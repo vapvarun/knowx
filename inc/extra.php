@@ -29,7 +29,7 @@ if ( ! function_exists( 'helpdesk_sub_header' ) ) {
 	<div class="site-sub-header">
 		<div class="container">
 		  <?php
-            if ( get_post_type() === 'post' || is_single() || is_archive( 'post-type-archive-forum' ) && ( function_exists( 'is_shop' ) && ! is_shop() ) ) {
+            if ( get_post_type() === 'post' || is_single() || is_archive( 'post-type-archive-forum' ) ) {
                 get_template_part( 'template-parts/content/page_header' );
                 $breadcrumbs = get_theme_mod( 'site_breadcrumbs', helpdesk_defaults( 'site-breadcrumbs' ) );
                 if ( ! empty($breadcrumbs) ) {
@@ -80,8 +80,6 @@ if ( ! function_exists( 'helpdesk_the_breadcrumb' ) ) {
                         printf(esc_html__('%s', 'helpdesk'), get_the_date(_x('F Y', 'monthly archives date format', 'helpdesk')));
                     } elseif (is_year()) {
                         printf(esc_html__('%s', 'helpdesk'), get_the_date(_x('Y', 'yearly archives date format', 'helpdesk')));
-                    } elseif (is_shop()) {
-                        esc_html_e('Shop', 'helpdesk');
                     } elseif (is_archive('post-type-archive-forum')) {
                         esc_html_e('Forums Archives', 'helpdesk');
                     } else {

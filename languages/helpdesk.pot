@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Helpdesk
+# Copyright (C) 2021 Helpdesk
 # This file is distributed under the same license as the Helpdesk package.
 msgid ""
 msgstr ""
@@ -567,16 +567,12 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:88
+#: ../helpdesk/inc/extra.php:86
 msgid "Blog Archives"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:86
-msgid "Forums Archives"
-msgstr ""
-
 #: ../helpdesk/inc/extra.php:84
-msgid "Shop"
+msgid "Forums Archives"
 msgstr ""
 
 #: ../helpdesk/inc/extra.php:82, ../helpdesk/inc/extra.php:80, ../helpdesk/inc/extra.php:78
@@ -593,27 +589,27 @@ msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:168
+#: ../helpdesk/inc/extra.php:166
 msgid "Helpdesk WordPress Theme"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:210
+#: ../helpdesk/inc/extra.php:208
 msgid "Sticky"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:221
+#: ../helpdesk/inc/extra.php:219
 msgid "Leave a comment"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:221
+#: ../helpdesk/inc/extra.php:219
 msgid "1 Comment"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:221
+#: ../helpdesk/inc/extra.php:219
 msgid "% Comments"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:226
+#: ../helpdesk/inc/extra.php:224
 msgid "Edit"
 msgstr ""
 

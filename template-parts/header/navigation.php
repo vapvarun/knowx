@@ -49,7 +49,7 @@ if (!helpdesk()->is_primary_nav_menu_active()) {
 	<i class="fa fa-bars" aria-hidden="true"></i>
 	</button>
 
-	<div class="primary-menu-container helpdesk-mobile-menu">
+	<div class="primary-menu-container">
 		<div class="mobile-menu-heading">
 			<h3 class="menu-title"><?php esc_html_e('Menu', 'helpdesk'); ?></h3>
 			<a href="<?php echo esc_url('#'); ?>" class="menu-close" <?php if (helpdesk()->is_amp()) { ?>
@@ -58,20 +58,5 @@ if (!helpdesk()->is_primary_nav_menu_active()) {
 			<?php } ?>><?php esc_html_e('Close', 'helpdesk'); ?></a>
 		</div>
 		<?php helpdesk()->display_primary_nav_menu(['menu_id' => 'primary-menu']); ?>
-		<div class="moible-icons">
-			<?php helpdesk_site_menu_icon(); ?>
-		</div>
-	</div>
-
-	<div class="primary-menu-container helpdesk-desktop-menu">
-		<?php helpdesk()->display_primary_nav_menu(['menu_id' => 'primary-menu']); ?>
-		<div class="moible-icons">
-			<?php helpdesk_site_menu_icon(); ?>
-		</div>
-	</div>
-	<div class="helpdesk-icons-wrapper">
-		<div class="desktop-icons">
-			<?php helpdesk_site_menu_icon(); ?>
-		</div>
 	</div>
 </nav><!-- #site-navigation -->

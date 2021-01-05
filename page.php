@@ -38,8 +38,10 @@ $default_sidebar = get_theme_mod( 'sidebar_option', helpdesk_defaults( 'sidebar-
 	<main id="primary" class="site-main">
 		
 	<?php
-		if ( have_posts() ) {?>
-			<?php 
+		if ( have_posts() ) {
+			
+			get_template_part( 'template-parts/content/page_header' );
+			
 				while ( have_posts() ) {
 					the_post();
 	

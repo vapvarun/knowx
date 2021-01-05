@@ -28,21 +28,13 @@ if ( ! function_exists( 'helpdesk_sub_header' ) ) {
         } ?>
 	<div class="site-sub-header">
 		<div class="container">
-		  <?php
-            if ( get_post_type() === 'post' || is_single() || is_archive( 'post-type-archive-forum' ) ) {
-                get_template_part( 'template-parts/content/page_header' );
-                $breadcrumbs = get_theme_mod( 'site_breadcrumbs', helpdesk_defaults( 'site-breadcrumbs' ) );
-                if ( ! empty($breadcrumbs) ) {
-                    helpdesk_the_breadcrumb();
-                }
-            } elseif ( get_post_type() === 'page' || is_single() ) {
-                // PAGE
-                get_template_part( 'template-parts/content/entry_title', get_post_type() );
-                $breadcrumbs = get_theme_mod( 'site_breadcrumbs', helpdesk_defaults( 'site-breadcrumbs' ) );
-                if ( ! empty($breadcrumbs) ) {
-                    helpdesk_the_breadcrumb();
-                }
-            } ?>
+		    <?php
+            $breadcrumbs = get_theme_mod( 'site_breadcrumbs', helpdesk_defaults( 'site-breadcrumbs' ) );
+            if ( ! empty($breadcrumbs) ) {
+                helpdesk_the_breadcrumb();
+            }
+            ?>
+            <?php get_search_form(); ?>
 		</div>
  	</div>
 <?php

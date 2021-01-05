@@ -563,53 +563,53 @@ msgstr ""
 msgid "XL"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:70, ../helpdesk/inc/Welcome/Component.php:61
+#: ../helpdesk/inc/extra.php:62, ../helpdesk/inc/Welcome/Component.php:61
 msgid "Home"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:86
+#: ../helpdesk/inc/extra.php:78
 msgid "Blog Archives"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:84
+#: ../helpdesk/inc/extra.php:76
 msgid "Forums Archives"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:82, ../helpdesk/inc/extra.php:80, ../helpdesk/inc/extra.php:78
+#: ../helpdesk/inc/extra.php:74, ../helpdesk/inc/extra.php:72, ../helpdesk/inc/extra.php:70
 msgid "%s"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:82
+#: ../helpdesk/inc/extra.php:74
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:80
+#: ../helpdesk/inc/extra.php:72
 msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:166
+#: ../helpdesk/inc/extra.php:158
 msgid "Helpdesk WordPress Theme"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:208
+#: ../helpdesk/inc/extra.php:200
 msgid "Sticky"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:219
+#: ../helpdesk/inc/extra.php:211
 msgid "Leave a comment"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:219
+#: ../helpdesk/inc/extra.php:211
 msgid "1 Comment"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:219
+#: ../helpdesk/inc/extra.php:211
 msgid "% Comments"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:224
+#: ../helpdesk/inc/extra.php:216
 msgid "Edit"
 msgstr ""
 

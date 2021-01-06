@@ -153,12 +153,11 @@ class Component implements Component_Interface, Templating_Component_Interface
      */
     public function helpdesk_enqueue_admin_style($hook)
     {
+        $css_uri = get_theme_file_uri('/assets/css/');
+        wp_enqueue_style('helpdesk-admin', $css_uri . '/admin.min.css');
+
         if (isset($_GET['page']) && $_GET['page'] == 'helpdesk-welcome') {
-            $css_uri = get_theme_file_uri('/assets/css/');
-            $css_dir = get_theme_file_path('/assets/css/');
-
-            wp_enqueue_style('helpdesk-admin', $css_uri . '/admin.min.css');
-
+            
             wp_enqueue_script(
 				'helpdesk-admin-script',
 				get_theme_file_uri( '/assets/js/helpdesk-admin.min.js' ),

@@ -197,6 +197,26 @@ class Component implements Component_Interface {
 			)
 		);
 
+		// Site Knowledge Base
+		$wp_customize->add_panel(
+			'knowledge_panel',
+			array(
+				'title'       => esc_html__( 'Knowledge Base', 'helpdesk' ),
+				'priority'    => 11,
+				'description' => '',
+			)
+		);
+
+		$wp_customize->add_section(
+			'site_knowledge_section_two',
+			array(
+				'title'       => esc_html__( 'Layout Two', 'helpdesk' ),
+				'priority'    => 10,
+				'description' => '',
+				'panel' => 'knowledge_panel',
+			)
+		);
+
 		// Site Footer
 		$wp_customize->add_panel(
 			'site_footer_panel',
@@ -665,21 +685,6 @@ class Component implements Component_Interface {
                 ],
 			),
 		);
-
-		/**
-		 *  Site Search
-		 */
-		$fields[] = array(
-			'type' => 'switch',
-			'settings'	 => 'site_search',
-			'label'		 => esc_html__( 'Site Search ?', 'helpdesk' ),
-			'section'	 => 'site_header_section',
-			'default'	 => '1',
-			'choices'	 => array(
-				'on'	 => esc_html__( 'Yes', 'helpdesk' ),
-				'off'	 => esc_html__( 'No', 'helpdesk' )
-			),
-		);
 		
 		/**
 		 *  Site Sub Header
@@ -1018,6 +1023,73 @@ class Component implements Component_Interface {
 		);
 
 		/**
+		 *  Site Knowledge Base
+		 */
+		$fields[] = array(
+			'type'     => 'radio',
+			'settings' => 'helpdesk_page_title',
+			'label' => __( 'Show page title', 'helpdesk' ),
+			'section' => 'site_knowledge_section_two',
+			'default' => 'yes',
+			'choices' => array(
+				'yes' => __('Yes', 'helpdesk'),
+				'no' => __('No', 'helpdesk'),
+			),
+		);
+
+		$fields[] = array(
+			'type'     => 'radio',
+			'settings' => 'helpdesk_view_all',
+			'label' => __( 'Show View All link', 'helpdesk' ),
+			'section' => 'site_knowledge_section_two',
+			'default' => 'no',
+			'choices' => array(
+				'yes' => __('Yes', 'helpdesk'),
+				'no' => __('No', 'helpdesk'),
+			),
+		);
+
+		$fields[] = array(
+			'type' => 'radio',
+			'settings' => 'helpdesk_cat_description',
+			'label' => __( 'Show category description', 'helpdesk' ),
+			'section' => 'site_knowledge_section_two',
+			'default' => 'no',
+			'choices' => array(
+				'yes' => __('Yes', 'helpdesk'),
+				'no' => __('No', 'helpdesk'),
+			),
+		);
+
+		$fields[] = array(
+			'type' => 'input',
+			'settings' => 'helpdesk_exclude',
+			'label' => __( 'Exclude category by ID', 'helpdesk' ),
+			'description' => __( 'Use a comma to separate multiple categories.', 'helpdesk' ),
+			'section' => 'site_knowledge_section_two',
+		);
+
+		$fields[] = array(
+			'type' => 'number',
+			'settings' => 'helpdesk_posts',
+			'label' => __( 'Posts per category', 'helpdesk' ),
+			'description' => __( 'Only numeric characters allowed.', 'helpdesk' ),
+			'section' => 'site_knowledge_section_two',
+		);
+
+		$fields[] = array(
+			'type' => 'radio',
+			'settings' => 'helpdesk_order',
+			'label' => __( 'Order posts', 'helpdesk' ),
+			'section' => 'site_knowledge_section_two',
+			'default' => 'date',
+			'choices' => array(
+				'date' => __('By date', 'helpdesk'),
+				'name' => __('By name', 'helpdesk'),
+			),
+		);
+
+		/**
 		 *  Site Footer
 		 */
 		$fields[] = array(
@@ -1128,7 +1200,7 @@ class Component implements Component_Interface {
 			'settings'    => 'site_copyright_text',
 			'label'       => esc_html__( 'Add Content', 'helpdesk' ),
 			'section'     => 'site_copyright_section',
-			'default' => esc_html__( 'Copyright © [current_year] [site_title] | Powered by [theme_author]', 'helpdesk' ),
+			'default' 	  => esc_html__( 'Copyright © [current_year] [site_title] | Powered by [theme_author]', 'helpdesk' ),
 			'priority'    => 10,
 		);
 

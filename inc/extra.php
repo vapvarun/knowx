@@ -346,3 +346,36 @@ if ( ! function_exists( 'helpdesk_register_elementor_locations' ) ) {
     }
     add_action( 'elementor/theme/register_locations', 'helpdesk_register_elementor_locations' );
 }
+
+/**
+ * Meta box for knowledge base page template
+ */
+function helpdesk_metabox_callback( $post ) {
+	wp_nonce_field( 'helpdesk_meta_box', 'helpdesk_nonce' );
+	$cats_value = get_post_meta( $post->ID, 'helpdesk-exclude-cats', true );
+	?>
+	<p><?php _e( 'Setting for the Knowledge Base page template. This field will override the one in Customizer.', 'helpdesk' ); ?></p>
+	<p><strong><label for="helpdesk-cats"><?php _e( 'Exclude category by ID', 'helpdesk' ); ?></label></strong></p>
+	<input class="widefat" id="helpdesk-cats" type="text" name="helpdesk-cats" value="<?php echo esc_attr( $cats_value ); ?>" />
+	<p><?php _e( 'Use a comma to separate multiple categories.', 'helpdesk' ); ?></p>
+	<?php
+}
+
+function helpdesk_save_meta( $post_id ) {
+	if ( ! isset( $_POST['helpdesk_nonce'] ) ) {
+		return;
+	}
+	if ( ! wp_verify_nonce( $_POST['helpdesk_nonce'], 'helpdesk_meta_box' ) ) {
+		return;
+	}
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return;
+	}
+	if ( ( get_post_type() != 'page' ) || ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+	if ( isset( $_POST['helpdesk-cats'] ) ) {
+		update_post_meta( $post_id, 'helpdesk-exclude-cats', sanitize_text_field( $_POST['helpdesk-cats'] ) );
+	}
+}
+add_action( 'save_post', 'helpdesk_save_meta' );

@@ -208,9 +208,19 @@ class Component implements Component_Interface {
 		);
 
 		$wp_customize->add_section(
+			'site_knowledge_section_one',
+			array(
+				'title'       => esc_html__( 'Knowledge Base Layout One', 'helpdesk' ),
+				'priority'    => 10,
+				'description' => '',
+				'panel' => 'knowledge_panel',
+			)
+		);
+
+		$wp_customize->add_section(
 			'site_knowledge_section_two',
 			array(
-				'title'       => esc_html__( 'Layout Two', 'helpdesk' ),
+				'title'       => esc_html__( 'Knowledge Base Layout Two', 'helpdesk' ),
 				'priority'    => 10,
 				'description' => '',
 				'panel' => 'knowledge_panel',
@@ -828,7 +838,7 @@ class Component implements Component_Interface {
 			'priority'    => 10,
 			'output'      => array(
 				array(
-					'element' => 'a:hover, a:active, a:focus',
+					'element' => 'a:hover, a:active, a:focus, #helpdesk-categories-columns-four li.post-name a:hover',
 					'property' => 'color',
 				),
 			),
@@ -1023,7 +1033,111 @@ class Component implements Component_Interface {
 		);
 
 		/**
-		 *  Site Knowledge Base
+		 *  Site Knowledge Base Layout One
+		 */
+		$fields[] = array(
+			'type'        => 'background',
+			'settings'    => 'hero_section_background_setting',
+			'label'       => esc_html__( 'Hero Section Background Control', 'helpdesk' ),
+			'description' => esc_html__( 'Note: "Background Image" not apply when set page featured image from backend.', 'helpdesk' ),
+			'section'     => 'site_knowledge_section_one',
+			'default'     => [
+				'background-color'      => 'rgba(3, 169, 244, 1)',
+				'background-image'      => 'none',
+				'background-repeat'     => 'repeat',
+				'background-position'   => 'center center',
+				'background-size'       => 'cover',
+				'background-attachment' => 'scroll',
+			],
+			'transport'   => 'auto',
+			'output'      => [
+				[
+					'element' => '.helpdesk-section-hero',
+				],
+			],
+		);
+
+		$fields[] = array(
+			'type'     => 'custom',
+			'settings' => 'custom-knowledge-divider-one',
+			'section'  => 'site_knowledge_section_one',
+			'default'  => '<hr>',
+		);
+
+		$fields[] = array(
+			'type'     => 'text',
+			'settings' => 'hero_section_heading',
+			'label'    => esc_html__( 'Hero Section Heading', 'helpdesk' ),
+			'section' => 'site_knowledge_section_one',
+			'default'  => '',
+			'input_attrs' => array(
+				'placeholder' => esc_html__( 'Create a Knowledge Base with Helpdesk', 'helpdesk' ),
+			),
+			'priority' => 10,
+		);
+
+		$fields[] = array(
+			'type'     => 'textarea',
+			'settings' => 'hero_section_content',
+			'label'    => esc_html__( 'Hero Section Content', 'helpdesk' ),
+			'section' => 'site_knowledge_section_one',
+			'default'  => '',
+			'priority' => 10,
+		);
+
+		$fields[] = array(
+			'type'     => 'custom',
+			'settings' => 'custom-knowledge-divider-two',
+			'section'  => 'site_knowledge_section_one',
+			'default'  => '<hr>',
+		);
+
+		$fields[] = array(
+			'type'        => 'typography',
+			'settings'    => 'hero_section_title_typo',
+			'label'       => esc_html__( 'Hero Section Title Typography', 'helpdesk' ),
+			'section'     => 'site_knowledge_section_one',
+			'default'     => array(
+				'font-family'    => '',
+				'variant'        => '',
+				'font-size'      => '',
+				'line-height'    => '',
+				'letter-spacing' => '',
+				'color'          => '#ffffff',
+				'text-transform' => 'none',
+			),
+			'priority'    => 10,
+			'output'      => array(
+				array(
+					'element' => '.helpdesk-section-hero .entry-title',
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'        => 'typography',
+			'settings'    => 'hero_section_content_typo',
+			'label'       => esc_html__( 'Hero Section Content Typography', 'helpdesk' ),
+			'section'     => 'site_knowledge_section_one',
+			'default'     => array(
+				'font-family'    => '',
+				'variant'        => '',
+				'font-size'      => '',
+				'line-height'    => '',
+				'letter-spacing' => '',
+				'color'          => '#ffffff',
+				'text-transform' => 'none',
+			),
+			'priority'    => 10,
+			'output'      => array(
+				array(
+					'element' => '.helpdesk-section-hero .entry-summary, .helpdesk-section-hero .entry-summary p',
+				),
+			),
+		);
+
+		/**
+		 *  Site Knowledge Base Layout Two
 		 */
 		$fields[] = array(
 			'type'     => 'radio',

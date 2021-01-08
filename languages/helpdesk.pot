@@ -617,11 +617,11 @@ msgstr ""
 msgid "Setting for the Knowledge Base page template. This field will override the one in Customizer."
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:358, ../helpdesk/inc/Kirki_Option/Component.php:1181
+#: ../helpdesk/inc/extra.php:358, ../helpdesk/inc/Kirki_Option/Component.php:1149, ../helpdesk/inc/Kirki_Option/Component.php:1308
 msgid "Exclude category by ID"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:360, ../helpdesk/inc/Kirki_Option/Component.php:1182
+#: ../helpdesk/inc/extra.php:360, ../helpdesk/inc/Kirki_Option/Component.php:1150, ../helpdesk/inc/Kirki_Option/Component.php:1309
 msgid "Use a comma to separate multiple categories."
 msgstr ""
 
@@ -685,11 +685,11 @@ msgstr ""
 msgid "Knowledge Base"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:213
+#: ../helpdesk/inc/Kirki_Option/Component.php:213, ../helpdesk/page-knowledgebase-one.php:3
 msgid "Knowledge Base Layout One"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:223, ../helpdesk/page-knowledgebase-one.php:3, ../helpdesk/page-knowledgebase-two.php:3
+#: ../helpdesk/inc/Kirki_Option/Component.php:223, ../helpdesk/page-knowledgebase-two.php:3
 msgid "Knowledge Base Layout Two"
 msgstr ""
 
@@ -717,11 +717,11 @@ msgstr ""
 msgid "Site Loader ?"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:310, ../helpdesk/inc/Kirki_Option/Component.php:709, ../helpdesk/inc/Kirki_Option/Component.php:767, ../helpdesk/inc/Kirki_Option/Component.php:1030, ../helpdesk/inc/Kirki_Option/Component.php:1149, ../helpdesk/inc/Kirki_Option/Component.php:1161, ../helpdesk/inc/Kirki_Option/Component.php:1173, ../helpdesk/inc/Kirki_Option/Component.php:1216
+#: ../helpdesk/inc/Kirki_Option/Component.php:310, ../helpdesk/inc/Kirki_Option/Component.php:709, ../helpdesk/inc/Kirki_Option/Component.php:767, ../helpdesk/inc/Kirki_Option/Component.php:1030, ../helpdesk/inc/Kirki_Option/Component.php:1276, ../helpdesk/inc/Kirki_Option/Component.php:1288, ../helpdesk/inc/Kirki_Option/Component.php:1300, ../helpdesk/inc/Kirki_Option/Component.php:1343
 msgid "Yes"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:311, ../helpdesk/inc/Kirki_Option/Component.php:710, ../helpdesk/inc/Kirki_Option/Component.php:768, ../helpdesk/inc/Kirki_Option/Component.php:1031, ../helpdesk/inc/Kirki_Option/Component.php:1150, ../helpdesk/inc/Kirki_Option/Component.php:1162, ../helpdesk/inc/Kirki_Option/Component.php:1174, ../helpdesk/inc/Kirki_Option/Component.php:1217
+#: ../helpdesk/inc/Kirki_Option/Component.php:311, ../helpdesk/inc/Kirki_Option/Component.php:710, ../helpdesk/inc/Kirki_Option/Component.php:768, ../helpdesk/inc/Kirki_Option/Component.php:1031, ../helpdesk/inc/Kirki_Option/Component.php:1277, ../helpdesk/inc/Kirki_Option/Component.php:1289, ../helpdesk/inc/Kirki_Option/Component.php:1301, ../helpdesk/inc/Kirki_Option/Component.php:1344
 msgid "No"
 msgstr ""
 
@@ -809,11 +809,11 @@ msgstr ""
 msgid "Header Background Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:705, ../helpdesk/inc/Kirki_Option/Component.php:1212
+#: ../helpdesk/inc/Kirki_Option/Component.php:705, ../helpdesk/inc/Kirki_Option/Component.php:1339
 msgid "Customize Background ?"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:717, ../helpdesk/inc/Kirki_Option/Component.php:1224
+#: ../helpdesk/inc/Kirki_Option/Component.php:717, ../helpdesk/inc/Kirki_Option/Component.php:1351
 msgid "Background Control"
 msgstr ""
 
@@ -833,11 +833,11 @@ msgstr ""
 msgid "Theme Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:818, ../helpdesk/inc/Kirki_Option/Component.php:1280, ../helpdesk/inc/Kirki_Option/Component.php:1372
+#: ../helpdesk/inc/Kirki_Option/Component.php:818, ../helpdesk/inc/Kirki_Option/Component.php:1407, ../helpdesk/inc/Kirki_Option/Component.php:1499
 msgid "Link Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:834, ../helpdesk/inc/Kirki_Option/Component.php:1296
+#: ../helpdesk/inc/Kirki_Option/Component.php:834, ../helpdesk/inc/Kirki_Option/Component.php:1423
 msgid "Link Hover"
 msgstr ""
 
@@ -929,63 +929,99 @@ msgstr ""
 msgid "Hero Section Content Typography"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1145
-msgid "Show page title"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1164
+msgid "Support Section Background Control"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1157
-msgid "Show View All link"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1165
+msgid "Set support section background color and image."
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1169
-msgid "Show category description"
-msgstr ""
-
-#: ../helpdesk/inc/Kirki_Option/Component.php:1189
-msgid "Posts per category"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1186
+msgid "Support Section Heading"
 msgstr ""
 
 #: ../helpdesk/inc/Kirki_Option/Component.php:1190
-msgid "Only numeric characters allowed."
+msgid "Can not find what you are looking for?"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1197
-msgid "Order posts"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1198
+msgid "Support Section Content"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1201
-msgid "By date"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1207
+msgid "Support Section Heading Typography"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1202
-msgid "By name"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1229
+msgid "Support Section Content Typography"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1248
-msgid "Title Color"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1251
+msgid "Button Text"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1264, ../helpdesk/inc/Kirki_Option/Component.php:1356
-msgid "Content Color"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1260
+msgid "Button Link URL"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1315
-msgid "Add Content"
+#: ../helpdesk/inc/Kirki_Option/Component.php:1272
+msgid "Show page title"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1284
+msgid "Show View All link"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1296
+msgid "Show category description"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1316
+msgid "Posts per category"
 msgstr ""
 
 #: ../helpdesk/inc/Kirki_Option/Component.php:1317
-msgid "Copyright © [current_year] [site_title] | Powered by [theme_author]"
+msgid "Only numeric characters allowed."
 msgstr ""
 
 #: ../helpdesk/inc/Kirki_Option/Component.php:1324
+msgid "Order posts"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1328
+msgid "By date"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1329
+msgid "By name"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1375
+msgid "Title Color"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1391, ../helpdesk/inc/Kirki_Option/Component.php:1483
+msgid "Content Color"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1442
+msgid "Add Content"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1444
+msgid "Copyright © [current_year] [site_title] | Powered by [theme_author]"
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1451
 msgid "Background Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1340
+#: ../helpdesk/inc/Kirki_Option/Component.php:1467
 msgid "Border Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1388
+#: ../helpdesk/inc/Kirki_Option/Component.php:1515
 msgid "Link Hover Color"
 msgstr ""
 
@@ -1248,7 +1284,23 @@ msgstr ""
 msgid "Get Pro and Experience all those exciting features"
 msgstr ""
 
-#: ../helpdesk/page-knowledgebase-one.php:117, ../helpdesk/page-knowledgebase-two.php:106
+#: ../helpdesk/page-knowledgebase-one.php:90
+msgid "Popular Articles"
+msgstr ""
+
+#: ../helpdesk/page-knowledgebase-one.php:105
+msgid "Recent Articles"
+msgstr ""
+
+#: ../helpdesk/page-knowledgebase-one.php:129
+msgid "Can't find what you're looking for?"
+msgstr ""
+
+#: ../helpdesk/page-knowledgebase-one.php:136
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+msgstr ""
+
+#: ../helpdesk/page-knowledgebase-two.php:106
 msgid "View All &raquo;"
 msgstr ""
 

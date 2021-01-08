@@ -40,6 +40,7 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', helpdesk_defaults( 'p
 		
 		<?php
 		if ( have_posts() ) {
+			setPostViews(get_the_ID());
 
 			get_template_part( 'template-parts/content/page_header' );
 
@@ -49,6 +50,7 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', helpdesk_defaults( 'p
 			<div class="grid-sizer <?php echo esc_attr( $post_per_row ); ?>"></div>
 			<?php 
 				while ( have_posts() ) {
+					
 					the_post();
 	
 					get_template_part( 'template-parts/content/entry', 'layout' );

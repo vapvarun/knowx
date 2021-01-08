@@ -41,7 +41,7 @@ helpdesk()->print_styles( 'helpdesk-content' );
 		}
 	?>
 
-	<div id="helpdesk-categories-columns-four">
+	<div id="helpdesk-categories-columns-four" class="helpdesk-knowledgebase-two">
 		<?php $exclude_cats = get_post_meta( get_the_ID(), 'helpdesk-exclude-cats', true );
 		if ( !empty( $exclude_cats ) ) {
 			$exclude = esc_attr( $exclude_cats );

@@ -1043,7 +1043,7 @@ class Component implements Component_Interface {
 			'section'     => 'site_knowledge_section_one',
 			'default'     => [
 				'background-color'      => 'rgba(3, 169, 244, 1)',
-				'background-image'      => 'none',
+				'background-image'      => '',
 				'background-repeat'     => 'repeat',
 				'background-position'   => 'center center',
 				'background-size'       => 'cover',
@@ -1134,6 +1134,133 @@ class Component implements Component_Interface {
 					'element' => '.helpdesk-section-hero .entry-summary, .helpdesk-section-hero .entry-summary p',
 				),
 			),
+		);
+
+		$fields[] = array(
+			'type'     => 'custom',
+			'settings' => 'custom-knowledge-divider-three',
+			'section'  => 'site_knowledge_section_one',
+			'default'  => '<hr>',
+		);
+
+		$fields[] = array(
+			'type' => 'input',
+			'settings' => 'helpdesk_exclude_posts',
+			'label' => __( 'Exclude category by ID', 'helpdesk' ),
+			'description' => __( 'Use a comma to separate multiple categories.', 'helpdesk' ),
+			'section' => 'site_knowledge_section_one',
+		);
+
+		$fields[] = array(
+			'type'     => 'custom',
+			'settings' => 'custom-knowledge-divider-four',
+			'section'  => 'site_knowledge_section_one',
+			'default'  => '<hr>',
+		);
+
+		$fields[] = array(
+			'type'        => 'background',
+			'settings'    => 'support_section_background_setting',
+			'label'       => esc_html__( 'Support Section Background Control', 'helpdesk' ),
+			'description' => esc_html__( 'Set support section background color and image.', 'helpdesk' ),
+			'section'     => 'site_knowledge_section_one',
+			'default'     => [
+				'background-color'      => 'rgba(236,236,236,.94)',
+				'background-image'      => '',
+				'background-repeat'     => 'repeat',
+				'background-position'   => 'center center',
+				'background-size'       => 'cover',
+				'background-attachment' => 'scroll',
+			],
+			'transport'   => 'auto',
+			'output'      => [
+				[
+					'element' => '.helpdesk-support-section',
+				],
+			],
+		);
+
+		$fields[] = array(
+			'type'     => 'text',
+			'settings' => 'support_section_heading',
+			'label'    => esc_html__( 'Support Section Heading', 'helpdesk' ),
+			'section' => 'site_knowledge_section_one',
+			'default'  => '',
+			'input_attrs' => array(
+				'placeholder' => esc_html__( 'Can not find what you are looking for?', 'helpdesk' ),
+			),
+			'priority' => 10,
+		);
+
+		$fields[] = array(
+			'type'     => 'textarea',
+			'settings' => 'support_section_content',
+			'label'    => esc_html__( 'Support Section Content', 'helpdesk' ),
+			'section' => 'site_knowledge_section_one',
+			'default'  => '',
+			'priority' => 10,
+		);
+
+		$fields[] = array(
+			'type'        => 'typography',
+			'settings'    => 'support_section_title_typo',
+			'label'       => esc_html__( 'Support Section Heading Typography', 'helpdesk' ),
+			'section'     => 'site_knowledge_section_one',
+			'default'     => array(
+				'font-family'    => '',
+				'variant'        => '',
+				'font-size'      => '',
+				'line-height'    => '',
+				'letter-spacing' => '',
+				'color'          => '#333333',
+				'text-transform' => 'none',
+			),
+			'priority'    => 10,
+			'output'      => array(
+				array(
+					'element' => '.helpdesk-support-title',
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'        => 'typography',
+			'settings'    => 'support_section_content_typo',
+			'label'       => esc_html__( 'Support Section Content Typography', 'helpdesk' ),
+			'section'     => 'site_knowledge_section_one',
+			'default'     => array(
+				'font-family'    => '',
+				'variant'        => '',
+				'font-size'      => '',
+				'line-height'    => '',
+				'letter-spacing' => '',
+				'color'          => '#333333',
+				'text-transform' => 'none',
+			),
+			'priority'    => 10,
+			'output'      => array(
+				array(
+					'element' => '.helpdesk-support-content, .helpdesk-support-content p',
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'     => 'text',
+			'settings' => 'support_section_button_text',
+			'label'    => __( 'Button Text', 'helpdesk' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => '',
+			'priority' => 10,
+		);
+
+		$fields[] = array(
+			'type'     => 'link',
+			'settings' => 'support_section_button_link_url',
+			'label'    => __( 'Button Link URL', 'helpdesk' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => '',
+			'priority' => 10,
 		);
 
 		/**

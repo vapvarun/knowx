@@ -76,4 +76,4 @@ if ( !function_exists( 'is_plugin_active' ) ) {
 require get_template_directory() . '/inc/extra.php';
 
 // Load theme category widget.
-require get_template_directory() . '/inc/catgeory-widget.php';
+require get_template_directory() . '/inc/widgets/category-widget.php';

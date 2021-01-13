@@ -51,7 +51,7 @@ if ( ! function_exists( 'helpdesk_the_breadcrumb' ) ) {
         if (function_exists( 'yoast_breadcrumb' ) && isset( $wpseo_titles['breadcrumbs-enable'] ) && $wpseo_titles['breadcrumbs-enable'] == 1 ) {
             yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
         } else {
-            $sep = ' &raquo ';
+            $sep = ' » ';
 
             if ( ! is_front_page() ) {
                 // Start the breadcrumb with a link to your homepage
@@ -64,7 +64,7 @@ if ( ! function_exists( 'helpdesk_the_breadcrumb' ) ) {
 
                 // Check if the current page is a category, an archive or a single page. If so show the category or archive name.
                 if ( is_category() || is_single() ) {
-                    the_category('  &raquo ');
+                    the_category('  » ');
                 } elseif ( is_archive() || is_single() ) {
                     if (is_day()) {
                         printf(esc_html__('%s', 'helpdesk'), get_the_date());

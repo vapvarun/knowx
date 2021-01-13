@@ -64,19 +64,19 @@ class Helpdesk_Category extends WP_Widget {
 			$type_attr = current_theme_supports( 'html5', 'script' ) ? '' : ' type="text/javascript"';
 			?>
 
-<script<?php echo $type_attr; ?>>
-/* <![CDATA[ */
-(function() {
-	var dropdown = document.getElementById( "<?php echo esc_js( $dropdown_id ); ?>" );
-	function onCatChange() {
-		if ( dropdown.options[ dropdown.selectedIndex ].value > 0 ) {
-			dropdown.parentNode.submit();
-		}
-	}
-	dropdown.onchange = onCatChange;
-})();
-/* ]]> */
-</script>
+		<script<?php echo $type_attr; ?>>
+		/* <![CDATA[ */
+		(function() {
+			var dropdown = document.getElementById( "<?php echo esc_js( $dropdown_id ); ?>" );
+			function onCatChange() {
+				if ( dropdown.options[ dropdown.selectedIndex ].value > 0 ) {
+					dropdown.parentNode.submit();
+				}
+			}
+			dropdown.onchange = onCatChange;
+		})();
+		/* ]]> */
+		</script>
 
 			<?php
 		} else {

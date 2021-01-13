@@ -685,8 +685,8 @@ msgstr ""
 msgid "Knowledge Base"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:213, ../helpdesk/page-knowledgebase-one.php:3
-msgid "Knowledge Base Layout One"
+#: ../helpdesk/inc/Kirki_Option/Component.php:213
+msgid "Knowledge Base Home Page"
 msgstr ""
 
 #: ../helpdesk/inc/Kirki_Option/Component.php:223, ../helpdesk/page-knowledgebase-two.php:3
@@ -906,14 +906,14 @@ msgid "Hero Section Background Control"
 msgstr ""
 
 #: ../helpdesk/inc/Kirki_Option/Component.php:1042
-msgid "Note: \"Background Image\" not apply when set page featured image from backend."
+msgid "Set hero section background color and image."
 msgstr ""
 
 #: ../helpdesk/inc/Kirki_Option/Component.php:1070
 msgid "Hero Section Heading"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1074
+#: ../helpdesk/inc/Kirki_Option/Component.php:1074, ../helpdesk/index.php:37
 msgid "Create a Knowledge Base with Helpdesk"
 msgstr ""
 
@@ -1284,19 +1284,55 @@ msgstr ""
 msgid "Get Pro and Experience all those exciting features"
 msgstr ""
 
-#: ../helpdesk/page-knowledgebase-one.php:90
+#: ../helpdesk/inc/widgets/category-widget.php:8
+msgid "A list or dropdown of categories."
+msgstr ""
+
+#: ../helpdesk/inc/widgets/category-widget.php:11
+msgid "Helpdesk Categories"
+msgstr ""
+
+#: ../helpdesk/inc/widgets/category-widget.php:17
+msgid "Categories"
+msgstr ""
+
+#: ../helpdesk/inc/widgets/category-widget.php:46
+msgid "Select Category"
+msgstr ""
+
+#: ../helpdesk/inc/widgets/category-widget.php:130
+msgid "Title:"
+msgstr ""
+
+#: ../helpdesk/inc/widgets/category-widget.php:136
+msgid "Display as dropdown"
+msgstr ""
+
+#: ../helpdesk/inc/widgets/category-widget.php:140
+msgid "Show post counts"
+msgstr ""
+
+#: ../helpdesk/inc/widgets/category-widget.php:144
+msgid "Show hierarchy"
+msgstr ""
+
+#: ../helpdesk/index.php:45
+msgid "Creating a knowledge base website or wiki can be an effective way to support your users, members, clients, and customers.."
+msgstr ""
+
+#: ../helpdesk/index.php:88, ../helpdesk/_page-knowledgebase-one.php:90
 msgid "Popular Articles"
 msgstr ""
 
-#: ../helpdesk/page-knowledgebase-one.php:105
+#: ../helpdesk/index.php:103, ../helpdesk/_page-knowledgebase-one.php:105
 msgid "Recent Articles"
 msgstr ""
 
-#: ../helpdesk/page-knowledgebase-one.php:129
+#: ../helpdesk/index.php:127, ../helpdesk/_page-knowledgebase-one.php:129
 msgid "Can't find what you're looking for?"
 msgstr ""
 
-#: ../helpdesk/page-knowledgebase-one.php:136
+#: ../helpdesk/index.php:134, ../helpdesk/_page-knowledgebase-one.php:136
 msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
 msgstr ""
 
@@ -1467,4 +1503,8 @@ msgstr ""
 
 #: ../helpdesk/template-parts/header/navigation.php:58
 msgid "Close"
+msgstr ""
+
+#: ../helpdesk/_page-knowledgebase-one.php:3
+msgid "Knowledge Base Layout One"
 msgstr ""

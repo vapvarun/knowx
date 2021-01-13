@@ -67,6 +67,13 @@ function helpdesk_register_required_plugins() {
 			'required'	 => false,
 		),
 
+		// Collapsing Categories
+		array(
+			'name'		 => 'Collapsing Categories', 'helpdesk',
+			'slug'		 => 'collapsing-categories',
+			'required'	 => false,
+		),
+
 	);
 
 	/*

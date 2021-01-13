@@ -210,7 +210,7 @@ class Component implements Component_Interface {
 		$wp_customize->add_section(
 			'site_knowledge_section_one',
 			array(
-				'title'       => esc_html__( 'Knowledge Base Layout One', 'helpdesk' ),
+				'title'       => esc_html__( 'Knowledge Base Home Page', 'helpdesk' ),
 				'priority'    => 10,
 				'description' => '',
 				'panel' => 'knowledge_panel',
@@ -1039,7 +1039,7 @@ class Component implements Component_Interface {
 			'type'        => 'background',
 			'settings'    => 'hero_section_background_setting',
 			'label'       => esc_html__( 'Hero Section Background Control', 'helpdesk' ),
-			'description' => esc_html__( 'Note: "Background Image" not apply when set page featured image from backend.', 'helpdesk' ),
+			'description' => esc_html__( 'Set hero section background color and image.', 'helpdesk' ),
 			'section'     => 'site_knowledge_section_one',
 			'default'     => [
 				'background-color'      => 'rgba(3, 169, 244, 1)',

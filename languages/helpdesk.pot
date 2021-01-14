@@ -1320,19 +1320,19 @@ msgstr ""
 msgid "Creating a knowledge base website or wiki can be an effective way to support your users, members, clients, and customers.."
 msgstr ""
 
-#: ../helpdesk/index.php:88, ../helpdesk/_page-knowledgebase-one.php:90
+#: ../helpdesk/index.php:88
 msgid "Popular Articles"
 msgstr ""
 
-#: ../helpdesk/index.php:103, ../helpdesk/_page-knowledgebase-one.php:105
+#: ../helpdesk/index.php:103
 msgid "Recent Articles"
 msgstr ""
 
-#: ../helpdesk/index.php:127, ../helpdesk/_page-knowledgebase-one.php:129
+#: ../helpdesk/index.php:127
 msgid "Can't find what you're looking for?"
 msgstr ""
 
-#: ../helpdesk/index.php:134, ../helpdesk/_page-knowledgebase-one.php:136
+#: ../helpdesk/index.php:134
 msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
 msgstr ""
 
@@ -1503,8 +1503,4 @@ msgstr ""
 
 #: ../helpdesk/template-parts/header/navigation.php:58
 msgid "Close"
-msgstr ""
-
-#: ../helpdesk/_page-knowledgebase-one.php:3
-msgid "Knowledge Base Layout One"
 msgstr ""

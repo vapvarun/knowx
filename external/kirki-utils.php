@@ -12,8 +12,8 @@ function helpdesk_defaults( $key = '' ) {
     # site search
     $defaults[ 'site-search' ] = '1';
 
-    # site cart
-    $defaults[ 'site-cart' ] = '1';
+    # site breadcrumbs
+    $defaults[ 'site-breadcrumbs' ] = '1';
 
     # site sidebar
     $defaults[ 'sidebar-option' ] = 'right';

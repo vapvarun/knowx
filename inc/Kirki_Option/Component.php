@@ -798,15 +798,15 @@ class Component implements Component_Interface {
 			'priority'    => 10,
 			'output'      => array(
 				array(
-					'element' => '.helpdesk-breadcrumbs a, #breadcrumbs a, .pagination .current',
+					'element' => '.helpdesk-breadcrumbs a, #breadcrumbs a, .pagination .current, .helpdesk-popular-posts ul li a:hover, .helpdesk-recent-posts ul li a:hover',
                     'property' => 'color',
 				),
 				array(
-					'element' => '',
+					'element' => '.helpdesk-knowledgebase-one ul.cat-list li.cat-name a:hover',
 					'property' => 'background-color',
 				),
 				array(
-                    'element' => '',
+                    'element' => '.helpdesk-knowledgebase-one ul.cat-list li.cat-name a',
 					'property' => 'border-color',
 				),
 			),
@@ -863,7 +863,7 @@ class Component implements Component_Interface {
 			'choices'	  => array( 'alpha' => true ),
 			'output'      => array(
 				array(
-					'element' => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"]',
+					'element' => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"], .helpdesk-support-button a',
                     'property' => 'background',
 				),
 			),
@@ -880,7 +880,7 @@ class Component implements Component_Interface {
 			'choices'	  => array( 'alpha' => true ),
 			'output'      => array(
 				array(
-					'element' => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus',
+					'element' => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus, .helpdesk-support-button a:hover',
                     'property' => 'background',
 				),
 			),
@@ -896,7 +896,7 @@ class Component implements Component_Interface {
 			'priority'    => 10,
 			'output'      => array(
 				array(
-					'element' => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"]',
+					'element' => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"], .helpdesk-support-button a',
 					'property' => 'color',
 				),
 			),
@@ -912,7 +912,7 @@ class Component implements Component_Interface {
 			'priority'    => 10,
 			'output'      => array(
 				array(
-					'element' => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus',
+					'element' => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus, .helpdesk-support-button a:hover',
 					'property' => 'color',
 				),
 			),
@@ -928,7 +928,7 @@ class Component implements Component_Interface {
 			'priority'    => 10,
 			'output'      => array(
 				array(
-					'element' => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"] ',
+					'element' => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"], .helpdesk-support-button a',
 					'property' => 'border-color',
 				),
 			),
@@ -944,7 +944,7 @@ class Component implements Component_Interface {
 			'priority'    => 10,
 			'output'      => array(
 				array(
-					'element' => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus',
+					'element' => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus, .helpdesk-support-button a:hover',
 					'property' => 'border-color',
 				),
 			),
@@ -1266,6 +1266,14 @@ class Component implements Component_Interface {
 		/**
 		 *  Site Knowledge Base Layout Two
 		 */
+		$fields[] = array(
+			'type'        => 'custom',
+			'settings'    => 'custom_setting',
+			'label'       => esc_html__( 'This settings apply for "Template: Knowledge Base Layout Two", set page template from backend.', 'helpdesk' ),
+			'section'     => 'site_knowledge_section_two',
+			'priority'    => 10,
+		);
+
 		$fields[] = array(
 			'type'     => 'radio',
 			'settings' => 'helpdesk_page_title',

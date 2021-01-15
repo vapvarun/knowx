@@ -589,39 +589,39 @@ msgctxt "monthly archives date format"
 msgid "F Y"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:158
+#: ../helpdesk/inc/extra.php:171, ../helpdesk/inc/extra.php:158
 msgid "Helpdesk WordPress Theme"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:200
+#: ../helpdesk/inc/extra.php:214
 msgid "Sticky"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:211
+#: ../helpdesk/inc/extra.php:225
 msgid "Leave a comment"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:211
+#: ../helpdesk/inc/extra.php:225
 msgid "1 Comment"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:211
+#: ../helpdesk/inc/extra.php:225
 msgid "% Comments"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:216
+#: ../helpdesk/inc/extra.php:230
 msgid "Edit"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:357
+#: ../helpdesk/inc/extra.php:371
 msgid "Setting for the Knowledge Base page template. This field will override the one in Customizer."
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:358, ../helpdesk/inc/Kirki_Option/Component.php:1149, ../helpdesk/inc/Kirki_Option/Component.php:1316
+#: ../helpdesk/inc/extra.php:372, ../helpdesk/inc/Kirki_Option/Component.php:1149, ../helpdesk/inc/Kirki_Option/Component.php:1316
 msgid "Exclude category by ID"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:360, ../helpdesk/inc/Kirki_Option/Component.php:1150, ../helpdesk/inc/Kirki_Option/Component.php:1317
+#: ../helpdesk/inc/extra.php:374, ../helpdesk/inc/Kirki_Option/Component.php:1150, ../helpdesk/inc/Kirki_Option/Component.php:1317
 msgid "Use a comma to separate multiple categories."
 msgstr ""
 
@@ -1338,6 +1338,10 @@ msgstr ""
 
 #: ../helpdesk/index.php:134
 msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+msgstr ""
+
+#: ../helpdesk/index.php:143
+msgid "Contact Support"
 msgstr ""
 
 #: ../helpdesk/page-knowledgebase-two.php:106

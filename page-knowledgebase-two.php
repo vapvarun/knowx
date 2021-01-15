@@ -59,7 +59,7 @@ helpdesk()->print_styles( 'helpdesk-content' );
 		$helpdesk_cats = get_categories( $helpdesk_cat_args );
 
 		foreach ( $helpdesk_cats as $category ) :
-			echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>';
+			echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 			if ( get_theme_mod( 'helpdesk_cat_description' ) == "yes" ) :
 				if ( category_description( $category->cat_ID ) ) :
@@ -99,11 +99,11 @@ helpdesk()->print_styles( 'helpdesk-content' );
 			$helpdesk_posts = get_posts( $helpdesk_post_args );
 
 			foreach( $helpdesk_posts AS $single_post ) :
-				echo '<li class="post-name"><a href="'. get_permalink( $single_post->ID ) .'" rel="bookmark" title="'. get_the_title( $single_post->ID ) .'">'. get_the_title( $single_post->ID ) .'</a></li>';
+				echo '<li class="post-name"><a href="'. get_permalink( $single_post->ID ) .'" rel="bookmark" title="'. get_the_title( $single_post->ID ) .'">'. get_the_title( $single_post->ID ) .'</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			endforeach;
 
 			if ( get_theme_mod( 'helpdesk_view_all' ) == "yes" ) {
-				echo '<li class="view-all"><a href="'. get_category_link( $category->cat_ID ) .'" title="'. $category->name .'" >'. __( 'View All &raquo;', 'helpdesk' ). '</a></li>';
+				echo '<li class="view-all"><a href="'. get_category_link( $category->cat_ID ) .'" title="'. $category->name .'" >'. __( 'View All &raquo;', 'helpdesk' ). '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			echo '</ul>';

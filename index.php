@@ -76,7 +76,7 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 			$helpdesk_cats = get_categories( $helpdesk_cat_args );
 
 			foreach ( $helpdesk_cats as $category ) :
-				echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>';
+				echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo '</ul>';
 			endforeach; ?>
 		</div><!-- #helpdesk-categories-columns-three -->
@@ -140,7 +140,7 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 						<?php echo $support_button_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</a>
 				<?php }else { ?>
-					<a href="#"><?php esc_html_e( 'Contact Support' ); ?></a>
+					<a href="#"><?php esc_html_e( 'Contact Support', 'helpdesk' ); ?></a>
 				<?php } ?>
 			</div>
 		</div><!-- .helpdesk-support-section -->

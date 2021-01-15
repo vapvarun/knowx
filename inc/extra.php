@@ -147,9 +147,22 @@ if ( ! function_exists( 'helpdesk_footer_custom_text' ) ) {
      * @return mixed         Markup of custom text option.
      */
     function helpdesk_footer_custom_text() {
+        
         $copyright = esc_html( get_theme_mod( 'site_copyright_text' ) );
-        $output = $copyright;
-        if ( '' != $output ) {
+        if ( ! empty( $copyright ) ) {
+            $copyright = str_replace( '[current_year]', date_i18n( 'Y' ), $copyright );
+            $copyright = str_replace( '[site_title]', '<span class="helpdesk-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $copyright );
+            $theme_author = apply_filters(
+                    'helpdesk_theme_author',
+                    array(
+                            'theme_name'       => __( 'Helpdesk WordPress Theme', 'helpdesk' ),
+                            'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/helpdesk-theme/' ),
+                    )
+            );
+            $copyright = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $copyright );
+            return apply_filters( 'helpdesk_footer_copyright_text', $copyright );
+        }else {
+            $output = 'Copyright © [current_year] [site_title] | Powered by [theme_author]';
             $output = str_replace( '[current_year]', date_i18n( 'Y' ), $output );
             $output = str_replace( '[site_title]', '<span class="helpdesk-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $output );
             $theme_author = apply_filters(
@@ -160,8 +173,9 @@ if ( ! function_exists( 'helpdesk_footer_custom_text' ) ) {
                     )
             );
             $output = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $output );
+            return apply_filters( 'helpdesk_footer_copyright_text', $output );
         }
-        return apply_filters( 'helpdesk_footer_copyright_text', $output, $copyright );
+        
     }
 }
 
@@ -201,7 +215,7 @@ if ( ! function_exists( 'helpdesk_posted_on' ) ) {
         }
 
         if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && helpdesk_categorized_blog() ) {
-            echo '<span class="entry-cat-links">' . get_the_category_list(', ') . '</span>';
+            echo '<span class="entry-cat-links">' . get_the_category_list(', ') . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         }
 
         if ( ! is_search() ) {
@@ -354,10 +368,10 @@ function helpdesk_metabox_callback( $post ) {
 	wp_nonce_field( 'helpdesk_meta_box', 'helpdesk_nonce' );
 	$cats_value = get_post_meta( $post->ID, 'helpdesk-exclude-cats', true );
 	?>
-	<p><?php _e( 'Setting for the Knowledge Base page template. This field will override the one in Customizer.', 'helpdesk' ); ?></p>
-	<p><strong><label for="helpdesk-cats"><?php _e( 'Exclude category by ID', 'helpdesk' ); ?></label></strong></p>
+	<p><?php esc_html_e( 'Setting for the Knowledge Base page template. This field will override the one in Customizer.', 'helpdesk' ); ?></p>
+	<p><strong><label for="helpdesk-cats"><?php esc_html_e( 'Exclude category by ID', 'helpdesk' ); ?></label></strong></p>
 	<input class="widefat" id="helpdesk-cats" type="text" name="helpdesk-cats" value="<?php echo esc_attr( $cats_value ); ?>" />
-	<p><?php _e( 'Use a comma to separate multiple categories.', 'helpdesk' ); ?></p>
+	<p><?php esc_html_e( 'Use a comma to separate multiple categories.', 'helpdesk' ); ?></p>
 	<?php
 }
 

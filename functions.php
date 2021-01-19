@@ -77,3 +77,6 @@ require get_template_directory() . '/inc/extra.php';
 
 // Load theme category widget.
 require get_template_directory() . '/inc/widgets/category-widget.php';
+
+// Load theme breadcrubms function.
+require get_template_directory() . '/inc/class-helpdesk-breadcrubms.php';

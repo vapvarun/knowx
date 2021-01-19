@@ -50,54 +50,8 @@ if ( ! function_exists( 'helpdesk_the_breadcrumb' ) ) {
         $wpseo_titles = get_option( 'wpseo_titles' );
         if (function_exists( 'yoast_breadcrumb' ) && isset( $wpseo_titles['breadcrumbs-enable'] ) && $wpseo_titles['breadcrumbs-enable'] == 1 ) {
             yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
-        } else {
-            $sep = ' » ';
-
-            if ( ! is_front_page() ) {
-                // Start the breadcrumb with a link to your homepage
-                echo '<div class="helpdesk-breadcrumbs">';
-                echo '<a href="';
-                echo esc_url( home_url() );
-                echo '">';
-                echo esc_html__( 'Home', 'helpdesk' );
-                echo '</a>'. $sep; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-
-                // Check if the current page is a category, an archive or a single page. If so show the category or archive name.
-                if ( is_category() || is_single() ) {
-                    the_category('  » ');
-                } elseif ( is_archive() || is_single() ) {
-                    if (is_day()) {
-                        printf(esc_html__('%s', 'helpdesk'), get_the_date());
-                    } elseif (is_month()) {
-                        printf(esc_html__('%s', 'helpdesk'), get_the_date(_x('F Y', 'monthly archives date format', 'helpdesk')));
-                    } elseif (is_year()) {
-                        printf(esc_html__('%s', 'helpdesk'), get_the_date(_x('Y', 'yearly archives date format', 'helpdesk')));
-                    } elseif (is_archive('post-type-archive-forum')) {
-                        esc_html_e('Forums Archives', 'helpdesk');
-                    } else {
-                        esc_html_e('Blog Archives', 'helpdesk');
-                    }
-                }
-
-                // If the current page is a single post, show its title with the separator
-                if (is_single()) {
-                    echo $sep; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                    the_title();
-                }
-
-                // If the current page is a static page, show its title.
-                if (is_page()) {
-                    the_title();
-                }
-
-                // if you have a static page assigned to be you posts list page. It will find the title of the static page.
-                if (is_home()) {
-                    $blog_title = get_option( 'page_for_posts', true );
-                    echo esc_html( get_the_title ( $blog_title ) );
-                }
-
-                echo '</div>';
-            }
+        } else {			
+			helpdesk_get_breadcrumb();
         }
     }
 }

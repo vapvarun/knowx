@@ -1439,6 +1439,25 @@ body.layout-boxed {
     text-decoration: underline;
 }
 
+.helpdesk-trail-items {
+    list-style: none;
+}
+
+.helpdesk-trail-items,
+.helpdesk-trail-items li {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: none;
+    background: inherit;
+    text-indent: 0;
+}
+
+.helpdesk-trail-items li:not(.trail-end)::after {
+    padding: 0 0.3em;
+    content: "\00bb";
+}
+
 
 /*--------------------------------------------------------------
 # Site Text Editor

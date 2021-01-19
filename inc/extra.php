@@ -50,8 +50,10 @@ if ( ! function_exists( 'helpdesk_the_breadcrumb' ) ) {
         $wpseo_titles = get_option( 'wpseo_titles' );
         if (function_exists( 'yoast_breadcrumb' ) && isset( $wpseo_titles['breadcrumbs-enable'] ) && $wpseo_titles['breadcrumbs-enable'] == 1 ) {
             yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
-        } else {			
-			helpdesk_get_breadcrumb();
+        } else {
+            echo '<div class="helpdesk-breadcrumbs">';
+                helpdesk_get_breadcrumb();
+            echo '</div>';
         }
     }
 }

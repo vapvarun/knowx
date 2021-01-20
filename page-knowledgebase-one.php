@@ -28,7 +28,7 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 	</div><!--close .container-->
 	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); ?>
 		<?php if ( has_post_thumbnail() ) { ?>
-			<div class="helpdesk-section-hero" style="background-image: url(' <?php echo $backgroundImg[0]; ?> ');">
+			<div class="helpdesk-section-hero" style="background-image: url(' <?php echo $backgroundImg[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> ');">
 		<?php }else { ?>
 			<div class="helpdesk-section-hero">
 		<?php } ?>
@@ -143,7 +143,7 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 						<?php echo $support_button_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</a>
 				<?php }else { ?>
-					<a href="#"><?php esc_html_e( 'Contact Support' ); ?></a>
+					<a href="#"><?php esc_html_e( 'Contact Support', 'helpdesk' ); ?></a>
 				<?php } ?>
 			</div>
 		</div><!-- .helpdesk-support-section -->

@@ -328,7 +328,7 @@ class Helpdesk_Breadcrumbs {
 		if ( false === $this->args['echo'] )
 			return $breadcrumb;
 
-		echo $breadcrumb;
+		echo $breadcrumb; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/* ====== Protected Methods ====== */

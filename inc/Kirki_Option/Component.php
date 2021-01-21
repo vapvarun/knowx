@@ -1440,6 +1440,7 @@ class Component implements Component_Interface {
 			'type'        => 'textarea',
 			'settings'    => 'site_copyright_text',
 			'label'       => esc_html__( 'Add Content', 'helpdesk' ),
+			'description' => esc_html__( 'You can use [current_year], [site_title], [theme_author] shortcode if you want.', 'helpdesk' ),
 			'section'     => 'site_copyright_section',
 			'default' 	  => esc_html__( 'Copyright © [current_year] [site_title] | Powered by [theme_author]', 'helpdesk' ),
 			'priority'    => 10,

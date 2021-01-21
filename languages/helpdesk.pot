@@ -644,10 +644,6 @@ msgstr ""
 msgid "XL"
 msgstr ""
 
-#: ../helpdesk/inc/extra.php:127, ../helpdesk/inc/extra.php:114
-msgid "Helpdesk WordPress Theme"
-msgstr ""
-
 #: ../helpdesk/inc/extra.php:170
 msgid "Sticky"
 msgstr ""
@@ -888,7 +884,7 @@ msgstr ""
 msgid "Theme Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:818, ../helpdesk/inc/Kirki_Option/Component.php:1407, ../helpdesk/inc/Kirki_Option/Component.php:1499
+#: ../helpdesk/inc/Kirki_Option/Component.php:818, ../helpdesk/inc/Kirki_Option/Component.php:1407, ../helpdesk/inc/Kirki_Option/Component.php:1500
 msgid "Link Color"
 msgstr ""
 
@@ -961,7 +957,7 @@ msgid "Hero Section Background Control"
 msgstr ""
 
 #: ../helpdesk/inc/Kirki_Option/Component.php:1042
-msgid "Note: \"Background Image\" not apply when set page featured image from backend."
+msgid "Set hero section background color and image. Note: \"Background Image\" not apply when set page featured image from backend."
 msgstr ""
 
 #: ../helpdesk/inc/Kirki_Option/Component.php:1070
@@ -1056,7 +1052,7 @@ msgstr ""
 msgid "Title Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1391, ../helpdesk/inc/Kirki_Option/Component.php:1483
+#: ../helpdesk/inc/Kirki_Option/Component.php:1391, ../helpdesk/inc/Kirki_Option/Component.php:1484
 msgid "Content Color"
 msgstr ""
 
@@ -1064,19 +1060,23 @@ msgstr ""
 msgid "Add Content"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1444
+#: ../helpdesk/inc/Kirki_Option/Component.php:1443
+msgid "You can use [current_year], [site_title], [theme_author] shortcode if you want."
+msgstr ""
+
+#: ../helpdesk/inc/Kirki_Option/Component.php:1445
 msgid "Copyright © [current_year] [site_title] | Powered by [theme_author]"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1451
+#: ../helpdesk/inc/Kirki_Option/Component.php:1452
 msgid "Background Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1467
+#: ../helpdesk/inc/Kirki_Option/Component.php:1468
 msgid "Border Color"
 msgstr ""
 
-#: ../helpdesk/inc/Kirki_Option/Component.php:1515
+#: ../helpdesk/inc/Kirki_Option/Component.php:1516
 msgid "Link Hover Color"
 msgstr ""
 
@@ -1385,6 +1385,10 @@ msgstr ""
 
 #: ../helpdesk/page-knowledgebase-one.php:137
 msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
+msgstr ""
+
+#: ../helpdesk/page-knowledgebase-one.php:146
+msgid "Contact Support"
 msgstr ""
 
 #: ../helpdesk/page-knowledgebase-two.php:106

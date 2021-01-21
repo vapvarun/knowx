@@ -104,14 +104,14 @@ if ( ! function_exists( 'helpdesk_footer_custom_text' ) ) {
      */
     function helpdesk_footer_custom_text() {
         
-        $copyright = esc_html( get_theme_mod( 'site_copyright_text' ) );
+        $copyright = get_theme_mod( 'site_copyright_text' );
         if ( ! empty( $copyright ) ) {
             $copyright = str_replace( '[current_year]', date_i18n( 'Y' ), $copyright );
             $copyright = str_replace( '[site_title]', '<span class="helpdesk-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $copyright );
             $theme_author = apply_filters(
                     'helpdesk_theme_author',
                     array(
-                            'theme_name'       => __( 'Helpdesk WordPress Theme', 'helpdesk' ),
+                            'theme_name'       => esc_html( 'Helpdesk WordPress Theme', 'helpdesk' ),
                             'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/helpdesk-theme/' ),
                     )
             );
@@ -124,7 +124,7 @@ if ( ! function_exists( 'helpdesk_footer_custom_text' ) ) {
             $theme_author = apply_filters(
                     'helpdesk_theme_author',
                     array(
-                            'theme_name'       => __( 'Helpdesk WordPress Theme', 'helpdesk' ),
+                            'theme_name'       => esc_html( 'Helpdesk WordPress Theme', 'helpdesk' ),
                             'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/helpdesk-theme/' ),
                     )
             );
@@ -366,3 +366,11 @@ function setPostViews($postID) {
         update_post_meta($postID, $countKey, $count);
     }
 }
+
+/*
+ * Hide bbp breadcrumb
+ */
+function custom_bbp_no_breadcrumb ($param) {
+    return true;
+}
+add_filter ('bbp_no_breadcrumb', 'custom_bbp_no_breadcrumb');

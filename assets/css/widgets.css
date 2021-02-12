@@ -17,6 +17,9 @@
 .widget-area .widget {
     position: relative;
     margin-bottom: 30px;
+    background: #fff;
+    padding: 1em;
+    border-radius: 4px;
 }
 
 .widget-area .widget:last-child {
@@ -106,13 +109,12 @@ ul.helpdesk-categories-lists ul.children li a {
 /* Collapsing Widget */
 
 .widget_collapscat ul.collapsing {
-    border: 1px solid var(--color-link);
     overflow: hidden;
 }
 
 .widget_collapscat ul li.collapsing.categories {
     float: none;
-    border-top: 1px solid var(--color-link);
+    border-top: 1px solid var(--global-border-color);
 }
 
 .widget_collapscat ul li.collapsing.categories:first-child {
@@ -120,30 +122,32 @@ ul.helpdesk-categories-lists ul.children li a {
 }
 
 .widget_collapscat ul li a {
-    display: inline-block;
-    padding: 10px 15px;
+    display: inline-block !important;
+    width: auto !important;
+    padding: 10px 15px !important;
 }
 
-#widget-collapscat-2-top li.collapsing.categories {
-    text-indent: 0;
+.widget_collapscat li.collapsing.categories {
+    text-indent: 0 !important;
+    margin: 0 !important;
     position: relative;
 }
 
-#widget-collapscat-2-top li.collapsing.categories:before {
+.widget_collapscat li.collapsing.categories:before {
     position: absolute;
     top: 8px;
 }
 
-#widget-collapscat-2-top li.collapsing.categories .sym img {
+.widget_collapscat li.collapsing.categories .sym img {
     display: inline-block;
 }
 
-#widget-collapscat-2-top li.collapsing.categories.expandable {
+.widget_collapscat li.collapsing.categories.expandable {
     margin-left: 0;
     text-indent: 0;
 }
 
-#widget-collapscat-2-top span.sym {
+.widget_collapscat span.sym {
     padding-right: 10px;
 }
 

@@ -1375,6 +1375,10 @@ msgstr ""
 msgid "Popular Articles"
 msgstr ""
 
+#: ../helpdesk/page-knowledgebase-one.php:99
+msgid "No data found."
+msgstr ""
+
 #: ../helpdesk/page-knowledgebase-one.php:106
 msgid "Recent Articles"
 msgstr ""

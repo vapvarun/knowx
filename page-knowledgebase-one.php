@@ -90,14 +90,14 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 					<div class="helpdesk-popular-posts">
 					<h3><?php esc_html_e( 'Popular Articles', 'helpdesk' ); ?></h3>
 					<?php
-						query_posts('meta_key=post_views_count&orderby=meta_value_num&order=DESC&posts_per_page=5');
-						if (have_posts()) : while (have_posts()) : the_post();
-						?><ul>
-							<li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
-						</ul>
-						<?php
-						endwhile; endif;
-						wp_reset_query();
+					if ( function_exists('wpp_get_mostpopular') ) {
+						/* Get up to the top 5 */
+						wpp_get_mostpopular(array(
+							'limit' => 5,
+						));
+					}else { ?>
+						<p><?php esc_html_e( 'No data found.', 'helpdesk' ); ?></p>
+					<?php }
 					?>
 					</div>
 				</div>

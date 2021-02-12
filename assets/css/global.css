@@ -22,6 +22,7 @@
 # Site Text Editor
 # Knowledge Base Layout one
 # Knowledge Base Layout Two
+# single Post Layout
 --------------------------------------------------------------*/
 
 
@@ -1342,7 +1343,8 @@ body.layout-boxed {
     content: none;
 }
 
-.site-sub-header>.container form#searchform {
+.site-sub-header>.container form#searchform,
+.site-sub-header>.container form#bbp-search-form {
     display: flex;
     position: relative;
     width: 30%;
@@ -1350,14 +1352,20 @@ body.layout-boxed {
     margin: 10px 0;
 }
 
+.site-sub-header>.container form#bbp-search-form>div {
+    width: 100%;
+}
+
 @media (max-width: 480px) {
-    .site-sub-header>.container form#searchform {
+    .site-sub-header>.container form#searchform,
+    .site-sub-header>.container form#bbp-search-form {
         width: 100%;
         min-width: 100%;
     }
 }
 
-.site-sub-header input.text_input {
+.site-sub-header input.text_input,
+.site-sub-header input#bbp_search {
     width: 100%;
     padding: 0 40px 0 15px;
     border-radius: 100px;
@@ -1710,6 +1718,10 @@ button.media-menu-item {
     color: var(--color-link);
 }
 
+.helpdesk-popular-posts ul li .wpp-meta.post-stats {
+    display: none;
+}
+
 .helpdesk-support-section {
     margin: 0;
     padding: 70px 0;
@@ -1816,4 +1828,16 @@ button.media-menu-item {
     left: 0;
     width: 20px;
     display: block;
+}
+
+
+/*--------------------------------------------------------------
+# single Post Layout
+--------------------------------------------------------------*/
+
+.single-post .site-main {
+    background-color: #fff;
+    margin: 1rem 0;
+    padding: 25px;
+    border-radius: 4px;
 }

@@ -74,6 +74,13 @@ function helpdesk_register_required_plugins() {
 			'required'	 => false,
 		),
 
+		// WordPress Popular Posts
+		array(
+			'name'		 => 'WordPress Popular Posts', 'helpdesk',
+			'slug'		 => 'wordpress-popular-posts',
+			'required'	 => false,
+		),
+
 	);
 
 	/*

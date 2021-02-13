@@ -155,7 +155,6 @@ class Theme {
 			new Kirki\Component(),
 			new Kirki_Option\Component(),
 			new Custom_Js\Component(),
-			new Welcome\Component(),
 		];
 
 		if ( defined( 'JETPACK__VERSION' ) ) {

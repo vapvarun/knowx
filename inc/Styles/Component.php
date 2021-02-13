@@ -149,26 +149,6 @@ class Component implements Component_Interface, Templating_Component_Interface
     }
 
     /**
-     * Register and enqueue a custom stylesheet in the WordPress admin.
-     */
-    public function helpdesk_enqueue_admin_style($hook)
-    {
-        $css_uri = get_theme_file_uri('/assets/css/');
-        wp_enqueue_style('helpdesk-admin', $css_uri . '/admin.min.css');
-
-        if (isset($_GET['page']) && $_GET['page'] == 'helpdesk-welcome') {
-            
-            wp_enqueue_script(
-				'helpdesk-admin-script',
-				get_theme_file_uri( '/assets/js/helpdesk-admin.min.js' ),
-				'',
-				'',
-				true
-			);
-        }
-    }
-
-    /**
      * Preloads in-body stylesheets depending on what templates are being used.
      *
      * Only stylesheets that have a 'preload_callback' provided will be considered. If that callback evaluates to true

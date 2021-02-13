@@ -88,9 +88,6 @@ Thomas Griffin, Gary Jones, Juliette Reinders Folmer
 Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
-Screenshot
-screenshot.png (Slider Image), © 2020 @decoasta9301, https://pxhere.com/en/photo/1624307, CC0
-
 == Changelog ==
 
 = 1.0.0 =

@@ -1,11 +1,11 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Component_Interface interface
+ * KnowX\KnowX\Component_Interface interface
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 /**
  * Interface for a theme component.

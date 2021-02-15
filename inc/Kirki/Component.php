@@ -1,13 +1,13 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Kirki\Component class
+ * KnowX\KnowX\Kirki\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Kirki;
+namespace KnowX\KnowX\Kirki;
 
-use Helpdesk\Helpdesk\Component_Interface;
+use KnowX\KnowX\Component_Interface;
 use Kirki;
 use function add_filter;
 
@@ -15,7 +15,7 @@ use function add_filter;
 /**
  * Class Component
  *
- * @package Helpdesk\Helpdesk\Kirki
+ * @package KnowX\KnowX\Kirki
  */
 class Component implements Component_Interface {
 
@@ -33,7 +33,7 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_filter( 'kirki/config', array( $this, 'configure_kirki' ) );		
+		add_filter( 'kirki/config', array( $this, 'configure_kirki' ) );
 		// TODO: Implement initialize() method.
 	}
 
@@ -43,10 +43,10 @@ class Component implements Component_Interface {
 	public function configure_kirki( $config ) {
 		if ( ! class_exists( 'Kirki' ) ) {
 			Kirki::add_config(
-				'helpdesk_kirki',
+				'knowx_kirki',
 				array(
-					'capability'    => 'edit_theme_options',
-					'option_type'   => 'theme_mod',
+					'capability'  => 'edit_theme_options',
+					'option_type' => 'theme_mod',
 				)
 			);
 		}

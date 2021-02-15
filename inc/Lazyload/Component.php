@@ -1,14 +1,14 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Lazyload\Component class
+ * KnowX\KnowX\Lazyload\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Lazyload;
+namespace KnowX\KnowX\Lazyload;
 
-use Helpdesk\Helpdesk\Component_Interface;
-use function Helpdesk\Helpdesk\helpdesk;
+use KnowX\KnowX\Component_Interface;
+use function KnowX\KnowX\knowx;
 use WP_Customize_Manager;
 use function add_action;
 use function add_filter;
@@ -67,7 +67,7 @@ class Component implements Component_Interface {
 		}
 
 		// If the AMP plugin is active, return early.
-		if ( helpdesk()->is_amp() ) {
+		if ( knowx()->is_amp() ) {
 			return;
 		}
 
@@ -86,8 +86,8 @@ class Component implements Component_Interface {
 	 */
 	public function action_customize_register_lazyload( WP_Customize_Manager $wp_customize ) {
 		$lazyload_choices = [
-			'lazyload'    => __( 'Lazy-load on', 'helpdesk' ),
-			'no-lazyload' => __( 'Lazy-load off (default)', 'helpdesk' ),
+			'lazyload'    => __( 'Lazy-load on', 'knowx' ),
+			'no-lazyload' => __( 'Lazy-load off (default)', 'knowx' ),
 		];
 
 		$wp_customize->add_setting(
@@ -108,10 +108,10 @@ class Component implements Component_Interface {
 		$wp_customize->add_control(
 			'lazy_load_media',
 			[
-				'label'           => __( 'Lazy-load images', 'helpdesk' ),
+				'label'           => __( 'Lazy-load images', 'knowx' ),
 				'section'         => 'theme_options',
 				'type'            => 'radio',
-				'description'     => __( 'Lazy-loading images means images are loaded only when they are in view. Improves performance, but can result in content jumping around on slower connections.', 'helpdesk' ),
+				'description'     => __( 'Lazy-loading images means images are loaded only when they are in view. Improves performance, but can result in content jumping around on slower connections.', 'knowx' ),
 				'choices'         => $lazyload_choices,
 			]
 		);
@@ -136,14 +136,14 @@ class Component implements Component_Interface {
 	 */
 	public function action_enqueue_lazyload_assets() {
 		wp_enqueue_script(
-			'helpdesk-lazy-load-images',
+			'knowx-lazy-load-images',
 			get_theme_file_uri( '/assets/js/lazyload.min.js' ),
 			[],
-			helpdesk()->get_asset_version( get_theme_file_path( '/assets/js/lazyload.min.js' ) ),
+			knowx()->get_asset_version( get_theme_file_path( '/assets/js/lazyload.min.js' ) ),
 			false
 		);
-		wp_script_add_data( 'helpdesk-lazy-load-images', 'defer', true );
-		wp_script_add_data( 'helpdesk-lazy-load-images', 'precache', true );
+		wp_script_add_data( 'knowx-lazy-load-images', 'defer', true );
+		wp_script_add_data( 'knowx-lazy-load-images', 'precache', true );
 	}
 
 	/**

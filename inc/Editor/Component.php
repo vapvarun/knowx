@@ -1,13 +1,13 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Editor\Component class
+ * KnowX\KnowX\Editor\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Editor;
+namespace KnowX\KnowX\Editor;
 
-use Helpdesk\Helpdesk\Component_Interface;
+use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function add_theme_support;
 
@@ -31,7 +31,7 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'after_setup_theme', [ $this, 'action_add_editor_support' ] );
+		add_action( 'after_setup_theme', array( $this, 'action_add_editor_support' ) );
 	}
 
 	/**
@@ -60,63 +60,63 @@ class Component implements Component_Interface {
 		 */
 		add_theme_support(
 			'editor-color-palette',
-			[
-				[
-					'name'  => __( 'Primary', 'helpdesk' ),
+			array(
+				array(
+					'name'  => __( 'Primary', 'knowx' ),
 					'slug'  => 'theme-primary',
 					'color' => '#e36d60',
-				],
-				[
-					'name'  => __( 'Secondary', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Secondary', 'knowx' ),
 					'slug'  => 'theme-secondary',
 					'color' => '#41848f',
-				],
-				[
-					'name'  => __( 'Red', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Red', 'knowx' ),
 					'slug'  => 'theme-red',
 					'color' => '#C0392B',
-				],
-				[
-					'name'  => __( 'Green', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Green', 'knowx' ),
 					'slug'  => 'theme-green',
 					'color' => '#27AE60',
-				],
-				[
-					'name'  => __( 'Blue', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Blue', 'knowx' ),
 					'slug'  => 'theme-blue',
 					'color' => '#2980B9',
-				],
-				[
-					'name'  => __( 'Yellow', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Yellow', 'knowx' ),
 					'slug'  => 'theme-yellow',
 					'color' => '#F1C40F',
-				],
-				[
-					'name'  => __( 'Black', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Black', 'knowx' ),
 					'slug'  => 'theme-black',
 					'color' => '#1C2833',
-				],
-				[
-					'name'  => __( 'Grey', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Grey', 'knowx' ),
 					'slug'  => 'theme-grey',
 					'color' => '#95A5A6',
-				],
-				[
-					'name'  => __( 'White', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'White', 'knowx' ),
 					'slug'  => 'theme-white',
 					'color' => '#ECF0F1',
-				],
-				[
-					'name'  => __( 'Dusty daylight', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Dusty daylight', 'knowx' ),
 					'slug'  => 'custom-daylight',
 					'color' => '#97c0b7',
-				],
-				[
-					'name'  => __( 'Dusty sun', 'helpdesk' ),
+				),
+				array(
+					'name'  => __( 'Dusty sun', 'knowx' ),
 					'slug'  => 'custom-sun',
 					'color' => '#eee9d1',
-				],
-			]
+				),
+			)
 		);
 
 		/*
@@ -127,32 +127,32 @@ class Component implements Component_Interface {
 		 */
 		add_theme_support(
 			'editor-font-sizes',
-			[
-				[
-					'name'      => __( 'Small', 'helpdesk' ),
-					'shortName' => __( 'S', 'helpdesk' ),
+			array(
+				array(
+					'name'      => __( 'Small', 'knowx' ),
+					'shortName' => __( 'S', 'knowx' ),
 					'size'      => 16,
 					'slug'      => 'small',
-				],
-				[
-					'name'      => __( 'Medium', 'helpdesk' ),
-					'shortName' => __( 'M', 'helpdesk' ),
+				),
+				array(
+					'name'      => __( 'Medium', 'knowx' ),
+					'shortName' => __( 'M', 'knowx' ),
 					'size'      => 25,
 					'slug'      => 'medium',
-				],
-				[
-					'name'      => __( 'Large', 'helpdesk' ),
-					'shortName' => __( 'L', 'helpdesk' ),
+				),
+				array(
+					'name'      => __( 'Large', 'knowx' ),
+					'shortName' => __( 'L', 'knowx' ),
 					'size'      => 31,
 					'slug'      => 'large',
-				],
-				[
-					'name'      => __( 'Larger', 'helpdesk' ),
-					'shortName' => __( 'XL', 'helpdesk' ),
+				),
+				array(
+					'name'      => __( 'Larger', 'knowx' ),
+					'shortName' => __( 'XL', 'knowx' ),
 					'size'      => 39,
 					'slug'      => 'larger',
-				],
-			]
+				),
+			)
 		);
 	}
 }

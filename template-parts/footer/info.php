@@ -2,15 +2,15 @@
 /**
  * Template part for displaying the footer info
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 <div class="site-info">
     <div class="container">	
-        <?php echo helpdesk_footer_custom_text(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+        <?php echo knowx_footer_custom_text(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
     </div>
 
 	<?php

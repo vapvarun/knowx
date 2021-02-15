@@ -1,14 +1,14 @@
 <?php
 /**
- * Helpdesk\Helpdesk\AMP\Component class
+ * KnowX\KnowX\AMP\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\AMP;
+namespace KnowX\KnowX\AMP;
 
-use Helpdesk\Helpdesk\Component_Interface;
-use Helpdesk\Helpdesk\Templating_Component_Interface;
+use KnowX\KnowX\Component_Interface;
+use KnowX\KnowX\Templating_Component_Interface;
 use function add_action;
 use function add_filter;
 use function add_theme_support;
@@ -18,8 +18,8 @@ use function get_theme_support;
  * Class for managing AMP support.
  *
  * Exposes template tags:
- * * `helpdesk()->is_amp()`
- * * `helpdesk()->using_amp_live_list_comments()`
+ * * `knowx()->is_amp()`
+ * * `knowx()->using_amp_live_list_comments()`
  *
  * @link https://wordpress.org/plugins/amp/
  */
@@ -38,24 +38,24 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'after_setup_theme', [ $this, 'action_add_amp_support' ] );
-		add_filter( 'body_class', [ $this, 'helpdesk_amp' ] );
-		add_filter( 'helpdesk_search_slide_toggle_data_attrs', array( $this, 'add_search_slide_toggle_attrs' ) );
-		add_filter( 'helpdesk_search_field_toggle_data_attrs', array( $this, 'add_search_field_toggle_attrs' ) );
+		add_action( 'after_setup_theme', array( $this, 'action_add_amp_support' ) );
+		add_filter( 'body_class', array( $this, 'knowx_amp' ) );
+		add_filter( 'knowx_search_slide_toggle_data_attrs', array( $this, 'add_search_slide_toggle_attrs' ) );
+		add_filter( 'knowx_search_field_toggle_data_attrs', array( $this, 'add_search_field_toggle_attrs' ) );
 	}
 
 	/**
-	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `helpdesk()`.
+	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
 	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
-		return [
-			'is_amp'                       => [ $this, 'is_amp' ],
-			'using_amp_live_list_comments' => [ $this, 'using_amp_live_list_comments' ],
-		];
+		return array(
+			'is_amp'                       => array( $this, 'is_amp' ),
+			'using_amp_live_list_comments' => array( $this, 'using_amp_live_list_comments' ),
+		);
 	}
 
 	/**
@@ -66,9 +66,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function action_add_amp_support() {
 		add_theme_support(
 			'amp',
-			[
+			array(
 				'comments_live_list' => true,
-			]
+			)
 		);
 	}
 
@@ -78,9 +78,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @param array $classes Classes for the body element.
 	 * @return array Filtered body classes.
 	 */
-	public function helpdesk_amp( array $classes ) : array {
+	public function knowx_amp( array $classes ) : array {
 		if ( $this->is_amp() ) {
-			$classes[] = 'helpdesk-amp';
+			$classes[] = 'knowx-amp';
 		}
 
 		return $classes;
@@ -94,9 +94,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return string
 	 */
 	public function add_search_slide_toggle_attrs( $input ) {
-		$input .= ' on="tap:AMP.setState( { helpdeskAmpSlideSearchMenuExpanded: ! helpdeskAmpSlideSearchMenuExpanded } )" ';
-		$input .= ' [class]="( helpdeskAmpSlideSearchMenuExpanded ? \'helpdesk-search-menu-icon search helpdesk-dropdown-active\' : \'helpdesk-search-menu-icon search\' )" ';
-		$input .= ' aria-expanded="false" [aria-expanded]="helpdeskAmpSlideSearchMenuExpanded ? \'true\' : \'false\'" ';
+		$input .= ' on="tap:AMP.setState( { knowxAmpSlideSearchMenuExpanded: ! knowxAmpSlideSearchMenuExpanded } )" ';
+		$input .= ' [class]="( knowxAmpSlideSearchMenuExpanded ? \'knowx-search-menu-icon search knowx-dropdown-active\' : \'knowx-search-menu-icon search\' )" ';
+		$input .= ' aria-expanded="false" [aria-expanded]="knowxAmpSlideSearchMenuExpanded ? \'true\' : \'false\'" ';
 
 		return $input;
 	}
@@ -109,7 +109,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return string
 	 */
 	public function add_search_field_toggle_attrs( $input ) {
-		$input .= ' on="tap:AMP.setState( { helpdeskAmpSlideSearchMenuExpanded: helpdeskAmpSlideSearchMenuExpanded } )" ';
+		$input .= ' on="tap:AMP.setState( { knowxAmpSlideSearchMenuExpanded: knowxAmpSlideSearchMenuExpanded } )" ';
 
 		return $input;
 	}
@@ -139,5 +139,5 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		return ! empty( $amp_theme_support[0]['comments_live_list'] );
 	}
-	
+
 }

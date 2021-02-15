@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post's title
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 if ( is_singular( get_post_type() ) ) {
 	the_title( '<h1 class="entry-title">', '</h1>' );

@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post's content
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 
@@ -16,7 +16,7 @@ namespace Helpdesk\Helpdesk;
 			sprintf(
 				wp_kses(
 					/* translators: %s: Name of current post. Only visible to screen readers */
-					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'helpdesk' ),
+					__( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'knowx' ),
 					array(
 						'span' => array(
 							'class' => array(),
@@ -33,7 +33,7 @@ namespace Helpdesk\Helpdesk;
 	}
 	wp_link_pages(
 		array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'helpdesk' ),
+			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'knowx' ),
 			'after'  => '</div>',
 		)
 	);

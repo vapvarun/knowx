@@ -1,11 +1,11 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Template_Tags class
+ * KnowX\KnowX\Template_Tags class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 use InvalidArgumentException;
 use BadMethodCallException;
@@ -16,8 +16,8 @@ use RuntimeException;
  *
  * This class provides access to all available template tag methods.
  *
- * Its instance can be accessed through `helpdesk()`. For example, if there is a template tag called `posted_on`, it can
- * be accessed via `helpdesk()->posted_on()`.
+ * Its instance can be accessed through `knowx()`. For example, if there is a template tag called `posted_on`, it can
+ * be accessed via `knowx()->posted_on()`.
  */
 class Template_Tags {
 
@@ -51,7 +51,7 @@ class Template_Tags {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: classname/type of the variable, 2: interface name */
-						__( 'The theme templating component %1$s does not implement the %2$s interface.', 'helpdesk' ),
+						__( 'The theme templating component %1$s does not implement the %2$s interface.', 'knowx' ),
 						gettype( $component ),
 						Templating_Component_Interface::class
 					)
@@ -78,8 +78,8 @@ class Template_Tags {
 			throw new BadMethodCallException(
 				sprintf(
 					/* translators: %s: template tag name */
-					__( 'The template tag %s does not exist.', 'helpdesk' ),
-					'helpdesk()->' . $method . '()'
+					__( 'The template tag %s does not exist.', 'knowx' ),
+					'knowx()->' . $method . '()'
 				)
 			);
 		}
@@ -107,7 +107,7 @@ class Template_Tags {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: template tag method name, 2: component class name */
-						__( 'The template tag method %1$s registered by theme component %2$s must either be a callable or an array.', 'helpdesk' ),
+						__( 'The template tag method %1$s registered by theme component %2$s must either be a callable or an array.', 'knowx' ),
 						$method_name,
 						get_class( $component )
 					)
@@ -118,7 +118,7 @@ class Template_Tags {
 				throw new RuntimeException(
 					sprintf(
 						/* translators: 1: template tag method name, 2: component class name */
-						__( 'The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name.', 'helpdesk' ),
+						__( 'The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name.', 'knowx' ),
 						$method_name,
 						get_class( $component )
 					)

@@ -4,15 +4,15 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 get_header();
 
-helpdesk()->print_styles( 'helpdesk-content' );
-helpdesk()->print_styles( 'helpdesk-sidebar', 'helpdesk-widgets' );
+knowx()->print_styles( 'knowx-content' );
+knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
 ?>
 	<main id="primary" class="site-main">
@@ -23,8 +23,7 @@ helpdesk()->print_styles( 'helpdesk-sidebar', 'helpdesk-widgets' );
 				the_post();
 
 				get_template_part( 'template-parts/content/entry', 'full-width' );
-            }
-            
+			}
 		} else {
 			get_template_part( 'template-parts/content/error' );
 		}

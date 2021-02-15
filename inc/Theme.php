@@ -1,11 +1,11 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Theme class
+ * KnowX\KnowX\Theme class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 use InvalidArgumentException;
 
@@ -21,7 +21,7 @@ class Theme {
 	 *
 	 * @var array
 	 */
-	protected $components = [];
+	protected $components = array();
 
 	/**
 	 * The template tags instance, providing access to all available template tags.
@@ -41,7 +41,7 @@ class Theme {
 	 *
 	 * @throws InvalidArgumentException Thrown if one of the $components does not implement Component_Interface.
 	 */
-	public function __construct( array $components = [] ) {
+	public function __construct( array $components = array() ) {
 		if ( empty( $components ) ) {
 			$components = $this->get_default_components();
 		}
@@ -54,7 +54,7 @@ class Theme {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: classname/type of the variable, 2: interface name */
-						__( 'The theme component %1$s does not implement the %2$s interface.', 'helpdesk' ),
+						__( 'The theme component %1$s does not implement the %2$s interface.', 'knowx' ),
 						gettype( $component ),
 						Component_Interface::class
 					)
@@ -92,9 +92,9 @@ class Theme {
 	/**
 	 * Retrieves the template tags instance, the entry point exposing template tag methods.
 	 *
-	 * Calling `helpdesk()` is a short-hand for calling this method on the main theme instance. The instance then allows
+	 * Calling `knowx()` is a short-hand for calling this method on the main theme instance. The instance then allows
 	 * for actual template tag methods to be called. For example, if there is a template tag called `posted_on`, it can
-	 * be accessed via `helpdesk()->posted_on()`.
+	 * be accessed via `knowx()->posted_on()`.
 	 *
 	 * @return Template_Tags Template tags instance.
 	 */
@@ -117,7 +117,7 @@ class Theme {
 			throw new InvalidArgumentException(
 				sprintf(
 					/* translators: %s: slug */
-					__( 'No theme component with the slug %s exists.', 'helpdesk' ),
+					__( 'No theme component with the slug %s exists.', 'knowx' ),
 					$slug
 				)
 			);
@@ -134,7 +134,7 @@ class Theme {
 	 * @return array List of theme components to use by default.
 	 */
 	protected function get_default_components() : array {
-		$components = [
+		$components = array(
 			new Localization\Component(),
 			new Base_Support\Component(),
 			new Editor\Component(),
@@ -155,7 +155,7 @@ class Theme {
 			new Kirki\Component(),
 			new Kirki_Option\Component(),
 			new Custom_Js\Component(),
-		];
+		);
 
 		if ( defined( 'JETPACK__VERSION' ) ) {
 			$components[] = new Jetpack\Component();

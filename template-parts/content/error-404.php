@@ -2,10 +2,10 @@
 /**
  * Template part for displaying the page content when a 404 error has occurred
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 <section class="error">
@@ -13,18 +13,18 @@ namespace Helpdesk\Helpdesk;
 
 	<div class="page-content">
 		<p>
-			<?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'helpdesk' ); ?>
+			<?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'knowx' ); ?>
 		</p>
 
 		<?php
 		get_search_form();
 
-		helpdesk()->print_styles( 'helpdesk-widgets' );
+		knowx()->print_styles( 'knowx-widgets' );
 		the_widget( 'WP_Widget_Recent_Posts' );
 		?>
 
 		<div class="widget widget_categories">
-			<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'helpdesk' ); ?></h2>
+			<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'knowx' ); ?></h2>
 			<ul>
 			<?php
 			wp_list_categories(
@@ -42,7 +42,7 @@ namespace Helpdesk\Helpdesk;
 
 		<?php
 		/* translators: %1$s: smiley */
-		$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'helpdesk' ), convert_smilies( ':)' ) ) . '</p>';
+		$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'knowx' ), convert_smilies( ':)' ) ) . '</p>';
 		the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
 
 		the_widget( 'WP_Widget_Tag_Cloud' );

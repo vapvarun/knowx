@@ -9,27 +9,27 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 get_header();
 
-helpdesk()->print_styles( 'helpdesk-content' );
-helpdesk()->print_styles( 'helpdesk-sidebar', 'helpdesk-widgets' );
+knowx()->print_styles( 'knowx-content' );
+knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
-$bbpress_sidebar = get_theme_mod( 'bbpress_sidebar_option', helpdesk_defaults( 'bbpress-sidebar-option' ) );
+$bbpress_sidebar = get_theme_mod( 'bbpress_sidebar_option', knowx_defaults( 'bbpress-sidebar-option' ) );
 
 ?>
-	<?php do_action( 'helpdesk_sub_header' ); ?>
+	<?php do_action( 'knowx_sub_header' ); ?>
 
-	<?php do_action( 'helpdesk_before_content' ); ?>
+	<?php do_action( 'knowx_before_content' ); ?>
 
 	<?php if ( $bbpress_sidebar == 'left' || $bbpress_sidebar == 'both' ) : ?>
 		<aside id="secondary" class="left-sidebar widget-area">
 			<div class="sticky-sidebar">
-				<?php helpdesk()->display_bbpress_left_sidebar(); ?>
+				<?php knowx()->display_bbpress_left_sidebar(); ?>
 			</div>
 		</aside>
 	<?php endif; ?>
@@ -58,11 +58,11 @@ $bbpress_sidebar = get_theme_mod( 'bbpress_sidebar_option', helpdesk_defaults( '
 	<?php if ( $bbpress_sidebar == 'right' || $bbpress_sidebar == 'both' ) : ?>
 		<aside id="secondary" class="primary-sidebar widget-area">
 			<div class="sticky-sidebar">
-				<?php helpdesk()->display_bbpress_right_sidebar(); ?>
+				<?php knowx()->display_bbpress_right_sidebar(); ?>
 			</div>
 		</aside>
 	<?php endif; ?>
 
-	<?php do_action( 'helpdesk_after_content' ); ?>
+	<?php do_action( 'knowx_after_content' ); ?>
 <?php
 get_footer();

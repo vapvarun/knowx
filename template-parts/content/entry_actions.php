@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post's comment and edit links
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 <div class="entry-actions">
@@ -18,7 +18,7 @@ namespace Helpdesk\Helpdesk;
 				sprintf(
 					wp_kses(
 						/* translators: %s: post title */
-						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'helpdesk' ),
+						__( 'Leave a Comment<span class="screen-reader-text"> on %s</span>', 'knowx' ),
 						[
 							'span' => [
 								'class' => [],
@@ -37,7 +37,7 @@ namespace Helpdesk\Helpdesk;
 		sprintf(
 			wp_kses(
 				/* translators: %s: post title */
-				__( 'Edit <span class="screen-reader-text">%s</span>', 'helpdesk' ),
+				__( 'Edit <span class="screen-reader-text">%s</span>', 'knowx' ),
 				[
 					'span' => [
 						'class' => [],

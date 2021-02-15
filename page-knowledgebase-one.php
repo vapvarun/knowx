@@ -6,14 +6,14 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 get_header();
 
-helpdesk()->print_styles( 'helpdesk-content' );
+knowx()->print_styles( 'knowx-content' );
 
 $hero_title = get_theme_mod( 'hero_section_heading' );
 $hero_content = get_theme_mod( 'hero_section_content' );
@@ -28,9 +28,9 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 	</div><!--close .container-->
 	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); ?>
 		<?php if ( has_post_thumbnail() ) { ?>
-			<div class="helpdesk-section-hero" style="background-image: url(' <?php echo $backgroundImg[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> ');">
+			<div class="knowx-section-hero" style="background-image: url(' <?php echo $backgroundImg[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> ');">
 		<?php }else { ?>
-			<div class="helpdesk-section-hero">
+			<div class="knowx-section-hero">
 		<?php } ?>
 		<div class="container">
 			<?php if ( ! empty( $hero_title ) ) { ?>
@@ -47,48 +47,48 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 					<?php the_excerpt(); ?>
 				</div><!-- .entry-summary -->
 			<?php } ?>
-			<div class="helpdesk-hero-section-search">
+			<div class="knowx-hero-section-search">
 				<?php get_search_form(); ?>
 			</div>
 		</div>
 	</div>
 	
 	
-	<?php do_action( 'helpdesk_before_content' ); ?>
+	<?php do_action( 'knowx_before_content' ); ?>
 	
 	<main id="primary" class="site-main">
 
 	<div class="container">
 
-		<div id="helpdesk-categories-columns-three" class="helpdesk-knowledgebase-one">
-			<?php $exclude_cats = get_post_meta( get_the_ID(), 'helpdesk-exclude-cats', true );
+		<div id="knowx-categories-columns-three" class="knowx-knowledgebase-one">
+			<?php $exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
 			if ( !empty( $exclude_cats ) ) {
 				$exclude = esc_attr( $exclude_cats );
-			} else if ( get_theme_mod( 'helpdesk_exclude_posts' ) ) :
-				$exclude = esc_attr( get_theme_mod( 'helpdesk_exclude_posts' ) );
+			} else if ( get_theme_mod( 'knowx_exclude_posts' ) ) :
+				$exclude = esc_attr( get_theme_mod( 'knowx_exclude_posts' ) );
 			else :
 				$exclude = '';
 			endif;
-			$helpdesk_cat_args = array(
+			$knowx_cat_args = array(
 				'parent' => 0,
 				'hide_empty' => 0,
 				'exclude' => $exclude,
 				'orderby' => 'name',
 				'order' => 'asc'
 			);
-			$helpdesk_cats = get_categories( $helpdesk_cat_args );
+			$knowx_cats = get_categories( $knowx_cat_args );
 
-			foreach ( $helpdesk_cats as $category ) :
+			foreach ( $knowx_cats as $category ) :
 				echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo '</ul>';
 			endforeach; ?>
-		</div><!-- #helpdesk-categories-columns-three -->
+		</div><!-- #knowx-categories-columns-three -->
 
-		<div class="helpdesk-post-section">
+		<div class="knowx-post-section">
 			<div class="row">
 				<div class="col-md-6">
-					<div class="helpdesk-popular-posts">
-					<h3><?php esc_html_e( 'Popular Articles', 'helpdesk' ); ?></h3>
+					<div class="knowx-popular-posts">
+					<h3><?php esc_html_e( 'Popular Articles', 'knowx' ); ?></h3>
 					<?php
 					if ( function_exists('wpp_get_mostpopular') ) {
 						/* Get up to the top 5 */
@@ -96,14 +96,14 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 							'limit' => 5,
 						));
 					}else { ?>
-						<p><?php esc_html_e( 'No data found.', 'helpdesk' ); ?></p>
+						<p><?php esc_html_e( 'No data found.', 'knowx' ); ?></p>
 					<?php }
 					?>
 					</div>
 				</div>
 				<div class="col-md-6">
-					<div class="helpdesk-recent-posts">
-					<h3><?php esc_html_e( 'Recent Articles', 'helpdesk' ); ?></h3>
+					<div class="knowx-recent-posts">
+					<h3><?php esc_html_e( 'Recent Articles', 'knowx' ); ?></h3>
 					<?php
 						$related = get_posts( array( 'numberposts' => 5 ) );
 							if( $related ) foreach( $related as $post ) {
@@ -117,39 +117,39 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 					</div>
 				</div>
 			</div><!-- .row -->
-		</div><!-- .helpdesk-post-section -->
+		</div><!-- .knowx-post-section -->
 
 	</div><!-- .container -->
 
-	<div class="helpdesk-support-section">
+	<div class="knowx-support-section">
 		<div class="container">
-			<div class="helpdesk-support-heading">
+			<div class="knowx-support-heading">
 			<?php if ( ! empty( $support_title ) ) { ?>
-					<h2 class="helpdesk-support-title"><?php echo $support_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+					<h2 class="knowx-support-title"><?php echo $support_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
 				<?php }else { ?>
-					<h2 class="helpdesk-support-title"><?php esc_html_e( 'Can\'t find what you\'re looking for?', 'helpdesk' ); ?></h2>
+					<h2 class="knowx-support-title"><?php esc_html_e( 'Can\'t find what you\'re looking for?', 'knowx' ); ?></h2>
 				<?php } ?>
 			</div>
-			<div class="helpdesk-support-content">
+			<div class="knowx-support-content">
 				<?php if ( ! empty( $support_content ) ) { ?>
 					<p><?php echo $support_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
 				<?php }else { ?>
-					<p><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 'helpdesk' ); ?></p>
+					<p><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 'knowx' ); ?></p>
 				<?php } ?>
 			</div>
-			<div class="helpdesk-support-button">
+			<div class="knowx-support-button">
 				<?php if ( ! empty( $support_button_text ) && ! empty( $support_button_link ) ) { ?>
 					<a href="<?php echo $support_button_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
 						<?php echo $support_button_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</a>
 				<?php }else { ?>
-					<a href="#"><?php esc_html_e( 'Contact Support', 'helpdesk' ); ?></a>
+					<a href="#"><?php esc_html_e( 'Contact Support', 'knowx' ); ?></a>
 				<?php } ?>
 			</div>
-		</div><!-- .helpdesk-support-section -->
+		</div><!-- .knowx-support-section -->
 	</div><!-- .container -->
 </main><!-- #primary -->
 
-	<?php do_action( 'helpdesk_after_content' ); ?>
+	<?php do_action( 'knowx_after_content' ); ?>
 <?php
 get_footer();

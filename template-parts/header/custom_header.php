@@ -2,10 +2,10 @@
 /**
  * Template part for displaying the custom header media
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 if ( ! has_header_image() ) {
 	return;

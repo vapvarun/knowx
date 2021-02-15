@@ -1,14 +1,14 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Image_Sizes\Component class
+ * KnowX\KnowX\Image_Sizes\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Image_Sizes;
+namespace KnowX\KnowX\Image_Sizes;
 
-use Helpdesk\Helpdesk\Component_Interface;
-use function Helpdesk\Helpdesk\helpdesk;
+use KnowX\KnowX\Component_Interface;
+use function KnowX\KnowX\knowx;
 use WP_Post;
 use function add_filter;
 use function is_active_sidebar;
@@ -31,9 +31,9 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_filter( 'wp_calculate_image_sizes', [ $this, 'filter_content_image_sizes_attr' ], 10, 2 );
-		add_filter( 'get_header_image_tag', [ $this, 'filter_header_image_tag' ], 10, 3 );
-		add_filter( 'wp_get_attachment_image_attributes', [ $this, 'filter_post_thumbnail_sizes_attr' ], 10, 3 );
+		add_filter( 'wp_calculate_image_sizes', array( $this, 'filter_content_image_sizes_attr' ), 10, 2 );
+		add_filter( 'get_header_image_tag', array( $this, 'filter_header_image_tag' ), 10, 3 );
+		add_filter( 'wp_get_attachment_image_attributes', array( $this, 'filter_post_thumbnail_sizes_attr' ), 10, 3 );
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Component implements Component_Interface {
 			$sizes = '100vw';
 		}
 
-		if ( helpdesk()->is_right_sidebar_active() ) {
+		if ( knowx()->is_right_sidebar_active() ) {
 			$sizes = '(min-width: 960px) 75vw, 100vw';
 		}
 
@@ -85,7 +85,7 @@ class Component implements Component_Interface {
 	public function filter_post_thumbnail_sizes_attr( array $attr, WP_Post $attachment, $size ) : array {
 		$attr['sizes'] = '100vw';
 
-		if ( helpdesk()->is_right_sidebar_active() ) {
+		if ( knowx()->is_right_sidebar_active() ) {
 			$attr['sizes'] = '(min-width: 960px) 75vw, 100vw';
 		}
 

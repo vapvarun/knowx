@@ -2,20 +2,20 @@
 /**
  * Template part for displaying the header navigation menu
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
-if (!helpdesk()->is_primary_nav_menu_active()) {
+if (!knowx()->is_primary_nav_menu_active()) {
     return;
 }
 
 ?>
 
-<nav id="site-navigation" class="main-navigation nav--toggle-sub nav--toggle-small" aria-label="<?php esc_attr_e('Main menu', 'helpdesk'); ?>"
+<nav id="site-navigation" class="main-navigation nav--toggle-sub nav--toggle-small" aria-label="<?php esc_attr_e('Main menu', 'knowx'); ?>"
 	<?php
-    if (helpdesk()->is_amp()) {
+    if (knowx()->is_amp()) {
         ?>
 		[class]=" siteNavigationMenu.expanded ? 'main-navigation nav--toggle-sub nav--toggle-small nav--toggled-on' : 'main-navigation nav--toggle-sub nav--toggle-small' "
 		<?php
@@ -23,7 +23,7 @@ if (!helpdesk()->is_primary_nav_menu_active()) {
     ?>
 >
 	<?php
-    if (helpdesk()->is_amp()) {
+    if (knowx()->is_amp()) {
         ?>
 		<amp-state id="siteNavigationMenu">
 			<script type="application/json">
@@ -36,9 +36,9 @@ if (!helpdesk()->is_primary_nav_menu_active()) {
     }
 	?>
 
-	<button class="menu-toggle" aria-label="<?php esc_attr_e('Open menu', 'helpdesk'); ?>" aria-controls="primary-menu" aria-expanded="false"
+	<button class="menu-toggle" aria-label="<?php esc_attr_e('Open menu', 'knowx'); ?>" aria-controls="primary-menu" aria-expanded="false"
 		<?php
-        if (helpdesk()->is_amp()) {
+        if (knowx()->is_amp()) {
             ?>
 			on="tap:AMP.setState( { siteNavigationMenu: { expanded: ! siteNavigationMenu.expanded } } )"
 			[aria-expanded]="siteNavigationMenu.expanded ? 'true' : 'false'"
@@ -51,16 +51,16 @@ if (!helpdesk()->is_primary_nav_menu_active()) {
 
 	<div class="primary-menu-container mobile-menu-container">
 		<div class="mobile-menu-heading">
-			<h3 class="menu-title"><?php esc_html_e('Menu', 'helpdesk'); ?></h3>
-			<a href="<?php echo esc_url('#'); ?>" class="menu-close" <?php if (helpdesk()->is_amp()) { ?>
+			<h3 class="menu-title"><?php esc_html_e('Menu', 'knowx'); ?></h3>
+			<a href="<?php echo esc_url('#'); ?>" class="menu-close" <?php if (knowx()->is_amp()) { ?>
 			on="tap:AMP.setState( { siteNavigationMenu: { expanded: ! siteNavigationMenu.expanded } } )"
 			[aria-expanded]="siteNavigationMenu.expanded ? 'true' : 'false'"
-			<?php } ?>><?php esc_html_e('Close', 'helpdesk'); ?></a>
+			<?php } ?>><?php esc_html_e('Close', 'knowx'); ?></a>
 		</div>
-		<?php helpdesk()->display_primary_nav_menu(['menu_id' => 'primary-menu']); ?>
+		<?php knowx()->display_primary_nav_menu(['menu_id' => 'primary-menu']); ?>
 	</div>
 	
 	<div class="primary-menu-container desktop-menu-container">
-		<?php helpdesk()->display_primary_nav_menu(['menu_id' => 'primary-menu']); ?>
+		<?php knowx()->display_primary_nav_menu(['menu_id' => 'primary-menu']); ?>
 	</div>
 </nav><!-- #site-navigation -->

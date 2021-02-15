@@ -2,10 +2,10 @@
 /**
  * Template part for displaying the header branding
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 
@@ -25,11 +25,11 @@ namespace Helpdesk\Helpdesk;
 	?>
 
 	<?php
-	$helpdesk_description = get_bloginfo( 'description', 'display' );
-	if ( $helpdesk_description || is_customize_preview() ) {
+	$knowx_description = get_bloginfo( 'description', 'display' );
+	if ( $knowx_description || is_customize_preview() ) {
 		?>
 		<p class="site-description">
-			<?php echo $helpdesk_description; /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
+			<?php echo $knowx_description; /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
 		</p>
 		<?php
 	}

@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post's content
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 
@@ -33,7 +33,7 @@ namespace Helpdesk\Helpdesk;
 		
 	wp_link_pages(
 		array(
-			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'helpdesk' ),
+			'before' => '<div class="page-links">' . esc_html__( 'Pages:', 'knowx' ),
 			'after'  => '</div>',
 		)
 	);

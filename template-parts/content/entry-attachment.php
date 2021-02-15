@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post of post type 'attachment'
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 
@@ -30,7 +30,7 @@ if ( is_singular( get_post_type() ) ) {
 		$prev_link = ob_get_clean();
 		if ( ! empty( $prev_link ) ) {
 			$attachment_navigation .= '<div class="nav-previous">';
-			$attachment_navigation .= '<div class="post-navigation-sub"><span>' . esc_html__( 'Previous:', 'helpdesk' ) . '</span></div>';
+			$attachment_navigation .= '<div class="post-navigation-sub"><span>' . esc_html__( 'Previous:', 'knowx' ) . '</span></div>';
 			$attachment_navigation .= $prev_link;
 			$attachment_navigation .= '</div>';
 		}
@@ -40,13 +40,13 @@ if ( is_singular( get_post_type() ) ) {
 		$next_link = ob_get_clean();
 		if ( ! empty( $next_link ) ) {
 			$attachment_navigation .= '<div class="nav-next">';
-			$attachment_navigation .= '<div class="post-navigation-sub"><span>' . esc_html__( 'Next:', 'helpdesk' ) . '</span></div>';
+			$attachment_navigation .= '<div class="post-navigation-sub"><span>' . esc_html__( 'Next:', 'knowx' ) . '</span></div>';
 			$attachment_navigation .= $next_link;
 			$attachment_navigation .= '</div>';
 		}
 
 		if ( ! empty( $attachment_navigation ) ) {
-			echo _navigation_markup( $attachment_navigation, $class = 'post-navigation', __( 'Post navigation', 'helpdesk' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo _navigation_markup( $attachment_navigation, $class = 'post-navigation', __( 'Post navigation', 'knowx' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 	}
 

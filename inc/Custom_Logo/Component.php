@@ -1,13 +1,13 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Custom_Logo\Component class
+ * KnowX\KnowX\Custom_Logo\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Custom_Logo;
+namespace KnowX\KnowX\Custom_Logo;
 
-use Helpdesk\Helpdesk\Component_Interface;
+use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function add_theme_support;
 use function apply_filters;
@@ -32,7 +32,7 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'after_setup_theme', [ $this, 'action_add_custom_logo_support' ] );
+		add_action( 'after_setup_theme', array( $this, 'action_add_custom_logo_support' ) );
 	}
 
 	/**
@@ -42,13 +42,13 @@ class Component implements Component_Interface {
 		add_theme_support(
 			'custom-logo',
 			apply_filters(
-				'helpdesk_custom_logo_args',
-				[
+				'knowx_custom_logo_args',
+				array(
 					'height'      => 250,
 					'width'       => 250,
 					'flex-width'  => true,
 					'flex-height' => true,
-				]
+				)
 			)
 		);
 	}

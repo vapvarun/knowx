@@ -1,19 +1,19 @@
 <?php
 /**
- * Helpdesk functions and definitions.
+ * KnowX functions and definitions.
  *
  * This file must be parseable by PHP 5.2.
  *
  * @see https://developer.wordpress.org/themes/basics/theme-functions/
  */
-define( 'HELPDESK_MINIMUM_WP_VERSION', '4.5' );
-define( 'HELPDESK_MINIMUM_PHP_VERSION', '7.0' );
+define( 'KNOWX_MINIMUM_WP_VERSION', '4.5' );
+define( 'KNOWX_MINIMUM_PHP_VERSION', '7.0' );
 
 // Bail if requirements are not met.
-if ( version_compare( $GLOBALS['wp_version'], HELPDESK_MINIMUM_WP_VERSION, '<' ) || version_compare(phpversion(), HELPDESK_MINIMUM_PHP_VERSION, '<' ) ) {
-    require get_template_directory().'/inc/back-compat.php';
+if ( version_compare( $GLOBALS['wp_version'], KNOWX_MINIMUM_WP_VERSION, '<' ) || version_compare( phpversion(), KNOWX_MINIMUM_PHP_VERSION, '<' ) ) {
+	require get_template_directory() . '/inc/back-compat.php';
 
-    return;
+	return;
 }
 
 // Include WordPress shims.
@@ -26,50 +26,50 @@ require_once get_template_directory() . '/external/kirki-utils.php';
 
 // Setup autoloader (via Composer or custom).
 if ( file_exists( get_template_directory() . '/vendor/autoload.php' ) ) {
-    require get_template_directory() . '/vendor/autoload.php';
+	require get_template_directory() . '/vendor/autoload.php';
 } else {
-    /**
-     * Custom autoloader function for theme classes.
-     *
-     * @param string $class_name class name to load
-     *
-     * @return bool true if the class was loaded, false otherwise
-     */
-    function _helpdesk_autoload( $class_name ) {
-        $namespace = 'Helpdesk\Helpdesk';
+	/**
+	 * Custom autoloader function for theme classes.
+	 *
+	 * @param string $class_name class name to load
+	 *
+	 * @return bool true if the class was loaded, false otherwise
+	 */
+	function _knowx_autoload( $class_name ) {
+		$namespace = 'KnowX\KnowX';
 
-        if ( strpos( $class_name, $namespace.'\\' ) !== 0 ) {
-            return false;
-        }
+		if ( strpos( $class_name, $namespace . '\\' ) !== 0 ) {
+			return false;
+		}
 
-        $parts = explode( '\\', substr( $class_name, strlen( $namespace.'\\' ) ) );
+		$parts = explode( '\\', substr( $class_name, strlen( $namespace . '\\' ) ) );
 
-        $path = get_template_directory() . '/inc';
-        foreach ( $parts as $part ) {
-            $path .= '/'.$part;
-        }
-        $path .= '.php';
+		$path = get_template_directory() . '/inc';
+		foreach ( $parts as $part ) {
+			$path .= '/' . $part;
+		}
+		$path .= '.php';
 
-        if ( ! file_exists( $path ) ) {
-            return false;
-        }
+		if ( ! file_exists( $path ) ) {
+			return false;
+		}
 
-        require_once $path;
+		require_once $path;
 
-        return true;
-    }
-    spl_autoload_register( '_helpdesk_autoload' );
+		return true;
+	}
+	spl_autoload_register( '_knowx_autoload' );
 }
 
-// Load the `helpdesk()` entry point function.
+// Load the `knowx()` entry point function.
 require get_template_directory() . '/inc/functions.php';
 
 // Initialize the theme.
-call_user_func( 'Helpdesk\Helpdesk\helpdesk' );
+call_user_func( 'KnowX\KnowX\knowx' );
 
 // Require plugin.php to use is_plugin_active() below
-if ( !function_exists( 'is_plugin_active' ) ) {
-    include_once ABSPATH.'wp-admin/includes/plugin.php';
+if ( ! function_exists( 'is_plugin_active' ) ) {
+	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
 
 // Load theme extra function.
@@ -79,4 +79,4 @@ require get_template_directory() . '/inc/extra.php';
 require get_template_directory() . '/inc/widgets/category-widget.php';
 
 // Load theme breadcrubms function.
-require get_template_directory() . '/inc/class-helpdesk-breadcrubms.php';
+require get_template_directory() . '/inc/class-knowx-breadcrubms.php';

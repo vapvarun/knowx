@@ -9,31 +9,31 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 get_header();
 
-helpdesk()->print_styles( 'helpdesk-content' );
-helpdesk()->print_styles( 'helpdesk-sidebar', 'helpdesk-widgets' );
+knowx()->print_styles( 'knowx-content' );
+knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
-$default_sidebar = get_theme_mod( 'sidebar_option', helpdesk_defaults( 'sidebar-option' ) );
+$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
 
-$post_layout = get_theme_mod( 'blog_layout_option', helpdesk_defaults( 'blog-layout-option' ) );
-$post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', helpdesk_defaults( 'post-per-row' ) );
+$post_layout = get_theme_mod( 'blog_layout_option', knowx_defaults( 'blog-layout-option' ) );
+$post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
 
 ?>
 
-	<?php do_action( 'helpdesk_sub_header' ); ?>
+	<?php do_action( 'knowx_sub_header' ); ?>
 	
-	<?php do_action( 'helpdesk_before_content' ); ?>
+	<?php do_action( 'knowx_before_content' ); ?>
 
 	<?php if ( $default_sidebar == 'left' || $default_sidebar == 'both' ) : ?>
 		<aside id="secondary" class="left-sidebar widget-area">
 			<div class="sticky-sidebar">
-				<?php helpdesk()->display_left_sidebar(); ?>
+				<?php knowx()->display_left_sidebar(); ?>
 			</div>
 		</aside>
 	<?php endif; ?>
@@ -79,11 +79,11 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', helpdesk_defaults( 'p
 	<?php if ( $default_sidebar == 'right' || $default_sidebar == 'both' ) : ?>
 		<aside id="secondary" class="primary-sidebar widget-area">
 			<div class="sticky-sidebar">
-				<?php helpdesk()->display_right_sidebar(); ?>
+				<?php knowx()->display_right_sidebar(); ?>
 			</div>
 		</aside>
 	<?php endif; ?>
 
-	<?php do_action( 'helpdesk_after_content' ); ?>
+	<?php do_action( 'knowx_after_content' ); ?>
 <?php
 get_footer();

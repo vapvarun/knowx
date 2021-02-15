@@ -1,13 +1,13 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Jetpack\Component class
+ * KnowX\KnowX\Jetpack\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Jetpack;
+namespace KnowX\KnowX\Jetpack;
 
-use Helpdesk\Helpdesk\Component_Interface;
+use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function add_theme_support;
 use function have_posts;
@@ -34,7 +34,7 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'after_setup_theme', [ $this, 'action_add_jetpack_support' ] );
+		add_action( 'after_setup_theme', array( $this, 'action_add_jetpack_support' ) );
 	}
 
 	/**
@@ -49,7 +49,7 @@ class Component implements Component_Interface {
 		// Add theme support for Infinite Scroll.
 		add_theme_support(
 			'infinite-scroll',
-			[
+			array(
 				'container' => 'primary',
 				'footer'    => 'page',
 				'render'    => function() {
@@ -62,7 +62,7 @@ class Component implements Component_Interface {
 						}
 					}
 				},
-			]
+			)
 		);
 
 		// Add theme support for Responsive Videos.
@@ -71,16 +71,16 @@ class Component implements Component_Interface {
 		// Add theme support for Content Options.
 		add_theme_support(
 			'jetpack-content-options',
-			[
-				'post-details' => [
-					'stylesheet' => 'helpdesk-content',
+			array(
+				'post-details' => array(
+					'stylesheet' => 'knowx-content',
 					'date'       => '.posted-on',
 					'categories' => '.category-links',
 					'tags'       => '.tag-links',
 					'author'     => '.posted-by',
 					'comment'    => '.comments-link',
-				],
-			]
+				),
+			)
 		);
 	}
 }

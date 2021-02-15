@@ -2,16 +2,16 @@
 /**
  * Template part for displaying the page content when an offline error has occurred
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 <section class="error">
 	<header class="page-header">
 		<h1 class="page-title">
-			<?php esc_html_e( 'Oops! It looks like you&#8217;re offline.', 'helpdesk' ); ?>
+			<?php esc_html_e( 'Oops! It looks like you&#8217;re offline.', 'knowx' ); ?>
 		</h1>
 	</header><!-- .page-header -->
 

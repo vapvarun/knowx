@@ -1,13 +1,13 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Post_Thumbnails\Component class
+ * KnowX\KnowX\Post_Thumbnails\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Post_Thumbnails;
+namespace KnowX\KnowX\Post_Thumbnails;
 
-use Helpdesk\Helpdesk\Component_Interface;
+use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function add_theme_support;
 use function add_image_size;
@@ -47,6 +47,6 @@ class Component implements Component_Interface {
 	 * Adds custom image sizes.
 	 */
 	public function action_add_image_sizes() {
-		add_image_size( 'helpdesk-featured', 720, 480 );
+		add_image_size( 'knowx-featured', 720, 480 );
 	}
 }

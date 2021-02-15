@@ -1,14 +1,14 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Nav_Menus\Component class
+ * KnowX\KnowX\Nav_Menus\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Nav_Menus;
+namespace KnowX\KnowX\Nav_Menus;
 
-use Helpdesk\Helpdesk\Component_Interface;
-use Helpdesk\Helpdesk\Templating_Component_Interface;
+use KnowX\KnowX\Component_Interface;
+use KnowX\KnowX\Templating_Component_Interface;
 use WP_Post;
 use function add_action;
 use function add_filter;
@@ -21,8 +21,8 @@ use function wp_nav_menu;
  * Class for managing navigation menus.
  *
  * Exposes template tags:
- * * `helpdesk()->is_primary_nav_menu_active()`
- * * `helpdesk()->display_primary_nav_menu( array $args = [] )`
+ * * `knowx()->is_primary_nav_menu_active()`
+ * * `knowx()->display_primary_nav_menu( array $args = [] )`
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
@@ -47,7 +47,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	}
 
 	/**
-	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `helpdesk()`.
+	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
 	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
@@ -66,12 +66,12 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function action_register_nav_menus() {
 		register_nav_menus(
 			[
-				static::PRIMARY_NAV_MENU_SLUG => esc_html__( 'Primary', 'helpdesk' ),
+				static::PRIMARY_NAV_MENU_SLUG => esc_html__( 'Primary', 'knowx' ),
 			]
 		);
 		register_nav_menus(
 			[
-				static::BUDDYPRESS_NAV_MENU_SLUG => esc_html__( 'User Menu', 'helpdesk' ),
+				static::BUDDYPRESS_NAV_MENU_SLUG => esc_html__( 'User Menu', 'knowx' ),
 			]
 		);
 	}

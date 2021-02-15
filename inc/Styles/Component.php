@@ -1,11 +1,11 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Styles\Component class
+ * KnowX\KnowX\Styles\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Styles;
+namespace KnowX\KnowX\Styles;
 
 use function _doing_it_wrong;
 use function add_action;
@@ -23,9 +23,9 @@ use function post_password_required;
 use function wp_enqueue_style;
 use function wp_print_styles;
 use function wp_register_style;
-use Helpdesk\Helpdesk\Component_Interface;
-use Helpdesk\Helpdesk\Templating_Component_Interface;
-use function Helpdesk\Helpdesk\helpdesk;
+use KnowX\KnowX\Component_Interface;
+use KnowX\KnowX\Templating_Component_Interface;
+use function KnowX\KnowX\knowx;
 use function wp_style_add_data;
 use function wp_style_is;
 use function wp_styles;
@@ -34,7 +34,7 @@ use function wp_styles;
  * Class for managing stylesheets.
  *
  * Exposes template tags:
- * * `helpdesk()->print_styles()`
+ * * `knowx()->print_styles()`
  */
 class Component implements Component_Interface, Templating_Component_Interface
 {
@@ -81,7 +81,7 @@ class Component implements Component_Interface, Templating_Component_Interface
     }
 
     /**
-     * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `helpdesk()`.
+     * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
      *
      * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
      *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
@@ -104,7 +104,7 @@ class Component implements Component_Interface, Templating_Component_Interface
         // Enqueue Google Fonts.
         $google_fonts_url = $this->get_google_fonts_url();
         if (!empty($google_fonts_url)) {
-            wp_enqueue_style('helpdesk-fonts', $google_fonts_url, [], null); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+            wp_enqueue_style('knowx-fonts', $google_fonts_url, [], null); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
         }
 
         $css_uri = get_theme_file_uri('/assets/css/');
@@ -115,7 +115,7 @@ class Component implements Component_Interface, Templating_Component_Interface
         $css_files = $this->get_css_files();
         foreach ($css_files as $handle => $data) {
             $src = $css_uri.$data['file'];
-            $version = helpdesk()->get_asset_version($css_dir.$data['file']);
+            $version = knowx()->get_asset_version($css_dir.$data['file']);
 
             /*
              * Enqueue global stylesheets immediately and register the other ones for later use
@@ -133,17 +133,17 @@ class Component implements Component_Interface, Templating_Component_Interface
 
         // Enqueue bbPress CSS
         if (function_exists('is_bbpress') ) {
-            wp_enqueue_style('helpdesk-bbpress', $css_uri . 'bbpress.min.css');
+            wp_enqueue_style('knowx-bbpress', $css_uri . 'bbpress.min.css');
         }
 
         // Enqueue RTL CSS
         if ( is_rtl() ) {
-            wp_enqueue_style('helpdesk-rtl', $css_uri . 'rtl.min.css');
+            wp_enqueue_style('knowx-rtl', $css_uri . 'rtl.min.css');
         }
 
         // Enqueue AMP CSS
-        if ( helpdesk()->is_amp() ) {
-            wp_enqueue_style('helpdesk-amp', $css_uri . 'helpdesk-amp.min.css');
+        if ( knowx()->is_amp() ) {
+            wp_enqueue_style('knowx-amp', $css_uri . 'knowx-amp.min.css');
         }
     }
 
@@ -215,7 +215,7 @@ class Component implements Component_Interface, Templating_Component_Interface
      */
     public function filter_resource_hints(array $urls, string $relation_type): array
     {
-        if ('preconnect' === $relation_type && wp_style_is('helpdesk-fonts', 'queue')) {
+        if ('preconnect' === $relation_type && wp_style_is('knowx-fonts', 'queue')) {
             $urls[] = [
                 'href' => 'https://fonts.gstatic.com',
                 'crossorigin',
@@ -251,7 +251,7 @@ class Component implements Component_Interface, Templating_Component_Interface
                 $is_valid = isset($css_files[$handle]) && !$css_files[$handle]['global'];
                 if (!$is_valid) {
                     /* translators: %s: stylesheet handle */
-                    _doing_it_wrong(__CLASS__.'::print_styles()', esc_html(sprintf(__('Invalid theme stylesheet handle: %s', 'helpdesk'), $handle)), 'Helpdesk 2.0.0');
+                    _doing_it_wrong(__CLASS__.'::print_styles()', esc_html(sprintf(__('Invalid theme stylesheet handle: %s', 'knowx'), $handle)), 'KnowX 2.0.0');
                 }
 
                 return $is_valid;
@@ -271,20 +271,20 @@ class Component implements Component_Interface, Templating_Component_Interface
      * Using this technique generally improves performance, however may not be preferred under certain circumstances.
      * For example, since AMP will include all style rules directly in the head, it must not be used in that context.
      * By default, this method returns true unless the page is being served in AMP. The
-     * {@see 'helpdesk_preloading_styles_enabled'} filter can be used to tweak the return value.
+     * {@see 'knowx_preloading_styles_enabled'} filter can be used to tweak the return value.
      *
      * @return bool true if preloading stylesheets and injecting them is enabled, false otherwise
      */
     protected function preloading_styles_enabled()
     {
-        $preloading_styles_enabled = !helpdesk()->is_amp();
+        $preloading_styles_enabled = !knowx()->is_amp();
 
         /*
          * Filters whether to preload stylesheets and inject their link tags within the page content.
          *
          * @param bool $preloading_styles_enabled Whether preloading stylesheets and injecting them is enabled.
          */
-        return apply_filters('helpdesk_preloading_styles_enabled', $preloading_styles_enabled);
+        return apply_filters('knowx_preloading_styles_enabled', $preloading_styles_enabled);
     }
 
     /**
@@ -299,27 +299,27 @@ class Component implements Component_Interface, Templating_Component_Interface
         }
 
         $css_files = [
-            'helpdesk-global' => [
+            'knowx-global' => [
                 'file' => 'global.min.css',
                 'global' => true,
             ],
-            'helpdesk-comments' => [
+            'knowx-comments' => [
                 'file' => 'comments.min.css',
                 'preload_callback' => function () {
                     return !post_password_required() && is_singular() && (comments_open() || get_comments_number());
                 },
             ],
-            'helpdesk-content' => [
+            'knowx-content' => [
                 'file' => 'content.min.css',
                 'preload_callback' => '__return_true',
             ],
-            'helpdesk-sidebar' => [
+            'knowx-sidebar' => [
                 'file' => 'sidebar.min.css',
             ],
-            'helpdesk-widgets' => [
+            'knowx-widgets' => [
                 'file' => 'widgets.min.css',
             ],
-            'helpdesk-front-page' => [
+            'knowx-front-page' => [
                 'file' => 'front-page.min.css',
                 'preload_callback' => function () {
                     global $template;
@@ -327,11 +327,11 @@ class Component implements Component_Interface, Templating_Component_Interface
                     return 'front-page.php' === basename($template);
                 },
             ],
-            'helpdesk-site-loader' => [
+            'knowx-site-loader' => [
                 'file' => 'loaders.min.css',
                 'global' => true,
             ],
-            'helpdesk-load-fontawesome' => [
+            'knowx-load-fontawesome' => [
                 'file' => 'fontawesome.min.css',
                 'global' => true,
             ],
@@ -346,7 +346,7 @@ class Component implements Component_Interface, Templating_Component_Interface
          *                         enqueued instead of just being registered) and 'preload_callback' (callback)
          *                         function determining whether the file should be preloaded for the current request).
          */
-        $css_files = apply_filters('helpdesk_css_files', $css_files);
+        $css_files = apply_filters('knowx_css_files', $css_files);
 
         $this->css_files = [];
         foreach ($css_files as $handle => $data) {
@@ -391,7 +391,7 @@ class Component implements Component_Interface, Templating_Component_Interface
          *
          * @param array $google_fonts Associative array of $font_name => $font_variants pairs.
          */
-        $this->google_fonts = (array) apply_filters('helpdesk_google_fonts', $google_fonts);
+        $this->google_fonts = (array) apply_filters('knowx_google_fonts', $google_fonts);
 
         return $this->google_fonts;
     }

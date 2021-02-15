@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post's header
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 

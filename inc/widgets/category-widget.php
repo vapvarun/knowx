@@ -1,20 +1,20 @@
 <?php
 
-class Helpdesk_Category extends WP_Widget {
+class Knowx_Category extends WP_Widget {
  
     public function __construct() {
         $widget_ops = array(
-			'classname'                   => 'widget_helpdesk_categories',
-			'description'                 => __( 'A list or dropdown of categories.', 'helpdesk' ),
+			'classname'                   => 'widget_knowx_categories',
+			'description'                 => __( 'A list or dropdown of categories.', 'knowx' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct( 'helpdesk_categories', __( 'Helpdesk Categories', 'helpdesk' ), $widget_ops );
+		parent::__construct( 'knowx_categories', __( 'Knowx Categories', 'knowx' ), $widget_ops );
     }
  
     public function widget( $args, $instance ) {
        static $first_dropdown = true;
 
-		$default_title = __( 'Categories', 'helpdesk' );
+		$default_title = __( 'Categories', 'knowx' );
 		$title         = ! empty( $instance['title'] ) ? $instance['title'] : $default_title;
 
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
@@ -38,12 +38,12 @@ class Helpdesk_Category extends WP_Widget {
 
 		if ( $dropdown ) {
 			printf( '<form action="%s" method="get">', esc_url( home_url() ) );
-			$dropdown_id    = ( $first_dropdown ) ? 'helpdesk-caegoriest' : "{$this->id_base}-dropdown-{$this->number}";
+			$dropdown_id    = ( $first_dropdown ) ? 'knowx-caegoriest' : "{$this->id_base}-dropdown-{$this->number}";
 			$first_dropdown = false;
 
 			echo '<label class="screen-reader-text" for="' . esc_attr( $dropdown_id ) . '">' . $title . '</label>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-			$cat_args['show_option_none'] = __( 'Select Category', 'helpdesk' );
+			$cat_args['show_option_none'] = __( 'Select Category', 'knowx' );
 			$cat_args['id']               = $dropdown_id;
 
 			/**
@@ -93,7 +93,7 @@ class Helpdesk_Category extends WP_Widget {
 			}
 			?>
 
-			<ul class="helpdesk-categories-lists">
+			<ul class="knowx-categories-lists">
 				<?php
 				$cat_args['title_li'] = '';
 
@@ -127,21 +127,21 @@ class Helpdesk_Category extends WP_Widget {
 		$dropdown     = isset( $instance['dropdown'] ) ? (bool) $instance['dropdown'] : false;
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Title:', 'helpdesk' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Title:', 'knowx' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 
 		<p>
 			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'dropdown' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" name="<?php echo $this->get_field_name( 'dropdown' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"<?php checked( $dropdown ); ?> />
-			<label for="<?php echo $this->get_field_id( 'dropdown' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Display as dropdown', 'helpdesk' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'dropdown' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Display as dropdown', 'knowx' ); ?></label>
 			<br />
 
 			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'count' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" name="<?php echo $this->get_field_name( 'count' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"<?php checked( $count ); ?> />
-			<label for="<?php echo $this->get_field_id( 'count' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Show post counts' ,'helpdesk'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'count' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Show post counts' ,'knowx'); ?></label>
 			<br />
 
 			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'hierarchical' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" name="<?php echo $this->get_field_name( 'hierarchical' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"<?php checked( $hierarchical ); ?> />
-			<label for="<?php echo $this->get_field_id( 'hierarchical' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Show hierarchy', 'helpdesk' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'hierarchical' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Show hierarchy', 'knowx' ); ?></label>
 		</p>
 		<?php
     }
@@ -158,8 +158,8 @@ class Helpdesk_Category extends WP_Widget {
 }
 
 
-add_action( 'widgets_init', 'helpdesk_register_widgets' );
+add_action( 'widgets_init', 'knowx_register_widgets' );
  
-function helpdesk_register_widgets() {
-    register_widget( 'Helpdesk_Category' );
+function knowx_register_widgets() {
+    register_widget( 'Knowx_Category' );
 }

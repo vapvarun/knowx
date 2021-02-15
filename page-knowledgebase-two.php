@@ -6,27 +6,27 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 get_header();
 
-helpdesk()->print_styles( 'helpdesk-content' );
+knowx()->print_styles( 'knowx-content' );
 
 ?>
 
-	<?php do_action( 'helpdesk_sub_header' ); ?>
+	<?php do_action( 'knowx_sub_header' ); ?>
 	
-	<?php do_action( 'helpdesk_before_content' ); ?>
+	<?php do_action( 'knowx_before_content' ); ?>
 	
 	<main id="primary" class="site-main">
 		
 	<?php
 		if ( have_posts() ) {
 			
-				if ( get_theme_mod( 'helpdesk_page_title' ) == "yes" ) {
+				if ( get_theme_mod( 'knowx_page_title' ) == "yes" ) {
 					get_template_part( 'template-parts/content/page_header' );
 				}
 			
@@ -41,39 +41,39 @@ helpdesk()->print_styles( 'helpdesk-content' );
 		}
 	?>
 
-	<div id="helpdesk-categories-columns-four" class="helpdesk-knowledgebase-two">
-		<?php $exclude_cats = get_post_meta( get_the_ID(), 'helpdesk-exclude-cats', true );
+	<div id="knowx-categories-columns-four" class="knowx-knowledgebase-two">
+		<?php $exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
 		if ( !empty( $exclude_cats ) ) {
 			$exclude = esc_attr( $exclude_cats );
-		} else if ( get_theme_mod( 'helpdesk_exclude' ) ) :
-			$exclude = esc_attr( get_theme_mod( 'helpdesk_exclude' ) );
+		} else if ( get_theme_mod( 'knowx_exclude' ) ) :
+			$exclude = esc_attr( get_theme_mod( 'knowx_exclude' ) );
 		else :
 			$exclude = '';
 		endif;
-		$helpdesk_cat_args = array(
+		$knowx_cat_args = array(
 			'hide_empty' => 0,
 			'exclude' => $exclude,
 			'orderby' => 'name',
 			'order' => 'asc'
 		);
-		$helpdesk_cats = get_categories( $helpdesk_cat_args );
+		$knowx_cats = get_categories( $knowx_cat_args );
 
-		foreach ( $helpdesk_cats as $category ) :
+		foreach ( $knowx_cats as $category ) :
 			echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-			if ( get_theme_mod( 'helpdesk_cat_description' ) == "yes" ) :
+			if ( get_theme_mod( 'knowx_cat_description' ) == "yes" ) :
 				if ( category_description( $category->cat_ID ) ) :
 					echo '<div class="cat-description">'. wp_kses_post( category_description( $category->cat_ID ) ) .'</div>';
 				endif;
 			endif;
 
-			if ( get_theme_mod( 'helpdesk_posts' ) ) :
-				$posts_per_page = esc_attr( get_theme_mod( 'helpdesk_posts' ) );
+			if ( get_theme_mod( 'knowx_posts' ) ) :
+				$posts_per_page = esc_attr( get_theme_mod( 'knowx_posts' ) );
 			else :
 				$posts_per_page = -1;
 			endif;
 
-			if ( get_theme_mod( 'helpdesk_order' ) == "name" ) :
+			if ( get_theme_mod( 'knowx_order' ) == "name" ) :
 				$order_by = 'name';
 				$the_order = 'asc';
 			else :
@@ -81,7 +81,7 @@ helpdesk()->print_styles( 'helpdesk-content' );
 				$the_order = 'desc';
 			endif;
 
-			$helpdesk_post_args = array(
+			$knowx_post_args = array(
 				'post_type' => 'post',
 				'tax_query' => array(
 					array(
@@ -96,14 +96,14 @@ helpdesk()->print_styles( 'helpdesk-content' );
 				'order' => $the_order
 			);
 
-			$helpdesk_posts = get_posts( $helpdesk_post_args );
+			$knowx_posts = get_posts( $knowx_post_args );
 
-			foreach( $helpdesk_posts AS $single_post ) :
+			foreach( $knowx_posts AS $single_post ) :
 				echo '<li class="post-name"><a href="'. get_permalink( $single_post->ID ) .'" rel="bookmark" title="'. get_the_title( $single_post->ID ) .'">'. get_the_title( $single_post->ID ) .'</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			endforeach;
 
-			if ( get_theme_mod( 'helpdesk_view_all' ) == "yes" ) {
-				echo '<li class="view-all"><a href="'. get_category_link( $category->cat_ID ) .'" title="'. $category->name .'" >'. __( 'View All &raquo;', 'helpdesk' ). '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			if ( get_theme_mod( 'knowx_view_all' ) == "yes" ) {
+				echo '<li class="view-all"><a href="'. get_category_link( $category->cat_ID ) .'" title="'. $category->name .'" >'. __( 'View All &raquo;', 'knowx' ). '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			echo '</ul>';
@@ -112,6 +112,6 @@ helpdesk()->print_styles( 'helpdesk-content' );
 
 	</main><!-- #primary -->
 
-	<?php do_action( 'helpdesk_after_content' ); ?>
+	<?php do_action( 'knowx_after_content' ); ?>
 <?php
 get_footer();

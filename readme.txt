@@ -1,8 +1,8 @@
-=== Helpdesk ===
+=== Knowx ===
 Contributors: wbcomdesigns
 Tags: translation-ready, Block Editor Styles, Blog, Custom Background, Custom Colors, Custom Logo, Custom Menu, Editor Style, Featured Images, Footer Widgets, Full Width Template, One Column, RTL Language Support, Sticky Post, Theme Options, Threaded Comments, Wide Blocks
 Requires at least: 4.8
-Tested up to: 5.6.1
+Tested up to: 5.5.0
 Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -10,25 +10,25 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 
 == Description ==
-Helpdesk is build with WP Rig for your knowledge base.
+Knowx is build with WP Rig for your knowledge base.
 
-== Helpdesk Child Theme ==
+== Knowx Child Theme ==
 
-There are multiple ways you can use a child theme with the Helpdesk Theme, Use any one method mentioned below to create a child theme or use a child theme we have created.
+There are multiple ways you can use a child theme with the Knowx Theme, Use any one method mentioned below to create a child theme or use a child theme we have created.
 
-1. Download the child theme from Github - https://github.com/helpdesk/helpdesk-child-theme
+1. Download the child theme from Github - https://github.com/knowx/knowx-child-theme
 2. More information on creating child theme - https://codex.wordpress.org/Child_Themes
 
-== Helpdesk License ==
+== Knowx License ==
 
-Helpdesk is licensed under the GNU General Public License v3.0 (or later)
+Knowx is licensed under the GNU General Public License v3.0 (or later)
 More details here: https://www.gnu.org/licenses/gpl-3.0.html
 
-Helpdesk is based on WP Rig https://github.com/wprig/wprig, WP Rig is released under GNU General Public License v3.0 (or later).
+Knowx is based on WP Rig https://github.com/wprig/wprig, WP Rig is released under GNU General Public License v3.0 (or later).
 
 == Copyright ==
 
-Helpdesk is distributed under the terms of the GNU GPL.
+Knowx is distributed under the terms of the GNU GPL.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -43,7 +43,7 @@ GNU General Public License for more details.
 == Customizations ==
 Navigate to Appearance > Customize in your admin panel and customize to taste.
 
-Helpdesk bundles the following third-party resources:
+Knowx bundles the following third-party resources:
 
 Font Awesome Fonts, Copyright Dave Gandy
 License: SIL OFL 1.1 License - https://scripts.sil.org/OFL
@@ -87,6 +87,9 @@ Url: http://tgmpluginactivation.com/
 Thomas Griffin, Gary Jones, Juliette Reinders Folmer
 Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
+
+Screenshot
+screenshot.png (Slider Image), © 2020 @decoasta9301, https://pxhere.com/en/photo/1624307, CC0
 
 == Changelog ==
 

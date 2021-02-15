@@ -1,14 +1,14 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Sidebars\Component class
+ * KnowX\KnowX\Sidebars\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Sidebars;
+namespace KnowX\KnowX\Sidebars;
 
-use Helpdesk\Helpdesk\Component_Interface;
-use Helpdesk\Helpdesk\Templating_Component_Interface;
+use KnowX\KnowX\Component_Interface;
+use KnowX\KnowX\Templating_Component_Interface;
 use function add_action;
 use function add_filter;
 use function register_sidebar;
@@ -20,8 +20,8 @@ use function dynamic_sidebar;
  * Class for managing sidebars.
  *
  * Exposes template tags:
- * * `helpdesk()->is_right_sidebar_active()`
- * * `helpdesk()->display_primary_sidebar()`
+ * * `knowx()->is_right_sidebar_active()`
+ * * `knowx()->display_primary_sidebar()`
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/
  */
@@ -50,7 +50,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	}
 
 	/**
-	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `helpdesk()`.
+	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
 	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
@@ -76,9 +76,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function action_register_sidebars() {
 		register_sidebar(
 			[
-				'name'          => esc_html__( 'Right Sidebar', 'helpdesk' ),
+				'name'          => esc_html__( 'Right Sidebar', 'knowx' ),
 				'id'            => static::RIGHT_SIDEBAR_SLUG,
-				'description'   => esc_html__( 'Add widgets here.', 'helpdesk' ),
+				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h2 class="widget-title">',
@@ -88,9 +88,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		register_sidebar(
 			[
-				'name'          => esc_html__( 'Left Sidebar', 'helpdesk' ),
+				'name'          => esc_html__( 'Left Sidebar', 'knowx' ),
 				'id'            => static::LEFT_SIDEBAR_SLUG,
-				'description'   => esc_html__( 'Add widgets here.', 'helpdesk' ),
+				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h2 class="widget-title">',
@@ -101,9 +101,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		if ( function_exists('is_bbpress') ) {
     		register_sidebar(
 				[
-					'name'          => esc_html__( 'bbPress Left Sidebar', 'helpdesk' ),
+					'name'          => esc_html__( 'bbPress Left Sidebar', 'knowx' ),
 					'id'            => static::BBPRESS_LEFT_SIDEBAR_SLUG,
-					'description'   => esc_html__( 'Add widgets here.', 'helpdesk' ),
+					'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
 					'before_widget' => '<section id="%1$s" class="widget %2$s">',
 					'after_widget'  => '</section>',
 					'before_title'  => '<h2 class="widget-title">',
@@ -113,9 +113,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 			register_sidebar(
 				[
-					'name'          => esc_html__( 'bbPress Right Sidebar', 'helpdesk' ),
+					'name'          => esc_html__( 'bbPress Right Sidebar', 'knowx' ),
 					'id'            => static::BBPRESS_RIGHT_SIDEBAR_SLUG,
-					'description'   => esc_html__( 'Add widgets here.', 'helpdesk' ),
+					'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
 					'before_widget' => '<section id="%1$s" class="widget %2$s">',
 					'after_widget'  => '</section>',
 					'before_title'  => '<h2 class="widget-title">',
@@ -126,9 +126,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		register_sidebar(
 			[
-				'name'          => esc_html__( 'Footer 1', 'helpdesk' ),
+				'name'          => esc_html__( 'Footer 1', 'knowx' ),
 				'id'            => 'footer-1',
-				'description'   => esc_html__( 'Add widgets here.', 'helpdesk' ),
+				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
@@ -138,9 +138,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		register_sidebar(
 			[
-				'name'          => esc_html__( 'Footer 2', 'helpdesk' ),
+				'name'          => esc_html__( 'Footer 2', 'knowx' ),
 				'id'            => 'footer-2',
-				'description'   => esc_html__( 'Add widgets here.', 'helpdesk' ),
+				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
@@ -150,9 +150,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		register_sidebar(
 			[
-				'name'          => esc_html__( 'Footer 3', 'helpdesk' ),
+				'name'          => esc_html__( 'Footer 3', 'knowx' ),
 				'id'            => 'footer-3',
-				'description'   => esc_html__( 'Add widgets here.', 'helpdesk' ),
+				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
@@ -162,9 +162,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		register_sidebar(
 			[
-				'name'          => esc_html__( 'Footer 4', 'helpdesk' ),
+				'name'          => esc_html__( 'Footer 4', 'knowx' ),
 				'id'            => 'footer-4',
-				'description'   => esc_html__( 'Add widgets here.', 'helpdesk' ),
+				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
 				'before_widget' => '<section id="%1$s" class="widget %2$s">',
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
@@ -180,7 +180,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return array Filtered body classes.
 	 */
 	public function filter_body_classes( array $classes ) : array {
-		$default_sidebar = get_theme_mod( 'sidebar_option', helpdesk_defaults( 'sidebar-option' ) );
+		$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
 
 		if ( $this->is_left_sidebar_active() && $default_sidebar == 'left' ) {
 			global $template;
@@ -204,7 +204,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		//bbPress
 		if ( function_exists('is_bbpress') ) {
-			$bbpress_sidebar = get_theme_mod( 'bbpress_sidebar_option', helpdesk_defaults( 'bbpress-sidebar-option' ) );
+			$bbpress_sidebar = get_theme_mod( 'bbpress_sidebar_option', knowx_defaults( 'bbpress-sidebar-option' ) );
 
 			if ( $this->is_bbpress_left_sidebar_active() && $bbpress_sidebar == 'left' ) {
 				global $template;

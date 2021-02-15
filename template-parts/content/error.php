@@ -2,10 +2,10 @@
 /**
  * Template part for displaying the page content when an error has occurred
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 <section class="error">
@@ -20,7 +20,7 @@ namespace Helpdesk\Helpdesk;
 				printf(
 					wp_kses(
 						/* translators: 1: link to WP admin new post page. */
-						__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'helpdesk' ),
+						__( 'Ready to publish your first post? <a href="%1$s">Get started here</a>.', 'knowx' ),
 						[
 							'a' => [
 								'href' => [],
@@ -35,13 +35,13 @@ namespace Helpdesk\Helpdesk;
 		} elseif ( is_search() ) {
 			?>
 			<p>
-				<?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'helpdesk' ); ?>
+				<?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'knowx' ); ?>
 			</p>
 			<?php
 		} else {
 			?>
 			<p>
-				<?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'helpdesk' ); ?>
+				<?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help.', 'knowx' ); ?>
 			</p>
 			<?php
 		}

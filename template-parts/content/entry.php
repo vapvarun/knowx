@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 ?>
 
@@ -29,8 +29,8 @@ if ( is_singular( get_post_type() ) ) {
 	if ( 'post' === get_post_type() || get_post_type_object( get_post_type() )->has_archive ) {
 		the_post_navigation(
 			[
-				'prev_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Previous:', 'helpdesk' ) . '</span></div>%title',
-				'next_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Next:', 'helpdesk' ) . '</span></div>%title',
+				'prev_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Previous:', 'knowx' ) . '</span></div>%title',
+				'next_text' => '<div class="post-navigation-sub"><span>' . esc_html__( 'Next:', 'knowx' ) . '</span></div>%title',
 			]
 		);
 	}

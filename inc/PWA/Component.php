@@ -1,13 +1,13 @@
 <?php
 /**
- * Helpdesk\Helpdesk\PWA\Component class
+ * KnowX\KnowX\PWA\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\PWA;
+namespace KnowX\KnowX\PWA;
 
-use Helpdesk\Helpdesk\Component_Interface;
+use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function add_theme_support;
 

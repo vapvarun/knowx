@@ -1,15 +1,15 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Comments\Component class
+ * KnowX\KnowX\Comments\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Comments;
+namespace KnowX\KnowX\Comments;
 
-use Helpdesk\Helpdesk\Component_Interface;
-use Helpdesk\Helpdesk\Templating_Component_Interface;
-use function Helpdesk\Helpdesk\helpdesk;
+use KnowX\KnowX\Component_Interface;
+use KnowX\KnowX\Templating_Component_Interface;
+use function KnowX\KnowX\knowx;
 use function add_action;
 use function is_singular;
 use function comments_open;
@@ -21,13 +21,13 @@ use function wp_list_comments;
 use function the_comments_navigation;
 use function add_filter;
 use function remove_filter;
-//use function esc_html_e;
+// use function esc_html_e;
 
 /**
  * Class for managing comments UI.
  *
  * Exposes template tags:
- * * `helpdesk()->the_comments( array $args = [] )`
+ * * `knowx()->the_comments( array $args = [] )`
  *
  * @link https://wordpress.org/plugins/amp/
  */
@@ -46,20 +46,20 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_comment_reply_script' ] );
+		add_action( 'wp_enqueue_scripts', array( $this, 'action_enqueue_comment_reply_script' ) );
 	}
 
 	/**
-	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `helpdesk()`.
+	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
 	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags() : array {
-		return [
-			'the_comments' => [ $this, 'the_comments' ],
-		];
+		return array(
+			'the_comments' => array( $this, 'the_comments' ),
+		);
 	}
 
 	/**
@@ -68,7 +68,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function action_enqueue_comment_reply_script() {
 
 		// If the AMP plugin is active, return early.
-		if ( helpdesk()->is_amp() ) {
+		if ( knowx()->is_amp() ) {
 			return;
 		}
 
@@ -88,16 +88,16 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @param array $args Optional. Array of arguments. See `wp_list_comments()` documentation for a list of supported
 	 *                    arguments.
 	 */
-	public function the_comments( array $args = [] ) {
+	public function the_comments( array $args = array() ) {
 		$args = array_merge(
 			$args,
-			[
+			array(
 				'style'      => 'ol',
 				'short_ping' => true,
-			]
+			)
 		);
 
-		$amp_live_list = helpdesk()->using_amp_live_list_comments();
+		$amp_live_list = knowx()->using_amp_live_list_comments();
 
 		if ( $amp_live_list ) {
 			$comment_order     = get_option( 'comment_order' );
@@ -113,7 +113,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			>
 			<?php
 
-			add_filter( 'navigation_markup_template', [ $this, 'filter_add_amp_live_list_pagination_attribute' ] );
+			add_filter( 'navigation_markup_template', array( $this, 'filter_add_amp_live_list_pagination_attribute' ) );
 		}
 
 		?>
@@ -125,11 +125,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		the_comments_navigation();
 
 		if ( $amp_live_list ) {
-			remove_filter( 'navigation_markup_template', [ $this, 'filter_add_amp_live_list_pagination_attribute' ] );
+			remove_filter( 'navigation_markup_template', array( $this, 'filter_add_amp_live_list_pagination_attribute' ) );
 
 			?>
 				<div update>
-					<button class="button" on="tap:amp-live-comments-list-<?php the_ID(); ?>.update"><?php esc_html_e( 'New comment(s)', 'helpdesk' ); ?></button>
+					<button class="button" on="tap:amp-live-comments-list-<?php the_ID(); ?>.update"><?php esc_html_e( 'New comment(s)', 'knowx' ); ?></button>
 				</div>
 			</amp-live-list>
 			<?php

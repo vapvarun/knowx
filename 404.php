@@ -4,17 +4,17 @@
  *
  * @link https://codex.wordpress.org/Creating_an_Error_404_Page
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 get_header();
 
-helpdesk()->print_styles( 'helpdesk-content' );
+knowx()->print_styles( 'knowx-content' );
 
 ?>
-	<?php do_action( 'helpdesk_before_content' ); ?>
+	<?php do_action( 'knowx_before_content' ); ?>
 
 	<main id="primary" class="site-main">
 		<?php if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'single' ) ) { ?>
@@ -22,6 +22,6 @@ helpdesk()->print_styles( 'helpdesk-content' );
 		<?php } ?>
 	</main><!-- #primary -->
 	
-	<?php do_action( 'helpdesk_after_content' ); ?>
+	<?php do_action( 'knowx_after_content' ); ?>
 <?php
 get_footer();

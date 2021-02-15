@@ -2,12 +2,12 @@
 /**
  * Template part for displaying a post
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
-$post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', helpdesk_defaults( 'post-per-row' ) );
+$post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
 
 $classes = [
     'entry',
@@ -18,7 +18,7 @@ $classes = [
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( $classes ); ?>>
-	<div class="helpdesk-post-content-wrapper">
+	<div class="knowx-post-content-wrapper">
 		<?php
 		get_template_part( 'template-parts/content/entry_header', get_post_type() );
 

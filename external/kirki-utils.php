@@ -1,35 +1,34 @@
 <?php
 
-function helpdesk_defaults( $key = '' ) {
+function knowx_defaults( $key = '' ) {
 	$defaults = array();
 
-	# site layout
-    $defaults[ 'site-layout' ] = 'wide';
-    
-    # site loader
-    $defaults[ 'site-loader' ] = '2';
+	// site layout
+	$defaults['site-layout'] = 'wide';
 
-    # site search
-    $defaults[ 'site-search' ] = '1';
+	// site loader
+	$defaults['site-loader'] = '2';
 
-    # site breadcrumbs
-    $defaults[ 'site-breadcrumbs' ] = '1';
+	// site search
+	$defaults['site-search'] = '1';
 
-    # site sidebar
-    $defaults[ 'sidebar-option' ] = 'right';
-    $defaults[ 'bbpress-sidebar-option' ] = 'right';
+	// site breadcrumbs
+	$defaults['site-breadcrumbs'] = '1';
 
-    # sticky sidebar
-    $defaults[ 'sticky-sidebar' ] = '1';
+	// site sidebar
+	$defaults['sidebar-option']         = 'right';
+	$defaults['bbpress-sidebar-option'] = 'right';
 
-    # blog layout option
-    $defaults[ 'blog-layout-option' ] = 'default-layout';
+	// sticky sidebar
+	$defaults['sticky-sidebar'] = '1';
 
-    # post per view
-    $defaults[ 'post-per-row' ] = '3';
+	// blog layout option
+	$defaults['blog-layout-option'] = 'default-layout';
 
+	// post per view
+	$defaults['post-per-row'] = '3';
 
-	if ( !empty( $key ) && array_key_exists( $key, $defaults ) ) {
+	if ( ! empty( $key ) && array_key_exists( $key, $defaults ) ) {
 		return $defaults[ $key ];
 	}
 

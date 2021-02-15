@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post's featured image
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 // Audio or video attachments can have featured images, so they need to be specifically checked.
 $support_slug = get_post_type();
@@ -24,7 +24,7 @@ if ( post_password_required() || ! post_type_supports( $support_slug, 'thumbnail
 if ( is_singular( get_post_type() ) ) {
 	?>
 	<div class="post-thumbnail">
-		<?php the_post_thumbnail( 'helpdesk-featured', [ 'class' => 'skip-lazy' ] ); ?>
+		<?php the_post_thumbnail( 'knowx-featured', [ 'class' => 'skip-lazy' ] ); ?>
 	</div><!-- .post-thumbnail -->
 	<?php
 } else {

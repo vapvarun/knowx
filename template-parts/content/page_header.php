@@ -2,16 +2,16 @@
 /**
  * Template part for displaying the page header of the currently displayed page
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 if ( is_404() ) {
 	?>
 	<header class="page-header">
 		<h1 class="page-title">
-			<?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'helpdesk' ); ?>
+			<?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'knowx' ); ?>
 		</h1>
 	</header><!-- .page-header -->
 	<?php
@@ -19,7 +19,7 @@ if ( is_404() ) {
 	?>
 	<header class="page-header">
 		<h1 class="page-title">
-			<?php esc_html_e( 'Nothing Found', 'helpdesk' ); ?>
+			<?php esc_html_e( 'Nothing Found', 'knowx' ); ?>
 		</h1>
 	</header><!-- .page-header -->
 	<?php
@@ -38,7 +38,7 @@ if ( is_404() ) {
 			<?php
 			printf(
 				/* translators: %s: search query */
-				esc_html__( 'Search Results for: %s', 'helpdesk' ),
+				esc_html__( 'Search Results for: %s', 'knowx' ),
 				'<span>' . get_search_query() . '</span>'
 			);
 			?>

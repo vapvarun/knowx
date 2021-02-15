@@ -7,10 +7,10 @@
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 /*
  * If the current post is protected by a password and
@@ -21,7 +21,7 @@ if ( post_password_required() ) {
 	return;
 }
 
-helpdesk()->print_styles( 'helpdesk-comments' );
+knowx()->print_styles( 'knowx-comments' );
 
 ?>
 <div id="comments" class="comments-area">
@@ -35,13 +35,13 @@ helpdesk()->print_styles( 'helpdesk-comments' );
 			if ( 1 === $comment_count ) {
 				printf(
 					/* translators: 1: title. */
-					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'helpdesk' ),
+					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'knowx' ),
 					'<span>' . get_the_title() . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			} else {
 				printf(
 					/* translators: 1: comment count number, 2: title. */
-					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $comment_count, 'comments title', 'helpdesk' ) ),
+					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $comment_count, 'comments title', 'knowx' ) ),
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					number_format_i18n( $comment_count ),
 					'<span>' . get_the_title() . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -52,12 +52,12 @@ helpdesk()->print_styles( 'helpdesk-comments' );
 
 		<?php the_comments_navigation(); ?>
 
-		<?php helpdesk()->the_comments(); ?>
+		<?php knowx()->the_comments(); ?>
 
 		<?php
 		if ( ! comments_open() && ! is_page() ) {
 			?>
-			<p class="no-comments"><?php esc_html_e( 'Comments are disabled.', 'helpdesk' ); ?></p>
+			<p class="no-comments"><?php esc_html_e( 'Comments are disabled.', 'knowx' ); ?></p>
 			<?php
 		}
 	}

@@ -1,13 +1,13 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Localization\Component class
+ * KnowX\KnowX\Localization\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Localization;
+namespace KnowX\KnowX\Localization;
 
-use Helpdesk\Helpdesk\Component_Interface;
+use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function load_theme_textdomain;
 use function get_template_directory;
@@ -59,6 +59,6 @@ class Component implements Component_Interface {
 		 * should not bundle translations in your theme. In that case you also need to get rid of the
 		 * second parameter in the following function call.
 		 */
-		load_theme_textdomain( 'helpdesk', $this->translation_directory );
+		load_theme_textdomain( 'knowx', $this->translation_directory );
 	}
 }

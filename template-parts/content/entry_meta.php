@@ -2,10 +2,10 @@
 /**
  * Template part for displaying a post's metadata
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 $post_type_obj = get_post_type_object( get_post_type() );
 
@@ -61,10 +61,10 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 			<?php
 			/* translators: %s: post author */
 			echo get_avatar( get_the_author_meta('user_email'), $size = '26');
-			$author_byline = _x( 'By %s', 'post author', 'helpdesk' );
+			$author_byline = _x( 'By %s', 'post author', 'knowx' );
 			if ( ! empty( $time_string ) ) {
 				/* translators: %s: post author */
-				$author_byline = _x( 'by %s', 'post author', 'helpdesk' );
+				$author_byline = _x( 'by %s', 'post author', 'knowx' );
 			}
 			printf(
 				esc_html( $author_byline ),
@@ -80,10 +80,10 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 		<span class="posted-in">
 			<?php
 			/* translators: %s: post parent title */
-			$parent_note = _x( 'In %s', 'post parent', 'helpdesk' );
+			$parent_note = _x( 'In %s', 'post parent', 'knowx' );
 			if ( ! empty( $time_string ) || ! empty( $author_string ) ) {
 				/* translators: %s: post parent title */
-				$parent_note = _x( 'in %s', 'post parent', 'helpdesk' );
+				$parent_note = _x( 'in %s', 'post parent', 'knowx' );
 			}
 			printf(
 				esc_html( $parent_note ),
@@ -100,14 +100,14 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 			<?php
 			printf(
 				/* translators: %s: post date */
-				esc_html_x( ': %s', 'post date', 'helpdesk' ),
+				esc_html_x( ': %s', 'post date', 'knowx' ),
 				$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			);
 			?>
 		</span>
 		<?php
 	}
-	helpdesk_posted_on();
+	knowx_posted_on();
 	?>
 </div><!-- .entry-meta -->
 <?php

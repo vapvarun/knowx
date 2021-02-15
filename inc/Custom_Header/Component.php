@@ -1,13 +1,13 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Custom_Header\Component class
+ * KnowX\KnowX\Custom_Header\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Custom_Header;
+namespace KnowX\KnowX\Custom_Header;
 
-use Helpdesk\Helpdesk\Component_Interface;
+use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function add_theme_support;
 use function apply_filters;
@@ -36,7 +36,7 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'after_setup_theme', [ $this, 'action_add_custom_header_support' ] );
+		add_action( 'after_setup_theme', array( $this, 'action_add_custom_header_support' ) );
 	}
 
 	/**
@@ -46,15 +46,15 @@ class Component implements Component_Interface {
 		add_theme_support(
 			'custom-header',
 			apply_filters(
-				'helpdesk_custom_header_args',
-				[
+				'knowx_custom_header_args',
+				array(
 					'default-image'      => '',
 					'default-text-color' => '000000',
 					'width'              => 1600,
 					'height'             => 250,
 					'flex-height'        => true,
-					'wp-head-callback'   => [ $this, 'wp_head_callback' ],
-				]
+					'wp-head-callback'   => array( $this, 'wp_head_callback' ),
+				)
 			)
 		);
 	}

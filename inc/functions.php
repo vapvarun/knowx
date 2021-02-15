@@ -1,11 +1,11 @@
 <?php
 /**
- * The `helpdesk()` function.
+ * The `knowx()` function.
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk;
+namespace KnowX\KnowX;
 
 /**
  * Provides access to all available template tags of the theme.
@@ -14,7 +14,7 @@ namespace Helpdesk\Helpdesk;
  *
  * @return Template_Tags Template tags instance exposing template tag methods.
  */
-function helpdesk() : Template_Tags {
+function knowx() : Template_Tags {
 	static $theme = null;
 
 	if ( null === $theme ) {

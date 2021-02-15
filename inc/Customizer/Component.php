@@ -1,14 +1,14 @@
 <?php
 /**
- * Helpdesk\Helpdesk\Customizer\Component class
+ * KnowX\KnowX\Customizer\Component class
  *
- * @package helpdesk
+ * @package knowx
  */
 
-namespace Helpdesk\Helpdesk\Customizer;
+namespace KnowX\KnowX\Customizer;
 
-use Helpdesk\Helpdesk\Component_Interface;
-use function Helpdesk\Helpdesk\helpdesk;
+use KnowX\KnowX\Component_Interface;
+use function KnowX\KnowX\knowx;
 use WP_Customize_Manager;
 use function add_action;
 use function bloginfo;
@@ -33,8 +33,8 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'customize_register', [ $this, 'action_customize_register' ] );
-		add_action( 'customize_preview_init', [ $this, 'action_enqueue_customize_preview_js' ] );
+		add_action( 'customize_register', array( $this, 'action_customize_register' ) );
+		add_action( 'customize_preview_init', array( $this, 'action_enqueue_customize_preview_js' ) );
 	}
 
 	/**
@@ -50,21 +50,21 @@ class Component implements Component_Interface {
 		if ( isset( $wp_customize->selective_refresh ) ) {
 			$wp_customize->selective_refresh->add_partial(
 				'blogname',
-				[
+				array(
 					'selector'        => '.site-title a',
 					'render_callback' => function() {
 						bloginfo( 'name' );
 					},
-				]
+				)
 			);
 			$wp_customize->selective_refresh->add_partial(
 				'blogdescription',
-				[
+				array(
 					'selector'        => '.site-description',
 					'render_callback' => function() {
 						bloginfo( 'description' );
 					},
-				]
+				)
 			);
 		}
 
@@ -73,10 +73,10 @@ class Component implements Component_Interface {
 		 */
 		$wp_customize->add_section(
 			'theme_options',
-			[
-				'title'    => __( 'Theme Options', 'helpdesk' ),
+			array(
+				'title'    => __( 'Theme Options', 'knowx' ),
 				'priority' => 130, // Before Additional CSS.
-			]
+			)
 		);
 	}
 
@@ -85,10 +85,10 @@ class Component implements Component_Interface {
 	 */
 	public function action_enqueue_customize_preview_js() {
 		wp_enqueue_script(
-			'helpdesk-customizer',
+			'knowx-customizer',
 			get_theme_file_uri( '/assets/js/customizer.min.js' ),
-			[ 'customize-preview' ],
-			helpdesk()->get_asset_version( get_theme_file_path( '/assets/js/customizer.min.js' ) ),
+			array( 'customize-preview' ),
+			knowx()->get_asset_version( get_theme_file_path( '/assets/js/customizer.min.js' ) ),
 			true
 		);
 	}

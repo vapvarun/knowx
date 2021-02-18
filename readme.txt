@@ -1,8 +1,8 @@
-=== Knowx ===
+=== KnowX ===
 Contributors: wbcomdesigns
 Tags: translation-ready, Block Editor Styles, Blog, Custom Background, Custom Colors, Custom Logo, Custom Menu, Editor Style, Featured Images, Footer Widgets, Full Width Template, One Column, RTL Language Support, Sticky Post, Theme Options, Threaded Comments, Wide Blocks
 Requires at least: 4.8
-Tested up to: 5.5.0
+Tested up to: 5.6.1
 Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -10,25 +10,18 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 
 == Description ==
-Knowx is build with WP Rig for your knowledge base.
+KnowX is build with WP Rig for your knowledge base.
 
-== Knowx Child Theme ==
+== Know License ==
 
-There are multiple ways you can use a child theme with the Knowx Theme, Use any one method mentioned below to create a child theme or use a child theme we have created.
-
-1. Download the child theme from Github - https://github.com/knowx/knowx-child-theme
-2. More information on creating child theme - https://codex.wordpress.org/Child_Themes
-
-== Knowx License ==
-
-Knowx is licensed under the GNU General Public License v3.0 (or later)
+KnowX is licensed under the GNU General Public License v3.0 (or later)
 More details here: https://www.gnu.org/licenses/gpl-3.0.html
 
-Knowx is based on WP Rig https://github.com/wprig/wprig, WP Rig is released under GNU General Public License v3.0 (or later).
+KnowX is based on WP Rig https://github.com/wprig/wprig, WP Rig is released under GNU General Public License v3.0 (or later).
 
 == Copyright ==
 
-Knowx is distributed under the terms of the GNU GPL.
+KnowX is distributed under the terms of the GNU GPL.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -43,7 +36,7 @@ GNU General Public License for more details.
 == Customizations ==
 Navigate to Appearance > Customize in your admin panel and customize to taste.
 
-Knowx bundles the following third-party resources:
+KnowX bundles the following third-party resources:
 
 Font Awesome Fonts, Copyright Dave Gandy
 License: SIL OFL 1.1 License - https://scripts.sil.org/OFL
@@ -87,9 +80,6 @@ Url: http://tgmpluginactivation.com/
 Thomas Griffin, Gary Jones, Juliette Reinders Folmer
 Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
-
-Screenshot
-screenshot.png (Slider Image), © 2020 @decoasta9301, https://pxhere.com/en/photo/1624307, CC0
 
 == Changelog ==
 

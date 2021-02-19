@@ -82,6 +82,8 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.1.0 =
+* Fix : Added source js and css files
 
 = 1.0.0 =
 * Initial Release

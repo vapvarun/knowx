@@ -60,7 +60,7 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 		<span class="posted-by">
 			<?php
 			/* translators: %s: post author */
-			echo get_avatar( get_the_author_meta('user_email'), $size = '26');
+			echo get_avatar( get_the_author_meta( 'user_email' ), $size = '26' );
 			$author_byline = _x( 'By %s', 'post author', 'knowx' );
 			if ( ! empty( $time_string ) ) {
 				/* translators: %s: post author */

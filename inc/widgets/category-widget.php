@@ -1,18 +1,18 @@
 <?php
 
-class Knowx_Category extends WP_Widget {
- 
-    public function __construct() {
-        $widget_ops = array(
+class KnowX_Category extends WP_Widget {
+
+	public function __construct() {
+		$widget_ops = array(
 			'classname'                   => 'widget_knowx_categories',
 			'description'                 => __( 'A list or dropdown of categories.', 'knowx' ),
 			'customize_selective_refresh' => true,
 		);
-		parent::__construct( 'knowx_categories', __( 'Knowx Categories', 'knowx' ), $widget_ops );
-    }
- 
-    public function widget( $args, $instance ) {
-       static $first_dropdown = true;
+		parent::__construct( 'knowx_categories', __( 'KnowX Categories', 'knowx' ), $widget_ops );
+	}
+
+	public function widget( $args, $instance ) {
+		static $first_dropdown = true;
 
 		$default_title = __( 'Categories', 'knowx' );
 		$title         = ! empty( $instance['title'] ) ? $instance['title'] : $default_title;
@@ -117,10 +117,10 @@ class Knowx_Category extends WP_Widget {
 		}
 
 		echo $args['after_widget']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-    }
- 
-    public function form( $instance ) {
-        // Defaults.
+	}
+
+	public function form( $instance ) {
+		// Defaults.
 		$instance     = wp_parse_args( (array) $instance, array( 'title' => '' ) );
 		$count        = isset( $instance['count'] ) ? (bool) $instance['count'] : false;
 		$hierarchical = isset( $instance['hierarchical'] ) ? (bool) $instance['hierarchical'] : false;
@@ -137,29 +137,29 @@ class Knowx_Category extends WP_Widget {
 			<br />
 
 			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'count' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" name="<?php echo $this->get_field_name( 'count' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"<?php checked( $count ); ?> />
-			<label for="<?php echo $this->get_field_id( 'count' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Show post counts' ,'knowx'); ?></label>
+			<label for="<?php echo $this->get_field_id( 'count' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Show post counts', 'knowx' ); ?></label>
 			<br />
 
 			<input type="checkbox" class="checkbox" id="<?php echo $this->get_field_id( 'hierarchical' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" name="<?php echo $this->get_field_name( 'hierarchical' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"<?php checked( $hierarchical ); ?> />
 			<label for="<?php echo $this->get_field_id( 'hierarchical' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"><?php esc_html_e( 'Show hierarchy', 'knowx' ); ?></label>
 		</p>
 		<?php
-    }
- 
-    public function update( $new_instance, $old_instance ) {
-        $instance                 = $old_instance;
+	}
+
+	public function update( $new_instance, $old_instance ) {
+		$instance                 = $old_instance;
 		$instance['title']        = sanitize_text_field( $new_instance['title'] );
 		$instance['count']        = ! empty( $new_instance['count'] ) ? 1 : 0;
 		$instance['hierarchical'] = ! empty( $new_instance['hierarchical'] ) ? 1 : 0;
 		$instance['dropdown']     = ! empty( $new_instance['dropdown'] ) ? 1 : 0;
 
 		return $instance;
-    }
+	}
 }
 
 
 add_action( 'widgets_init', 'knowx_register_widgets' );
- 
+
 function knowx_register_widgets() {
-    register_widget( 'Knowx_Category' );
+	register_widget( 'KnowX_Category' );
 }

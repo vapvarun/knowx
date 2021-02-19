@@ -24,46 +24,46 @@ knowx()->print_styles( 'knowx-content' );
 	<main id="primary" class="site-main">
 		
 	<?php
-		if ( have_posts() ) {
-			
-				if ( get_theme_mod( 'knowx_page_title' ) == "yes" ) {
-					get_template_part( 'template-parts/content/page_header' );
-				}
-			
-				while ( have_posts() ) {
-					the_post();
-	
-					get_template_part( 'template-parts/content/entry', 'page' );
-				} 
+	if ( have_posts() ) {
 
-			} else {
-				get_template_part( 'template-parts/content/error' );
+		if ( get_theme_mod( 'knowx_page_title' ) == 'yes' ) {
+			get_template_part( 'template-parts/content/page_header' );
 		}
+
+		while ( have_posts() ) {
+			the_post();
+
+			get_template_part( 'template-parts/content/entry', 'page' );
+		}
+	} else {
+		get_template_part( 'template-parts/content/error' );
+	}
 	?>
 
 	<div id="knowx-categories-columns-four" class="knowx-knowledgebase-two">
-		<?php $exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
-		if ( !empty( $exclude_cats ) ) {
+		<?php
+		$exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
+		if ( ! empty( $exclude_cats ) ) {
 			$exclude = esc_attr( $exclude_cats );
-		} else if ( get_theme_mod( 'knowx_exclude' ) ) :
+		} elseif ( get_theme_mod( 'knowx_exclude' ) ) :
 			$exclude = esc_attr( get_theme_mod( 'knowx_exclude' ) );
 		else :
 			$exclude = '';
 		endif;
 		$knowx_cat_args = array(
 			'hide_empty' => 0,
-			'exclude' => $exclude,
-			'orderby' => 'name',
-			'order' => 'asc'
+			'exclude'    => $exclude,
+			'orderby'    => 'name',
+			'order'      => 'asc',
 		);
-		$knowx_cats = get_categories( $knowx_cat_args );
+		$knowx_cats     = get_categories( $knowx_cat_args );
 
 		foreach ( $knowx_cats as $category ) :
 			echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
-			if ( get_theme_mod( 'knowx_cat_description' ) == "yes" ) :
+			if ( get_theme_mod( 'knowx_cat_description' ) == 'yes' ) :
 				if ( category_description( $category->cat_ID ) ) :
-					echo '<div class="cat-description">'. wp_kses_post( category_description( $category->cat_ID ) ) .'</div>';
+					echo '<div class="cat-description">' . wp_kses_post( category_description( $category->cat_ID ) ) . '</div>';
 				endif;
 			endif;
 
@@ -73,41 +73,42 @@ knowx()->print_styles( 'knowx-content' );
 				$posts_per_page = -1;
 			endif;
 
-			if ( get_theme_mod( 'knowx_order' ) == "name" ) :
-				$order_by = 'name';
+			if ( get_theme_mod( 'knowx_order' ) == 'name' ) :
+				$order_by  = 'name';
 				$the_order = 'asc';
 			else :
-				$order_by = 'date';
+				$order_by  = 'date';
 				$the_order = 'desc';
 			endif;
 
 			$knowx_post_args = array(
-				'post_type' => 'post',
-				'tax_query' => array(
+				'post_type'      => 'post',
+				'tax_query'      => array(
 					array(
-						'taxonomy' => 'category',
-						'field' => 'term_id',
-						'terms' => $category->term_id,
+						'taxonomy'         => 'category',
+						'field'            => 'term_id',
+						'terms'            => $category->term_id,
 						'include_children' => false,
-					)
+					),
 				),
 				'posts_per_page' => $posts_per_page,
-				'orderby' => $order_by,
-				'order' => $the_order
+				'orderby'        => $order_by,
+				'order'          => $the_order,
 			);
 
 			$knowx_posts = get_posts( $knowx_post_args );
 
-			foreach( $knowx_posts AS $single_post ) :
-				echo '<li class="post-name"><a href="'. get_permalink( $single_post->ID ) .'" rel="bookmark" title="'. get_the_title( $single_post->ID ) .'">'. get_the_title( $single_post->ID ) .'</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			foreach ( $knowx_posts as $single_post ) :
+				echo '<li class="post-name"><a href="' . get_permalink( $single_post->ID ) . '" rel="bookmark" title="' . get_the_title( $single_post->ID ) . '">' . get_the_title( $single_post->ID ) . '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			endforeach;
 
-			if ( get_theme_mod( 'knowx_view_all' ) == "yes" ) {
-				echo '<li class="view-all"><a href="'. get_category_link( $category->cat_ID ) .'" title="'. $category->name .'" >'. __( 'View All &raquo;', 'knowx' ). '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			if ( get_theme_mod( 'knowx_view_all' ) == 'yes' ) {
+				echo '<li class="view-all"><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . __( 'View All &raquo;', 'knowx' ) . '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			}
 
 			echo '</ul>';
-		endforeach; ?>
+		endforeach;
+		?>
 	</div>
 
 	</main><!-- #primary -->

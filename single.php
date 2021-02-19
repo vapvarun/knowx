@@ -9,7 +9,6 @@
 
 namespace KnowX\KnowX;
 
-
 get_header();
 
 knowx()->print_styles( 'knowx-content' );
@@ -17,7 +16,7 @@ knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
 $default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
 
-$post_layout = get_theme_mod( 'blog_layout_option', knowx_defaults( 'blog-layout-option' ) );
+$post_layout  = get_theme_mod( 'blog_layout_option', knowx_defaults( 'blog-layout-option' ) );
 $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
 
 ?>
@@ -40,27 +39,29 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 		
 		<?php
 		if ( have_posts() ) {
-			setPostViews(get_the_ID());
+			setPostViews( get_the_ID() );
 
 			get_template_part( 'template-parts/content/page_header' );
 
 			$classes = get_body_class();
-			if(in_array('blog',$classes) || in_array('archive',$classes) || in_array('search',$classes)){ ?>
-			<div class="post-layout row <?php echo esc_attr($post_layout); ?>">
+			if ( in_array( 'blog', $classes ) || in_array( 'archive', $classes ) || in_array( 'search', $classes ) ) {
+				?>
+			<div class="post-layout row <?php echo esc_attr( $post_layout ); ?>">
 			<div class="grid-sizer <?php echo esc_attr( $post_per_row ); ?>"></div>
-			<?php 
+				<?php
 				while ( have_posts() ) {
-					
+
 					the_post();
-	
+
 					get_template_part( 'template-parts/content/entry', 'layout' );
-				} ?>
+				}
+				?>
 				</div>
-			<?php 
+				<?php
 			} else {
 				while ( have_posts() ) {
 					the_post();
-	
+
 					get_template_part( 'template-parts/content/entry', get_post_type() );
 				}
 			}

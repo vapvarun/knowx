@@ -15,10 +15,10 @@ get_header();
 
 knowx()->print_styles( 'knowx-content' );
 
-$hero_title = get_theme_mod( 'hero_section_heading' );
+$hero_title   = get_theme_mod( 'hero_section_heading' );
 $hero_content = get_theme_mod( 'hero_section_content' );
 
-$support_title = get_theme_mod( 'support_section_heading' );
+$support_title   = get_theme_mod( 'support_section_heading' );
 $support_content = get_theme_mod( 'support_section_content' );
 
 $support_button_text = get_theme_mod( 'support_section_button_text' );
@@ -26,23 +26,25 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 
 ?>
 	</div><!--close .container-->
-	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'full' ); ?>
+	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' ); ?>
 		<?php if ( has_post_thumbnail() ) { ?>
 			<div class="knowx-section-hero" style="background-image: url(' <?php echo $backgroundImg[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> ');">
-		<?php }else { ?>
+		<?php } else { ?>
 			<div class="knowx-section-hero">
 		<?php } ?>
 		<div class="container">
 			<?php if ( ! empty( $hero_title ) ) { ?>
 				<h1 class="entry-title"><?php echo $hero_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h1>
-			<?php }else {
+				<?php
+			} else {
 				get_template_part( 'template-parts/content/page_header' );
-			} ?>
+			}
+			?>
 			<?php if ( ! empty( $hero_content ) ) { ?>
 				<div class="entry-summary">
 					<?php echo $hero_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div><!-- .entry-summary -->
-			<?php }else { ?>
+			<?php } else { ?>
 				<div class="entry-summary">
 					<?php the_excerpt(); ?>
 				</div><!-- .entry-summary -->
@@ -61,27 +63,29 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 	<div class="container">
 
 		<div id="knowx-categories-columns-three" class="knowx-knowledgebase-one">
-			<?php $exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
-			if ( !empty( $exclude_cats ) ) {
+			<?php
+			$exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
+			if ( ! empty( $exclude_cats ) ) {
 				$exclude = esc_attr( $exclude_cats );
-			} else if ( get_theme_mod( 'knowx_exclude_posts' ) ) :
+			} elseif ( get_theme_mod( 'knowx_exclude_posts' ) ) :
 				$exclude = esc_attr( get_theme_mod( 'knowx_exclude_posts' ) );
 			else :
 				$exclude = '';
 			endif;
 			$knowx_cat_args = array(
-				'parent' => 0,
+				'parent'     => 0,
 				'hide_empty' => 0,
-				'exclude' => $exclude,
-				'orderby' => 'name',
-				'order' => 'asc'
+				'exclude'    => $exclude,
+				'orderby'    => 'name',
+				'order'      => 'asc',
 			);
-			$knowx_cats = get_categories( $knowx_cat_args );
+			$knowx_cats     = get_categories( $knowx_cat_args );
 
 			foreach ( $knowx_cats as $category ) :
 				echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo '</ul>';
-			endforeach; ?>
+			endforeach;
+			?>
 		</div><!-- #knowx-categories-columns-three -->
 
 		<div class="knowx-post-section">
@@ -90,14 +94,18 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 					<div class="knowx-popular-posts">
 					<h3><?php esc_html_e( 'Popular Articles', 'knowx' ); ?></h3>
 					<?php
-					if ( function_exists('wpp_get_mostpopular') ) {
+					if ( function_exists( 'wpp_get_mostpopular' ) ) {
 						/* Get up to the top 5 */
-						wpp_get_mostpopular(array(
-							'limit' => 5,
-						));
-					}else { ?>
+						wpp_get_mostpopular(
+							array(
+								'limit' => 5,
+							)
+						);
+					} else {
+						?>
 						<p><?php esc_html_e( 'No data found.', 'knowx' ); ?></p>
-					<?php }
+						<?php
+					}
 					?>
 					</div>
 				</div>
@@ -106,13 +114,17 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 					<h3><?php esc_html_e( 'Recent Articles', 'knowx' ); ?></h3>
 					<?php
 						$related = get_posts( array( 'numberposts' => 5 ) );
-							if( $related ) foreach( $related as $post ) {
-							setup_postdata($post); ?>
+					if ( $related ) {
+						foreach ( $related as $post ) {
+							setup_postdata( $post );
+							?>
 								<ul> 
-									<li><a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></li>
+									<li><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></li>
 								</ul>   
-							<?php }
-						wp_reset_postdata(); 
+							<?php
+						}
+					}
+							wp_reset_postdata();
 					?>
 					</div>
 				</div>
@@ -126,14 +138,14 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 			<div class="knowx-support-heading">
 			<?php if ( ! empty( $support_title ) ) { ?>
 					<h2 class="knowx-support-title"><?php echo $support_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
-				<?php }else { ?>
+				<?php } else { ?>
 					<h2 class="knowx-support-title"><?php esc_html_e( 'Can\'t find what you\'re looking for?', 'knowx' ); ?></h2>
 				<?php } ?>
 			</div>
 			<div class="knowx-support-content">
 				<?php if ( ! empty( $support_content ) ) { ?>
 					<p><?php echo $support_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-				<?php }else { ?>
+				<?php } else { ?>
 					<p><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 'knowx' ); ?></p>
 				<?php } ?>
 			</div>
@@ -142,7 +154,7 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 					<a href="<?php echo $support_button_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
 						<?php echo $support_button_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</a>
-				<?php }else { ?>
+				<?php } else { ?>
 					<a href="#"><?php esc_html_e( 'Contact Support', 'knowx' ); ?></a>
 				<?php } ?>
 			</div>

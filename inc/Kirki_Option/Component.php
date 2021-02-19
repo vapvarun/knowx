@@ -1083,7 +1083,7 @@ class Component implements Component_Interface {
 			'section'     => 'site_knowledge_section_one',
 			'default'     => '',
 			'input_attrs' => array(
-				'placeholder' => esc_html__( 'Create a Knowledge Base with Knowx', 'knowx' ),
+				'placeholder' => esc_html__( 'Create a Knowledge Base with KnowX', 'knowx' ),
 			),
 			'priority'    => 10,
 		);

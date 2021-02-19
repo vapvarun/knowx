@@ -86,7 +86,7 @@ function knowx_get_breadcrumb( $echo = true ) {
 	$breadcrumb = apply_filters( 'knowx_breadcrumb_trail_object', null, $args );
 
 	if ( ! is_object( $breadcrumb ) ) {
-		$breadcrumb = new Knowx_Breadcrumbs( $args );
+		$breadcrumb = new KnowX_Breadcrumbs( $args );
 	}
 
 	return $breadcrumb->trail();
@@ -98,7 +98,7 @@ function knowx_get_breadcrumb( $echo = true ) {
  * @since  1.0.0
  * @access public
  */
-class Knowx_Breadcrumbs {
+class KnowX_Breadcrumbs {
 
 	/**
 	 * Array of items belonging to the current breadcrumb trail.
@@ -1384,3 +1384,4 @@ class Knowx_Breadcrumbs {
 		}
 	}
 }
+

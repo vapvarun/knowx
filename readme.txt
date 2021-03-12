@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready, Block Editor Styles, Blog, Custom Background, Custom Colors, Custom Logo, Custom Menu, Editor Style, Featured Images, Footer Widgets, Full Width Template, One Column, RTL Language Support, Sticky Post, Theme Options, Threaded Comments, Wide Blocks
 Requires at least: 4.8
-Tested up to: 5.5.0
+Tested up to: 5.7.0
 Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -11,13 +11,6 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 KnowX is build with WP Rig for your knowledge base.
-
-== KnowX Child Theme ==
-
-There are multiple ways you can use a child theme with the KnowX Theme, Use any one method mentioned below to create a child theme or use a child theme we have created.
-
-1. Download the child theme from Github - https://github.com/knowx/knowx-child-theme
-2. More information on creating child theme - https://codex.wordpress.org/Child_Themes
 
 == KnowX License ==
 
@@ -88,10 +81,9 @@ Thomas Griffin, Gary Jones, Juliette Reinders Folmer
 Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
-Screenshot
-screenshot.png (Slider Image), © 2020 @decoasta9301, https://pxhere.com/en/photo/1624307, CC0
-
 == Changelog ==
+= 1.1.0 =
+* Fix : Added source js and css files
 
 = 1.0.0 =
 * Initial Release

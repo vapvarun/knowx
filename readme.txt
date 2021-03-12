@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready, Block Editor Styles, Blog, Custom Background, Custom Colors, Custom Logo, Custom Menu, Editor Style, Featured Images, Footer Widgets, Full Width Template, One Column, RTL Language Support, Sticky Post, Theme Options, Threaded Comments, Wide Blocks
 Requires at least: 4.8
-Tested up to: 5.6.1
+Tested up to: 5.7.0
 Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -12,7 +12,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 == Description ==
 KnowX is build with WP Rig for your knowledge base.
 
-== Know License ==
+== KnowX License ==
 
 KnowX is licensed under the GNU General Public License v3.0 (or later)
 More details here: https://www.gnu.org/licenses/gpl-3.0.html

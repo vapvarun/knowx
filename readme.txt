@@ -82,6 +82,11 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.2.0 =
+* Fix : Escaping functions
+* Fix:  Styling of the_content area of Full-Width-no-title template
+* Fix: Updated tags
+
 = 1.1.0 =
 * Fix : Added source js and css files
 

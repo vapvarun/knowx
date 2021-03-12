@@ -45,11 +45,11 @@ knowx()->print_styles( 'knowx-content' );
 		$exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
 		if ( ! empty( $exclude_cats ) ) {
 			$exclude = esc_attr( $exclude_cats );
-		} elseif ( get_theme_mod( 'knowx_exclude' ) ) :
+		} elseif ( get_theme_mod( 'knowx_exclude' ) ) {
 			$exclude = esc_attr( get_theme_mod( 'knowx_exclude' ) );
-		else :
+		} else {
 			$exclude = '';
-		endif;
+		}
 		$knowx_cat_args = array(
 			'hide_empty' => 0,
 			'exclude'    => $exclude,
@@ -99,11 +99,11 @@ knowx()->print_styles( 'knowx-content' );
 			$knowx_posts = get_posts( $knowx_post_args );
 
 			foreach ( $knowx_posts as $single_post ) :
-				echo '<li class="post-name"><a href="' . get_permalink( $single_post->ID ) . '" rel="bookmark" title="' . get_the_title( $single_post->ID ) . '">' . get_the_title( $single_post->ID ) . '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<li class="post-name"><a href="' . esc_url( get_permalink( $single_post->ID ) ) . '" rel="bookmark" title="' . esc_attr( get_the_title( $single_post->ID ) ) . '">' . esc_html( get_the_title( $single_post->ID ) ) . '</a></li>';
 			endforeach;
 
 			if ( get_theme_mod( 'knowx_view_all' ) == 'yes' ) {
-				echo '<li class="view-all"><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . __( 'View All &raquo;', 'knowx' ) . '</a></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo '<li class="view-all"><a href="' . esc_url( get_category_link( $category->cat_ID ) ) . '" title="' . esc_attr( $category->name ) . '" >' . esc_html( 'View All &raquo;', 'knowx' ) . '</a></li>';
 			}
 
 			echo '</ul>';

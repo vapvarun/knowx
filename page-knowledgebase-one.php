@@ -34,7 +34,7 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 		<?php } ?>
 		<div class="container">
 			<?php if ( ! empty( $hero_title ) ) { ?>
-				<h1 class="entry-title"><?php echo $hero_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h1>
+				<h1 class="entry-title"><?php echo esc_html( $hero_title ); ?></h1>
 				<?php
 			} else {
 				get_template_part( 'template-parts/content/page_header' );
@@ -42,7 +42,7 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 			?>
 			<?php if ( ! empty( $hero_content ) ) { ?>
 				<div class="entry-summary">
-					<?php echo $hero_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo esc_html( $hero_content ); ?>
 				</div><!-- .entry-summary -->
 			<?php } else { ?>
 				<div class="entry-summary">
@@ -67,11 +67,11 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 			$exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
 			if ( ! empty( $exclude_cats ) ) {
 				$exclude = esc_attr( $exclude_cats );
-			} elseif ( get_theme_mod( 'knowx_exclude_posts' ) ) :
+			} elseif ( get_theme_mod( 'knowx_exclude_posts' ) ) {
 				$exclude = esc_attr( get_theme_mod( 'knowx_exclude_posts' ) );
-			else :
+			} else {
 				$exclude = '';
-			endif;
+			}
 			$knowx_cat_args = array(
 				'parent'     => 0,
 				'hide_empty' => 0,
@@ -137,25 +137,25 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 		<div class="container">
 			<div class="knowx-support-heading">
 			<?php if ( ! empty( $support_title ) ) { ?>
-					<h2 class="knowx-support-title"><?php echo $support_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h2>
+					<h2 class="knowx-support-title"><?php echo esc_html( $support_title ); ?></h2>
 				<?php } else { ?>
 					<h2 class="knowx-support-title"><?php esc_html_e( 'Can\'t find what you\'re looking for?', 'knowx' ); ?></h2>
 				<?php } ?>
 			</div>
 			<div class="knowx-support-content">
 				<?php if ( ! empty( $support_content ) ) { ?>
-					<p><?php echo $support_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+					<p><?php echo esc_html( $support_content ); ?></p>
 				<?php } else { ?>
 					<p><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 'knowx' ); ?></p>
 				<?php } ?>
 			</div>
 			<div class="knowx-support-button">
 				<?php if ( ! empty( $support_button_text ) && ! empty( $support_button_link ) ) { ?>
-					<a href="<?php echo $support_button_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>">
-						<?php echo $support_button_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<a href="<?php echo esc_url( $support_button_link ); ?>">
+						<?php echo esc_html( $support_button_text ); ?>
 					</a>
 				<?php } else { ?>
-					<a href="#"><?php esc_html_e( 'Contact Support', 'knowx' ); ?></a>
+					<a href="<?php esc_url( '#' ); ?>"><?php esc_html_e( 'Contact Support', 'knowx' ); ?></a>
 				<?php } ?>
 			</div>
 		</div><!-- .knowx-support-section -->

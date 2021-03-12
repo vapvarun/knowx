@@ -23,8 +23,7 @@
     KNOWX.headerHeight = function() {
         var header_height = $('.site-header-wrapper').height();
         $('.site').css("paddingTop", header_height + 12 + "px");
-        $('.page-template-full-width:not(.elementor-editor-active) .site').css("paddingTop", header_height - 10 + "px");
-        $('#cover-image-container').css("marginTop", -header_height + 46 + "px");
+        $('.page-template-full-width:not(.elementor-editor-active) .site').css("paddingTop", header_height - 2 + "px");
 
         var $document = $(document),
             $elementHeader = $('.site-header-wrapper'),

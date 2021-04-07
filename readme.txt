@@ -1,6 +1,6 @@
 === KnowX ===
 Contributors: wbcomdesigns
-Tags: translation-ready, Block Editor Styles, Blog, Custom Background, Custom Colors, Custom Logo, Custom Menu, Editor Style, Featured Images, Footer Widgets, Full Width Template, One Column, RTL Language Support, Sticky Post, Theme Options, Threaded Comments, Wide Blocks
+Tags: translation-ready
 Requires at least: 4.8
 Tested up to: 5.7.0
 Requires PHP: 7.0
@@ -82,6 +82,11 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.2.0 =
+* Fix : Escaping functions
+* Fix:  Styling of the_content area of Full-Width-no-title template
+* Fix: Updated tags
+
 = 1.1.0 =
 * Fix : Added source js and css files
 

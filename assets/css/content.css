@@ -183,6 +183,12 @@ h2.entry-title {
     margin: 1em 0 0;
 }
 
+.page-content a,
+.entry-content a,
+.entry-summary a {
+    text-decoration: underline;
+}
+
 .page-content>*,
 .entry-content>*,
 .entry-summary>* {

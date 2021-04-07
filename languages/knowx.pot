@@ -416,30 +416,6 @@ msgstr ""
 msgid "Updating Plugin %1$s (%2$d/%3$d)"
 msgstr ""
 
-#: ../knowx/external/include-kirki.php:59
-msgid "You have installed Kirki. Activate it to take advantage of this theme's features in the customizer."
-msgstr ""
-
-#: ../knowx/external/include-kirki.php:60
-msgid "Activate Kirki Toolkit now"
-msgstr ""
-
-#: ../knowx/external/include-kirki.php:61
-msgid "Activate Now"
-msgstr ""
-
-#: ../knowx/external/include-kirki.php:54
-msgid "A plugin is required to take advantage of this theme's features in the customizer."
-msgstr ""
-
-#: ../knowx/external/include-kirki.php:55
-msgid "Install Kirki Toolkit now"
-msgstr ""
-
-#: ../knowx/external/include-kirki.php:56
-msgid "Install Now"
-msgstr ""
-
 #: ../knowx/footer.php:25
 msgid "Footer"
 msgstr ""

@@ -89,6 +89,15 @@ canvas {
     height: auto !important;
 }
 
+p:empty {
+    content: none;
+    margin: 0;
+}
+
+p:empty::before {
+    content: none;
+}
+
 
 /*--------------------------------------------------------------
 # Layouts

@@ -82,6 +82,11 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.3.0 =
+* Fix : Removed include-kirki.php (notice removed from customizer)
+* Fix : Updated theme screenshot.png
+* Fix : Updated gmpg.org link with https
+
 = 1.2.0 =
 * Fix : Escaping functions
 * Fix:  Styling of the_content area of Full-Width-no-title template

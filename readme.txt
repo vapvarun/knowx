@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 5.7.0
+Tested up to: 5.7.1
 Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -82,6 +82,11 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+
+= 1.3.1 =
+* Fix : Updated screenshot
+
+
 = 1.3.0 =
 * Fix : Removed include-kirki.php (notice removed from customizer)
 * Fix : Updated theme screenshot.png

@@ -86,17 +86,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Page Mapping
-		$wp_customize->add_section(
-			'page_mapping',
-			array(
-				'title'       => esc_html__( 'Page Mapping', 'knowx' ),
-				'priority'    => 10,
-				'description' => '',
-				'panel'       => 'site_layout_panel',
-			)
-		);
-
 		// Typography
 		$wp_customize->add_panel(
 			'typography_panel',
@@ -333,42 +322,6 @@ class Component implements Component_Interface {
 					'value'    => '1',
 				),
 			),
-		);
-
-		/*
-		 *  Page Mapping
-		 */
-		$fields[] = array(
-			'type'        => 'dropdown-pages',
-			'settings'    => 'knowx_login_page',
-			'label'       => esc_attr__( 'Login Page', 'knowx' ),
-			'description' => esc_attr__( 'You can redirect user to custom login page.', 'knowx' ),
-			'section'     => 'page_mapping',
-			'priority'    => 10,
-			'default'     => 0,
-			'placeholder' => '--- Select a Page ---',
-		);
-
-		$fields[] = array(
-			'type'        => 'dropdown-pages',
-			'settings'    => 'knowx_registration_page',
-			'label'       => esc_attr__( 'Registration Page', 'knowx' ),
-			'description' => esc_attr__( 'You can redirect user to custom registration page.', 'knowx' ),
-			'section'     => 'page_mapping',
-			'priority'    => 10,
-			'default'     => 0,
-			'placeholder' => '--- Select a Page ---',
-		);
-
-		$fields[] = array(
-			'type'        => 'dropdown-pages',
-			'settings'    => 'knowx_404_page',
-			'label'       => esc_attr__( '404', 'knowx' ),
-			'description' => esc_attr__( 'You can redirect user to custom 404 page.', 'knowx' ),
-			'section'     => 'page_mapping',
-			'priority'    => 10,
-			'default'     => 0,
-			'placeholder' => '--- Select a Page ---',
 		);
 
 		/**

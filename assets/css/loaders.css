@@ -15,7 +15,7 @@
 .loader-inner:before {
     content: "Loading";
     display: block;
-    font-size: 10em;
+    font-size: 8em;
     text-transform: uppercase;
     left: 0;
     position: absolute;
@@ -31,6 +31,30 @@
     letter-spacing: 10px;
     opacity: 0.05;
     text-shadow: 5px 5px 0px #fff;
+}
+
+@media (max-width: 1200px) {
+    .loader-inner:before {
+        font-size: 6em;
+    }
+}
+
+@media(max-width: 991px) {
+    .loader-inner:before {
+        font-size: 5em;
+    }
+}
+
+@media(max-width: 767px) {
+    .loader-inner:before {
+        font-size: 4em;
+    }
+}
+
+@media(max-width: 480px) {
+    .loader-inner:before {
+        font-size: 2em;
+    }
 }
 
 .loader-inner {

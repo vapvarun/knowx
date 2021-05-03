@@ -29,19 +29,27 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 		if ( is_front_page() ) {
 			return;
 		}
-		?>
-	<div class="site-sub-header">
-		<div class="container">
-			<?php
-			$breadcrumbs = get_theme_mod( 'site_breadcrumbs', knowx_defaults( 'site-breadcrumbs' ) );
-			if ( ! empty( $breadcrumbs ) ) {
-				knowx_the_breadcrumb();
-			}
+		$site_subheader = get_theme_mod( 'site_sub_header', knowx_defaults( 'site-sub-header' ) );
+		if ( ! empty( $site_subheader ) ) {
 			?>
-			<?php get_search_form(); ?>
+		<div class="site-sub-header">
+			<div class="container">
+				<?php
+				$breadcrumbs = get_theme_mod( 'site_breadcrumbs', knowx_defaults( 'site-breadcrumbs' ) );
+				if ( ! empty( $breadcrumbs ) ) {
+					knowx_the_breadcrumb();
+				}
+				?>
+				<?php
+				$site_search = get_theme_mod( 'site_search', knowx_defaults( 'site-search' ) );
+				if ( ! empty( $site_search ) ) {
+					get_search_form();
+				}
+				?>
+			</div>
 		</div>
-	 </div>
-		<?php
+			<?php
+		}
 	}
 }
 

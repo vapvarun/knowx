@@ -1607,6 +1607,7 @@ button.media-menu-item {
 .knowx-hero-section-search input[type="submit"]:hover,
 .knowx-hero-section-search input[type="submit"]:focus {
     position: absolute;
+    top: 0;
     right: 0;
     text-indent: -9999999px;
     width: 55px;

@@ -29,19 +29,27 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 		if ( is_front_page() ) {
 			return;
 		}
-		?>
-	<div class="site-sub-header">
-		<div class="container">
-			<?php
-			$breadcrumbs = get_theme_mod( 'site_breadcrumbs', knowx_defaults( 'site-breadcrumbs' ) );
-			if ( ! empty( $breadcrumbs ) ) {
-				knowx_the_breadcrumb();
-			}
+		$site_subheader = get_theme_mod( 'site_sub_header', knowx_defaults( 'site-sub-header' ) );
+		if ( ! empty( $site_subheader ) ) {
 			?>
-			<?php get_search_form(); ?>
+		<div class="site-sub-header">
+			<div class="container">
+				<?php
+				$breadcrumbs = get_theme_mod( 'site_breadcrumbs', knowx_defaults( 'site-breadcrumbs' ) );
+				if ( ! empty( $breadcrumbs ) ) {
+					knowx_the_breadcrumb();
+				}
+				?>
+				<?php
+				$site_search = get_theme_mod( 'site_search', knowx_defaults( 'site-search' ) );
+				if ( ! empty( $site_search ) ) {
+					get_search_form();
+				}
+				?>
+			</div>
 		</div>
-	 </div>
-		<?php
+			<?php
+		}
 	}
 }
 
@@ -194,123 +202,6 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 		edit_post_link( esc_html__( 'Edit', 'knowx' ), '<span class="entry-edit-link">', '</span>' );
 	}
 }
-
-/**
- * Managing Login and Register URL in Frontend
- */
-
-if ( ! function_exists( 'knowx_alter_login_url_at_frontend' ) ) {
-
-	add_filter( 'login_url', 'knowx_alter_login_url_at_frontend', 10, 3 );
-
-	function knowx_alter_login_url_at_frontend( $login_url, $redirect, $force_reauth ) {
-		if ( is_admin() ) {
-			return $login_url;
-		}
-
-		$knowx_login_page_id = get_theme_mod( 'knowx_login_page', '0' );
-		if ( $knowx_login_page_id ) {
-			$knowx_login_page_url = get_permalink( $knowx_login_page_id );
-			if ( $knowx_login_page_url ) {
-				$login_url = $knowx_login_page_url;
-			}
-		}
-		return $login_url;
-	}
-}
-
-if ( ! function_exists( 'knowx_alter_register_url_at_frontend' ) ) {
-
-	add_filter( 'register_url', 'knowx_alter_register_url_at_frontend', 10, 1 );
-
-	function knowx_alter_register_url_at_frontend( $register_url ) {
-		if ( is_admin() ) {
-			return $register_url;
-		}
-
-		$knowx_registration_page_id = get_theme_mod( 'knowx_registration_page', '0' );
-		if ( $knowx_registration_page_id ) {
-			$knowx_registration_page_url = get_permalink( $knowx_registration_page_id );
-			if ( $knowx_registration_page_url ) {
-				$register_url = $knowx_registration_page_url;
-			}
-		}
-		return $register_url;
-	}
-}
-
-/**
- * Redirect to selected login page from options.
- */
-if ( ! function_exists( 'knowx_redirect_login_page' ) ) {
-	function knowx_redirect_login_page() {
-
-		/* removing conflict with logout url */
-		if ( isset( $_GET['action'] ) && ( 'logout' === $_GET['action'] ) ) {
-			return;
-		}
-
-		global $wbtm_knowx_settings;
-		$login_page_id    = $wbtm_knowx_settings['knowx_pages']['knowx_login_page'];
-		$register_page_id = $wbtm_knowx_settings['knowx_pages']['knowx_register_page'];
-
-		$login_page      = get_permalink( $login_page_id );
-		$register_page   = get_permalink( $register_page_id );
-		$page_viewed_url = isset( $_SERVER['REQUEST_URI'] ) ? basename( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';// phpcs:ignore: sanitization okay
-		$exploded_url    = wp_parse_url( $page_viewed_url );
-
-		if ( ! isset( $exploded_url['path'] ) ) {
-			return;
-		}
-
-		// For register page
-		if ( $register_page && 'wp-login.php' === $exploded_url['path'] && 'action=register' === $exploded_url['query'] && ( isset( $_SERVER['REQUEST_METHOD'] ) && 'GET' === $_SERVER['REQUEST_METHOD'] ) ) {
-			wp_redirect( $register_page );
-			exit;
-		}
-
-		// For login page.
-		if ( 'wp-login.php' === $login_page && $exploded_url['path'] && ( isset( $_SERVER['REQUEST_METHOD'] ) && 'GET' === $_SERVER['REQUEST_METHOD'] ) ) {
-			wp_redirect( $login_page );
-			exit;
-		}
-	}
-}
-
-/**
- * Add 404 page redirect
- */
-if ( ! function_exists( 'knowx_404_redirect' ) ) {
-	function knowx_404_redirect() {
-
-		$current_url = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : ''; // phpcs:ignore: sanitization okay
-
-		// media popup fix.
-		if ( strpos( $current_url, 'media' ) !== false ) {
-			return;
-		}
-
-		// media upload fix.
-		if ( strpos( $current_url, 'upload' ) !== false ) {
-			return;
-		}
-
-		if ( ! is_404() ) {
-			return;
-		}
-
-		$knowx_404_page_id = get_theme_mod( 'knowx_404_page', '0' );
-
-		if ( $knowx_404_page_id ) {
-			$knowx_404_page_url = get_permalink( $knowx_404_page_id );
-			wp_redirect( $knowx_404_page_url );
-			exit;
-		}
-
-	}
-	add_action( 'template_redirect', 'knowx_404_redirect' );
-}
-
 
 /**
  * Add Elementor Locations Support

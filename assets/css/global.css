@@ -84,9 +84,29 @@
     outline: 0;
 }
 
+body.elementor-editor-active .site-header-wrapper {
+    z-index: 99;
+}
+
+.elementor-template-full-width #page>.container,
+.elementor-template-full-width #page>.container-fluid {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+}
+
 canvas {
     width: 100% !important;
     height: auto !important;
+}
+
+p:empty {
+    content: none;
+    margin: 0;
+}
+
+p:empty::before {
+    content: none;
 }
 
 
@@ -380,30 +400,34 @@ select {
 --------------------------------------------------------------*/
 
 .site-header-wrapper {
+    position: relative;
     margin: 0;
-    margin-bottom: 30px;
     padding-top: 5px;
     padding-bottom: 5px;
     border-top: 0;
-    border-top: 1px solid var(--global-border-color);
-    border-bottom: 1px solid var(--global-border-color);
     background: #fff;
     min-height: 51px;
-    transition: all .2s;
+    z-index: 999;
     box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 5px 10px 0 rgba(189, 189, 189, 0.15);
 }
 
 .site-header-wrapper.has-sticky-header {
-    box-shadow: 0 1px 0 0 rgba(206, 206, 206, 0.05), 0 5px 10px 0 rgba(132, 132, 132, 0.15);
-}
-
-.site-header-wrapper {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     width: 100%;
-    z-index: 9999;
+    z-index: 999;
+}
+
+@media (max-width: 767px) {
+    .site-header-wrapper {
+        z-index: 9999;
+    }
+}
+
+.site-header-wrapper.has-sticky-header {
+    box-shadow: 0 1px 0 0 rgba(206, 206, 206, 0.05), 0 5px 10px 0 rgba(132, 132, 132, 0.15);
 }
 
 .site-header {
@@ -495,12 +519,12 @@ select {
     display: none;
 }
 
-body.admin-bar .site-header-wrapper {
+body.admin-bar .site-header-wrapper.has-sticky-header {
     top: 32px;
 }
 
 @media (max-width: 782px) {
-    body.admin-bar .site-header-wrapper {
+    body.admin-bar .site-header-wrapper.has-sticky-header {
         top: 46px;
     }
     .main-navigation .user-profile-menu .sub-menu {
@@ -549,7 +573,7 @@ body.admin-bar .site-header-wrapper {
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 999;
+        z-index: 99;
         opacity: 0;
         visibility: hidden;
         background-color: rgba(0, 0, 0, 0.7);
@@ -1598,6 +1622,7 @@ button.media-menu-item {
 .knowx-hero-section-search input[type="submit"]:hover,
 .knowx-hero-section-search input[type="submit"]:focus {
     position: absolute;
+    top: 0;
     right: 0;
     text-indent: -9999999px;
     width: 55px;

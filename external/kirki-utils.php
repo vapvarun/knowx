@@ -9,7 +9,10 @@ function knowx_defaults( $key = '' ) {
 	// site loader
 	$defaults['site-loader'] = '2';
 
-	// site search
+	// site sub header
+	$defaults['site-sub-header'] = '1';
+
+		// site search
 	$defaults['site-search'] = '1';
 
 	// site breadcrumbs

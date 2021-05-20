@@ -83,6 +83,11 @@ License: GPL-2.0+
 
 == Changelog ==
 
+= 1.4.0 =
+* Fix : Fixed header glitch on page load
+* Improvement: Added setting to enable or disable sub header and search option
+* Fix : Removed page mapping option from customizer
+
 = 1.3.1 =
 * Fix : Updated screenshot
 

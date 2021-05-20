@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 5.7.1
+Tested up to: 5.7.3
 Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)

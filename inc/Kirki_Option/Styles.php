@@ -94,16 +94,6 @@ function knowx_get_customizer_style() {
 		echo '}';
 
 	}
-    
-    // Content Background Color
-    // $content_background_color = get_theme_mod( 'content_background_color' );
-    // if ( $content_background_color ) {
-
-	// 	echo 'body.layout-boxed .site {';
-	// 	echo sprintf( 'background-color: %s;', esc_attr( $content_background_color ) );
-	// 	echo '}';
-
-	// }
 
     // Theme Color
     $site_primary_color = get_theme_mod( 'site_primary_color' );

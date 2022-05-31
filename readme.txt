@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 5.7.1
+Tested up to: 5.7.3
 Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -82,6 +82,11 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+
+= 1.4.0 =
+* Fix : Fixed header glitch on page load
+* Improvement: Added setting to enable or disable sub header and search option
+* Fix : Removed page mapping option from customizer
 
 = 1.3.1 =
 * Fix : Updated screenshot

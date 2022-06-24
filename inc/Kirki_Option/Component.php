@@ -74,7 +74,7 @@ class Component implements Component_Interface {
 	 * Add Customizer Section
 	 */
 	public function add_panels_and_sections( $wp_customize ) {
-		// Site Layout
+		// Site Layout.
 		$wp_customize->add_panel(
 			'site_layout_panel',
 			array(
@@ -94,7 +94,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Loader
+		// Site Loader.
 		$wp_customize->add_section(
 			'site_loader',
 			array(
@@ -105,7 +105,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Typography
+		// Typography.
 		$wp_customize->add_panel(
 			'typography_panel',
 			array(
@@ -155,7 +155,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Header
+		// Site Header.
 		$wp_customize->add_section(
 			'site_header_section',
 			array(
@@ -165,7 +165,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Sub Header
+		// Site Sub Header.
 		$wp_customize->add_section(
 			'site_sub_header_section',
 			array(
@@ -175,7 +175,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Skin
+		// Site Skin.
 		$wp_customize->add_section(
 			'site_skin_section',
 			array(
@@ -185,7 +185,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Blog Layout
+		// Site Blog Layout.
 		$wp_customize->add_section(
 			'site_blog_section',
 			array(
@@ -195,7 +195,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Sidebar Layout
+		// Site Sidebar Layout.
 		$wp_customize->add_section(
 			'site_sidebar_layout',
 			array(
@@ -205,7 +205,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Knowledge Base
+		// Site Knowledge Base.
 		$wp_customize->add_panel(
 			'knowledge_panel',
 			array(
@@ -235,7 +235,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Footer
+		// Site Footer.
 		$wp_customize->add_panel(
 			'site_footer_panel',
 			array(
@@ -255,7 +255,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Copyright
+		// Site Copyright.
 		$wp_customize->add_section(
 			'site_copyright_section',
 			array(
@@ -265,8 +265,21 @@ class Component implements Component_Interface {
 				'panel'       => 'site_footer_panel',
 			)
 		);
+
+		// Site Performance.
+		$wp_customize->add_section(
+			'site_performance_section',
+			array(
+				'title'       => esc_html__( 'Site Performance', 'knowx' ),
+				'priority'    => 11,
+				'description' => '',
+			)
+		);
 	}
 
+	/**
+	 * Add fields
+	 */
 	public function add_fields( $fields ) {
 		/**
 		 *  Site Layout
@@ -895,7 +908,7 @@ class Component implements Component_Interface {
 			'default'  => '<hr>',
 		);
 
-		// Site Buttons
+		// Site Buttons.
 		$fields[] = array(
 			'type'     => 'color',
 			'settings' => 'site_buttons_background_color',
@@ -1574,6 +1587,56 @@ class Component implements Component_Interface {
 				array(
 					'element'  => '.site-info a:hover',
 					'property' => 'color',
+				),
+			),
+		);
+
+		/**
+		 *  Site Performance
+		 */
+		$fields[] = array(
+			'type'     => 'switch',
+			'settings' => 'site_load_google_font_locally',
+			'label'    => esc_html__( 'Load Google Fonts Locally ?', 'knowx' ),
+			'section'  => 'site_performance_section',
+			'default'  => '',
+			'choices'  => array(
+				'on'  => esc_html__( 'Enable', 'knowx' ),
+				'off' => esc_html__( 'Disable', 'knowx' ),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'switch',
+			'settings'        => 'site_preload_local_font',
+			'label'           => esc_html__( 'Preload Local Fonts ?', 'knowx' ),
+			'section'         => 'site_performance_section',
+			'default'         => '',
+			'choices'         => array(
+				'on'  => esc_html__( 'Enable', 'knowx' ),
+				'off' => esc_html__( 'Disable', 'knowx' ),
+			),
+			'active_callback' => array(
+				array(
+					'setting'  => 'site_load_google_font_locally',
+					'operator' => '==',
+					'value'    => 1,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'custom',
+			'settings'        => 'site_flush_local_font',
+			'label'           => esc_html__( 'Flush Local Fonts Cache', 'knowx' ),
+			'description'     => esc_html__( 'Click the button to reset the local fonts cache.', 'knowx' ),
+			'section'         => 'site_performance_section',
+			'default'         => '<input type="submit" value="Flush Local Font Files" class="button button-secondary knowx-flush-font-files">',
+			'active_callback' => array(
+				array(
+					'setting'  => 'site_load_google_font_locally',
+					'operator' => '==',
+					'value'    => 1,
 				),
 			),
 		);

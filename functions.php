@@ -5,7 +5,10 @@
  * This file must be parseable by PHP 5.2.
  *
  * @see https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package knowx
  */
+
 define( 'KNOWX_MINIMUM_WP_VERSION', '4.5' );
 define( 'KNOWX_MINIMUM_PHP_VERSION', '7.0' );
 
@@ -66,10 +69,13 @@ require get_template_directory() . '/inc/functions.php';
 // Initialize the theme.
 call_user_func( 'KnowX\KnowX\knowx' );
 
-// Require plugin.php to use is_plugin_active() below
+// Require plugin.php to use is_plugin_active() below.
 if ( ! function_exists( 'is_plugin_active' ) ) {
 	include_once ABSPATH . 'wp-admin/includes/plugin.php';
 }
+
+// Load webfont loader file.
+require get_template_directory() . '/inc/Webfont/class-knowx-webfont-loader.php';
 
 // Load theme extra function.
 require get_template_directory() . '/inc/extra.php';

@@ -33,14 +33,21 @@ class Component implements Component_Interface {
 		add_filter( 'kirki/fields', array( $this, 'add_fields' ) );
 		add_filter( 'body_class', array( $this, 'site_width_body_classes' ) );
 		add_filter( 'body_class', array( $this, 'site_sticky_sidebar_body_classes' ) );
+		add_filter( 'body_class', array( $this, 'site_sticky_header_classes' ) );
 	}
 
+	/**
+	 * Site width body class.
+	 */
 	public function site_width_body_classes( array $classes ) : array {
 		$classes[] = 'layout-' . get_theme_mod( 'site_layout', knowx_defaults( 'site-layout' ) );
 
 		return $classes;
 	}
 
+	/**
+	 * Site sticky sidebar body class.
+	 */
 	public function site_sticky_sidebar_body_classes( array $classes ) : array {
 
 		$sticky_sidebar = get_theme_mod( 'sticky_sidebar_option', knowx_defaults( 'sticky-sidebar' ) );
@@ -52,10 +59,22 @@ class Component implements Component_Interface {
 	}
 
 	/**
+	 * Site sticky header body class.
+	 */
+	public function site_sticky_header_classes( array $classes ): array {
+		$sticky_header = get_theme_mod( 'site_sticky_header', knowx_defaults( 'site-sticky-header' ) );
+		if ( $sticky_header ) {
+			$classes[] = 'sticky-header';
+		}
+
+		return $classes;
+	}
+
+	/**
 	 * Add Customizer Section
 	 */
 	public function add_panels_and_sections( $wp_customize ) {
-		// Site Layout
+		// Site Layout.
 		$wp_customize->add_panel(
 			'site_layout_panel',
 			array(
@@ -75,7 +94,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Loader
+		// Site Loader.
 		$wp_customize->add_section(
 			'site_loader',
 			array(
@@ -86,7 +105,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Typography
+		// Typography.
 		$wp_customize->add_panel(
 			'typography_panel',
 			array(
@@ -136,7 +155,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Header
+		// Site Header.
 		$wp_customize->add_section(
 			'site_header_section',
 			array(
@@ -146,7 +165,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Sub Header
+		// Site Sub Header.
 		$wp_customize->add_section(
 			'site_sub_header_section',
 			array(
@@ -156,7 +175,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Skin
+		// Site Skin.
 		$wp_customize->add_section(
 			'site_skin_section',
 			array(
@@ -166,7 +185,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Blog Layout
+		// Site Blog Layout.
 		$wp_customize->add_section(
 			'site_blog_section',
 			array(
@@ -176,7 +195,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Sidebar Layout
+		// Site Sidebar Layout.
 		$wp_customize->add_section(
 			'site_sidebar_layout',
 			array(
@@ -186,7 +205,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Knowledge Base
+		// Site Knowledge Base.
 		$wp_customize->add_panel(
 			'knowledge_panel',
 			array(
@@ -216,7 +235,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Footer
+		// Site Footer.
 		$wp_customize->add_panel(
 			'site_footer_panel',
 			array(
@@ -236,7 +255,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Copyright
+		// Site Copyright.
 		$wp_customize->add_section(
 			'site_copyright_section',
 			array(
@@ -246,8 +265,21 @@ class Component implements Component_Interface {
 				'panel'       => 'site_footer_panel',
 			)
 		);
+
+		// Site Performance.
+		$wp_customize->add_section(
+			'site_performance_section',
+			array(
+				'title'       => esc_html__( 'Site Performance', 'knowx' ),
+				'priority'    => 11,
+				'description' => '',
+			)
+		);
 	}
 
+	/**
+	 * Add fields
+	 */
 	public function add_fields( $fields ) {
 		/**
 		 *  Site Layout
@@ -622,9 +654,21 @@ class Component implements Component_Interface {
 			),
 		);
 
-		/**
+		/*
 		 * Site Header
 		 */
+		$fields[] = array(
+			'type'     => 'switch',
+			'settings' => 'site_sticky_header',
+			'label'    => esc_html__( 'Enable Sticky Header ?', 'knowx' ),
+			'section'  => 'site_header_section',
+			'default'  => '1',
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		);
+
 		$fields[] = array(
 			'type'     => 'color',
 			'settings' => 'site_header_bg_color',
@@ -656,29 +700,29 @@ class Component implements Component_Interface {
 		/**
 		 *  Site Sub Header
 		 */
-                $fields[] = array(
+		$fields[] = array(
 			'type'     => 'switch',
 			'settings' => 'site_sub_header',
 			'label'    => esc_html__( 'Site Sub Header?', 'knowx' ),
 			'section'  => 'site_sub_header_section',
 			'default'  => 'on',
 			'choices'  => array(
-				'on'  => esc_html__( 'Yes','knowx' ),
-				'off' => esc_html__( 'No', 'knowx' ),
-			),
-		);
-                
-		$fields[] = array(
-			'type'     => 'switch',
-			'settings' => 'site_sub_header_bg',
-			'label'    => esc_html__( 'Customize Background ?', 'knowx' ),
-			'section'  => 'site_sub_header_section',
-			'default'  => 'off',
-			'choices'  => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),
 			),
-                        'active_callback' => array(
+		);
+
+		$fields[] = array(
+			'type'            => 'switch',
+			'settings'        => 'site_sub_header_bg',
+			'label'           => esc_html__( 'Customize Background ?', 'knowx' ),
+			'section'         => 'site_sub_header_section',
+			'default'         => 'off',
+			'choices'         => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+			'active_callback' => array(
 				array(
 					'setting'  => 'site_sub_header',
 					'operator' => '==',
@@ -716,11 +760,11 @@ class Component implements Component_Interface {
 		);
 
 		$fields[] = array(
-			'type'     => 'typography',
-			'settings' => 'site_sub_header_typography',
-			'label'    => esc_html__( 'Content Typography', 'knowx' ),
-			'section'  => 'site_sub_header_section',
-			'default'  => array(
+			'type'            => 'typography',
+			'settings'        => 'site_sub_header_typography',
+			'label'           => esc_html__( 'Content Typography', 'knowx' ),
+			'section'         => 'site_sub_header_section',
+			'default'         => array(
 				'font-family'    => '',
 				'variant'        => '',
 				'font-size'      => '',
@@ -729,13 +773,13 @@ class Component implements Component_Interface {
 				'color'          => '#333333',
 				'text-transform' => 'none',
 			),
-			'priority' => 10,
-			'output'   => array(
+			'priority'        => 10,
+			'output'          => array(
 				array(
 					'element' => '.site-sub-header, .site-sub-header .entry-header .entry-title, .site-sub-header .page-header .page-title, .site-sub-header .entry-header, .site-sub-header .page-header, .site-sub-header .entry-title, .site-sub-header .page-title',
 				),
 			),
-                        'active_callback' => array(
+			'active_callback' => array(
 				array(
 					'setting'  => 'site_sub_header',
 					'operator' => '==',
@@ -745,16 +789,16 @@ class Component implements Component_Interface {
 		);
 
 		$fields[] = array(
-			'type'     => 'switch',
-			'settings' => 'site_breadcrumbs',
-			'label'    => esc_html__( 'Site Breadcrumbs?', 'knowx' ),
-			'section'  => 'site_sub_header_section',
-			'default'  => 'off',
-			'choices'  => array(
+			'type'            => 'switch',
+			'settings'        => 'site_breadcrumbs',
+			'label'           => esc_html__( 'Site Breadcrumbs?', 'knowx' ),
+			'section'         => 'site_sub_header_section',
+			'default'         => 'on',
+			'choices'         => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),
 			),
-                        'active_callback' => array(
+			'active_callback' => array(
 				array(
 					'setting'  => 'site_sub_header',
 					'operator' => '==',
@@ -762,15 +806,15 @@ class Component implements Component_Interface {
 				),
 			),
 		);
-                
-                $fields[] = array(
-			'type'     => 'switch',
-			'settings' => 'site_search',
-			'label'    => esc_html__( 'Site Search?', 'knowx' ),
-			'section'  => 'site_sub_header_section',
-			'default'  => 'on',
-			'choices'  => array(
-				'on'  => esc_html__( 'Yes','knowx' ),
+
+		$fields[] = array(
+			'type'            => 'switch',
+			'settings'        => 'site_search',
+			'label'           => esc_html__( 'Site Search?', 'knowx' ),
+			'section'         => 'site_sub_header_section',
+			'default'         => 'on',
+			'choices'         => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),
 			),
 			'active_callback' => array(
@@ -864,7 +908,7 @@ class Component implements Component_Interface {
 			'default'  => '<hr>',
 		);
 
-		// Site Buttons
+		// Site Buttons.
 		$fields[] = array(
 			'type'     => 'color',
 			'settings' => 'site_buttons_background_color',
@@ -1543,6 +1587,56 @@ class Component implements Component_Interface {
 				array(
 					'element'  => '.site-info a:hover',
 					'property' => 'color',
+				),
+			),
+		);
+
+		/**
+		 *  Site Performance
+		 */
+		$fields[] = array(
+			'type'     => 'switch',
+			'settings' => 'site_load_google_font_locally',
+			'label'    => esc_html__( 'Load Google Fonts Locally ?', 'knowx' ),
+			'section'  => 'site_performance_section',
+			'default'  => '',
+			'choices'  => array(
+				'on'  => esc_html__( 'Enable', 'knowx' ),
+				'off' => esc_html__( 'Disable', 'knowx' ),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'switch',
+			'settings'        => 'site_preload_local_font',
+			'label'           => esc_html__( 'Preload Local Fonts ?', 'knowx' ),
+			'section'         => 'site_performance_section',
+			'default'         => '',
+			'choices'         => array(
+				'on'  => esc_html__( 'Enable', 'knowx' ),
+				'off' => esc_html__( 'Disable', 'knowx' ),
+			),
+			'active_callback' => array(
+				array(
+					'setting'  => 'site_load_google_font_locally',
+					'operator' => '==',
+					'value'    => 1,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'custom',
+			'settings'        => 'site_flush_local_font',
+			'label'           => esc_html__( 'Flush Local Fonts Cache', 'knowx' ),
+			'description'     => esc_html__( 'Click the button to reset the local fonts cache.', 'knowx' ),
+			'section'         => 'site_performance_section',
+			'default'         => '<input type="submit" value="Flush Local Font Files" class="button button-secondary knowx-flush-font-files">',
+			'active_callback' => array(
+				array(
+					'setting'  => 'site_load_google_font_locally',
+					'operator' => '==',
+					'value'    => 1,
 				),
 			),
 		);

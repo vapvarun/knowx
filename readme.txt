@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 5.7.3
+Tested up to: 6.0.0
 Requires PHP: 7.0
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -82,6 +82,9 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.5.0 =
+* Fix : Implement webfonts locally and removed unnecessary files
+* Fix : Added sticky header enable/disable customizer setting
 
 = 1.4.0 =
 * Fix : Fixed header glitch on page load

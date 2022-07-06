@@ -36,401 +36,413 @@ use function wp_styles;
  * Exposes template tags:
  * * `knowx()->print_styles()`
  */
-class Component implements Component_Interface, Templating_Component_Interface
-{
-    /**
-     * Associative array of CSS files, as $handle => $data pairs.
-     * $data must be an array with keys 'file' (file path relative to 'assets/css' directory), and optionally 'global'
-     * (whether the file should immediately be enqueued instead of just being registered) and 'preload_callback'
-     * (callback function determining whether the file should be preloaded for the current request).
-     *
-     * Do not access this property directly, instead use the `get_css_files()` method.
-     *
-     * @var array
-     */
-    protected $css_files;
+class Component implements Component_Interface, Templating_Component_Interface {
 
-    /**
-     * Associative array of Google Fonts to load, as $font_name => $font_variants pairs.
-     *
-     * Do not access this property directly, instead use the `get_google_fonts()` method.
-     *
-     * @var array
-     */
-    protected $google_fonts;
+	/**
+	 * Associative array of CSS files, as $handle => $data pairs.
+	 * $data must be an array with keys 'file' (file path relative to 'assets/css' directory), and optionally 'global'
+	 * (whether the file should immediately be enqueued instead of just being registered) and 'preload_callback'
+	 * (callback function determining whether the file should be preloaded for the current request).
+	 *
+	 * Do not access this property directly, instead use the `get_css_files()` method.
+	 *
+	 * @var array
+	 */
+	protected $css_files;
 
-    /**
-     * Gets the unique identifier for the theme component.
-     *
-     * @return string component slug
-     */
-    public function get_slug(): string
-    {
-        return 'styles';
-    }
+	/**
+	 * Associative array of Google Fonts to load, as $font_name => $font_variants pairs.
+	 *
+	 * Do not access this property directly, instead use the `get_google_fonts()` method.
+	 *
+	 * @var array
+	 */
+	protected $google_fonts;
 
-    /**
-     * Adds the action and filter hooks to integrate with WordPress.
-     */
-    public function initialize()
-    {
-        add_action('wp_enqueue_scripts', [$this, 'action_enqueue_styles']);
-        add_action('wp_head', [$this, 'action_preload_styles']);
-        add_action('after_setup_theme', [$this, 'action_add_editor_styles']);
-        add_filter('wp_resource_hints', [$this, 'filter_resource_hints'], 10, 2);
-    }
+	/**
+	 * Gets the unique identifier for the theme component.
+	 *
+	 * @return string component slug
+	 */
+	public function get_slug(): string {
+		return 'styles';
+	}
 
-    /**
-     * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
-     *
-     * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-     *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-     *               adding support for further arguments in the future.
-     */
-    public function template_tags(): array
-    {
-        return [
-            'print_styles' => [$this, 'print_styles'],
-        ];
-    }
+	/**
+	 * Adds the action and filter hooks to integrate with WordPress.
+	 */
+	public function initialize() {
+		add_action( 'wp_enqueue_scripts', array( $this, 'action_enqueue_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'knowx_enqueue_admin_style' ) );
+		add_action( 'wp_head', array( $this, 'action_preload_styles' ) );
+		add_action( 'after_setup_theme', array( $this, 'action_add_editor_styles' ) );
+		add_filter( 'wp_resource_hints', array( $this, 'filter_resource_hints' ), 10, 2 );
+	}
 
-    /**
-     * Registers or enqueues stylesheets.
-     *
-     * Stylesheets that are global are enqueued. All other stylesheets are only registered, to be enqueued later.
-     */
-    public function action_enqueue_styles()
-    {
-        // Enqueue Google Fonts.
-        $google_fonts_url = $this->get_google_fonts_url();
-        if (!empty($google_fonts_url)) {
-            wp_enqueue_style('knowx-fonts', $google_fonts_url, [], null); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
-        }
+	/**
+	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
+	 *
+	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
+	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *               adding support for further arguments in the future.
+	 */
+	public function template_tags(): array {
+		return array(
+			'print_styles' => array( $this, 'print_styles' ),
+		);
+	}
 
-        $css_uri = get_theme_file_uri('/assets/css/');
-        $css_dir = get_theme_file_path('/assets/css/');
+	/**
+	 * Registers or enqueues stylesheets.
+	 *
+	 * Stylesheets that are global are enqueued. All other stylesheets are only registered, to be enqueued later.
+	 */
+	public function action_enqueue_styles() {
+		// Enqueue Google Fonts.
+		$google_fonts_url = $this->get_google_fonts_url();
+		if ( ! empty( $google_fonts_url ) ) {
+			if ( get_theme_mod( 'site_load_google_font_locally' ) && ! is_customize_preview() && ! is_admin() ) {
+				if ( get_theme_mod( 'site_preload_local_font' ) ) {
+					knowx_load_preload_local_fonts( $google_fonts_url );
+				}
+				wp_enqueue_style( 'knowx-fonts', knowx_get_webfont_url( $google_fonts_url ), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+			} else {
+				wp_enqueue_style( 'knowx-fonts', $google_fonts_url, array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
+			}
+		}
 
-        $preloading_styles_enabled = $this->preloading_styles_enabled();
+		$css_uri = get_theme_file_uri( '/assets/css/' );
+		$css_dir = get_theme_file_path( '/assets/css/' );
 
-        $css_files = $this->get_css_files();
-        foreach ($css_files as $handle => $data) {
-            $src = $css_uri.$data['file'];
-            $version = knowx()->get_asset_version($css_dir.$data['file']);
+		$preloading_styles_enabled = $this->preloading_styles_enabled();
 
-            /*
-             * Enqueue global stylesheets immediately and register the other ones for later use
-             * (unless preloading stylesheets is disabled, in which case stylesheets should be immediately
-             * enqueued based on whether they are necessary for the page content).
-             */
-            if ($data['global'] || !$preloading_styles_enabled && is_callable($data['preload_callback']) && call_user_func($data['preload_callback'])) {
-                wp_enqueue_style($handle, $src, [], $version, $data['media']);
-            } else {
-                wp_register_style($handle, $src, [], $version, $data['media']);
-            }
+		$css_files = $this->get_css_files();
+		foreach ( $css_files as $handle => $data ) {
+			$src     = $css_uri . $data['file'];
+			$version = knowx()->get_asset_version( $css_dir . $data['file'] );
 
-            wp_style_add_data($handle, 'precache', true);
-        }
+			/*
+			 * Enqueue global stylesheets immediately and register the other ones for later use
+			 * (unless preloading stylesheets is disabled, in which case stylesheets should be immediately
+			 * enqueued based on whether they are necessary for the page content).
+			 */
+			if ( $data['global'] || ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) ) {
+				wp_enqueue_style( $handle, $src, array(), $version, $data['media'] );
+			} else {
+				wp_register_style( $handle, $src, array(), $version, $data['media'] );
+			}
 
-        // Enqueue bbPress CSS
-        if (function_exists('is_bbpress') ) {
-            wp_enqueue_style('knowx-bbpress', $css_uri . 'bbpress.min.css');
-        }
+			wp_style_add_data( $handle, 'precache', true );
+		}
 
-        // Enqueue RTL CSS
-        if ( is_rtl() ) {
-            wp_enqueue_style('knowx-rtl', $css_uri . 'rtl.min.css');
-        }
+		// Enqueue bbPress CSS.
+		if ( function_exists( 'is_bbpress' ) ) {
+			wp_enqueue_style( 'knowx-bbpress', $css_uri . 'bbpress.min.css' );
+		}
 
-        // Enqueue AMP CSS
-        if ( knowx()->is_amp() ) {
-            wp_enqueue_style('knowx-amp', $css_uri . 'knowx-amp.min.css');
-        }
-    }
+		// Enqueue RTL CSS.
+		if ( is_rtl() ) {
+			wp_enqueue_style( 'knowx-rtl', $css_uri . 'rtl.min.css' );
+		}
 
-    /**
-     * Preloads in-body stylesheets depending on what templates are being used.
-     *
-     * Only stylesheets that have a 'preload_callback' provided will be considered. If that callback evaluates to true
-     * for the current request, the stylesheet will be preloaded.
-     *
-     * Preloading is disabled when AMP is active, as AMP injects the stylesheets inline.
-     *
-     * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
-     */
-    public function action_preload_styles()
-    {
-        // If preloading styles is disabled, return early.
-        if (!$this->preloading_styles_enabled()) {
-            return;
-        }
+		// Enqueue AMP CSS.
+		if ( knowx()->is_amp() ) {
+			wp_enqueue_style( 'knowx-amp', $css_uri . 'knowx-amp.min.css' );
+		}
+	}
 
-        $wp_styles = wp_styles();
+	/**
+	 * Register and enqueue a custom stylesheet in the WordPress admin.
+	 */
+	public function knowx_enqueue_admin_style( $hook ) {
+		// Admin CSS.
+		$css_uri = get_theme_file_uri( '/assets/css/' );
+		wp_enqueue_style( 'knowx-admin', $css_uri . '/admin.min.css' );
 
-        $css_files = $this->get_css_files();
-        foreach ($css_files as $handle => $data) {
-            // Skip if stylesheet not registered.
-            if (!isset($wp_styles->registered[$handle])) {
-                continue;
-            }
+		// Customizer JS.
+		global $pagenow;
 
-            // Skip if no preload callback provided.
-            if (!is_callable($data['preload_callback'])) {
-                continue;
-            }
+		if ( $pagenow === 'customize.php' ) {
+			wp_enqueue_script( 'knowx-customizer-script', get_theme_file_uri( '/assets/js/knowx-customizer.min.js' ), '', '', true );
+		}
+	}
 
-            // Skip if preloading is not necessary for this request.
-            if (!call_user_func($data['preload_callback'])) {
-                continue;
-            }
+	/**
+	 * Preloads in-body stylesheets depending on what templates are being used.
+	 *
+	 * Only stylesheets that have a 'preload_callback' provided will be considered. If that callback evaluates to true
+	 * for the current request, the stylesheet will be preloaded.
+	 *
+	 * Preloading is disabled when AMP is active, as AMP injects the stylesheets inline.
+	 *
+	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
+	 */
+	public function action_preload_styles() {
+		// If preloading styles is disabled, return early.
+		if ( ! $this->preloading_styles_enabled() ) {
+			return;
+		}
 
-            $preload_uri = $wp_styles->registered[$handle]->src.'?ver='.$wp_styles->registered[$handle]->ver;
+		$wp_styles = wp_styles();
 
-            echo '<link rel="preload" id="'.esc_attr($handle).'-preload" href="'.esc_url($preload_uri).'" as="style">';
-            echo "\n";
-        }
-    }
+		$css_files = $this->get_css_files();
+		foreach ( $css_files as $handle => $data ) {
+			// Skip if stylesheet not registered.
+			if ( ! isset( $wp_styles->registered[ $handle ] ) ) {
+				continue;
+			}
 
-    /**
-     * Enqueues WordPress theme styles for the editor.
-     */
-    public function action_add_editor_styles()
-    {
-        // Enqueue Google Fonts.
-        $google_fonts_url = $this->get_google_fonts_url();
-        if (!empty($google_fonts_url)) {
-            add_editor_style($this->get_google_fonts_url());
-        }
+			// Skip if no preload callback provided.
+			if ( ! is_callable( $data['preload_callback'] ) ) {
+				continue;
+			}
 
-        // Enqueue block editor stylesheet.
-        add_editor_style('assets/css/editor/editor-styles.min.css');
-    }
+			// Skip if preloading is not necessary for this request.
+			if ( ! call_user_func( $data['preload_callback'] ) ) {
+				continue;
+			}
 
-    /**
-     * Adds preconnect resource hint for Google Fonts.
-     *
-     * @param array  $urls          URLs to print for resource hints
-     * @param string $relation_type the relation type the URLs are printed
-     *
-     * @return array URLs to print for resource hints
-     */
-    public function filter_resource_hints(array $urls, string $relation_type): array
-    {
-        if ('preconnect' === $relation_type && wp_style_is('knowx-fonts', 'queue')) {
-            $urls[] = [
-                'href' => 'https://fonts.gstatic.com',
-                'crossorigin',
-            ];
-        }
+			$preload_uri = $wp_styles->registered[ $handle ]->src . '?ver=' . $wp_styles->registered[ $handle ]->ver;
 
-        return $urls;
-    }
+			echo '<link rel="preload" id="' . esc_attr( $handle ) . '-preload" href="' . esc_url( $preload_uri ) . '" as="style">';
+			echo "\n";
+		}
+	}
 
-    /**
-     * Prints stylesheet link tags directly.
-     *
-     * This should be used for stylesheets that aren't global and thus should only be loaded if the HTML markup
-     * they are responsible for is actually present. Template parts should use this method when the related markup
-     * requires a specific stylesheet to be loaded. If preloading stylesheets is disabled, this method will not do
-     * anything.
-     *
-     * If the `<link>` tag for a given stylesheet has already been printed, it will be skipped.
-     *
-     * @param string ...$handles One or more stylesheet handles.
-     */
-    public function print_styles(string ...$handles)
-    {
-        // If preloading styles is disabled (and thus they have already been enqueued), return early.
-        if (!$this->preloading_styles_enabled()) {
-            return;
-        }
+	/**
+	 * Enqueues WordPress theme styles for the editor.
+	 */
+	public function action_add_editor_styles() {
+		// Enqueue Google Fonts.
+		$google_fonts_url = $this->get_google_fonts_url();
+		if ( ! empty( $google_fonts_url ) ) {
+			add_editor_style( $this->get_google_fonts_url() );
+		}
 
-        $css_files = $this->get_css_files();
-        $handles = array_filter(
-            $handles,
-            function ($handle) use ($css_files) {
-                $is_valid = isset($css_files[$handle]) && !$css_files[$handle]['global'];
-                if (!$is_valid) {
-                    /* translators: %s: stylesheet handle */
-                    _doing_it_wrong(__CLASS__.'::print_styles()', esc_html(sprintf(__('Invalid theme stylesheet handle: %s', 'knowx'), $handle)), 'KnowX 2.0.0');
-                }
+		// Enqueue block editor stylesheet.
+		add_editor_style( 'assets/css/editor/editor-styles.min.css' );
+	}
 
-                return $is_valid;
-            }
-        );
+	/**
+	 * Adds preconnect resource hint for Google Fonts.
+	 *
+	 * @param array  $urls          URLs to print for resource hints
+	 * @param string $relation_type the relation type the URLs are printed
+	 *
+	 * @return array URLs to print for resource hints
+	 */
+	public function filter_resource_hints( array $urls, string $relation_type ): array {
+		if ( 'preconnect' === $relation_type && wp_style_is( 'knowx-fonts', 'queue' ) ) {
+			$urls[] = array(
+				'href' => 'https://fonts.gstatic.com',
+				'crossorigin',
+			);
+		}
 
-        if (empty($handles)) {
-            return;
-        }
+		return $urls;
+	}
 
-        wp_print_styles($handles);
-    }
+	/**
+	 * Prints stylesheet link tags directly.
+	 *
+	 * This should be used for stylesheets that aren't global and thus should only be loaded if the HTML markup
+	 * they are responsible for is actually present. Template parts should use this method when the related markup
+	 * requires a specific stylesheet to be loaded. If preloading stylesheets is disabled, this method will not do
+	 * anything.
+	 *
+	 * If the `<link>` tag for a given stylesheet has already been printed, it will be skipped.
+	 *
+	 * @param string ...$handles One or more stylesheet handles.
+	 */
+	public function print_styles( string ...$handles ) {
+		// If preloading styles is disabled (and thus they have already been enqueued), return early.
+		if ( ! $this->preloading_styles_enabled() ) {
+			return;
+		}
 
-    /**
-     * Determines whether to preload stylesheets and inject their link tags directly within the page content.
-     *
-     * Using this technique generally improves performance, however may not be preferred under certain circumstances.
-     * For example, since AMP will include all style rules directly in the head, it must not be used in that context.
-     * By default, this method returns true unless the page is being served in AMP. The
-     * {@see 'knowx_preloading_styles_enabled'} filter can be used to tweak the return value.
-     *
-     * @return bool true if preloading stylesheets and injecting them is enabled, false otherwise
-     */
-    protected function preloading_styles_enabled()
-    {
-        $preloading_styles_enabled = !knowx()->is_amp();
+		$css_files = $this->get_css_files();
+		$handles   = array_filter(
+			$handles,
+			function ( $handle ) use ( $css_files ) {
+				$is_valid = isset( $css_files[ $handle ] ) && ! $css_files[ $handle ]['global'];
+				if ( ! $is_valid ) {
+					/* translators: %s: stylesheet handle */
+					_doing_it_wrong( __CLASS__ . '::print_styles()', esc_html( sprintf( __( 'Invalid theme stylesheet handle: %s', 'knowx' ), $handle ) ), 'KnowX 2.0.0' );
+				}
 
-        /*
-         * Filters whether to preload stylesheets and inject their link tags within the page content.
-         *
-         * @param bool $preloading_styles_enabled Whether preloading stylesheets and injecting them is enabled.
-         */
-        return apply_filters('knowx_preloading_styles_enabled', $preloading_styles_enabled);
-    }
+				return $is_valid;
+			}
+		);
 
-    /**
-     * Gets all CSS files.
-     *
-     * @return array associative array of $handle => $data pairs
-     */
-    protected function get_css_files(): array
-    {
-        if (is_array($this->css_files)) {
-            return $this->css_files;
-        }
+		if ( empty( $handles ) ) {
+			return;
+		}
 
-        $css_files = [
-            'knowx-global' => [
-                'file' => 'global.min.css',
-                'global' => true,
-            ],
-            'knowx-comments' => [
-                'file' => 'comments.min.css',
-                'preload_callback' => function () {
-                    return !post_password_required() && is_singular() && (comments_open() || get_comments_number());
-                },
-            ],
-            'knowx-content' => [
-                'file' => 'content.min.css',
-                'preload_callback' => '__return_true',
-            ],
-            'knowx-sidebar' => [
-                'file' => 'sidebar.min.css',
-            ],
-            'knowx-widgets' => [
-                'file' => 'widgets.min.css',
-            ],
-            'knowx-front-page' => [
-                'file' => 'front-page.min.css',
-                'preload_callback' => function () {
-                    global $template;
+		wp_print_styles( $handles );
+	}
 
-                    return 'front-page.php' === basename($template);
-                },
-            ],
-            'knowx-site-loader' => [
-                'file' => 'loaders.min.css',
-                'global' => true,
-            ],
-            'knowx-load-fontawesome' => [
-                'file' => 'fontawesome.min.css',
-                'global' => true,
-            ],
-        ];
+	/**
+	 * Determines whether to preload stylesheets and inject their link tags directly within the page content.
+	 *
+	 * Using this technique generally improves performance, however may not be preferred under certain circumstances.
+	 * For example, since AMP will include all style rules directly in the head, it must not be used in that context.
+	 * By default, this method returns true unless the page is being served in AMP. The
+	 * {@see 'knowx_preloading_styles_enabled'} filter can be used to tweak the return value.
+	 *
+	 * @return bool true if preloading stylesheets and injecting them is enabled, false otherwise
+	 */
+	protected function preloading_styles_enabled() {
+		$preloading_styles_enabled = ! knowx()->is_amp();
 
-        /**
-         * Filters default CSS files.
-         *
-         * @param array $css_files Associative array of CSS files, as $handle => $data pairs.
-         *                         $data must be an array with keys 'file' (file path relative to 'assets/css'
-         *                         directory), and optionally 'global' (whether the file should immediately be
-         *                         enqueued instead of just being registered) and 'preload_callback' (callback)
-         *                         function determining whether the file should be preloaded for the current request).
-         */
-        $css_files = apply_filters('knowx_css_files', $css_files);
+		/*
+		 * Filters whether to preload stylesheets and inject their link tags within the page content.
+		 *
+		 * @param bool $preloading_styles_enabled Whether preloading stylesheets and injecting them is enabled.
+		 */
+		return apply_filters( 'knowx_preloading_styles_enabled', $preloading_styles_enabled );
+	}
 
-        $this->css_files = [];
-        foreach ($css_files as $handle => $data) {
-            if (is_string($data)) {
-                $data = ['file' => $data];
-            }
+	/**
+	 * Gets all CSS files.
+	 *
+	 * @return array associative array of $handle => $data pairs
+	 */
+	protected function get_css_files(): array {
+		if ( is_array( $this->css_files ) ) {
+			return $this->css_files;
+		}
 
-            if (empty($data['file'])) {
-                continue;
-            }
+		$css_files = array(
+			'knowx-global'           => array(
+				'file'   => 'global.min.css',
+				'global' => true,
+			),
+			'knowx-comments'         => array(
+				'file'             => 'comments.min.css',
+				'preload_callback' => function () {
+					return ! post_password_required() && is_singular() && ( comments_open() || get_comments_number() );
+				},
+			),
+			'knowx-content'          => array(
+				'file'             => 'content.min.css',
+				'preload_callback' => '__return_true',
+			),
+			'knowx-sidebar'          => array(
+				'file' => 'sidebar.min.css',
+			),
+			'knowx-widgets'          => array(
+				'file' => 'widgets.min.css',
+			),
+			'knowx-front-page'       => array(
+				'file'             => 'front-page.min.css',
+				'preload_callback' => function () {
+					global $template;
 
-            $this->css_files[$handle] = array_merge(
-                [
-                    'global' => false,
-                    'preload_callback' => null,
-                    'media' => 'all',
-                ],
-                $data
-            );
-        }
+					return 'front-page.php' === basename( $template );
+				},
+			),
+			'knowx-site-loader'      => array(
+				'file'   => 'loaders.min.css',
+				'global' => true,
+			),
+			'knowx-load-fontawesome' => array(
+				'file'   => 'fontawesome.min.css',
+				'global' => true,
+			),
+		);
 
-        return $this->css_files;
-    }
+		/**
+		 * Filters default CSS files.
+		 *
+		 * @param array $css_files Associative array of CSS files, as $handle => $data pairs.
+		 *                         $data must be an array with keys 'file' (file path relative to 'assets/css'
+		 *                         directory), and optionally 'global' (whether the file should immediately be
+		 *                         enqueued instead of just being registered) and 'preload_callback' (callback)
+		 *                         function determining whether the file should be preloaded for the current request).
+		 */
+		$css_files = apply_filters( 'knowx_css_files', $css_files );
 
-    /**
-     * Returns Google Fonts used in theme.
-     *
-     * @return array associative array of $font_name => $font_variants pairs
-     */
-    protected function get_google_fonts(): array
-    {
-        if (is_array($this->google_fonts)) {
-            return $this->google_fonts;
-        }
+		$this->css_files = array();
+		foreach ( $css_files as $handle => $data ) {
+			if ( is_string( $data ) ) {
+				$data = array( 'file' => $data );
+			}
 
-        $google_fonts = [
-            'Open Sans' => ['300', '300i', '400', '400i', '700', '700i', '900&display=swap'],
-        ];
+			if ( empty( $data['file'] ) ) {
+				continue;
+			}
 
-        /*
-         * Filters default Google Fonts.
-         *
-         * @param array $google_fonts Associative array of $font_name => $font_variants pairs.
-         */
-        $this->google_fonts = (array) apply_filters('knowx_google_fonts', $google_fonts);
+			$this->css_files[ $handle ] = array_merge(
+				array(
+					'global'           => false,
+					'preload_callback' => null,
+					'media'            => 'all',
+				),
+				$data
+			);
+		}
 
-        return $this->google_fonts;
-    }
+		return $this->css_files;
+	}
 
-    /**
-     * Returns the Google Fonts URL to use for enqueuing Google Fonts CSS.
-     *
-     * Uses `latin` subset by default. To use other subsets, add a `subset` key to $query_args and the desired value.
-     *
-     * @return string google Fonts URL, or empty string if no Google Fonts should be used
-     */
-    protected function get_google_fonts_url(): string
-    {
-        $google_fonts = $this->get_google_fonts();
+	/**
+	 * Returns Google Fonts used in theme.
+	 *
+	 * @return array associative array of $font_name => $font_variants pairs
+	 */
+	protected function get_google_fonts(): array {
+		if ( is_array( $this->google_fonts ) ) {
+			return $this->google_fonts;
+		}
 
-        if (empty($google_fonts)) {
-            return '';
-        }
+		$google_fonts = array(
+			'Open Sans' => array( '300', '300i', '400', '400i', '700', '700i', '900&display=swap' ),
+		);
 
-        $font_families = [];
+		/*
+		 * Filters default Google Fonts.
+		 *
+		 * @param array $google_fonts Associative array of $font_name => $font_variants pairs.
+		 */
+		$this->google_fonts = (array) apply_filters( 'knowx_google_fonts', $google_fonts );
 
-        foreach ($google_fonts as $font_name => $font_variants) {
-            if (!empty($font_variants)) {
-                if (!is_array($font_variants)) {
-                    $font_variants = explode(',', str_replace(' ', '', $font_variants));
-                }
+		return $this->google_fonts;
+	}
 
-                $font_families[] = $font_name.':'.implode(',', $font_variants);
-                continue;
-            }
+	/**
+	 * Returns the Google Fonts URL to use for enqueuing Google Fonts CSS.
+	 *
+	 * Uses `latin` subset by default. To use other subsets, add a `subset` key to $query_args and the desired value.
+	 *
+	 * @return string google Fonts URL, or empty string if no Google Fonts should be used
+	 */
+	protected function get_google_fonts_url(): string {
+		$google_fonts = $this->get_google_fonts();
 
-            $font_families[] = $font_name;
-        }
+		if ( empty( $google_fonts ) ) {
+			return '';
+		}
 
-        $query_args = [
-            'family' => implode('|', $font_families),
-            'display' => 'swap',
-        ];
+		$font_families = array();
 
-        return add_query_arg($query_args, 'https://fonts.googleapis.com/css');
-    }
+		foreach ( $google_fonts as $font_name => $font_variants ) {
+			if ( ! empty( $font_variants ) ) {
+				if ( ! is_array( $font_variants ) ) {
+					$font_variants = explode( ',', str_replace( ' ', '', $font_variants ) );
+				}
+
+				$font_families[] = $font_name . ':' . implode( ',', $font_variants );
+				continue;
+			}
+
+			$font_families[] = $font_name;
+		}
+
+		$query_args = array(
+			'family'  => implode( '|', $font_families ),
+			'display' => 'swap',
+		);
+
+		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
+	}
 }

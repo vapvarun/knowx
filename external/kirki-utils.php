@@ -9,10 +9,13 @@ function knowx_defaults( $key = '' ) {
 	// site loader
 	$defaults['site-loader'] = '2';
 
+	// site sticky header
+	$defaults['site-sticky-header'] = '1';
+
 	// site sub header
 	$defaults['site-sub-header'] = '1';
 
-		// site search
+	// site search
 	$defaults['site-search'] = '1';
 
 	// site breadcrumbs

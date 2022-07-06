@@ -152,7 +152,6 @@ class Theme {
 			new Post_Thumbnails\Component(),
 			new Customizer\Component(),
 			new Styles\Component(),
-			new Kirki\Component(),
 			new Kirki_Option\Component(),
 			new Custom_Js\Component(),
 		);

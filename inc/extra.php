@@ -272,3 +272,17 @@ function custom_bbp_no_breadcrumb( $param ) {
 	return true;
 }
 add_filter( 'bbp_no_breadcrumb', 'custom_bbp_no_breadcrumb' );
+
+/**
+ *
+ * CSS Compress
+ *
+ */
+if ( ! function_exists( 'knowx_css_compress' ) ) {
+	function knowx_css_compress( $css ) {
+		$css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
+		$css = str_replace( ': ', ':', $css );
+		$css = str_replace( array( "\r\n", "\r", "\n", "\t", '  ', '    ', '    ' ), '', $css );
+		return $css;
+	}
+}

@@ -22,7 +22,7 @@
     // Header Class
     KNOWX.headerClass = function() {
         var $document = $(document),
-            $elementHeader = $('body, .site-header-wrapper'),
+            $elementHeader = $('body.sticky-header, .sticky-header .site-header-wrapper'),
             className = 'has-sticky-header';
 
         $document.scroll(function() {
@@ -34,7 +34,7 @@
     KNOWX.headerScroll = function() {
         var header_height = $('.site-header-wrapper').height();
 
-        if ($('body').hasClass('has-sticky-header')) {
+        if ($('body.sticky-header').hasClass('has-sticky-header')) {
             $('.site').css("paddingTop", header_height + 10 + "px");
         } else {
             $('.site').css("paddingTop", 0 + "px");
@@ -194,7 +194,11 @@
     KNOWX.stickySidebar = function() {
 
         var headerHeight = $('.site-header-wrapper').height();
-        var headerHeightExt = headerHeight + 54;
+        if ($('body').hasClass('sticky-header')) {
+            var headerHeightExt = headerHeight + 54;
+        } else {
+            var headerHeightExt = headerHeight;
+        }
         $('.sticky-sidebar-enable .sticky-sidebar').stick_in_parent({
             offset_top: headerHeightExt,
             recalc_every: 1,

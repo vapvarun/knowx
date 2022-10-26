@@ -235,6 +235,26 @@ class Component implements Component_Interface {
 			)
 		);
 
+		// WP Login.
+		$wp_customize->add_panel(
+			'site_wp_login',
+			array(
+				'title'       => esc_html__( 'WP Login', 'knowx' ),
+				'priority'    => 11,
+				'description' => '',
+			)
+		);
+
+		$wp_customize->add_section(
+			'site_wp_login_logo',
+			array(
+				'title'       => esc_html__( 'Logo', 'knowx' ),
+				'priority'    => 10,
+				'description' => '',
+				'panel'       => 'site_wp_login',
+			)
+		);
+
 		// Site Footer.
 		$wp_customize->add_panel(
 			'site_footer_panel',
@@ -1388,6 +1408,193 @@ class Component implements Component_Interface {
 			'choices'  => array(
 				'date' => esc_html__( 'By date', 'knowx' ),
 				'name' => esc_html__( 'By name', 'knowx' ),
+			),
+		);
+
+		/*
+		 *  WP Login
+		 */
+		$fields[] = array(
+			'type'     => 'switch',
+			'settings' => 'enable_custom_login',
+			'label'    => esc_html__( 'Customize Your Logo Section', 'knowx' ),
+			'section'  => 'site_wp_login_logo',
+			'default'  => '',
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'switch',
+			'settings'        => 'enable_custom_login_logo',
+			'label'           => esc_html__( 'Disable Logo?', 'knowx' ),
+			'section'         => 'site_wp_login_logo',
+			'default'         => '',
+			'choices'         => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+			'active_callback' => array(
+				array(
+					'setting'  => 'enable_custom_login',
+					'operator' => '==',
+					'value'    => true,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'image',
+			'settings'        => 'custom_login_logo_image',
+			'label'           => esc_attr__( 'Custom Logo', 'knowx' ),
+			'section'         => 'site_wp_login_logo',
+			'priority'        => 10,
+			'default'         => '',
+			'transport'       => 'postMessage',
+			'active_callback' => array(
+				array(
+					'setting'  => 'enable_custom_login',
+					'operator' => '==',
+					'value'    => true,
+				),
+				array(
+					'setting'  => 'enable_custom_login_logo',
+					'operator' => '==',
+					'value'    => false,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'dimension',
+			'settings'        => 'custom_login_logo_image_width',
+			'label'           => esc_attr__( 'Logo Width', 'knowx' ),
+			'description'     => esc_html__( 'Select the logo width (px)', 'knowx' ),
+			'section'         => 'site_wp_login_logo',
+			'priority'        => 10,
+			'default'         => '84px',
+			'transport'       => 'postMessage',
+			'active_callback' => array(
+				array(
+					'setting'  => 'enable_custom_login',
+					'operator' => '==',
+					'value'    => true,
+				),
+				array(
+					'setting'  => 'enable_custom_login_logo',
+					'operator' => '==',
+					'value'    => false,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'dimension',
+			'settings'        => 'custom_login_logo_image_height',
+			'label'           => esc_attr__( 'Logo Height', 'knowx' ),
+			'description'     => esc_html__( 'Select the logo height (px)', 'knowx' ),
+			'section'         => 'site_wp_login_logo',
+			'priority'        => 10,
+			'default'         => '84px',
+			'transport'       => 'postMessage',
+			'active_callback' => array(
+				array(
+					'setting'  => 'enable_custom_login',
+					'operator' => '==',
+					'value'    => true,
+				),
+				array(
+					'setting'  => 'enable_custom_login_logo',
+					'operator' => '==',
+					'value'    => false,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'dimension',
+			'settings'        => 'custom_login_logo_space',
+			'label'           => esc_attr__( 'Logo Space Bottom', 'knowx' ),
+			'description'     => esc_html__( 'Select the logo bottom spacing (px)', 'knowx' ),
+			'section'         => 'site_wp_login_logo',
+			'priority'        => 10,
+			'default'         => '0px',
+			'transport'       => 'postMessage',
+			'active_callback' => array(
+				array(
+					'setting'  => 'enable_custom_login',
+					'operator' => '==',
+					'value'    => true,
+				),
+				array(
+					'setting'  => 'enable_custom_login_logo',
+					'operator' => '==',
+					'value'    => false,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'url',
+			'settings'        => 'custom_login_logo_url',
+			'label'           => esc_attr__( 'Logo URL', 'knowx' ),
+			'section'         => 'site_wp_login_logo',
+			'priority'        => 10,
+			'default'         => '',
+			'transport'       => 'postMessage',
+			'active_callback' => array(
+				array(
+					'setting'  => 'enable_custom_login',
+					'operator' => '==',
+					'value'    => true,
+				),
+				array(
+					'setting'  => 'enable_custom_login_logo',
+					'operator' => '==',
+					'value'    => false,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'text',
+			'settings'        => 'custom_login_logo_title',
+			'label'           => esc_attr__( 'Logo Title', 'knowx' ),
+			'section'         => 'site_wp_login_logo',
+			'priority'        => 10,
+			'default'         => '',
+			'transport'       => 'postMessage',
+			'active_callback' => array(
+				array(
+					'setting'  => 'enable_custom_login',
+					'operator' => '==',
+					'value'    => true,
+				),
+				array(
+					'setting'  => 'enable_custom_login_logo',
+					'operator' => '==',
+					'value'    => false,
+				),
+			),
+		);
+
+		$fields[] = array(
+			'type'            => 'text',
+			'settings'        => 'custom_login_page_title',
+			'label'           => esc_attr__( 'Login Page Title', 'knowx' ),
+			'description'     => esc_attr__( 'Login page title that is shown on WordPress login page.', 'knowx' ),
+			'section'         => 'site_wp_login_logo',
+			'priority'        => 10,
+			'default'         => '',
+			'transport'       => 'postMessage',
+			'active_callback' => array(
+				array(
+					'setting'  => 'enable_custom_login',
+					'operator' => '==',
+					'value'    => true,
+				),
 			),
 		);
 

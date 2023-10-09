@@ -124,7 +124,7 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 							<?php
 						}
 					}
-							wp_reset_postdata();
+					wp_reset_postdata();
 					?>
 					</div>
 				</div>

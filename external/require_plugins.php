@@ -60,7 +60,7 @@ function knowx_register_required_plugins() {
 	 */
 	$plugins = array(
 
-		// Kirki Toolkit
+		// Kirki Toolkit.
 		array(
 			'name'     => 'Kirki Toolkit',
 			'knowx',
@@ -68,7 +68,7 @@ function knowx_register_required_plugins() {
 			'required' => false,
 		),
 
-		// Collapsing Categories
+		// Collapsing Categories.
 		array(
 			'name'     => 'Collapsing Categories',
 			'knowx',
@@ -76,7 +76,7 @@ function knowx_register_required_plugins() {
 			'required' => false,
 		),
 
-		// WordPress Popular Posts
+		// WordPress Popular Posts.
 		array(
 			'name'     => 'WordPress Popular Posts',
 			'knowx',

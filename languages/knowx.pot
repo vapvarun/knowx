@@ -31,7 +31,7 @@ msgstr ""
 msgid "Comments are disabled."
 msgstr ""
 
-#: ../knowx/footer.php:25
+#: ../knowx/footer.php:26
 msgid "Footer"
 msgstr ""
 
@@ -51,27 +51,27 @@ msgstr ""
 msgid "Knowledge Base Layout One"
 msgstr ""
 
-#: ../knowx/page-knowledgebase-one.php:91
+#: ../knowx/page-knowledgebase-one.php:95
 msgid "Popular Articles"
 msgstr ""
 
-#: ../knowx/page-knowledgebase-one.php:99
+#: ../knowx/page-knowledgebase-one.php:106
 msgid "No data found."
 msgstr ""
 
-#: ../knowx/page-knowledgebase-one.php:106
+#: ../knowx/page-knowledgebase-one.php:114
 msgid "Recent Articles"
 msgstr ""
 
-#: ../knowx/page-knowledgebase-one.php:130
+#: ../knowx/page-knowledgebase-one.php:142
 msgid "Can't find what you're looking for?"
 msgstr ""
 
-#: ../knowx/page-knowledgebase-one.php:137
+#: ../knowx/page-knowledgebase-one.php:149
 msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor."
 msgstr ""
 
-#: ../knowx/page-knowledgebase-one.php:146
+#: ../knowx/page-knowledgebase-one.php:158
 msgid "Contact Support"
 msgstr ""
 
@@ -568,35 +568,35 @@ msgctxt "weekly archives date format"
 msgid "W"
 msgstr ""
 
-#: ../knowx/inc/extra.php:179
+#: ../knowx/inc/extra.php:187
 msgid "Sticky"
 msgstr ""
 
-#: ../knowx/inc/extra.php:190
+#: ../knowx/inc/extra.php:198
 msgid "Leave a comment"
 msgstr ""
 
-#: ../knowx/inc/extra.php:190
+#: ../knowx/inc/extra.php:198
 msgid "1 Comment"
 msgstr ""
 
-#: ../knowx/inc/extra.php:190
+#: ../knowx/inc/extra.php:198
 msgid "% Comments"
 msgstr ""
 
-#: ../knowx/inc/extra.php:195
+#: ../knowx/inc/extra.php:203
 msgid "Edit"
 msgstr ""
 
-#: ../knowx/inc/extra.php:220
+#: ../knowx/inc/extra.php:227
 msgid "Setting for the Knowledge Base page template. This field will override the one in Customizer."
 msgstr ""
 
-#: ../knowx/inc/extra.php:221, ../knowx/inc/Kirki_Option/Component.php:1281, ../knowx/inc/Kirki_Option/Component.php:1452
+#: ../knowx/inc/extra.php:228, ../knowx/inc/Kirki_Option/Component.php:1281, ../knowx/inc/Kirki_Option/Component.php:1452
 msgid "Exclude category by ID"
 msgstr ""
 
-#: ../knowx/inc/extra.php:223, ../knowx/inc/Kirki_Option/Component.php:1282, ../knowx/inc/Kirki_Option/Component.php:1453
+#: ../knowx/inc/extra.php:230, ../knowx/inc/Kirki_Option/Component.php:1282, ../knowx/inc/Kirki_Option/Component.php:1453
 msgid "Use a comma to separate multiple categories."
 msgstr ""
 
@@ -642,11 +642,11 @@ msgstr ""
 msgid "Pages:"
 msgstr ""
 
-#: ../knowx/inc/Accessibility/Component.php:72
+#: ../knowx/inc/Accessibility/Component.php:69
 msgid "Expand child menu"
 msgstr ""
 
-#: ../knowx/inc/Accessibility/Component.php:73
+#: ../knowx/inc/Accessibility/Component.php:70
 msgid "Collapse child menu"
 msgstr ""
 

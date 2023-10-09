@@ -33,7 +33,7 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_filter( 'kirki/config', array( $this, 'configure_kirki' ) );		
+		add_filter( 'kirki/config', array( $this, 'configure_kirki' ) );
 		// TODO: Implement initialize() method.
 	}
 
@@ -45,8 +45,8 @@ class Component implements Component_Interface {
 			Kirki::add_config(
 				'knowx_kirki',
 				array(
-					'capability'    => 'edit_theme_options',
-					'option_type'   => 'theme_mod',
+					'capability'  => 'edit_theme_options',
+					'option_type' => 'theme_mod',
 				)
 			);
 		}

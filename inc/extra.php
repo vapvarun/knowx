@@ -2,7 +2,8 @@
 
 // Content wrapper
 if ( ! function_exists( 'knowx_content_top' ) ) {
-	function knowx_content_top() { ?>
+	function knowx_content_top() {
+		?>
 		<div class="site-wrapper">
 		<?php
 	}
@@ -12,6 +13,7 @@ add_action( 'knowx_before_content', 'knowx_content_top' );
 
 if ( ! function_exists( 'knowx_content_bottom' ) ) {
 	function knowx_content_bottom() {
+
 		?>
 		</div>
 		<?php
@@ -127,7 +129,7 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 			$theme_author = apply_filters(
 				'knowx_theme_author',
 				array(
-					'theme_name'       => esc_html__( 'Knowx WordPress Theme', 'knowx' ),
+					'theme_name'       => esc_html( 'KnowX WordPress Theme', 'knowx' ),
 					'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/knowx-theme/' ),
 				)
 			);
@@ -140,14 +142,13 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 			$theme_author = apply_filters(
 				'knowx_theme_author',
 				array(
-					'theme_name'       => esc_html__( 'Knowx WordPress Theme', 'knowx' ),
+					'theme_name'       => esc_html( 'KnowX WordPress Theme', 'knowx' ),
 					'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/knowx-theme/' ),
 				)
 			);
 			$output       = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $output );
 			return apply_filters( 'knowx_footer_copyright_text', $output );
 		}
-
 	}
 }
 
@@ -201,7 +202,9 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 
 		edit_post_link( esc_html__( 'Edit', 'knowx' ), '<span class="entry-edit-link">', '</span>' );
 	}
+
 }
+
 
 /**
  * Add Elementor Locations Support
@@ -210,7 +213,6 @@ if ( ! function_exists( 'knowx_register_elementor_locations' ) ) {
 	function knowx_register_elementor_locations( $elementor_theme_manager ) {
 
 		$elementor_theme_manager->register_all_core_location();
-
 	}
 	add_action( 'elementor/theme/register_locations', 'knowx_register_elementor_locations' );
 }
@@ -243,7 +245,7 @@ function knowx_save_meta( $post_id ) {
 		return;
 	}
 	if ( isset( $_POST['knowx-cats'] ) ) {
-		update_post_meta( $post_id, 'knowx-exclude-cats', sanitize_text_field( wp_unslash( $_POST['knowx-cats'] ) ) );
+		update_post_meta( $post_id, 'knowx-exclude-cats', sanitize_text_field( $_POST['knowx-cats'] ) );
 	}
 }
 add_action( 'save_post', 'knowx_save_meta' );
@@ -253,15 +255,15 @@ add_action( 'save_post', 'knowx_save_meta' );
  * Set post views count using post meta
  */
 function setPostViews( $postID ) {
-	$count_key = 'post_views_count';
-	$count     = get_post_meta( $postID, $count_key, true );
+	$countKey = 'post_views_count';
+	$count    = get_post_meta( $postID, $countKey, true );
 	if ( $count == '' ) {
 		$count = 0;
-		delete_post_meta( $postID, $count_key );
-		add_post_meta( $postID, $count_key, '0' );
+		delete_post_meta( $postID, $countKey );
+		add_post_meta( $postID, $countKey, '0' );
 	} else {
-		$count++;
-		update_post_meta( $postID, $count_key, $count );
+		++$count;
+		update_post_meta( $postID, $countKey, $count );
 	}
 }
 
@@ -272,17 +274,3 @@ function custom_bbp_no_breadcrumb( $param ) {
 	return true;
 }
 add_filter( 'bbp_no_breadcrumb', 'custom_bbp_no_breadcrumb' );
-
-/**
- *
- * CSS Compress
- *
- */
-if ( ! function_exists( 'knowx_css_compress' ) ) {
-	function knowx_css_compress( $css ) {
-		$css = preg_replace( '!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css );
-		$css = str_replace( ': ', ':', $css );
-		$css = str_replace( array( "\r\n", "\r", "\n", "\t", '  ', '    ', '    ' ), '', $css );
-		return $css;
-	}
-}

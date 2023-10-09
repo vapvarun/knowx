@@ -654,7 +654,7 @@ msgstr ""
 msgid "New comment(s)"
 msgstr ""
 
-#: ../knowx/inc/Customizer/Component.php:77
+#: ../knowx/inc/Customizer/Component.php:85
 msgid "Theme Options"
 msgstr ""
 

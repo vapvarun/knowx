@@ -35,6 +35,14 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_action( 'customize_register', array( $this, 'action_customize_register' ) );
 		add_action( 'customize_preview_init', array( $this, 'action_enqueue_customize_preview_js' ) );
+
+		add_action(
+			'customize_controls_enqueue_scripts',
+			function () {
+				$css_uri = get_theme_file_uri( '/assets/css/' );
+				wp_enqueue_style( 'knowx-customizer', $css_uri . 'knowx-customizer.min.css', '', time() );
+			}
+		);
 	}
 
 	/**

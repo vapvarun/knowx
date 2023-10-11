@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 6.0.3
+Tested up to: 6.3.1
 Requires PHP: 7.4
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -82,6 +82,11 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.7.0 =
+* Fix: Updated customizer options images
+* Fix: Managed plugin bulk selection installation and activation
+* Fix: Format theme files
+* Fix: Added kirki 5.0.0 support
 
 = 1.6.0 =
 * Fix : Added custom WP login form setting

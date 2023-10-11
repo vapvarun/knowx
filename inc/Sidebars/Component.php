@@ -12,7 +12,7 @@ use KnowX\KnowX\Templating_Component_Interface;
 use function add_action;
 use function add_filter;
 use function register_sidebar;
-//use function esc_html__;
+// use function esc_html__;
 use function is_active_sidebar;
 use function dynamic_sidebar;
 
@@ -27,9 +27,9 @@ use function dynamic_sidebar;
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
-	const LEFT_SIDEBAR_SLUG  = 'sidebar-left';
-	const RIGHT_SIDEBAR_SLUG = 'sidebar-right';
-	const BBPRESS_LEFT_SIDEBAR_SLUG = 'bbpress-sidebar-left';
+	const LEFT_SIDEBAR_SLUG          = 'sidebar-left';
+	const RIGHT_SIDEBAR_SLUG         = 'sidebar-right';
+	const BBPRESS_LEFT_SIDEBAR_SLUG  = 'bbpress-sidebar-left';
 	const BBPRESS_RIGHT_SIDEBAR_SLUG = 'bbpress-sidebar-right';
 
 	/**
@@ -37,7 +37,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @return string Component slug.
 	 */
-	public function get_slug() : string {
+	public function get_slug(): string {
 		return 'sidebars';
 	}
 
@@ -45,8 +45,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'widgets_init', [ $this, 'action_register_sidebars' ] );
-		add_filter( 'body_class', [ $this, 'filter_body_classes' ] );
+		add_action( 'widgets_init', array( $this, 'action_register_sidebars' ) );
+		add_filter( 'body_class', array( $this, 'filter_body_classes' ) );
 	}
 
 	/**
@@ -56,18 +56,18 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
-	public function template_tags() : array {
-		return [
-			'is_left_sidebar_active'  => [ $this, 'is_left_sidebar_active' ],
-			'display_left_sidebar'    => [ $this, 'display_left_sidebar' ],
-			'is_right_sidebar_active' => [ $this, 'is_right_sidebar_active' ],
-			'display_right_sidebar'   => [ $this, 'display_right_sidebar' ],
+	public function template_tags(): array {
+		return array(
+			'is_left_sidebar_active'          => array( $this, 'is_left_sidebar_active' ),
+			'display_left_sidebar'            => array( $this, 'display_left_sidebar' ),
+			'is_right_sidebar_active'         => array( $this, 'is_right_sidebar_active' ),
+			'display_right_sidebar'           => array( $this, 'display_right_sidebar' ),
 
-			'display_bbpress_left_sidebar'    => [ $this, 'display_bbpress_left_sidebar' ],
-			'is_bbpress_left_sidebar_active'  => [ $this, 'is_bbpress_left_sidebar_active' ],
-			'display_bbpress_right_sidebar'    => [ $this, 'display_bbpress_right_sidebar' ],
-			'is_bbpress_right_sidebar_active'  => [ $this, 'is_bbpress_right_sidebar_active' ],
-		];
+			'display_bbpress_left_sidebar'    => array( $this, 'display_bbpress_left_sidebar' ),
+			'is_bbpress_left_sidebar_active'  => array( $this, 'is_bbpress_left_sidebar_active' ),
+			'display_bbpress_right_sidebar'   => array( $this, 'display_bbpress_right_sidebar' ),
+			'is_bbpress_right_sidebar_active' => array( $this, 'is_bbpress_right_sidebar_active' ),
+		);
 	}
 
 	/**
@@ -75,7 +75,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function action_register_sidebars() {
 		register_sidebar(
-			[
+			array(
 				'name'          => esc_html__( 'Right Sidebar', 'knowx' ),
 				'id'            => static::RIGHT_SIDEBAR_SLUG,
 				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
@@ -83,11 +83,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'after_widget'  => '</section>',
 				'before_title'  => '<h2 class="widget-title">',
 				'after_title'   => '</h2>',
-			]
+			)
 		);
 
 		register_sidebar(
-			[
+			array(
 				'name'          => esc_html__( 'Left Sidebar', 'knowx' ),
 				'id'            => static::LEFT_SIDEBAR_SLUG,
 				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
@@ -95,12 +95,12 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'after_widget'  => '</section>',
 				'before_title'  => '<h2 class="widget-title">',
 				'after_title'   => '</h2>',
-			]
+			)
 		);
 
-		if ( function_exists('is_bbpress') ) {
-    		register_sidebar(
-				[
+		if ( function_exists( 'is_bbpress' ) ) {
+			register_sidebar(
+				array(
 					'name'          => esc_html__( 'bbPress Left Sidebar', 'knowx' ),
 					'id'            => static::BBPRESS_LEFT_SIDEBAR_SLUG,
 					'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
@@ -108,11 +108,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					'after_widget'  => '</section>',
 					'before_title'  => '<h2 class="widget-title">',
 					'after_title'   => '</h2>',
-				]
+				)
 			);
 
 			register_sidebar(
-				[
+				array(
 					'name'          => esc_html__( 'bbPress Right Sidebar', 'knowx' ),
 					'id'            => static::BBPRESS_RIGHT_SIDEBAR_SLUG,
 					'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
@@ -120,12 +120,12 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					'after_widget'  => '</section>',
 					'before_title'  => '<h2 class="widget-title">',
 					'after_title'   => '</h2>',
-				]
+				)
 			);
-        }
+		}
 
 		register_sidebar(
-			[
+			array(
 				'name'          => esc_html__( 'Footer 1', 'knowx' ),
 				'id'            => 'footer-1',
 				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
@@ -133,11 +133,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
 				'after_title'   => '</h3>',
-			]
+			)
 		);
 
 		register_sidebar(
-			[
+			array(
 				'name'          => esc_html__( 'Footer 2', 'knowx' ),
 				'id'            => 'footer-2',
 				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
@@ -145,11 +145,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
 				'after_title'   => '</h3>',
-			]
+			)
 		);
 
 		register_sidebar(
-			[
+			array(
 				'name'          => esc_html__( 'Footer 3', 'knowx' ),
 				'id'            => 'footer-3',
 				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
@@ -157,11 +157,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
 				'after_title'   => '</h3>',
-			]
+			)
 		);
 
 		register_sidebar(
-			[
+			array(
 				'name'          => esc_html__( 'Footer 4', 'knowx' ),
 				'id'            => 'footer-4',
 				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
@@ -169,7 +169,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'after_widget'  => '</section>',
 				'before_title'  => '<h3 class="widget-title">',
 				'after_title'   => '</h3>',
-			]
+			)
 		);
 	}
 
@@ -179,49 +179,49 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @param array $classes Classes for the body element.
 	 * @return array Filtered body classes.
 	 */
-	public function filter_body_classes( array $classes ) : array {
+	public function filter_body_classes( array $classes ): array {
 		$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
 
 		if ( $this->is_left_sidebar_active() && $default_sidebar == 'left' ) {
 			global $template;
 
-			if ( ! in_array( basename( $template ), [ 'front-page.php', '404.php', '500.php', 'offline.php' ] ) ) {
+			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
 				$classes[] = 'has-sidebar-left';
 			}
 		} elseif ( $this->is_right_sidebar_active() && $default_sidebar == 'right' ) {
 			global $template;
 
-			if ( ! in_array( basename( $template ), [ 'front-page.php', '404.php', '500.php', 'offline.php' ] ) ) {
+			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
 				$classes[] = 'has-sidebar-right';
 			}
 		} elseif ( $this->is_right_sidebar_active() && $this->is_right_sidebar_active() && $default_sidebar == 'both' ) {
 			global $template;
 
-			if ( ! in_array( basename( $template ), [ 'front-page.php', '404.php', '500.php', 'offline.php' ] ) ) {
+			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
 				$classes[] = 'has-sidebar-both';
 			}
 		}
 
-		//bbPress
-		if ( function_exists('is_bbpress') ) {
+		// bbPress
+		if ( function_exists( 'is_bbpress' ) ) {
 			$bbpress_sidebar = get_theme_mod( 'bbpress_sidebar_option', knowx_defaults( 'bbpress-sidebar-option' ) );
 
 			if ( $this->is_bbpress_left_sidebar_active() && $bbpress_sidebar == 'left' ) {
 				global $template;
 
-				if ( ! in_array( basename( $template ), [ 'front-page.php', '404.php', '500.php', 'offline.php' ] ) ) {
+				if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
 					$classes[] = 'has-bbpress-sidebar-left';
 				}
 			} elseif ( $this->is_bbpress_right_sidebar_active() && $bbpress_sidebar == 'right' ) {
 				global $template;
 
-				if ( ! in_array( basename( $template ), [ 'front-page.php', '404.php', '500.php', 'offline.php' ] ) ) {
+				if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
 					$classes[] = 'has-bbpress-sidebar-right';
 				}
 			} elseif ( $this->is_bbpress_right_sidebar_active() && $this->is_bbpress_right_sidebar_active() && $bbpress_sidebar == 'both' ) {
 				global $template;
 
-				if ( ! in_array( basename( $template ), [ 'front-page.php', '404.php', '500.php', 'offline.php' ] ) ) {
+				if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
 					$classes[] = 'has-bbpress-sidebar-both';
 				}
 			}
@@ -235,7 +235,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @return bool True if the left sidebar is active, false otherwise.
 	 */
-	public function is_left_sidebar_active() : bool {
+	public function is_left_sidebar_active(): bool {
 		return (bool) is_active_sidebar( static::LEFT_SIDEBAR_SLUG );
 	}
 
@@ -251,7 +251,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @return bool True if the right sidebar is active, false otherwise.
 	 */
-	public function is_right_sidebar_active() : bool {
+	public function is_right_sidebar_active(): bool {
 		return (bool) is_active_sidebar( static::RIGHT_SIDEBAR_SLUG );
 	}
 
@@ -267,7 +267,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @return bool True if the bbpress left sidebar is active, false otherwise.
 	 */
-	public function is_bbpress_left_sidebar_active() : bool {
+	public function is_bbpress_left_sidebar_active(): bool {
 		return (bool) is_active_sidebar( static::BBPRESS_LEFT_SIDEBAR_SLUG );
 	}
 
@@ -283,7 +283,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @return bool True if the bbpress right sidebar is active, false otherwise.
 	 */
-	public function is_bbpress_right_sidebar_active() : bool {
+	public function is_bbpress_right_sidebar_active(): bool {
 		return (bool) is_active_sidebar( static::BBPRESS_RIGHT_SIDEBAR_SLUG );
 	}
 

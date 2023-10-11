@@ -25,7 +25,7 @@ class Component implements Component_Interface {
 	 *
 	 * @return string Component slug.
 	 */
-	public function get_slug() : string {
+	public function get_slug(): string {
 		return 'customizer';
 	}
 
@@ -35,6 +35,14 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_action( 'customize_register', array( $this, 'action_customize_register' ) );
 		add_action( 'customize_preview_init', array( $this, 'action_enqueue_customize_preview_js' ) );
+
+		add_action(
+			'customize_controls_enqueue_scripts',
+			function () {
+				$css_uri = get_theme_file_uri( '/assets/css/' );
+				wp_enqueue_style( 'knowx-customizer', $css_uri . 'knowx-customizer.min.css', '', time() );
+			}
+		);
 	}
 
 	/**
@@ -52,7 +60,7 @@ class Component implements Component_Interface {
 				'blogname',
 				array(
 					'selector'        => '.site-title a',
-					'render_callback' => function() {
+					'render_callback' => function () {
 						bloginfo( 'name' );
 					},
 				)
@@ -61,7 +69,7 @@ class Component implements Component_Interface {
 				'blogdescription',
 				array(
 					'selector'        => '.site-description',
-					'render_callback' => function() {
+					'render_callback' => function () {
 						bloginfo( 'description' );
 					},
 				)

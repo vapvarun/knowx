@@ -85,3 +85,6 @@ require get_template_directory() . '/inc/widgets/category-widget.php';
 
 // Load theme breadcrubms function.
 require get_template_directory() . '/inc/class-knowx-breadcrubms.php';
+
+// Custom WP Login Form.
+require get_template_directory() . '/inc/login.php';

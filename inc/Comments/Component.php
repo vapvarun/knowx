@@ -38,7 +38,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @return string Component slug.
 	 */
-	public function get_slug() : string {
+	public function get_slug(): string {
 		return 'comments';
 	}
 
@@ -56,7 +56,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
-	public function template_tags() : array {
+	public function template_tags(): array {
 		return array(
 			'the_comments' => array( $this, 'the_comments' ),
 		);
@@ -146,7 +146,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @param string $markup Navigation markup.
 	 * @return string Filtered markup.
 	 */
-	public function filter_add_amp_live_list_pagination_attribute( string $markup ) : string {
+	public function filter_add_amp_live_list_pagination_attribute( string $markup ): string {
 		return preg_replace( '/(\s*<[a-z0-9_-]+)/i', '$1 pagination ', $markup, 1 );
 	}
 }

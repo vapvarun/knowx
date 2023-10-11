@@ -14,7 +14,7 @@ namespace KnowX\KnowX;
  *
  * @return Template_Tags Template tags instance exposing template tag methods.
  */
-function knowx() : Template_Tags {
+function knowx(): Template_Tags {
 	static $theme = null;
 
 	if ( null === $theme ) {

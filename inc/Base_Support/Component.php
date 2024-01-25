@@ -48,6 +48,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		add_filter( 'embed_defaults', array( $this, 'filter_embed_dimensions' ) );
 		add_filter( 'theme_scandir_exclusions', array( $this, 'filter_scandir_exclusions_for_optional_templates' ) );
 		add_filter( 'script_loader_tag', array( $this, 'filter_script_loader_tag' ), 10, 2 );
+		add_action( 'init', array( $this, 'knowx_theme_block_styles' ) );
+		add_action( 'init', array( $this, 'knowx_register_block_patterns' ) );
 	}
 
 	/**
@@ -205,5 +207,47 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 
 		return $this->get_version();
+	}
+
+	/**
+	 * Register block styles.
+	 */
+	public function knowx_theme_block_styles() {
+		if ( function_exists( 'register_block_style' ) ) {
+			register_block_style(
+				'core/image',
+				array(
+					'name'  => 'knowx-border',
+					'label' => esc_html__( 'Borders', 'knowx' ),
+					'style' => 'knowx-border-style',
+				)
+			);
+		}
+	}
+
+	/**
+	 * Register register block patterns.
+	 */
+	public function knowx_register_block_patterns() {
+
+		if ( function_exists( 'register_block_pattern_category' ) ) {
+			register_block_pattern_category(
+				'knowx',
+				array( 'label' => __( 'KnowX', 'knowx' ) )
+			);
+		}
+
+		if ( function_exists( 'register_block_pattern' ) ) {
+			$block_patterns = array(
+				'footer-small',
+			);
+
+			foreach ( $block_patterns as $block_pattern ) {
+				register_block_pattern(
+					'knowx/' . $block_pattern,
+					require __DIR__ . '/patterns/' . $block_pattern . '.php'
+				);
+			}
+		}
 	}
 }

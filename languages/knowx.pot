@@ -1,4 +1,4 @@
-# Copyright (C) 2023 KnowX
+# Copyright (C) 2024 KnowX
 # This file is distributed under the same license as the KnowX package.
 msgid ""
 msgstr ""
@@ -648,6 +648,14 @@ msgstr ""
 
 #: ../knowx/inc/Accessibility/Component.php:70
 msgid "Collapse child menu"
+msgstr ""
+
+#: ../knowx/inc/Base_Support/Component.php:221
+msgid "Borders"
+msgstr ""
+
+#: ../knowx/inc/Base_Support/Component.php:236
+msgid "KnowX"
 msgstr ""
 
 #: ../knowx/inc/Comments/Component.php:132
@@ -1434,4 +1442,8 @@ msgstr ""
 
 #: ../knowx/template-parts/header/navigation.php:58
 msgid "Close"
+msgstr ""
+
+#: ../knowx/inc/Base_Support/patterns/footer-small.php:9
+msgid "Small footer"
 msgstr ""

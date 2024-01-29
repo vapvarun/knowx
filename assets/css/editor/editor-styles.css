@@ -93,7 +93,7 @@ option {
 	padding-right: 2.5em;
 }
 
-.wp-block-image.is-style-buddyx-border img {
+.wp-block-image.is-style-knowx-border img {
     border: 2px solid var(--color-theme-primary); /* Adjust the border properties as needed */
     border-radius: 5px; /* Optional: Add border-radius for rounded corners */
 }

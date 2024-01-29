@@ -366,12 +366,6 @@ class Component implements Component_Interface {
 				'default'         => '#03A9F4',
 				'choices'         => array( 'alpha' => true ),
 				'priority'        => 10,
-				'output'          => array(
-					array(
-						'element'  => '.site-loader',
-						'property' => 'background-color',
-					),
-				),
 				'active_callback' => array(
 					array(
 						'setting'  => 'site_loader',
@@ -417,12 +411,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-title a:hover',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -636,16 +624,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.main-navigation a:hover, .main-navigation ul li a:hover, .nav--toggle-sub li.menu-item-has-children:hover, .nav--toggle-small .menu-toggle:hover',
-						'property' => 'color',
-					),
-					array(
-						'element'  => '.nav--toggle-small .menu-toggle:hover',
-						'property' => 'border-color',
-					),
-				),
 			)
 		);
 
@@ -657,12 +635,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.main-navigation ul li.current-menu-item>a',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -717,24 +689,6 @@ class Component implements Component_Interface {
 				'default'  => '#ffffff',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-header-wrapper, .layout-boxed .site-header-wrapper, .nav--toggle-sub ul ul, #user-profile-menu, .bp-header-submenu, .main-navigation .primary-menu-container, .main-navigation #user-profile-menu, .main-navigation .bp-header-submenu',
-						'property' => 'background-color',
-					),
-					array(
-						'element'  => '.site-header-wrapper',
-						'property' => 'border-color',
-					),
-					array(
-						'element'  => '.menu-item--has-toggle>ul.sub-menu:before, .nav--toggle-sub ul.user-profile-menu .sub-menu:before, .bp-header-submenu:before, .user-profile-menu:before',
-						'property' => 'border-top-color',
-					),
-					array(
-						'element'  => '.menu-item--has-toggle>ul.sub-menu:before, .nav--toggle-sub ul.user-profile-menu .sub-menu:before, .bp-header-submenu:before, .user-profile-menu:before',
-						'property' => 'border-right-color',
-					),
-				),
 			)
 		);
 
@@ -884,12 +838,6 @@ class Component implements Component_Interface {
 				'default'  => '#f7f7f9',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => 'body',
-						'property' => 'background-color',
-					),
-				),
 			)
 		);
 
@@ -901,20 +849,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.knowx-breadcrumbs a, #breadcrumbs a, .pagination .current, .knowx-popular-posts ul li a:hover, .knowx-recent-posts ul li a:hover',
-						'property' => 'color',
-					),
-					array(
-						'element'  => '.knowx-knowledgebase-one ul.cat-list li.cat-name a:hover',
-						'property' => 'background-color',
-					),
-					array(
-						'element'  => '.knowx-knowledgebase-one ul.cat-list li.cat-name a',
-						'property' => 'border-color',
-					),
-				),
 			)
 		);
 
@@ -926,12 +860,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => 'a',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -943,12 +871,6 @@ class Component implements Component_Interface {
 				'default'  => '#222222',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => 'a:hover, a:active, a:focus, #knowx-categories-columns-four li.post-name a:hover',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -969,13 +891,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'choices'  => array( 'alpha' => true ),
-				'output'   => array(
-					array(
-						'element'  => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"], .knowx-support-button a',
-						'property' => 'background',
-					),
-				),
 			)
 		);
 
@@ -987,13 +902,6 @@ class Component implements Component_Interface {
 				'default'  => '#222222',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'choices'  => array( 'alpha' => true ),
-				'output'   => array(
-					array(
-						'element'  => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus, .knowx-support-button a:hover',
-						'property' => 'background',
-					),
-				),
 			)
 		);
 
@@ -1005,12 +913,6 @@ class Component implements Component_Interface {
 				'default'  => '#ffffff',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"], .knowx-support-button a',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -1022,12 +924,6 @@ class Component implements Component_Interface {
 				'default'  => '#ffffff',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus, .knowx-support-button a:hover',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -1039,12 +935,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => 'a.read-more.button, button:not(.menu-toggle), input[type="button"], input[type="reset"], input[type="submit"], .knowx-support-button a',
-						'property' => 'border-color',
-					),
-				),
 			)
 		);
 
@@ -1056,12 +946,6 @@ class Component implements Component_Interface {
 				'default'  => '#222222',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => 'a.read-more.button:hover, button:not(.menu-toggle):hover, input[type="button"]:hover, input[type="reset"]:hover, input[type="submit"]:hover, button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus, .knowx-support-button a:hover',
-						'property' => 'border-color',
-					),
-				),
 			)
 		);
 
@@ -1726,12 +1610,6 @@ class Component implements Component_Interface {
 				'default'  => '#333333',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-footer .widget-title',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -1743,12 +1621,6 @@ class Component implements Component_Interface {
 				'default'  => '#505050',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-footer',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -1760,12 +1632,6 @@ class Component implements Component_Interface {
 				'default'  => '#222222',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-footer a',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -1777,12 +1643,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-footer a:hover, .site-footer a:active',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -1808,12 +1668,6 @@ class Component implements Component_Interface {
 				'default'  => '#ffffff',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-info',
-						'property' => 'background-color',
-					),
-				),
 			)
 		);
 
@@ -1825,12 +1679,6 @@ class Component implements Component_Interface {
 				'default'  => '#e8e8e8',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-info',
-						'property' => 'border-color',
-					),
-				),
 			)
 		);
 
@@ -1842,12 +1690,6 @@ class Component implements Component_Interface {
 				'default'  => '#505050',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-info',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -1859,12 +1701,6 @@ class Component implements Component_Interface {
 				'default'  => '#222222',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-info a',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 
@@ -1876,12 +1712,6 @@ class Component implements Component_Interface {
 				'default'  => '#03A9F4',
 				'choices'  => array( 'alpha' => true ),
 				'priority' => 10,
-				'output'   => array(
-					array(
-						'element'  => '.site-info a:hover',
-						'property' => 'color',
-					),
-				),
 			)
 		);
 

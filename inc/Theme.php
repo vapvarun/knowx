@@ -161,6 +161,10 @@ class Theme {
 			$components[] = new Jetpack\Component();
 		}
 
+		if ( class_exists( 'Kirki' ) ) {
+			$components[] = new Dynamic_Style\Component();
+		}
+
 		return $components;
 	}
 }

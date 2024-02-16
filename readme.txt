@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 6.3.1
+Tested up to: 6.4.3
 Requires PHP: 7.4
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -10,7 +10,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 
 == Description ==
-KnowX is build with WP Rig for your knowledge base.
+KnowX is built with WP Rig for your knowledge base.
 
 == KnowX License ==
 
@@ -82,6 +82,12 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.7.1 =
+* Enhancement: Managed color scheme options apply dynamically
+* Enhancement: Added theme.json
+* Fix: Theme check warnings fixes
+* Fix: Managed sticky sidebar scrolling
+
 = 1.7.0 =
 * Fix: Updated customizer options images
 * Fix: Managed plugin bulk selection installation and activation

@@ -487,83 +487,83 @@ msgstr ""
 msgid "KnowX requires at least PHP version %1$s. You are running version %2$s. Please update and try again."
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:346
+#: ../knowx/inc/class-knowx-breadcrubms.php:352
 msgid "Browse:"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:347
+#: ../knowx/inc/class-knowx-breadcrubms.php:353
 msgctxt "breadcrumbs aria label"
 msgid "Breadcrumbs"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:348
+#: ../knowx/inc/class-knowx-breadcrubms.php:354
 msgid "Home"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:349
+#: ../knowx/inc/class-knowx-breadcrubms.php:355
 msgid "404 Not Found"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:350
+#: ../knowx/inc/class-knowx-breadcrubms.php:356
 msgid "Archives"
 msgstr ""
 
 #. translators: %s is the search query.
-#: ../knowx/inc/class-knowx-breadcrubms.php:352
+#: ../knowx/inc/class-knowx-breadcrubms.php:358
 msgid "Search results for: %s"
 msgstr ""
 
 #. translators: %s is the page number.
-#: ../knowx/inc/class-knowx-breadcrubms.php:354
+#: ../knowx/inc/class-knowx-breadcrubms.php:360
 msgid "Page %s"
 msgstr ""
 
 #. translators: %s is the page number.
-#: ../knowx/inc/class-knowx-breadcrubms.php:356
+#: ../knowx/inc/class-knowx-breadcrubms.php:362
 msgid "Comment Page %s"
 msgstr ""
 
 #. translators: Minute archive title. %s is the minute time format.
-#: ../knowx/inc/class-knowx-breadcrubms.php:358
+#: ../knowx/inc/class-knowx-breadcrubms.php:364
 msgid "Minute %s"
 msgstr ""
 
 #. translators: Weekly archive title. %s is the week date format.
-#: ../knowx/inc/class-knowx-breadcrubms.php:360
+#: ../knowx/inc/class-knowx-breadcrubms.php:366
 msgid "Week %s"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:820
+#: ../knowx/inc/class-knowx-breadcrubms.php:851
 msgctxt "minute and hour archives time format"
 msgid "g:i a"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:837
+#: ../knowx/inc/class-knowx-breadcrubms.php:869
 msgctxt "minute archives time format"
 msgid "i"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:854
+#: ../knowx/inc/class-knowx-breadcrubms.php:887
 msgctxt "hour archives time format"
 msgid "g a"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:870, ../knowx/inc/class-knowx-breadcrubms.php:899, ../knowx/inc/class-knowx-breadcrubms.php:926, ../knowx/inc/class-knowx-breadcrubms.php:953, ../knowx/inc/class-knowx-breadcrubms.php:1293
+#: ../knowx/inc/class-knowx-breadcrubms.php:904, ../knowx/inc/class-knowx-breadcrubms.php:934, ../knowx/inc/class-knowx-breadcrubms.php:974, ../knowx/inc/class-knowx-breadcrubms.php:1002, ../knowx/inc/class-knowx-breadcrubms.php:1356
 msgctxt "yearly archives date format"
 msgid "Y"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:871, ../knowx/inc/class-knowx-breadcrubms.php:927, ../knowx/inc/class-knowx-breadcrubms.php:1297
+#: ../knowx/inc/class-knowx-breadcrubms.php:905, ../knowx/inc/class-knowx-breadcrubms.php:975, ../knowx/inc/class-knowx-breadcrubms.php:1361
 msgctxt "monthly archives date format"
 msgid "F"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:872, ../knowx/inc/class-knowx-breadcrubms.php:1301
+#: ../knowx/inc/class-knowx-breadcrubms.php:906, ../knowx/inc/class-knowx-breadcrubms.php:1366
 msgctxt "daily archives date format"
 msgid "j"
 msgstr ""
 
-#: ../knowx/inc/class-knowx-breadcrubms.php:900
+#: ../knowx/inc/class-knowx-breadcrubms.php:935
 msgctxt "weekly archives date format"
 msgid "W"
 msgstr ""
@@ -592,11 +592,11 @@ msgstr ""
 msgid "Setting for the Knowledge Base page template. This field will override the one in Customizer."
 msgstr ""
 
-#: ../knowx/inc/extra.php:228, ../knowx/inc/Kirki_Option/Component.php:1165, ../knowx/inc/Kirki_Option/Component.php:1336
+#: ../knowx/inc/extra.php:228, ../knowx/inc/Kirki_Option/Component.php:1178, ../knowx/inc/Kirki_Option/Component.php:1349
 msgid "Exclude category by ID"
 msgstr ""
 
-#: ../knowx/inc/extra.php:230, ../knowx/inc/Kirki_Option/Component.php:1166, ../knowx/inc/Kirki_Option/Component.php:1337
+#: ../knowx/inc/extra.php:230, ../knowx/inc/Kirki_Option/Component.php:1179, ../knowx/inc/Kirki_Option/Component.php:1350
 msgid "Use a comma to separate multiple categories."
 msgstr ""
 
@@ -834,11 +834,11 @@ msgstr ""
 msgid "Site Loader ?"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:355, ../knowx/inc/Kirki_Option/Component.php:678, ../knowx/inc/Kirki_Option/Component.php:705, ../knowx/inc/Kirki_Option/Component.php:718, ../knowx/inc/Kirki_Option/Component.php:797, ../knowx/inc/Kirki_Option/Component.php:817, ../knowx/inc/Kirki_Option/Component.php:1037, ../knowx/inc/Kirki_Option/Component.php:1301, ../knowx/inc/Kirki_Option/Component.php:1314, ../knowx/inc/Kirki_Option/Component.php:1327, ../knowx/inc/Kirki_Option/Component.php:1374, ../knowx/inc/Kirki_Option/Component.php:1387, ../knowx/inc/Kirki_Option/Component.php:1570
+#: ../knowx/inc/Kirki_Option/Component.php:355, ../knowx/inc/Kirki_Option/Component.php:678, ../knowx/inc/Kirki_Option/Component.php:705, ../knowx/inc/Kirki_Option/Component.php:718, ../knowx/inc/Kirki_Option/Component.php:797, ../knowx/inc/Kirki_Option/Component.php:817, ../knowx/inc/Kirki_Option/Component.php:1000, ../knowx/inc/Kirki_Option/Component.php:1050, ../knowx/inc/Kirki_Option/Component.php:1314, ../knowx/inc/Kirki_Option/Component.php:1327, ../knowx/inc/Kirki_Option/Component.php:1340, ../knowx/inc/Kirki_Option/Component.php:1387, ../knowx/inc/Kirki_Option/Component.php:1400, ../knowx/inc/Kirki_Option/Component.php:1583
 msgid "Yes"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:356, ../knowx/inc/Kirki_Option/Component.php:679, ../knowx/inc/Kirki_Option/Component.php:706, ../knowx/inc/Kirki_Option/Component.php:719, ../knowx/inc/Kirki_Option/Component.php:798, ../knowx/inc/Kirki_Option/Component.php:818, ../knowx/inc/Kirki_Option/Component.php:1038, ../knowx/inc/Kirki_Option/Component.php:1302, ../knowx/inc/Kirki_Option/Component.php:1315, ../knowx/inc/Kirki_Option/Component.php:1328, ../knowx/inc/Kirki_Option/Component.php:1375, ../knowx/inc/Kirki_Option/Component.php:1388, ../knowx/inc/Kirki_Option/Component.php:1571
+#: ../knowx/inc/Kirki_Option/Component.php:356, ../knowx/inc/Kirki_Option/Component.php:679, ../knowx/inc/Kirki_Option/Component.php:706, ../knowx/inc/Kirki_Option/Component.php:719, ../knowx/inc/Kirki_Option/Component.php:798, ../knowx/inc/Kirki_Option/Component.php:818, ../knowx/inc/Kirki_Option/Component.php:1001, ../knowx/inc/Kirki_Option/Component.php:1051, ../knowx/inc/Kirki_Option/Component.php:1315, ../knowx/inc/Kirki_Option/Component.php:1328, ../knowx/inc/Kirki_Option/Component.php:1341, ../knowx/inc/Kirki_Option/Component.php:1388, ../knowx/inc/Kirki_Option/Component.php:1401, ../knowx/inc/Kirki_Option/Component.php:1584
 msgid "No"
 msgstr ""
 
@@ -910,11 +910,11 @@ msgstr ""
 msgid "Site Sub Header?"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:714, ../knowx/inc/Kirki_Option/Component.php:1566
+#: ../knowx/inc/Kirki_Option/Component.php:714, ../knowx/inc/Kirki_Option/Component.php:1579
 msgid "Customize Background ?"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:734, ../knowx/inc/Kirki_Option/Component.php:1579
+#: ../knowx/inc/Kirki_Option/Component.php:734, ../knowx/inc/Kirki_Option/Component.php:1592
 msgid "Background Control"
 msgstr ""
 
@@ -938,11 +938,11 @@ msgstr ""
 msgid "Theme Color"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:858, ../knowx/inc/Kirki_Option/Component.php:1630, ../knowx/inc/Kirki_Option/Component.php:1699
+#: ../knowx/inc/Kirki_Option/Component.php:858, ../knowx/inc/Kirki_Option/Component.php:1643, ../knowx/inc/Kirki_Option/Component.php:1712
 msgid "Link Color"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:869, ../knowx/inc/Kirki_Option/Component.php:1641
+#: ../knowx/inc/Kirki_Option/Component.php:869, ../knowx/inc/Kirki_Option/Component.php:1654
 msgid "Link Hover"
 msgstr ""
 
@@ -994,219 +994,223 @@ msgstr ""
 msgid "Column 4"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:999
+#: ../knowx/inc/Kirki_Option/Component.php:996
+msgid "Post Box View Layout"
+msgstr ""
+
+#: ../knowx/inc/Kirki_Option/Component.php:1012
 msgid "Sidebar Layout"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1016
+#: ../knowx/inc/Kirki_Option/Component.php:1029
 msgid "bbPress Sidebar Layout"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1033
+#: ../knowx/inc/Kirki_Option/Component.php:1046
 msgid "Sticky Sidebar ?"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1049
+#: ../knowx/inc/Kirki_Option/Component.php:1062
 msgid "Hero Section Background Control"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1050
+#: ../knowx/inc/Kirki_Option/Component.php:1063
 msgid "Set hero section background color and image. Note: \"Background Image\" not apply when set page featured image from backend."
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1080
+#: ../knowx/inc/Kirki_Option/Component.php:1093
 msgid "Hero Section Heading"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1084
+#: ../knowx/inc/Kirki_Option/Component.php:1097
 msgid "Create a Knowledge Base with KnowX"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1093
+#: ../knowx/inc/Kirki_Option/Component.php:1106
 msgid "Hero Section Content"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1111
+#: ../knowx/inc/Kirki_Option/Component.php:1124
 msgid "Hero Section Title Typography"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1134
+#: ../knowx/inc/Kirki_Option/Component.php:1147
 msgid "Hero Section Content Typography"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1182
+#: ../knowx/inc/Kirki_Option/Component.php:1195
 msgid "Support Section Background Control"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1183
+#: ../knowx/inc/Kirki_Option/Component.php:1196
 msgid "Set support section background color and image."
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1205
+#: ../knowx/inc/Kirki_Option/Component.php:1218
 msgid "Support Section Heading"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1209
+#: ../knowx/inc/Kirki_Option/Component.php:1222
 msgid "Can not find what you are looking for?"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1218
+#: ../knowx/inc/Kirki_Option/Component.php:1231
 msgid "Support Section Content"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1228
+#: ../knowx/inc/Kirki_Option/Component.php:1241
 msgid "Support Section Heading Typography"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1251
+#: ../knowx/inc/Kirki_Option/Component.php:1264
 msgid "Support Section Content Typography"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1274
+#: ../knowx/inc/Kirki_Option/Component.php:1287
 msgid "Button Text"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1284
+#: ../knowx/inc/Kirki_Option/Component.php:1297
 msgid "Button Link URL"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1297
+#: ../knowx/inc/Kirki_Option/Component.php:1310
 msgid "Show page title"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1310
+#: ../knowx/inc/Kirki_Option/Component.php:1323
 msgid "Show View All link"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1323
+#: ../knowx/inc/Kirki_Option/Component.php:1336
 msgid "Show category description"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1345
+#: ../knowx/inc/Kirki_Option/Component.php:1358
 msgid "Posts per category"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1346
+#: ../knowx/inc/Kirki_Option/Component.php:1359
 msgid "Only numeric characters allowed."
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1354
+#: ../knowx/inc/Kirki_Option/Component.php:1367
 msgid "Order posts"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1358
+#: ../knowx/inc/Kirki_Option/Component.php:1371
 msgid "By date"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1359
+#: ../knowx/inc/Kirki_Option/Component.php:1372
 msgid "By name"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1370
+#: ../knowx/inc/Kirki_Option/Component.php:1383
 msgid "Customize Your Logo Section"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1383
+#: ../knowx/inc/Kirki_Option/Component.php:1396
 msgid "Disable Logo?"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1403
+#: ../knowx/inc/Kirki_Option/Component.php:1416
 msgid "Custom Logo"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1426
+#: ../knowx/inc/Kirki_Option/Component.php:1439
 msgid "Logo Width"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1427
+#: ../knowx/inc/Kirki_Option/Component.php:1440
 msgid "Select the logo width (px)"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1450
+#: ../knowx/inc/Kirki_Option/Component.php:1463
 msgid "Logo Height"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1451
+#: ../knowx/inc/Kirki_Option/Component.php:1464
 msgid "Select the logo height (px)"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1474
+#: ../knowx/inc/Kirki_Option/Component.php:1487
 msgid "Logo Space Bottom"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1475
+#: ../knowx/inc/Kirki_Option/Component.php:1488
 msgid "Select the logo bottom spacing (px)"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1498
+#: ../knowx/inc/Kirki_Option/Component.php:1511
 msgid "Logo URL"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1521
+#: ../knowx/inc/Kirki_Option/Component.php:1534
 msgid "Logo Title"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1544
+#: ../knowx/inc/Kirki_Option/Component.php:1557
 msgid "Login Page Title"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1545
+#: ../knowx/inc/Kirki_Option/Component.php:1558
 msgid "Login page title that is shown on WordPress login page."
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1608
+#: ../knowx/inc/Kirki_Option/Component.php:1621
 msgid "Title Color"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1619, ../knowx/inc/Kirki_Option/Component.php:1688
+#: ../knowx/inc/Kirki_Option/Component.php:1632, ../knowx/inc/Kirki_Option/Component.php:1701
 msgid "Content Color"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1655
+#: ../knowx/inc/Kirki_Option/Component.php:1668
 msgid "Add Content"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1656
+#: ../knowx/inc/Kirki_Option/Component.php:1669
 msgid "You can use [current_year], [site_title], [theme_author] shortcode if you want."
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1658
+#: ../knowx/inc/Kirki_Option/Component.php:1671
 msgid "Copyright © [current_year] [site_title] | Powered by [theme_author]"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1666
+#: ../knowx/inc/Kirki_Option/Component.php:1679
 msgid "Background Color"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1677
+#: ../knowx/inc/Kirki_Option/Component.php:1690
 msgid "Border Color"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1710
+#: ../knowx/inc/Kirki_Option/Component.php:1723
 msgid "Link Hover Color"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1724
+#: ../knowx/inc/Kirki_Option/Component.php:1737
 msgid "Load Google Fonts Locally ?"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1728, ../knowx/inc/Kirki_Option/Component.php:1741
+#: ../knowx/inc/Kirki_Option/Component.php:1741, ../knowx/inc/Kirki_Option/Component.php:1754
 msgid "Enable"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1729, ../knowx/inc/Kirki_Option/Component.php:1742
+#: ../knowx/inc/Kirki_Option/Component.php:1742, ../knowx/inc/Kirki_Option/Component.php:1755
 msgid "Disable"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1737
+#: ../knowx/inc/Kirki_Option/Component.php:1750
 msgid "Preload Local Fonts ?"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1757
+#: ../knowx/inc/Kirki_Option/Component.php:1770
 msgid "Flush Local Fonts Cache"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:1758
+#: ../knowx/inc/Kirki_Option/Component.php:1771
 msgid "Click the button to reset the local fonts cache."
 msgstr ""
 
@@ -1348,7 +1352,7 @@ msgstr ""
 #. translators: %s: post date
 #: ../knowx/template-parts/content/entry_meta.php:103
 msgctxt "post date"
-msgid ": %s"
+msgid " %s"
 msgstr ""
 
 #. translators: separator between taxonomy terms

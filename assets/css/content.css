@@ -52,6 +52,14 @@ h2.entry-title {
     font-size: 24px;
 }
 
+h2.entry-title a {
+    color: inherit;
+}
+
+h2.entry-title a:hover {
+    color: var(--color-theme-primary);
+}
+
 .single-post .entry-header h1.entry-title {
     margin-top: 0;
     margin-bottom: 6px;
@@ -112,11 +120,13 @@ h2.entry-title {
     align-items: center;
     flex-flow: wrap;
     font-size: 12px;
+    gap: 5px;
 }
 
 .entry-meta .posted-by {
     display: flex;
     align-items: center;
+    flex: 0 0 100%;
     margin: 5px 3px 5px 0;
 }
 
@@ -143,7 +153,8 @@ h2.entry-title {
 .entry-meta .entry-cat-links::before,
 .entry-meta .entry-comments-link a::before,
 .entry-meta .entry-edit-link a::before,
-.entry-meta .entry-featured::before {
+.entry-meta .entry-featured::before,
+.entry-meta .posted-on a::before {
     margin-right: 4px;
     font-family: 'FontAwesome';
     font-style: normal;
@@ -166,10 +177,29 @@ h2.entry-title {
     content: "\f0e5";
 }
 
+.entry-meta .posted-on a::before {
+    content: "\f073";
+}
+
 .entry-meta .entry-featured::before {
     content: "\f041";
 }
 
+/* Post box layout */
+.post-box-layout .knowx-post-content-wrapper {
+    position: relative;
+    background: #fff;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.post-box-layout.entry-layout .knowx-post-content-wrapper .entry-content {
+    border-bottom: 0 !important;
+}
+
+.post-box-layout .post-thumbnail img {
+    border-radius: 4px;
+}
 
 /* Hides the update date and time. */
 

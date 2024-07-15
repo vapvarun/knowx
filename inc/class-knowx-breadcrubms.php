@@ -1384,4 +1384,3 @@ class KnowX_Breadcrumbs {
 		}
 	}
 }
-

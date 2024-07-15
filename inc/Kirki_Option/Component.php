@@ -990,6 +990,19 @@ class Component implements Component_Interface {
 			)
 		);
 
+		new \Kirki\Field\Checkbox_Switch(
+			array(
+				'settings' => 'post_box_view_layout',
+				'label'    => esc_html__( 'Post Box View Layout', 'knowx' ),
+				'section'  => 'site_blog_section',
+				'default'  => '',
+				'choices'  => array(
+					'on'  => esc_html__( 'Yes', 'knowx' ),
+					'off' => esc_html__( 'No', 'knowx' ),
+				),
+			)
+		);
+
 		/**
 		 *  Site Sidebar Layout
 		 */

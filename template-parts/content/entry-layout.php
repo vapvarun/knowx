@@ -7,12 +7,20 @@
 
 namespace KnowX\KnowX;
 
-$post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
+$post_per_row    = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
+$post_box_layout = get_theme_mod( 'post_box_view_layout', knowx_defaults( 'post-box-view-layout' ) );
+
+if ( $post_box_layout ) {
+	$layout_class = 'post-box-layout';
+} else {
+	$layout_class = '';
+}
 
 $classes = array(
 	'entry',
 	'entry-layout',
 	$post_per_row,
+	$layout_class,
 );
 
 ?>

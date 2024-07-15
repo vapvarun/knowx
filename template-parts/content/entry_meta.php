@@ -100,7 +100,7 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 			<?php
 			printf(
 				/* translators: %s: post date */
-				esc_html_x( ': %s', 'post date', 'knowx' ),
+				esc_html_x( ' %s', 'post date', 'knowx' ),
 				$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			);
 			?>

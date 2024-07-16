@@ -14,6 +14,7 @@ use function wp_enqueue_script;
 use KnowX\KnowX\Component_Interface;
 use function KnowX\KnowX\knowx;
 use function wp_script_add_data;
+use function wp_localize_script;
 
 /**
  * Class for improving custom_js among various core features.
@@ -89,6 +90,21 @@ class Component implements Component_Interface {
 		wp_script_add_data( 'knowx-sticky-kit', 'async', true );
 		wp_script_add_data( 'knowx-sticky-kit', 'precache', true );
 
+		// Enqueue the scroll up script.
+		$knowx_scroll_top = ( get_theme_mod( 'knowx_scroll_top' ) ) ? true : false;
+
+		if ( $knowx_scroll_top ) {
+			wp_enqueue_script(
+				'knowx-scroll-up',
+				get_theme_file_uri( '/assets/js/jquery.scrollUp.min.js' ),
+				array(),
+				knowx()->get_asset_version( get_theme_file_path( '/assets/js/jquery.scrollUp.min.js' ) ),
+				true
+			);
+			wp_script_add_data( 'knowx-scroll-up', 'async', true );
+			wp_script_add_data( 'knowx-scroll-up', 'precache', true );
+		}
+
 		// Enqueue the custom script.
 		wp_enqueue_script(
 			'knowx-custom',
@@ -99,5 +115,13 @@ class Component implements Component_Interface {
 		);
 		wp_script_add_data( 'knowx-custom', 'async', true );
 		wp_script_add_data( 'knowx-custom', 'precache', true );
+
+		wp_localize_script(
+			'knowx-custom',
+			'knowx_data',
+			array(
+				'enable_scrollup' => $knowx_scroll_top,
+			)
+		);
 	}
 }

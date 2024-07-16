@@ -107,6 +107,17 @@ class Component implements Component_Interface {
 			)
 		);
 
+		// Site Scroll Top.
+		new \Kirki\Section(
+			'site_scroll_top',
+			array(
+				'title'       => esc_html__( 'Scroll Top', 'knowx' ),
+				'priority'    => 30,
+				'description' => '',
+				'panel'       => 'site_layout_panel',
+			)
+		);
+
 		// Typography.
 		new \Kirki\Panel(
 			'typography_panel',
@@ -372,6 +383,23 @@ class Component implements Component_Interface {
 						'operator' => '==',
 						'value'    => '1',
 					),
+				),
+			)
+		);
+
+		/*
+		 *  Scroll Top
+		 */
+		new \Kirki\Field\Checkbox_Switch(
+			array(
+				'settings' => 'knowx_scroll_top',
+				'label'    => esc_attr__( 'Scroll Top', 'knowx' ),
+				'section'  => 'site_scroll_top',
+				'priority' => 10,
+				'default'  => '',
+				'choices'  => array(
+					'on'  => esc_attr__( 'Yes', 'knowx' ),
+					'off' => esc_attr__( 'No', 'knowx' ),
 				),
 			)
 		);

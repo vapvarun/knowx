@@ -16,7 +16,7 @@
 	# Buddypress navigation icons
 # Content navigation
 # Footer
-# Infinite scroll
+# Scroll Up
 # Site Layout
 # Site Sub Header Layout
 # Site Text Editor
@@ -1446,6 +1446,36 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     color: var(--color-copyright-link-hover);
 }
 
+
+/*--------------------------------------------------------------
+# Scroll Up
+--------------------------------------------------------------*/
+#scrollUp {
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 100px;
+    background: rgba(0, 0, 0, .1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: none;
+}
+
+#scrollUp i {
+    line-height: 1;
+    font-weight: 400;
+    margin-top: -3px;
+}
+
+#scrollUp:hover {
+    background: var(--color-theme-primary);
+}
 
 /*--------------------------------------------------------------
 # Site Layout

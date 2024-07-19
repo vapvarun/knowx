@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 6.4.3
+Tested up to: 6.6.0
 Requires PHP: 7.4
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -17,7 +17,7 @@ KnowX is built with WP Rig for your knowledge base.
 KnowX is licensed under the GNU General Public License v3.0 (or later)
 More details here: https://www.gnu.org/licenses/gpl-3.0.html
 
-KnowX is based on WP Rig https://github.com/wprig/wprig, WP Rig is released under GNU General Public License v3.0 (or later).
+KnowX is based on WP Rig (https://github.com/wprig/wprig), which is released under the GNU General Public License v3.0 (or later).
 
 == Copyright ==
 
@@ -82,6 +82,11 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.7.2 =
+* Fix: Manage theme issue with WP 6.6
+* Enhancement: Add scroll top
+* Enhancement: Add blog post box view layout
+
 = 1.7.1 =
 * Enhancement: Managed color scheme options apply dynamically
 * Enhancement: Added theme.json

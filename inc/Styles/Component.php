@@ -325,7 +325,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			),
 			'knowx-content'          => array(
 				'file'             => 'content.min.css',
-				'preload_callback' => '__return_true',
+				'preload_callback' => '__return_false',
 			),
 			'knowx-sidebar'          => array(
 				'file' => 'sidebar.min.css',

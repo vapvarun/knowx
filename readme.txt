@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 6.6.0
+Tested up to: 6.7.2
 Requires PHP: 7.4
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -82,6 +82,12 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.7.3 =
+* Fixed duplicate calls for content.min.css.
+* Resolved theme typography component issue.
+* Improved block button UI for better consistency.
+* Managed Gutenberg editor font and font size for improved styling.
+
 = 1.7.2 =
 * Fix: Manage theme issue with WP 6.6
 * Enhancement: Add scroll top

@@ -633,12 +633,11 @@ msgstr ""
 #. translators: %s: Name of current post. Only visible to screen readers
 #. translators: %s: Name of current post. Only visible to screen readers
 #. translators: %s: Name of current post. Only visible to screen readers
-#. translators: %s: Name of current post. Only visible to screen readers
-#: ../knowx/template-parts/content-bbpress.php:18, ../knowx/template-parts/content-buddypress.php:18, ../knowx/template-parts/content/entry-full-width.php:18, ../knowx/template-parts/content/entry_content.php:19
+#: ../knowx/template-parts/content-bbpress.php:18, ../knowx/template-parts/content/entry-full-width.php:18, ../knowx/template-parts/content/entry_content.php:19
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: ../knowx/template-parts/content-bbpress.php:31, ../knowx/template-parts/content-buddypress.php:31, ../knowx/template-parts/content/entry-full-width.php:31, ../knowx/template-parts/content/entry-page.php:36, ../knowx/template-parts/content/entry_content.php:36
+#: ../knowx/template-parts/content-bbpress.php:31, ../knowx/template-parts/content/entry-full-width.php:31, ../knowx/template-parts/content/entry-page.php:36, ../knowx/template-parts/content/entry_content.php:36
 msgid "Pages:"
 msgstr ""
 

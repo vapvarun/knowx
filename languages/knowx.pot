@@ -770,7 +770,7 @@ msgstr ""
 msgid "Headings"
 msgstr ""
 
-#: ../knowx/inc/Kirki_Option/Component.php:154, ../knowx/template-parts/header/navigation.php:54
+#: ../knowx/inc/Kirki_Option/Component.php:154, ../knowx/template-parts/header/navigation.php:53
 msgid "Menu"
 msgstr ""
 
@@ -1440,15 +1440,15 @@ msgstr ""
 msgid "Page navigation"
 msgstr ""
 
-#: ../knowx/template-parts/header/navigation.php:16
+#: ../knowx/template-parts/header/navigation.php:38
 msgid "Main menu"
 msgstr ""
 
-#: ../knowx/template-parts/header/navigation.php:39
+#: ../knowx/template-parts/header/navigation.php:45
 msgid "Open menu"
 msgstr ""
 
-#: ../knowx/template-parts/header/navigation.php:58
+#: ../knowx/template-parts/header/navigation.php:54
 msgid "Close"
 msgstr ""
 

@@ -1330,31 +1330,31 @@ msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
 #. translators: %s: post author
-#: ../knowx/template-parts/content/entry_meta.php:64
+#: ../knowx/template-parts/content/entry_meta.php:79
 msgctxt "post author"
 msgid "By %s"
 msgstr ""
 
 #. translators: %s: post author
-#: ../knowx/template-parts/content/entry_meta.php:67
+#: ../knowx/template-parts/content/entry_meta.php:82
 msgctxt "post author"
 msgid "by %s"
 msgstr ""
 
 #. translators: %s: post parent title
-#: ../knowx/template-parts/content/entry_meta.php:83
+#: ../knowx/template-parts/content/entry_meta.php:98
 msgctxt "post parent"
 msgid "In %s"
 msgstr ""
 
 #. translators: %s: post parent title
-#: ../knowx/template-parts/content/entry_meta.php:86
+#: ../knowx/template-parts/content/entry_meta.php:101
 msgctxt "post parent"
 msgid "in %s"
 msgstr ""
 
 #. translators: %s: post date
-#: ../knowx/template-parts/content/entry_meta.php:103
+#: ../knowx/template-parts/content/entry_meta.php:118
 msgctxt "post date"
 msgid " %s"
 msgstr ""

@@ -26,9 +26,9 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 
 ?>
 	</div><!--close .container-->
-	<?php $backgroundImg = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' ); ?>
+	<?php $background_img = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' ); ?>
 		<?php if ( has_post_thumbnail() ) { ?>
-			<div class="knowx-section-hero" style="background-image: url(' <?php echo $backgroundImg[0]; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> ');">
+			<div class="knowx-section-hero" style="background-image: url(' <?php echo esc_url( $background_img[0] ); ?> ');">
 		<?php } else { ?>
 			<div class="knowx-section-hero">
 		<?php } ?>

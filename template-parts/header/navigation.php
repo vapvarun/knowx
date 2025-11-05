@@ -8,7 +8,7 @@
 namespace KnowX\KnowX;
 
 if ( ! knowx()->is_primary_nav_menu_active() ) {
-	return;
+	//return;
 }
 
 // Pre-fetch common variables.

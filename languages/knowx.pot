@@ -649,6 +649,14 @@ msgstr ""
 msgid "Collapse child menu"
 msgstr ""
 
+#: ../knowx/inc/Activation/Component.php:62, ../knowx/inc/Kirki_Option/Component.php:225
+msgid "Knowledge Base"
+msgstr ""
+
+#: ../knowx/inc/Activation/Component.php:63
+msgid "Welcome to our Knowledge Base. Here you can find articles, guides, and resources to help you."
+msgstr ""
+
 #: ../knowx/inc/Base_Support/Component.php:221
 msgid "Borders"
 msgstr ""
@@ -795,10 +803,6 @@ msgstr ""
 
 #: ../knowx/inc/Kirki_Option/Component.php:215
 msgid "Site Sidebar"
-msgstr ""
-
-#: ../knowx/inc/Kirki_Option/Component.php:225
-msgid "Knowledge Base"
 msgstr ""
 
 #: ../knowx/inc/Kirki_Option/Component.php:255

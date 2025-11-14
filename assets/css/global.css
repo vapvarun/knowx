@@ -126,6 +126,12 @@ p:empty::before {
     margin-top: 15px;
 }
 
+.page-template-full-width .entry-content, 
+.page-template-full-width .entry-summary, 
+.page-template-full-width .page-content {
+    margin: 0;
+}
+
 @media (min-width: 768px) {
 
     #primary,
@@ -136,12 +142,6 @@ p:empty::before {
     .page-template-full-width #primary,
     .page-template-full-width .site-wrapper {
         min-height: calc(100vh - 130px);
-    }
-}
-
-@media (max-width: 767px) {
-    .page-template-full-width:not(.elementor-editor-active) .site {
-        padding-top: 36px !important;
     }
 }
 

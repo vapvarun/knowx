@@ -31,7 +31,7 @@ msgstr ""
 msgid "Comments are disabled."
 msgstr ""
 
-#: ../knowx/footer.php:26
+#: ../knowx/footer.php:32
 msgid "Footer"
 msgstr ""
 

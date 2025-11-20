@@ -2,7 +2,7 @@
 Contributors: wbcomdesigns
 Tags: translation-ready
 Requires at least: 4.8
-Tested up to: 6.7.2
+Tested up to: 6.8.2
 Requires PHP: 7.4
 Stable tag: trunk
 License: GNU General Public License v3.0 (or later)
@@ -82,6 +82,15 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.7.4 =
+* Improvement: Updated global styling for better design consistency.
+* Improvement: Refined footer structure for cleaner and more maintainable layout.
+* Improvement: Added Knowledge Base page display on theme activation to help users get started quickly.
+* Improvement: Removed unwanted white space on full-width pages with no title.
+* Improvement: Optimized navigation template for faster performance.
+* Performance: Improved caching to reduce repeated processing and speed up page loads.
+* Cleanup: Removed unused templates and applied general code quality improvements.
+
 = 1.7.3 =
 * Fixed duplicate calls for content.min.css.
 * Resolved theme typography component issue.

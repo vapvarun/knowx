@@ -1,0 +1,10 @@
+{
+  "dev": {
+    "browserSync": {
+      "proxyURL": "knowx.local/",
+      "bypassPort": "8181",
+      "live": true,
+      "https": false
+    }
+  }
+}

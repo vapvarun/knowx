@@ -1,4 +1,4 @@
-/* global wpRigScreenReaderText */
+/* global KnowXScreenReaderText */
 /**
  * File navigation.js.
  *
@@ -191,7 +191,7 @@ function knowx_toggleSubMenu(parentMenuItem, forceToggle) {
         // Toggle "off" the submenu.
         parentMenuItem.classList.remove('menu-item--toggled-on');
         subMenu.classList.remove('toggle-show');
-        toggleButton.setAttribute('aria-label', wpRigScreenReaderText.expand);
+        toggleButton.setAttribute('aria-label', KnowXScreenReaderText.expand);
 
         // Make sure all children are closed.
         var subMenuItemsToggled = parentMenuItem.querySelectorAll('.menu-item--toggled-on');
@@ -208,7 +208,7 @@ function knowx_toggleSubMenu(parentMenuItem, forceToggle) {
         // Toggle "on" the submenu.
         parentMenuItem.classList.add('menu-item--toggled-on');
         subMenu.classList.add('toggle-show');
-        toggleButton.setAttribute('aria-label', wpRigScreenReaderText.collapse);
+        toggleButton.setAttribute('aria-label', KnowXScreenReaderText.collapse);
     }
 }
 
@@ -221,7 +221,7 @@ function knowx_getDropdownButton() {
     var dropdownButton = document.createElement('button');
     dropdownButton.classList.add('dropdown-toggle');
     dropdownButton.setAttribute('aria-expanded', 'false');
-    dropdownButton.setAttribute('aria-label', wpRigScreenReaderText.expand);
+    dropdownButton.setAttribute('aria-label', KnowXScreenReaderText.expand);
     return dropdownButton;
 }
 

@@ -1,0 +1,61 @@
+{
+  "theme": {
+    "PHPNamespace": "KnowX\\KnowX",
+    "slug": "knowx",
+    "name": "KnowX",
+    "theme_uri": "https://github.com/knowx/knowx/",
+    "author": "wbcomdesigns",
+    "author_uri": "https://knowx.io/",
+    "description": "A progressive theme development rig for WordPress.",
+    "version": "1.0.0"
+  },
+  "dev": {
+    "browserSync": {
+      "live": true,
+      "proxyURL": "knowx.local/",
+      "bypassPort": "8181",
+      "https": false,
+      "keyPath": "",
+      "certPath": "",
+      "devPort": 3000
+    },
+    "styles": {
+      "stage": 3,
+      "autoprefixer": {
+        "grid": false
+      },
+      "preload": [
+        "_custom-media.css"
+      ],
+      "features": {
+        "custom-media-queries": true,
+        "custom-properties": true,
+        "nesting-rules": true,
+        "mobile-nav-type": "modern"
+      }
+    },
+    "debug": {
+      "styles": false,
+      "scripts": false,
+      "phpcs": true
+    }
+  },
+  "child": {
+    "enabled": false,
+    "parentSlug": ""
+  },
+  "export": {
+    "compress": true,
+    "generatePotFile": true,
+    "filesToCopy": [
+      "LICENSE",
+      "readme.txt",
+      "screenshot.png",
+      "assets/css/vendor/**/*.css",
+      "assets/js/vendor/**/*.js",
+      "assets/svg/*.svg",
+      "inc/EZ_Customizer/themeCustomizeSettings.json",
+      "assets/fonts/*"
+    ]
+  }
+}

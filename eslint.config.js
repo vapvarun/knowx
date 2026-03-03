@@ -68,7 +68,7 @@ export default [
 			},
 			globals: {
 				wp: 'readonly',
-				KnowXScreenReaderText: 'readonly',
+				knowxScreenReaderText: 'readonly',
 				jQuery: 'readonly',
 				$: 'readonly',
 				window: 'readonly',

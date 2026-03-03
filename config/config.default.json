@@ -3,11 +3,11 @@
     "PHPNamespace": "KnowX\\KnowX",
     "slug": "knowx",
     "name": "KnowX",
-    "theme_uri": "https://github.com/knowx/knowx/",
+    "theme_uri": "https://wbcomdesigns.com/downloads/knowx-theme/",
     "author": "wbcomdesigns",
-    "author_uri": "https://knowx.io/",
-    "description": "A progressive theme development rig for WordPress.",
-    "version": "1.0.0"
+    "author_uri": "https://wbcomdesigns.com",
+    "description": "Free theme for a knowledge base",
+    "version": "1.7.5"
   },
   "dev": {
     "browserSync": {
@@ -51,11 +51,23 @@
       "LICENSE",
       "readme.txt",
       "screenshot.png",
+      "theme.json",
+      "wpml-config.xml",
+      "styles/*.json",
+      "assets/css/*.css",
+      "assets/css/admin/*.css",
+      "assets/css/editor/*.css",
+      "assets/js/*.js",
+      "assets/js/admin/*.js",
       "assets/css/vendor/**/*.css",
       "assets/js/vendor/**/*.js",
       "assets/svg/*.svg",
       "inc/EZ_Customizer/themeCustomizeSettings.json",
-      "assets/fonts/*"
+      "assets/fonts/*",
+      "inc/Kirki/**/*",
+      "inc/Kirki_Option/**/*",
+      "external/include-kirki.php",
+      "external/kirki-utils.php"
     ]
   }
 }

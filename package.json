@@ -1,21 +1,21 @@
 {
   "name": "knowx",
   "version": "3.1.0",
-  "description": "A progressive theme development rig for WordPress.",
-  "author": "The KnowX Contributors",
+  "description": "Free theme for a knowledge base",
+  "author": "wbcomdesigns,vapvarun",
   "license": "GPL-3.0-or-later",
   "main": "index.php",
-  "homepage": "https://github.com/knowx/knowx#readme",
+  "homepage": "https://github.com/wbcomdesigns/knowx#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/knowx/knowx.git"
+    "url": "git+https://github.com/wbcomdesigns/knowx.git"
   },
   "engines": {
     "node": ">=20.13.1",
     "npm": ">=10.5.2"
   },
   "bugs": {
-    "url": "https://github.com/knowx/knowx/issues"
+    "url": "https://github.com/wbcomdesigns/knowx/issues"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

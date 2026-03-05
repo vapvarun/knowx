@@ -1,4 +1,4 @@
-#wp-rig-settings-page .components-panel__row {
+#knowx-settings-page .components-panel__row {
   -ms-flex-direction: column;
   flex-direction: column;
   align-items: normal;
@@ -6,23 +6,23 @@
   margin-top: 1.3em;
 }
 
-#wp-rig-settings-page #settings-saved {
+#knowx-settings-page #settings-saved {
   width: 50%;
   position: fixed;
   top: 50px;
 }
 
-#wp-rig-settings-page #settings-saved .components-snackbar-list {
+#knowx-settings-page #settings-saved .components-snackbar-list {
   position: relative;
 }
 
-#wp-rig-settings-page #settings-saved .components-snackbar-list > div {
+#knowx-settings-page #settings-saved .components-snackbar-list > div {
   animation: .2s forwards swipeIn;
   position: relative;
   left: 0;
 }
 
-#wp-rig-settings-page #settings-saved .components-snackbar-list > div .components-snackbar {
+#knowx-settings-page #settings-saved .components-snackbar-list > div .components-snackbar {
   background: #3c8000;
 }
 

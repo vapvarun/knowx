@@ -51,8 +51,8 @@ class Template_Tags {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: classname/type of the variable, 2: interface name */
-						__( 'The theme templating component %1$s does not implement the %2$s interface.', 'knowx' ),
-						gettype( $component ),
+						esc_html__( 'The theme templating component %1$s does not implement the %2$s interface.', 'knowx' ),
+						esc_html( gettype( $component ) ),
 						Templating_Component_Interface::class
 					)
 				);
@@ -78,8 +78,8 @@ class Template_Tags {
 			throw new BadMethodCallException(
 				sprintf(
 					/* translators: %s: template tag name */
-					__( 'The template tag %s does not exist.', 'knowx' ),
-					'knowx()->' . $method . '()'
+					esc_html__( 'The template tag %s does not exist.', 'knowx' ),
+					'knowx()->' . esc_html( $method ) . '()'
 				)
 			);
 		}
@@ -107,9 +107,9 @@ class Template_Tags {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: template tag method name, 2: component class name */
-						__( 'The template tag method %1$s registered by theme component %2$s must either be a callable or an array.', 'knowx' ),
-						$method_name,
-						get_class( $component )
+						esc_html__( 'The template tag method %1$s registered by theme component %2$s must either be a callable or an array.', 'knowx' ),
+						esc_html( $method_name ),
+						esc_html( get_class( $component ) )
 					)
 				);
 			}
@@ -118,14 +118,103 @@ class Template_Tags {
 				throw new RuntimeException(
 					sprintf(
 						/* translators: 1: template tag method name, 2: component class name */
-						__( 'The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name.', 'knowx' ),
-						$method_name,
-						get_class( $component )
+						esc_html__( 'The template tag method %1$s registered by theme component %2$s conflicts with an already registered template tag of the same name.', 'knowx' ),
+						esc_html( $method_name ),
+						esc_html( get_class( $component ) )
 					)
 				);
 			}
 
 			$this->template_tags[ $method_name ] = $callback;
 		}
+	}
+
+	/**
+	 * Gets the theme version.
+	 *
+	 * @return string Theme version number.
+	 */
+	public function get_version(): string {
+		static $theme_version = null;
+
+		if ( null === $theme_version ) {
+			$theme_version = wp_get_theme( get_template() )->get( 'Version' );
+		}
+
+		return $theme_version;
+	}
+
+	/**
+	 * Gets the version for a given asset.
+	 *
+	 * Returns filemtime when WP_DEBUG is true, otherwise the theme version.
+	 *
+	 * @param string $filepath Asset file path.
+	 * @return string Asset version number.
+	 */
+	public function get_asset_version( string $filepath ): string {
+		if ( WP_DEBUG ) {
+			return (string) filemtime( $filepath );
+		}
+
+		return $this->get_version();
+	}
+
+	/**
+	 * Gets a theme asset from the assets directory.
+	 *
+	 * @param string $filename The name of the asset file (with extension).
+	 * @param string $type The asset type/subdirectory (e.g., 'images', 'svg').
+	 * @param bool   $content Whether to return the file contents (true) or URL (false).
+	 * @return string|null The asset URL/contents or null if not found.
+	 *
+	 * @throws RuntimeException If the asset file cannot be read.
+	 */
+	public function get_theme_asset( string $filename, string $type = 'images', bool $content = false ): ?string {
+		$asset_path = get_template_directory() . '/assets/' . trim( $type, '/' ) . '/' . $filename;
+		$asset_uri  = get_template_directory_uri() . '/assets/' . trim( $type, '/' ) . '/' . $filename;
+
+		if ( ! file_exists( $asset_path ) ) {
+			return null;
+		}
+
+		if ( $content ) {
+			try {
+				// Initialize WordPress Filesystem.
+				global $wp_filesystem;
+				if ( empty( $wp_filesystem ) ) {
+					require_once ABSPATH . '/wp-admin/includes/file.php';
+					WP_Filesystem();
+				}
+
+				if ( ! $wp_filesystem ) {
+					throw new RuntimeException(
+						esc_html__( 'WordPress filesystem is not initialized properly.', 'knowx' )
+					);
+				}
+
+				$file_contents = $wp_filesystem->get_contents( $asset_path );
+				if ( false === $file_contents ) {
+					throw new RuntimeException(
+						sprintf(
+						/* translators: %s: asset file path */
+							esc_html__( 'Error reading asset file: %s', 'knowx' ),
+							esc_html( $asset_path )
+						)
+					);
+				}
+				return $file_contents;
+			} catch ( \Exception $e ) {
+				throw new RuntimeException(
+					sprintf(
+					/* translators: %s: error message */
+						esc_html__( 'Failed to get asset contents: %s', 'knowx' ),
+						esc_html( $e->getMessage() )
+					)
+				);
+			}
+		}
+
+		return $asset_uri;
 	}
 }

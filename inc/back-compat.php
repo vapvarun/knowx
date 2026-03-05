@@ -22,7 +22,7 @@ function knowx_get_insufficient_requirements_message() {
 
 	if ( $insufficient_wp && $insufficient_php ) {
 		/* translators: 1: required WP version number, 2: required PHP version number, 3: available WP version number, 4: available PHP version number */
-		return sprintf( __( 'KnowX requires at least WordPress version %1$s and PHP version %2$s. You are running versions %3$s and %3$s respectively. Please update and try again.', 'knowx' ), KNOWX_MINIMUM_WP_VERSION, KNOWX_MINIMUM_PHP_VERSION, $wp_version, phpversion() );
+		return sprintf( __( 'KnowX requires at least WordPress version %1$s and PHP version %2$s. You are running versions %3$s and %4$s respectively. Please update and try again.', 'knowx' ), KNOWX_MINIMUM_WP_VERSION, KNOWX_MINIMUM_PHP_VERSION, $wp_version, phpversion() );
 	}
 
 	if ( $insufficient_wp ) {
@@ -36,6 +36,15 @@ function knowx_get_insufficient_requirements_message() {
 	}
 
 	return '';
+}
+
+/**
+ * Displays an error message if WP-CLI is used when requirements are not met.
+ *
+ * Exits script.
+ */
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	WP_CLI::error( knowx_get_insufficient_requirements_message() );
 }
 
 /**
@@ -79,6 +88,7 @@ add_action( 'load-customize.php', 'knowx_customize' );
  * Prevents the Theme Preview from being loaded when requirements are not met.
  */
 function knowx_preview() {
+	// @phpcs:ignore
 	if ( isset( $_GET['preview'] ) ) {
 		wp_die( esc_html( knowx_get_insufficient_requirements_message() ) );
 	}

@@ -15,20 +15,20 @@ use function is_singular;
 use function comments_open;
 use function get_option;
 use function wp_enqueue_script;
-use function the_ID;
-use function esc_attr;
 use function wp_list_comments;
 use function the_comments_navigation;
+use function the_ID;
+use function esc_attr;
 use function add_filter;
 use function remove_filter;
-// use function esc_html_e;
+use function esc_html_e;
 
 /**
  * Class for managing comments UI.
  *
  * Exposes template tags:
- * * `knowx()->the_comments( array $args = [] )`
- *
+ * * `knowx()->the_comments( array $args = array() )`
+ * 
  * @link https://wordpress.org/plugins/amp/
  */
 class Component implements Component_Interface, Templating_Component_Interface {
@@ -79,11 +79,27 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	}
 
 	/**
+	 * Filters the comment form default arguments.
+	 *
+	 * Change the heading level to h2 when there are no comments.
+	 *
+	 * @param array $args The default comment form arguments.
+	 * @return array      Modified comment form arguments.
+	 */
+	public function filter_comment_form_defaults( array $args ): array {
+		if ( ! get_comments_number() ) {
+			$args['title_reply_before'] = '<h2 id="reply-title" class="comment-reply-title">';
+			$args['title_reply_after']  = '</h2>';
+		}
+
+		return $args;
+	}
+
+	/**
 	 * Displays the list of comments for the current post.
 	 *
 	 * Internally this method calls `wp_list_comments()`. However, in addition to that it will render the wrapping
-	 * element for the list, so that must not be added manually. The method will also take care of generating the
-	 * necessary markup if amp-live-list should be used for comments.
+	 * element for the list, so that must not be added manually.
 	 *
 	 * @param array $args Optional. Array of arguments. See `wp_list_comments()` documentation for a list of supported
 	 *                    arguments.

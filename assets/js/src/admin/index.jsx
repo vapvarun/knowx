@@ -20,7 +20,7 @@ const textControlTypes = [
 
 const SettingsPage = () => {
 	const [ settings, setSettings ] = useState(
-		window.wpRigThemeSettings.settings
+		window.knowxThemeSettings.settings
 	);
 	const [ snackbarNotices, setSnackbarNotices ] = useState( [] );
 	const timeoutRef = useRef( null );
@@ -85,12 +85,12 @@ const SettingsPage = () => {
 									{ field.type === 'toggle' && (
 										<BaseControl
 											label={ field.label }
-											id={ `wp-rig-control-${ field.name }` } // ID for the label element
-											htmlFor={ `wp-rig-toggle-${ field.name }` } // Links label to toggle
+											id={ `knowx-control-${ field.name }` } // ID for the label element
+											htmlFor={ `knowx-toggle-${ field.name }` } // Links label to toggle
 											__nextHasNoMarginBottom
 										>
 											<FormToggle
-												id={ `wp-rig-toggle-${ field.name }` } // ID for the toggle input
+												id={ `knowx-toggle-${ field.name }` } // ID for the toggle input
 												checked={
 													!! settings[ field.name ]
 												}
@@ -154,7 +154,7 @@ const SettingsPage = () => {
 export default SettingsPage;
 
 const renderSettingsPage = () => {
-	const container = document.getElementById( 'wp-rig-settings-page' );
+	const container = document.getElementById( 'knowx-settings-page' );
 	if ( container ) {
 		const root = createRoot( container );
 		root.render( <SettingsPage /> );

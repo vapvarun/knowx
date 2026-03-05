@@ -9,7 +9,7 @@ declare global {
 	interface Window {
 		mobileBreakpoint: number;
 		isWidthMobile: () => boolean;
-		wpRig?: Element | null;
+		knowx?: Element | null;
 	}
 }
 
@@ -24,6 +24,6 @@ window.isWidthMobile = (): boolean => {
 	).fontSize.slice( 0, -2 );
 	const fontSize = parseFloat( fontSizeStr );
 	const emValue = window.innerWidth / fontSize;
-	window.wpRig = document.querySelector( '.wp-rig' );
+	window.knowx = document.querySelector( '.knowx' );
 	return emValue <= window.mobileBreakpoint;
 };

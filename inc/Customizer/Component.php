@@ -8,12 +8,14 @@
 namespace KnowX\KnowX\Customizer;
 
 use KnowX\KnowX\Component_Interface;
-use function KnowX\KnowX\knowx;
 use WP_Customize_Manager;
+
+use function KnowX\KnowX\knowx;
 use function add_action;
 use function bloginfo;
 use function wp_enqueue_script;
 use function get_theme_file_uri;
+use function get_theme_file_path;
 
 /**
  * Class for managing Customizer integration.

@@ -47,6 +47,6 @@ class Component implements Component_Interface {
 	 * Adds custom image sizes.
 	 */
 	public function action_add_image_sizes() {
-		add_image_size( 'knowx-featured', 720, 480 );
+		add_image_size( 'knowx-featured', 720, 480, true );
 	}
 }

@@ -1,9 +1,11 @@
 <?php
 /**
- * Shims for recent WordPress functions.
+ * Shims for recent WordPress functions
+ *
+ * @package knowx
  */
 
-/*
+/**
  * Adds backwards compatibility for knowx_wp_body_open() introduced with WordPress 5.2
  */
 if ( ! function_exists( 'knowx_wp_body_open' ) ) {

@@ -7,16 +7,17 @@
 
 namespace KnowX\KnowX\Accessibility;
 
+use KnowX\KnowX\Component_Interface;
+use WP_Post;
+
+use function KnowX\KnowX\knowx;
 use function add_action;
 use function add_filter;
-use function get_theme_file_path;
-use function get_theme_file_uri;
 use function wp_enqueue_script;
-use function wp_localize_script;
-use WP_Post;
-use KnowX\KnowX\Component_Interface;
-use function KnowX\KnowX\knowx;
+use function get_theme_file_uri;
+use function get_theme_file_path;
 use function wp_script_add_data;
+use function wp_localize_script;
 
 /**
  * Class for improving accessibility among various core features.
@@ -26,7 +27,7 @@ class Component implements Component_Interface {
 	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string component slug
+	 * @return string Component slug.
 	 */
 	public function get_slug(): string {
 		return 'accessibility';
@@ -91,13 +92,9 @@ class Component implements Component_Interface {
 	 *
 	 * Since it will never need to be changed, it is simply printed in its minified version.
 	 *
-	 * @see https://git.io/vWdr2
+	 * @link https://git.io/vWdr2
 	 */
 	public function action_print_skip_link_focus_fix() {
-		// If the AMP plugin is active, return early.
-		if ( knowx()->is_amp() ) {
-			return;
-		}
 
 		// Print the minified script.
 		?>
@@ -112,9 +109,8 @@ class Component implements Component_Interface {
 	 *
 	 * Checks if the menu item is the current menu item and adds the aria "current" attribute.
 	 *
-	 * @param array   $atts the HTML attributes applied to the menu item's `<a>` element
-	 * @param WP_Post $item the current menu item
-	 *
+	 * @param array   $atts The HTML attributes applied to the menu item's `<a>` element.
+	 * @param WP_Post $item The current menu item.
 	 * @return array Modified HTML attributes
 	 */
 	public function filter_nav_menu_link_attributes_aria_current( array $atts, WP_Post $item ): array {

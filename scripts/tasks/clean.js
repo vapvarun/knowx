@@ -9,7 +9,7 @@ import { deleteAsync } from 'del';
 /**
  * Internal dependencies
  */
-import { paths } from '../lib/constants.js';
+import { paths, isProd } from '../lib/constants.js';
 
 /**
  * Clean CSS
@@ -26,7 +26,7 @@ export function cleanCSS() {
 		.filter( ( path ) => path.indexOf( '/css/' ) !== -1 )
 		.map( ( path ) => `!${ path }` );
 
-	return deleteAsync( delPath.concat( keepExportPath ) );
+	return deleteAsync( delPath.concat( keepExportPath ), { force: isProd } );
 }
 
 /**
@@ -44,5 +44,5 @@ export function cleanJS() {
 		.filter( ( path ) => path.indexOf( '/js/' ) !== -1 )
 		.map( ( path ) => `!${ path }` );
 
-	return deleteAsync( delPath.concat( keepExportPath ) );
+	return deleteAsync( delPath.concat( keepExportPath ), { force: isProd } );
 }

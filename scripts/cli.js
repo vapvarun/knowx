@@ -134,7 +134,7 @@ async function runBuild( { phpcs = false, lint = false, dev = false } = {} ) {
 	await Promise.all( postBuildTasks );
 }
 
-async function runBundle( { phpcs = false, lint = false } = {} ) {
+async function runBundle( { phpcs = false, lint = false, destination = null } = {} ) {
 	const config = getThemeConfig();
 	const prodPath = path.join( rootPath, '..', config.theme.slug );
 
@@ -179,7 +179,15 @@ async function runBundle( { phpcs = false, lint = false } = {} ) {
 
 	// String replace and compress
 	await runTask( prodStringReplace, 'prodStringReplace' );
-	await runTask( prodCompress, 'prodCompress' );
+	await new Promise( ( resolve, reject ) => {
+		prodCompress( ( err ) => {
+			if ( err ) {
+				reject( new Error( `prodCompress failed: ${ err?.message || err }` ) );
+			} else {
+				resolve();
+			}
+		}, destination );
+	} );
 
 	// Generate .pot file from production directory
 	await exec( `cd ${prodPath} && mkdir -p languages && npx wp i18n make-pot . languages/knowx.pot --domain=knowx --exclude=vendor --exclude=node_modules` );
@@ -211,15 +219,15 @@ program
 	} );
 
 program
-	.command( 'bundle' )
-	.description( 'Create a production bundle' )
+	.command( 'bundle [destination]' )
+	.description( 'Create a production bundle. Optional: specify destination zip path (e.g., dist/knowx.zip)' )
 	.option( '--phpcs', 'Run PHP CodeSniffer' )
 	.option( '--lint', 'Run JS and CSS linters' )
-	.action( async ( opts ) => {
+	.action( async ( destination, opts ) => {
 		try {
 			// Ensure production env to match previous scripts
 			process.env.NODE_ENV = 'production';
-			await runBundle( { phpcs: !! opts.phpcs, lint: !! opts.lint } );
+			await runBundle( { phpcs: !! opts.phpcs, lint: !! opts.lint, destination } );
 			console.log( 'Bundle completed.' );
 		} catch ( e ) {
 			console.error( e?.message || e );

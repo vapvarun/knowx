@@ -1,0 +1,761 @@
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Imports
+	# Blocks
+	# Media
+		# Captions
+		# Galleries (Legacy)
+# Post and page content
+	# Alignments
+	# Custom block colors
+	# Custom font sizes
+# Content Navigation
+# Infinite Scrool
+# Layouts
+--------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Imports
+--------------------------------------------------------------*/
+@import "_blocks.css";
+@import "_media.css";
+@import "_forms.css";
+
+/*--------------------------------------------------------------
+# Post and page content
+--------------------------------------------------------------*/
+
+/* Custom rule  for sticky posts:
+.sticky {
+
+}
+*/
+
+.entry {
+    margin-bottom: 1rem;
+}
+
+.single-post .entry {
+    margin: 1rem 0;
+}
+
+.post-thumbnail {
+    margin-bottom: 15px;
+    display: block;
+    border-radius: 8px;
+}
+
+.blog .entry-title,
+.archive .entry-title,
+.search .entry-title {
+    margin-bottom: 6px;
+}
+
+h2.entry-title {
+    font-size: 24px;
+}
+
+h2.entry-title a {
+    color: inherit;
+}
+
+h2.entry-title a:hover {
+    color: var(--color-theme-primary);
+}
+
+.single-post .entry-header h1.entry-title {
+    margin-top: 0;
+    margin-bottom: 6px;
+}
+
+.entry-layout {
+    margin-top: 1rem;
+}
+
+.post-layout .entry-layout {
+    position: relative;
+    margin: 1rem 0;
+}
+
+.post-layout:not(.grid-layout):not(.masory-layout) .entry-layout .entry-content,
+.default-layout .entry-layout .entry-content {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.entry-header {
+    position: relative;
+}
+
+.post-categories {
+    display: none;
+}
+
+.post-thumbnail+.post-categories {
+    display: block;
+    position: absolute;
+    top: 6px;
+    left: 10px;
+    margin-bottom: 10px;
+}
+
+.post-categories a {
+    display: inline-block;
+    margin-right: 3px;
+    margin-bottom: 3px;
+    padding: 2px 6px;
+    font-size: 11px;
+    line-height: 1.5;
+    background: var(--color-theme-primary);
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.entry-meta,
+.single-post .entry-footer {
+    font-size: inherit;
+}
+
+.entry-meta {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    flex-flow: wrap;
+    font-size: 12px;
+    gap: 5px;
+}
+
+.entry-meta .posted-by {
+    display: flex;
+    align-items: center;
+    flex: 0 0 100%;
+    margin: 5px 3px 5px 0;
+}
+
+.entry-meta .author.vcard,
+.entry-meta span.posted-by>a {
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+.entry-meta .posted-by img {
+    margin-right: 5px;
+    border-radius: 100px;
+}
+
+.page-template-default .entry-meta,
+.page-template-default .entry-footer {
+    display: none;
+}
+
+.entry-meta>span {
+    margin-right: 10px;
+}
+
+.entry-meta .entry-cat-links::before,
+.entry-meta .entry-comments-link a::before,
+.entry-meta .entry-edit-link a::before,
+.entry-meta .entry-featured::before,
+.entry-meta .posted-on a::before {
+    margin-right: 4px;
+    font-family: 'FontAwesome';
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.entry-meta .entry-cat-links::before {
+    content: "\f115";
+}
+
+.entry-meta .entry-edit-link a::before {
+    content: "\f040";
+}
+
+.entry-meta .entry-comments-link a::before {
+    content: "\f0e5";
+}
+
+.entry-meta .posted-on a::before {
+    content: "\f073";
+}
+
+.entry-meta .entry-featured::before {
+    content: "\f041";
+}
+
+/* Post box layout */
+.post-box-layout .knowx-post-content-wrapper {
+    position: relative;
+    background: #fff;
+    padding: 1em;
+    border-radius: 4px;
+}
+
+.post-box-layout.entry-layout .knowx-post-content-wrapper .entry-content {
+    border-bottom: 0 !important;
+}
+
+.post-box-layout .post-thumbnail img {
+    border-radius: 4px;
+}
+
+/* Hides the update date and time. */
+
+.updated:not(.published) {
+    display: none;
+}
+
+.page-content,
+.entry-content,
+.entry-summary {
+    margin: 1em 0 0;
+}
+
+.page-content a,
+.entry-content a,
+.entry-summary a {
+    text-decoration: underline;
+}
+
+.page-content>*,
+.entry-content>*,
+.entry-summary>* {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: var(--content-width);
+}
+
+.page-content ul,
+.entry-content ul,
+.entry-summary ul,
+.page-content ol:not(.comment-list),
+.entry-content ol:not(.comment-list),
+.entry-summary ol:not(.comment-list) {
+    margin-left: 1.05em;
+}
+
+.page-header,
+.entry-header,
+.entry-footer,
+.post-navigation,
+.page-navigation,
+.comments-area {
+    margin: 0 0 1.5em;
+    max-width: var(--content-width);
+}
+
+article .entry-header {
+    max-width: max-content;
+}
+
+.type-grade .entry-header,
+.type-grade .entry-footer,
+.type-level .entry-header,
+.type-level .entry-footer,
+.type-quests .entry-header,
+.type-quests .entry-footer,
+.type-badges .entry-header,
+.type-badges .entry-footer {
+    display: none;
+}
+
+@media (--content-query) {
+    .page-content>*,
+    .entry-content>*,
+    .entry-summary>*,
+    .page-header,
+    .entry-header,
+    .entry-footer,
+    .post-navigation,
+    .page-navigation,
+    .comments-area {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.single-post .entry-content ul:not(.blocks-gallery-grid),
+.single-post .entry-content ol {
+    padding-right: 2.5em;
+    padding-left: 2.5em;
+}
+
+.entry-content ul ul,
+.entry-content ol ol {
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
+}
+
+
+/* Align .more-link with the content. */
+
+.entry-content>.more-link {
+    display: block;
+}
+
+.page-links {
+    clear: both;
+    margin-bottom: 1.5em;
+}
+
+.entry-footer span {
+    margin-right: 1em;
+}
+
+.entry-footer {
+    clear: both;
+    margin-bottom: 0;
+    padding: 1.5em 0 0;
+    border-top: 1px solid #e8e8e8;
+}
+
+@media (--content-query) {
+    .entry-footer {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+
+/*--------------------------------------------------------------
+## Alignments
+--------------------------------------------------------------*/
+
+.alignleft {
+    float: left;
+    margin-right: 1.5rem;
+}
+
+.alignright {
+    float: right;
+    margin-left: 1.5rem;
+}
+
+.aligncenter {
+    clear: both;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.alignwide {
+    max-width: calc(50% + var(--content-width) / 2);
+}
+
+.alignfull {
+    max-width: 100%;
+    padding: 0;
+}
+
+
+/*--------------------------------------------------------------
+## Custom block colors.
+--------------------------------------------------------------*/
+
+.has-theme-primary-color,
+.has-theme-primary-color a {
+    color: var(--color-theme-primary);
+}
+
+.has-theme-primary-background-color {
+    background-color: var(--color-theme-primary);
+}
+
+.has-theme-secondary-color,
+.has-theme-secondary-color a {
+    color: var(--color-theme-secondary);
+}
+
+.has-theme-secondary-background-color {
+    background-color: var(--color-theme-secondary);
+}
+
+.has-theme-red-color,
+.has-theme-red-color a {
+    color: var(--color-theme-red);
+}
+
+.has-theme-red-background-color {
+    background-color: var(--color-theme-red);
+}
+
+.has-theme-green-color,
+.has-theme-green-color a {
+    color: var(--color-theme-green);
+}
+
+.has-theme-green-background-color {
+    background-color: var(--color-theme-green);
+}
+
+.has-theme-blue-color,
+.has-theme-blue-color a {
+    color: var(--color-theme-blue);
+}
+
+.has-theme-blue-background-color {
+    background-color: var(--color-theme-blue);
+}
+
+.has-theme-yellow-color,
+.has-theme-yellow-color a {
+    color: var(--color-theme-yellow);
+}
+
+.has-theme-yellow-background-color {
+    background-color: var(--color-theme-yellow);
+}
+
+.has-theme-black-color,
+.has-theme-black-color a {
+    color: var(--color-theme-black);
+}
+
+.has-theme-black-background-color {
+    background-color: var(--color-theme-black);
+}
+
+.has-theme-grey-color,
+.has-theme-grey-color a {
+    color: var(--color-theme-grey);
+}
+
+.has-theme-grey-background-color {
+    background-color: var(--color-theme-grey);
+}
+
+.has-theme-white-color,
+.has-theme-white-color a {
+    color: var(--color-theme-white);
+}
+
+.has-theme-white-background-color {
+    background-color: var(--color-theme-white);
+}
+
+.has-custom-daylight-color,
+.has-custom-daylight-color a {
+    color: var(--color-custom-daylight);
+}
+
+.has-custom-daylight-background-color {
+    background-color: var(--color-custom-daylight);
+}
+
+.has-custom-sun-color,
+.has-custom-sun-color a {
+    color: var(--color-custom-sun);
+}
+
+.has-custom-sun-background-color {
+    background-color: var(--color-custom-sun);
+}
+
+
+/*--------------------------------------------------------------
+## Custom block font sizes.
+--------------------------------------------------------------*/
+
+.has-small-font-size {
+    font-size: var(--font-size-small);
+}
+
+.has-regular-font-size {
+    font-size: var(--font-size-regular);
+}
+
+.has-large-font-size {
+    font-size: var(--font-size-large);
+}
+
+.has-larger-font-size {
+    font-size: var(--font-size-larger);
+}
+
+
+/*--------------------------------------------------------------
+## Custom post layouts.
+--------------------------------------------------------------*/
+
+.default-layout .entry-layout,
+.default-layout .entry-layout,
+.default-layout .entry-layout,
+.default-layout .entry-layout {
+    width: 100%;
+}
+
+.post-layout.grid-layout .entry-layout,
+.post-layout.masonry-layout .entry-layout {
+    margin: 15px 0;
+}
+
+.grid-layout .entry-layout,
+.masonry-layout .entry-layout {
+    margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# Content navigation
+--------------------------------------------------------------*/
+.site-main .comment-navigation,
+.site-main .posts-navigation,
+.site-main .post-navigation,
+.site-main .pagination {
+	border-bottom: 1px solid var(--border-color-dark);
+	margin: 0 auto 2em;
+	max-width: var(--content-width);
+	overflow: hidden;
+	padding: 0 1.5rem 2em;
+	font-family: var(--highlight-font-family);
+	font-stretch: condensed;
+}
+
+@media (--content-query) {
+
+	.site-main .comment-navigation,
+	.site-main .posts-navigation,
+	.site-main .post-navigation,
+	.site-main .pagination {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.nav-links {
+	display: flex;
+}
+
+.comment-navigation .nav-previous,
+.posts-navigation .nav-previous,
+.post-navigation .nav-previous {
+	width: 50%;
+	flex: 1 0 50%;
+}
+
+.comment-navigation .nav-next,
+.posts-navigation .nav-next,
+.post-navigation .nav-next {
+	text-align: end;
+	flex: 1 0 50%;
+}
+
+.post-navigation-sub span {
+	color: var(--global-font-color);
+	text-decoration: none;
+	display: inline-block;
+}
+
+.site-main .pagination {
+	margin-bottom: 1.5em;
+}
+
+.pagination .nav-links {
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.pagination .page-numbers {
+	display: inline-block;
+	margin-bottom: 0.5em;
+	margin-right: 1em;
+	border: 1px solid var(--color-link);
+	min-width: 1.75em;
+	line-height: 1.75;
+	text-align: center;
+	text-decoration: none;
+}
+
+.pagination a:visited {
+	color: var(--color-link);
+}
+
+.pagination a:hover,
+.pagination a:focus,
+.pagination a:active {
+	border-color: var(--color-link-active);
+}
+
+.pagination .prev,
+.pagination .next {
+	min-width: auto;
+	border-color: transparent;
+	text-decoration: underline;
+}
+
+.pagination .prev:hover,
+.pagination .prev:focus,
+.pagination .prev:active,
+.pagination .next:hover,
+.pagination .next:focus,
+.pagination .next:active {
+	border-color: transparent;
+}
+
+.pagination .dots {
+	min-width: auto;
+	border: none;
+}
+
+.pagination .current {
+	border-color: var(--border-color-dark);
+}
+
+/*--------------------------------------------------------------
+# Infinite scroll
+--------------------------------------------------------------*/
+
+/* Globally hidden elements when Infinite Scroll is supported and in use. */
+.infinite-scroll .posts-navigation,
+.infinite-scroll .pagination,
+.infinite-scroll.neverending .site-footer {
+
+	/* Theme Footer (when set to scrolling) */
+	display: none;
+}
+
+/* When Infinite Scroll has reached its end we need to re-display elements that
+were hidden (via .neverending) before. */
+.infinity-end.neverending .site-footer {
+	display: block;
+}
+
+.wp-rig {
+	display:none;
+}
+
+/*--------------------------------------------------------------
+# Layouts
+--------------------------------------------------------------*/
+.site {
+    margin: 0 auto;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.blog .site-wrapper,
+.home-page .site-wrapper {
+    margin-top: 15px;
+}
+
+.page-template-full-width .entry-content, 
+.page-template-full-width .entry-summary, 
+.page-template-full-width .page-content {
+    margin: 0;
+}
+
+@media (min-width: 768px) {
+
+    #primary,
+    .site-wrapper {
+        min-height: calc(100vh - 190px);
+    }
+
+    .page-template-full-width #primary,
+    .page-template-full-width .site-wrapper {
+        min-height: calc(100vh - 130px);
+    }
+}
+
+@media (--sidebar-query) {
+
+    .has-sidebar-right:not(.bbpress):not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper,
+    .has-bbpress-sidebar-right.bbpress .site-wrapper {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        grid-gap: 2rem;
+        justify-content: center;
+    }
+
+    .has-sidebar-left:not(.bbpress):not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper,
+    .has-bbpress-sidebar-left.bbpress .site-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        grid-gap: 2rem;
+        justify-content: center;
+    }
+
+    .has-sidebar-both:not(.bbpress):not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper,
+    .has-bbpress-sidebar-both.bbpress .site-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-gap: 1.5rem;
+        justify-content: center;
+    }
+
+    .has-sidebar-both:not(.bbpress):not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .primary-sidebar,
+    .has-bbpress-sidebar-both.bbpress .primary-sidebar {
+        padding: 0;
+        grid-column: 3;
+        min-width: 0;
+    }
+
+    .has-sidebar-both:not(.bbpress):not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-main,
+    .has-bbpress-sidebar-both.bbpress .site-main {
+        grid-column: 2;
+        min-width: 0;
+    }
+
+    .has-sidebar-both:not(.bbpress):not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .primary-sidebar,
+    .has-bbpress-sidebar-both.bbpress .primary-sidebar {
+        grid-column: 3;
+        min-width: 0;
+    }
+
+    .site-header {
+        grid-column: span 2;
+    }
+
+    .site-main {
+        grid-column: 1;
+        min-width: 0;
+    }
+
+    .has-sidebar-left:not(.bbpress):not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-main,
+    .has-bbpress-sidebar-left.bbpress .site-main {
+        grid-column: 2;
+        min-width: 0;
+    }
+
+    .primary-sidebar {
+        grid-column: 2;
+        min-width: 0;
+    }
+
+    .site-footer {
+        grid-column: span 2;
+    }
+}
+
+@media screen and (max-width: 60em) {
+
+    /* Sidebar and Content ordering in mobile */
+    .site-wrapper {
+        display: flex;
+        flex-flow: row wrap;
+    }
+
+    .left-sidebar,
+    .woo-left-sidebar {
+        order: 2;
+        width: 100%;
+    }
+
+    #primary {
+        order: 1;
+        width: 100%;
+    }
+
+    .primary-sidebar,
+    .woo-primary-sidebar {
+        order: 3;
+        width: 100%;
+    }
+}

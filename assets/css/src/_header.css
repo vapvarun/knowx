@@ -1,0 +1,99 @@
+/*--------------------------------------------------------------
+# Imports
+--------------------------------------------------------------*/
+@import "_navigation.css";
+
+/*--------------------------------------------------------------
+# Header
+--------------------------------------------------------------*/
+
+.site-header-wrapper {
+    position: relative;
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: 0;
+    background: #fff;
+    min-height: 51px;
+    z-index: 999;
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 5px 10px 0 rgba(189, 189, 189, 0.15);
+}
+
+.sticky-header .site-header-wrapper.has-sticky-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+@media (max-width: 767px) {
+    .site-header-wrapper {
+        z-index: 9999;
+    }
+}
+
+.sticky-header .site-header-wrapper.has-sticky-header {
+    box-shadow: 0 1px 0 0 rgba(206, 206, 206, 0.05), 0 5px 10px 0 rgba(132, 132, 132, 0.15);
+}
+
+.site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-image {
+    margin: 0 auto;
+}
+
+.header-image img {
+    display: block;
+    margin: 0 auto;
+}
+
+.custom-logo-link {
+    display: block;
+}
+
+.site-branding {
+    display: flex;
+    align-items: center;
+}
+
+.site-logo-wrapper>a {
+    margin-right: 15px;
+}
+
+.site-branding img {
+    max-width: 150px;
+}
+
+.site-title {
+    margin: 0;
+    margin-bottom: 6px;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #333332;
+}
+
+.site-title a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.site-title a:hover {
+    color: var(--color-site-title-hover);
+}
+
+.site-description {
+    margin: -5px 0 0;
+    font-size: 14px;
+    font-weight: inherit;
+    line-height: 1.4;
+    word-wrap: break-word;
+    color: #757575;
+}

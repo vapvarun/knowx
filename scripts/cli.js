@@ -5,7 +5,7 @@
  used in gulpfile.js, but without using gulp itself.
 */
 
-import { exec as execCb } from 'node:child_process';
+import { exec as execCb, execFile as execFileCb, spawn } from 'node:child_process';
 import { promisify } from 'node:util';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -26,6 +26,7 @@ import { getThemeConfig } from './lib/utils.js';
 import generateCert from './tasks/generateCert.js';
 
 const exec = promisify( execCb );
+const execFile = promisify( execFileCb );
 const program = new Command();
 
 // Utility to run possibly callback-style tasks as promises
@@ -90,6 +91,69 @@ async function buildJS( { dev = false } = {} ) {
 		// esbuild sometimes prints to stderr for warnings; don't treat as fatal
 		console.error( stderr );
 	}
+	
+	// In production mode, copy built JS files to production directory
+	if ( process.env.NODE_ENV === 'production' && prodThemePath ) {
+		const prodJsDir = path.join( prodThemePath, 'assets', 'js' );
+		
+		// Ensure production JS directory exists
+		if ( ! fs.existsSync( prodJsDir ) ) {
+			fs.mkdirSync( prodJsDir, { recursive: true } );
+		}
+		
+		// Copy all JS files from development to production
+		const devJsFiles = fs.readdirSync( 'assets/js' ).filter( file => file.endsWith( '.js' ) );
+		for ( const file of devJsFiles ) {
+			const srcPath = path.join( 'assets', 'js', file );
+			const destPath = path.join( prodJsDir, file );
+			fs.copyFileSync( srcPath, destPath );
+		}
+		
+		// Copy non-minified source JS files to main js folder
+		const jsSrcDir = path.join( 'assets', 'js', 'src' );
+		if ( fs.existsSync( jsSrcDir ) ) {
+			const jsSrcFiles = fs.readdirSync( jsSrcDir ).filter( file => 
+				file.endsWith( '.js' ) || file.endsWith( '.ts' ) || file.endsWith( '.tsx' ) || file.endsWith( '.cjs' )
+			);
+			for ( const file of jsSrcFiles ) {
+				const srcPath = path.join( jsSrcDir, file );
+				const destPath = path.join( prodJsDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+		}
+		
+		// Copy admin JS files if they exist
+		const adminJsDir = path.join( 'assets', 'js', 'admin' );
+		if ( fs.existsSync( adminJsDir ) ) {
+			const prodAdminDir = path.join( prodJsDir, 'admin' );
+			if ( ! fs.existsSync( prodAdminDir ) ) {
+				fs.mkdirSync( prodAdminDir, { recursive: true } );
+			}
+			
+			const adminJsFiles = fs.readdirSync( adminJsDir ).filter( file => file.endsWith( '.js' ) );
+			for ( const file of adminJsFiles ) {
+				const srcPath = path.join( adminJsDir, file );
+				const destPath = path.join( prodAdminDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+		}
+		
+		// Copy non-minified source admin JS files from src/admin
+		const jsSrcAdminDir = path.join( 'assets', 'js', 'src', 'admin' );
+		if ( fs.existsSync( jsSrcAdminDir ) ) {
+			const prodAdminDir = path.join( prodJsDir, 'admin' );
+			if ( ! fs.existsSync( prodAdminDir ) ) {
+				fs.mkdirSync( prodAdminDir, { recursive: true } );
+			}
+			
+			const srcAdminJsFiles = fs.readdirSync( jsSrcAdminDir ).filter( file => file.endsWith( '.js' ) );
+			for ( const file of srcAdminJsFiles ) {
+				const srcPath = path.join( jsSrcAdminDir, file );
+				const destPath = path.join( prodAdminDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+		}
+	}
 }
 
 async function buildCSS( { dev = false } = {} ) {
@@ -97,6 +161,107 @@ async function buildCSS( { dev = false } = {} ) {
 	const { stderr } = await exec( cmd );
 	if ( stderr ) {
 		console.error( stderr );
+	}
+	
+	// In production mode, copy built CSS files to production directory
+	if ( process.env.NODE_ENV === 'production' && prodThemePath ) {
+		const prodCssDir = path.join( prodThemePath, 'assets', 'css' );
+		
+		// Ensure production CSS directory exists
+		if ( ! fs.existsSync( prodCssDir ) ) {
+			fs.mkdirSync( prodCssDir, { recursive: true } );
+		}
+		
+		// Copy all CSS files from development to production
+		const devCssFiles = fs.readdirSync( 'assets/css' ).filter( file => file.endsWith( '.css' ) );
+		for ( const file of devCssFiles ) {
+			const srcPath = path.join( 'assets', 'css', file );
+			const destPath = path.join( prodCssDir, file );
+			fs.copyFileSync( srcPath, destPath );
+		}
+		
+		// Copy non-minified source CSS files to main css folder (including partials like _accessibility.css)
+		const cssSrcDir = path.join( 'assets', 'css', 'src' );
+		if ( fs.existsSync( cssSrcDir ) ) {
+			const cssSrcFiles = fs.readdirSync( cssSrcDir ).filter( file => file.endsWith( '.css' ) && ! file.startsWith( '_' ) );
+			for ( const file of cssSrcFiles ) {
+				const srcPath = path.join( cssSrcDir, file );
+				const destPath = path.join( prodCssDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+			
+			// Copy partial CSS files (starting with _) to main css folder
+			const partialCssFiles = fs.readdirSync( cssSrcDir ).filter( file => file.endsWith( '.css' ) && file.startsWith( '_' ) );
+			for ( const file of partialCssFiles ) {
+				const srcPath = path.join( cssSrcDir, file );
+				const destPath = path.join( prodCssDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+		}
+		
+		// Copy admin CSS files if they exist
+		const adminCssDir = path.join( 'assets', 'css', 'admin' );
+		if ( fs.existsSync( adminCssDir ) ) {
+			const prodAdminDir = path.join( prodCssDir, 'admin' );
+			if ( ! fs.existsSync( prodAdminDir ) ) {
+				fs.mkdirSync( prodAdminDir, { recursive: true } );
+			}
+			
+			const adminCssFiles = fs.readdirSync( adminCssDir ).filter( file => file.endsWith( '.css' ) );
+			for ( const file of adminCssFiles ) {
+				const srcPath = path.join( adminCssDir, file );
+				const destPath = path.join( prodAdminDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+		}
+		
+		// Copy non-minified source admin CSS files from src/admin
+		const cssSrcAdminDir = path.join( 'assets', 'css', 'src', 'admin' );
+		if ( fs.existsSync( cssSrcAdminDir ) ) {
+			const prodAdminDir = path.join( prodCssDir, 'admin' );
+			if ( ! fs.existsSync( prodAdminDir ) ) {
+				fs.mkdirSync( prodAdminDir, { recursive: true } );
+			}
+			
+			const srcAdminCssFiles = fs.readdirSync( cssSrcAdminDir ).filter( file => file.endsWith( '.css' ) );
+			for ( const file of srcAdminCssFiles ) {
+				const srcPath = path.join( cssSrcAdminDir, file );
+				const destPath = path.join( prodAdminDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+		}
+		
+		// Copy editor CSS files if they exist
+		const editorCssDir = path.join( 'assets', 'css', 'editor' );
+		if ( fs.existsSync( editorCssDir ) ) {
+			const prodEditorDir = path.join( prodCssDir, 'editor' );
+			if ( ! fs.existsSync( prodEditorDir ) ) {
+				fs.mkdirSync( prodEditorDir, { recursive: true } );
+			}
+			
+			const editorCssFiles = fs.readdirSync( editorCssDir ).filter( file => file.endsWith( '.css' ) );
+			for ( const file of editorCssFiles ) {
+				const srcPath = path.join( editorCssDir, file );
+				const destPath = path.join( prodEditorDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+		}
+		
+		// Copy non-minified source editor CSS files from src/editor
+		const cssSrcEditorDir = path.join( 'assets', 'css', 'src', 'editor' );
+		if ( fs.existsSync( cssSrcEditorDir ) ) {
+			const prodEditorDir = path.join( prodCssDir, 'editor' );
+			if ( ! fs.existsSync( prodEditorDir ) ) {
+				fs.mkdirSync( prodEditorDir, { recursive: true } );
+			}
+			
+			const srcEditorCssFiles = fs.readdirSync( cssSrcEditorDir ).filter( file => file.endsWith( '.css' ) );
+			for ( const file of srcEditorCssFiles ) {
+				const srcPath = path.join( cssSrcEditorDir, file );
+				const destPath = path.join( prodEditorDir, file );
+				fs.copyFileSync( srcPath, destPath );
+			}
+		}
 	}
 }
 
@@ -135,9 +300,6 @@ async function runBuild( { phpcs = false, lint = false, dev = false } = {} ) {
 }
 
 async function runBundle( { phpcs = false, lint = false, destination = null } = {} ) {
-	const config = getThemeConfig();
-	const prodPath = path.join( rootPath, '..', config.theme.slug );
-
 	// Prepare production
 	await runTask( prodPrep, 'prodPrep' );
 
@@ -177,8 +339,40 @@ async function runBundle( { phpcs = false, lint = false, destination = null } = 
 	];
 	await Promise.all( middle );
 
-	// String replace and compress
+	// String replace
 	await runTask( prodStringReplace, 'prodStringReplace' );
+
+	// Generate .pot file from production directory (before compression)
+	const potConfig = getThemeConfig();
+	const potDomain = potConfig.theme.slug || 'knowx';
+	const languagesDir = path.join( prodThemePath, 'languages' );
+	const potFile = path.join( languagesDir, `${ potDomain }.pot` );
+
+	// Ensure languages directory exists
+	if ( ! fs.existsSync( languagesDir ) ) {
+		fs.mkdirSync( languagesDir, { recursive: true } );
+	}
+
+	// Copy translation files (.pot, .po, .mo, .l10n.php, .json) from source
+	const srcLangDir = path.join( rootPath, 'languages' );
+	if ( fs.existsSync( srcLangDir ) ) {
+		const langFiles = fs.readdirSync( srcLangDir ).filter( f =>
+			f.endsWith( '.pot' ) || f.endsWith( '.po' ) || f.endsWith( '.mo' ) ||
+			f.endsWith( '.l10n.php' ) || f.endsWith( '.json' )
+		);
+		for ( const langFile of langFiles ) {
+			const srcFile = path.join( srcLangDir, langFile );
+			// Rename pot file to match new domain if needed
+			let destFileName = langFile;
+			if ( langFile.endsWith( '.pot' ) && langFile !== `${ potDomain }.pot` ) {
+				destFileName = `${ potDomain }.pot`;
+			}
+			const destFile = path.join( languagesDir, destFileName );
+			fs.copyFileSync( srcFile, destFile );
+		}
+	}
+
+	// Compress (creates zip and cleans up temp folder)
 	await new Promise( ( resolve, reject ) => {
 		prodCompress( ( err ) => {
 			if ( err ) {
@@ -188,9 +382,6 @@ async function runBundle( { phpcs = false, lint = false, destination = null } = 
 			}
 		}, destination );
 	} );
-
-	// Generate .pot file from production directory
-	await exec( `cd ${prodPath} && mkdir -p languages && npx wp i18n make-pot . languages/knowx.pot --domain=knowx --exclude=vendor --exclude=node_modules` );
 }
 
 program
@@ -418,7 +609,7 @@ program
 							'Enter your local development domain (without protocol), e.g. mysite.local:10004',
 						default:
 							defaults?.dev?.browserSync?.proxyURL ||
-							'knowx.test:8888',
+							'knowx.local',
 						validate: ( input ) =>
 							!! String( input ).trim() ||
 							'Please enter a domain (e.g. mysite.local:10004)',
@@ -451,7 +642,7 @@ program
 				answers = {
 					proxyURL:
 						defaults?.dev?.browserSync?.proxyURL ||
-						'knowx.test:8888',
+						'knowx.local',
 					bypassPort: String(
 						defaults?.dev?.browserSync?.bypassPort || '8181'
 					),
@@ -500,7 +691,7 @@ program
 			);
 			console.log( '  4) Build assets once: npm run build' );
 			console.log(
-				'  5) Learn common KnowX workflows: https://knowx.io/getting-started'
+				'  5) Refer to theme documentation for development workflows'
 			);
 			console.log( '  6) Create a production bundle: npm run bundle' );
 		} catch ( e ) {

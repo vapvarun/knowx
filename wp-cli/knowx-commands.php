@@ -11,11 +11,11 @@ if ( ! defined( 'WP_CLI' ) || ! WP_CLI ) {
 
 
 /**
- * Class Rig_Command
+ * Class KnowX_Command
  *
  * A WP-CLI command class designed to assist in setting up a WordPress development environment. This class provides functionality to install a set of curated plugins and configure pages within WordPress to establish a standard development setup.
  */
-class Rig_Command extends WP_CLI_Command {
+class KnowX_Command extends WP_CLI_Command {
 
 
 	/**
@@ -593,4 +593,4 @@ class Rig_Command extends WP_CLI_Command {
 	}
 }
 
-WP_CLI::add_command( 'rig', 'Rig_Command' );
+WP_CLI::add_command( 'knowx', 'KnowX_Command' );

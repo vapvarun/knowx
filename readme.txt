@@ -10,14 +10,14 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 
 == Description ==
-KnowX is built with KnowX for your knowledge base.
+KnowX is a free WordPress theme built for knowledge bases.
 
 == KnowX License ==
 
 KnowX is licensed under the GNU General Public License v3.0 (or later)
 More details here: https://www.gnu.org/licenses/gpl-3.0.html
 
-KnowX is based on KnowX (https://github.com/knowx/knowx), which is released under the GNU General Public License v3.0 (or later).
+KnowX is based on WP Rig (https://github.com/wprig/wprig), which is released under the GNU General Public License v3.0 (or later).
 
 == Copyright ==
 

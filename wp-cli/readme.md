@@ -139,7 +139,7 @@ knowx menu_list --format=json
 ```
 
 ## Development Notes
-- All commands are part of the class extending `WP_CLI_Command` `Rig_Command`
+- All commands are part of the class extending `WP_CLI_Command` `KnowX_Command`
 - Commands automatically handle error cases and provide user feedback
 - The command includes progress bars for better user experience `fake_menu_items`
 - Menu creation is intelligent - it will use existing menus by name or ID, or create new ones as needed

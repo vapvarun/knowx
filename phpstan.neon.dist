@@ -14,5 +14,4 @@ parameters:
         - scripts/
         - external/
         - inc/Kirki/
-        - inc/Dropdown_Select/
         - wp-cli/

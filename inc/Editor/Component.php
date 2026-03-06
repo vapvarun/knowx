@@ -64,7 +64,7 @@ class Component implements Component_Interface {
 				array(
 					'name'  => __( 'Primary', 'knowx' ),
 					'slug'  => 'theme-primary',
-					'color' => '#e36d60',
+					'color' => '#03a9f4',
 				),
 				array(
 					'name'  => __( 'Secondary', 'knowx' ),
@@ -131,26 +131,26 @@ class Component implements Component_Interface {
 				array(
 					'name'      => __( 'Small', 'knowx' ),
 					'shortName' => __( 'S', 'knowx' ),
-					'size'      => 16,
+					'size'      => 13,
 					'slug'      => 'small',
 				),
 				array(
 					'name'      => __( 'Medium', 'knowx' ),
 					'shortName' => __( 'M', 'knowx' ),
-					'size'      => 25,
+					'size'      => 20,
 					'slug'      => 'medium',
 				),
 				array(
 					'name'      => __( 'Large', 'knowx' ),
 					'shortName' => __( 'L', 'knowx' ),
-					'size'      => 31,
+					'size'      => 36,
 					'slug'      => 'large',
 				),
 				array(
-					'name'      => __( 'Larger', 'knowx' ),
+					'name'      => __( 'Extra Large', 'knowx' ),
 					'shortName' => __( 'XL', 'knowx' ),
-					'size'      => 39,
-					'slug'      => 'larger',
+					'size'      => 42,
+					'slug'      => 'x-large',
 				),
 			)
 		);

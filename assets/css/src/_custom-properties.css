@@ -53,6 +53,30 @@
 
     --color-quote-border: #111111;
     --color-quote-citation: #6c7781;
+
+    /* Heading colors */
+    --color-h1: #333333;
+    --color-h2: #333333;
+    --color-h3: #333333;
+    --color-h4: #444444;
+    --color-h5: #555555;
+    --color-h6: #666666;
+
+    /* Block backgrounds */
+    --color-block-bg-subtle: #f7f7f9;
+    --color-code-bg: #2d2d2d;
+    --color-code-text: #f8f8f2;
+
+    /* Border radius */
+    --global-border-radius: 4px;
+    --button-border-radius: 3px;
+    --form-border-radius: 4px;
+    --textarea-border-radius: 4px;
+
+    /* Site identity */
+    --color-site-title: #333333;
+    --color-site-tagline: #666666;
+
     /* Custom editor font sizes */
     --font-size-small: calc(16 / var(--global-font-size) * 1rem);
     --font-size-regular: calc(var(--global-font-size) / 16 * 1rem);

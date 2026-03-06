@@ -94,8 +94,8 @@ option {
 }
 
 .wp-block-image.is-style-knowx-border img {
-    border: 2px solid var(--color-theme-primary); /* Adjust the border properties as needed */
-    border-radius: 5px; /* Optional: Add border-radius for rounded corners */
+	border: 2px solid var(--color-theme-primary);
+	border-radius: 5px;
 }
 
 .editor-styles-wrapper {
@@ -148,8 +148,7 @@ option {
     -webkit-appearance: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-transition: all .2s linear;
-    transition: all .2s linear;
+	transition: all 0.2s linear;
 }
 
 .wp-element-button:hover,

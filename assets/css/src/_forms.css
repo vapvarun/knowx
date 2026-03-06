@@ -8,7 +8,7 @@ textarea {
 /* stylelint-enable */
 
 /* stylelint-disable */
-button:not(.menu-toggle),
+button:not(.menu-toggle,.wp-block-accordion-heading__toggle),
 input[type="button"],
 input[type="reset"],
 input[type="submit"],
@@ -46,7 +46,7 @@ a.read-more.button {
 }
 /* stylelint-enable */
 
-button:not(.menu-toggle):hover,
+button:not(.menu-toggle,.wp-block-accordion-heading__toggle):hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover,

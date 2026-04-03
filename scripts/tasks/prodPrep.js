@@ -56,17 +56,22 @@ export default function prodPrep( done ) {
 		);
 		return done( new Error( 'Production theme path missing' ) );
 	}
-	if ( path.basename( prodThemePath ) === path.basename( rootPath ) ) {
+	// Safety check: ensure prodThemePath is inside dist/ and not the source directory
+	const normalizedProdPath = path.normalize( prodThemePath );
+	const normalizedRootPath = path.normalize( rootPath );
+	const expectedDistPath = path.join( normalizedRootPath, 'dist' );
+
+	if ( ! normalizedProdPath.startsWith( expectedDistPath ) ) {
 		log(
 			colors.red(
 				`${ colors.bold(
 					'Error:'
-				) } The theme slug cannot be the same as the dev theme directory name.`
+				) } Production path must be inside dist/ folder to prevent overwriting source.`
 			)
 		);
 		return done(
 			new Error(
-				'Production theme slug matches development directory name'
+				'Production theme path is not inside dist/ folder'
 			)
 		);
 	}
@@ -180,7 +185,7 @@ export default function prodPrep( done ) {
 		// Normalize source file path for consistent handling across platforms
 		const relativePath = path.relative( rootPath, srcFilePath );
 
-		// Exclude certain root-level directories from being bundled
+		// Exclude certain directories and files from being bundled
 		try {
 			// Use forward slash as separator for consistency across platforms
 			const topLevel =
@@ -188,7 +193,10 @@ export default function prodPrep( done ) {
 				relativePath.split( '\\' )[ 0 ] ||
 				'';
 			const excludedDirs = new Set( [ 'childify_backup', 'scripts' ] );
-			if ( excludedDirs.has( topLevel ) ) {
+			const excludedFiles = new Set( [ 'rector.php', 'phpcs.xml.dist', 'phpstan.neon', 'grumphp.yml' ] );
+			const fileName = path.basename( relativePath );
+
+			if ( excludedDirs.has( topLevel ) || excludedFiles.has( fileName ) ) {
 				log(
 					colors.gray(
 						`prodPrep: Skipping ${ relativePath } (excluded)`

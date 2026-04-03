@@ -49,9 +49,9 @@ export const nameFieldDefaults = {
 };
 
 // Default Theme Paths
-// Use a hidden .build directory for production to avoid conflicts
+// Use dist/.build/ directory for production to avoid conflicts with source
 export const prodThemePath = isProd
-	? path.normalize( `${ rootPath }/../.build` )
+	? path.normalize( `${ rootPath }/dist/.build` )
 	: undefined;
 export const prodAssetsDir = isProd ? `${ prodThemePath }/assets` : assetsDir;
 

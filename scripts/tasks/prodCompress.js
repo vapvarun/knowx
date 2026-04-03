@@ -6,15 +6,14 @@ import fs from 'node:fs';
 import fse from 'fs-extra';
 import archiver from 'archiver';
 
-import { prodThemePath, rootPath } from '../lib/constants.js';
+import { prodThemePath } from '../lib/constants.js';
 import { getThemeConfig } from '../lib/utils.js';
 
 /**
  * Gulp-free production compression task: create a zip from prodThemePath
  * @param {Function} done callback when finished
- * @param {string|null} customDestination optional custom destination path for the zip file
  */
-export default function prodCompress( done, customDestination = null ) {
+export default function prodCompress( done ) {
 	try {
 		const config = getThemeConfig();
 
@@ -22,35 +21,33 @@ export default function prodCompress( done, customDestination = null ) {
 			return done();
 		}
 
-		const zipName = `${ config.theme.slug }.zip`;
-		let destZip;
+		// Use dist_slug for zip/folder names (allows hyphens), slug for PHP identifiers
+		const distSlug = config.theme.dist_slug || config.theme.slug;
+		const version = config.theme.version;
+		const zipName = version ? `${ distSlug }-${ version }.zip` : `${ distSlug }.zip`;
+		const destDir = path.normalize( path.join( prodThemePath, '..' ) );
+		const destZip = path.join( destDir, zipName );
 
-		if ( customDestination ) {
-			// Custom destination provided (e.g., dist/knowx.zip)
-			destZip = path.resolve( rootPath, customDestination );
-			// Ensure the directory exists
-			const destDir = path.dirname( destZip );
-			fse.ensureDirSync( destDir );
-		} else {
-			// Default behavior: zip in dist/ folder
-			const destDir = path.join( rootPath, 'dist' );
-			destZip = path.join( destDir, zipName );
-			fse.ensureDirSync( destDir );
-		}
+		fse.ensureDirSync( destDir );
 
 		const output = fs.createWriteStream( destZip );
 		const archive = archiver( 'zip', { zlib: { level: 9 } } );
 
 		output.on( 'close', () => {
-			console.log( `Created zip: ${ destZip }` );
+			// Clean up temp folder after zip is created
+			try {
+				fse.removeSync( prodThemePath );
+			} catch ( cleanupErr ) {
+				console.warn( `Warning: Could not clean up temp folder: ${ cleanupErr.message }` );
+			}
 			done();
 		} );
 		output.on( 'error', ( err ) => done( err ) );
 		archive.on( 'error', ( err ) => done( err ) );
 
 		archive.pipe( output );
-		// Add contents of prodThemePath to the root of the zip
-		archive.directory( prodThemePath, false );
+		// Add contents of prodThemePath with dist_slug as root folder in zip
+		archive.directory( prodThemePath, distSlug );
 		archive.finalize();
 	} catch ( e ) {
 		done( e );

@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
 				array(
 					'setting'  => 'site_sub_header',
 					'operator' => '==',
-					'value'    => '1',
+					'value'    => true,
 				),
 			),
 		)
@@ -96,7 +96,7 @@ defined( 'ABSPATH' ) || exit;
 				array(
 					'setting'  => 'site_sub_header',
 					'operator' => '==',
-					'value'    => '1',
+					'value'    => true,
 				),
 			),
 		)
@@ -116,7 +116,7 @@ defined( 'ABSPATH' ) || exit;
 				array(
 					'setting'  => 'site_sub_header',
 					'operator' => '==',
-					'value'    => '1',
+					'value'    => true,
 				),
 			),
 		)
@@ -136,7 +136,7 @@ defined( 'ABSPATH' ) || exit;
 				array(
 					'setting'  => 'site_sub_header',
 					'operator' => '==',
-					'value'    => '1',
+					'value'    => true,
 				),
 			),
 		)

@@ -13,7 +13,10 @@ use WP_Customize_Manager;
 use function KnowX\KnowX\knowx;
 use function add_action;
 use function bloginfo;
+use function wp_add_inline_style;
+use function wp_enqueue_style;
 use function wp_enqueue_script;
+use function wp_script_is;
 use function get_theme_file_uri;
 use function get_theme_file_path;
 
@@ -42,7 +45,31 @@ class Component implements Component_Interface {
 			'customize_controls_enqueue_scripts',
 			function () {
 				$css_uri = get_theme_file_uri( '/assets/css/' );
-				wp_enqueue_style( 'knowx-customizer', $css_uri . 'knowx-customizer.min.css', '', time() );
+				wp_enqueue_style( 'knowx-customizer', $css_uri . 'knowx-customizer.min.css', '', knowx()->get_asset_version( get_theme_file_path( '/assets/css/knowx-customizer.min.css' ) ) );
+
+				if ( class_exists( 'Kirki' ) ) {
+					$kirki_deps = array( 'customize-controls', 'jquery' );
+
+					// Kirki 5.x uses 'kirki-customizer'; older versions used 'kirki_field_dependencies'.
+					if ( wp_script_is( 'kirki-customizer', 'registered' ) ) {
+						$kirki_deps[] = 'kirki-customizer';
+					} elseif ( wp_script_is( 'kirki_field_dependencies', 'registered' ) ) {
+						$kirki_deps[] = 'kirki_field_dependencies';
+					}
+
+					wp_enqueue_script(
+						'knowx-customizer-controls',
+						get_theme_file_uri( '/assets/js/customizer-controls.min.js' ),
+						$kirki_deps,
+						knowx()->get_asset_version( get_theme_file_path( '/assets/js/customizer-controls.min.js' ) ),
+						true
+					);
+
+					wp_add_inline_style(
+						'knowx-customizer',
+						'.customize-control.knowx-force-hidden-by-mode{display:none !important;}'
+					);
+				}
 			}
 		);
 	}

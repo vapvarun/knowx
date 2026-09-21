@@ -1,0 +1,14 @@
+{
+	"product": "KnowX Theme",
+	"productType": "theme",
+	"shortId": "knowx",
+	"sections": [
+		{ "name": "Getting Started", "folder": "getting-started" },
+		{ "name": "Customizing", "folder": "customizing" },
+		{ "name": "Templates and Patterns", "folder": "templates-and-patterns" },
+		{ "name": "Features", "folder": "features" },
+		{ "name": "Developer Guide", "folder": "developer-guide" },
+		{ "name": "FAQ", "folder": "faq" },
+		{ "name": "Troubleshooting", "folder": "troubleshooting" }
+	]
+}

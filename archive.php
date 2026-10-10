@@ -21,7 +21,6 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 
 ?>
 
-<?php if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'archive' ) ) { ?>
 
 	<?php do_action( 'knowx_sub_header' ); ?>
 	
@@ -84,7 +83,6 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 
 	<?php do_action( 'knowx_after_content' ); ?>
 
-	<?php } ?>
 	
 <?php
 get_footer();

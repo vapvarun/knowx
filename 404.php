@@ -17,9 +17,7 @@ knowx()->print_styles( 'knowx-content' );
 	<?php do_action( 'knowx_before_content' ); ?>
 
 	<main id="primary" class="site-main">
-		<?php if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'single' ) ) { ?>
 			<?php get_template_part( 'template-parts/content/error', '404' ); ?>
-		<?php } ?>
 	</main><!-- #primary -->
 	
 	<?php do_action( 'knowx_after_content' ); ?>

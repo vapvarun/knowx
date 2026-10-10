@@ -117,19 +117,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			wp_style_add_data( $handle, 'precache', true );
 		}
 
-		// Enqueue bbPress CSS.
-		if ( function_exists( 'is_bbpress' ) ) {
-			wp_enqueue_style( 'knowx-bbpress', $css_uri . 'bbpress.min.css' );
-		}
-
 		// Enqueue RTL CSS.
 		if ( is_rtl() ) {
 			wp_enqueue_style( 'knowx-rtl', $css_uri . 'rtl.min.css' );
-		}
-
-		// Enqueue AMP CSS.
-		if ( knowx()->is_amp() ) {
-			wp_enqueue_style( 'knowx-amp', $css_uri . 'knowx-amp.min.css' );
 		}
 	}
 
@@ -139,7 +129,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Only stylesheets that have a 'preload_callback' provided will be considered. If that callback evaluates to true
 	 * for the current request, the stylesheet will be preloaded.
 	 *
-	 * Preloading is disabled when AMP is active, as AMP injects the stylesheets inline.
 	 *
 	 * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
 	 */
@@ -237,7 +226,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	protected function preloading_styles_enabled(): bool {
 
-		$preloading_styles_enabled = ! knowx()->is_amp();
+		$preloading_styles_enabled = true;
 
 		/**
 		 * Filters whether to preload stylesheets and inject their link tags within the page content.

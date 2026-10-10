@@ -23,7 +23,6 @@ function knowx_defaults( $key = '' ) {
 
 	// site sidebar.
 	$defaults['sidebar-option']         = 'right';
-	$defaults['bbpress-sidebar-option'] = 'right';
 
 	// sticky sidebar.
 	$defaults['sticky-sidebar'] = '1';

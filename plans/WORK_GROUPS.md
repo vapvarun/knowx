@@ -24,7 +24,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 |---|---|---|---|
 | W00 | Trustworthy gates (tooling) | done | [10392494216](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494216) |
 | W01 | Lint debt cleared | todo | [10392494270](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494270) |
-| W02 | Dead code and repo hygiene | todo | [10392494288](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494288) |
+| W02 | Dead code, core duplicates and repo hygiene | done | [10392494288](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494288) |
 | W03 | Compatibility headers and theme-review blockers | todo | [10392494297](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494297) |
 | W04 | Basecamp Bugs cards and KB template defects | todo | [10392494317](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494317) |
 | W05 | Security and correctness hardening | todo | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
@@ -76,20 +76,17 @@ Why first: today the gates lie, so nothing after this can be proven. (tooling au
 - [ ] phpcs on real PHP: remaining errors in `inc/`, `template-parts/`, root templates fixed (Yoda, loose comparisons, missing docblocks, translators comments, spaces/tabs, `MissingUnslash` in `inc/extra.php:238-248`)
 - Gate: lint commands exit 0; rebuilt `.min` output visually unchanged.
 
-## W02 Dead code and repo hygiene (feeds A, G)
-Verify each before deleting (grep callers); A section 3, B section 6, C sections 4 and 6.
-- [ ] `optional/` (11 files) and `optional/dev/dev-proxy-livereload.php` (script-injection risk) removed
-- [ ] `sidebar.php`: only `optional/*` calls `get_sidebar()`; confirm `Styles::print_styles` use at `sidebar.php:16`, then remove
-- [ ] `inc/EZ_Customizer/` (commented out in `Theme.php`; JSON loopback `wp_remote_get`), `inc/Kirki/` (inverted dead logic), `inc/Blocks/` (`assets/blocks` missing)
-- [ ] `inc/Options/` dead admin page: unregistered menu but live REST route `my-theme/v1/settings` and a React bundle enqueued on every wp-admin screen
-- [ ] `wp-cli/knowx-commands.php` never required: wire it or delete
-- [ ] `scripts/`: remove block tooling (`blocks.js`, `build-all-blocks.js`, `build-blocks.js`, `templates/block`), `convert-to-block-theme.js`, `dev-modern.js`, `start.js` if unused, prod-build tests with mmenu-light
-- [ ] dead functions: `knowx_site_menu_icon`, `knowx_metabox_callback`/`knowx_save_meta` (decide: register meta box or drop), `Template_Tags::get_theme_asset`, `Comments::filter_comment_form_defaults`, `knowx_log`, `knowx_is_login_page`
-- [ ] `login.php:122-151` undefined-variable branches
-- [ ] No extra plugin integrations (decision 2026-10-10): remove bbPress support (`bbpress.php`, `template-parts/content/content-bbpress.php`, `bbpress.css`, `bbpress_sidebar_option`, `custom_bbp_no_breadcrumb`) and Elementor location checks (`elementor_theme_do_location` in `404.php`, `archive.php`, `footer.php`, `header.php`, `single.php`)
-- [ ] unused JS/CSS: `global.min.js` never enqueued, `admin/knowx-customizer.js` never loaded, `knowx-customizer.css`, 9 PNG layout pickers (tied to Kirki, removed in W07)
-- [ ] duplicate helpers (`get_version`/`get_asset_version`, two footer-copyright branches, duplicate `add_theme_support` for custom-header/background)
-- Gate: build, bundle and `php -l` pass; browser smoke on home, KB1, KB2, single, archive, 404 shows no regressions.
+## W02 Dead code, core duplicates and repo hygiene (feeds A, G)
+Verified with `git grep` before every delete. Principle added 2026-10-10: do not re-implement what WordPress core provides (see `docs/LIBRARIES.md`, section 1).
+- [x] Dead code removed: `optional/` (incl. the livereload injection file), `sidebar.php`, `inc/EZ_Customizer/`, `inc/Blocks/`, `inc/Options/` (dead admin page, live REST route, React bundle) and its `assets/js/admin` + `src/admin`, `inc/Kirki/` (config only; `inc/Kirki_Option` stays until W07), `wp-cli/`, `global.ts`/`global.min.js`
+- [x] `scripts/`: block tooling, `convert-to-block-theme.js`, `dev-modern.js`, `start.js`, block templates and the WP Rig prod-build tests removed; matching npm scripts removed
+- [x] Dead functions removed: `knowx_site_menu_icon`, `Template_Tags::get_theme_asset`, `Comments::filter_comment_form_defaults`, `knowx_is_login_page`; three `login.php` branches that used undefined variables
+- [x] Core duplicates and integrations removed: custom `knowx_wp_body_open` shim (now core `wp_body_open()`), `wordpress-shims.php`, `back-compat.php` and the version gate (core enforces `Requires at least` / `Requires PHP`), `Localization` loader, `PWA` (service worker support, `offline.php`, `500.php` and their template parts), `AMP` (component, stylesheet, markup branches in navigation, comments, styles, accessibility), `Jetpack`, IE11 skip-link focus fix, duplicate `aria-current` filters
+- [x] bbPress and Elementor support removed (decision "keep nothing extra"): `bbpress.php`, `content-bbpress.php`, bbPress CSS, bbPress sidebars and layout setting, Elementor location wrappers in six templates
+- [x] 1,145 unused npm packages removed (block editor stack, react, cssnano, esm, tiny-lr and others); `lightningcss` declared (it used to arrive only through `@wordpress/scripts`)
+- [x] Added `docs/LIBRARIES.md`: every shipped library with where it is used, why, and a keep / replace / remove verdict (replacements scheduled in W10 to W12)
+- [ ] Still to do in later groups: `knowx_metabox_callback` / `knowx-exclude-cats` decision (W04), Kirki-tied assets (W07), duplicate `get_version`/`get_asset_version` in `Fonts` (W12), duplicate footer-copyright branches (W05)
+- Gate: build, bundle, phpunit (7 tests), phpstan (baseline 136), `php -l` clean; home, post, category, search and 404 screenshots at 390 / 768 / 1024 / 1440 show **0.00%** pixel difference against the W00 baseline. **Passed 2026-10-10.**
 
 ## W03 Compatibility headers and theme-review blockers (feeds A, G)
 - [ ] Minimum versions decided: **PHP 8.1, WordPress 6.9**, tested up to 7.1. Code already uses PHP 8.0 syntax (`Options/Component.php:141`, `Fonts/Component.php:331`, `Blocks/Component.php:166,194`) under a 7.4 header and 7.0 gate; make `style.css`, `readme.txt`, `functions.php` gate (`KNOWX_MINIMUM_*`) and composer all say PHP 8.1 / WP 6.9
@@ -171,7 +168,7 @@ From C section 4 and 5.
 - [ ] Remove `async` from dependent scripts (`Scripts/Component.php:178-240`, `Base_Support:150`); add missing `jquery` and `knowx-scroll-up` deps; or load with `defer` and proper deps
 - [ ] `$(window).load()` (`custom.js:264`) replaced; loader overlay cannot stay up on failure
 - [ ] `navigation.ts` inverted expand/collapse labels; `aria-expanded` sync; 55em JS vs 768px CSS breakpoint conflict
-- [ ] Drop libraries CSS or native features replace: sticky-kit, fitvids, scrollUp, lazyload; evaluate isotope and superfish; target no jQuery on the front end
+- [ ] Drop libraries CSS or native features replace, per `docs/LIBRARIES.md`: superfish, sticky-kit, fitvids, scrollUp, isotope (CSS grid, load masonry only where needed); no jQuery on the front end; use `strategy => defer` instead of the custom async filter
 - [x] Production build strips inline source maps (done in W00); `.ts/.tsx` sources beside minified files stay (wp.org requires readable source)
 - [ ] No `console.log` leftovers; no `innerHTML` with data
 - Gate: console clean on every template; JS under 20 KB gzip per page.

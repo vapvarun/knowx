@@ -15,5 +15,3 @@ parameters:
         - languages/
         - scripts/
         - external/
-        - inc/Kirki/
-        - wp-cli/

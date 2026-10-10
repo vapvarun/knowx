@@ -202,3 +202,7 @@ Constraints these imply: no custom post type or taxonomy (wordpress.org rule), n
 - Minimum **PHP 8.1** and **WordPress 6.9**, tested up to 7.1.
 - **Keep nothing extra**: no bbPress, Elementor, WooCommerce, BuddyPress or LearnDash integration. The theme works on a plain WordPress install and every feature is native.
 - Work is tracked as one Basecamp card per group W00-W18 in the KnowX board (Ready for Development column), plus `plans/WORK_GROUPS.md` in the repo.
+
+## 14. Principle: WordPress is always present (user, 2026-10-10)
+
+The theme must not re-implement anything WordPress core already provides. `docs/LIBRARIES.md` section 1 lists each core feature we rely on and the duplicate we removed or will remove. Every new feature is checked against core first (Details block for FAQ, REST search, `theme.json` fonts, `custom-background`, `wp_body_open()`, script `strategy`, native lazy loading, core speculative loading, `responsive-embeds`), and every shipped library needs a justification in `docs/LIBRARIES.md`.

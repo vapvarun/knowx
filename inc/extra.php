@@ -82,33 +82,6 @@ if ( ! function_exists( 'knowx_site_loader' ) ) {
 	}
 }
 
-// Site Search and Woo icon
-if ( ! function_exists( 'knowx_site_menu_icon' ) ) {
-	function knowx_site_menu_icon() {
-		// menu icons
-		$searchicon = (int) get_theme_mod( 'site_search', knowx_defaults( 'site-search' ) );
-		$carticon   = (int) get_theme_mod( 'site_cart', knowx_defaults( 'site-cart' ) );
-		if ( ! empty( $searchicon ) || ! empty( $carticon ) ) :
-			?>
-			<div class="menu-icons-wrapper">
-			<?php
-			if ( ! empty( $searchicon ) ) :
-				?>
-					<div class="search" <?php echo apply_filters( 'knowx_search_slide_toggle_data_attrs', '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-						<a href="#" id="overlay-search" class="search-icon"> <span class="fa fa-search"> </span> </a>
-						<div class="top-menu-search-container" <?php echo apply_filters( 'knowx_search_field_toggle_data_attrs', '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-							<?php get_search_form(); ?>
-						</div>
-					</div>
-					<?php
-				endif;
-			?>
-			</div>
-			<?php
-		endif;
-	}
-}
-
 /**
  * Function Footer Custom Text
  */
@@ -207,17 +180,6 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 
 
 /**
- * Add Elementor Locations Support
- */
-if ( ! function_exists( 'knowx_register_elementor_locations' ) ) {
-	function knowx_register_elementor_locations( $elementor_theme_manager ) {
-
-		$elementor_theme_manager->register_all_core_location();
-	}
-	add_action( 'elementor/theme/register_locations', 'knowx_register_elementor_locations' );
-}
-
-/**
  * Meta box for knowledge base page template
  */
 function knowx_metabox_callback( $post ) {
@@ -267,10 +229,3 @@ function setPostViews( $postID ) {
 	}
 }
 
-/*
- * Hide bbp breadcrumb
- */
-function custom_bbp_no_breadcrumb( $param ) {
-	return true;
-}
-add_filter( 'bbp_no_breadcrumb', 'custom_bbp_no_breadcrumb' );

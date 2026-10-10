@@ -65,9 +65,7 @@ class Component_Tests extends Unit_Test_Case {
 		$this->mock_post = $this->getMockBuilder( 'WP_Post' );
 
 		$this->assertNotEquals( false, has_action( 'wp_enqueue_scripts', array( $this->component, 'action_enqueue_navigation_script' ) ) );
-		$this->assertNotEquals( false, has_action( 'wp_print_footer_scripts', array( $this->component, 'action_print_skip_link_focus_fix' ) ) );
-		$this->assertNotEquals( false, has_filter( 'nav_menu_link_attributes', array( $this->component, 'filter_nav_menu_link_attributes_aria_current' ) ) );
-		$this->assertNotEquals( false, has_filter( 'page_menu_link_attributes', array( $this->component, 'filter_nav_menu_link_attributes_aria_current' ) ) );
+		$this->assertNotEquals( false, has_action( 'wp_head', array( $this->component, 'action_remove_no_js_class' ) ) );
 	}
 
 	/**
@@ -76,9 +74,7 @@ class Component_Tests extends Unit_Test_Case {
 	 * @covers Component::action_enqueue_navigation_script()
 	 */
 	public function test_action_enqueue_navigation_script() {
-		$template_tags = $this->mockTemplateTags( array( 'get_asset_version', 'is_amp' ) );
-
-		$template_tags->method( 'is_amp' )->willReturn( false );
+		$template_tags = $this->mockTemplateTags( array( 'get_asset_version' ) );
 
 		$template_tags->expects( $this->once() )
 			->method( 'get_asset_version' )
@@ -104,62 +100,15 @@ class Component_Tests extends Unit_Test_Case {
 
 
 	/**
-	 * Tests printing the skip-link-focus-fix script inline.
+	 * Tests that the no-js class is removed by an inline script.
 	 *
-	 * @covers Component::action_print_skip_link_focus_fix()
+	 * @covers Component::action_remove_no_js_class()
 	 */
-	public function test_action_print_skip_link_focus_fix() {
-
+	public function test_action_remove_no_js_class() {
 		ob_start();
-		$this->component->action_print_skip_link_focus_fix();
+		$this->component->action_remove_no_js_class();
 		$output = ob_get_clean();
 
-		$this->assertTrue( false !== strpos( $output, '<script>' ) );
-	}
-
-
-	/**
-	 * Tests that an aria-current attribute is not added unconditionally.
-	 *
-	 * @covers Component::filter_nav_menu_link_attributes_aria_current()
-	 */
-	public function test_filter_nav_menu_link_attributes_aria_current() {
-		$atts = array();
-		$item = $this->mock_post;
-		$atts = $this->component->filter_nav_menu_link_attributes_aria_current( $atts, $item );
-		$this->assertEmpty( $atts );
-	}
-
-	/**
-	 * Tests that an aria-current attribute is added for the current menu item.
-	 *
-	 * @covers Component::filter_nav_menu_link_attributes_aria_current()
-	 */
-	public function test_filter_nav_menu_link_attributes_aria_current_with_current_item() {
-		$atts          = array();
-		$item          = $this->mock_post;
-		$item->current = true;
-
-		$atts = $this->component->filter_nav_menu_link_attributes_aria_current( $atts, $item );
-		$this->assertArrayHasKey( 'aria-current', $atts );
-	}
-
-	/**
-	 * Tests that an aria-current attribute is added for the current post.
-	 *
-	 * @covers Component::filter_nav_menu_link_attributes_aria_current()
-	 */
-	public function test_filter_nav_menu_link_attributes_aria_current_with_current_post() {
-		$atts     = array();
-		$item     = $this->mock_post;
-		$item->ID = 1;
-
-		$GLOBALS['post'] = $item; // phpcs:ignore WordPress.WP.GlobalVariablesOverride
-
-		$atts = $this->component->filter_nav_menu_link_attributes_aria_current( $atts, $item );
-
-		unset( $GLOBALS['post'] );
-
-		$this->assertArrayHasKey( 'aria-current', $atts );
+		$this->assertTrue( false !== strpos( $output, "classList.remove( 'no-js' )" ) );
 	}
 }

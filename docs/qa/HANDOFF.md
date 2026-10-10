@@ -22,14 +22,14 @@ Start here. This is the one page QA needs. Everything else in `docs/qa/` is link
 | Comments | Form and list are styled as cards | J23 |
 | Patterns | 17 patterns: callouts, prerequisites, troubleshooting, API endpoint, compatibility table, next steps, feedback, docs home, recently updated, popular tags, FAQ, steps, changelog, support | J24 |
 | Colours | One place: Customizer, Colors. Palette cards at the top, then your own choices | J14, J25 |
-| Customizer | Flat sections, plain labels and hints, collapsible Typography groups | J26 |
+| Customizer | Flat sections, plain labels and hints, collapsible Typography groups; colours and corners update live in the preview | J26, J28 |
 | Footer menu | New `footer` menu location | J27 |
 
 Removed on purpose, do not report as missing: page loader, search options, blog layout options, style variations, Kirki, the old colour-scheme picker, the extra colour settings that are now derived (link hover, button colours and similar).
 
 ## How to run the checks
 
-1. **Browser journeys:** `docs/qa/JOURNEYS.md`, J1 to J27, at 390, 768, 1024 and 1440 px, light and dark. Each ends with axe clean, console empty, no sideways scroll.
+1. **Browser journeys:** `docs/qa/JOURNEYS.md`, J1 to J28, at 390, 768, 1024 and 1440 px, light and dark. Each ends with axe clean, console empty, no sideways scroll.
 2. **Every Customizer setting:** `docs/qa/SETTINGS_QA.md` is the last report (43 settings, 0 failures). To rerun on a clean Docker stack: `cd tests/docker && docker compose up -d`, then `python3 settings_qa.py` (site on port 8089).
 3. **Customizer screens render:** open the Customizer, expand every section, paste `tests/docker/customizer-ui-check.js` into the browser console. It must print every section with all controls visible and nothing flagged.
 4. **Integration tests:** `tests/docker/run-integration.sh` (12 tests).
@@ -37,7 +37,6 @@ Removed on purpose, do not report as missing: page loader, search options, blog 
 
 ## Known limits (not bugs)
 
-- Colour controls refresh the preview after each change instead of updating live.
 - "Hide Categories" takes category IDs, not a picker.
 - A custom text, background or surface colour applies in light mode only. Dark mode keeps its own colours.
 - The product accent colour is decoration on cards only. The theme colour in Customizer, Colors drives buttons and links.

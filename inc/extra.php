@@ -1,7 +1,15 @@
 <?php
+/**
+ * Template helpers: content wrapper, sub header, loader, footer text and post meta.
+ *
+ * @package knowx
+ */
 
 // Content wrapper.
 if ( ! function_exists( 'knowx_content_top' ) ) {
+	/**
+	 * Opens the site wrapper that holds the content and the sidebars.
+	 */
 	function knowx_content_top() {
 		?>
 		<div class="site-wrapper">
@@ -12,6 +20,9 @@ if ( ! function_exists( 'knowx_content_top' ) ) {
 add_action( 'knowx_before_content', 'knowx_content_top' );
 
 if ( ! function_exists( 'knowx_content_bottom' ) ) {
+	/**
+	 * Closes the site wrapper.
+	 */
 	function knowx_content_bottom() {
 
 		?>
@@ -26,6 +37,9 @@ add_action( 'knowx_after_content', 'knowx_content_bottom' );
 if ( ! function_exists( 'knowx_sub_header' ) ) {
 	add_action( 'knowx_sub_header', 'knowx_sub_header' );
 
+	/**
+	 * Prints the sub header with the breadcrumbs and the search form.
+	 */
 	function knowx_sub_header() {
 		global $post;
 		if ( is_front_page() ) {
@@ -64,6 +78,9 @@ function knowx_the_breadcrumb() {
 
 // Site Loader.
 if ( ! function_exists( 'knowx_site_loader' ) ) {
+	/**
+	 * Prints the page loader markup when the loader is enabled.
+	 */
 	function knowx_site_loader() {
 		$loader = knowx_mod( 'site_loader' );
 		if ( knowx_is_truthy( $loader ) ) {
@@ -80,8 +97,6 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 	 * Function Footer Custom Text
 	 *
 	 * @since 1.0.14
-	 * @param string $option Custom text option name.
-	 * @return mixed         Markup of custom text option.
 	 */
 	function knowx_footer_custom_text() {
 
@@ -134,6 +149,9 @@ function knowx_categorized_blog() {
  */
 if ( ! function_exists( 'knowx_posted_on' ) ) {
 
+	/**
+	 * Prints the author, date and category line of a post.
+	 */
 	function knowx_posted_on() {
 
 		global $post;

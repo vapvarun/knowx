@@ -52,7 +52,7 @@ function knowx_get_breadcrumb_items() {
 		} elseif ( 'post' === get_post_type() ) {
 			$categories = get_the_category();
 			if ( ! empty( $categories ) ) {
-				$items = array_merge( $items, $term_trail( $categories[0]->term_id, 'category' ) );
+				$items   = array_merge( $items, $term_trail( $categories[0]->term_id, 'category' ) );
 				$items[] = array(
 					'label' => $categories[0]->name,
 					'url'   => get_category_link( $categories[0]->term_id ),
@@ -64,8 +64,8 @@ function knowx_get_breadcrumb_items() {
 			'url'   => '',
 		);
 	} elseif ( is_category() || is_tag() || is_tax() ) {
-		$term  = get_queried_object();
-		$items = array_merge( $items, $term_trail( $term->term_id, $term->taxonomy ) );
+		$term    = get_queried_object();
+		$items   = array_merge( $items, $term_trail( $term->term_id, $term->taxonomy ) );
 		$items[] = array(
 			'label' => $term->name,
 			'url'   => '',

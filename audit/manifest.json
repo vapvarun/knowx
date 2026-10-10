@@ -1,0 +1,302 @@
+{
+  "theme": "knowx",
+  "version": "1.7.5",
+  "generated_by": "tools/build-manifest.py",
+  "components": [
+    "Accessibility",
+    "Activation",
+    "Base_Support",
+    "Color_Mode",
+    "Comments",
+    "Custom_Background",
+    "Custom_Header",
+    "Custom_Logo",
+    "Customizer",
+    "Customizer_Settings",
+    "Docs",
+    "Editor",
+    "Excerpts",
+    "Image_Sizes",
+    "Nav_Menus",
+    "Post_Thumbnails",
+    "Scripts",
+    "Sidebars",
+    "Styles",
+    "Tokens"
+  ],
+  "filters": {
+    "knowx_css_files": [
+      "inc/Styles/Component.php"
+    ],
+    "knowx_custom_background_args": [
+      "inc/Custom_Background/Component.php"
+    ],
+    "knowx_custom_header_args": [
+      "inc/Custom_Header/Component.php"
+    ],
+    "knowx_custom_logo_args": [
+      "inc/Custom_Logo/Component.php"
+    ],
+    "knowx_customizer_field_args": [
+      "inc/Customizer_Framework/Field.php"
+    ],
+    "knowx_customizer_field_type_map": [
+      "inc/Customizer_Framework/Field.php"
+    ],
+    "knowx_footer_copyright_text": [
+      "inc/extra.php"
+    ],
+    "knowx_js_files": [
+      "inc/Scripts/Component.php"
+    ],
+    "knowx_kb_max_categories": [
+      "inc/knowledge-base.php"
+    ],
+    "knowx_meta_description": [
+      "inc/docs.php"
+    ],
+    "knowx_preloading_styles_enabled": [
+      "inc/Styles/Component.php"
+    ],
+    "knowx_schema_graph": [
+      "inc/docs.php"
+    ],
+    "knowx_show_product_switcher": [
+      "template-parts/header/product-switcher.php"
+    ],
+    "knowx_theme_author": [
+      "inc/extra.php"
+    ],
+    "knowx_tree_max_posts": [
+      "inc/docs.php"
+    ]
+  },
+  "actions": {
+    "knowx_after_content": [
+      "404.php",
+      "archive.php",
+      "category.php",
+      "full-width-container.php",
+      "index.php",
+      "page-changelog.php",
+      "page-faq.php",
+      "page-knowledgebase-one.php",
+      "page-knowledgebase-two.php",
+      "page.php",
+      "single.php",
+      "template-parts/docs/single.php"
+    ],
+    "knowx_before_content": [
+      "404.php",
+      "archive.php",
+      "category.php",
+      "full-width-container.php",
+      "index.php",
+      "page-changelog.php",
+      "page-faq.php",
+      "page-knowledgebase-one.php",
+      "page-knowledgebase-two.php",
+      "page.php",
+      "single.php",
+      "template-parts/docs/single.php"
+    ],
+    "knowx_sub_header": [
+      "archive.php",
+      "category.php",
+      "full-width-container.php",
+      "index.php",
+      "page-changelog.php",
+      "page-faq.php",
+      "page-knowledgebase-two.php",
+      "page.php",
+      "single.php",
+      "template-parts/docs/single.php"
+    ]
+  },
+  "meta": {
+    "post_meta": {
+      "knowx_version": [
+        "inc/Docs/Component.php"
+      ]
+    },
+    "term_meta": {
+      "knowx_accent": [
+        "inc/Docs/Component.php"
+      ],
+      "knowx_icon": [
+        "inc/Docs/Component.php"
+      ]
+    }
+  },
+  "rest": {
+    "custom_routes": [],
+    "registered_meta_in_rest": [
+      "knowx_accent",
+      "knowx_icon",
+      "knowx_version"
+    ]
+  },
+  "page_templates": {
+    "full-width-container.php": "Page-Without-Sidebar",
+    "full-width.php": "Full-Width-No-Title",
+    "page-changelog.php": "Changelog",
+    "page-faq.php": "FAQ",
+    "page-knowledgebase-one.php": "Docs Home",
+    "page-knowledgebase-two.php": "Knowledge Base Layout Two"
+  },
+  "patterns": {
+    "patterns/callout-note.php": {
+      "title": "Note callout",
+      "slug": "knowx/callout-note"
+    },
+    "patterns/changelog-entry.php": {
+      "title": "Changelog entry",
+      "slug": "knowx/changelog-entry"
+    },
+    "patterns/faq.php": {
+      "title": "Frequently asked questions",
+      "slug": "knowx/faq"
+    },
+    "patterns/getting-started-steps.php": {
+      "title": "Getting started steps",
+      "slug": "knowx/getting-started-steps"
+    },
+    "patterns/support-cta.php": {
+      "title": "Contact support",
+      "slug": "knowx/support-cta"
+    }
+  },
+  "pattern_categories": {
+    "knowx": [
+      "inc/Base_Support/Component.php"
+    ],
+    "knowx-docs": [
+      "inc/Docs/Component.php"
+    ]
+  },
+  "style_variations": [
+    "cool",
+    "minimal",
+    "monochrome",
+    "pastel",
+    "vibrant",
+    "warm"
+  ],
+  "asset_handles": {
+    "styles": [
+      "knowx-global",
+      "knowx-comments",
+      "knowx-content",
+      "knowx-docs",
+      "knowx-sidebar",
+      "knowx-widgets",
+      "knowx-front-page",
+      "knowx-site-loader"
+    ],
+    "scripts": [
+      "knowx-theme",
+      "knowx-docs"
+    ]
+  },
+  "customizer_settings": [
+    "background_setting",
+    "blog_layout_option",
+    "custom-knowledge-divider-four",
+    "custom-knowledge-divider-one",
+    "custom-knowledge-divider-three",
+    "custom-knowledge-divider-two",
+    "custom-skin-divider",
+    "headings_typography_option",
+    "hero_section_background_setting",
+    "hero_section_content",
+    "hero_section_heading",
+    "knowx_cat_description",
+    "knowx_exclude",
+    "knowx_order",
+    "knowx_page_title",
+    "knowx_posts",
+    "knowx_scroll_top",
+    "knowx_view_all",
+    "menu_typography_option",
+    "post_box_view_layout",
+    "post_per_row",
+    "sidebar_option",
+    "site_breadcrumbs",
+    "site_color_mode",
+    "site_color_mode_toggle_show",
+    "site_color_scheme",
+    "site_container_width",
+    "site_copyright_background_color",
+    "site_copyright_content_color",
+    "site_copyright_text",
+    "site_footer_content_color",
+    "site_header_bg_color",
+    "site_layout",
+    "site_loader",
+    "site_primary_color",
+    "site_search",
+    "site_sticky_header",
+    "site_sub_header",
+    "site_tagline_typography_option",
+    "site_title_typography_option",
+    "sticky_sidebar_option",
+    "sub_header_background_setting",
+    "support_section_background_setting",
+    "support_section_button_link_url",
+    "support_section_button_text",
+    "support_section_content",
+    "support_section_heading",
+    "typography_option"
+  ],
+  "data_helpers": [
+    "knowx_add_heading_anchors",
+    "knowx_article_count_label",
+    "knowx_article_version",
+    "knowx_block_text",
+    "knowx_current_product",
+    "knowx_current_product_id",
+    "knowx_faq_from_blocks",
+    "knowx_icon_svg",
+    "knowx_kb_bump_version",
+    "knowx_kb_cached",
+    "knowx_kb_excluded_ids",
+    "knowx_kb_featured_posts",
+    "knowx_kb_map_posts",
+    "knowx_kb_map_terms",
+    "knowx_kb_max_categories",
+    "knowx_kb_post_query",
+    "knowx_kb_recent_posts",
+    "knowx_kb_sections",
+    "knowx_kb_top_categories",
+    "knowx_kb_version",
+    "knowx_meta_description",
+    "knowx_product_icons",
+    "knowx_product_tree",
+    "knowx_products",
+    "knowx_render_toc",
+    "knowx_render_tree",
+    "knowx_schema_graph",
+    "knowx_toc_items",
+    "knowx_tree_flat",
+    "knowx_tree_max_posts",
+    "knowx_tree_open_ids"
+  ],
+  "options": [
+    "knowx_kb_version",
+    "knowx_theme_activated"
+  ],
+  "entry_points": {
+    "frontend": [
+      "docs home, product, section, article, FAQ, changelog, search overlay"
+    ],
+    "backend": [
+      "category screen: icon and accent",
+      "post editor: Order and Applies to version",
+      "Customizer"
+    ],
+    "api": [
+      "/wp/v2/categories (knowx_icon, knowx_accent)",
+      "/wp/v2/posts (knowx_version, menu_order)"
+    ]
+  }
+}

@@ -39,7 +39,7 @@ class Tokens_Tests extends Unit_Test_Case {
 			$this->assertCount( 2, $link, $brand );
 
 			preg_match( '/rgb\((\d+),(\d+),(\d+)\)/', $link[0], $m );
-			$channels = array_map(
+			$channels  = array_map(
 				static function ( $c ) {
 					$c = $c / 255;
 					return $c <= 0.03928 ? $c / 12.92 : pow( ( $c + 0.055 ) / 1.055, 2.4 );

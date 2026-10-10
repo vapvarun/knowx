@@ -8,9 +8,13 @@
 // Run common tests script.
 require __DIR__ . '/bootstrap-common.php';
 
-// Auto-setup WordPress test environment if it doesn't exist
+/**
+ * Sets up the WordPress test environment when it does not exist yet.
+ *
+ * @throws Exception When the setup script fails.
+ */
 function knowx_ensure_test_environment() {
-	// Get the real system temp directory
+	// Get the real system temp directory.
 	$system_temp = realpath( sys_get_temp_dir() );
 	$test_dir    = $system_temp . DIRECTORY_SEPARATOR . 'knowx-tests' . DIRECTORY_SEPARATOR . 'wordpress-tests-lib';
 
@@ -48,16 +52,16 @@ tests_add_filter(
 	}
 );
 
-// Load WP test suite - let WordPress handle PHPUnit compatibility
+// Load the WP test suite and let WordPress handle PHPUnit compatibility.
 
 $bootstrap_file = $test_root . DIRECTORY_SEPARATOR . 'includes' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 if ( ! file_exists( $bootstrap_file ) ) {
-	echo "❌ ERROR: Bootstrap file does not exist: {$bootstrap_file}\n";
+	echo '❌ ERROR: Bootstrap file does not exist: ' . $bootstrap_file . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- CLI test output.
 	exit( 1 );
 }
 
 
-// WordPress will handle PHPUnit compatibility - we just need to load it
+// WordPress handles PHPUnit compatibility; it only has to be loaded.
 require_once $bootstrap_file;
 
 echo "✅ WordPress test suite bootstrap loaded successfully\n";

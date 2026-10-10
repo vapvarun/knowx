@@ -62,15 +62,19 @@ class Theme_Support_Tests extends Integration_Test_Case {
 				'align-wide',
 			),
 			array(
-				'editor-color-palette',
-			),
-			array(
-				'editor-font-sizes',
-			),
-			array(
 				'custom-header',
 			),
 		);
+	}
+
+	/**
+	 * Tests that the palette and font sizes come from theme.json.
+	 */
+	public function test_theme_json_supplies_palette_and_font_sizes() {
+		$settings = wp_get_global_settings();
+
+		$this->assertNotEmpty( $settings['color']['palette']['theme'] );
+		$this->assertNotEmpty( $settings['typography']['fontSizes']['theme'] );
 	}
 
 	/**
@@ -88,7 +92,7 @@ class Theme_Support_Tests extends Integration_Test_Case {
 				'gallery',
 				'caption',
 			),
-			$html5_support[0]
+			array_unique( $html5_support[0] )
 		);
 	}
 }

@@ -43,8 +43,9 @@ $knowx_per     = 5;
 					<span aria-hidden="true">&middot;</span>
 					<?php echo esc_html( knowx_article_count_label( $knowx_product['count'] ) ); ?>
 				</p>
-				<?php if ( $knowx_first ) : ?>
-					<a class="knowx-start" href="<?php echo esc_url( $knowx_first[0]['url'] ); ?>"><?php esc_html_e( 'Start here', 'knowx' ); ?></a>
+				<?php $knowx_start = '' !== $knowx_product['start'] ? $knowx_product['start'] : ( $knowx_first ? $knowx_first[0]['url'] : '' ); ?>
+				<?php if ( '' !== $knowx_start ) : ?>
+					<a class="knowx-start" href="<?php echo esc_url( $knowx_start ); ?>"><?php esc_html_e( 'Start here', 'knowx' ); ?></a>
 				<?php endif; ?>
 			<?php elseif ( ! $knowx_is_root ) : ?>
 				<p class="knowx-term-meta"><?php echo esc_html( knowx_article_count_label( $knowx_term->count ) ); ?></p>
@@ -52,30 +53,17 @@ $knowx_per     = 5;
 		</header>
 
 		<?php if ( $knowx_is_root && $knowx_tree ) : ?>
-			<div class="knowx-section-grid">
-			<?php foreach ( $knowx_tree['root']['children'] as $knowx_id ) : ?>
-				<?php $knowx_node = $knowx_tree['nodes'][ $knowx_id ]; ?>
-				<section class="knowx-section" aria-labelledby="knowx-section-<?php echo esc_attr( $knowx_id ); ?>">
-					<h2 id="knowx-section-<?php echo esc_attr( $knowx_id ); ?>"><a href="<?php echo esc_url( $knowx_node['url'] ); ?>"><?php echo esc_html( $knowx_node['name'] ); ?></a></h2>
-					<?php if ( '' !== $knowx_node['description'] ) : ?>
-						<p class="knowx-section-desc"><?php echo esc_html( $knowx_node['description'] ); ?></p>
-					<?php endif; ?>
-					<ul class="knowx-article-list">
-						<?php foreach ( array_slice( $knowx_node['posts'], 0, $knowx_per ) as $knowx_item ) : ?>
-							<li><a href="<?php echo esc_url( $knowx_item['url'] ); ?>"><?php echo esc_html( $knowx_item['title'] ); ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php if ( $knowx_node['count'] > $knowx_per ) : ?>
-						<a class="knowx-view-all" href="<?php echo esc_url( $knowx_node['url'] ); ?>">
-							<?php
-							/* translators: %s: number of articles. */
-							echo esc_html( sprintf( __( 'View all %s articles', 'knowx' ), number_format_i18n( $knowx_node['count'] ) ) );
-							?>
-						</a>
-					<?php endif; ?>
-				</section>
-			<?php endforeach; ?>
-			</div>
+			<?php
+			get_template_part(
+				'template-parts/docs/section-grid',
+				null,
+				array(
+					'tree'   => $knowx_tree,
+					'per'    => $knowx_per,
+					'prefix' => 'knowx-section',
+				)
+			);
+			?>
 		<?php elseif ( have_posts() ) : ?>
 			<ul class="knowx-article-cards">
 				<?php

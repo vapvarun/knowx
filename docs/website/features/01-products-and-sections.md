@@ -39,3 +39,16 @@ The lists are cached and refresh when you publish, edit or delete a post or chan
 ## Search results, tags, dates and authors
 
 Search results and the tag, date and author archives use the same article list as a section page. Search results and these archives print the product and section above each title, so a reader can tell two articles with the same name apart. The blog layout and sidebar settings apply to the posts page only.
+
+## Order, start link and search filter
+
+On **Posts > Categories**, a top-level category has two more fields next to its icon and colour:
+
+| Field | What it does |
+|---|---|
+| Product order | Lowest number first, then by name. Applies to the docs home, the product switcher and the search filter. |
+| Start here link | Where the **Start here** button on the product page goes. Empty opens the first article. |
+
+When there are two or more products, search results show **All products** and one button per product. Choosing a product limits the results to that product and its sections.
+
+**Customize > Knowledge Base > Layout One > Products on the docs home** switches between product cards and each product listed with its sections.

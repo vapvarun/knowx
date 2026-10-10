@@ -129,6 +129,12 @@
       ],
       "knowx_icon": [
         "inc/Docs/Component.php"
+      ],
+      "knowx_order": [
+        "inc/Docs/Component.php"
+      ],
+      "knowx_start": [
+        "inc/Docs/Component.php"
       ]
     }
   },
@@ -137,6 +143,8 @@
     "registered_meta_in_rest": [
       "knowx_accent",
       "knowx_icon",
+      "knowx_order",
+      "knowx_start",
       "knowx_version"
     ]
   },
@@ -257,6 +265,7 @@
     "knowx_cat_description",
     "knowx_exclude",
     "knowx_home_count",
+    "knowx_home_layout",
     "knowx_order",
     "knowx_page_title",
     "knowx_posts",

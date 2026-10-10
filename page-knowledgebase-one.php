@@ -85,30 +85,36 @@ $single     = 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] 
 			<?php endif; ?>
 		</div>
 		<?php elseif ( $single && $single['root']['children'] ) : ?>
-		<div class="knowx-section-grid knowx-home-sections">
-			<?php foreach ( $single['root']['children'] as $section_id ) : ?>
-				<?php $node = $single['nodes'][ $section_id ]; ?>
-				<section class="knowx-section" aria-labelledby="knowx-home-section-<?php echo esc_attr( $section_id ); ?>">
-					<h2 id="knowx-home-section-<?php echo esc_attr( $section_id ); ?>"><a href="<?php echo esc_url( $node['url'] ); ?>"><?php echo esc_html( $node['name'] ); ?></a></h2>
-					<?php if ( '' !== $node['description'] ) : ?>
-						<p class="knowx-section-desc"><?php echo esc_html( $node['description'] ); ?></p>
-					<?php endif; ?>
-					<ul class="knowx-article-list">
-						<?php foreach ( array_slice( $node['posts'], 0, 5 ) as $item ) : ?>
-							<li><a href="<?php echo esc_url( $item['url'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a></li>
-						<?php endforeach; ?>
-					</ul>
-					<?php if ( $node['count'] > 5 ) : ?>
-						<a class="knowx-view-all" href="<?php echo esc_url( $node['url'] ); ?>">
-							<?php
-							/* translators: %s: number of articles. */
-							echo esc_html( sprintf( __( 'View all %s articles', 'knowx' ), number_format_i18n( $node['count'] ) ) );
-							?>
-						</a>
-					<?php endif; ?>
+		<div class="knowx-home-sections">
+			<?php
+			get_template_part(
+				'template-parts/docs/section-grid',
+				null,
+				array(
+					'tree'   => $single,
+					'per'    => 5,
+					'prefix' => 'knowx-home-section',
+				)
+			);
+			?>
+		</div>
+		<?php elseif ( 'sections' === knowx_mod( 'knowx_home_layout' ) ) : ?>
+			<?php foreach ( $products as $product ) : ?>
+				<section class="knowx-home-product" aria-labelledby="knowx-home-product-<?php echo esc_attr( $product['id'] ); ?>"<?php echo $product['accent'] ? ' style="--card-accent:' . esc_attr( $product['accent'] ) . '"' : ''; ?>>
+					<h2 class="knowx-home-product-title" id="knowx-home-product-<?php echo esc_attr( $product['id'] ); ?>"><span class="knowx-icon"><?php echo knowx_icon_svg( $product['icon'], 24 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in knowx_icon_svg(). ?></span><a href="<?php echo esc_url( $product['url'] ); ?>"><?php echo esc_html( $product['name'] ); ?></a></h2>
+					<?php
+					get_template_part(
+						'template-parts/docs/section-grid',
+						null,
+						array(
+							'tree'   => knowx_product_tree( $product['id'] ),
+							'per'    => 5,
+							'prefix' => 'knowx-home-' . $product['id'],
+						)
+					);
+					?>
 				</section>
 			<?php endforeach; ?>
-		</div>
 		<?php else : ?>
 		<ul class="knowx-products">
 			<?php foreach ( $products as $product ) : ?>

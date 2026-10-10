@@ -495,12 +495,12 @@
 	background: var(--color-surface);
 }
 
-.knowx-section h2 {
+.knowx-section :is(h2, h3) {
 	margin: 0 0 0.35rem;
 	font-size: 1.125rem;
 }
 
-.knowx-section h2 a {
+.knowx-section :is(h2, h3) a {
 	color: var(--color-heading);
 }
 
@@ -674,4 +674,50 @@ p.knowx-item-date {
 /* Docs home of a single product: its sections stand in for the product card. */
 .knowx-home-sections {
 	margin-block: 2.5rem;
+}
+
+/* Search: product filter. */
+.knowx-filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-block-start: 1rem;
+}
+
+.knowx-filters a {
+	padding: 0.25rem 0.875rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: 999px;
+	background: var(--color-surface);
+	color: var(--global-font-color);
+	font-size: 0.875rem;
+	text-decoration: none;
+}
+
+.knowx-filters a[aria-current="true"] {
+	border-color: var(--color-link);
+	color: var(--color-link);
+	font-weight: 600;
+}
+
+/* Docs home listing each product with its sections. */
+.knowx-home-product {
+	margin-block: 2.5rem;
+}
+
+.knowx-home-product-title {
+	display: flex;
+	align-items: center;
+	gap: 0.625rem;
+	margin: 0 0 1rem;
+	font-size: 1.375rem;
+}
+
+.knowx-home-product-title .knowx-icon {
+	color: var(--card-accent, var(--color-link));
+}
+
+.knowx-home-product-title a {
+	color: var(--color-heading);
+	text-decoration: none;
 }

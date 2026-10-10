@@ -138,6 +138,33 @@ class Component implements Component_Interface {
 		);
 		register_term_meta(
 			'category',
+			'knowx_order',
+			array(
+				'type'              => 'integer',
+				'single'            => true,
+				'default'           => 0,
+				'show_in_rest'      => true,
+				'sanitize_callback' => 'absint',
+				'auth_callback'     => static function () {
+					return current_user_can( 'manage_categories' );
+				},
+			)
+		);
+		register_term_meta(
+			'category',
+			'knowx_start',
+			array(
+				'type'              => 'string',
+				'single'            => true,
+				'show_in_rest'      => true,
+				'sanitize_callback' => 'esc_url_raw',
+				'auth_callback'     => static function () {
+					return current_user_can( 'manage_categories' );
+				},
+			)
+		);
+		register_term_meta(
+			'category',
 			'knowx_accent',
 			array(
 				'type'              => 'string',
@@ -200,6 +227,25 @@ class Component implements Component_Interface {
 			<p><?php esc_html_e( 'Buttons and links on this product use this colour. Leave unchecked and the theme picks a colour from its palette when the site has several products.', 'knowx' ); ?></p>
 		</div>
 		<?php
+		$this->add_form_extra_fields();
+	}
+
+	/**
+	 * Order and "Start here" fields for the Add category form.
+	 */
+	private function add_form_extra_fields() {
+		?>
+		<div class="form-field">
+			<label for="knowx_order"><?php esc_html_e( 'Product order', 'knowx' ); ?></label>
+			<input type="number" min="0" name="knowx_order" id="knowx_order" value="0" class="small-text">
+			<p><?php esc_html_e( 'Products are listed from the lowest number to the highest, then by name.', 'knowx' ); ?></p>
+		</div>
+		<div class="form-field">
+			<label for="knowx_start"><?php esc_html_e( 'Start here link', 'knowx' ); ?></label>
+			<input type="url" name="knowx_start" id="knowx_start" value="">
+			<p><?php esc_html_e( 'Where the Start here button on the product page goes. Leave empty to open the first article.', 'knowx' ); ?></p>
+		</div>
+		<?php
 	}
 
 	/**
@@ -221,6 +267,20 @@ class Component implements Component_Interface {
 			<td>
 				<?php $this->accent_input( (string) get_term_meta( $term->term_id, 'knowx_accent', true ) ); ?>
 				<p class="description"><?php esc_html_e( 'Buttons and links on this product use this colour. Leave unchecked and the theme picks a colour from its palette when the site has several products.', 'knowx' ); ?></p>
+			</td>
+		</tr>
+		<tr class="form-field">
+			<th scope="row"><label for="knowx_order"><?php esc_html_e( 'Product order', 'knowx' ); ?></label></th>
+			<td>
+				<input type="number" min="0" name="knowx_order" id="knowx_order" value="<?php echo esc_attr( (string) absint( get_term_meta( $term->term_id, 'knowx_order', true ) ) ); ?>" class="small-text">
+				<p class="description"><?php esc_html_e( 'Products are listed from the lowest number to the highest, then by name.', 'knowx' ); ?></p>
+			</td>
+		</tr>
+		<tr class="form-field">
+			<th scope="row"><label for="knowx_start"><?php esc_html_e( 'Start here link', 'knowx' ); ?></label></th>
+			<td>
+				<input type="url" name="knowx_start" id="knowx_start" value="<?php echo esc_attr( (string) get_term_meta( $term->term_id, 'knowx_start', true ) ); ?>">
+				<p class="description"><?php esc_html_e( 'Where the Start here button on the product page goes. Leave empty to open the first article.', 'knowx' ); ?></p>
 			</td>
 		</tr>
 		<?php
@@ -266,6 +326,12 @@ class Component implements Component_Interface {
 		if ( isset( $_POST['knowx_accent'] ) ) {
 			$accent = empty( $_POST['knowx_accent_on'] ) ? '' : (string) sanitize_hex_color( wp_unslash( $_POST['knowx_accent'] ) );
 			update_term_meta( $term_id, 'knowx_accent', $accent );
+		}
+		if ( isset( $_POST['knowx_order'] ) ) {
+			update_term_meta( $term_id, 'knowx_order', absint( wp_unslash( $_POST['knowx_order'] ) ) );
+		}
+		if ( isset( $_POST['knowx_start'] ) ) {
+			update_term_meta( $term_id, 'knowx_start', esc_url_raw( wp_unslash( $_POST['knowx_start'] ) ) );
 		}
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 	}

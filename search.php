@@ -24,6 +24,28 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 			?>
 		</h1>
 		<?php get_search_form(); ?>
+		<?php $knowx_filters = knowx_products(); ?>
+		<?php if ( count( $knowx_filters ) > 1 ) : ?>
+			<nav class="knowx-filters" aria-label="<?php esc_attr_e( 'Filter by product', 'knowx' ); ?>">
+				<?php $knowx_active = absint( get_query_var( 'cat' ) ); ?>
+				<a href="<?php echo esc_url( add_query_arg( 's', rawurlencode( get_search_query( false ) ), home_url( '/' ) ) ); ?>"<?php echo 0 === $knowx_active ? ' aria-current="true"' : ''; ?>><?php esc_html_e( 'All products', 'knowx' ); ?></a>
+				<?php foreach ( $knowx_filters as $knowx_filter ) : ?>
+					<a href="
+					<?php
+					echo esc_url(
+						add_query_arg(
+							array(
+								's'   => rawurlencode( get_search_query( false ) ),
+								'cat' => $knowx_filter['id'],
+							),
+							home_url( '/' )
+						)
+					);
+					?>
+								"<?php echo $knowx_active === $knowx_filter['id'] ? ' aria-current="true"' : ''; ?>><?php echo esc_html( $knowx_filter['name'] ); ?></a>
+				<?php endforeach; ?>
+			</nav>
+		<?php endif; ?>
 	</header>
 
 	<?php if ( have_posts() ) : ?>

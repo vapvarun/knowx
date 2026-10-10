@@ -365,3 +365,17 @@ defined( 'ABSPATH' ) || exit;
 			),
 		)
 	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'radio',
+		array(
+			'settings' => 'knowx_home_layout',
+			'label'    => esc_html__( 'Products on the docs home', 'knowx' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => 'cards',
+			'choices'  => array(
+				'cards'    => esc_html__( 'Product cards', 'knowx' ),
+				'sections' => esc_html__( 'Each product with its sections', 'knowx' ),
+			),
+		)
+	);

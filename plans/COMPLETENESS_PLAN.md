@@ -19,10 +19,10 @@ Status 2026-10-10. Found by reviewing the shipped pages with fresh eyes. Nothing
 
 ## C. Multi-product site
 
-- [ ] Product order: by name today; add drag order through term meta `knowx_order`.
-- [ ] Per-product hero text and "Start here" target (term meta).
-- [ ] Search results: product filter chips (All, each product).
-- [ ] Docs home: option to list products as cards, or as full sections.
+- [x] Product order: by name today; add drag order through term meta `knowx_order`.
+- [x] Per-product "Start here" target (term meta `knowx_start`); the product hero text is the category description.
+- [x] Search results: product filter chips (All, each product).
+- [x] Docs home: option to list products as cards, or as full sections.
 
 ## D. Archives
 

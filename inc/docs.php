@@ -67,7 +67,7 @@ function knowx_icon_svg( $slug, $size = 24 ) {
 /**
  * Products: top-level categories that hold articles, with their icon, accent colour and article count.
  *
- * @return array[] Items with id, name, url, description, count, icon and accent.
+ * @return array[] Items with id, name, url, description, count, icon, accent and the Start here link.
  */
 function knowx_products() {
 	$exclude = knowx_kb_excluded_ids();
@@ -116,6 +116,14 @@ function knowx_products() {
 			// One query for every product's meta instead of one per product.
 			update_termmeta_cache( wp_list_pluck( $terms, 'term_id' ) );
 
+			// Lowest "Product order" first, then by name (the list is already by name and usort is stable).
+			usort(
+				$terms,
+				static function ( $a, $b ) {
+					return absint( get_term_meta( $a->term_id, 'knowx_order', true ) ) <=> absint( get_term_meta( $b->term_id, 'knowx_order', true ) );
+				}
+			);
+
 			// Sections of each product come from the same padded term list, so the cards need no extra query.
 			$sections = array();
 			foreach ( $all as $term ) {
@@ -131,14 +139,15 @@ function knowx_products() {
 			$items = knowx_kb_map_terms( $terms );
 			foreach ( $items as $index => $item ) {
 				$items[ $index ]['sections'] = array_slice( $sections[ $item['id'] ] ?? array(), 0, 4 );
-				$items[ $index ]['count']  = (int) $terms[ $index ]->count;
-				$icon   = (string) get_term_meta( $item['id'], 'knowx_icon', true );
-				$accent = (string) get_term_meta( $item['id'], 'knowx_accent', true );
+				$items[ $index ]['count']    = (int) $terms[ $index ]->count;
+				$icon                        = (string) get_term_meta( $item['id'], 'knowx_icon', true );
+				$accent                      = (string) get_term_meta( $item['id'], 'knowx_accent', true );
 				if ( count( $terms ) > 1 ) {
 					$looks  = knowx_default_product_looks();
 					$icon   = '' !== $icon ? $icon : $looks['icons'][ $item['id'] % count( $looks['icons'] ) ];
 					$accent = '' !== $accent ? $accent : $looks['accents'][ $item['id'] % count( $looks['accents'] ) ];
 				}
+				$items[ $index ]['start']  = (string) get_term_meta( $item['id'], 'knowx_start', true );
 				$items[ $index ]['icon']   = $icon;
 				$items[ $index ]['accent'] = $accent;
 			}
@@ -248,14 +257,14 @@ function knowx_product_tree( $product_id ) {
 			);
 			foreach ( is_wp_error( $terms ) ? array() : $terms as $term ) {
 				$tree['nodes'][ $term->term_id ] = array(
-					'id'       => (int) $term->term_id,
-					'name'     => $term->name,
-					'url'      => get_term_link( $term ),
-					'parent'   => (int) $term->parent,
-					'count'    => (int) $term->count,
+					'id'          => (int) $term->term_id,
+					'name'        => $term->name,
+					'url'         => get_term_link( $term ),
+					'parent'      => (int) $term->parent,
+					'count'       => (int) $term->count,
 					'description' => $term->description,
-					'posts'    => array(),
-					'children' => array(),
+					'posts'       => array(),
+					'children'    => array(),
 				);
 			}
 			foreach ( $tree['nodes'] as $id => $node ) {

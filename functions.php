@@ -57,6 +57,9 @@ call_user_func( 'KnowX\KnowX\knowx' );
 // Load theme extra function.
 require get_template_directory() . '/inc/extra.php';
 
+// Load the Knowledge Base data helpers.
+require get_template_directory() . '/inc/knowledge-base.php';
+
 // Load the breadcrumb trail.
 require get_template_directory() . '/inc/breadcrumbs.php';
 

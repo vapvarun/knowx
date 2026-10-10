@@ -129,7 +129,7 @@ parameters:
 		-
 			message: '#^Instantiated class Kirki\\Field\\Text not found\.$#'
 			identifier: class.notFound
-			count: 5
+			count: 4
 			path: inc/Kirki_Option/Fields/Knowledge_Base_Fields.php
 
 		-

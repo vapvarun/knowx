@@ -128,9 +128,9 @@ defined( 'ABSPATH' ) || exit;
 
 	new \Kirki\Field\Text(
 		array(
-			'settings'    => 'knowx_exclude_posts',
+			'settings'    => 'knowx_exclude',
 			'label'       => esc_html__( 'Exclude category by ID', 'knowx' ),
-			'description' => esc_html__( 'Use a comma to separate multiple categories.', 'knowx' ),
+			'description' => esc_html__( 'Applies to both Knowledge Base layouts. Use a comma to separate multiple category IDs.', 'knowx' ),
 			'section'     => 'site_knowledge_section_one',
 		)
 	);
@@ -297,20 +297,11 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	new \Kirki\Field\Text(
-		array(
-			'settings'    => 'knowx_exclude',
-			'label'       => esc_html__( 'Exclude category by ID', 'knowx' ),
-			'description' => esc_html__( 'Use a comma to separate multiple categories.', 'knowx' ),
-			'section'     => 'site_knowledge_section_two',
-		)
-	);
-
 	new \Kirki\Field\Number(
 		array(
 			'settings'    => 'knowx_posts',
 			'label'       => esc_html__( 'Posts per category', 'knowx' ),
-			'description' => esc_html__( 'Only numeric characters allowed.', 'knowx' ),
+			'description' => esc_html__( 'Only numeric characters allowed. Leave empty for 10.', 'knowx' ),
 			'section'     => 'site_knowledge_section_two',
 		)
 	);

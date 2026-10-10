@@ -24,13 +24,16 @@ $support_content = get_theme_mod( 'support_section_content' );
 $support_button_text = get_theme_mod( 'support_section_button_text' );
 $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 
+$hero_image = get_the_post_thumbnail_url( get_queried_object_id(), 'full' );
+$categories = knowx_kb_top_categories();
+$featured   = knowx_kb_featured_posts();
+$recent     = knowx_kb_recent_posts();
+$column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
+
 ?>
-	<?php $background_img = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' ); ?>
-		<?php if ( has_post_thumbnail() ) { ?>
-			<div class="knowx-section-hero" style="background-image: url(' <?php echo esc_url( $background_img[0] ); ?> ');">
-		<?php } else { ?>
-			<div class="knowx-section-hero">
-		<?php } ?>
+	<main id="primary" class="site-main">
+
+	<div class="knowx-section-hero"<?php echo $hero_image ? ' style="background-image: url(\'' . esc_url( $hero_image ) . '\');"' : ''; ?>>
 		<div class="container">
 			<?php if ( ! empty( $hero_title ) ) { ?>
 				<h1 class="entry-title"><?php echo esc_html( $hero_title ); ?></h1>
@@ -53,112 +56,71 @@ $support_button_link = get_theme_mod( 'support_section_button_link_url' );
 			</div>
 		</div>
 	</div>
-	
-	
+
 	<?php do_action( 'knowx_before_content' ); ?>
-	
-	<main id="primary" class="site-main">
 
 	<div class="container">
 
+		<?php if ( ! empty( $categories ) ) : ?>
 		<div id="knowx-categories-columns-three" class="knowx-knowledgebase-one">
-			<?php
-			$exclude_cats = get_post_meta( get_the_ID(), 'knowx-exclude-cats', true );
-			if ( ! empty( $exclude_cats ) ) {
-				$exclude = esc_attr( $exclude_cats );
-			} elseif ( get_theme_mod( 'knowx_exclude_posts' ) ) {
-				$exclude = esc_attr( get_theme_mod( 'knowx_exclude_posts' ) );
-			} else {
-				$exclude = '';
-			}
-			$knowx_cat_args = array(
-				'parent'     => 0,
-				'hide_empty' => 0,
-				'exclude'    => $exclude,
-				'orderby'    => 'name',
-				'order'      => 'asc',
-			);
-			$knowx_cats     = get_categories( $knowx_cat_args );
-
-			foreach ( $knowx_cats as $category ) :
-				echo '<ul class="cat-list"><li class="cat-name"><h2><a href="' . get_category_link( $category->cat_ID ) . '" title="' . $category->name . '" >' . $category->name . '</a></h2></li>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '</ul>';
-			endforeach;
-			?>
+			<?php foreach ( $categories as $category ) : ?>
+				<ul class="cat-list">
+					<li class="cat-name"><h2><a href="<?php echo esc_url( $category['url'] ); ?>"><?php echo esc_html( $category['name'] ); ?></a></h2></li>
+				</ul>
+			<?php endforeach; ?>
 		</div><!-- #knowx-categories-columns-three -->
+		<?php endif; ?>
 
+		<?php if ( ! empty( $featured ) || ! empty( $recent ) ) : ?>
 		<div class="knowx-post-section">
 			<div class="row">
-				<div class="col-md-6">
+				<?php if ( ! empty( $featured ) ) : ?>
+				<div class="<?php echo esc_attr( $column ); ?>">
 					<div class="knowx-popular-posts">
-					<h3><?php esc_html_e( 'Popular Articles', 'knowx' ); ?></h3>
-					<?php
-					if ( function_exists( 'wpp_get_mostpopular' ) ) {
-						/* Get up to the top 5 */
-						wpp_get_mostpopular(
-							array(
-								'limit' => 5,
-							)
-						);
-					} else {
-						?>
-						<p><?php esc_html_e( 'No data found.', 'knowx' ); ?></p>
-						<?php
-					}
-					?>
+						<h3><?php esc_html_e( 'Featured Articles', 'knowx' ); ?></h3>
+						<ul>
+							<?php foreach ( $featured as $item ) : ?>
+								<li><a href="<?php echo esc_url( $item['url'] ); ?>" rel="bookmark"><?php echo esc_html( $item['title'] ); ?></a></li>
+							<?php endforeach; ?>
+						</ul>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<?php endif; ?>
+				<?php if ( ! empty( $recent ) ) : ?>
+				<div class="<?php echo esc_attr( $column ); ?>">
 					<div class="knowx-recent-posts">
-					<h3><?php esc_html_e( 'Recent Articles', 'knowx' ); ?></h3>
-					<?php
-						$related = get_posts( array( 'numberposts' => 5 ) );
-					if ( $related ) {
-						foreach ( $related as $post ) {
-							setup_postdata( $post );
-							?>
-								<ul> 
-									<li><a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php the_title(); ?>"><?php the_title(); ?></a></li>
-								</ul>   
-							<?php
-						}
-					}
-					wp_reset_postdata();
-					?>
+						<h3><?php esc_html_e( 'Recent Articles', 'knowx' ); ?></h3>
+						<ul>
+							<?php foreach ( $recent as $item ) : ?>
+								<li><a href="<?php echo esc_url( $item['url'] ); ?>" rel="bookmark"><?php echo esc_html( $item['title'] ); ?></a></li>
+							<?php endforeach; ?>
+						</ul>
 					</div>
 				</div>
+				<?php endif; ?>
 			</div><!-- .row -->
 		</div><!-- .knowx-post-section -->
+		<?php endif; ?>
 
 	</div><!-- .container -->
 
 	<div class="knowx-support-section">
 		<div class="container">
 			<div class="knowx-support-heading">
-			<?php if ( ! empty( $support_title ) ) { ?>
-					<h2 class="knowx-support-title"><?php echo esc_html( $support_title ); ?></h2>
-				<?php } else { ?>
-					<h2 class="knowx-support-title"><?php esc_html_e( 'Can\'t find what you\'re looking for?', 'knowx' ); ?></h2>
-				<?php } ?>
+				<h2 class="knowx-support-title">
+					<?php echo esc_html( ! empty( $support_title ) ? $support_title : __( 'Can\'t find what you\'re looking for?', 'knowx' ) ); ?>
+				</h2>
 			</div>
 			<div class="knowx-support-content">
-				<?php if ( ! empty( $support_content ) ) { ?>
-					<p><?php echo esc_html( $support_content ); ?></p>
-				<?php } else { ?>
-					<p><?php esc_html_e( 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.', 'knowx' ); ?></p>
-				<?php } ?>
+				<p><?php echo esc_html( ! empty( $support_content ) ? $support_content : __( 'Search the articles above, or get in touch and we will help you.', 'knowx' ) ); ?></p>
 			</div>
+			<?php if ( ! empty( $support_button_text ) && ! empty( $support_button_link ) ) : ?>
 			<div class="knowx-support-button">
-				<?php if ( ! empty( $support_button_text ) && ! empty( $support_button_link ) ) { ?>
-					<a href="<?php echo esc_url( $support_button_link ); ?>">
-						<?php echo esc_html( $support_button_text ); ?>
-					</a>
-				<?php } else { ?>
-					<a href="<?php esc_url( '#' ); ?>"><?php esc_html_e( 'Contact Support', 'knowx' ); ?></a>
-				<?php } ?>
+				<a href="<?php echo esc_url( $support_button_link ); ?>"><?php echo esc_html( $support_button_text ); ?></a>
 			</div>
-		</div><!-- .knowx-support-section -->
-	</div><!-- .container -->
+			<?php endif; ?>
+		</div><!-- .container -->
+	</div><!-- .knowx-support-section -->
 </main><!-- #primary -->
 
 	<?php do_action( 'knowx_after_content' ); ?>

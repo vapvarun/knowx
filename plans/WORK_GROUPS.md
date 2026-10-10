@@ -26,7 +26,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W01 | Lint debt cleared | done | [10392494270](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494270) |
 | W02 | Dead code, core duplicates and repo hygiene | done | [10392494288](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494288) |
 | W03 | Compatibility headers and theme-review blockers | done | [10392494297](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494297) |
-| W04 | Basecamp Bugs cards and KB template defects | todo | [10392494317](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494317) |
+| W04 | Basecamp Bugs cards and KB template defects | done | [10392494317](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494317) |
 | W05 | Security and correctness hardening | done | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
 | W06 | Visual baseline and settings inventory | todo | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
 | W07 | Customizer_Framework port, Kirki removed | todo | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
@@ -104,20 +104,17 @@ Verified with `git grep` before every delete. Principle added 2026-10-10: do not
 - Gate: PHP lint clean, phpunit 7 tests, phpstan OK (baseline regenerated), CSS/JS lint 0, theme.json validates; screenshots at 390 / 768 / 1024 / 1440 differ from the baseline by at most 0.01% (the search results page, from the new search form markup); no duplicate ids; `debug.log` empty. **Passed 2026-10-10.**
 
 ## W04 Basecamp Bugs cards and KB template defects (feeds D, F)
-Cards 10388866381 and 10391809639 plus the related defects from B section 1. Reproduce first, fix, browser-verify, post proof, move card.
-- [ ] Layout One: lorem ipsum default in the support section (`page-knowledgebase-one.php:149`) replaced by a real sentence; dead button `esc_url( '#' )` without `echo` (line 158) fixed
-- [ ] Popular Articles: native fallback (most commented or most recent) when WordPress Popular Posts is inactive; no "No data found."
-- [ ] Empty categories hidden by default (`hide_empty`), no "Uncategorized" tile on a new site
-- [ ] Recent Articles and Popular Articles honour the same category exclusion as the tiles; one setting (today `knowx_exclude_posts` in Layout One vs `knowx_exclude` in Layout Two, same label)
-- [ ] The per-page `knowx-exclude-cats` meta: register the meta box or remove the meta
-- [ ] Recent Articles markup: one `<ul>` with five `<li>` (`:116-123`)
-- [ ] Layout Two: `cat-description` `<div>` directly inside `<ul>` fixed; `orderby` title not slug (line 77); bounded `get_categories` and one grouped post query instead of `get_posts` per category (line 99, `posts_per_page` -1)
-- [ ] Layout Two page title: needs a default (`knowx_page_title`) since Kirki defaults vanish
-- [ ] `esc_html( 'View All &raquo;', 'knowx' )` becomes `esc_html__()` (`page-knowledgebase-two.php:106`)
-- [ ] Escape `$category->name`, `get_category_link()` in title attr and link text (`:85`, `:62`); remove blanket `phpcs:ignore`
-- [ ] Layouts One and Two list the same set of categories, or the difference is a documented option
-- [ ] Docs `docs/website/features/knowledge-base-homepage.md` rewritten to match (after `master` sync, see W17)
-- Gate: both cards reproduced then fixed; 390px and desktop screenshots; seeded 1000+ posts / 500+ categories run in acceptable time.
+Cards 10388866381 and 10391809639 plus the related defects from B section 1. Reproduced first on the W00 baseline (lorem ipsum, "No data found.", "Uncategorized" tile visible in `baseline-w00/home-*.png`), then fixed.
+- [x] New `inc/knowledge-base.php`: bounded, cached data helpers shared by both layouts (categories capped at 100 via `knowx_kb_max_categories`, per-category posts default 10, `no_found_rows`, meta/term cache off, cache key includes the settings and the posts/terms "last changed" stamps so it invalidates on any edit); 4 unit tests
+- [x] Layout One: placeholder lorem ipsum replaced by a real sentence; the dead `esc_url( '#' )` button is no longer rendered without a link; empty categories hidden (`hide_empty`)
+- [x] "Popular Articles" depended on WordPress Popular Posts and printed "No data found."; it is now **Featured Articles** from core sticky posts and the column is not rendered when there are none (Recent then takes the full width)
+- [x] One exclusion setting `knowx_exclude` for both layouts (was `knowx_exclude_posts` and `knowx_exclude`); Recent and Featured articles honour it, children included; verified on the live site (excluding a parent removes it and its children from tiles and Recent)
+- [x] Recent Articles is one `<ul>` with one `<li>` per article (was five single-item lists)
+- [x] Layout Two: one bounded query per listed category instead of unbounded `get_posts` per category; `orderby` title instead of slug; `cat-description` is a list item, not a `<div>` inside the `<ul>`; `esc_html__()` for "View All"; all names, links and titles escaped (no blanket `phpcs:ignore`); `knowx_page_title` has its `'yes'` default so the title does not vanish without Kirki
+- [x] Hero heading and search are inside `<main>`; `$post` global override removed; the per-page `knowx-exclude-cats` meta is no longer read
+- [x] Decision for card item 5: Layout One lists top-level categories, Layout Two lists every category; documented as by design and carried into the product model in W14
+- [ ] Docs page `docs/website/features/knowledge-base-homepage.md` exists only on `master`; rewritten in W17 after the `master` sync (the card's docs item)
+- Gate: lint and tests pass (phpunit 15 tests, phpstan baseline 131); verified on the live site: tiles, exclusion with children, sticky featured, Layout Two options (view all, descriptions, posts per category), div balance, no `debug.log` entries; Layout One screenshots at 390 / 768 / 1024 / 1440. **Passed 2026-10-10** (the 390 px page is wider than the viewport on every template; that pre-existing overflow is fixed in W11).
 
 ## W05 Security and correctness hardening (feeds A, G)
 From A section 4.

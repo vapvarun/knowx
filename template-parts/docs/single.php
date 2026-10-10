@@ -23,11 +23,10 @@ $knowx_article = ob_get_clean();
 $knowx_toc     = knowx_is_truthy( knowx_mod( 'knowx_show_toc' ) ) ? knowx_toc_items() : array();
 
 $knowx_index   = array_search( get_queried_object_id(), wp_list_pluck( $knowx_flat, 'id' ), true );
-$knowx_pager   = knowx_is_truthy( knowx_mod( 'knowx_show_pager' ) );
-$knowx_prev    = $knowx_pager && false !== $knowx_index && $knowx_index > 0 ? $knowx_flat[ $knowx_index - 1 ] : null;
-$knowx_next    = $knowx_pager && false !== $knowx_index && isset( $knowx_flat[ $knowx_index + 1 ] ) ? $knowx_flat[ $knowx_index + 1 ] : null;
+$knowx_prev    = false !== $knowx_index && $knowx_index > 0 ? $knowx_flat[ $knowx_index - 1 ] : null;
+$knowx_next    = false !== $knowx_index && isset( $knowx_flat[ $knowx_index + 1 ] ) ? $knowx_flat[ $knowx_index + 1 ] : null;
 $knowx_related = array();
-$knowx_scan = knowx_is_truthy( knowx_mod( 'knowx_show_related' ) ) ? array_merge( array( $knowx_tree['root'] ), $knowx_tree['nodes'] ) : array();
+$knowx_scan = array_merge( array( $knowx_tree['root'] ), $knowx_tree['nodes'] );
 foreach ( $knowx_scan as $knowx_node ) {
 	if ( in_array( get_queried_object_id(), wp_list_pluck( $knowx_node['posts'], 'id' ), true ) ) {
 		$knowx_related = array_slice(

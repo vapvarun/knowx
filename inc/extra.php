@@ -33,39 +33,24 @@ if ( ! function_exists( 'knowx_content_bottom' ) ) {
 
 add_action( 'knowx_after_content', 'knowx_content_bottom' );
 
-// Site Sub Header.
+// Breadcrumb bar.
 if ( ! function_exists( 'knowx_sub_header' ) ) {
 	add_action( 'knowx_sub_header', 'knowx_sub_header' );
 
 	/**
-	 * Prints the sub header with the breadcrumbs and the search form.
+	 * Prints the bar with the breadcrumbs under the header.
 	 */
 	function knowx_sub_header() {
-		global $post;
-		if ( is_front_page() ) {
+		if ( is_front_page() || ! knowx_is_truthy( knowx_mod( 'site_breadcrumbs' ) ) ) {
 			return;
 		}
-		$site_subheader = knowx_mod( 'site_sub_header' );
-		if ( knowx_is_truthy( $site_subheader ) ) {
-			?>
+		?>
 		<div class="site-sub-header">
 			<div class="container">
-				<?php
-				$breadcrumbs = knowx_mod( 'site_breadcrumbs' );
-				if ( knowx_is_truthy( $breadcrumbs ) ) {
-					knowx_the_breadcrumb();
-				}
-				?>
-				<?php
-				$site_search = knowx_mod( 'site_search' );
-				if ( knowx_is_truthy( $site_search ) ) {
-					get_search_form();
-				}
-				?>
+				<?php knowx_the_breadcrumb(); ?>
 			</div>
 		</div>
-			<?php
-		}
+		<?php
 	}
 }
 
@@ -74,19 +59,6 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
  */
 function knowx_the_breadcrumb() {
 	knowx_get_breadcrumb();
-}
-
-// Site Loader.
-if ( ! function_exists( 'knowx_site_loader' ) ) {
-	/**
-	 * Prints the page loader markup when the loader is enabled.
-	 */
-	function knowx_site_loader() {
-		$loader = knowx_mod( 'site_loader' );
-		if ( knowx_is_truthy( $loader ) ) {
-			echo '<div class="site-loader"><div class="loader-inner"><span class="dot"></span><span class="dot dot1"></span><span class="dot dot2"></span><span class="dot dot3"></span><span class="dot dot4"></span></div></div>';
-		}
-	}
 }
 
 /**

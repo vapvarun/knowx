@@ -21,8 +21,6 @@ knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
 $default_sidebar = knowx_mod( 'sidebar_option' );
 
-$post_layout  = knowx_mod( 'blog_layout_option' );
-$post_per_row = 'col-md-' . knowx_mod( 'post_per_row' );
 
 ?>
 
@@ -50,8 +48,7 @@ $post_per_row = 'col-md-' . knowx_mod( 'post_per_row' );
 			$classes = get_body_class();
 			if ( in_array( 'blog', $classes ) || in_array( 'archive', $classes ) || in_array( 'search', $classes ) ) {
 				?>
-			<div class="post-layout row <?php echo esc_attr( $post_layout ); ?>">
-			<div class="grid-sizer <?php echo esc_attr( $post_per_row ); ?>"></div>
+			<div class="post-layout row default-layout">
 				<?php
 				while ( have_posts() ) {
 					the_post();

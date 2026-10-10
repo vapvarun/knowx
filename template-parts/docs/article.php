@@ -13,7 +13,7 @@ $knowx_version = knowx_article_version( get_the_ID() );
 	<header class="entry-header">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 		<p class="knowx-article-meta">
-			<?php if ( '' !== $knowx_version && knowx_is_truthy( knowx_mod( 'knowx_show_version' ) ) ) : ?>
+			<?php if ( '' !== $knowx_version ) : ?>
 				<span class="knowx-version">
 					<?php
 					/* translators: %s: product version. */

@@ -16,7 +16,7 @@
     margin-bottom: 30px;
     background: var(--color-surface);
     padding: 1em;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
 }
 
 .widget-area .widget:last-child {

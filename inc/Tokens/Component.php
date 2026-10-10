@@ -103,6 +103,16 @@ class Component implements Component_Interface {
 			$declarations .= '--color-theme-body:#' . $page . ';';
 		}
 
+		// Corner roundness: soft is the stylesheet default.
+		$corners = array(
+			'square' => array( 0, 0, 0 ),
+			'round'  => array( 8, 14, 20 ),
+		);
+		$corner  = (string) get_theme_mod( 'knowx_corners', '' );
+		if ( isset( $corners[ $corner ] ) ) {
+			$declarations .= sprintf( '--radius-sm:%1$dpx;--radius-md:%2$dpx;--radius-lg:%3$dpx;', ...$corners[ $corner ] );
+		}
+
 		foreach ( self::VARIABLES as $setting => $variable ) {
 			$color = self::sanitize_color( get_theme_mod( $setting, '' ) );
 			if ( '' !== $color ) {

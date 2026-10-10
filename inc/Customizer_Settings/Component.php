@@ -113,16 +113,6 @@ class Component implements Component_Interface {
 		);
 
 		// Site Loader.
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'site_loader',
-			array(
-				'title'       => esc_html__( 'Site Loader', 'knowx' ),
-				'priority'    => 30,
-				'description' => '',
-				'panel'       => 'site_layout_panel',
-			)
-		);
-
 		// Site Scroll Top.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_scroll_top',
@@ -215,15 +205,6 @@ class Component implements Component_Interface {
 		);
 
 		// Site Blog Layout.
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'site_blog_section',
-			array(
-				'title'       => esc_html__( 'Posts Page', 'knowx' ),
-				'priority'    => 32,
-				'description' => '',
-			)
-		);
-
 		// Site Sidebar Layout.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_sidebar_layout',
@@ -318,7 +299,6 @@ class Component implements Component_Interface {
 		require_once $fields_dir . 'Header_Fields.php';
 		require_once $fields_dir . 'Sub_Header_Fields.php';
 		require_once $fields_dir . 'Skin_Fields.php';
-		require_once $fields_dir . 'Blog_Fields.php';
 		require_once $fields_dir . 'Sidebar_Fields.php';
 		require_once $fields_dir . 'Knowledge_Base_Fields.php';
 		require_once $fields_dir . 'Footer_Fields.php';

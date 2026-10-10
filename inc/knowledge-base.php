@@ -146,23 +146,14 @@ function knowx_kb_top_categories() {
 }
 
 /**
- * Whether the docs home lists the recently changed articles instead of the newest ones.
- *
- * @return bool True when ordered by last modified.
- */
-function knowx_recent_by_updated() {
-	return 'updated' === knowx_mod( 'knowx_recent_by' );
-}
-
-/**
- * Recent posts outside the excluded categories: by last modified date, or by publish date.
+ * Recently updated posts outside the excluded categories.
  *
  * @param int $limit Number of posts.
  * @return array[] Post items.
  */
 function knowx_kb_recent_posts( $limit = 5 ) {
 	$exclude = knowx_kb_excluded_ids();
-	$orderby = knowx_recent_by_updated() ? 'modified' : 'date';
+	$orderby = 'modified';
 
 	return knowx_kb_cached(
 		'recent-' . $orderby . '-' . (int) $limit . '-' . implode( ',', $exclude ),

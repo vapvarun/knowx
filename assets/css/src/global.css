@@ -460,7 +460,7 @@ button.media-menu-item {
     padding: 25px;
     text-align: center;
     border: 1px solid var(--color-theme-primary);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
 }
 
 .knowx-knowledgebase-one ul.cat-list li.cat-name a:hover {
@@ -665,5 +665,5 @@ button.media-menu-item {
     background-color: var(--color-surface);
     margin: 1rem 0;
     padding: 25px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
 }

@@ -26,7 +26,7 @@ if ( is_search() || is_tag() || is_date() || is_author() ) {
 		<p class="knowx-crumb"><?php echo esc_html( implode( ' / ', $knowx_trail ) ); ?></p>
 	<?php endif; ?>
 	<h2><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-	<?php if ( '' !== $knowx_version && knowx_is_truthy( knowx_mod( 'knowx_show_version' ) ) ) : ?>
+	<?php if ( '' !== $knowx_version ) : ?>
 		<span class="knowx-version">
 			<?php
 			/* translators: %s: product version. */

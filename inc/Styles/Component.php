@@ -252,41 +252,37 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 
 		$css_files = array(
-			'knowx-global'      => array(
+			'knowx-global' => array(
 				'file'   => 'global.min.css',
 				'global' => true,
 			),
-			'knowx-comments'    => array(
+			'knowx-comments' => array(
 				'file'             => 'comments.min.css',
 				'preload_callback' => function () {
 					return ! post_password_required() && is_singular() && ( comments_open() || get_comments_number() );
 				},
 			),
-			'knowx-content'     => array(
+			'knowx-content' => array(
 				'file'             => 'content.min.css',
 				'preload_callback' => '__return_false',
 			),
-			'knowx-docs'        => array(
+			'knowx-docs' => array(
 				'file'             => 'docs.min.css',
 				'preload_callback' => '__return_false',
 			),
-			'knowx-sidebar'     => array(
+			'knowx-sidebar' => array(
 				'file' => 'sidebar.min.css',
 			),
-			'knowx-widgets'     => array(
+			'knowx-widgets' => array(
 				'file' => 'widgets.min.css',
 			),
-			'knowx-front-page'  => array(
+			'knowx-front-page' => array(
 				'file'             => 'front-page.min.css',
 				'preload_callback' => function () {
 					global $template;
 
 					return 'front-page.php' === basename( $template );
 				},
-			),
-			'knowx-site-loader' => array(
-				'file'   => 'loaders.min.css',
-				'global' => true,
 			),
 		);
 

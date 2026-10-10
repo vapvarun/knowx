@@ -13,10 +13,8 @@ The header holds the logo or site title, the primary menu, the search button, th
 
 The bar under the header, shown on every page except the front page.
 
-- **Site sub header**: show or hide the whole bar. On by default.
+- **Show breadcrumbs**: show or hide the bar with the trail Home, product, section, article. On by default.
 - **Background**: colour or image for the bar.
-- **Site breadcrumbs**: show the trail Home, product, section, article. On by default.
-- **Site search**: show a search box in the bar. Off by default, because the header already has the search button.
 
 ## Menus
 

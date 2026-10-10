@@ -6,74 +6,49 @@
 		"color": {
 			"palette": [
 				{
-					"color": "#ffffff",
+					"slug": "base",
 					"name": "Base",
-					"slug": "base"
+					"color": "var(--color-surface)"
 				},
 				{
-					"color": "#000000",
+					"slug": "contrast",
 					"name": "Contrast",
-					"slug": "contrast"
+					"color": "var(--color-heading)"
 				},
 				{
-					"color": "#03a9f4",
+					"slug": "primary",
 					"name": "Primary",
-					"slug": "primary"
+					"color": "var(--color-theme-primary)"
 				},
 				{
-					"color": "#41848f",
+					"slug": "secondary",
 					"name": "Secondary",
-					"slug": "secondary"
+					"color": "var(--color-theme-secondary)"
 				},
 				{
-					"color": "#F6F6F6",
+					"slug": "tertiary",
 					"name": "Tertiary",
-					"slug": "tertiary"
+					"color": "var(--color-surface-alt)"
 				},
 				{
-					"color": "#c0392b",
+					"slug": "red",
 					"name": "Red",
-					"slug": "red"
+					"color": "var(--color-theme-red)"
 				},
 				{
-					"color": "#27ae60",
+					"slug": "green",
 					"name": "Green",
-					"slug": "green"
+					"color": "var(--color-theme-green)"
 				},
 				{
-					"color": "#2980b9",
+					"slug": "blue",
 					"name": "Blue",
-					"slug": "blue"
+					"color": "var(--color-theme-blue)"
 				},
 				{
-					"color": "#f1c40f",
+					"slug": "yellow",
 					"name": "Yellow",
-					"slug": "yellow"
-				},
-				{
-					"color": "#1c2833",
-					"name": "Black",
-					"slug": "black"
-				},
-				{
-					"color": "#95a5a6",
-					"name": "Grey",
-					"slug": "grey"
-				},
-				{
-					"color": "#ecf0f1",
-					"name": "White",
-					"slug": "white"
-				},
-				{
-					"color": "#97c0b7",
-					"name": "Dusty Daylight",
-					"slug": "custom-daylight"
-				},
-				{
-					"color": "#eee9d1",
-					"name": "Dusty Sun",
-					"slug": "custom-sun"
+					"color": "var(--color-theme-yellow)"
 				}
 			]
 		},

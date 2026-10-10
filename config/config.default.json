@@ -52,6 +52,7 @@
       "readme.txt",
       "screenshot.png",
       "theme.json",
+      "styles/*.json",
       "assets/css/*.css",
       "assets/css/admin/*.css",
       "assets/css/editor/*.css",

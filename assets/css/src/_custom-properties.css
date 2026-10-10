@@ -67,17 +67,12 @@
     --color-code-bg: #2d2d2d;
     --color-code-text: #f8f8f2;
 
-    /* Custom editor colors */
+    /* Status colours used by the theme.json palette */
     --color-theme-secondary: #41848f;
     --color-theme-red: #c0392b;
     --color-theme-green: #27ae60;
     --color-theme-blue: #2980b9;
     --color-theme-yellow: #f1c40f;
-    --color-theme-black: #1c2833;
-    --color-theme-grey: #95a5a6;
-    --color-theme-white: #ecf0f1;
-    --color-custom-daylight: #97c0b7;
-    --color-custom-sun: #eee9d1;
 
     /* Border radius */
     --global-border-radius: 4px;
@@ -89,11 +84,7 @@
     --color-site-title: var(--color-heading);
     --color-site-tagline: var(--color-muted);
 
-    /* Custom editor font sizes */
-    --font-size-small: calc(16 / var(--global-font-size) * 1rem);
     --font-size-regular: calc(var(--global-font-size) / 16 * 1rem);
-    --font-size-large: calc(36 / var(--global-font-size) * 1rem);
-    --font-size-larger: calc(48 / var(--global-font-size) * 1rem);
     /* Global container width */
     --container-width: 1170px;
 }
@@ -108,8 +99,8 @@
     --color-muted: #9aa1ac;
     --global-border-color: #2c313a;
     --select-arrow: url(../images/arrow-down-light.svg);
-    --color-link: color-mix(in srgb, var(--color-theme-primary) 55%, #fff);
-    --color-link-hover: color-mix(in srgb, var(--color-theme-primary) 35%, #fff);
+    --color-link: color-mix(in srgb, var(--color-theme-primary) 40%, #fff);
+    --color-link-hover: color-mix(in srgb, var(--color-theme-primary) 25%, #fff);
     --color-header-bg: var(--color-surface);
     --color-footer-content: var(--global-font-color);
     --color-copyright-bg: var(--color-surface);
@@ -129,8 +120,8 @@
         --color-muted: #9aa1ac;
         --global-border-color: #2c313a;
     --select-arrow: url(../images/arrow-down-light.svg);
-        --color-link: color-mix(in srgb, var(--color-theme-primary) 55%, #fff);
-        --color-link-hover: color-mix(in srgb, var(--color-theme-primary) 35%, #fff);
+        --color-link: color-mix(in srgb, var(--color-theme-primary) 40%, #fff);
+        --color-link-hover: color-mix(in srgb, var(--color-theme-primary) 25%, #fff);
         --color-header-bg: var(--color-surface);
         --color-footer-content: var(--global-font-color);
         --color-copyright-bg: var(--color-surface);

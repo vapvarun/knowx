@@ -35,7 +35,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W10 | JavaScript: ordering, jQuery, libraries | done | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
 | W11 | CSS: token migration, RTL, focus, responsive | done | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
 | W12 | Fonts and icons | done | [10392494459](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494459) |
-| W13 | theme.json, style variations, editor | todo | [10392494471](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494471) |
+| W13 | theme.json, style variations, editor | done | [10392494471](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494471) |
 | W14 | Docs templates and structured data | todo | [10392494490](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494490) |
 | W15 | Starter content, patterns, Playground | todo | [10392494499](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494499) |
 | W16 | Large-site and speed | todo | [10392494519](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494519) |
@@ -209,10 +209,12 @@ From C section 2, 3 and 7. Screenshots now use real device emulation (`shots2.sh
 - Gate: phpstan clean, phpunit 28 green, lint 0, phpcs 18 errors (all in files owned by W14/W17), zip 399 KB, no FontAwesome or Google reference on the front end, console clean. **Passed 2026-10-10.**
 
 ## W13 theme.json, style variations, editor (feeds C)
-- [ ] `theme.json` v3 is the design source (palette, font sizes, spacing, layout widths); `--bx-*` tokens read `--wp--preset--*`
-- [ ] Eight BuddyX style variations in `styles/`
-- [ ] Editor styles match the front end; palettes consistent
-- Gate: `lint:theme-json` passes; editor and front end compared side by side.
+- [x] `theme.json` v3 is the palette and font-size source: nine colours that point at the `--color-*` tokens (so the editor palette, `.has-*` classes and dark mode follow the Customizer); the legacy `editor-color-palette` / `editor-font-sizes` supports, the `has-theme-*` and `has-*-font-size` CSS and the unused colour variables were removed (core generates the classes)
+- [x] Six style variations in `styles/` (Cool, Minimal, Monochrome, Pastel, Vibrant, Warm) as valid theme.json files; BuddyX Dark is not copied (the colour-mode toggle does that) and Editorial is typography-only. A Customizer "Colour Scheme" select (Site Skin) applies one; colours the owner set explicitly still win. Link and muted colours are derived for each scheme's background
+- [x] Editor gets the same token rule through `block_editor_settings_all` (checked: editor iframe shows the scheme's primary and surface)
+- [x] Bug found by the check: `_blocks.css` and `_media.css` re-imported the token file, so `content.min.css` re-declared every token after the saved Customizer colours and overrode them; imports removed (content.min.css 42 KB to 38 KB)
+- [x] Dark links lightened (40% brand over white) so a black brand colour stays readable
+- Gate: `lint:theme-json` passes (7 files), phpstan clean, phpunit 29 green, lint 0, zip 400 KB, axe 0 violations across 7 schemes x 4 pages x light/dark x 390/1280 px. **Passed 2026-10-10.**
 
 ## W14 Docs product: multi-product, search, FAQ, templates, structured data (feeds I)
 Decisions in plan section 12.

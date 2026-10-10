@@ -62,4 +62,24 @@ class Tokens_Tests extends Unit_Test_Case {
 		$this->assertSame( '', Component::sanitize_color( 'red;}body{display:none' ) );
 		$this->assertSame( '', Component::sanitize_color( 'url(javascript:alert(1))' ) );
 	}
+
+	/**
+	 * A scheme slug is read from styles/<slug>.json and nothing else.
+	 */
+	public function test_scheme_palette() {
+		\Brain\Monkey\Functions\when( 'get_template_directory' )->justReturn( TESTS_THEME_DIR );
+		\Brain\Monkey\Functions\when( 'wp_json_file_decode' )->alias(
+			static function ( $file ) {
+				return json_decode( file_get_contents( $file ), true );
+			}
+		);
+
+		$palette = Component::scheme_palette( 'warm' );
+		foreach ( array( 'base', 'contrast', 'primary', 'secondary', 'tertiary' ) as $slug ) {
+			$this->assertArrayHasKey( $slug, $palette );
+		}
+		$this->assertSame( array(), Component::scheme_palette( '../theme' ) );
+		$this->assertSame( array(), Component::scheme_palette( 'missing' ) );
+		$this->assertSame( array(), Component::scheme_palette( '' ) );
+	}
 }

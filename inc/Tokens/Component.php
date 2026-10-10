@@ -10,7 +10,10 @@ namespace KnowX\KnowX\Tokens;
 use KnowX\KnowX\Component_Interface;
 
 use function add_action;
+use function add_filter;
+use function get_template_directory;
 use function wp_add_inline_style;
+use function wp_json_file_decode;
 
 /**
  * Prints the few colour variables the Customizer can change.
@@ -46,6 +49,7 @@ class Component implements Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'action_add_tokens' ), 20 );
+		add_filter( 'block_editor_settings_all', array( $this, 'filter_editor_settings' ) );
 	}
 
 	/**
@@ -59,6 +63,43 @@ class Component implements Component_Interface {
 	}
 
 	/**
+	 * Gives the block editor the same colours as the front end.
+	 *
+	 * @param array $settings Editor settings.
+	 * @return array Editor settings with the token rule added.
+	 */
+	public function filter_editor_settings( $settings ) {
+		$css = $this->build_css();
+		if ( '' !== $css ) {
+			$settings['styles'][] = array( 'css' => $css );
+		}
+		return $settings;
+	}
+
+	/**
+	 * Colour scheme palette from `styles/<slug>.json`, or an empty array.
+	 *
+	 * @param string $slug Scheme slug saved by the Customizer.
+	 * @return string[] Palette as slug => colour.
+	 */
+	public static function scheme_palette( string $slug ): array {
+		if ( ! preg_match( '/^[a-z0-9-]+$/', $slug ) ) {
+			return array();
+		}
+		$file = get_template_directory() . '/styles/' . $slug . '.json';
+		$data = is_readable( $file ) ? wp_json_file_decode( $file, array( 'associative' => true ) ) : null;
+
+		$palette = array();
+		foreach ( (array) ( $data['settings']['color']['palette'] ?? array() ) as $entry ) {
+			$color = self::sanitize_color( $entry['color'] ?? '' );
+			if ( '' !== $color && isset( $entry['slug'] ) ) {
+				$palette[ $entry['slug'] ] = $color;
+			}
+		}
+		return $palette;
+	}
+
+	/**
 	 * Builds the `:root` rule from the settings the owner changed.
 	 *
 	 * Only saved values are printed; unsaved settings keep the stylesheet default.
@@ -68,11 +109,22 @@ class Component implements Component_Interface {
 	public function build_css(): string {
 		$declarations = '';
 
+		// A chosen colour scheme comes first; colours the owner set explicitly still win.
+		$scheme = self::scheme_palette( (string) get_theme_mod( 'site_color_scheme', '' ) );
+		if ( $scheme ) {
+			$declarations .= '--color-surface:' . $scheme['base'] . ';--color-theme-body:' . $scheme['tertiary'] . ';--color-surface-alt:' . $scheme['tertiary'] . ';'
+				. '--color-heading:' . $scheme['contrast'] . ';--global-font-color:color-mix(in srgb,' . $scheme['contrast'] . ' 80%,' . $scheme['base'] . ');'
+				. '--color-theme-secondary:' . $scheme['secondary'] . ';--color-muted:color-mix(in srgb,' . $scheme['contrast'] . ' 75%,' . $scheme['base'] . ');';
+		}
+
 		$primary = self::sanitize_color( get_theme_mod( 'site_primary_color', '' ) );
+		if ( '' === $primary && $scheme ) {
+			$primary = $scheme['primary'];
+		}
 		if ( '' !== $primary ) {
 			$declarations .= '--color-theme-primary:' . $primary . ';--color-on-primary:' . self::on_color( $primary ) . ';';
 
-			$link = self::link_colors( $primary );
+			$link = self::link_colors( $primary, $scheme['tertiary'] ?? '#f7f7f9' );
 			if ( $link ) {
 				$declarations .= '--color-link:' . $link[0] . ';--color-link-hover:' . $link[1] . ';';
 			}
@@ -111,16 +163,17 @@ class Component implements Component_Interface {
 	 * Darkens the brand colour until link text on the light page background reaches 4.5:1.
 	 *
 	 * @param string $color Hex or rgb() colour.
+	 * @param string $page  Page background the links sit on; the default is the light palette's body colour.
 	 * @return string[] Link and link hover colours as rgb(), or an empty array when the colour cannot be parsed.
 	 */
-	public static function link_colors( string $color ): array {
+	public static function link_colors( string $color, string $page = '#f7f7f9' ): array {
 		$rgb = self::to_rgb( $color );
-		if ( null === $rgb ) {
+		$bg  = self::to_rgb( $page );
+		if ( null === $rgb || null === $bg ) {
 			return array();
 		}
 
-		// Page background in the light palette (#f7f7f9).
-		$background = self::luminance( array( 247, 247, 249 ) );
+		$background = self::luminance( $bg );
 
 		for ( $black = 0; $black <= 90; $black += 5 ) {
 			$mixed = array_map(

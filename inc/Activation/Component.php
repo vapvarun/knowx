@@ -34,19 +34,19 @@ class Component implements Component_Interface {
 	 * Sets up the home page on theme activation.
 	 */
 	public function setup_home_page() {
-		// Check if this is the first activation by looking for a theme option
+		// Check if this is the first activation by looking for a theme option.
 		$theme_activated = get_option( 'knowx_theme_activated' );
 
 		if ( ! $theme_activated ) {
-			// Create the home page
+			// Create the home page.
 			$page_id = $this->create_home_page();
 
 			if ( $page_id ) {
-				// Set the page as front page
+				// Set the page as front page.
 				update_option( 'show_on_front', 'page' );
 				update_option( 'page_on_front', $page_id );
 
-				// Mark theme as activated
+				// Mark theme as activated.
 				update_option( 'knowx_theme_activated', true );
 			}
 		}

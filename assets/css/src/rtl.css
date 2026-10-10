@@ -54,7 +54,7 @@ body:not(.block-editor-page):not(.wp-core-ui) pre {
 
 .menu-icons-wrapper {
     float: left;
-    margin: 0 10px 0 0px;
+    margin: 0 10px 0 0;
 }
 
 .menu-icons-wrapper .cart,
@@ -67,12 +67,12 @@ body:not(.block-editor-page):not(.wp-core-ui) pre {
     margin-right: 10px;
 }
 
-.menu-icons-wrapper #searchform:before {
+.menu-icons-wrapper #searchform::before {
     left: 15px;
     right: auto;
 }
 
-.menu-icons-wrapper #searchform input[type=submit] {
+.menu-icons-wrapper #searchform input[type="submit"] {
     left: 0;
     right: auto;
 }

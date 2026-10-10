@@ -129,7 +129,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Only stylesheets that have a 'preload_callback' provided will be considered. If that callback evaluates to true
 	 * for the current request, the stylesheet will be preloaded.
 	 *
-	 *
 	 * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
 	 */
 	public function action_preload_styles() {

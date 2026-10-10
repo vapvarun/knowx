@@ -22,7 +22,7 @@ function knowx_defaults( $key = '' ) {
 	$defaults['site-breadcrumbs'] = '1';
 
 	// site sidebar.
-	$defaults['sidebar-option']         = 'right';
+	$defaults['sidebar-option'] = 'right';
 
 	// sticky sidebar.
 	$defaults['sticky-sidebar'] = '1';

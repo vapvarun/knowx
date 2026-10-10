@@ -112,9 +112,6 @@ if ( ! function_exists( 'login_custom_head' ) ) {
 			<?php
 		}
 
-
-
-
 		echo '</style>';
 	}
 }

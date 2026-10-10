@@ -1,6 +1,6 @@
 <?php
 
-// Content wrapper
+// Content wrapper.
 if ( ! function_exists( 'knowx_content_top' ) ) {
 	function knowx_content_top() {
 		?>
@@ -22,7 +22,7 @@ if ( ! function_exists( 'knowx_content_bottom' ) ) {
 
 add_action( 'knowx_after_content', 'knowx_content_bottom' );
 
-// Site Sub Header
+// Site Sub Header.
 if ( ! function_exists( 'knowx_sub_header' ) ) {
 	add_action( 'knowx_sub_header', 'knowx_sub_header' );
 
@@ -58,11 +58,11 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 /*
  * BREADCRUMBS
  */
-// to include in functions.php
+// to include in functions.php.
 if ( ! function_exists( 'knowx_the_breadcrumb' ) ) {
 	function knowx_the_breadcrumb() {
 		$wpseo_titles = get_option( 'wpseo_titles' );
-		if ( function_exists( 'yoast_breadcrumb' ) && isset( $wpseo_titles['breadcrumbs-enable'] ) && $wpseo_titles['breadcrumbs-enable'] == 1 ) {
+		if ( function_exists( 'yoast_breadcrumb' ) && isset( $wpseo_titles['breadcrumbs-enable'] ) && 1 == $wpseo_titles['breadcrumbs-enable'] ) {
 			yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
 		} else {
 			echo '<div class="knowx-breadcrumbs">';
@@ -72,11 +72,11 @@ if ( ! function_exists( 'knowx_the_breadcrumb' ) ) {
 	}
 }
 
-// Site Loader
+// Site Loader.
 if ( ! function_exists( 'knowx_site_loader' ) ) {
 	function knowx_site_loader() {
 		$loader = get_theme_mod( 'site_loader', knowx_defaults( 'site-loader' ) );
-		if ( $loader == '1' ) {
+		if ( '1' == $loader ) {
 			echo '<div class="site-loader"><div class="loader-inner"><span class="dot"></span><span class="dot dot1"></span><span class="dot dot2"></span><span class="dot dot3"></span><span class="dot dot4"></span></div></div>';
 		}
 	}
@@ -219,7 +219,7 @@ add_action( 'save_post', 'knowx_save_meta' );
 function setPostViews( $postID ) {
 	$countKey = 'post_views_count';
 	$count    = get_post_meta( $postID, $countKey, true );
-	if ( $count == '' ) {
+	if ( '' == $count ) {
 		$count = 0;
 		delete_post_meta( $postID, $countKey );
 		add_post_meta( $postID, $countKey, '0' );

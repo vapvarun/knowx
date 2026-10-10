@@ -7,7 +7,7 @@
  * @package knowx
  */
 
-// Include Kirki
+// Include Kirki.
 require get_template_directory() . '/external/require_plugins.php';
 require_once get_template_directory() . '/external/kirki-utils.php';
 
@@ -18,7 +18,7 @@ if ( file_exists( get_template_directory() . '/vendor/autoload.php' ) ) {
 	/**
 	 * Custom autoloader function for theme classes.
 	 *
-	 * @param string $class_name class name to load
+	 * @param string $class_name Class name to load.
 	 *
 	 * @return bool true if the class was loaded, false otherwise
 	 */
@@ -64,9 +64,6 @@ require get_template_directory() . '/inc/Webfont/class-knowx-webfont-loader.php'
 
 // Load theme extra function.
 require get_template_directory() . '/inc/extra.php';
-
-// Load theme category widget.
-require get_template_directory() . '/inc/widgets/category-widget.php';
 
 // Load theme breadcrubms function.
 require get_template_directory() . '/inc/class-knowx-breadcrubms.php';

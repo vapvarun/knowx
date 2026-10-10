@@ -84,17 +84,17 @@ body.layout-boxed {
     border-color: var(--color-header-bg);
 }
 
-.menu-item--has-toggle>ul.sub-menu:before,
-.nav--toggle-sub ul.user-profile-menu .sub-menu:before,
-.bp-header-submenu:before,
-.user-profile-menu:before {
+.menu-item--has-toggle>ul.sub-menu::before,
+.nav--toggle-sub ul.user-profile-menu .sub-menu::before,
+.bp-header-submenu::before,
+.user-profile-menu::before {
     border-top-color: var(--color-header-bg);
 }
 
-.menu-item--has-toggle>ul.sub-menu:before,
-.nav--toggle-sub ul.user-profile-menu .sub-menu:before,
-.bp-header-submenu:before,
-.user-profile-menu:before {
+.menu-item--has-toggle>ul.sub-menu::before,
+.nav--toggle-sub ul.user-profile-menu .sub-menu::before,
+.bp-header-submenu::before,
+.user-profile-menu::before {
     border-right-color: var(--color-header-bg);
 }
 
@@ -177,7 +177,7 @@ body.layout-boxed {
     background-position: right 8px center;
 }
 
-.site-sub-header input[type=submit]:focus {
+.site-sub-header input[type="submit"]:focus {
     outline: thin dotted #111;
 }
 
@@ -313,7 +313,6 @@ body.layout-boxed {
 
 .mce-toolbar .mce-btn-group .mce-btn button {
     background: inherit;
-    border-color: inherit;
     border: 1px transparent solid !important;
 }
 
@@ -394,7 +393,7 @@ button.media-menu-item {
     background-position: right 16px center;
 }
 
-.knowx-hero-section-search input[type=submit]:focus {
+.knowx-hero-section-search input[type="submit"]:focus {
     outline: thin dotted #111;
 }
 
@@ -618,7 +617,7 @@ button.media-menu-item {
 
 .knowx-knowledgebase-two li.post-name a::before {
     content: "\f0f6 ";
-    font-family: 'FontAwesome';
+    font-family: FontAwesome;
     position: absolute;
     left: 0;
     width: 20px;

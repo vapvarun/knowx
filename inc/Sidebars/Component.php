@@ -27,8 +27,8 @@ use function dynamic_sidebar;
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
-	const LEFT_SIDEBAR_SLUG          = 'sidebar-left';
-	const RIGHT_SIDEBAR_SLUG         = 'sidebar-right';
+	const LEFT_SIDEBAR_SLUG  = 'sidebar-left';
+	const RIGHT_SIDEBAR_SLUG = 'sidebar-right';
 
 	/**
 	 * Gets the unique identifier for the theme component.
@@ -150,19 +150,19 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function filter_body_classes( array $classes ): array {
 		$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
 
-		if ( $this->is_left_sidebar_active() && $default_sidebar == 'left' ) {
+		if ( $this->is_left_sidebar_active() && 'left' == $default_sidebar ) {
 			global $template;
 
 			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php' ) ) ) {
 				$classes[] = 'has-sidebar-left';
 			}
-		} elseif ( $this->is_right_sidebar_active() && $default_sidebar == 'right' ) {
+		} elseif ( $this->is_right_sidebar_active() && 'right' == $default_sidebar ) {
 			global $template;
 
 			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php' ) ) ) {
 				$classes[] = 'has-sidebar-right';
 			}
-		} elseif ( $this->is_right_sidebar_active() && $this->is_right_sidebar_active() && $default_sidebar == 'both' ) {
+		} elseif ( $this->is_right_sidebar_active() && $this->is_right_sidebar_active() && 'both' == $default_sidebar ) {
 			global $template;
 
 			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php' ) ) ) {
@@ -204,5 +204,4 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function display_right_sidebar() {
 		dynamic_sidebar( static::RIGHT_SIDEBAR_SLUG );
 	}
-
 }

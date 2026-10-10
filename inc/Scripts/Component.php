@@ -225,8 +225,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'loading'  => 'async',
 				'precache' => true,
 				'localize' => array(
-					'knowx_data' => array(
-						'enable_scrollup' => $enable_scrollup,
+					'knowxData' => array(
+						'enableScrollup' => $enable_scrollup,
 					),
 				),
 			),

@@ -124,7 +124,7 @@ ul.knowx-categories-lists ul.children li a {
     position: relative;
 }
 
-.widget_collapscat li.collapsing.categories:before {
+.widget_collapscat li.collapsing.categories::before {
     position: absolute;
     top: 8px;
 }

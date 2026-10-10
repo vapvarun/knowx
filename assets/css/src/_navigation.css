@@ -115,7 +115,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         right: 0;
         width: 340px;
         overflow: auto;
-        background-color: white;
+        background-color: #fff;
         z-index: 9999;
         transform: translate3d(340px, 0, 0);
         transition: all .2s ease;
@@ -138,7 +138,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     .mobile-menu-heading {
         margin-bottom: 20px;
         padding: 28px 20px;
-        background-color: black;
+        background-color: #000;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -148,8 +148,8 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 
     .mobile-menu-heading .menu-title {
         letter-spacing: .6px;
-        margin-bottom: 0px;
-        padding-bottom: 0px;
+        margin-bottom: 0;
+        padding-bottom: 0;
         font-size: 24px;
         text-transform: uppercase;
         vertical-align: middle;
@@ -170,33 +170,33 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         padding-right: 21px;
     }
 
-    .mobile-menu-heading .menu-close:before,
-    .mobile-menu-heading .menu-close:after {
+    .mobile-menu-heading .menu-close::before,
+    .mobile-menu-heading .menu-close::after {
         content: " ";
         position: absolute;
-        right: 0px;
+        right: 0;
         top: 50%;
         margin-top: -1px;
         width: 15px;
         height: 2px;
         display: inline-block;
-        background-color: white;
+        background-color: #fff;
         -webkit-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
         -moz-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
         -o-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
         transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
     }
 
-    .mobile-menu-heading .menu-close:before,
-    .mobile-menu-heading .menu-close:after {
+    .mobile-menu-heading .menu-close::before,
+    .mobile-menu-heading .menu-close::after {
         transform: rotate(0deg);
     }
 
-    .mobile-menu-heading .menu-close:hover:before {
+    .mobile-menu-heading .menu-close:hover::before {
         transform: rotate(45deg);
     }
 
-    .mobile-menu-heading .menu-close:hover:after {
+    .mobile-menu-heading .menu-close:hover::after {
         transform: rotate(-45deg);
     }
 
@@ -211,9 +211,9 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         height: 30px;
     }
 
-    .primary-menu-container .dropdown-toggle:after {
+    .primary-menu-container .dropdown-toggle::after {
         content: "\f107";
-        font-family: "FontAwesome";
+        font-family: FontAwesome;
         font-size: 18px;
     }
 
@@ -237,12 +237,12 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         position: relative;
     }
 
-    .primary-menu-container .menu-icons-wrapper #searchform input[type=text] {
+    .primary-menu-container .menu-icons-wrapper #searchform input[type="text"] {
         width: 155px;
         padding-left: 10px;
     }
 
-    .primary-menu-container .menu-icons-wrapper #searchform input[type=submit] {
+    .primary-menu-container .menu-icons-wrapper #searchform input[type="submit"] {
         height: 40px;
     }
 }
@@ -302,7 +302,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         margin-left: -10px;
     }
 
-    .hideshow.menu-item--has-toggle>ul.sub-menu:before {
+    .hideshow.menu-item--has-toggle>ul.sub-menu::before {
         right: 24px;
     }
 
@@ -327,7 +327,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     }
 
     .nav--toggle-sub ul.user-profile-menu .sub-menu::before,
-    .sub-menu li.menu-item--has-toggle>ul.sub-menu:before {
+    .sub-menu li.menu-item--has-toggle>ul.sub-menu::before {
         top: 11px;
         left: auto;
         right: -13px;
@@ -450,7 +450,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     width: 100%;
     padding: 0.5em 1em 0.5em 0;
     text-decoration: none;
-    color: #222222;
+    color: #222;
 }
 
 .main-navigation a:hover {
@@ -530,7 +530,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         right: -170px;
     }
 
-    .sub-menu li.menu-item--has-toggle>ul ul.sub-menu:before {
+    .sub-menu li.menu-item--has-toggle>ul ul.sub-menu::before {
         top: 30px;
         left: 0;
         right: auto;
@@ -553,8 +553,8 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 
 .menu-icons-wrapper {
     float: right;
-    margin: 0px 0px 0px 10px;
-    padding: 10px 0px;
+    margin: 0 0 0 10px;
+    padding: 10px 0;
     min-width: 30px;
 }
 
@@ -570,11 +570,11 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 .menu-icons-wrapper .search,
 .menu-icons-wrapper .cart {
     float: left;
-    margin: 0px 10px;
+    margin: 0 10px;
 }
 
 .menu-icons-wrapper div:last-child {
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .menu-icons-wrapper .top-menu-search-container {
@@ -589,7 +589,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     max-width: 250px;
     position: relative;
     background: #fff;
-    margin: 0px;
+    margin: 0;
     padding: 5px 15px;
     padding-right: 40px;
     border-radius: 8px;
@@ -600,7 +600,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 .menu-icons-wrapper #searchform input[type="text"] {
     border: none;
     background: none;
-    padding: 0px;
+    padding: 0;
     text-transform: uppercase;
     font-size: 12px;
     width: 190px;
@@ -608,9 +608,9 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 }
 
 .menu-icons-wrapper #searchform input[type="text"],
-.cart-info:before,
-.cart-total:before {
-    color: #aaaaaa;
+.cart-info::before,
+.cart-total::before {
+    color: #aaa;
 }
 
 #searchform .search-icon {
@@ -620,11 +620,11 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 .menu-icons-wrapper #searchform input[type="submit"] {
     width: 45px;
     height: 45px;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 0;
+    top: 0;
     z-index: 1;
     cursor: pointer;
     background: none;
@@ -632,23 +632,23 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     text-indent: -9999px;
 }
 
-.menu-icons-wrapper #searchform input[type=submit]:focus {
+.menu-icons-wrapper #searchform input[type="submit"]:focus {
     border: 1px dotted #aaa;
 }
 
-.menu-icons-wrapper #searchform:before {
+.menu-icons-wrapper #searchform::before {
     content: "\f002";
     position: absolute;
     font-family: FontAwesome;
     font-size: 14px;
     right: 15px;
     top: 0;
-    bottom: 0px;
+    bottom: 0;
     margin: auto;
     height: 22px;
 }
 
-.menu-icons-wrapper #searchform:before {
+.menu-icons-wrapper #searchform::before {
     color: #c2c2c2;
 }
 
@@ -659,7 +659,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     text-align: center;
     letter-spacing: 0;
     font-size: 9px;
-    font-weight: bold;
+    font-weight: 700;
     background: var(--color-theme-primary);
     color: #fff;
     border-radius: 50%;
@@ -670,7 +670,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 }
 
 @media (max-width: 767px) {
-    .menu-icons-wrapper:after {
+    .menu-icons-wrapper::after {
         content: "";
         display: table;
         clear: both;

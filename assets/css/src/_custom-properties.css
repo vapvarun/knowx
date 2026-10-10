@@ -32,35 +32,35 @@
     --color-menu-hover: #03A9F4;
     --color-menu-active: #03A9F4;
     --color-link: #03A9F4;
-    --color-link-hover: #222222;
+    --color-link-hover: #222;
     --global-border-color: #e5e5e5;
     --button-text-color: #fff;
     --button-text-hover-color: #fff;
     --button-background-color: #03A9F4;
-    --button-background-hover-color: #222222;
+    --button-background-hover-color: #222;
     --button-border-color: #03A9F4;
-    --button-border-hover-color: #222222;
+    --button-border-hover-color: #222;
 
-    --color-footer-title: #333333;
+    --color-footer-title: #333;
     --color-footer-content: #505050;
-    --color-footer-link: #222222;
+    --color-footer-link: #222;
     --color-footer-link-hover: #03A9F4;
-    --color-copyright-bg: #ffffff;
+    --color-copyright-bg: #fff;
     --color-copyright-content: #505050;
     --copyright-border-color: #e8e8e8;
-    --color-copyright-link: #222222;
+    --color-copyright-link: #222;
     --color-copyright-link-hover: #03A9F4;
 
-    --color-quote-border: #111111;
+    --color-quote-border: #111;
     --color-quote-citation: #6c7781;
 
     /* Heading colors */
-    --color-h1: #333333;
-    --color-h2: #333333;
-    --color-h3: #333333;
-    --color-h4: #444444;
-    --color-h5: #555555;
-    --color-h6: #666666;
+    --color-h1: #333;
+    --color-h2: #333;
+    --color-h3: #333;
+    --color-h4: #444;
+    --color-h5: #555;
+    --color-h6: #666;
 
     /* Block backgrounds */
     --color-block-bg-subtle: #f7f7f9;
@@ -74,8 +74,8 @@
     --textarea-border-radius: 4px;
 
     /* Site identity */
-    --color-site-title: #333333;
-    --color-site-tagline: #666666;
+    --color-site-title: #333;
+    --color-site-tagline: #666;
 
     /* Custom editor font sizes */
     --font-size-small: calc(16 / var(--global-font-size) * 1rem);

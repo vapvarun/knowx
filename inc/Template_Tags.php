@@ -159,5 +159,4 @@ class Template_Tags {
 
 		return $this->get_version();
 	}
-
 }

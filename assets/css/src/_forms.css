@@ -154,13 +154,14 @@ select {
 
 select {
     -webkit-appearance: none;
-    background-image: url("../images/arrow-down.svg");
+    background-image: url(../images/arrow-down.svg);
     background-repeat: no-repeat;
     background-position: right 1rem center;
     padding-right: 40px;
 }
 
 @supports (-webkit-touch-callout: none) {
+
     @media (hover: none) and (pointer: coarse) {
         input[type="text"],
         input[type="email"],

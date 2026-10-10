@@ -26,7 +26,7 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 	
 	<?php do_action( 'knowx_before_content' ); ?>
 	
-	<?php if ( $default_sidebar == 'left' || $default_sidebar == 'both' ) : ?>
+	<?php if ( 'left' == $default_sidebar || 'both' == $default_sidebar ) : ?>
 		<aside id="secondary" class="left-sidebar widget-area">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_left_sidebar(); ?>
@@ -73,7 +73,7 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 
 	</main><!-- #primary -->
 	
-	<?php if ( $default_sidebar == 'right' || $default_sidebar == 'both' ) : ?>
+	<?php if ( 'right' == $default_sidebar || 'both' == $default_sidebar ) : ?>
 		<aside id="secondary" class="primary-sidebar widget-area">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_right_sidebar(); ?>

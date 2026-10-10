@@ -49,7 +49,6 @@ function knowx_attr( $context, $attributes = array(), $args = array() ) {
  * @param array  $args       Optional. Custom data to pass to filter.
  * @return array Merged and filtered attributes.
  */
-
 function knowx_parse_attr( $context, $attributes = array(), $args = array() ) {
 
 	$defaults = array(

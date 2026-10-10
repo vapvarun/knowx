@@ -27,7 +27,7 @@ use function esc_html_e;
  *
  * Exposes template tags:
  * * `knowx()->the_comments( array $args = array() )`
- * 
+ *
  * @link https://wordpress.org/plugins/amp/
  */
 class Component implements Component_Interface, Templating_Component_Interface {

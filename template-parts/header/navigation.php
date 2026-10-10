@@ -7,10 +7,6 @@
 
 namespace KnowX\KnowX;
 
-if ( ! knowx()->is_primary_nav_menu_active() ) {
-	//return;
-}
-
 ?>
 
 <nav id="site-navigation" class="main-navigation nav--toggle-sub nav--toggle-small" aria-label="<?php esc_attr_e( 'Main menu', 'knowx' ); ?>">

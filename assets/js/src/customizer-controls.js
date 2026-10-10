@@ -1,28 +1,41 @@
 /**
  * KnowX Customizer controls fallback logic.
  *
- * @package knowx
+ * @param $
+ * @package
  */
 
-( function( $ ) {
+(function ($) {
 	'use strict';
 
-	var DependencyVisibility = {
+	const DependencyVisibility = {
 		dependencyMap: {},
 		watchedSettings: {},
 
-		getSettingLink: function( settingId ) {
-			var element = document.querySelector( '[data-kirki-setting="' + settingId + '"]' );
+		getSettingLink(settingId) {
+			const element = document.querySelector(
+				'[data-kirki-setting="' + settingId + '"]'
+			);
 
-			if ( element && element.dataset && element.dataset.kirkiSettingLink && settingId !== element.dataset.kirkiSettingLink ) {
+			if (
+				element &&
+				element.dataset &&
+				element.dataset.kirkiSettingLink &&
+				settingId !== element.dataset.kirkiSettingLink
+			) {
 				return element.dataset.kirkiSettingLink;
 			}
 
 			return settingId;
 		},
 
-		init: function() {
-			if ( typeof wp === 'undefined' || ! wp.customize || ! wp.customize.control || typeof window.kirkiControlDependencies === 'undefined' ) {
+		init() {
+			if (
+				typeof wp === 'undefined' ||
+				!wp.customize ||
+				!wp.customize.control ||
+				typeof window.kirkiControlDependencies === 'undefined'
+			) {
 				return;
 			}
 
@@ -32,50 +45,61 @@
 			this.syncAll();
 		},
 
-		normalizeValue: function( value ) {
-			if ( value === 'on' || value === '1' || value === 1 || value === true ) {
+		normalizeValue(value) {
+			if (
+				value === 'on' ||
+				value === '1' ||
+				value === 1 ||
+				value === true
+			) {
 				return true;
 			}
 
-			if ( value === 'off' || value === '0' || value === 0 || value === false || value === '' ) {
+			if (
+				value === 'off' ||
+				value === '0' ||
+				value === 0 ||
+				value === false ||
+				value === ''
+			) {
 				return false;
 			}
 
 			return value;
 		},
 
-		getSettingValue: function( settingId, choice ) {
-			var linkedSettingId = this.getSettingLink( settingId );
-			var setting = wp.customize( linkedSettingId );
-			var control = wp.customize.control( settingId );
-			var value;
+		getSettingValue(settingId, choice) {
+			const linkedSettingId = this.getSettingLink(settingId);
+			const setting = wp.customize(linkedSettingId);
+			const control = wp.customize.control(settingId);
+			let value;
 
-			if ( ! setting ) {
+			if (!setting) {
 				return undefined;
 			}
 
 			value = setting.get();
 
-			if ( control && control.setting ) {
-				if ( typeof control.setting._value !== 'undefined' ) {
+			if (control && control.setting) {
+				if (typeof control.setting._value !== 'undefined') {
 					value = control.setting._value;
-				} else if ( typeof control.setting.get === 'function' ) {
+				} else if (typeof control.setting.get === 'function') {
 					value = control.setting.get();
 				}
 			}
 
-			if ( choice && value && typeof value === 'object' ) {
-				value = value[ choice ];
+			if (choice && value && typeof value === 'object') {
+				value = value[choice];
 			}
 
-			return this.normalizeValue( value );
+			return this.normalizeValue(value);
 		},
 
-		evaluateComparison: function( expected, actual, operator ) {
-			expected = this.normalizeValue( expected );
-			actual = this.normalizeValue( actual );
+		evaluateComparison(expected, actual, operator) {
+			expected = this.normalizeValue(expected);
+			actual = this.normalizeValue(actual);
 
-			switch ( operator ) {
+			switch (operator) {
 				case '===':
 					return actual === expected;
 				case '!==':
@@ -93,11 +117,11 @@
 					return actual < expected;
 				case 'contains':
 				case 'in':
-					if ( Array.isArray( actual ) ) {
-						return actual.indexOf( expected ) !== -1;
+					if (Array.isArray(actual)) {
+						return actual.indexOf(expected) !== -1;
 					}
-					if ( typeof actual === 'string' ) {
-						return actual.indexOf( expected ) !== -1;
+					if (typeof actual === 'string') {
+						return actual.indexOf(expected) !== -1;
 					}
 					return false;
 				case '==':
@@ -109,43 +133,43 @@
 			}
 		},
 
-		evaluateRule: function( rule, relation ) {
-			var self = this;
-			var nextRelation = relation === 'AND' ? 'OR' : 'AND';
+		evaluateRule(rule, relation) {
+			const self = this;
+			const nextRelation = relation === 'AND' ? 'OR' : 'AND';
 
-			if ( Array.isArray( rule ) && typeof rule.setting === 'undefined' ) {
-				var results = rule.map( function( nestedRule ) {
-					return self.evaluateRule( nestedRule, nextRelation );
-				} );
+			if (Array.isArray(rule) && typeof rule.setting === 'undefined') {
+				const results = rule.map(function (nestedRule) {
+					return self.evaluateRule(nestedRule, nextRelation);
+				});
 
-				if ( nextRelation === 'OR' ) {
-					return results.indexOf( true ) !== -1;
+				if (nextRelation === 'OR') {
+					return results.indexOf(true) !== -1;
 				}
 
-				return results.indexOf( false ) === -1;
+				return results.indexOf(false) === -1;
 			}
 
-			if ( ! rule || ! rule.setting ) {
+			if (!rule || !rule.setting) {
 				return true;
 			}
 
 			return this.evaluateComparison(
 				rule.value,
-				this.getSettingValue( rule.setting, rule.choice ),
+				this.getSettingValue(rule.setting, rule.choice),
 				rule.operator || '=='
 			);
 		},
 
-		isControlVisible: function( control ) {
-			var controlId = control && control.id ? control.id : null;
-			var required = controlId ? this.dependencyMap[ controlId ] : null;
+		isControlVisible(control) {
+			const controlId = control && control.id ? control.id : null;
+			const required = controlId ? this.dependencyMap[controlId] : null;
 
-			if ( ! required || ! required.length ) {
+			if (!required || !required.length) {
 				return true;
 			}
 
-			for ( var i = 0; i < required.length; i++ ) {
-				if ( ! this.evaluateRule( required[ i ], 'AND' ) ) {
+			for (let i = 0; i < required.length; i++) {
+				if (!this.evaluateRule(required[i], 'AND')) {
 					return false;
 				}
 			}
@@ -153,59 +177,66 @@
 			return true;
 		},
 
-		toggleControl: function( control, shouldShow ) {
-			if ( control && control.container ) {
-				control.container.toggleClass( 'knowx-force-hidden-by-mode', ! shouldShow );
+		toggleControl(control, shouldShow) {
+			if (control && control.container) {
+				control.container.toggleClass(
+					'knowx-force-hidden-by-mode',
+					!shouldShow
+				);
 			}
 		},
 
-		syncAll: function() {
-			var self = this;
+		syncAll() {
+			const self = this;
 
-			wp.customize.control.each( function( control ) {
-				if ( control && control.id && self.dependencyMap[ control.id ] ) {
-					self.toggleControl( control, self.isControlVisible( control ) );
+			wp.customize.control.each(function (control) {
+				if (control && control.id && self.dependencyMap[control.id]) {
+					self.toggleControl(control, self.isControlVisible(control));
 				}
-			} );
+			});
 		},
 
-		collectWatchers: function() {
-			var self = this;
+		collectWatchers() {
+			const self = this;
 
-			function walkRule( rule ) {
-				if ( Array.isArray( rule ) && typeof rule.setting === 'undefined' ) {
-					rule.forEach( walkRule );
+			function walkRule(rule) {
+				if (
+					Array.isArray(rule) &&
+					typeof rule.setting === 'undefined'
+				) {
+					rule.forEach(walkRule);
 					return;
 				}
 
-				if ( rule && rule.setting ) {
-					self.watchedSettings[ self.getSettingLink( rule.setting ) ] = true;
+				if (rule && rule.setting) {
+					self.watchedSettings[self.getSettingLink(rule.setting)] =
+						true;
 				}
 			}
 
-			Object.keys( this.dependencyMap ).forEach( function( controlId ) {
-				walkRule( self.dependencyMap[ controlId ] );
-			} );
+			Object.keys(this.dependencyMap).forEach(function (controlId) {
+				walkRule(self.dependencyMap[controlId]);
+			});
 		},
 
-		bindEvents: function() {
-			var self = this;
+		bindEvents() {
+			const self = this;
 
-			Object.keys( this.watchedSettings ).forEach( function( settingId ) {
-				wp.customize( settingId, function( setting ) {
-					setting.bind( function() {
+			Object.keys(this.watchedSettings).forEach(function (settingId) {
+				wp.customize(settingId, function (setting) {
+					setting.bind(function () {
 						self.syncAll();
-					} );
-				} );
-			} );
+					});
+				});
+			});
 
-			wp.customize.bind( 'ready', function() {
+			wp.customize.bind('ready', function () {
 				self.syncAll();
-			} );
+			});
 		},
 	};
 
-	wp.customize.bind( 'ready', function() {
+	wp.customize.bind('ready', function () {
 		DependencyVisibility.init();
-	} );
-} )( jQuery );
+	});
+})(jQuery);

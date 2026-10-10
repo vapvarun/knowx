@@ -19,11 +19,17 @@ export default [
 	// Global ignores (alternative to .eslintignore)
 	{
 		ignores: [
-			'assets/js/libs/**',
+			// Third-party libraries kept as shipped (see docs/LIBRARIES.md); they are replaced in W10.
+			'assets/js/src/isotope.pkgd.cjs',
+			'assets/js/src/superfish.js',
+			'assets/js/src/sticky-kit.js',
+			'assets/js/src/fitvids.js',
+			'assets/js/src/scrollup.js',
+			// Kirki customizer controls are deleted with Kirki in W07.
+			'assets/js/src/customizer-controls.js',
 			'node_modules/**',
 			'vendor/**',
 			'config/**',
-			'gulpfile.babel.js', // Parsing error: 'import' and 'export' may appear only with 'sourceType: module'
 			'**/*.min.{js,ts,jsx,tsx}', // All minified files
 		],
 	},

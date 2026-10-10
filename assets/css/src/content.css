@@ -160,9 +160,9 @@ h2.entry-title a:hover {
 .entry-meta .entry-featured::before,
 .entry-meta .posted-on a::before {
     margin-right: 4px;
-    font-family: 'FontAwesome';
+    font-family: FontAwesome;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     display: inline-block;
     line-height: 1;
     -webkit-font-smoothing: antialiased;

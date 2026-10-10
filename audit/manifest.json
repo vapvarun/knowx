@@ -255,6 +255,7 @@
     "knowx_block_text",
     "knowx_current_product",
     "knowx_current_product_id",
+    "knowx_default_product_looks",
     "knowx_faq_from_blocks",
     "knowx_icon_svg",
     "knowx_kb_bump_version",

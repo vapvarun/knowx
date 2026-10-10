@@ -33,7 +33,7 @@ $column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
 ?>
 	<main id="primary" class="site-main">
 
-	<div class="knowx-section-hero"<?php echo $hero_image ? ' style="background-image: url(\'' . esc_url( $hero_image ) . '\');"' : ''; ?>>
+	<div class="knowx-section-hero<?php echo $hero_image ? ' knowx-section-hero--image' : ''; ?>"<?php echo $hero_image ? ' style="background-image: url(\'' . esc_url( $hero_image ) . '\');"' : ''; ?>>
 		<div class="container">
 			<?php if ( ! empty( $hero_title ) ) { ?>
 				<h1 class="entry-title"><?php echo esc_html( $hero_title ); ?></h1>
@@ -54,6 +54,14 @@ $column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
 			<div class="knowx-hero-section-search">
 				<?php get_search_form(); ?>
 			</div>
+			<?php if ( ! empty( $featured ) ) : ?>
+				<p class="knowx-hero-popular">
+					<span><?php esc_html_e( 'Popular:', 'knowx' ); ?></span>
+					<?php foreach ( array_slice( $featured, 0, 4 ) as $item ) : ?>
+						<a href="<?php echo esc_url( $item['url'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a>
+					<?php endforeach; ?>
+				</p>
+			<?php endif; ?>
 		</div>
 	</div>
 
@@ -61,18 +69,35 @@ $column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
 
 	<div class="container">
 
-		<?php if ( ! empty( $products ) ) : ?>
+		<?php if ( empty( $products ) ) : ?>
+		<div class="knowx-empty">
+			<h2><?php esc_html_e( 'Your documentation starts here', 'knowx' ); ?></h2>
+			<?php if ( current_user_can( 'manage_categories' ) ) : ?>
+				<p>
+					<?php esc_html_e( 'Add your first product: create a category with no parent, give it an icon and a description, then publish articles in its sections.', 'knowx' ); ?>
+				</p>
+				<a class="knowx-start" href="<?php echo esc_url( admin_url( 'edit-tags.php?taxonomy=category' ) ); ?>"><?php esc_html_e( 'Add a product', 'knowx' ); ?></a>
+			<?php else : ?>
+				<p><?php esc_html_e( 'The documentation is being written. Please check back soon.', 'knowx' ); ?></p>
+			<?php endif; ?>
+		</div>
+		<?php else : ?>
 		<ul class="knowx-products">
 			<?php foreach ( $products as $product ) : ?>
-				<li>
-					<a class="knowx-product-card" href="<?php echo esc_url( $product['url'] ); ?>"<?php echo $product['accent'] ? ' style="--card-accent:' . esc_attr( $product['accent'] ) . '"' : ''; ?>>
-						<span class="knowx-icon"><?php echo knowx_icon_svg( $product['icon'], 32 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in knowx_icon_svg(). ?></span>
-						<h2><?php echo esc_html( $product['name'] ); ?></h2>
-						<?php if ( '' !== $product['description'] ) : ?>
-							<p><?php echo esc_html( $product['description'] ); ?></p>
-						<?php endif; ?>
-						<span class="knowx-product-count"><?php echo esc_html( knowx_article_count_label( $product['count'] ) ); ?></span>
-					</a>
+				<li class="knowx-product-card"<?php echo $product['accent'] ? ' style="--card-accent:' . esc_attr( $product['accent'] ) . '"' : ''; ?>>
+					<span class="knowx-icon"><?php echo knowx_icon_svg( $product['icon'], 28 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in knowx_icon_svg(). ?></span>
+					<h2><a class="knowx-product-link" href="<?php echo esc_url( $product['url'] ); ?>"><?php echo esc_html( $product['name'] ); ?></a></h2>
+					<?php if ( '' !== $product['description'] ) : ?>
+						<p class="knowx-product-desc"><?php echo esc_html( $product['description'] ); ?></p>
+					<?php endif; ?>
+					<?php if ( ! empty( $product['sections'] ) ) : ?>
+						<ul class="knowx-product-sections">
+							<?php foreach ( $product['sections'] as $section ) : ?>
+								<li><a href="<?php echo esc_url( $section['url'] ); ?>"><?php echo esc_html( $section['name'] ); ?></a></li>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif; ?>
+					<span class="knowx-product-count"><?php echo esc_html( knowx_article_count_label( $product['count'] ) ); ?></span>
 				</li>
 			<?php endforeach; ?>
 		</ul>

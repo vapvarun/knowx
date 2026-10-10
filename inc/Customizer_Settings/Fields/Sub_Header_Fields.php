@@ -74,7 +74,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings'        => 'site_search',
 			'label'           => esc_html__( 'Site Search?', 'knowx' ),
 			'section'         => 'site_sub_header_section',
-			'default'         => 1,
+			'default'         => 0,
 			'choices'         => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),

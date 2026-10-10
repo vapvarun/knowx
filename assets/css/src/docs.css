@@ -5,68 +5,112 @@
 /* Product cards on the docs home page. */
 .knowx-products {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
 	gap: 1.25rem;
 	margin: 0;
-	padding: 3rem 0;
+	padding: 2.5rem 0;
 	list-style: none;
 }
 
 .knowx-product-card {
 	--card-accent: var(--color-theme-primary);
 
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
-	height: 100%;
+	gap: 0.6rem;
 	padding: 1.5rem;
 	background: var(--color-surface);
 	border: 1px solid var(--global-border-color);
-	border-block-start: 3px solid var(--card-accent);
-	border-radius: var(--global-border-radius);
+	border-radius: 12px;
 	color: var(--global-font-color);
-	transition: box-shadow 0.15s ease, transform 0.15s ease;
+	transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .knowx-product-card:hover,
-.knowx-product-card:focus-visible {
-	box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
-	transform: translateY(-2px);
-}
-
-.knowx-product-card:focus-visible {
-	outline: 2px solid var(--card-accent);
-	outline-offset: 2px;
+.knowx-product-card:focus-within {
+	border-color: var(--card-accent);
+	box-shadow: 0 8px 28px rgb(0 0 0 / 10%);
 }
 
 .knowx-product-card .knowx-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3rem;
+	height: 3rem;
+	border-radius: 12px;
+	background: color-mix(in srgb, var(--card-accent) 12%, var(--color-surface));
 	color: var(--card-accent);
 }
 
 .knowx-product-card h2 {
-	margin: 0;
+	margin: 0.25rem 0 0;
 	font-size: 1.25rem;
 }
 
-.knowx-product-card p {
+/* The whole card is clickable: the title link stretches over it. */
+.knowx-product-link {
+	color: var(--color-heading);
+}
+
+.knowx-product-link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: 12px;
+}
+
+.knowx-product-link:focus-visible {
+	outline: none;
+}
+
+.knowx-product-card:has(.knowx-product-link:focus-visible) {
+	outline: 2px solid var(--card-accent);
+	outline-offset: 2px;
+}
+
+.knowx-product-desc {
 	margin: 0;
 	color: var(--color-muted);
+}
+
+.knowx-product-sections {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin: 0.25rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.knowx-product-sections a {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	padding: 0.2rem 0.65rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: 999px;
+	color: var(--global-font-color);
+	font-size: 0.85rem;
+}
+
+.knowx-product-sections a:hover {
+	border-color: var(--card-accent);
+	color: var(--color-heading);
 }
 
 .knowx-product-count {
 	margin-block-start: auto;
+	padding-block-start: 0.5rem;
 	font-size: 0.875rem;
-	color: var(--color-muted);
+	font-weight: 600;
+	color: color-mix(in srgb, var(--card-accent) 65%, var(--color-heading));
 }
 
 @media (prefers-reduced-motion: reduce) {
 	.knowx-product-card {
 		transition: none;
-	}
-
-	.knowx-product-card:hover,
-	.knowx-product-card:focus-visible {
-		transform: none;
 	}
 }
 
@@ -415,27 +459,83 @@
 /* Product home and section pages. */
 .knowx-term-header {
 	margin-block-end: 2rem;
+	padding: 1.75rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: 12px;
+	background: linear-gradient(135deg, color-mix(in srgb, var(--color-theme-primary) 10%, var(--color-surface)), var(--color-surface));
 }
 
 .knowx-term-header .knowx-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: 14px;
+	background: color-mix(in srgb, var(--color-theme-primary) 14%, var(--color-surface));
 	color: var(--color-theme-primary);
 }
 
 .knowx-term-header .page-title {
-	margin-block: 0.5rem;
+	margin-block: 0.75rem 0.25rem;
+	font-size: 2rem;
+}
+
+.knowx-term-header .archive-description {
+	max-width: 42rem;
+	color: var(--color-muted);
+	font-size: 1.0625rem;
+}
+
+.knowx-term-meta {
+	margin: 0.75rem 0 0;
+	font-size: 0.9rem;
+	color: var(--color-muted);
+}
+
+.knowx-start {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	margin-block-start: 1rem;
+	padding: 0 1.25rem;
+	border-radius: var(--button-border-radius);
+	background: var(--color-theme-primary);
+	color: var(--color-on-primary);
+	font-weight: 600;
+}
+
+.knowx-start:hover {
+	background: var(--button-background-hover-color);
+	color: var(--color-on-primary);
+}
+
+.knowx-section-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+	gap: 1.25rem;
 }
 
 .knowx-section {
-	margin-block-end: 2.5rem;
+	padding: 1.25rem 1.5rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: 12px;
+	background: var(--color-surface);
 }
 
 .knowx-section h2 {
-	margin-block-end: 0.5rem;
-	font-size: 1.25rem;
+	margin: 0 0 0.35rem;
+	font-size: 1.125rem;
 }
 
 .knowx-section h2 a {
 	color: var(--color-heading);
+}
+
+.knowx-section-desc {
+	margin: 0 0 0.5rem;
+	color: var(--color-muted);
+	font-size: 0.9rem;
 }
 
 .knowx-article-list {
@@ -447,12 +547,22 @@
 .knowx-article-list a {
 	display: block;
 	padding-block: 0.45rem;
-	border-block-end: 1px solid var(--global-border-color);
+	border-block-start: 1px solid var(--global-border-color);
+	color: var(--global-font-color);
+}
+
+.knowx-article-list li:first-child a {
+	border-block-start: 0;
+}
+
+.knowx-article-list a:hover {
+	color: var(--color-link);
 }
 
 .knowx-view-all {
 	display: inline-block;
 	margin-block-start: 0.5rem;
+	font-size: 0.9rem;
 	font-weight: 600;
 }
 
@@ -517,4 +627,24 @@
 
 .knowx-narrow .wp-block-details {
 	margin-block-end: 0.75rem;
+}
+
+/* Docs home with no product yet. */
+.knowx-empty {
+	margin-block: 2.5rem;
+	padding: 2rem;
+	border: 1px dashed var(--global-border-color);
+	border-radius: 12px;
+	background: var(--color-surface);
+	text-align: center;
+}
+
+.knowx-empty h2 {
+	margin-block-start: 0;
+}
+
+.knowx-empty p {
+	max-width: 36rem;
+	margin-inline: auto;
+	color: var(--color-muted);
 }

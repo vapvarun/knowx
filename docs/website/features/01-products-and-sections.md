@@ -12,10 +12,10 @@ KnowX organises documentation with the categories and posts WordPress already ha
 ## Add a product
 
 1. Go to **Posts > Categories** and add a category with no parent. Write a short description; it is shown on the product card.
-2. Choose an **icon** from the list and, if you want one, tick **Use an accent colour** and pick a colour. Buttons and links on that product's pages use it.
+2. Choose an **icon** from the list and, if you want one, tick **Use an accent colour** and pick a colour. Buttons and links on that product's pages use it. If you choose nothing, a site with two or more products gives each product its own icon and colour from the theme's palette automatically, so the cards look different out of the box. With one product the theme colour is used.
 3. Add child categories for the sections and publish articles in them.
 
-The product appears on the docs home page and in the **Products** menu in the header. The menu is hidden when the site has a single product.
+WordPress' stock "Uncategorized" category is never shown as a product. The product appears on the docs home page and in the **Products** menu in the header. The menu is hidden when the site has a single product.
 
 ## Order of articles
 

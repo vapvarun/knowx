@@ -8,8 +8,8 @@
 :root {
     --global-font-color: #505050;
     --global-font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", roboto, "Helvetica Neue", arial, sans-serif;
-    --global-font-size: 14;
-    --global-font-line-height: 1.4;
+    --global-font-size: 16;
+    --global-font-line-height: 1.7;
     --highlight-font-family: var(--global-font-family);
     --content-width: 100%;
     --dropdown-symbol-width: 0.7em;

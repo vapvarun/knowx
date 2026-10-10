@@ -197,7 +197,7 @@ class Component implements Component_Interface {
 		<div class="form-field">
 			<label for="knowx_accent"><?php esc_html_e( 'Product accent colour', 'knowx' ); ?></label>
 			<?php $this->accent_input( '' ); ?>
-			<p><?php esc_html_e( 'Buttons and links on this product use this colour. Leave unchecked to use the theme colour.', 'knowx' ); ?></p>
+			<p><?php esc_html_e( 'Buttons and links on this product use this colour. Leave unchecked and the theme picks a colour from its palette when the site has several products.', 'knowx' ); ?></p>
 		</div>
 		<?php
 	}
@@ -220,7 +220,7 @@ class Component implements Component_Interface {
 			<th scope="row"><label for="knowx_accent"><?php esc_html_e( 'Product accent colour', 'knowx' ); ?></label></th>
 			<td>
 				<?php $this->accent_input( (string) get_term_meta( $term->term_id, 'knowx_accent', true ) ); ?>
-				<p class="description"><?php esc_html_e( 'Buttons and links on this product use this colour. Leave unchecked to use the theme colour.', 'knowx' ); ?></p>
+				<p class="description"><?php esc_html_e( 'Buttons and links on this product use this colour. Leave unchecked and the theme picks a colour from its palette when the site has several products.', 'knowx' ); ?></p>
 			</td>
 		</tr>
 		<?php

@@ -32,6 +32,21 @@ function knowx_product_icons() {
 }
 
 /**
+ * Colours and icons a product gets when its owner has not picked any.
+ *
+ * Chosen by category id, so a product keeps the same look as products are added. Used only when the site
+ * has two or more products; with one product the theme colour applies.
+ *
+ * @return array[] Two lists: 'accents' (AA contrast on white) and 'icons' (icon slugs).
+ */
+function knowx_default_product_looks() {
+	return array(
+		'accents' => array( '#2563eb', '#7c3aed', '#047857', '#b45309', '#be123c', '#0f766e', '#4338ca', '#c2410c' ),
+		'icons'   => array( 'book', 'rocket', 'code', 'shield', 'chat', 'gear', 'bolt', 'puzzle' ),
+	);
+}
+
+/**
  * Prints-ready inline SVG for a product icon.
  *
  * @param string $slug Icon slug; unknown slugs fall back to the book.
@@ -81,18 +96,17 @@ function knowx_products() {
 				)
 			);
 
-			// The default category is only a product on a site with nothing else.
+			// WordPress' stock "Uncategorized" category is a placeholder, never a product. A renamed default category is.
 			$default = (int) get_option( 'default_category' );
-			if ( count( $terms ) > 1 ) {
-				$terms = array_values(
-					array_filter(
-						$terms,
-						static function ( $term ) use ( $default ) {
-							return (int) $term->term_id !== $default;
-						}
-					)
-				);
-			}
+			$stock   = sanitize_title( _x( 'Uncategorized', 'Default category slug' ) ); // phpcs:ignore WordPress.WP.I18n.MissingArgDomain -- core string.
+			$terms   = array_values(
+				array_filter(
+					$terms,
+					static function ( $term ) use ( $default, $stock ) {
+						return ! ( (int) $term->term_id === $default && $term->slug === $stock );
+					}
+				)
+			);
 
 			$terms = array_slice( $terms, 0, knowx_kb_max_categories() );
 			if ( empty( $terms ) ) {
@@ -102,11 +116,31 @@ function knowx_products() {
 			// One query for every product's meta instead of one per product.
 			update_termmeta_cache( wp_list_pluck( $terms, 'term_id' ) );
 
+			// Sections of each product come from the same padded term list, so the cards need no extra query.
+			$sections = array();
+			foreach ( $all as $term ) {
+				if ( (int) $term->parent > 0 ) {
+					$sections[ (int) $term->parent ][] = array(
+						'name'  => $term->name,
+						'url'   => get_term_link( $term ),
+						'count' => (int) $term->count,
+					);
+				}
+			}
+
 			$items = knowx_kb_map_terms( $terms );
 			foreach ( $items as $index => $item ) {
+				$items[ $index ]['sections'] = array_slice( $sections[ $item['id'] ] ?? array(), 0, 4 );
 				$items[ $index ]['count']  = (int) $terms[ $index ]->count;
-				$items[ $index ]['icon']   = (string) get_term_meta( $item['id'], 'knowx_icon', true );
-				$items[ $index ]['accent'] = (string) get_term_meta( $item['id'], 'knowx_accent', true );
+				$icon   = (string) get_term_meta( $item['id'], 'knowx_icon', true );
+				$accent = (string) get_term_meta( $item['id'], 'knowx_accent', true );
+				if ( count( $terms ) > 1 ) {
+					$looks  = knowx_default_product_looks();
+					$icon   = '' !== $icon ? $icon : $looks['icons'][ $item['id'] % count( $looks['icons'] ) ];
+					$accent = '' !== $accent ? $accent : $looks['accents'][ $item['id'] % count( $looks['accents'] ) ];
+				}
+				$items[ $index ]['icon']   = $icon;
+				$items[ $index ]['accent'] = $accent;
 			}
 
 			return $items;
@@ -219,6 +253,7 @@ function knowx_product_tree( $product_id ) {
 					'url'      => get_term_link( $term ),
 					'parent'   => (int) $term->parent,
 					'count'    => (int) $term->count,
+					'description' => $term->description,
 					'posts'    => array(),
 					'children' => array(),
 				);

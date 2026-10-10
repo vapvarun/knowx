@@ -4,6 +4,8 @@
 
 This takes about ten minutes.
 
+On a new site the theme has already created a **Knowledge Base** page with the Docs Home template and set it as your homepage, and it shows a panel that links to the next step.
+
 ## 1. Add a product
 
 1. Go to **Posts > Categories**.

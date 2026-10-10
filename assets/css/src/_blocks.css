@@ -48,8 +48,9 @@
 	font-size: 3.375em;
 	font-weight: 700;
 	line-height: 0.68;
-	float: left;
-	margin: 0.05em 0.1em 0 0;
+	float: inline-start;
+	margin: 0.05em 0 0;
+	margin-inline-end: 0.1em;
 	text-transform: uppercase;
 	color: var(--color-h1);
 }

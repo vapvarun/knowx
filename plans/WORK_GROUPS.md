@@ -5,6 +5,7 @@ Source of truth for the work: `audit/code-audit-2026-10-10/` (A = PHP inc, B = t
 Decisions in force: no Kirki, hybrid = classic theme + block features, existing sites are not a constraint (~200 installs, many test), release route develops on wbcomdesigns and releases to the vapvarun mirror, fast docs site on 390/768/1024/1440 with schema.org markup.
 
 ## How tracking works
+- Each group has a Basecamp card in the KnowX board, column Ready for Development (created 2026-10-10). Move the card with the group: In Development when started, Ready for Testing when its gate passed, Done when verified. Post the proof (commit id, screenshots, command output) as a comment on the card.
 - One group = one commit (split into more commits only when a group is large). Commit subject starts with the group id, e.g. `W04: fix Layout One recent articles`.
 - A group is Done only when its **gate** passed, not when the code was written. Tick the boxes in the same commit and move the status line.
 - Each group lists the checklist section it feeds (`RELEASE_CHECKLIST.md` letters) and audit references (A/B/C + section).
@@ -12,27 +13,27 @@ Decisions in force: no Kirki, hybrid = classic theme + block features, existing 
 
 ## Status board
 
-| Id | Group | Status |
-|---|---|---|
-| W00 | Trustworthy gates (tooling) | todo |
-| W01 | Lint debt cleared | todo |
-| W02 | Dead code and repo hygiene | todo |
-| W03 | Compatibility headers and theme-review blockers | todo |
-| W04 | Basecamp Bugs cards and KB template defects | todo |
-| W05 | Security and correctness hardening | todo |
-| W06 | Visual baseline and settings inventory | todo |
-| W07 | Customizer_Framework port, Kirki removed | todo |
-| W08 | Settings redesign and audit | todo |
-| W09 | Tokens, dark mode, colour output | todo |
-| W10 | JavaScript: ordering, jQuery, libraries | todo |
-| W11 | CSS: token migration, RTL, focus, responsive | todo |
-| W12 | Fonts and icons | todo |
-| W13 | theme.json, style variations, editor | todo |
-| W14 | Docs templates and structured data | todo |
-| W15 | Starter content, patterns, Playground | todo |
-| W16 | Large-site and speed | todo |
-| W17 | i18n, docs, manifest, QA journeys | todo |
-| W18 | Release gate | todo |
+| Id | Group | Status | Basecamp card |
+|---|---|---|---|
+| W00 | Trustworthy gates (tooling) | todo | [10392494216](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494216) |
+| W01 | Lint debt cleared | todo | [10392494270](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494270) |
+| W02 | Dead code and repo hygiene | todo | [10392494288](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494288) |
+| W03 | Compatibility headers and theme-review blockers | todo | [10392494297](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494297) |
+| W04 | Basecamp Bugs cards and KB template defects | todo | [10392494317](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494317) |
+| W05 | Security and correctness hardening | todo | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
+| W06 | Visual baseline and settings inventory | todo | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
+| W07 | Customizer_Framework port, Kirki removed | todo | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
+| W08 | Settings redesign and audit | todo | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
+| W09 | Tokens, dark mode, colour output | todo | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
+| W10 | JavaScript: ordering, jQuery, libraries | todo | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
+| W11 | CSS: token migration, RTL, focus, responsive | todo | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
+| W12 | Fonts and icons | todo | [10392494459](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494459) |
+| W13 | theme.json, style variations, editor | todo | [10392494471](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494471) |
+| W14 | Docs templates and structured data | todo | [10392494490](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494490) |
+| W15 | Starter content, patterns, Playground | todo | [10392494499](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494499) |
+| W16 | Large-site and speed | todo | [10392494519](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494519) |
+| W17 | i18n, docs, manifest, QA journeys | todo | [10392494541](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494541) |
+| W18 | Release gate | todo | [10392494558](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494558) |
 
 ---
 

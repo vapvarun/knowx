@@ -48,3 +48,4 @@ dist/
 # Test environment markers
 tests/phpunit/.wp-tests-setup-complete
 scripts/tests/prod-build/config.local.json
+__pycache__/

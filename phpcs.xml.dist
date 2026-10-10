@@ -42,8 +42,7 @@
 	<exclude-pattern>*/tests/phpunit/setup-wp-env.php</exclude-pattern>
 
 	<!-- Rewritten or deleted in later work groups; polished there, not twice (see plans/WORK_GROUPS.md). -->
-	<exclude-pattern>*/external/*</exclude-pattern>             <!-- W07: Kirki, TGMPA and knowx_defaults go -->
-	<exclude-pattern>*/inc/Kirki_Option/*</exclude-pattern>      <!-- W07: replaced by Customizer_Framework -->
+	<exclude-pattern>*/inc/Customizer_Settings/*</exclude-pattern> <!-- W08: settings are redesigned and cleaned there -->
 
 	<exclude-pattern>*/external/class-tgm-plugin-activation.php</exclude-pattern>
 
@@ -58,6 +57,17 @@
 	<rule ref="WordPress-Core" />
 	<rule ref="WordPress-Docs" />
 	<rule ref="WordPress-Extra" />
+
+	<!-- Customizer_Framework is shared with BuddyX; keep it diff-able against that copy instead of re-documenting every method here. -->
+	<rule ref="Squiz.Commenting.FunctionComment">
+		<exclude-pattern>*/inc/Customizer_Framework/*</exclude-pattern>
+	</rule>
+	<rule ref="Generic.Commenting.DocComment">
+		<exclude-pattern>*/inc/Customizer_Framework/*</exclude-pattern>
+	</rule>
+	<rule ref="Squiz.Commenting.ClassComment">
+		<exclude-pattern>*/inc/Customizer_Framework/*</exclude-pattern>
+	</rule>
 
 	<!--
 	#############################################################################

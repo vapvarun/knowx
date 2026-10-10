@@ -9,10 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Kirki' ) ) {
-	return;
-}
-
 /**
  * Change login logo url
  */

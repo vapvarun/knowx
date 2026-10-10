@@ -29,7 +29,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W04 | Basecamp Bugs cards and KB template defects | done | [10392494317](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494317) |
 | W05 | Security and correctness hardening | done | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
 | W06 | Visual baseline and settings inventory | done | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
-| W07 | Customizer_Framework port, Kirki removed | todo | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
+| W07 | Customizer_Framework port, Kirki removed | done | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
 | W08 | Settings redesign and audit | todo | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
 | W09 | Tokens, dark mode, colour output | todo | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
 | W10 | JavaScript: ordering, jQuery, libraries | todo | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
@@ -139,14 +139,19 @@ No longer a byte-identical migration gate (existing sites are not a constraint);
 - Gate: inventory file and baseline screenshots exist. **Passed 2026-10-10.**
 
 ## W07 Customizer_Framework port, Kirki removed (feeds B)
-Plan phase 1. Copy BuddyX `inc/Customizer_Framework/` and rewrite namespace to `KnowX\KnowX`.
-- [ ] Framework registered in `Theme.php`; `inc/Kirki_Option` renamed `inc/Customizer_Settings`; `\Kirki\Field\X::add` becomes `Field::add('<type>', ...)`; panels and sections use the framework
-- [ ] `class_exists('Kirki')` gates removed so panels, fields, `Dynamic_Style` and login styling always run (A section 2: without Kirki all 24 colours, typography, backgrounds, container width, login customisation vanish)
-- [ ] `knowx_defaults()` moved out of `external/kirki-utils.php`; every `get_theme_mod()` has a default
-- [ ] Delete: `inc/Kirki/`, `external/kirki-utils.php`, TGMPA (`class-tgm-plugin-activation.php`, `require_plugins.php`), `customizer-controls.js`, Kirki PNG pickers
-- [ ] Popular Posts and Collapsing Categories become optional, documented, never prompted
-- [ ] Every setting has `sanitize_callback` (wp.org blocker if missing)
-- Gate: `git grep -i kirki` only in plans and docs history; every panel opens; no PHP errors or console errors.
+Plan phase 1. The BuddyX `inc/Customizer_Framework/` was copied and renamed to `KnowX\KnowX`; BuddyX's style-variation and Tokens coupling is left out (it returns in W09 and W13).
+- [x] Framework registered through `inc/Customizer_Settings/Component.php` (renamed from `Kirki_Option`), which boots it and registers panels, sections and fields on `init`; all 88 fields converted from `new \Kirki\Field\X(...)` to `Field::add( 'type', ... )`, panels and sections to `Panel::add` / `Section::add`; a `number` field type added to the framework (sanitized with `absint`)
+- [x] `class_exists( 'Kirki' )` gates removed: panels, fields, `Dynamic_Style`, login styling and the live-preview scripts always run
+- [x] Deleted: `inc/Kirki/`, `external/` (Kirki utils, TGMPA, plugin recommendations, `require_plugins.php`), Kirki JS and CSS (`customizer-controls.js`, `knowx-customizer.css`), the dead Options admin CSS; TGMPA no longer loads on every request
+- [x] `knowx_defaults()` moved to `inc/defaults.php` (W08 removes it); new `knowx_is_truthy()` helper in `inc/extra.php`; the framework's `Toggle` control needs it (without it the Customizer fataled, found by driving the real Customizer)
+- [x] Customizer guard: `blogname`, `blogdescription` and `header_textcolor` are only switched to `postMessage` when the setting exists (the unguarded code fataled when header text was off)
+- [x] `config` bundle list updated; the zip ships the framework assets (975 KB zip); the empty "Theme Options" section is gone
+- [x] Every one of the 82 settings registers a control (checked headlessly); the real Customizer loads in Chrome with all theme sections
+- [x] Every setting has a sanitize callback chosen by field type (framework default)
+- [x] phpstan: no errors, baseline file deleted; phpcs: framework doc-block sniffs scoped out so it stays diff-able against the BuddyX copy
+- [x] `git grep -i kirki` finds nothing outside plans, audit, docs history, old changelog entries and the inventory tool name
+- Gate: PHP lint clean; phpunit 15 tests; phpstan clean; stylelint and eslint 0; **real Customizer driven over Chrome DevTools**: loads as "Customize: knowx" with 15 theme sections and 122 controls, no console or PHP errors; changing a link colour updates the live preview from rgb(3,169,244) to rgb(255,0,0); the dependent loader-background control is active only when the loader is on; the Site Skin section renders colour pickers with opacity sliders (`qa-artifacts/customizer-skin-w07.png`). **Passed 2026-10-10.**
+- Note: the front end now prints each field's default as CSS (as Kirki did when it was active), so the default look is the designed one (for example the hero is `#03A9F4`); W09 puts this on tokens.
 
 ## W08 Settings redesign and audit (feeds B)
 - [ ] Section topology mirrors BuddyX plus a KnowX Knowledge Base panel; unused settings dropped; duplicates merged (`knowx_exclude` vs `knowx_exclude_posts`)

@@ -25,8 +25,6 @@ export default [
 			'assets/js/src/sticky-kit.js',
 			'assets/js/src/fitvids.js',
 			'assets/js/src/scrollup.js',
-			// Kirki customizer controls are deleted with Kirki in W07.
-			'assets/js/src/customizer-controls.js',
 			'node_modules/**',
 			'vendor/**',
 			'config/**',

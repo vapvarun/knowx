@@ -87,7 +87,7 @@ License: GPL-2.0+
 * New      - Theme.json v3 with an expanded color palette and block styles.
 * Improve  - Pinch-to-zoom now works on mobile.
 * Improve  - Rebuilt the asset pipeline on the current WP Rig toolchain with source files under assets/css/src and assets/js/src.
-* Fix      - Compatibility with Kirki 6.0.4.
+* Improve  - The Customizer is built in; the Kirki plugin is no longer required or recommended.
 * Fix      - Production bundle file paths.
 * Dev      - Added PHPStan static analysis, PHPUnit, Jest and Playwright test scaffolding, and WP-CLI commands.
 * Dev      - Completed the rebrand from WP Rig to KnowX.

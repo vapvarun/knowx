@@ -57,11 +57,8 @@
       "assets/css/editor/*.css",
       "assets/js/*.js",
       "assets/js/admin/*.js",
-      "inc/EZ_Customizer/themeCustomizeSettings.json",
       "assets/fonts/*",
-      "inc/Kirki/**/*",
-      "inc/Kirki_Option/**/*",
-      "external/kirki-utils.php"
+      "inc/Customizer_Framework/assets/*"
     ]
   }
 }

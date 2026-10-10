@@ -173,3 +173,33 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 function knowx_template_uses_container() {
 	return ! is_page_template( array( 'full-width.php', 'page-knowledgebase-one.php' ) );
 }
+
+if ( ! function_exists( 'knowx_is_truthy' ) ) {
+	/**
+	 * Whether a setting value means "on".
+	 *
+	 * Accepts booleans, integers and the strings 1, on, yes, true and enable (case
+	 * insensitive). Unlike wp_validate_boolean(), the string "off" is false.
+	 *
+	 * @param mixed $value Raw setting value.
+	 * @return bool True when the value is truthy.
+	 */
+	function knowx_is_truthy( $value ): bool {
+		if ( is_bool( $value ) ) {
+			return $value;
+		}
+		if ( is_int( $value ) ) {
+			return 0 !== $value;
+		}
+		if ( is_string( $value ) ) {
+			$normalized = strtolower( trim( $value ) );
+			if ( in_array( $normalized, array( '1', 'on', 'yes', 'true', 'enable' ), true ) ) {
+				return true;
+			}
+			if ( in_array( $normalized, array( '0', '', 'off', 'no', 'false', 'disable' ), true ) ) {
+				return false;
+			}
+		}
+		return (bool) $value;
+	}
+}

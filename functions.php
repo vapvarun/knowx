@@ -7,9 +7,8 @@
  * @package knowx
  */
 
-// Include Kirki.
-require get_template_directory() . '/external/require_plugins.php';
-require_once get_template_directory() . '/external/kirki-utils.php';
+// Default setting values.
+require get_template_directory() . '/inc/defaults.php';
 
 // Setup autoloader (via Composer or custom).
 if ( file_exists( get_template_directory() . '/vendor/autoload.php' ) ) {

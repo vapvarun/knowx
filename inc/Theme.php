@@ -154,14 +154,10 @@ class Theme {
 			new Styles\Component(),
 			new Scripts\Component(),
 			new Excerpts\Component(),
-			new Kirki_Option\Component(),
+			new Customizer_Settings\Component(),
+			new Dynamic_Style\Component(),
 			new Activation\Component(),
 		);
-
-		if ( class_exists( 'Kirki' ) ) {
-			$components[] = new Dynamic_Style\Component();
-		}
-
 		return $components;
 	}
 }

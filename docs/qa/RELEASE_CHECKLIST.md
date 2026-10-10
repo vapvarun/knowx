@@ -27,7 +27,7 @@ Legend: `[x]` verified, `[ ]` open. A box is ticked only after the check was run
 - [ ] `knowx-core` content verified as superseded (`v3.1` branch, "Manage block style UI") before it is archived
 - [ ] `CLAUDE.md`, `audit/manifest.json`, role matrix, QA journeys present and current
 
-## B. Customizer (in-house framework, Kirki removed): 11 sections, 84 settings (90 fields incl. 6 dividers)
+## B. Customizer (in-house framework, Kirki removed): 11 sections, 82 settings (88 fields incl. 6 dividers; bbPress sidebar and the second exclusion field were removed)
 
 For every section: the control renders, the value saves, it round-trips after reload, the front end reflects it, the live preview updates, and defaults match a fresh install. No migration: existing 1.7.4 customizer values are not carried over (decision 2026-10-10). Every setting still needs a default, a sanitize callback and escaped output, and the changelog says customizer choices reset.
 
@@ -39,9 +39,9 @@ For every section: the control renders, the value saves, it round-trips after re
 | Sub Header (`Sub_Header_Fields`) | 6 | [ ] |
 | Skin (`Skin_Fields`): theme colours, button styles | 11 | [ ] |
 | Blog (`Blog_Fields`) | 3 | [ ] |
-| Sidebar (`Sidebar_Fields`) | 3 | [ ] |
+| Sidebar (`Sidebar_Fields`) | 2 | [ ] |
 | Footer (`Footer_Fields`) | 12 | [ ] |
-| Knowledge Base (`Knowledge_Base_Fields`): Layout One and Layout Two | 23 | [ ] |
+| Knowledge Base (`Knowledge_Base_Fields`): Layout One and Layout Two | 22 | [ ] |
 | WP Login (`WP_Login_Fields`) | 9 | [ ] |
 | Site Performance (`Site_Performance`) | 3 | [ ] |
 

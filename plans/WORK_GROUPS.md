@@ -28,7 +28,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W03 | Compatibility headers and theme-review blockers | done | [10392494297](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494297) |
 | W04 | Basecamp Bugs cards and KB template defects | done | [10392494317](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494317) |
 | W05 | Security and correctness hardening | done | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
-| W06 | Visual baseline and settings inventory | todo | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
+| W06 | Visual baseline and settings inventory | done | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
 | W07 | Customizer_Framework port, Kirki removed | todo | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
 | W08 | Settings redesign and audit | todo | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
 | W09 | Tokens, dark mode, colour output | todo | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
@@ -132,10 +132,11 @@ From A section 4.
 
 ## W06 Visual baseline and settings inventory (feeds B)
 No longer a byte-identical migration gate (existing sites are not a constraint); this is a visual reference and a diffable list.
-- [ ] Settings inventory script ported from BuddyX (`tools/dump-customizer-inventory.py`) and run: id | type | default | where read. A found 84 real settings (90 Kirki objects, 6 dividers) and 4 settings nobody reads (`site_load_google_font_locally`, `site_preload_local_font`, `site_sub_header_bg`, `site_footer_bg`)
-- [ ] Screenshots of home, KB1, KB2, post, archive, search, 404, login at 390 / 768 / 1024 / 1440 stored under `~/Local Sites/knowx/app/qa-artifacts/`
-- [ ] Local Playground / test site has the theme active with sample posts so later groups can be checked
-- Gate: inventory file and screenshots exist.
+- [x] `tools/dump-customizer-inventory.py` and `docs/customizer-inventory.md`: **88 fields = 82 settings + 6 dividers** with type, section, default, output CSS, transport and where each is read (the counts in earlier notes, 85 and 84, were off: bbPress and the duplicate exclusion field are gone)
+- [x] Four settings are never read and have no output CSS: `site_footer_bg`, `site_load_google_font_locally`, `site_preload_local_font`, `site_sub_header_bg`; 20 settings only act through Kirki `output` CSS (they stop working the moment Kirki goes, which is what W07 and W09 replace)
+- [x] Screenshots of home, post, category, search and 404 at 390 / 768 / 1024 / 1440 in `~/Local Sites/knowx/app/qa-artifacts/baseline-w00/` plus one capture folder per group (`after-w01` to `after-w05`); `scratchpad/shots.sh` and `imgdiff.py` produce and compare them (ImageMagick has no PNG support here, so the diff uses Pillow)
+- [x] Local site `http://knowx.local`: theme active, 37 seeded posts in three products, template test pages for Layout Two, Full-Width and Page-Without-Sidebar, `WP_DEBUG_LOG` on
+- Gate: inventory file and baseline screenshots exist. **Passed 2026-10-10.**
 
 ## W07 Customizer_Framework port, Kirki removed (feeds B)
 Plan phase 1. Copy BuddyX `inc/Customizer_Framework/` and rewrite namespace to `KnowX\KnowX`.

@@ -45,7 +45,6 @@ class Component implements Component_Interface {
 		add_filter( 'body_class', array( $this, 'filter_body_classes_add_hfeed' ) );
 		add_filter( 'embed_defaults', array( $this, 'filter_embed_dimensions' ) );
 		add_action( 'init', array( $this, 'knowx_theme_block_styles' ) );
-		add_action( 'init', array( $this, 'knowx_register_block_patterns' ) );
 	}
 
 	/**
@@ -144,32 +143,6 @@ class Component implements Component_Interface {
 					'style' => 'knowx-border-style',
 				)
 			);
-		}
-	}
-
-	/**
-	 * Register register block patterns.
-	 */
-	public function knowx_register_block_patterns() {
-
-		if ( function_exists( 'register_block_pattern_category' ) ) {
-			register_block_pattern_category(
-				'knowx',
-				array( 'label' => __( 'KnowX', 'knowx' ) )
-			);
-		}
-
-		if ( function_exists( 'register_block_pattern' ) ) {
-			$block_patterns = array(
-				'footer-small',
-			);
-
-			foreach ( $block_patterns as $block_pattern ) {
-				register_block_pattern(
-					'knowx/' . $block_pattern,
-					require __DIR__ . '/patterns/' . $block_pattern . '.php'
-				);
-			}
 		}
 	}
 }

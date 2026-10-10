@@ -38,7 +38,7 @@ The lists are cached and refresh when you publish, edit or delete a post or chan
 
 ## Search results, tags, dates and authors
 
-Search results and the tag, date and author archives use the same article list as a section page. Search results and these archives print the product and section above each title, so a reader can tell two articles with the same name apart. The blog layout and sidebar settings apply to the posts page only.
+Search results and the tag, date and author archives use the same article list as a section page. Search results and these archives print the product and section above each title, so a reader can tell two articles with the same name apart. The Sidebar setting also applies to search results and archives.
 
 ## Order, start link and search filter
 

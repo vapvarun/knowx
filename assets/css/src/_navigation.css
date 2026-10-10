@@ -25,8 +25,8 @@
     order: 2;
 }
 
-.nav--toggle-small .menu-toggle .fa {
-    font-size: 24px;
+.nav--toggle-small .menu-toggle svg {
+    display: block;
 }
 
 .nav--toggle-sub .dropdown,
@@ -202,9 +202,12 @@
     }
 
     .primary-menu-container .dropdown-toggle::after {
-        content: "\f107";
-        font-family: FontAwesome;
-        font-size: 18px;
+        content: "";
+        display: block;
+        width: 18px;
+        height: 18px;
+        background-color: currentcolor;
+        mask: url(../images/icon-chevron-down.svg) no-repeat center / contain;
     }
 
     .main-navigation ul.menu ul li {
@@ -378,12 +381,12 @@
 
     .nav--toggle-sub li.menu-item-has-children::after,
     .nav--toggle-sub li.menu-item--has-toggle::after {
-        content: "\f107";
-        font-family: FontAwesome;
+        content: "";
         display: inline-block;
         width: 12px;
         height: 20px;
-        line-height: 20px;
+        background-color: currentcolor;
+        mask: url(../images/icon-chevron-down.svg) no-repeat center / 12px;
         position: absolute;
         inset-inline-end: 0;
         top: 0;
@@ -627,22 +630,6 @@
 
 .menu-icons-wrapper .searchform input[type="submit"]:focus {
     border: 1px dotted var(--color-muted);
-}
-
-.menu-icons-wrapper .searchform::before {
-    content: "\f002";
-    position: absolute;
-    font-family: FontAwesome;
-    font-size: 14px;
-    inset-inline-end: 15px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    height: 22px;
-}
-
-.menu-icons-wrapper .searchform::before {
-    color: var(--color-muted);
 }
 
 .menu-icons-wrapper .cart sup {

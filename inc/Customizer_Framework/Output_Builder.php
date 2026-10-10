@@ -158,10 +158,30 @@ class Output_Builder {
 		);
 		foreach ( $key_map as $k => $css_prop ) {
 			if ( ! empty( $value[ $k ] ) ) {
-				$decls .= sprintf( '%s:%s;', $css_prop, $value[ $k ] );
+				$rendered = 'font-family' === $k ? self::font_stack( (string) $value[ $k ] ) : $value[ $k ];
+				$decls   .= sprintf( '%s:%s;', $css_prop, $rendered );
 			}
 		}
 		return $decls;
+	}
+
+	/**
+	 * Turns a chosen font name into a full font stack so text never falls back to a serif face.
+	 *
+	 * Values that are already a stack, a variable or a generic family are passed through.
+	 *
+	 * @param string $family Family name as saved by the Typography control.
+	 * @return string CSS font-family value.
+	 */
+	protected static function font_stack( string $family ): string {
+		$family = trim( str_replace( array( '<', '>', ';', '{', '}' ), '', $family ) );
+
+		$generic = array( 'serif', 'sans-serif', 'monospace', 'cursive', 'fantasy', 'system-ui', 'ui-serif', 'ui-sans-serif', 'ui-monospace' );
+		if ( false !== strpos( $family, ',' ) || 0 === strpos( $family, 'var(' ) || in_array( strtolower( $family ), $generic, true ) ) {
+			return $family;
+		}
+
+		return '"' . trim( $family, '"\'' ) . '", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
 	}
 
 	/**

@@ -160,33 +160,56 @@ h2.entry-title a:hover {
 .entry-meta .entry-featured::before,
 .entry-meta .posted-on a::before {
     margin-inline-end: 4px;
-    font-family: FontAwesome;
-    font-style: normal;
-    font-weight: 400;
-    display: inline-block;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 .entry-meta .entry-cat-links::before {
-    content: "\f115";
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    background-color: currentcolor;
+    mask: url(../images/icon-folder.svg) no-repeat center / contain;
 }
 
 .entry-meta .entry-edit-link a::before {
-    content: "\f040";
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    background-color: currentcolor;
+    mask: url(../images/icon-pencil.svg) no-repeat center / contain;
 }
 
 .entry-meta .entry-comments-link a::before {
-    content: "\f0e5";
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    background-color: currentcolor;
+    mask: url(../images/icon-comment.svg) no-repeat center / contain;
 }
 
 .entry-meta .posted-on a::before {
-    content: "\f073";
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    background-color: currentcolor;
+    mask: url(../images/icon-calendar.svg) no-repeat center / contain;
 }
 
 .entry-meta .entry-featured::before {
-    content: "\f041";
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    background-color: currentcolor;
+    mask: url(../images/icon-marker.svg) no-repeat center / contain;
 }
 
 /* Post box layout */

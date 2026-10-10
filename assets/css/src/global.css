@@ -609,12 +609,14 @@ button.media-menu-item {
 }
 
 .knowx-knowledgebase-two li.post-name a::before {
-    content: "\f0f6 ";
-    font-family: FontAwesome;
+    content: "";
     position: absolute;
     inset-inline-start: 0;
-    width: 20px;
-    display: block;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background-color: currentcolor;
+    mask: url(../images/icon-file.svg) no-repeat center / contain;
 }
 
 #knowx-categories-columns-four li.post-name a:hover {

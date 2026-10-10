@@ -32,13 +32,13 @@ Verdicts: **Keep**, **Replace** (native or core feature does it), **Remove** (no
 | ~~FitVids 1.1~~ (removed in W10) | Responsive video wrappers (`custom.js:171-179`) | 2 KB min | Fluid iframes | **Done**: `aspect-ratio` on video iframes (`_media.css`) |
 | ~~jQuery.scrollUp 2.4.1~~ (removed in W10) | Back-to-top button | 2 KB min | Scroll-to-top | **Done**: 60-line `theme.js` back-to-top with a reduced-motion guard |
 | ~~jQuery~~ (no longer a dependency, W10) | `custom.js`, all of the above | core | Dependency of every library above | **Done**: the front end loads no jQuery (checked) |
-| Font Awesome 4.7 (SIL OFL fonts, MIT CSS) | About 11 icon glyphs; 6 font files, 1.08 MB on disk, 29 KB CSS | about 1.1 MB in zip | Icons | **Replace** with inline SVG for the few icons used; the attribution text in `readme.txt` also names the wrong licence (W12) |
+| ~~Font Awesome 4.7~~ (removed in W12) | About 11 icon glyphs, 1.1 MB | 1.1 MB | Icons | **Done**: CSS-mask SVG files and inline SVG; readme attribution to update in W17 |
 | normalize.css 8.0.1 (MIT) | `_reset.css` | small | Cross-browser reset | **Keep** or fold into a modern `@layer reset` (W11) |
 | Bootstrap 3 grid (MIT, copied) | Only `.container`, `.row`, `.col-md-6` | 12 KB min | Layout | **Remove**: those classes need about ten lines of CSS grid (W11) |
 | TGM-Plugin-Activation 2.6.1 (GPL-2.0+) | Recommends plugins on every admin load | 3,759 lines | Plugin nag | **Remove**: no required or recommended plugin (W07) |
-| Open Sans + Montserrat from Google Fonts | Body and headings; Montserrat is never used | external request | Typography | **Replace** with one self-hosted variable woff2 (W12) |
+| ~~Open Sans + Montserrat from Google Fonts~~ (removed in W12) | Body and headings | external request | Typography | **Done**: Open Sans variable woff2 self-hosted (about 90 KB), declared in `theme.json`, one preload |
 
-Result after W10: no jQuery and no third-party JavaScript on the front end; the theme ships 6.4 KB of minified JS in total (it was 284 KB with source maps and 60 KB without). Still to do: one icon approach (inline SVG) and one font family (W12).
+Result after W10: no jQuery and no third-party JavaScript on the front end; the theme ships 6.4 KB of minified JS in total (it was 284 KB with source maps and 60 KB without). After W12: icons are SVG and the only font is self-hosted Open Sans; no external request.
 
 ## 3. Kirki
 

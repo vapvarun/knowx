@@ -34,7 +34,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W09 | Tokens, dark mode, colour output | done | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
 | W10 | JavaScript: ordering, jQuery, libraries | done | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
 | W11 | CSS: token migration, RTL, focus, responsive | done | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
-| W12 | Fonts and icons | todo | [10392494459](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494459) |
+| W12 | Fonts and icons | done | [10392494459](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494459) |
 | W13 | theme.json, style variations, editor | todo | [10392494471](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494471) |
 | W14 | Docs templates and structured data | todo | [10392494490](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494490) |
 | W15 | Starter content, patterns, Playground | todo | [10392494499](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494499) |
@@ -202,11 +202,11 @@ From C section 2, 3 and 7. Screenshots now use real device emulation (`shots2.sh
 - Gate: lint 0, phpstan clean, phpunit green, zip 934 KB, axe 0 violations, screenshots vs the W10 baseline differ only where the container is now fluid up to 1170px at 1024px (previously fixed at 970px). **Passed 2026-10-10.**
 
 ## W12 Fonts and icons (feeds I)
-- [ ] `inc/Fonts` + Google catalog (value-driven loader) ported or dropped in favour of self-hosted variable woff2 only
-- [ ] Google URL fixed (Montserrat requested but unused; `900&display=swap` inside variant), preload, `font-display: swap`
-- [ ] FontAwesome 4.7 replaced by inline SVG for the 11 glyphs used; remove 910 KB of eot / svg / ttf / otf
-- [ ] `sslverify => false` in font download removed with the old downloader
-- Gate: one font request set; zero FontAwesome files; Network panel shows only selected fonts.
+- [x] `inc/Fonts` and the Google catalog dropped; Open Sans variable woff2 (latin and latin-ext, OFL) self-hosted and declared in `theme.json` `fontFace`, so the Customizer picker, the editor and the Font Library all see the same families
+- [x] Single font request set: one preload for the latin file, `font-display: swap`, no Google request, Montserrat gone
+- [x] FontAwesome 4.7 removed (about 1.1 MB); the glyphs used are CSS-mask SVG files (`assets/images/icon-*.svg`) and inline SVG in the search form, menu and back-to-top
+- [x] Downloader with `sslverify => false` removed together with `inc/Fonts`
+- Gate: phpstan clean, phpunit 28 green, lint 0, phpcs 18 errors (all in files owned by W14/W17), zip 399 KB, no FontAwesome or Google reference on the front end, console clean. **Passed 2026-10-10.**
 
 ## W13 theme.json, style variations, editor (feeds C)
 - [ ] `theme.json` v3 is the design source (palette, font sizes, spacing, layout widths); `--bx-*` tokens read `--wp--preset--*`

@@ -66,6 +66,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'action_enqueue_styles' ) );
+		add_action( 'wp_head', array( $this, 'action_preload_font' ), 2 );
 		add_action( 'wp_head', array( $this, 'action_preload_styles' ) );
 		add_action( 'after_setup_theme', array( $this, 'action_add_editor_styles' ) );
 	}
@@ -80,6 +81,16 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function template_tags(): array {
 		return array(
 			'print_styles' => array( $this, 'print_styles' ),
+		);
+	}
+
+	/**
+	 * Preloads the main text font so it is ready before the first paint.
+	 */
+	public function action_preload_font() {
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( get_theme_file_uri( '/assets/fonts/open-sans/open-sans-latin-wght-normal.woff2' ) )
 		);
 	}
 
@@ -271,10 +282,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			),
 			'knowx-site-loader'      => array(
 				'file'   => 'loaders.min.css',
-				'global' => true,
-			),
-			'knowx-load-fontawesome' => array(
-				'file'   => 'fontawesome.min.css',
 				'global' => true,
 			),
 		);

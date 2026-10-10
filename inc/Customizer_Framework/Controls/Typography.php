@@ -51,57 +51,33 @@ class Typography extends \WP_Customize_Control {
 	 *     ),
 	 *   )
 	 *
-	 * Theme fonts come from theme.json fontFamilies (self-hosted); Google fonts
-	 * come from the bundled catalog. The JS prepends a "Default (theme)" option.
+	 * Theme fonts come from theme.json fontFamilies (self-hosted) and installed
+	 * fonts from the core Font Library; the saved value is the family name. The JS
+	 * prepends a "Default (theme)" option.
 	 *
 	 * @return array
 	 */
 	protected static function available_font_families(): array {
-		$theme_json = function_exists( 'wp_get_global_settings' ) ? wp_get_global_settings() : array();
-		$families   = $theme_json['typography']['fontFamilies']['theme'] ?? array();
-		$theme      = array();
-		foreach ( $families as $f ) {
-			if ( isset( $f['slug'], $f['name'] ) ) {
-				$theme[ $f['slug'] ] = $f['name'];
+		$settings = function_exists( 'wp_get_global_settings' ) ? wp_get_global_settings( array( 'typography', 'fontFamilies' ) ) : array();
+
+		// Theme fonts (theme.json) and fonts the owner installed through the core Font Library.
+		$groups = array();
+		foreach ( array(
+			'theme'  => esc_html__( 'Theme fonts', 'knowx' ),
+			'custom' => esc_html__( 'Installed fonts', 'knowx' ),
+		) as $origin => $label ) {
+			$fonts = array();
+			foreach ( (array) ( $settings[ $origin ] ?? array() ) as $font ) {
+				if ( ! empty( $font['name'] ) ) {
+					$fonts[ $font['name'] ] = $font['name'];
+				}
 			}
-		}
-		if ( empty( $theme ) ) {
-			$theme = array(
-				'system' => 'System UI',
-				'inter'  => 'Inter',
-			);
-		}
-
-		$google = array();
-		if ( class_exists( '\\KnowX\\KnowX\\Fonts\\Google_Fonts_Catalog' ) ) {
-			$google = \KnowX\KnowX\Fonts\Google_Fonts_Catalog::get_family_choices();
-		}
-
-		$groups = array(
-			array(
-				'label' => esc_html__( 'Theme fonts', 'knowx' ),
-				'fonts' => $theme,
-			),
-		);
-		if ( ! empty( $google ) ) {
-			$groups[] = array(
-				'label' => esc_html__( 'Google Fonts', 'knowx' ),
-				'fonts' => $google,
-			);
-		}
-
-		// Fonts uploaded via WordPress's native Font Library
-		// (Appearance → Fonts → Upload). Read-only — KnowX never writes to
-		// the wp_font_family/wp_font_face post types.
-		$custom = array();
-		if ( class_exists( '\\KnowX\\KnowX\\Fonts\\Custom_Fonts_Repository' ) ) {
-			$custom = \KnowX\KnowX\Fonts\Custom_Fonts_Repository::get_families();
-		}
-		if ( ! empty( $custom ) ) {
-			$groups[] = array(
-				'label' => esc_html__( 'Custom Fonts', 'knowx' ),
-				'fonts' => $custom,
-			);
+			if ( $fonts ) {
+				$groups[] = array(
+					'label' => $label,
+					'fonts' => $fonts,
+				);
+			}
 		}
 
 		return array(

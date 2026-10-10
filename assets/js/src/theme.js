@@ -57,7 +57,8 @@
 		button.id = 'scrollUp';
 		button.href = '#page';
 		button.setAttribute('aria-label', data.scrollTopLabel || 'Back to top');
-		button.innerHTML = '<i class="fa fa-angle-up" aria-hidden="true"></i>';
+		button.innerHTML =
+			'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 15l6-6 6 6"/></svg>';
 		document.body.appendChild(button);
 
 		const reduceMotion = window.matchMedia(

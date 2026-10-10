@@ -57,7 +57,7 @@
       "assets/css/editor/*.css",
       "assets/js/*.js",
       "assets/js/admin/*.js",
-      "assets/fonts/*",
+      "assets/fonts/**/*",
       "inc/Customizer_Framework/assets/*"
     ]
   }

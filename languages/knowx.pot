@@ -2,21 +2,20 @@
 # This file is distributed under the GNU General Public License v3.0 (or later).
 msgid ""
 msgstr ""
-"Project-Id-Version: KnowX 2.0.0 2.0.0\n"
+"Project-Id-Version: KnowX 2.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/knowx\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-10T18:51:15+00:00\n"
+"POT-Creation-Date: 2026-10-10T19:36:37+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: knowx\n"
 
 #. Theme Name of the theme
 #: style.css
-#: inc/Base_Support/Component.php:158
 msgid "KnowX"
 msgstr ""
 
@@ -53,7 +52,9 @@ msgid "Start here"
 msgstr ""
 
 #. translators: %s: date the newest article was changed.
+#. translators: %s: date the article was last changed.
 #: category.php:58
+#: template-parts/docs/list-item.php:42
 #, php-format
 msgid "Updated %s"
 msgstr ""
@@ -122,28 +123,24 @@ msgstr ""
 msgid "Welcome to our Knowledge Base. Here you can find articles, guides, and resources to help you."
 msgstr ""
 
-#: inc/Base_Support/Component.php:124
+#: inc/Base_Support/Component.php:123
 msgid "Note"
 msgstr ""
 
-#: inc/Base_Support/Component.php:125
+#: inc/Base_Support/Component.php:124
 msgid "Tip"
 msgstr ""
 
-#: inc/Base_Support/Component.php:126
+#: inc/Base_Support/Component.php:125
 msgid "Warning"
 msgstr ""
 
-#: inc/Base_Support/Component.php:127
+#: inc/Base_Support/Component.php:126
 msgid "Danger"
 msgstr ""
 
-#: inc/Base_Support/Component.php:143
+#: inc/Base_Support/Component.php:142
 msgid "Borders"
-msgstr ""
-
-#: inc/Base_Support/patterns/footer-small.php:9
-msgid "Small footer"
 msgstr ""
 
 #: inc/breadcrumbs.php:20
@@ -1649,6 +1646,7 @@ msgid "Search for:"
 msgstr ""
 
 #: searchform.php:15
+#: template-parts/docs/search-dialog.php:13
 msgid "Search the documentation"
 msgstr ""
 
@@ -1794,16 +1792,74 @@ msgstr ""
 msgid "Page navigation"
 msgstr ""
 
+#. translators: %s: product version.
+#: template-parts/docs/article.php:20
+#: template-parts/docs/list-item.php:33
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#. translators: %s: date the article was last changed.
+#: template-parts/docs/article.php:28
+#, php-format
+msgid "Last updated %s"
+msgstr ""
+
+#: template-parts/docs/search-dialog.php:18
+#: template-parts/header/navigation.php:21
+msgid "Close"
+msgstr ""
+
+#. translators: %s: product name.
+#: template-parts/docs/search-dialog.php:25
+#, php-format
+msgid "Only in %s"
+msgstr ""
+
+#. translators: %s: number of articles.
+#: template-parts/docs/section-grid.php:40
+#, php-format
+msgid "View all %s article"
+msgid_plural "View all %s articles"
+msgstr[0] ""
+msgstr[1] ""
+
+#: template-parts/docs/sidebar.php:19
+msgid "Product sections"
+msgstr ""
+
+#: template-parts/docs/sidebar.php:25
+msgid "Product overview"
+msgstr ""
+
+#: template-parts/docs/single.php:55
+#: template-parts/docs/single.php:93
+#: template-parts/docs/single.php:94
+msgid "On this page"
+msgstr ""
+
+#: template-parts/docs/single.php:63
+msgid "Previous and next article"
+msgstr ""
+
+#: template-parts/docs/single.php:65
+msgid "Previous"
+msgstr ""
+
+#: template-parts/docs/single.php:68
+msgid "Next"
+msgstr ""
+
+#: template-parts/docs/single.php:75
+msgid "More in this section"
+msgstr ""
+
 #: template-parts/footer/info.php:13
 msgid "Footer menu"
 msgstr ""
 
 #: template-parts/header/navigation.php:14
 msgid "Open menu"
-msgstr ""
-
-#: template-parts/header/navigation.php:21
-msgid "Close"
 msgstr ""
 
 #: template-parts/header/product-switcher.php:26

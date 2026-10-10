@@ -11,7 +11,7 @@
 
 ## Sidebar
 
-**Sidebar** is left, right, both or none. It applies to the posts page and ordinary pages. Articles that belong to a product use the docs layout, which has its own section tree instead of a sidebar. **Sticky sidebar** keeps the sidebar in view while the page scrolls.
+**Sidebar** is left, right, both or none. It applies to the posts page, ordinary pages, search results and archives. Articles that belong to a product use the docs layout, which has its own section tree instead of a sidebar. **Keep the sidebar in view while scrolling** keeps the sidebar in view while the page scrolls.
 
 Fill the sidebars under **Appearance > Widgets** (Right Sidebar and Left Sidebar). A sidebar with no widgets shows nothing.
 

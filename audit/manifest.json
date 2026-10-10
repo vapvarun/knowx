@@ -230,9 +230,6 @@
     }
   },
   "pattern_categories": {
-    "knowx": [
-      "inc/Base_Support/Component.php"
-    ],
     "knowx-docs": [
       "inc/Docs/Component.php"
     ]

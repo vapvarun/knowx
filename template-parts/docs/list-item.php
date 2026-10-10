@@ -35,4 +35,12 @@ if ( is_search() ) {
 		</span>
 	<?php endif; ?>
 	<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 28 ) ); ?></p>
+	<?php if ( knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ) : ?>
+		<p class="knowx-item-date">
+			<?php
+			/* translators: %s: date the article was last changed. */
+			printf( esc_html__( 'Updated %s', 'knowx' ), '<time datetime="' . esc_attr( get_the_modified_date( 'c' ) ) . '">' . esc_html( get_the_modified_date() ) . '</time>' );
+			?>
+		</p>
+	<?php endif; ?>
 </li>

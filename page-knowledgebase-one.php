@@ -29,6 +29,8 @@ $products   = knowx_products();
 $featured   = knowx_kb_featured_posts();
 $recent     = knowx_kb_recent_posts();
 $column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
+$show_date  = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) );
+$single     = 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] ) : null;
 
 ?>
 	<main id="primary" class="site-main">
@@ -81,6 +83,31 @@ $column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
 				<p><?php esc_html_e( 'The documentation is being written. Please check back soon.', 'knowx' ); ?></p>
 			<?php endif; ?>
 		</div>
+		<?php elseif ( $single && $single['root']['children'] ) : ?>
+		<div class="knowx-section-grid knowx-home-sections">
+			<?php foreach ( $single['root']['children'] as $section_id ) : ?>
+				<?php $node = $single['nodes'][ $section_id ]; ?>
+				<section class="knowx-section" aria-labelledby="knowx-home-section-<?php echo esc_attr( $section_id ); ?>">
+					<h2 id="knowx-home-section-<?php echo esc_attr( $section_id ); ?>"><a href="<?php echo esc_url( $node['url'] ); ?>"><?php echo esc_html( $node['name'] ); ?></a></h2>
+					<?php if ( '' !== $node['description'] ) : ?>
+						<p class="knowx-section-desc"><?php echo esc_html( $node['description'] ); ?></p>
+					<?php endif; ?>
+					<ul class="knowx-article-list">
+						<?php foreach ( array_slice( $node['posts'], 0, 5 ) as $item ) : ?>
+							<li><a href="<?php echo esc_url( $item['url'] ); ?>"><?php echo esc_html( $item['title'] ); ?></a></li>
+						<?php endforeach; ?>
+					</ul>
+					<?php if ( $node['count'] > 5 ) : ?>
+						<a class="knowx-view-all" href="<?php echo esc_url( $node['url'] ); ?>">
+							<?php
+							/* translators: %s: number of articles. */
+							echo esc_html( sprintf( __( 'View all %s articles', 'knowx' ), number_format_i18n( $node['count'] ) ) );
+							?>
+						</a>
+					<?php endif; ?>
+				</section>
+			<?php endforeach; ?>
+		</div>
 		<?php else : ?>
 		<ul class="knowx-products">
 			<?php foreach ( $products as $product ) : ?>
@@ -121,10 +148,15 @@ $column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
 				<?php if ( ! empty( $recent ) ) : ?>
 				<div class="<?php echo esc_attr( $column ); ?>">
 					<div class="knowx-recent-posts">
-						<h3><?php esc_html_e( 'Recent Articles', 'knowx' ); ?></h3>
+						<h3><?php echo esc_html( knowx_recent_by_updated() ? __( 'Recently Updated', 'knowx' ) : __( 'Recent Articles', 'knowx' ) ); ?></h3>
 						<ul>
 							<?php foreach ( $recent as $item ) : ?>
-								<li><a href="<?php echo esc_url( $item['url'] ); ?>" rel="bookmark"><?php echo esc_html( $item['title'] ); ?></a></li>
+								<li>
+									<a href="<?php echo esc_url( $item['url'] ); ?>" rel="bookmark"><?php echo esc_html( $item['title'] ); ?></a>
+									<?php if ( $show_date ) : ?>
+										<time class="knowx-item-date" datetime="<?php echo esc_attr( $item['iso'] ); ?>"><?php echo esc_html( $item['date'] ); ?></time>
+									<?php endif; ?>
+								</li>
 							<?php endforeach; ?>
 						</ul>
 					</div>

@@ -231,3 +231,37 @@ defined( 'ABSPATH' ) || exit;
 			),
 		)
 	);
+
+	/**
+	 *  Docs home: how the recent list is ordered
+	 */
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'radio',
+		array(
+			'settings' => 'knowx_recent_by',
+			'label'    => esc_html__( 'Recent articles list', 'knowx' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => 'updated',
+			'choices'  => array(
+				'updated' => esc_html__( 'Recently updated', 'knowx' ),
+				'newest'  => esc_html__( 'Newest', 'knowx' ),
+			),
+		)
+	);
+
+	/**
+	 *  Articles
+	 */
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_updated',
+			'label'    => esc_html__( 'Show last updated date', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);

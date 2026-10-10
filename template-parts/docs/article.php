@@ -21,12 +21,14 @@ $knowx_version = knowx_article_version( get_the_ID() );
 					?>
 				</span>
 			<?php endif; ?>
-			<span class="knowx-updated">
-				<?php
-				/* translators: %s: date the article was last changed. */
-				printf( esc_html__( 'Last updated %s', 'knowx' ), '<time datetime="' . esc_attr( get_the_modified_date( 'c' ) ) . '">' . esc_html( get_the_modified_date() ) . '</time>' );
-				?>
-			</span>
+			<?php if ( knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ) : ?>
+				<span class="knowx-updated">
+					<?php
+					/* translators: %s: date the article was last changed. */
+					printf( esc_html__( 'Last updated %s', 'knowx' ), '<time datetime="' . esc_attr( get_the_modified_date( 'c' ) ) . '">' . esc_html( get_the_modified_date() ) . '</time>' );
+					?>
+				</span>
+			<?php endif; ?>
 		</p>
 	</header>
 

@@ -13,9 +13,16 @@ The hero block at the top, the product cards, the featured and recent articles a
 | Hero background | Colour or image behind the hero. A featured image on the page is used if you set one. |
 | Hero heading and content | The title and text in the hero. If empty, the page title and excerpt are used. |
 | Exclude category by ID | Category IDs, separated by commas, hidden from the cards and from both lists (and from Layout Two). Their sub-categories are hidden too. |
+| Recent articles list | Recently updated (default) lists the articles changed last, with their date. Newest lists the latest published ones. |
 | Support section background, heading, content, button text and link | The closing block. The button shows only when both its text and link are set. |
 
-Featured articles are your **sticky posts**. Recent articles are the newest posts outside the excluded categories.
+Featured articles are your **sticky posts**. The recent list skips the excluded categories.
+
+With **one product**, the home shows that product's sections as cards instead of a single product card, and the product switcher in the header is hidden. With two or more products you get the product cards.
+
+## Articles
+
+**Customize > Knowledge Base > Articles > Show last updated date** turns the date off on articles and in article lists. The date is the last modified date of the post, and it is also sent as `dateModified` in the page's structured data.
 
 ## Layout Two: the Docs Index template
 

@@ -256,6 +256,16 @@ class Component implements Component_Interface {
 		);
 
 		\KnowX\KnowX\Customizer_Framework\Section::add(
+			'site_articles_section',
+			array(
+				'title'       => esc_html__( 'Articles', 'knowx' ),
+				'priority'    => 30,
+				'description' => '',
+				'panel'       => 'knowledge_panel',
+			)
+		);
+
+		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_knowledge_section_two',
 			array(
 				'title'       => esc_html__( 'Knowledge Base Layout Two', 'knowx' ),

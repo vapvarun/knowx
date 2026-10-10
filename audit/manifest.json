@@ -83,6 +83,7 @@
       "page-knowledgebase-one.php",
       "page-knowledgebase-two.php",
       "page.php",
+      "search.php",
       "single.php",
       "template-parts/docs/single.php"
     ],
@@ -97,10 +98,12 @@
       "page-knowledgebase-one.php",
       "page-knowledgebase-two.php",
       "page.php",
+      "search.php",
       "single.php",
       "template-parts/docs/single.php"
     ],
     "knowx_sub_header": [
+      "404.php",
       "archive.php",
       "category.php",
       "full-width-container.php",
@@ -109,6 +112,7 @@
       "page-faq.php",
       "page-knowledgebase-two.php",
       "page.php",
+      "search.php",
       "single.php",
       "template-parts/docs/single.php"
     ]
@@ -215,7 +219,9 @@
     "knowx_order",
     "knowx_page_title",
     "knowx_posts",
+    "knowx_recent_by",
     "knowx_scroll_top",
+    "knowx_show_updated",
     "knowx_view_all",
     "menu_typography_option",
     "post_box_view_layout",
@@ -274,6 +280,7 @@
     "knowx_product_icons",
     "knowx_product_tree",
     "knowx_products",
+    "knowx_recent_by_updated",
     "knowx_render_toc",
     "knowx_render_tree",
     "knowx_schema_graph",

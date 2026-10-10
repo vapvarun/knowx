@@ -4,15 +4,15 @@ Status 2026-10-10. Found by reviewing the shipped pages with fresh eyes. Nothing
 
 ## A. Last updated and modified info (decided: do first)
 
-- [ ] Article page already shows "Last updated"; keep it and add a setting to hide it.
-- [ ] Show the updated date in `list-item.php` (section list, search results, archives), not only on the article.
-- [ ] Docs home: "Recently updated" list ordered by `post_modified`, next to Featured; cached with `knowx_kb_cached()`.
+- [x] Article page shows "Last updated"; setting added to hide it (Articles section).
+- [x] Updated date in `list-item.php` (section list, search results, archives).
+- [x] Docs home: "Recently updated" list ordered by modified date (setting: Recent articles list), cached.
 - [ ] Product and section pages: "Updated <date>" of the newest article in the header.
 - [ ] Sort option on sections: menu order (default), title, last updated.
 
 ## B. Single-product site
 
-- [ ] Docs home with one product: replace the single wide card by one card per section (same grid), no product switcher (already hidden).
+- [x] Docs home with one product: one card per section, no product card, switcher hidden.
 - [ ] Header and breadcrumb skip the product level when there is one product.
 - [ ] Sidebar tree opens straight on the product (no product label row).
 - [ ] Sample content variant for Playground: "Orbit Helpdesk only".

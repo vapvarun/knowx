@@ -212,6 +212,8 @@ update_option( 'blogname', 'Orbit Docs' );
 update_option( 'blogdescription', 'Help for Orbit Helpdesk and the Orbit API' );
 
 // Menu.
+// Replace the menu the theme made on activation so the sample menu has the sample pages.
+wp_delete_nav_menu( 'Main menu' );
 $menu_id = wp_create_nav_menu( 'Main menu' );
 foreach ( array(
 	$home        => 'Docs',

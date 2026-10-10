@@ -23,7 +23,7 @@ PAGES = {
     'section': '/category/orbit-api-guides/',
     'article': '/get-an-api-key/',
     'plain post': '/plain-post/',
-    'tag archive': '/tag/docs-tag/',
+    'tag archive': '/author/admin/',
     'search': '/?s=webhook',
     'faq': '/faq/',
     'docs index': '/?page_id=INDEX',
@@ -52,7 +52,7 @@ TESTS = [
     ('site_sub_header', [0]),
     ('sub_header_background_setting', [BG]),
     ('site_breadcrumbs', [0]),
-    ('site_search', [0]),
+    ('site_search', [1]),
     ('blog_layout_option', ['grid-layout', 'masonry-layout']),
     ('post_per_row', ['6']),
     ('post_box_view_layout', [1]),
@@ -141,7 +141,7 @@ EXPECT = {
     ('site_header_bg_color', '#ffeecc'): ('docs home', r'--color-header-bg:#ffeecc', True),
     ('site_sub_header', 0): ('article', r'site-sub-header', False),
     ('site_breadcrumbs', 0): ('article', r'knowx-breadcrumbs', False),
-    ('site_search', 0): ('article', 'COUNT', False),
+    ('site_search', 1): ('article', 'COUNT_UP', True),
     ('blog_layout_option', 'grid-layout'): ('tag archive', r'grid-layout', True),
     ('blog_layout_option', 'masonry-layout'): ('tag archive', r'masonry-layout', True),
     ('post_per_row', '6'): ('tag archive', r'col-md-6', True),
@@ -174,6 +174,8 @@ def check_expect(key, value):
     if ek not in EXPECT:
         return None
     page, rx, present = EXPECT[ek]
+    if rx == 'COUNT_UP':
+        return 'ok' if RAW[page].count('class="searchform"') > BASECNT[page] else 'FAIL: %s search form count did not rise' % page
     if rx == 'COUNT':
         return 'ok' if RAW[page].count('class="searchform"') < BASECNT[page] else 'FAIL: %s search form count did not drop' % page
     found = re.search(rx, RAW[page]) is not None

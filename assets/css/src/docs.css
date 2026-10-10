@@ -582,6 +582,15 @@
 	font-size: 1.125rem;
 }
 
+.knowx-article-card h2 a {
+	padding: 0;
+}
+
+.knowx-article-card .knowx-version {
+	display: inline-block;
+	margin-block-start: 0.25rem;
+}
+
 .knowx-article-card p {
 	margin: 0.25rem 0 0;
 	color: var(--color-muted);
@@ -647,4 +656,20 @@
 	max-width: 36rem;
 	margin-inline: auto;
 	color: var(--color-muted);
+}
+
+/* Search results: product / section above each result. */
+.knowx-crumb {
+	margin: 0 0 0.25rem;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--color-muted);
+}
+
+.knowx-search-results .page-header {
+	margin-block-end: 1.5rem;
+}
+
+.knowx-search-results .search-form {
+	margin-block-start: 1rem;
 }

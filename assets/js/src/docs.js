@@ -115,9 +115,16 @@
 					item.append(link);
 					list.append(item);
 				});
-				status.textContent = posts.length
-					? strings.results.replace('%d', posts.length)
-					: strings.none;
+				if (!posts.length) {
+					status.textContent = strings.none;
+				} else if (posts.length === 1) {
+					status.textContent = strings.resultOne;
+				} else {
+					status.textContent = strings.results.replace(
+						'%d',
+						posts.length
+					);
+				}
 			} catch (e) {
 				if (e.name !== 'AbortError') {
 					status.textContent = strings.error;

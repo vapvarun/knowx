@@ -193,7 +193,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						'copied'     => esc_html__( 'Copied', 'knowx' ),
 						'linkCopied' => esc_html__( 'Link copied', 'knowx' ),
 						'searching'  => esc_html__( 'Searching...', 'knowx' ),
-						/* translators: %d: number of results. */
+						'resultOne'  => esc_html__( '1 result. Use the arrow keys to move through it.', 'knowx' ),
+						/* translators: %d: number of results, two or more. */
 						'results'    => esc_html__( '%d results. Use the arrow keys to move through them.', 'knowx' ),
 						'none'       => esc_html__( 'No articles found. Press Enter to search the whole site.', 'knowx' ),
 						'error'      => esc_html__( 'Search is not available right now. Press Enter to use the search page.', 'knowx' ),

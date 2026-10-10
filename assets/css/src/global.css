@@ -31,17 +31,6 @@
 @import "_color-mode.css";
 @import "_switcher.css";
 
-body.elementor-editor-active .site-header-wrapper {
-    z-index: 99;
-}
-
-.elementor-template-full-width #page>.container,
-.elementor-template-full-width #page>.container-fluid {
-    max-width: 100%;
-    width: 100%;
-    padding: 0;
-}
-
 canvas {
     width: 100% !important;
     height: auto !important;
@@ -135,8 +124,7 @@ body.layout-boxed {
     content: none;
 }
 
-.site-sub-header>.container form.searchform,
-.site-sub-header>.container form#bbp-search-form {
+.site-sub-header>.container form.searchform {
     display: flex;
     position: relative;
     width: 30%;
@@ -144,21 +132,15 @@ body.layout-boxed {
     margin: 10px 0;
 }
 
-.site-sub-header>.container form#bbp-search-form>div {
-    width: 100%;
-}
-
 @media (max-width: 480px) {
 
-    .site-sub-header>.container form.searchform,
-    .site-sub-header>.container form#bbp-search-form {
+    .site-sub-header>.container form.searchform {
         width: 100%;
         min-width: 100%;
     }
 }
 
-.site-sub-header input.text_input,
-.site-sub-header input#bbp_search {
+.site-sub-header input.text_input {
     width: 100%;
     padding: 0 40px 0 15px;
     border-radius: 100px;

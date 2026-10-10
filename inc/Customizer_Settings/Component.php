@@ -229,7 +229,7 @@ class Component implements Component_Interface {
 
 		$palettes = \KnowX\KnowX\Tokens\Component::palettes();
 		$first    = reset( $palettes );
-		$ids      = $first ? array_keys( $first['colors'] ) : array();
+		$ids      = $first ? array_merge( array_keys( $first['colors'] ), array( 'site_link_color' ) ) : array();
 
 		// What "Default" puts back: each colour's own default, and core's default page background.
 		$defaults = array_fill_keys( $ids, '' );

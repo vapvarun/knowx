@@ -173,3 +173,11 @@ What "hybrid" adds:
 What it does not do: convert PHP templates to HTML templates, remove the Customizer, or move settings to the Site Editor. That stays a possible future release.
 
 Cleanup this implies: `theme.json` currently declares `customTemplates` (lines 304-343) and `templateParts` (lines 344-365) for files that do not exist; remove or replace them with real classic `Template Name:` entries so Theme Check and the editor stay consistent. Remove `scripts/convert-to-block-theme.js`.
+
+## 11. Decision: existing sites are not a constraint (user, 2026-10-10)
+
+"We are not worried about existing sites." This relaxes section 5:
+- No requirement to keep setting IDs, defaults, value shapes or `'on'`/`'off'` compatibility. Settings are redesigned cleanly (BuddyX defaults and field shapes), and `knowx_defaults()` plus the Kirki-era default tables are deleted, not preserved.
+- Dropped: the legacy truthy-normalisation phase (Phase 7) beyond writing the new settings as 0/1; the "Saved" font optgroup backward-compat; the Pass 3 real-customer-database check; the beta/RC rollout and the `dist/legacy` rollback zip; the byte-identical-to-1.7.4 baseline gate (Phase 0 snapshot is now only a visual reference for the redesigned defaults).
+- Still required: every setting has a `sanitize_callback`, a default and escaped output; fresh installs, wordpress.org rules and Playground are the only audience.
+- Consequence to put in the changelog: updating from 1.7.4 resets customizer choices to the new defaults. Release as a major version (2.0.0 recommended) so it is clearly not a drop-in patch.

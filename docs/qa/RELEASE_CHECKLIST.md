@@ -4,6 +4,8 @@ Branch: `1.7.5` (do not merge to `master`, tag, or release until every box below
 Release route: develop on `wbcomdesigns/knowx`, release to the `vapvarun/knowx` mirror (same as BuddyX).
 Basecamp: KnowX Theme project 38311801, card table 7605386991.
 
+Work is tracked in groups W00-W18 in `plans/WORK_GROUPS.md`; each group is one commit and feeds the sections below.
+
 Legend: `[x]` verified, `[ ]` open. A box is ticked only after the check was run, not after the code was written.
 
 ## A. WP Rig skeleton and build
@@ -27,7 +29,7 @@ Legend: `[x]` verified, `[ ]` open. A box is ticked only after the check was run
 
 ## B. Customizer (Kirki 6.0.4): 11 sections, 85 settings
 
-For every section: the control renders, the value saves, it round-trips after reload, the front end reflects it, the live preview updates, and defaults match a fresh install. Existing 1.7.4 customer values must survive the upgrade (setting IDs, value shapes and sanitize callbacks unchanged).
+For every section: the control renders, the value saves, it round-trips after reload, the front end reflects it, the live preview updates, and defaults match a fresh install. No migration: existing 1.7.4 customizer values are not carried over (decision 2026-10-10). Every setting still needs a default, a sanitize callback and escaped output, and the changelog says customizer choices reset.
 
 | Section (source file) | Settings | Verified |
 |---|---|---|

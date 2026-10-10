@@ -181,3 +181,5 @@ Cleanup this implies: `theme.json` currently declares `customTemplates` (lines 3
 - Dropped: the legacy truthy-normalisation phase (Phase 7) beyond writing the new settings as 0/1; the "Saved" font optgroup backward-compat; the Pass 3 real-customer-database check; the beta/RC rollout and the `dist/legacy` rollback zip; the byte-identical-to-1.7.4 baseline gate (Phase 0 snapshot is now only a visual reference for the redesigned defaults).
 - Still required: every setting has a `sanitize_callback`, a default and escaped output; fresh installs, wordpress.org rules and Playground are the only audience.
 - Consequence to put in the changelog: updating from 1.7.4 resets customizer choices to the new defaults. Release as a major version (2.0.0 recommended) so it is clearly not a drop-in patch.
+
+**No migration code** (user, 2026-10-10): the theme ships no upgrade routine, no legacy `'on'`/`'off'` handling and no setting-ID mapping. Grouped work items are tracked in `plans/WORK_GROUPS.md`.

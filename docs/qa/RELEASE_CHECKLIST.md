@@ -1,6 +1,6 @@
 # KnowX 2.0.0 Release Checklist
 
-Branch `1.7.5`, releasing as **2.0.0**, PHP 8.1 and WordPress 6.9 minimum, tested up to 7.1. Do not merge to `master`, tag or release before the open boxes in section H are closed by the owner.
+Everything is on `master` (the former `1.7.5` branch and the later first-view and Customizer work are merged), releasing as **2.0.0**, PHP 8.1 and WordPress 6.9 minimum, tested up to 7.1. Do not tag or release before the open boxes in section H are closed by the owner. QA starts at `HANDOFF.md`.
 Release route: develop on `wbcomdesigns/knowx`, release to the `vapvarun/knowx` mirror (same as BuddyX).
 Basecamp: KnowX Theme project 38311801, card table 7605386991. Work groups W00 to W18 are in `plans/WORK_GROUPS.md`.
 
@@ -14,9 +14,9 @@ Legend: `[x]` verified on 2026-10-10 with the evidence beside it, `[ ]` open (wi
 - [x] Version 2.0.0 is identical in `style.css`, `package.json`, `package-lock.json`, `config/config.default.json` and the `readme.txt` stable tag and changelog
 - [x] No committed zips; `dist/` and `*.zip` are ignored
 - [x] The only "WP Rig" text left is the credit line in `readme.txt`
-- [x] The zip has no tests, scripts, `playground/`, `tools/`, `rector.php`, source maps or markdown; it has `patterns/`, `styles/`, `template-parts/docs/`, `languages/knowx.pot`
+- [x] The zip has no tests, scripts, `playground/`, `tools/`, `rector.php`, source maps or markdown; it has `patterns/`, `template-parts/docs/`, `languages/knowx.pot`
 - [x] `npm run lint` is one command (JS, CSS, theme.json) and passes with 0 problems
-- [x] `npm test` runs the PHPUnit unit suite (33 tests, 67 assertions). Jest, `jest.config.cjs` and the unused Playwright config were removed because there are no JS unit tests
+- [x] `npm test` runs the PHPUnit unit suite (33 tests, 115 assertions). Jest, `jest.config.cjs` and the unused Playwright config were removed because there are no JS unit tests
 - [x] `vendor/bin/phpstan analyze`: no errors, no baseline
 - [x] `vendor/bin/phpcs --standard=phpcs.xml.dist`: 0 errors, 27 warnings in legacy templates and test helpers
 - [x] PHPUnit integration suite: 12 tests pass in Docker on WordPress 7.1.3 (`tests/docker/run-integration.sh`)
@@ -29,7 +29,7 @@ Legend: `[x]` verified on 2026-10-10 with the evidence beside it, `[ ]` open (wi
 
 43 settings in 10 sections (`docs/customizer-inventory.md`, generated; every setting has a reader or output CSS). No migration from 1.7.4 (decision 2026-10-10): the changelog says Customizer choices reset.
 
-- [x] Opened in the real Customizer over CDP: 48 settings all have a control, 47 sections render, no console error, no PHP notice
+- [x] Opened in the real Customizer over CDP: every setting has a control, all 10 sections render with every control visible (`tests/docker/customizer-ui-check.js`), no console error, no PHP notice. Settings QA: 43 OK, 0 failures (`SETTINGS_QA.md`)
 - [x] A save round-trips: primary colour, colour scheme, hero heading and "Posts per category" were set, saved, read back with WP-CLI and seen on the front end; then removed
 - [x] Live preview and front end share the same `--color-*` variables; the editor receives the same rule through `block_editor_settings_all`
 - [x] Fonts are served from the theme (Open Sans variable woff2); the Customizer font list shows the theme fonts
@@ -124,6 +124,7 @@ Playground and sample content
 ## H. Release (owner decisions)
 
 - [x] Docs rewritten on `1.7.5` instead of merging master's old pages; when `1.7.5` goes into `master` the new docs replace the old ones, and `.github/workflows/ci.yml` from master is kept
-- [ ] Owner checks the whole flow, then approves the merge of `1.7.5` into `master`
+- [x] `1.7.5`, first-view-and-defaults and customizer-usability are merged into `master`
+- [ ] Owner checks the whole flow and approves the release
 - [ ] Release to `vapvarun/knowx` with the clean zip; switch the blueprint to the wordpress.org slug; archive `knowx-core`; retire `knowx-demo-importer`
 - [ ] Rich Results test and HTTPS Lighthouse on the published copy

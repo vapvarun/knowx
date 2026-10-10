@@ -82,6 +82,16 @@ Copyright (c) 2011, Thomas Griffin
 License: GPL-2.0+
 
 == Changelog ==
+= 1.7.5 - October 2026 =
+
+* New      - Theme.json v3 with an expanded color palette and block styles.
+* Improve  - Pinch-to-zoom now works on mobile.
+* Improve  - Rebuilt the asset pipeline on the current WP Rig toolchain with source files under assets/css/src and assets/js/src.
+* Fix      - Compatibility with Kirki 6.0.4.
+* Fix      - Production bundle file paths.
+* Dev      - Added PHPStan static analysis, PHPUnit, Jest and Playwright test scaffolding, and WP-CLI commands.
+* Dev      - Completed the rebrand from WP Rig to KnowX.
+
 = 1.7.4 =
 * Improvement: Updated global styling for better design consistency.
 * Improvement: Refined footer structure for cleaner and more maintainable layout.

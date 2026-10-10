@@ -40,3 +40,7 @@ blob-report/
 
 # Block build output
 assets/blocks/*/build/
+
+# Release output
+dist/
+*.zip

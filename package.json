@@ -1,6 +1,6 @@
 {
   "name": "knowx",
-  "version": "3.1.0",
+  "version": "1.7.5",
   "description": "Free theme for a knowledge base",
   "author": "wbcomdesigns,vapvarun",
   "license": "GPL-3.0-or-later",
@@ -83,18 +83,15 @@
   },
   "type": "module",
   "scripts": {
-    "editor-support": "node node/editorSupport.js",
-    "rig-init": "npm install --loglevel=error --no-audit --no-fund && composer install --quiet && node scripts/cli.js init",
-    "rig-init:bun": "bun install --loglevel=error --no-audit --no-fund && composer install --quiet && node scripts/cli.js init",
     "generateCert": "node scripts/cli.js generateCert",
     "build:js": "node build-js.js",
     "dev:js": "node build-js.js --dev",
     "lint:js": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint \"assets/js/src/**/*.{js,jsx,ts,tsx}\"",
     "build:css": "node build-css.js",
     "dev:css": "node build-css.js --dev",
-    "lint:css": "node lint-css.js",
+    "lint:css": "stylelint \"assets/css/src/**/*.css\"",
     "watch:js": "node build-js.js",
-    "watch:css": "npm run build:css && chokidar 'src/styles/**/*.css' -c 'npm run build:css'",
+    "watch:css": "npm run build:css && chokidar 'assets/css/src/**/*.css' -c 'npm run build:css'",
     "dev": "node scripts/cli.js dev",
     "dev:modern": "node scripts/dev-modern.js",
     "dev:modern:debug": "cross-env KNOWX_DEBUG=1 node scripts/dev-modern.js --debug",
@@ -112,11 +109,8 @@
     "block:list": "node scripts/blocks.js block:list",
     "block:remove": "node scripts/blocks.js block:remove",
     "block:promote-plugin": "node scripts/blocks.js block:promote-plugin",
-    "childify": "node node/childify.js",
-    "setup-child": "npm run rig-init && npm run childify",
-    "setup-child:bun": "bun run rig-init:bun && bun run childify",
     "block-based": "node scripts/convert-to-block-theme.js",
-    "create-rig-component": "node node/create-component-wrapper.js"
+    "setup": "npm install && composer install && node scripts/cli.js init"
   },
   "dependencies": {
     "glob": "^11.0.3"

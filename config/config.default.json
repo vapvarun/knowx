@@ -52,21 +52,15 @@
       "readme.txt",
       "screenshot.png",
       "theme.json",
-      "wpml-config.xml",
-      "styles/*.json",
       "assets/css/*.css",
       "assets/css/admin/*.css",
       "assets/css/editor/*.css",
       "assets/js/*.js",
       "assets/js/admin/*.js",
-      "assets/css/vendor/**/*.css",
-      "assets/js/vendor/**/*.js",
-      "assets/svg/*.svg",
       "inc/EZ_Customizer/themeCustomizeSettings.json",
       "assets/fonts/*",
       "inc/Kirki/**/*",
       "inc/Kirki_Option/**/*",
-      "external/include-kirki.php",
       "external/kirki-utils.php"
     ]
   }

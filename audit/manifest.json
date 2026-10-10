@@ -25,6 +25,9 @@
     "Tokens"
   ],
   "filters": {
+    "knowx_color_palettes": [
+      "inc/Tokens/Component.php"
+    ],
     "knowx_css_files": [
       "inc/Styles/Component.php"
     ],
@@ -283,10 +286,14 @@
     "site_copyright_text",
     "site_footer_content_color",
     "site_header_bg_color",
+    "site_heading_color",
     "site_layout",
+    "site_link_color",
     "site_primary_color",
     "site_sticky_header",
+    "site_surface_color",
     "site_tagline_typography_option",
+    "site_text_color",
     "site_title_typography_option",
     "sticky_sidebar_option",
     "sub_header_background_setting",

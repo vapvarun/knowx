@@ -13,7 +13,7 @@ Assign a menu to the **Footer** location under **Appearance > Menus** to print a
 ## Footer Section
 
 - **Background control**: colour or image behind the footer.
-- **Content colour**: the footer text colour. Leave empty to follow dark mode.
+- The footer text colour is **Footer Text** under **Colors**.
 
 ## Copyright Section
 
@@ -25,4 +25,4 @@ Assign a menu to the **Footer** location under **Appearance > Menus** to print a
 | `[site_title]` | The site name, linked to the home page |
 | `[theme_author]` | A link to the theme page |
 
-- **Background colour** and **Content colour** for the bar.
+- The colours of the copyright line are **Copyright Background** and **Copyright Text** under **Colors**.

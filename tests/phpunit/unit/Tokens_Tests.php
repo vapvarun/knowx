@@ -62,4 +62,40 @@ class Tokens_Tests extends Unit_Test_Case {
 		$this->assertSame( '', Component::sanitize_color( 'red;}body{display:none' ) );
 		$this->assertSame( '', Component::sanitize_color( 'url(javascript:alert(1))' ) );
 	}
+
+	/**
+	 * Every palette fills every colour control and keeps text readable (WCAG AA, 4.5:1).
+	 */
+	public function test_palettes_are_complete_and_readable() {
+		\Brain\Monkey\Functions\when( '__' )->returnArg();
+		\Brain\Monkey\Filters\expectApplied( 'knowx_color_palettes' )->andReturnFirstArg();
+
+		$luminance = static function ( string $hex ): float {
+			$channels = array_map(
+				static function ( $part ) {
+					$value = hexdec( $part ) / 255;
+					return $value <= 0.03928 ? $value / 12.92 : pow( ( $value + 0.055 ) / 1.055, 2.4 );
+				},
+				str_split( ltrim( $hex, '#' ), 2 )
+			);
+			return 0.2126 * $channels[0] + 0.7152 * $channels[1] + 0.0722 * $channels[2];
+		};
+		$ratio     = static function ( string $a, string $b ) use ( $luminance ): float {
+			$light = max( $luminance( $a ), $luminance( $b ) );
+			$dark  = min( $luminance( $a ), $luminance( $b ) );
+			return ( $light + 0.05 ) / ( $dark + 0.05 );
+		};
+
+		$palettes = Component::palettes();
+		$this->assertCount( 5, $palettes );
+		foreach ( $palettes as $slug => $palette ) {
+			$c = $palette['colors'];
+			$this->assertCount( 9, $c, $slug );
+			$this->assertGreaterThanOrEqual( 4.5, $ratio( $c['site_text_color'], $c['background_color'] ), "$slug text on page" );
+			$this->assertGreaterThanOrEqual( 4.5, $ratio( $c['site_text_color'], $c['site_surface_color'] ), "$slug text on content" );
+			$this->assertGreaterThanOrEqual( 4.5, $ratio( $c['site_heading_color'], $c['background_color'] ), "$slug heading" );
+			$this->assertGreaterThanOrEqual( 4.5, $ratio( $c['site_footer_content_color'], $c['background_color'] ), "$slug footer" );
+			$this->assertGreaterThanOrEqual( 4.5, $ratio( $c['site_copyright_content_color'], $c['site_copyright_background_color'] ), "$slug copyright" );
+		}
+	}
 }

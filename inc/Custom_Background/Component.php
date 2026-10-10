@@ -46,7 +46,7 @@ class Component implements Component_Interface {
 		if ( $control ) {
 			$control->section  = 'site_skin_section';
 			$control->label    = __( 'Page Background Color', 'knowx' );
-			$control->priority = 12;
+			$control->priority = 14;
 		}
 		$wp_customize->remove_section( 'background_image' );
 	}

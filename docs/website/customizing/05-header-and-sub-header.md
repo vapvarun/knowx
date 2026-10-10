@@ -5,7 +5,7 @@
 ## Header
 
 - **Sticky header**: keep the header at the top while scrolling. On by default.
-- **Background colour**: the header colour. Leave empty to follow the theme and dark mode.
+- The header colour is **Header Background** under **Colors**.
 
 The header holds the logo or site title, the primary menu, the search button, the **Products** menu and the dark mode toggle.
 

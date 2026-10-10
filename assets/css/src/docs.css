@@ -434,7 +434,7 @@
 	padding: 1.75rem;
 	border: 1px solid var(--global-border-color);
 	border-radius: var(--radius-lg);
-	background: linear-gradient(135deg, color-mix(in srgb, var(--color-theme-primary) 10%, var(--color-surface)), var(--color-surface));
+	background: linear-gradient(135deg, color-mix(in srgb, var(--card-accent, var(--color-theme-primary)) 10%, var(--color-surface)), var(--color-surface));
 }
 
 .knowx-term-header .knowx-icon {
@@ -444,8 +444,12 @@
 	width: 3.5rem;
 	height: 3.5rem;
 	border-radius: var(--radius-lg);
-	background: color-mix(in srgb, var(--color-theme-primary) 14%, var(--color-surface));
-	color: var(--color-theme-primary);
+	background: color-mix(in srgb, var(--card-accent, var(--color-theme-primary)) 14%, var(--color-surface));
+	color: var(--card-accent, var(--color-theme-primary));
+}
+
+.knowx-tree-panel > summary .knowx-icon {
+	color: var(--card-accent, var(--color-theme-primary));
 }
 
 .knowx-term-header .page-title {

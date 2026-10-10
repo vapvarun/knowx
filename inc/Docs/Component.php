@@ -192,9 +192,7 @@ class Component implements Component_Interface {
 	}
 
 	/**
-	 * Uses the product's accent colour as the brand colour on its pages.
-	 *
-	 * Dark mode keeps working because the dark palette derives its link colours from the brand colour.
+	 * Colours the product's icon and header with its accent. Buttons and links always follow the theme colour.
 	 */
 	public function action_add_accent() {
 		$product = knowx_current_product();
@@ -203,13 +201,7 @@ class Component implements Component_Interface {
 			return;
 		}
 
-		$css  = '--color-theme-primary:' . $accent . ';--color-on-primary:' . Tokens::on_color( $accent ) . ';';
-		$link = Tokens::link_colors( $accent, '#f7f7f9' );
-		if ( $link ) {
-			$css .= '--color-link:' . $link[0] . ';--color-link-hover:' . $link[1] . ';';
-		}
-
-		wp_add_inline_style( 'knowx-global', ':root{' . $css . '}' );
+		wp_add_inline_style( 'knowx-global', '.knowx-docs{--card-accent:' . $accent . ';}' );
 	}
 
 	/**

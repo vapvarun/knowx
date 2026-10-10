@@ -28,11 +28,11 @@ The list shows `h2` and `h3` headings in the article. Add headings with the Head
 
 ## The theme colour looks wrong in one product
 
-Products can have their own accent colour. Edit the category under **Posts > Categories** and untick **Use an accent colour**.
+Products can have their own icon colour. Edit the category under **Posts > Categories** and choose **Automatic**.
 
 ## Colours I set do not apply
 
-A product's accent colour wins over the theme colour on that product's pages. To use the theme colour there, set the product's accent to Automatic.
+Buttons and links always follow the theme colour; a product colour only changes that product's icon, card and page header.
 
 ## Pretty permalinks give "Not found"
 

@@ -38,6 +38,10 @@ BG = {'background-color': '#334455'}
 TESTS = [
     ('site_primary_color', ['#aa2255']),
     ('background_color', ['ffeedd']),
+    ('site_link_color', ['#aa2255']),
+    ('site_text_color', ['#223344']),
+    ('site_heading_color', ['#112233']),
+    ('site_surface_color', ['#fff8ee']),
     ('site_color_mode', ['dark', 'auto']),
     ('site_color_mode_toggle_show', [1]),
     ('site_layout', ['boxed']),
@@ -123,6 +127,10 @@ def snapshot(pages):
 
 # What the front end must contain after a setting is applied: (page, regex, should_be_present)
 EXPECT = {
+    ('site_link_color', '#aa2255'): ('article', r'--color-link:#aa2255', True),
+    ('site_text_color', '#223344'): ('article', r'--global-font-color:#223344', True),
+    ('site_heading_color', '#112233'): ('article', r'--color-heading:#112233', True),
+    ('site_surface_color', '#fff8ee'): ('article', r'--color-surface:#fff8ee', True),
     ('background_color', 'ffeedd'): ('docs home', r'--color-theme-body:#ffeedd', True),
     ('site_primary_color', '#aa2255'): ('docs home', r'--color-theme-primary:#aa2255', True),
     ('site_color_mode', 'dark'): ('docs home', r'var mode="dark"', True),

@@ -28,10 +28,9 @@ defined( 'ABSPATH' ) || exit;
 		'color',
 		array(
 			'settings' => 'site_header_bg_color',
-			'label'    => esc_html__( 'Header Background Color', 'knowx' ),
-			'section'  => 'site_header_section',
+			'label'    => esc_html__( 'Header Background', 'knowx' ),
+			'section'  => 'site_skin_section',
 			'default'  => '#ffffff',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
+			'priority' => 20,
 		)
 	);

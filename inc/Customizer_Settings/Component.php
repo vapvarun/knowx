@@ -39,6 +39,7 @@ class Component implements Component_Interface {
 
 		add_action( 'init', array( $this, 'add_panels_and_sections' ) );
 		add_action( 'init', array( $this, 'add_fields' ) );
+		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_palettes' ) );
 		add_filter( 'body_class', array( $this, 'site_width_body_classes' ) );
 		add_filter( 'body_class', array( $this, 'site_sticky_sidebar_body_classes' ) );
 		add_filter( 'body_class', array( $this, 'site_sticky_header_classes' ) );
@@ -302,5 +303,43 @@ class Component implements Component_Interface {
 		require_once $fields_dir . 'Sidebar_Fields.php';
 		require_once $fields_dir . 'Knowledge_Base_Fields.php';
 		require_once $fields_dir . 'Footer_Fields.php';
+	}
+
+	/**
+	 * Loads the palette picker for the Colors section.
+	 */
+	public function enqueue_palettes() {
+		$base = get_template_directory_uri() . '/inc/Customizer_Framework/assets/';
+		$ver  = wp_get_theme()->get( 'Version' );
+
+		wp_enqueue_style( 'knowx-palettes', $base . 'knowx-palettes.css', array(), $ver );
+		wp_enqueue_script( 'knowx-palettes', $base . 'knowx-palettes.js', array( 'customize-controls' ), $ver, true );
+
+		$palettes = \KnowX\KnowX\Tokens\Component::palettes();
+		$first    = reset( $palettes );
+		$ids      = $first ? array_keys( $first['colors'] ) : array();
+
+		// What "Default" puts back: each colour's own default, and core's default page background.
+		$defaults = array_fill_keys( $ids, '' );
+		foreach ( \KnowX\KnowX\Customizer_Framework\Component::get_fields() as $field ) {
+			if ( isset( $defaults[ $field['settings'] ?? '' ] ) ) {
+				$defaults[ $field['settings'] ] = (string) ( $field['default'] ?? '' );
+			}
+		}
+		$defaults['background_color'] = '#' . ltrim( (string) get_theme_support( 'custom-background', 'default-color' ), '#' );
+		wp_localize_script(
+			'knowx-palettes',
+			'knowxPalettes',
+			array(
+				'palettes' => $palettes,
+				'ids'      => $ids,
+				'defaults' => $defaults,
+				'strings'  => array(
+					'title' => __( 'Palettes', 'knowx' ),
+					'hint'  => __( 'Pick a starting point, then change any colour below.', 'knowx' ),
+					'reset' => __( 'Default', 'knowx' ),
+				),
+			)
+		);
 	}
 }

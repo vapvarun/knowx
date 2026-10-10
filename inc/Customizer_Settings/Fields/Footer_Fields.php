@@ -37,11 +37,10 @@ defined( 'ABSPATH' ) || exit;
 		'color',
 		array(
 			'settings' => 'site_footer_content_color',
-			'label'    => esc_html__( 'Content Color', 'knowx' ),
-			'section'  => 'site_footer_section',
+			'label'    => esc_html__( 'Footer Text', 'knowx' ),
+			'section'  => 'site_skin_section',
 			'default'  => '#505050',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
+			'priority' => 30,
 		)
 	);
 
@@ -64,11 +63,10 @@ defined( 'ABSPATH' ) || exit;
 		'color',
 		array(
 			'settings' => 'site_copyright_background_color',
-			'label'    => esc_html__( 'Background Color', 'knowx' ),
-			'section'  => 'site_copyright_section',
+			'label'    => esc_html__( 'Copyright Background', 'knowx' ),
+			'section'  => 'site_skin_section',
 			'default'  => '#ffffff',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
+			'priority' => 31,
 		)
 	);
 
@@ -76,10 +74,9 @@ defined( 'ABSPATH' ) || exit;
 		'color',
 		array(
 			'settings' => 'site_copyright_content_color',
-			'label'    => esc_html__( 'Content Color', 'knowx' ),
-			'section'  => 'site_copyright_section',
+			'label'    => esc_html__( 'Copyright Text', 'knowx' ),
+			'section'  => 'site_skin_section',
 			'default'  => '#505050',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
+			'priority' => 32,
 		)
 	);

@@ -29,6 +29,8 @@ class Component implements Component_Interface {
 	 * @var string[]
 	 */
 	const VARIABLES = array(
+		'site_text_color'                 => '--global-font-color',
+		'site_heading_color'              => '--color-heading',
 		'site_header_bg_color'            => '--color-header-bg',
 		'site_footer_content_color'       => '--color-footer-content',
 		'site_copyright_background_color' => '--color-copyright-bg',
@@ -77,6 +79,40 @@ class Component implements Component_Interface {
 	}
 
 	/**
+	 * Ready-made colour palettes for the Customizer. Choosing one fills the colour controls, which can then be changed one by one.
+	 *
+	 * Light mode only: dark mode keeps its own palette.
+	 *
+	 * @return array[] Palette slug => label and colours keyed by setting id.
+	 */
+	public static function palettes(): array {
+		$palettes = array(
+			'ocean'  => array( __( 'Ocean', 'knowx' ), '#0369a1', '#1e293b', '#0f172a', '#f0f7fb', '#ffffff', '#ffffff', '#334155', '#e6f1f7', '#334155' ),
+			'forest' => array( __( 'Forest', 'knowx' ), '#047857', '#1f2937', '#064e3b', '#f3f8f5', '#ffffff', '#ffffff', '#374151', '#e8f1ec', '#374151' ),
+			'sunset' => array( __( 'Sunset', 'knowx' ), '#c2410c', '#292524', '#431407', '#fbf5ef', '#fffdfb', '#fffdfb', '#44403c', '#f3e8dc', '#44403c' ),
+			'berry'  => array( __( 'Berry', 'knowx' ), '#7c3aed', '#27272a', '#2e1065', '#f7f4fc', '#ffffff', '#ffffff', '#3f3f46', '#ece6f7', '#3f3f46' ),
+			'slate'  => array( __( 'Slate', 'knowx' ), '#334155', '#1e293b', '#0f172a', '#f1f5f9', '#ffffff', '#ffffff', '#334155', '#e2e8f0', '#334155' ),
+		);
+		$keys     = array( 'site_primary_color', 'site_text_color', 'site_heading_color', 'background_color', 'site_surface_color', 'site_header_bg_color', 'site_footer_content_color', 'site_copyright_background_color', 'site_copyright_content_color' );
+
+		$out = array();
+		foreach ( $palettes as $slug => $row ) {
+			$label        = array_shift( $row );
+			$out[ $slug ] = array(
+				'label'  => $label,
+				'colors' => array_combine( $keys, $row ),
+			);
+		}
+
+		/**
+		 * Filters the colour palettes offered in the Customizer.
+		 *
+		 * @param array[] $out Palette slug => `label` and `colors` (setting id => hex).
+		 */
+		return apply_filters( 'knowx_color_palettes', $out );
+	}
+
+	/**
 	 * Builds the `:root` rule from the settings the owner changed.
 	 *
 	 * Only saved values are printed; unsaved settings keep the stylesheet default.
@@ -101,6 +137,21 @@ class Component implements Component_Interface {
 		$page = sanitize_hex_color_no_hash( get_theme_mod( 'background_color', '' ) );
 		if ( $page && strtolower( $page ) !== strtolower( (string) get_theme_support( 'custom-background', 'default-color' ) ) ) {
 			$declarations .= '--color-theme-body:#' . $page . ';';
+		}
+
+		// Content background: cards and boxes, with the neutral shades next to it following it.
+		$surface = self::sanitize_color( get_theme_mod( 'site_surface_color', '' ) );
+		if ( '' !== $surface ) {
+			$declarations .= '--color-surface:' . $surface . ';--color-surface-alt:color-mix(in srgb,' . $surface . ' 94%,#000);';
+		}
+		if ( '' !== self::sanitize_color( get_theme_mod( 'site_text_color', '' ) ) ) {
+			$declarations .= '--color-muted:color-mix(in srgb,var(--global-font-color) 72%,var(--color-surface));';
+		}
+
+		// Link colour: the owner's own, with a darker hover; otherwise the one derived from the theme colour above.
+		$link_color = self::sanitize_color( get_theme_mod( 'site_link_color', '' ) );
+		if ( '' !== $link_color ) {
+			$declarations .= '--color-link:' . $link_color . ';--color-link-hover:color-mix(in srgb,' . $link_color . ' 75%,#000);';
 		}
 
 		// Corner roundness: soft is the stylesheet default.

@@ -10,10 +10,14 @@ namespace KnowX\KnowX\Docs;
 use KnowX\KnowX\Component_Interface;
 use KnowX\KnowX\Tokens\Component as Tokens;
 
+use function KnowX\KnowX\knowx;
 use function add_action;
 use function add_filter;
 use function add_meta_box;
 use function add_post_type_support;
+use function get_post_type;
+use function get_theme_file_path;
+use function get_theme_file_uri;
 use function register_block_pattern_category;
 use function register_post_meta;
 use function register_term_meta;
@@ -57,6 +61,7 @@ class Component implements Component_Interface {
 		add_action( 'edited_category', array( $this, 'save_term_fields' ) );
 
 		add_action( 'add_meta_boxes_post', array( $this, 'add_version_box' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_order_panel' ) );
 		add_action( 'save_post_post', array( $this, 'save_version' ) );
 		add_action( 'pre_get_posts', array( $this, 'order_category_archives' ) );
 	}
@@ -109,6 +114,34 @@ class Component implements Component_Interface {
 	public function action_register_meta() {
 		// Adds the Order field to the editor so owners can sort articles inside a section.
 		add_post_type_support( 'post', 'page-attributes' );
+
+		// Core's posts endpoint has a fixed field list without menu_order, so the editor and REST clients cannot read or save the order.
+		register_rest_field(
+			'post',
+			'menu_order',
+			array(
+				'get_callback'    => static function ( $post ) {
+					return (int) get_post_field( 'menu_order', $post['id'] );
+				},
+				'update_callback' => static function ( $value, $post ) {
+					if ( ! current_user_can( 'edit_post', $post->ID ) ) {
+						return new \WP_Error( 'rest_cannot_edit', __( 'Sorry, you are not allowed to edit this post.', 'knowx' ), array( 'status' => rest_authorization_required_code() ) );
+					}
+					wp_update_post(
+						array(
+							'ID'         => $post->ID,
+							'menu_order' => (int) $value,
+						)
+					);
+					return true;
+				},
+				'schema'          => array(
+					'description' => __( 'The order of the article inside its section.', 'knowx' ),
+					'type'        => 'integer',
+					'context'     => array( 'view', 'edit' ),
+				),
+			)
+		);
 
 		register_post_meta(
 			'post',
@@ -379,6 +412,19 @@ class Component implements Component_Interface {
 			update_term_meta( $term_id, 'knowx_start', esc_url_raw( wp_unslash( $_POST['knowx_start'] ) ) );
 		}
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
+	}
+
+	/**
+	 * Adds the Order field to the block editor sidebar for articles.
+	 */
+	public function enqueue_order_panel() {
+		if ( 'post' !== get_post_type() ) {
+			return;
+		}
+
+		$file = get_theme_file_path( '/assets/js/editor-order.min.js' );
+		wp_enqueue_script( 'knowx-editor-order', get_theme_file_uri( '/assets/js/editor-order.min.js' ), array( 'wp-plugins', 'wp-editor', 'wp-components', 'wp-data', 'wp-element', 'wp-i18n' ), knowx()->get_asset_version( $file ), true );
+		wp_set_script_translations( 'knowx-editor-order', 'knowx' );
 	}
 
 	/**

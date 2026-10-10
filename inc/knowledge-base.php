@@ -257,12 +257,12 @@ function knowx_kb_sections() {
 			$sections = knowx_kb_map_terms(
 				get_terms(
 					array(
-						'taxonomy'   => 'category',
-						'hide_empty' => true,
-						'exclude'    => $exclude,
-						'orderby'    => 'name',
-						'order'      => 'ASC',
-						'number'     => knowx_kb_max_categories(),
+						'taxonomy'     => 'category',
+						'hide_empty'   => true,
+						'exclude_tree' => $exclude,
+						'orderby'      => 'name',
+						'order'        => 'ASC',
+						'number'       => knowx_kb_max_categories(),
 					)
 				)
 			);

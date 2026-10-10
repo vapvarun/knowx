@@ -11,6 +11,13 @@ Decisions in force: no Kirki, hybrid = classic theme + block features, existing 
 - Each group lists the checklist section it feeds (`RELEASE_CHECKLIST.md` letters) and audit references (A/B/C + section).
 - Status values: `todo`, `doing`, `done`, `blocked`.
 
+## Execution order and rules for the autonomous run (user, 2026-10-10)
+The user authorised working through the whole sequence without stopping, pushing fixes to `origin/1.7.5` as each group lands, and a full double check at the end. Still not allowed without a new instruction: merging to `master`, tagging, releasing to the vapvarun mirror, archiving `knowx-core`.
+
+Order (reordered so no effort is spent linting code that is about to be deleted): W00 done, **W02, W01, W03, W05, W04, W06, W07, W08, W09, W10, W11, W12, W13, W14, W15, W16, W17, W18**.
+
+Per group: implement, run the gates, check in the browser (headless screenshots via `scratchpad/shots.sh` compared with `compare -metric AE`, plus interactive checks in Chrome), commit with the group id, push, comment proof on the Basecamp card and move it to Ready for Testing. Local test site: `http://knowx.local` (WP-CLI wrapper in the session scratchpad, theme active, 37 seeded posts in 3 products, `WP_DEBUG_LOG` on). Baseline screenshots: `~/Local Sites/knowx/app/qa-artifacts/baseline-w00/`.
+
 ## Status board
 
 | Id | Group | Status | Basecamp card |

@@ -8,11 +8,20 @@ Open the inserter, choose **Patterns** and pick the **KnowX Docs** category.
 |---|---|
 | Frequently asked questions | A heading and three core Details blocks. |
 | Getting started steps | A lead-in sentence, a "Steps" heading and a numbered list. |
-| Note callout | A highlighted note with a left border. |
+| Note, Tip, Warning and Danger callouts | A highlighted block with a coloured left border. The same four looks are in the block editor under **Styles** on a Group block. |
+| Prerequisites | "Before you begin" with a list. |
+| Troubleshooting | A problem with its cause and fix. |
+| API endpoint | Method and URL, a parameters table and an example request. |
+| Compatibility table | Versions against the platform they need, with a status. |
+| Next steps | A list of the articles to read next. |
+| Still need help | A note with Contact support and Suggest an edit buttons. Point the buttons at your own pages. |
+| Recently updated | The five articles changed last, as a Query Loop ordered by modified date. The modified date shows once an article has been edited after it was published. |
+| Popular tags | A tag cloud under "Browse by topic". |
+| Docs home | A hero with search, two product columns and the latest articles, built from blocks, for a home page that does not use the Docs Home template. |
 | Changelog entry | A release heading with New, Improve and Fix items. |
 | Contact support | A closing block with a heading, a sentence and a button. |
 
-Patterns use the theme's colours, so they follow your colour scheme and dark mode.
+Patterns use the theme's colours, so they follow your theme colour and dark mode.
 
 ## Add your own
 

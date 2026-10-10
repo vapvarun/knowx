@@ -288,6 +288,46 @@
 }
 
 /*--------------------------------------------------------------
+# Callouts (Group block styles: note, tip, warning, danger)
+--------------------------------------------------------------*/
+
+.wp-block-group[class*="is-style-knowx-"] {
+	--callout: var(--color-theme-blue);
+
+	margin-block: 1.5em;
+	padding: 0.75rem 1rem;
+	border-inline-start: 4px solid var(--callout);
+	border-radius: 0 var(--global-border-radius) var(--global-border-radius) 0;
+	background: color-mix(in srgb, var(--callout) 12%, var(--color-surface));
+}
+
+.wp-block-group.is-style-knowx-tip {
+	--callout: var(--color-theme-green);
+}
+
+.wp-block-group.is-style-knowx-warning {
+	--callout: var(--color-theme-yellow);
+}
+
+.wp-block-group.is-style-knowx-danger {
+	--callout: var(--color-theme-red);
+}
+
+.wp-block-group[class*="is-style-knowx-"] > :first-child {
+	margin-block-start: 0;
+}
+
+.wp-block-group[class*="is-style-knowx-"] > :last-child {
+	margin-block-end: 0;
+}
+
+.knowx-pattern-hero {
+	padding-block: 3rem;
+	text-align: center;
+	background: color-mix(in srgb, var(--color-theme-primary) 10%, var(--color-surface));
+}
+
+/*--------------------------------------------------------------
 # Latest Posts / Comments Blocks
 --------------------------------------------------------------*/
 
@@ -622,10 +662,39 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 }
 
 .wp-block-details summary {
-	padding: 1em 1.25em 1em 2em;
+	padding-block: 1em;
+	padding-inline: 1.25em 2.75em;
 	font-weight: 600;
 	cursor: pointer;
-	list-style-position: outside;
+	list-style: none;
+	position: relative;
+}
+
+.wp-block-details summary::-webkit-details-marker {
+	display: none;
+}
+
+.wp-block-details summary::after {
+	content: "";
+	position: absolute;
+	inset-inline-end: 1.25em;
+	inset-block-start: 50%;
+	width: 0.5em;
+	height: 0.5em;
+	border-inline-end: 2px solid currentcolor;
+	border-block-end: 2px solid currentcolor;
+	transform: translateY(-70%) rotate(45deg);
+	transition: transform 0.15s;
+}
+
+.wp-block-details[open] summary::after {
+	transform: translateY(-30%) rotate(-135deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.wp-block-details summary::after {
+		transition: none;
+	}
 }
 
 .wp-block-details summary:hover {
@@ -1669,4 +1738,32 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 	.wp-block-text-columns {
 		flex-direction: column;
 	}
+}
+
+/* Code blocks get a copy button from docs.js. */
+.knowx-code {
+	position: relative;
+}
+
+.knowx-copy {
+	position: absolute;
+	inset-block-start: 0.5rem;
+	inset-inline-end: 0.5rem;
+	min-height: 32px;
+	padding: 0 0.6rem;
+	border: 1px solid rgb(255 255 255 / 30%);
+	border-radius: var(--global-border-radius);
+	background: rgb(255 255 255 / 10%);
+	color: #fff;
+	font-size: 0.8125rem;
+	cursor: pointer;
+}
+
+.knowx-copy:hover {
+	background: rgb(255 255 255 / 20%);
+}
+
+.knowx-copy:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: 2px;
 }

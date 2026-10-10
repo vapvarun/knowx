@@ -8,25 +8,6 @@
 	const data = window.knowxData || {};
 
 	/**
-	 * Hides the page loader when the page has loaded, and never leaves it covering the page.
-	 */
-	function initLoader() {
-		const loader = document.querySelector('.site-loader');
-		if (!loader) {
-			return;
-		}
-
-		const hide = () => loader.classList.add('loaded');
-
-		if (document.readyState === 'complete') {
-			hide();
-		} else {
-			window.addEventListener('load', hide);
-		}
-		window.setTimeout(hide, 4000);
-	}
-
-	/**
 	 * Copies each column heading onto its cells so tables can stack on small screens.
 	 */
 	function initTables() {
@@ -93,7 +74,6 @@
 		update();
 	}
 
-	initLoader();
 	initTables();
 	initScrollTop();
 })();

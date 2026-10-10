@@ -23,7 +23,6 @@ namespace KnowX\KnowX;
 </head>
 
 <body <?php body_class(); ?>>
-<?php knowx_site_loader(); ?>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="<?php echo esc_url( '#primary' ); ?>"><?php esc_html_e( 'Skip to content', 'knowx' ); ?></a>

@@ -18,8 +18,8 @@ defined( 'ABSPATH' ) || exit;
 			'section'  => 'site_title_typography_section',
 			'default'  => array(
 				'font-family'    => 'Open Sans',
-				'variant'        => '600',
-				'font-size'      => '38px',
+				'variant'        => '700',
+				'font-size'      => '26px',
 				'line-height'    => '1.2',
 				'letter-spacing' => '0',
 				'text-transform' => 'none',
@@ -69,8 +69,8 @@ defined( 'ABSPATH' ) || exit;
 			'section'  => 'headings_typography_section',
 			'default'  => array(
 				'font-family'    => 'Open Sans',
-				'variant'        => '500',
-				'line-height'    => '1.4',
+				'variant'        => '700',
+				'line-height'    => '1.25',
 				'letter-spacing' => '0',
 				'text-transform' => 'none',
 				'text-align'     => '',
@@ -96,7 +96,7 @@ defined( 'ABSPATH' ) || exit;
 			'default'  => array(
 				'font-family'    => 'Open Sans',
 				'variant'        => '500',
-				'font-size'      => '14px',
+				'font-size'      => '15px',
 				'line-height'    => '1.6',
 				'letter-spacing' => '0.02em',
 				'text-transform' => 'none',
@@ -127,8 +127,8 @@ defined( 'ABSPATH' ) || exit;
 			'default'  => array(
 				'font-family'    => 'Open Sans',
 				'variant'        => 'regular',
-				'font-size'      => '14px',
-				'line-height'    => '1.6',
+				'font-size'      => '16px',
+				'line-height'    => '1.7',
 				'letter-spacing' => '0',
 				'text-transform' => 'none',
 				'text-align'     => 'left',

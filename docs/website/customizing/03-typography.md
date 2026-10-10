@@ -17,7 +17,7 @@ Each group sets the font family, size, weight, line height, letter spacing, text
 
 KnowX ships one font, **Open Sans**, served from your own site, so visitors' browsers make no request to Google. The font list shows the fonts the theme declares in `theme.json` and any font you add through the WordPress **Font Library** in the Site Editor.
 
-If you leave the family empty, the theme uses Open Sans with the system fonts as a fallback.
+The defaults are tuned for reading documentation: body text 16px with a 1.7 line height, bold headings, a 26px site title and a 15px menu. If you leave the family empty, the theme uses Open Sans with the system fonts as a fallback.
 
 ## Colours
 

@@ -120,6 +120,22 @@ class Component implements Component_Interface {
 	 */
 	public function knowx_theme_block_styles() {
 		if ( function_exists( 'register_block_style' ) ) {
+			$callouts = array(
+				'knowx-note'    => __( 'Note', 'knowx' ),
+				'knowx-tip'     => __( 'Tip', 'knowx' ),
+				'knowx-warning' => __( 'Warning', 'knowx' ),
+				'knowx-danger'  => __( 'Danger', 'knowx' ),
+			);
+			foreach ( $callouts as $name => $label ) {
+				register_block_style(
+					'core/group',
+					array(
+						'name'  => $name,
+						'label' => $label,
+					)
+				);
+			}
+
 			register_block_style(
 				'core/image',
 				array(

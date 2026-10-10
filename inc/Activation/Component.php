@@ -49,10 +49,44 @@ class Component implements Component_Interface {
 					update_option( 'page_on_front', $page_id );
 				}
 
+				$this->create_primary_menu( (int) $page_id );
+
 				// Mark theme as activated.
 				update_option( 'knowx_theme_activated', true );
 			}
 		}
+	}
+
+	/**
+	 * Gives a new site a main menu with the docs home page, unless a menu is already assigned.
+	 *
+	 * @param int $page_id Docs home page id.
+	 */
+	private function create_primary_menu( int $page_id ) {
+		$locations = get_theme_mod( 'nav_menu_locations', array() );
+		if ( ! empty( $locations['primary'] ) ) {
+			return;
+		}
+
+		$menu_id = wp_create_nav_menu( __( 'Main menu', 'knowx' ) );
+		if ( is_wp_error( $menu_id ) ) {
+			return;
+		}
+
+		wp_update_nav_menu_item(
+			$menu_id,
+			0,
+			array(
+				'menu-item-title'     => __( 'Docs', 'knowx' ),
+				'menu-item-object'    => 'page',
+				'menu-item-object-id' => $page_id,
+				'menu-item-type'      => 'post_type',
+				'menu-item-status'    => 'publish',
+			)
+		);
+
+		$locations['primary'] = $menu_id;
+		set_theme_mod( 'nav_menu_locations', $locations );
 	}
 
 	/**

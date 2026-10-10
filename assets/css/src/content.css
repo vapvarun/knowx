@@ -42,7 +42,7 @@
 .post-thumbnail {
     margin-bottom: 15px;
     display: block;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
 }
 
 .blog .entry-title,
@@ -211,22 +211,6 @@ h2.entry-title a:hover {
     mask: url(../images/icon-marker.svg) no-repeat center / contain;
 }
 
-/* Post box layout */
-.post-box-layout .knowx-post-content-wrapper {
-    position: relative;
-    background: var(--color-surface);
-    padding: 1em;
-    border-radius: 4px;
-}
-
-.post-box-layout.entry-layout .knowx-post-content-wrapper .entry-content {
-    border-bottom: 0 !important;
-}
-
-.post-box-layout .post-thumbnail img {
-    border-radius: 4px;
-}
-
 /* Hides the update date and time. */
 
 .updated:not(.published) {
@@ -389,26 +373,6 @@ article .entry-header {
     width: 100%;
 }
 
-.post-layout.grid-layout .entry-layout,
-.post-layout.masonry-layout .entry-layout {
-    margin: 15px 0;
-}
-
-.grid-layout .entry-layout,
-.masonry-layout .entry-layout {
-    margin-bottom: 0;
-}
-
-/* Grid and masonry post lists: layout comes from CSS, no script. */
-.post-layout.grid-layout {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.post-layout.masonry-layout {
-    column-width: 18rem;
-    column-gap: 30px;
-}
 
 .post-layout.masonry-layout .entry-layout {
     float: none;
@@ -552,7 +516,7 @@ were hidden (via .neverending) before. */
 .site {
     margin: 0 auto;
     max-width: 100%;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .blog .site-wrapper,

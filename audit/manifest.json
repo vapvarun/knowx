@@ -83,6 +83,7 @@
       "page-knowledgebase-one.php",
       "page-knowledgebase-two.php",
       "page.php",
+      "search.php",
       "single.php",
       "template-parts/docs/single.php"
     ],
@@ -97,10 +98,12 @@
       "page-knowledgebase-one.php",
       "page-knowledgebase-two.php",
       "page.php",
+      "search.php",
       "single.php",
       "template-parts/docs/single.php"
     ],
     "knowx_sub_header": [
+      "404.php",
       "archive.php",
       "category.php",
       "full-width-container.php",
@@ -109,6 +112,7 @@
       "page-faq.php",
       "page-knowledgebase-two.php",
       "page.php",
+      "search.php",
       "single.php",
       "template-parts/docs/single.php"
     ]
@@ -125,6 +129,12 @@
       ],
       "knowx_icon": [
         "inc/Docs/Component.php"
+      ],
+      "knowx_order": [
+        "inc/Docs/Component.php"
+      ],
+      "knowx_start": [
+        "inc/Docs/Component.php"
       ]
     }
   },
@@ -133,6 +143,8 @@
     "registered_meta_in_rest": [
       "knowx_accent",
       "knowx_icon",
+      "knowx_order",
+      "knowx_start",
       "knowx_version"
     ]
   },
@@ -145,13 +157,41 @@
     "page-knowledgebase-two.php": "Docs Index"
   },
   "patterns": {
+    "patterns/api-endpoint.php": {
+      "title": "API endpoint",
+      "slug": "knowx/api-endpoint"
+    },
+    "patterns/article-feedback.php": {
+      "title": "Still need help",
+      "slug": "knowx/article-feedback"
+    },
+    "patterns/callout-danger.php": {
+      "title": "Danger callout",
+      "slug": "knowx/callout-danger"
+    },
     "patterns/callout-note.php": {
       "title": "Note callout",
       "slug": "knowx/callout-note"
     },
+    "patterns/callout-tip.php": {
+      "title": "Tip callout",
+      "slug": "knowx/callout-tip"
+    },
+    "patterns/callout-warning.php": {
+      "title": "Warning callout",
+      "slug": "knowx/callout-warning"
+    },
     "patterns/changelog-entry.php": {
       "title": "Changelog entry",
       "slug": "knowx/changelog-entry"
+    },
+    "patterns/compatibility-table.php": {
+      "title": "Compatibility table",
+      "slug": "knowx/compatibility-table"
+    },
+    "patterns/docs-home.php": {
+      "title": "Docs home",
+      "slug": "knowx/docs-home"
     },
     "patterns/faq.php": {
       "title": "Frequently asked questions",
@@ -161,9 +201,29 @@
       "title": "Getting started steps",
       "slug": "knowx/getting-started-steps"
     },
+    "patterns/next-steps.php": {
+      "title": "Next steps",
+      "slug": "knowx/next-steps"
+    },
+    "patterns/popular-tags.php": {
+      "title": "Popular tags",
+      "slug": "knowx/popular-tags"
+    },
+    "patterns/prerequisites.php": {
+      "title": "Prerequisites",
+      "slug": "knowx/prerequisites"
+    },
+    "patterns/recently-updated.php": {
+      "title": "Recently updated",
+      "slug": "knowx/recently-updated"
+    },
     "patterns/support-cta.php": {
       "title": "Contact support",
       "slug": "knowx/support-cta"
+    },
+    "patterns/troubleshooting.php": {
+      "title": "Troubleshooting",
+      "slug": "knowx/troubleshooting"
     }
   },
   "pattern_categories": {
@@ -174,14 +234,7 @@
       "inc/Docs/Component.php"
     ]
   },
-  "style_variations": [
-    "cool",
-    "minimal",
-    "monochrome",
-    "pastel",
-    "vibrant",
-    "warm"
-  ],
+  "style_variations": [],
   "asset_handles": {
     "styles": [
       "knowx-global",
@@ -190,8 +243,7 @@
       "knowx-docs",
       "knowx-sidebar",
       "knowx-widgets",
-      "knowx-front-page",
-      "knowx-site-loader"
+      "knowx-front-page"
     ],
     "scripts": [
       "knowx-theme",
@@ -200,7 +252,6 @@
   },
   "customizer_settings": [
     "background_setting",
-    "blog_layout_option",
     "custom-knowledge-divider-four",
     "custom-knowledge-divider-one",
     "custom-knowledge-divider-three",
@@ -210,21 +261,22 @@
     "hero_section_background_setting",
     "hero_section_content",
     "hero_section_heading",
-    "knowx_cat_description",
+    "knowx_corners",
     "knowx_exclude",
+    "knowx_home_layout",
     "knowx_order",
-    "knowx_page_title",
     "knowx_posts",
     "knowx_scroll_top",
-    "knowx_view_all",
+    "knowx_section_sort",
+    "knowx_show_recent",
+    "knowx_show_support",
+    "knowx_show_toc",
+    "knowx_show_updated",
     "menu_typography_option",
-    "post_box_view_layout",
-    "post_per_row",
     "sidebar_option",
     "site_breadcrumbs",
     "site_color_mode",
     "site_color_mode_toggle_show",
-    "site_color_scheme",
     "site_container_width",
     "site_copyright_background_color",
     "site_copyright_content_color",
@@ -232,16 +284,12 @@
     "site_footer_content_color",
     "site_header_bg_color",
     "site_layout",
-    "site_loader",
     "site_primary_color",
-    "site_search",
     "site_sticky_header",
-    "site_sub_header",
     "site_tagline_typography_option",
     "site_title_typography_option",
     "sticky_sidebar_option",
     "sub_header_background_setting",
-    "support_section_background_setting",
     "support_section_button_link_url",
     "support_section_button_text",
     "support_section_content",
@@ -255,6 +303,7 @@
     "knowx_block_text",
     "knowx_current_product",
     "knowx_current_product_id",
+    "knowx_default_product_looks",
     "knowx_faq_from_blocks",
     "knowx_icon_svg",
     "knowx_kb_bump_version",
@@ -276,6 +325,7 @@
     "knowx_render_toc",
     "knowx_render_tree",
     "knowx_schema_graph",
+    "knowx_term_updated",
     "knowx_toc_items",
     "knowx_tree_flat",
     "knowx_tree_max_posts",

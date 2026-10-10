@@ -2,21 +2,19 @@
 
 **Included in Free**
 
-## Site Header
+## Header
 
 - **Sticky header**: keep the header at the top while scrolling. On by default.
-- **Background colour**: the header colour. Leave empty to follow the colour scheme and dark mode.
+- **Background colour**: the header colour. Leave empty to follow the theme and dark mode.
 
 The header holds the logo or site title, the primary menu, the search button, the **Products** menu and the dark mode toggle.
 
-## Site Sub Header
+## Breadcrumb Bar
 
 The bar under the header, shown on every page except the front page.
 
-- **Site sub header**: show or hide the whole bar. On by default.
+- **Show breadcrumbs**: show or hide the bar with the trail Home, product, section, article. On by default.
 - **Background**: colour or image for the bar.
-- **Site breadcrumbs**: show the trail Home, product, section, article. On by default.
-- **Site search**: show a search box in the bar. On by default.
 
 ## Menus
 

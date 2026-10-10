@@ -86,7 +86,7 @@ function knowx_kb_map_terms( $terms ) {
  * Maps posts to the fields the templates print.
  *
  * @param WP_Post[] $posts Posts.
- * @return array[] Items with id, title and url.
+ * @return array[] Items with id, title, url, and the last modified date (display and ISO).
  */
 function knowx_kb_map_posts( $posts ) {
 	$items = array();
@@ -95,6 +95,8 @@ function knowx_kb_map_posts( $posts ) {
 			'id'    => (int) $post_item->ID,
 			'title' => get_the_title( $post_item ),
 			'url'   => get_permalink( $post_item ),
+			'date'  => get_the_modified_date( '', $post_item ),
+			'iso'   => get_the_modified_date( 'c', $post_item ),
 		);
 	}
 
@@ -144,18 +146,29 @@ function knowx_kb_top_categories() {
 }
 
 /**
- * Newest posts outside the excluded categories.
+ * Recently updated posts outside the excluded categories.
  *
  * @param int $limit Number of posts.
  * @return array[] Post items.
  */
 function knowx_kb_recent_posts( $limit = 5 ) {
 	$exclude = knowx_kb_excluded_ids();
+	$orderby = 'modified';
 
 	return knowx_kb_cached(
-		'recent-' . (int) $limit . '-' . implode( ',', $exclude ),
-		static function () use ( $exclude, $limit ) {
-			return knowx_kb_map_posts( get_posts( knowx_kb_post_query( $exclude, array( 'numberposts' => (int) $limit ) ) ) );
+		'recent-' . $orderby . '-' . (int) $limit . '-' . implode( ',', $exclude ),
+		static function () use ( $exclude, $limit, $orderby ) {
+			return knowx_kb_map_posts(
+				get_posts(
+					knowx_kb_post_query(
+						$exclude,
+						array(
+							'numberposts' => (int) $limit,
+							'orderby'     => $orderby,
+						)
+					)
+				)
+			);
 		}
 	);
 }

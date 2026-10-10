@@ -28,7 +28,7 @@ Fill in **Docs > Applies to version** in the editor sidebar.
 
 ## Does it support dark mode?
 
-Yes. Set the default under **Site Skin** and let visitors switch with the header toggle.
+Yes. Set the default under **Dark Mode** and let visitors switch with the header toggle.
 
 ## Does it work with page builders?
 

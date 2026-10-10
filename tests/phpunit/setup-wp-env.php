@@ -308,7 +308,10 @@ define( 'NONCE_SALT',       'put your unique phrase here' );
 	}
 
 	private function download_and_extract( $url, $extract_to, $expected_folder = null ) {
-		$temp_file = tempnam( sys_get_temp_dir(), 'wp_download' );
+		// PharData needs a recognised extension on the archive name.
+		$base      = tempnam( sys_get_temp_dir(), 'wp_download' );
+		$temp_file = $base . '.tar.gz';
+		rename( $base, $temp_file );
 
 		if ( $this->download_file( $url, $temp_file ) ) {
 			$this->extract_tar_gz( $temp_file, $extract_to, $expected_folder );

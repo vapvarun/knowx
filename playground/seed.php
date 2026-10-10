@@ -211,7 +211,45 @@ update_option( 'page_on_front', $home );
 update_option( 'blogname', 'Orbit Docs' );
 update_option( 'blogdescription', 'Help for Orbit Helpdesk and the Orbit API' );
 
+// Tags and two comments, so the tag archive and the comment list have something to show.
+$tagged = array(
+	'Get an API key'        => array( 'authentication', 'api' ),
+	'Make your first request' => array( 'api' ),
+	'Create your account'   => array( 'authentication' ),
+);
+foreach ( $tagged as $title => $tags ) {
+	$found = get_posts(
+		array(
+			'title'          => $title,
+			'post_type'      => 'post',
+			'posts_per_page' => 1,
+			'no_found_rows'  => true,
+		)
+	);
+	if ( $found ) {
+		wp_set_post_tags( $found[0]->ID, $tags );
+		if ( 'Get an API key' === $title && ! get_comments( array( 'post_id' => $found[0]->ID, 'count' => true ) ) ) {
+			foreach ( array(
+				array( 'Maya', 'Does the key work for the sandbox too?' ),
+				array( 'Orbit Support', 'Yes. Create a separate key under Settings > API > Sandbox.' ),
+			) as $comment ) {
+				wp_insert_comment(
+					array(
+						'comment_post_ID'      => $found[0]->ID,
+						'comment_author'       => $comment[0],
+						'comment_author_email' => 'sample@example.com',
+						'comment_content'      => $comment[1],
+						'comment_approved'     => 1,
+					)
+				);
+			}
+		}
+	}
+}
+
 // Menu.
+// Replace the menu the theme made on activation so the sample menu has the sample pages.
+wp_delete_nav_menu( 'Main menu' );
 $menu_id = wp_create_nav_menu( 'Main menu' );
 foreach ( array(
 	$home        => 'Docs',

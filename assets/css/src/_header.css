@@ -96,3 +96,14 @@
     word-wrap: break-word;
     color: var(--color-muted);
 }
+/* Logo and menu on the left, search, products and mode toggle on the right. */
+.site-header .main-navigation {
+    margin-inline: 1.5rem auto;
+}
+
+@media (width <= 767px) {
+    .site-header .main-navigation {
+        margin-inline-start: auto;
+        margin-inline-end: 0;
+    }
+}

@@ -326,50 +326,98 @@ button.media-menu-item {
 # Knowledge Base Layout One
 --------------------------------------------------------------*/
 
+
+
+
+
+
+
+/* Docs home hero: a light tint of the theme colour, compact, with the search box and popular links. */
 .knowx-section-hero {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 4vw, 3rem);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--color-theme-primary) 14%, var(--color-surface)), var(--color-surface));
+    border-block-end: 1px solid var(--global-border-color);
+    text-align: center;
+}
+
+.knowx-section-hero--image {
     background-color: var(--color-theme-primary);
     background-blend-mode: color-burn;
     background-position: 50% 0;
     background-size: cover;
     background-repeat: no-repeat;
-    text-align: center;
+    border-block-end: 0;
 }
 
 .knowx-section-hero h1.entry-title {
-    color: var(--color-on-primary);
-    font-size: 2.133rem;
-    line-height: 1.1;
-    margin-top: 40px;
+    margin: 0;
+    color: var(--color-heading);
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    line-height: 1.15;
 }
 
 .knowx-section-hero .entry-summary {
-    color: var(--color-on-primary);
-    font-size: 1rem;
+    max-width: 40rem;
+    margin: 1rem auto 0;
+    color: var(--color-muted);
+    font-size: 1.125rem;
     line-height: 1.5;
-    font-weight: 100;
-    max-width: 85%;
-    margin: 20px;
-    margin-inline-start: auto;
-    margin-inline-end: auto;
+}
+
+.knowx-section-hero--image h1.entry-title,
+.knowx-section-hero--image .entry-summary {
+    color: var(--color-on-primary);
 }
 
 .knowx-hero-section-search {
-    margin-top: 40px;
-    margin-bottom: 70px;
     position: relative;
+    max-width: 36rem;
+    margin: 1.75rem auto 0;
 }
 
 .knowx-hero-section-search form.searchform {
-    max-width: 500px;
-    margin: auto;
     position: relative;
+    max-width: none;
+    margin: 0;
 }
 
 .knowx-hero-section-search input.text_input {
     width: 100%;
-    height: 55px;
-    padding: 0 40px 0 15px;
+    height: 56px;
+    padding: 0 3.5rem 0 1.25rem;
+    border: 1px solid var(--global-border-color);
     border-radius: 100px;
+    background: var(--color-surface);
+    box-shadow: 0 6px 24px rgb(0 0 0 / 8%);
+}
+
+.knowx-hero-popular {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    margin: 1.25rem 0 0;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+}
+
+.knowx-hero--image .knowx-hero-popular,
+.knowx-section-hero--image .knowx-hero-popular {
+    color: var(--color-on-primary);
+}
+
+.knowx-hero-popular a {
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--global-border-color);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-heading);
+}
+
+.knowx-hero-popular a:hover {
+    border-color: var(--color-theme-primary);
+    color: var(--color-link);
 }
 
 .knowx-hero-section-search input[type="submit"],
@@ -393,21 +441,6 @@ button.media-menu-item {
     outline: thin dotted var(--color-heading);
 }
 
-@media (min-width: 960px) {
-    .knowx-section-hero h1.entry-title {
-        font-size: 3.75rem;
-        margin-top: 140px;
-    }
-
-    .knowx-section-hero .entry-summary {
-        font-size: 1.3rem;
-    }
-
-    .knowx-hero-section-search {
-        margin-top: 40px;
-        margin-bottom: 140px;
-    }
-}
 
 .knowx-knowledgebase-one {
     margin: 0;
@@ -427,7 +460,7 @@ button.media-menu-item {
     padding: 25px;
     text-align: center;
     border: 1px solid var(--color-theme-primary);
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
 }
 
 .knowx-knowledgebase-one ul.cat-list li.cat-name a:hover {
@@ -632,5 +665,5 @@ button.media-menu-item {
     background-color: var(--color-surface);
     margin: 1rem 0;
     padding: 25px;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
 }

@@ -7,22 +7,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-	/**
-	 *  Site Sub Header
-	 */
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'switch',
-		array(
-			'settings' => 'site_sub_header',
-			'label'    => esc_html__( 'Site Sub Header?', 'knowx' ),
-			'section'  => 'site_sub_header_section',
-			'default'  => 1,
-			'choices'  => array(
-				'on'  => esc_html__( 'Yes', 'knowx' ),
-				'off' => esc_html__( 'No', 'knowx' ),
-			),
-		)
-	);
+
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'background',
@@ -51,7 +36,7 @@ defined( 'ABSPATH' ) || exit;
 		'switch',
 		array(
 			'settings'        => 'site_breadcrumbs',
-			'label'           => esc_html__( 'Site Breadcrumbs?', 'knowx' ),
+			'label'           => esc_html__( 'Show breadcrumbs', 'knowx' ),
 			'section'         => 'site_sub_header_section',
 			'default'         => 1,
 			'choices'         => array(
@@ -68,23 +53,4 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'switch',
-		array(
-			'settings'        => 'site_search',
-			'label'           => esc_html__( 'Site Search?', 'knowx' ),
-			'section'         => 'site_sub_header_section',
-			'default'         => 1,
-			'choices'         => array(
-				'on'  => esc_html__( 'Yes', 'knowx' ),
-				'off' => esc_html__( 'No', 'knowx' ),
-			),
-			'active_callback' => array(
-				array(
-					'setting'  => 'site_sub_header',
-					'operator' => '==',
-					'value'    => true,
-				),
-			),
-		)
-	);
+	

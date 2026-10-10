@@ -12,10 +12,10 @@ KnowX organises documentation with the categories and posts WordPress already ha
 ## Add a product
 
 1. Go to **Posts > Categories** and add a category with no parent. Write a short description; it is shown on the product card.
-2. Choose an **icon** from the list and, if you want one, tick **Use an accent colour** and pick a colour. Buttons and links on that product's pages use it.
+2. Choose an **icon** from the list and, if you want one, tick **Use an accent colour** and pick a colour. Buttons and links on that product's pages use it. If you choose nothing, a site with two or more products gives each product its own icon and colour from the theme's palette automatically, so the cards look different out of the box. With one product the theme colour is used.
 3. Add child categories for the sections and publish articles in them.
 
-The product appears on the docs home page and in the **Products** menu in the header. The menu is hidden when the site has a single product.
+WordPress' stock "Uncategorized" category is never shown as a product. The product appears on the docs home page and in the **Products** menu in the header. The menu is hidden when the site has a single product.
 
 ## Order of articles
 
@@ -35,3 +35,20 @@ In the editor sidebar, the **Docs** box has an **Applies to version** field. Wha
 ## Large sites
 
 The lists are cached and refresh when you publish, edit or delete a post or change a category. A product tree lists up to 500 articles; the section links always reach the full list. You can change the limits with the `knowx_kb_max_categories` and `knowx_tree_max_posts` filters.
+
+## Search results, tags, dates and authors
+
+Search results and the tag, date and author archives use the same article list as a section page. Search results and these archives print the product and section above each title, so a reader can tell two articles with the same name apart. The blog layout and sidebar settings apply to the posts page only.
+
+## Order, start link and search filter
+
+On **Posts > Categories**, a top-level category has two more fields next to its icon and colour:
+
+| Field | What it does |
+|---|---|
+| Product order | Lowest number first, then by name. Applies to the docs home, the product switcher and the search filter. |
+| Start here link | Where the **Start here** button on the product page goes. Empty opens the first article. |
+
+When there are two or more products, search results show **All products** and one button per product. Choosing a product limits the results to that product and its sections.
+
+**Customize > Docs > Docs Home > Products on the docs home** switches between product cards and each product listed with its sections.

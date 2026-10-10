@@ -12,9 +12,9 @@ KnowX is a classic theme with block features. It is based on WP Rig and uses nam
 | `inc/<Name>/Component.php` | One class per concern, namespace `KnowX\KnowX\<Name>` |
 | `inc/docs.php`, `inc/knowledge-base.php`, `inc/breadcrumbs.php`, `inc/helpers.php`, `inc/extra.php` | Helper functions used by templates (`knowx_*`) |
 | `inc/Customizer_Framework`, `inc/Customizer_Settings` | The built-in Customizer API and the settings |
-| `inc/Tokens`, `inc/Color_Mode` | Colour variables, schemes and dark mode |
+| `inc/Tokens`, `inc/Color_Mode` | Colour variables and dark mode |
 | `template-parts/docs`, `template-parts/header` | Docs layout parts and header parts |
-| `patterns`, `styles` | Block patterns and colour-scheme style variations |
+| `patterns` | Block patterns |
 | `assets/css/src`, `assets/js/src` | Source files; built files end in `.min.css` and `.min.js` |
 
 ## Settings

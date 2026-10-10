@@ -19,7 +19,7 @@ Legend: `[x]` verified on 2026-10-10 with the evidence beside it, `[ ]` open (wi
 - [x] `npm test` runs the PHPUnit unit suite (33 tests, 67 assertions). Jest, `jest.config.cjs` and the unused Playwright config were removed because there are no JS unit tests
 - [x] `vendor/bin/phpstan analyze`: no errors, no baseline
 - [x] `vendor/bin/phpcs --standard=phpcs.xml.dist`: 0 errors, 27 warnings in legacy templates and test helpers
-- [ ] PHPUnit integration suite: not run, it needs a MySQL test database that this machine's wrapper cannot create
+- [x] PHPUnit integration suite: 12 tests pass in Docker on WordPress 7.1.3 (`tests/docker/run-integration.sh`)
 - [ ] Git pre-commit hook: `simple-git-hooks` installs it, but the global `core.hooksPath` on this machine bypasses it; run the gates by hand
 - [x] `knowx-core` is superseded: its `v3.1` branch has two commits (WP Rig 3.1 structure, "Manage block style UI") and 1.7.5 contains `_blocks-style.css` and the rebuilt toolchain. Archive after the release
 - [x] `CLAUDE.md`, `audit/manifest.json` (generated), `docs/qa/ROLE_MATRIX.md`, `docs/qa/JOURNEYS.md` exist

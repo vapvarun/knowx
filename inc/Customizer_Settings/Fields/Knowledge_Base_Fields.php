@@ -98,22 +98,7 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'background',
-		array(
-			'settings'    => 'support_section_background_setting',
-			'label'       => esc_html__( 'Support Section Background Control', 'knowx' ),
-			'description' => esc_html__( 'Set support section background color and image.', 'knowx' ),
-			'section'     => 'site_knowledge_section_one',
-			'default'     => array(),
-			'transport'   => 'auto',
-			'output'      => array(
-				array(
-					'element' => '.knowx-support-section',
-				),
-			),
-		)
-	);
+	
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'text',
@@ -162,50 +147,11 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	/**
-	 *  Site Knowledge Base Layout Two
-	 */
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'radio',
-		array(
-			'settings' => 'knowx_page_title',
-			'label'    => esc_html__( 'Show page title', 'knowx' ),
-			'section'  => 'site_knowledge_section_two',
-			'default'  => 'yes',
-			'choices'  => array(
-				'yes' => esc_html__( 'Yes', 'knowx' ),
-				'no'  => esc_html__( 'No', 'knowx' ),
-			),
-		)
-	);
 
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'radio',
-		array(
-			'settings' => 'knowx_view_all',
-			'label'    => esc_html__( 'Show View All link', 'knowx' ),
-			'section'  => 'site_knowledge_section_two',
-			'default'  => 'no',
-			'choices'  => array(
-				'yes' => esc_html__( 'Yes', 'knowx' ),
-				'no'  => esc_html__( 'No', 'knowx' ),
-			),
-		)
-	);
 
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'radio',
-		array(
-			'settings' => 'knowx_cat_description',
-			'label'    => esc_html__( 'Show category description', 'knowx' ),
-			'section'  => 'site_knowledge_section_two',
-			'default'  => 'no',
-			'choices'  => array(
-				'yes' => esc_html__( 'Yes', 'knowx' ),
-				'no'  => esc_html__( 'No', 'knowx' ),
-			),
-		)
-	);
+	
+
+	
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'number',
@@ -228,6 +174,104 @@ defined( 'ABSPATH' ) || exit;
 			'choices'  => array(
 				'date' => esc_html__( 'By date', 'knowx' ),
 				'name' => esc_html__( 'By name', 'knowx' ),
+			),
+		)
+	);
+
+
+
+	/**
+	 *  Articles
+	 */
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_updated',
+			'label'    => esc_html__( 'Show last updated date', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_toc',
+			'label'    => esc_html__( 'Show the contents list (On this page)', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	
+
+	
+
+	
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_recent',
+			'label'    => esc_html__( 'Show the recent articles list', 'knowx' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_support',
+			'label'    => esc_html__( 'Show the support block', 'knowx' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'radio',
+		array(
+			'settings' => 'knowx_home_layout',
+			'label'    => esc_html__( 'Products on the docs home', 'knowx' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => 'cards',
+			'choices'  => array(
+				'cards'    => esc_html__( 'Product cards', 'knowx' ),
+				'sections' => esc_html__( 'Each product with its sections', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'radio',
+		array(
+			'settings' => 'knowx_section_sort',
+			'label'    => esc_html__( 'Order articles in a section', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 'date',
+			'choices'  => array(
+				'date'    => esc_html__( 'Newest first (after the page order)', 'knowx' ),
+				'title'   => esc_html__( 'By title (after the page order)', 'knowx' ),
+				'updated' => esc_html__( 'Last updated first (after the page order)', 'knowx' ),
 			),
 		)
 	);

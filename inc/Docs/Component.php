@@ -52,6 +52,7 @@ class Component implements Component_Interface {
 
 		add_action( 'category_add_form_fields', array( $this, 'render_add_fields' ) );
 		add_action( 'category_edit_form_fields', array( $this, 'render_edit_fields' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_picker_styles' ) );
 		add_action( 'created_category', array( $this, 'save_term_fields' ) );
 		add_action( 'edited_category', array( $this, 'save_term_fields' ) );
 
@@ -138,6 +139,33 @@ class Component implements Component_Interface {
 		);
 		register_term_meta(
 			'category',
+			'knowx_order',
+			array(
+				'type'              => 'integer',
+				'single'            => true,
+				'default'           => 0,
+				'show_in_rest'      => true,
+				'sanitize_callback' => 'absint',
+				'auth_callback'     => static function () {
+					return current_user_can( 'manage_categories' );
+				},
+			)
+		);
+		register_term_meta(
+			'category',
+			'knowx_start',
+			array(
+				'type'              => 'string',
+				'single'            => true,
+				'show_in_rest'      => true,
+				'sanitize_callback' => 'esc_url_raw',
+				'auth_callback'     => static function () {
+					return current_user_can( 'manage_categories' );
+				},
+			)
+		);
+		register_term_meta(
+			'category',
 			'knowx_accent',
 			array(
 				'type'              => 'string',
@@ -185,6 +213,26 @@ class Component implements Component_Interface {
 	}
 
 	/**
+	 * Styles for the icon and colour pickers on the category screens.
+	 */
+	public function enqueue_picker_styles() {
+		$screen = get_current_screen();
+		if ( ! $screen || 'category' !== $screen->taxonomy ) {
+			return;
+		}
+		wp_add_inline_style(
+			'common',
+			'.knowx-picker{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:520px}'
+			. '.knowx-pick{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;margin:0;border:1px solid #c3c4c7;border-radius:6px;background:#fff;cursor:pointer}'
+			. '.knowx-pick-text{padding:0 10px;font-size:13px}'
+			. '.knowx-pick input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}'
+			. '.knowx-pick:has(input:checked){border-color:#2271b1;box-shadow:0 0 0 1px #2271b1;background:#f0f6fc}'
+			. '.knowx-pick:has(input:focus-visible){outline:2px solid #2271b1;outline-offset:2px}'
+			. '.knowx-swatch{display:block;width:22px;height:22px;border-radius:50%}'
+		);
+	}
+
+	/**
 	 * Fields on the Add category form.
 	 */
 	public function render_add_fields() {
@@ -197,7 +245,26 @@ class Component implements Component_Interface {
 		<div class="form-field">
 			<label for="knowx_accent"><?php esc_html_e( 'Product accent colour', 'knowx' ); ?></label>
 			<?php $this->accent_input( '' ); ?>
-			<p><?php esc_html_e( 'Buttons and links on this product use this colour. Leave unchecked to use the theme colour.', 'knowx' ); ?></p>
+			<p><?php esc_html_e( 'Buttons and links on this product use this colour. Automatic picks one from the theme palette when the site has several products.', 'knowx' ); ?></p>
+		</div>
+		<?php
+		$this->add_form_extra_fields();
+	}
+
+	/**
+	 * Order and "Start here" fields for the Add category form.
+	 */
+	private function add_form_extra_fields() {
+		?>
+		<div class="form-field">
+			<label for="knowx_order"><?php esc_html_e( 'Product order', 'knowx' ); ?></label>
+			<input type="number" min="0" name="knowx_order" id="knowx_order" value="0" class="small-text">
+			<p><?php esc_html_e( 'Products are listed from the lowest number to the highest, then by name.', 'knowx' ); ?></p>
+		</div>
+		<div class="form-field">
+			<label for="knowx_start"><?php esc_html_e( 'Start here link', 'knowx' ); ?></label>
+			<input type="url" name="knowx_start" id="knowx_start" value="">
+			<p><?php esc_html_e( 'Where the Start here button on the product page goes. Leave empty to open the first article.', 'knowx' ); ?></p>
 		</div>
 		<?php
 	}
@@ -220,37 +287,80 @@ class Component implements Component_Interface {
 			<th scope="row"><label for="knowx_accent"><?php esc_html_e( 'Product accent colour', 'knowx' ); ?></label></th>
 			<td>
 				<?php $this->accent_input( (string) get_term_meta( $term->term_id, 'knowx_accent', true ) ); ?>
-				<p class="description"><?php esc_html_e( 'Buttons and links on this product use this colour. Leave unchecked to use the theme colour.', 'knowx' ); ?></p>
+				<p class="description"><?php esc_html_e( 'Buttons and links on this product use this colour. Automatic picks one from the theme palette when the site has several products.', 'knowx' ); ?></p>
+			</td>
+		</tr>
+		<tr class="form-field">
+			<th scope="row"><label for="knowx_order"><?php esc_html_e( 'Product order', 'knowx' ); ?></label></th>
+			<td>
+				<input type="number" min="0" name="knowx_order" id="knowx_order" value="<?php echo esc_attr( (string) absint( get_term_meta( $term->term_id, 'knowx_order', true ) ) ); ?>" class="small-text">
+				<p class="description"><?php esc_html_e( 'Products are listed from the lowest number to the highest, then by name.', 'knowx' ); ?></p>
+			</td>
+		</tr>
+		<tr class="form-field">
+			<th scope="row"><label for="knowx_start"><?php esc_html_e( 'Start here link', 'knowx' ); ?></label></th>
+			<td>
+				<input type="url" name="knowx_start" id="knowx_start" value="<?php echo esc_attr( (string) get_term_meta( $term->term_id, 'knowx_start', true ) ); ?>">
+				<p class="description"><?php esc_html_e( 'Where the Start here button on the product page goes. Leave empty to open the first article.', 'knowx' ); ?></p>
 			</td>
 		</tr>
 		<?php
 	}
 
 	/**
-	 * Prints the icon select.
+	 * Prints the icon picker: Automatic plus every icon the theme ships, as a grid.
 	 *
 	 * @param string $current Saved icon slug.
 	 */
 	protected function icon_select( string $current ) {
-		echo '<select name="knowx_icon" id="knowx_icon"><option value="">' . esc_html__( 'Default', 'knowx' ) . '</option>';
+		echo '<div class="knowx-picker" role="radiogroup" aria-label="' . esc_attr__( 'Product icon', 'knowx' ) . '" id="knowx_icon">';
+		printf(
+			'<label class="knowx-pick knowx-pick-text"><input type="radio" name="knowx_icon" value=""%1$s><span>%2$s</span></label>',
+			checked( '', $current, false ),
+			esc_html__( 'Automatic', 'knowx' )
+		);
 		foreach ( knowx_product_icons() as $slug => $icon ) {
-			printf( '<option value="%s"%s>%s</option>', esc_attr( $slug ), selected( $current, $slug, false ), esc_html( $icon[0] ) );
+			printf(
+				'<label class="knowx-pick" title="%1$s"><input type="radio" name="knowx_icon" value="%2$s"%3$s><span>%4$s</span><span class="screen-reader-text">%1$s</span></label>',
+				esc_attr( $icon[0] ),
+				esc_attr( $slug ),
+				checked( $current, $slug, false ),
+				knowx_icon_svg( $slug, 22 ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in knowx_icon_svg().
+			);
 		}
-		echo '</select>';
+		echo '</div>';
 	}
 
 	/**
-	 * Prints the colour input with its "use accent" switch.
+	 * Prints the accent picker: Automatic, the theme's palette as swatches, and a colour of the owner's own.
 	 *
 	 * @param string $current Saved hex colour.
 	 */
 	protected function accent_input( string $current ) {
+		$palette = knowx_default_product_looks()['accents'];
+		$custom  = '' !== $current && ! in_array( strtolower( $current ), $palette, true );
+
+		echo '<div class="knowx-picker" role="radiogroup" aria-label="' . esc_attr__( 'Product accent colour', 'knowx' ) . '" id="knowx_accent">';
 		printf(
-			'<label><input type="checkbox" name="knowx_accent_on" value="1"%1$s> %2$s</label> <input type="color" name="knowx_accent" id="knowx_accent" value="%3$s">',
-			checked( '' !== $current, true, false ),
-			esc_html__( 'Use an accent colour', 'knowx' ),
-			esc_attr( '' !== $current ? $current : '#03a9f4' )
+			'<label class="knowx-pick knowx-pick-text"><input type="radio" name="knowx_accent_choice" value=""%1$s><span>%2$s</span></label>',
+			checked( '', $current, false ),
+			esc_html__( 'Automatic', 'knowx' )
 		);
+		foreach ( $palette as $hex ) {
+			printf(
+				'<label class="knowx-pick" title="%1$s"><input type="radio" name="knowx_accent_choice" value="%1$s"%2$s><span class="knowx-swatch" style="background:%1$s"></span><span class="screen-reader-text">%1$s</span></label>',
+				esc_attr( $hex ),
+				checked( strtolower( $current ), $hex, false )
+			);
+		}
+		printf(
+			'<label class="knowx-pick knowx-pick-text"><input type="radio" name="knowx_accent_choice" value="custom"%1$s><span>%2$s</span></label> <input type="color" name="knowx_accent_custom" value="%3$s" aria-label="%4$s">',
+			checked( $custom, true, false ),
+			esc_html__( 'Your own', 'knowx' ),
+			esc_attr( $custom ? $current : '#03a9f4' ),
+			esc_attr__( 'Your own colour', 'knowx' )
+		);
+		echo '</div>';
 	}
 
 	/**
@@ -263,9 +373,18 @@ class Component implements Component_Interface {
 		if ( isset( $_POST['knowx_icon'] ) ) {
 			update_term_meta( $term_id, 'knowx_icon', $this->sanitize_icon( sanitize_text_field( wp_unslash( $_POST['knowx_icon'] ) ) ) );
 		}
-		if ( isset( $_POST['knowx_accent'] ) ) {
-			$accent = empty( $_POST['knowx_accent_on'] ) ? '' : (string) sanitize_hex_color( wp_unslash( $_POST['knowx_accent'] ) );
-			update_term_meta( $term_id, 'knowx_accent', $accent );
+		if ( isset( $_POST['knowx_accent_choice'] ) ) {
+			$choice = sanitize_text_field( wp_unslash( $_POST['knowx_accent_choice'] ) );
+			if ( 'custom' === $choice ) {
+				$choice = isset( $_POST['knowx_accent_custom'] ) ? sanitize_text_field( wp_unslash( $_POST['knowx_accent_custom'] ) ) : '';
+			}
+			update_term_meta( $term_id, 'knowx_accent', (string) sanitize_hex_color( $choice ) );
+		}
+		if ( isset( $_POST['knowx_order'] ) ) {
+			update_term_meta( $term_id, 'knowx_order', absint( wp_unslash( $_POST['knowx_order'] ) ) );
+		}
+		if ( isset( $_POST['knowx_start'] ) ) {
+			update_term_meta( $term_id, 'knowx_start', esc_url_raw( wp_unslash( $_POST['knowx_start'] ) ) );
 		}
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
 	}
@@ -321,17 +440,24 @@ class Component implements Component_Interface {
 			return;
 		}
 
-		$query->set(
-			'orderby',
-			'name' === knowx_mod( 'knowx_order' )
-				? array(
-					'menu_order' => 'ASC',
-					'title'      => 'ASC',
-				)
-				: array(
-					'menu_order' => 'ASC',
-					'date'       => 'DESC',
-				)
-		);
+		$sort = knowx_mod( 'knowx_section_sort' );
+		if ( 'title' === $sort ) {
+			$orderby = array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			);
+		} elseif ( 'updated' === $sort ) {
+			$orderby = array(
+				'menu_order' => 'ASC',
+				'modified'   => 'DESC',
+			);
+		} else {
+			$orderby = array(
+				'menu_order' => 'ASC',
+				'date'       => 'DESC',
+			);
+		}
+
+		$query->set( 'orderby', $orderby );
 	}
 }

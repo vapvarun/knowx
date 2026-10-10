@@ -48,22 +48,7 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	/**
-	 *  Site Loader
-	 */
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'switch',
-		array(
-			'settings' => 'site_loader',
-			'label'    => esc_html__( 'Site Loader ?', 'knowx' ),
-			'section'  => 'site_loader',
-			'default'  => 0,
-			'choices'  => array(
-				'on'  => esc_html__( 'Yes', 'knowx' ),
-				'off' => esc_html__( 'No', 'knowx' ),
-			),
-		)
-	);
+
 
 	/*
 	 *  Scroll Top
@@ -80,5 +65,24 @@ defined( 'ABSPATH' ) || exit;
 				'on'  => esc_attr__( 'Yes', 'knowx' ),
 				'off' => esc_attr__( 'No', 'knowx' ),
 			),
+		)
+	);
+
+	/**
+	 *  Corner roundness
+	 */
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'radio',
+		array(
+			'settings' => 'knowx_corners',
+			'label'    => esc_html__( 'Corners', 'knowx' ),
+			'section'  => 'site_layout',
+			'default'  => 'soft',
+			'choices'  => array(
+				'square' => esc_html__( 'Square', 'knowx' ),
+				'soft'   => esc_html__( 'Soft', 'knowx' ),
+				'round'  => esc_html__( 'Round', 'knowx' ),
+			),
+			'priority' => 20,
 		)
 	);

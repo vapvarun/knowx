@@ -5,68 +5,112 @@
 /* Product cards on the docs home page. */
 .knowx-products {
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
 	gap: 1.25rem;
 	margin: 0;
-	padding: 3rem 0;
+	padding: 2.5rem 0;
 	list-style: none;
 }
 
 .knowx-product-card {
 	--card-accent: var(--color-theme-primary);
 
+	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
-	height: 100%;
+	gap: 0.6rem;
 	padding: 1.5rem;
 	background: var(--color-surface);
 	border: 1px solid var(--global-border-color);
-	border-block-start: 3px solid var(--card-accent);
-	border-radius: var(--global-border-radius);
+	border-radius: var(--radius-lg);
 	color: var(--global-font-color);
-	transition: box-shadow 0.15s ease, transform 0.15s ease;
+	transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .knowx-product-card:hover,
-.knowx-product-card:focus-visible {
-	box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
-	transform: translateY(-2px);
-}
-
-.knowx-product-card:focus-visible {
-	outline: 2px solid var(--card-accent);
-	outline-offset: 2px;
+.knowx-product-card:focus-within {
+	border-color: var(--card-accent);
+	box-shadow: 0 8px 28px rgb(0 0 0 / 10%);
 }
 
 .knowx-product-card .knowx-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3rem;
+	height: 3rem;
+	border-radius: var(--radius-lg);
+	background: color-mix(in srgb, var(--card-accent) 12%, var(--color-surface));
 	color: var(--card-accent);
 }
 
 .knowx-product-card h2 {
-	margin: 0;
+	margin: 0.25rem 0 0;
 	font-size: 1.25rem;
 }
 
-.knowx-product-card p {
+/* The whole card is clickable: the title link stretches over it. */
+.knowx-product-link {
+	color: var(--color-heading);
+}
+
+.knowx-product-link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: var(--radius-lg);
+}
+
+.knowx-product-link:focus-visible {
+	outline: none;
+}
+
+.knowx-product-card:has(.knowx-product-link:focus-visible) {
+	outline: 2px solid var(--card-accent);
+	outline-offset: 2px;
+}
+
+.knowx-product-desc {
 	margin: 0;
 	color: var(--color-muted);
+}
+
+.knowx-product-sections {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin: 0.25rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.knowx-product-sections a {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	padding: 0.2rem 0.65rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: 999px;
+	color: var(--global-font-color);
+	font-size: 0.85rem;
+}
+
+.knowx-product-sections a:hover {
+	border-color: var(--card-accent);
+	color: var(--color-heading);
 }
 
 .knowx-product-count {
 	margin-block-start: auto;
+	padding-block-start: 0.5rem;
 	font-size: 0.875rem;
-	color: var(--color-muted);
+	font-weight: 600;
+	color: color-mix(in srgb, var(--card-accent) 65%, var(--color-heading));
 }
 
 @media (prefers-reduced-motion: reduce) {
 	.knowx-product-card {
 		transition: none;
-	}
-
-	.knowx-product-card:hover,
-	.knowx-product-card:focus-visible {
-		transform: none;
 	}
 }
 
@@ -334,34 +378,6 @@
 	outline-offset: 2px;
 }
 
-/* Code blocks get a copy button from docs.js. */
-.knowx-code {
-	position: relative;
-}
-
-.knowx-copy {
-	position: absolute;
-	inset-block-start: 0.5rem;
-	inset-inline-end: 0.5rem;
-	min-height: 32px;
-	padding: 0 0.6rem;
-	border: 1px solid rgb(255 255 255 / 30%);
-	border-radius: var(--global-border-radius);
-	background: rgb(255 255 255 / 10%);
-	color: #fff;
-	font-size: 0.8125rem;
-	cursor: pointer;
-}
-
-.knowx-copy:hover {
-	background: rgb(255 255 255 / 20%);
-}
-
-.knowx-copy:focus-visible {
-	outline: 2px solid #fff;
-	outline-offset: 2px;
-}
-
 /* Previous and next. */
 .knowx-pager {
 	display: grid;
@@ -415,27 +431,83 @@
 /* Product home and section pages. */
 .knowx-term-header {
 	margin-block-end: 2rem;
+	padding: 1.75rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--radius-lg);
+	background: linear-gradient(135deg, color-mix(in srgb, var(--color-theme-primary) 10%, var(--color-surface)), var(--color-surface));
 }
 
 .knowx-term-header .knowx-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: var(--radius-lg);
+	background: color-mix(in srgb, var(--color-theme-primary) 14%, var(--color-surface));
 	color: var(--color-theme-primary);
 }
 
 .knowx-term-header .page-title {
-	margin-block: 0.5rem;
+	margin-block: 0.75rem 0.25rem;
+	font-size: 2rem;
+}
+
+.knowx-term-header .archive-description {
+	max-width: 42rem;
+	color: var(--color-muted);
+	font-size: 1.0625rem;
+}
+
+.knowx-term-meta {
+	margin: 0.75rem 0 0;
+	font-size: 0.9rem;
+	color: var(--color-muted);
+}
+
+.knowx-start {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	margin-block-start: 1rem;
+	padding: 0 1.25rem;
+	border-radius: var(--button-border-radius);
+	background: var(--color-theme-primary);
+	color: var(--color-on-primary);
+	font-weight: 600;
+}
+
+.knowx-start:hover {
+	background: var(--button-background-hover-color);
+	color: var(--color-on-primary);
+}
+
+.knowx-section-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+	gap: 1.25rem;
 }
 
 .knowx-section {
-	margin-block-end: 2.5rem;
+	padding: 1.25rem 1.5rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--radius-lg);
+	background: var(--color-surface);
 }
 
-.knowx-section h2 {
-	margin-block-end: 0.5rem;
-	font-size: 1.25rem;
+.knowx-section :is(h2, h3) {
+	margin: 0 0 0.35rem;
+	font-size: 1.125rem;
 }
 
-.knowx-section h2 a {
+.knowx-section :is(h2, h3) a {
 	color: var(--color-heading);
+}
+
+.knowx-section-desc {
+	margin: 0 0 0.5rem;
+	color: var(--color-muted);
+	font-size: 0.9rem;
 }
 
 .knowx-article-list {
@@ -447,12 +519,22 @@
 .knowx-article-list a {
 	display: block;
 	padding-block: 0.45rem;
-	border-block-end: 1px solid var(--global-border-color);
+	border-block-start: 1px solid var(--global-border-color);
+	color: var(--global-font-color);
+}
+
+.knowx-article-list li:first-child a {
+	border-block-start: 0;
+}
+
+.knowx-article-list a:hover {
+	color: var(--color-link);
 }
 
 .knowx-view-all {
 	display: inline-block;
 	margin-block-start: 0.5rem;
+	font-size: 0.9rem;
 	font-weight: 600;
 }
 
@@ -470,6 +552,15 @@
 .knowx-article-card h2 {
 	margin: 0 0 0.25rem;
 	font-size: 1.125rem;
+}
+
+.knowx-article-card h2 a {
+	padding: 0;
+}
+
+.knowx-article-card .knowx-version {
+	display: inline-block;
+	margin-block-start: 0.25rem;
 }
 
 .knowx-article-card p {
@@ -517,4 +608,122 @@
 
 .knowx-narrow .wp-block-details {
 	margin-block-end: 0.75rem;
+}
+
+/* Docs home with no product yet. */
+.knowx-empty {
+	margin-block: 2.5rem;
+	padding: 2rem;
+	border: 1px dashed var(--global-border-color);
+	border-radius: var(--radius-lg);
+	background: var(--color-surface);
+	text-align: center;
+}
+
+.knowx-empty h2 {
+	margin-block-start: 0;
+}
+
+.knowx-empty p {
+	max-width: 36rem;
+	margin-inline: auto;
+	color: var(--color-muted);
+}
+
+/* Search results: product / section above each result. */
+.knowx-crumb {
+	margin: 0 0 0.25rem;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--color-muted);
+}
+
+.knowx-search-results .page-header {
+	margin-block-end: 1.5rem;
+}
+
+.knowx-narrow .searchform {
+	display: flex;
+	gap: 0.5rem;
+	margin-block-start: 1rem;
+}
+
+.knowx-narrow .searchform .text_input {
+	flex: 1;
+	min-width: 0;
+}
+
+/* 404 */
+.knowx-404 h2 {
+	margin-block: 2rem 0.5rem;
+	font-size: 1.125rem;
+}
+
+/* Last updated date under a list item. */
+.knowx-item-date {
+	display: block;
+	margin-block-start: 0.25rem;
+	font-size: 0.8125rem;
+	color: var(--color-muted);
+}
+
+p.knowx-item-date {
+	margin-block: 0.25rem 0;
+}
+
+/* Docs home of a single product: its sections stand in for the product card. */
+.knowx-home-sections {
+	margin-block: 2.5rem;
+}
+
+/* Search: product filter. */
+.knowx-filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-block-start: 1rem;
+}
+
+.knowx-filters a {
+	padding: 0.25rem 0.875rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: 999px;
+	background: var(--color-surface);
+	color: var(--global-font-color);
+	font-size: 0.875rem;
+	text-decoration: none;
+}
+
+.knowx-filters a[aria-current="true"] {
+	border-color: var(--color-link);
+	color: var(--color-link);
+	font-weight: 600;
+}
+
+/* Docs home listing each product with its sections. */
+.knowx-home-product {
+	margin-block: 2.5rem;
+}
+
+.knowx-home-product-title {
+	display: flex;
+	align-items: center;
+	gap: 0.625rem;
+	margin: 0 0 1rem;
+	font-size: 1.375rem;
+}
+
+.knowx-home-product-title .knowx-icon {
+	color: var(--card-accent, var(--color-link));
+}
+
+.knowx-home-product-title a {
+	color: var(--color-heading);
+	text-decoration: none;
+}
+
+.knowx-term-updated {
+	margin: 0.25rem 0 0;
+	font-size: 0.875rem;
+	color: var(--color-muted);
 }

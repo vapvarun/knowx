@@ -61,7 +61,7 @@ Both cards were assigned to Nitin Patil and are fixed by the redesign. Proof is 
 - [x] No placeholder text anywhere in the theme (`grep` finds none); the support section has real default text
 - [x] No Popular Articles column and no WordPress Popular Posts dependency, so "No data found" cannot appear
 - [x] Product cards and lists use `hide_empty => true` and hide the default category when other products exist
-- [ ] `docs/website/features/knowledge-base-homepage.md` is rewritten: it lives on `master`; rewriting waits for the owner's approval to merge `master` into `1.7.5`
+- [x] The docs are rewritten for 2.0 (`docs/website`, 27 pages, lint clean); the Layout One page is `customizing/07-docs-home-settings.md`
 
 ### D2. Card 10391809639 "Layout One: Recent Articles ignores the category exclusion..."
 - [x] One setting, "Exclude category by ID", feeds the product cards, featured and recent articles and Layout Two (checked: excluding Acme App removed its card and its articles from both lists)
@@ -123,7 +123,7 @@ Playground and sample content
 
 ## H. Release (owner decisions)
 
-- [ ] Merge `master` into `1.7.5` (CI workflow and the 22 `docs/website` pages) after approval, then rewrite those pages and run `lint-plugin-docs`
+- [x] Docs rewritten on `1.7.5` instead of merging master's old pages; when `1.7.5` goes into `master` the new docs replace the old ones, and `.github/workflows/ci.yml` from master is kept
 - [ ] Owner checks the whole flow, then approves the merge of `1.7.5` into `master`
 - [ ] Release to `vapvarun/knowx` with the clean zip; switch the blueprint to the wordpress.org slug; archive `knowx-core`; retire `knowx-demo-importer`
 - [ ] Rich Results test and HTTPS Lighthouse on the published copy

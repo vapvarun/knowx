@@ -137,12 +137,12 @@
     ]
   },
   "page_templates": {
-    "full-width-container.php": "Page-Without-Sidebar",
-    "full-width.php": "Full-Width-No-Title",
+    "full-width-container.php": "Page Without Sidebar",
+    "full-width.php": "Full Width, No Title",
     "page-changelog.php": "Changelog",
     "page-faq.php": "FAQ",
     "page-knowledgebase-one.php": "Docs Home",
-    "page-knowledgebase-two.php": "Knowledge Base Layout Two"
+    "page-knowledgebase-two.php": "Docs Index"
   },
   "patterns": {
     "patterns/callout-note.php": {

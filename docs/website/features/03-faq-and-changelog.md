@@ -5,7 +5,7 @@
 1. Create a page and choose the **FAQ** template.
 2. Insert the **Frequently asked questions** pattern (category **KnowX Docs**), or add core **Details** blocks yourself. The summary is the question and the content inside is the answer.
 
-Pages with two or more Details blocks also print FAQ structured data, built from the same visible questions and answers. See [Structured data](structured-data.md).
+Pages with two or more Details blocks also print FAQ structured data, built from the same visible questions and answers. See [Structured data](04-structured-data.md).
 
 ## Changelog
 

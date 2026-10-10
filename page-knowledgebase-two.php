@@ -1,6 +1,6 @@
 <?php
 /**
- * Template Name: Knowledge Base Layout Two
+ * Template Name: Docs Index
  * Description: Template for displaying Categories and Posts
  * Template Post Type: page
  *

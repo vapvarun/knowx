@@ -114,3 +114,19 @@ Browser-verify at 390px, 768px and desktop, light and dark, with Kirki absent an
 3. Dynamic_Style to Tokens switch can change cascade order; the byte-identical baseline gate catches it.
 4. The copy from BuddyX brings BuddyPress-specific fields; strip them (KnowX has no BuddyPress panel).
 5. Size: Tokens (about 2,000 lines) and the framework are large; only KnowX-specific mapping is hand-written.
+
+## 8. Lessons from Twenty Twenty-Five 1.5 (WordPress default theme, checked locally 2026-10-10)
+
+Facts: block theme, no Customizer, no JavaScript, 159-line `functions.php`, 8 HTML templates, 7 parts, 98 patterns, `theme.json` v3 (schema 6.7) with 8 palette colours, 5 font sizes, 7 spacing sizes, 2 self-hosted variable `woff2` fonts, 8 style variations (plus `colors/`, `typography/`, `sections/`, `blocks/` partials), a 611-byte `style.min.css`. Header: Requires at least 6.7, Tested up to 7.1, Requires PHP 7.2, 17 feature tags including `accessibility-ready`, `style-variations`, `rtl-language-support`. The local site runs WordPress 7.1.3.
+
+What KnowX takes from it (KnowX stays a classic theme with its own Customizer, per the BuddyX route):
+1. **Header truth.** Set `Tested up to` to the current release (7.1), pick one honest `Requires PHP`, and make code, `functions.php` gate and header agree. KnowX today: header 7.4, gate 7.0, code needs 8.0.
+2. **`theme.json` as the design source.** Palette, font sizes, spacing and layout widths live in `theme.json`; the `--bx-*` tokens should read from `--wp--preset--*` where the preset exists instead of duplicating values.
+3. **Tiny front-end CSS.** Only the CSS the theme needs, with `.min` chosen by `SCRIPT_DEBUG` and `wp_style_add_data( ..., 'path' )` so WordPress can inline small styles.
+4. **Fonts.** Self-host variable `woff2` only. KnowX ships FontAwesome 4.7 in six formats (about 1 MB); keep `woff2` (and `woff` fallback) only.
+5. **Patterns carry the demo content.** Each pattern file has a docblock header (Title, Slug, Categories, Description). KB layouts and the sample content should be patterns, registered categories included.
+6. **Style variations as JSON.** Eight palettes plus typography presets; KnowX copies the BuddyX eight and may add a typography set.
+7. **No JS unless needed.** Drop jQuery-era libraries that CSS or native features replace (sticky-kit, fitvids, scrollUp, lazyload when `loading="lazy"` exists) after the CSS/JS audit confirms usage.
+8. **`readme.txt` and screenshot** follow the wp.org layout (1200x900 screenshot, changelog per version).
+
+Not taken: converting KnowX to a block theme. The user chose "lightweight like BuddyX", which is a classic theme with the in-house Customizer; the unused `scripts/convert-to-block-theme.js` can be removed.

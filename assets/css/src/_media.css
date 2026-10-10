@@ -19,6 +19,16 @@ object {
 	max-width: 100%;
 }
 
+/* Video embeds keep a 16:9 box at any width (replaces the FitVids script). */
+iframe[src*="youtube.com"],
+iframe[src*="youtube-nocookie.com"],
+iframe[src*="youtu.be"],
+iframe[src*="vimeo.com"] {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 9;
+}
+
 /*--------------------------------------------------------------
 ## Captions
 --------------------------------------------------------------*/

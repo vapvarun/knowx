@@ -84,12 +84,17 @@ class Component_Tests extends Unit_Test_Case {
 		Functions\when( 'get_theme_file_path' )->returnArg();
 
 		Functions\expect( 'wp_enqueue_script' )
-			->with( 'knowx-navigation', Mockery::any(), Mockery::any(), Mockery::any(), Mockery::any() )
+			->with(
+				'knowx-navigation',
+				Mockery::any(),
+				Mockery::any(),
+				Mockery::any(),
+				array(
+					'in_footer' => true,
+					'strategy'  => 'defer',
+				)
+			)
 			->once();
-
-		Functions\expect( 'wp_script_add_data' )
-			->with( 'knowx-navigation', 'async', true )
-			->twice();
 
 		Functions\expect( 'wp_localize_script' )
 			->with( 'knowx-navigation', Mockery::any(), Mockery::any() )

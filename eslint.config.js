@@ -19,12 +19,6 @@ export default [
 	// Global ignores (alternative to .eslintignore)
 	{
 		ignores: [
-			// Third-party libraries kept as shipped (see docs/LIBRARIES.md); they are replaced in W10.
-			'assets/js/src/isotope.pkgd.cjs',
-			'assets/js/src/superfish.js',
-			'assets/js/src/sticky-kit.js',
-			'assets/js/src/fitvids.js',
-			'assets/js/src/scrollup.js',
 			'node_modules/**',
 			'vendor/**',
 			'config/**',

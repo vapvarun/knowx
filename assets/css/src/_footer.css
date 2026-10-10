@@ -94,6 +94,9 @@
 # Scroll Up
 --------------------------------------------------------------*/
 #scrollUp {
+    position: fixed;
+    z-index: 99;
+    display: none;
     bottom: 20px;
     right: 20px;
     font-size: 24px;
@@ -103,11 +106,14 @@
     border-radius: 100px;
     background: rgba(0, 0, 0, .1);
     color: #fff;
-    display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     box-shadow: none;
+}
+
+#scrollUp.is-visible {
+    display: flex;
 }
 
 #scrollUp i {

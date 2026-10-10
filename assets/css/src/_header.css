@@ -19,23 +19,22 @@
     box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 5px 10px 0 rgba(189, 189, 189, 0.15);
 }
 
-.sticky-header .site-header-wrapper.has-sticky-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
+.sticky-header .site-header-wrapper {
+    position: sticky;
+    top: var(--wp-admin--admin-bar--height, 0);
     z-index: 999;
+}
+
+@media (max-width: 600px) {
+    .sticky-header .site-header-wrapper {
+        top: 0;
+    }
 }
 
 @media (max-width: 767px) {
     .site-header-wrapper {
         z-index: 9999;
     }
-}
-
-.sticky-header .site-header-wrapper.has-sticky-header {
-    box-shadow: 0 1px 0 0 rgba(206, 206, 206, 0.05), 0 5px 10px 0 rgba(132, 132, 132, 0.15);
 }
 
 .site-header {

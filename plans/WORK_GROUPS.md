@@ -32,7 +32,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W07 | Customizer_Framework port, Kirki removed | done | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
 | W08 | Settings redesign and audit | done | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
 | W09 | Tokens, dark mode, colour output | done | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
-| W10 | JavaScript: ordering, jQuery, libraries | todo | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
+| W10 | JavaScript: ordering, jQuery, libraries | done | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
 | W11 | CSS: token migration, RTL, focus, responsive | todo | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
 | W12 | Fonts and icons | todo | [10392494459](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494459) |
 | W13 | theme.json, style variations, editor | todo | [10392494471](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494471) |
@@ -179,14 +179,14 @@ Decision change: BuddyX's 2,079-line Tokens component carries Kirki-era purge lo
 - Gate: PHP lint, phpstan clean, phpunit 28 tests, stylelint and eslint 0, zip 978 KB; light-mode screenshots differ from W08 by at most 1.04% (darker, readable link blue; dark hero text on the brand blue); dark mode reviewed in screenshots. **Passed 2026-10-10.**
 
 ## W10 JavaScript: ordering, jQuery, libraries (feeds I)
-From C section 4 and 5.
-- [ ] Remove `async` from dependent scripts (`Scripts/Component.php:178-240`, `Base_Support:150`); add missing `jquery` and `knowx-scroll-up` deps; or load with `defer` and proper deps
-- [ ] `$(window).load()` (`custom.js:264`) replaced; loader overlay cannot stay up on failure
-- [ ] `navigation.ts` inverted expand/collapse labels; `aria-expanded` sync; 55em JS vs 768px CSS breakpoint conflict
-- [ ] Drop libraries CSS or native features replace, per `docs/LIBRARIES.md`: superfish, sticky-kit, fitvids, scrollUp, isotope (CSS grid, load masonry only where needed); no jQuery on the front end; use `strategy => defer` instead of the custom async filter
-- [x] Production build strips inline source maps (done in W00); `.ts/.tsx` sources beside minified files stay (wp.org requires readable source)
-- [ ] No `console.log` leftovers; no `innerHTML` with data
-- Gate: console clean on every template; JS under 20 KB gzip per page.
+From C section 4 and 5 and `docs/LIBRARIES.md`.
+- [x] **No jQuery and no vendored libraries on the front end**: Superfish, Isotope, Sticky-kit, FitVids and jQuery.scrollUp are deleted, `custom.js` (jQuery, `$(window).load`, duplicate mobile-menu handlers, dead header-search code) is replaced by a 90-line `theme.js` (page loader that can never stay up, table cell labels, back-to-top with a reduced-motion guard); the front end now loads two scripts, `navigation.min.js` and `theme.min.js`, and the full set shipped in the zip is **6.4 KB minified** (was 284 KB with inline source maps)
+- [x] Script loading uses core `strategy => defer` through the enqueue args; the custom `async` flags, the `script_loader_tag` filter and the dependency race are gone
+- [x] `navigation.ts`: the mobile drawer state (body class, `aria-expanded`, `nav--toggled-on`) lives in one function; Close button, overlay and Escape close it and return focus to the toggle; the JS breakpoint is the CSS one (767px via `matchMedia`, was 55em = 880px); the submenu toggle label said the opposite of what it did and is fixed
+- [x] CSS replaced the libraries: sticky header and sticky sidebar use `position: sticky` (admin-bar offset from `--wp-admin--admin-bar--height`), grid layout is flex and masonry is CSS columns, video iframes keep 16:9 with `aspect-ratio`
+- [x] Verified in the browser at 390px and 1280px: loader class, drawer open / Escape / Close button, focus return, sub-menu toggle labels and `aria-expanded` on mobile and desktop, back-to-top appears after scrolling and returns to the top, header is `position: sticky`, no duplicate ids, `jQuery` is undefined, no console errors, masonry screenshot
+- [ ] Not done here: the focus trap for the open mobile drawer and the full docs layout (sticky table of contents) are part of W11 and W14
+- Gate: lint 0, phpstan clean, phpunit 28 tests, stylelint 0, zip 944 KB. **Passed 2026-10-10.**
 
 ## W11 CSS: token migration, RTL, focus, responsive (feeds C, I)
 From C section 2, 3, 7.

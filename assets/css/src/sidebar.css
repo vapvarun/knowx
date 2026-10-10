@@ -26,11 +26,14 @@
     display: block;
 }
 
-@media screen and (max-width: 60em) {
-    .sticky-sidebar-enable .sticky-sidebar.is_stuck {
-        position: static !important;
+/* Sticky sidebar without a script: it follows the page below the sticky header. */
+@media screen and (min-width: 60.0625em) {
+    .sticky-sidebar-enable .widget-area {
+        align-self: stretch;
     }
-    .sticky-sidebar-enable .widget-area>div {
-        height: auto !important;
+
+    .sticky-sidebar-enable .sticky-sidebar {
+        position: sticky;
+        top: calc(var(--wp-admin--admin-bar--height, 0px) + 5rem);
     }
 }

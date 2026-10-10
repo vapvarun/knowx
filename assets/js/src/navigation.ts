@@ -147,26 +147,18 @@ function initNavToggleSmall(): void {
  */
 function watchForWindowSizeChanges(): void {
 	window.addEventListener('resize', () => {
-		const width = window.innerWidth;
-		const mobileBreakPoint = 55;
-		const emValue =
-			width /
-			parseFloat(getComputedStyle(document.documentElement).fontSize);
-		if (emValue > mobileBreakPoint) {
+		if (!isMobileWidth()) {
 			closeAllSubMenus();
+			setMobileMenuOpen(false);
 		}
 	});
 }
 
 /**
- * Helper to determine if we are at or below the mobile breakpoint (55em).
+ * Helper to determine if we are at or below the mobile breakpoint (767px, same as the CSS).
  */
 function isMobileWidth(): boolean {
-	const width = window.innerWidth;
-	const mobileBreakPoint = 55;
-	const emValue =
-		width / parseFloat(getComputedStyle(document.documentElement).fontSize);
-	return emValue <= mobileBreakPoint;
+	return window.matchMedia('(max-width: 767px)').matches;
 }
 
 /**
@@ -343,39 +335,51 @@ function initEachNavToggleSmall(): void {
 
 		menuToggle.addEventListener('click', toggleMenuToggleState);
 	});
+
+	// Close the mobile drawer from its Close button, the dimmed overlay and the Escape key.
+	document.addEventListener('click', (e) => {
+		const target = e.target as HTMLElement;
+		if (target.closest('.menu-close, .mobile-menu-close')) {
+			setMobileMenuOpen(false);
+			(menuToggles[0] as HTMLElement).focus();
+		}
+	});
+	document.addEventListener('keydown', (e) => {
+		if (
+			e.key === 'Escape' &&
+			document.body.classList.contains('mobile-menu-opened')
+		) {
+			setMobileMenuOpen(false);
+			(menuToggles[0] as HTMLElement).focus();
+		}
+	});
+}
+
+/**
+ * Opens or closes the mobile menu drawer and keeps every toggle, nav element and the page in sync.
+ *
+ * @param {boolean} open - Whether the drawer should be open.
+ * @return {void}
+ */
+function setMobileMenuOpen(open: boolean): void {
+	document.body.classList.toggle('mobile-menu-opened', open);
+
+	document
+		.querySelectorAll<HTMLElement>('.menu-toggle')
+		.forEach((menuToggle) => {
+			menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+			menuToggle.classList.toggle('menu-toggle-open', open);
+		});
+
+	navElements?.forEach((navElement) => {
+		navElement.classList.toggle('nav--toggled-on', open);
+	});
 }
 
 function toggleMenuToggleState(e: Event) {
-	const menuToggles = document.querySelectorAll<HTMLElement>('.menu-toggle');
-
-	if (!menuToggles.length) {
-		return;
-	}
-
-	// Get the current toggle that was clicked
 	const currentToggle = e.currentTarget as HTMLElement;
 
-	// Determine the new state based on the clicked toggle
-	const newExpandedState =
-		currentToggle.getAttribute('aria-expanded') === 'false'
-			? 'true'
-			: 'false';
-
-	// Update all menu toggles to maintain sync
-	menuToggles.forEach((menuToggle) => {
-		menuToggle.setAttribute('aria-expanded', newExpandedState);
-	});
-
-	// Toggle all navigation elements that have the 'nav--toggle-small' class
-	if (navElements && navElements.length) {
-		navElements.forEach((navElement) => {
-			if (newExpandedState === 'true') {
-				navElement.classList.add('nav--toggled-on');
-			} else {
-				navElement.classList.remove('nav--toggled-on');
-			}
-		});
-	}
+	setMobileMenuOpen(currentToggle.getAttribute('aria-expanded') === 'false');
 }
 
 /**
@@ -417,7 +421,7 @@ function toggleSubMenu(
 	if (parentMenuItemToggled) {
 		parentMenuItem.classList.remove('menu-item--toggled-on');
 		subMenu!.classList.remove('toggle-show');
-		toggleButton.setAttribute('aria-label', knowxScreenReaderText.collapse);
+		toggleButton.setAttribute('aria-label', knowxScreenReaderText.expand);
 
 		if (limitOpenSubmenus) {
 			const subMenuItemsToggled =
@@ -439,7 +443,7 @@ function toggleSubMenu(
 
 		parentMenuItem.classList.add('menu-item--toggled-on');
 		subMenu!.classList.add('toggle-show');
-		toggleButton.setAttribute('aria-label', knowxScreenReaderText.expand);
+		toggleButton.setAttribute('aria-label', knowxScreenReaderText.collapse);
 	}
 }
 

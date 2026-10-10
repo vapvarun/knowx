@@ -26,19 +26,19 @@ Verdicts: **Keep**, **Replace** (native or core feature does it), **Remove** (no
 
 | Library | Where it is used | Size shipped | Why it was there | Verdict |
 |---|---|---|---|---|
-| Isotope 3.0.6 (GPLv3) | Blog `grid-layout` and `masonry-layout` (`custom.js:154-167`), loaded on every page | 35 KB min | Masonry and filtered grids | **Replace** with CSS grid / CSS columns; if a true masonry is wanted, load it only on that layout (W10) |
-| Superfish 1.7.10 (MIT/GPL) | Desktop menu (`custom.js:68`) | 4 KB min | Dropdown hover delay | **Remove**: CSS `:hover` / `:focus-within` already shows submenus and `navigation.ts` toggles classes (W10) |
-| Sticky-kit 1.1.3 (MIT) | Sticky sidebar (`custom.js:194-206`) | 3 KB min | Sticky sidebar before CSS could | **Replace** with `position: sticky` (W10, W14) |
-| FitVids 1.1 (WTFPL) | Responsive video wrappers (`custom.js:171-179`) | 2 KB min | Fluid iframes | **Replace** with `aspect-ratio` and core `responsive-embeds` (W10) |
-| jQuery.scrollUp 2.4.1 (MIT) | Back-to-top button | 2 KB min | Scroll-to-top | **Replace** with an anchor, `scroll-behavior: smooth` (reduced-motion guarded) and a small IntersectionObserver (W10) |
-| jQuery (WordPress core) | `custom.js`, all of the above | core | Dependency of every library above | **Remove from our front end**; no jQuery on docs pages (W10) |
+| ~~Isotope 3.0.6~~ (removed in W10) | Blog `grid-layout` and `masonry-layout` (`custom.js:154-167`), loaded on every page | 35 KB min | Masonry and filtered grids | **Done**: grid is flex, masonry is CSS columns (`content.css`) |
+| ~~Superfish 1.7.10~~ (removed in W10) | Desktop menu (`custom.js:68`) | 4 KB min | Dropdown hover delay | **Done**: CSS `:hover` shows submenus; `navigation.ts` toggles them for keyboard and touch |
+| ~~Sticky-kit 1.1.3~~ (removed in W10) | Sticky sidebar (`custom.js:194-206`) | 3 KB min | Sticky sidebar before CSS could | **Done**: `position: sticky` (sidebar and header); the full docs layout in W14 |
+| ~~FitVids 1.1~~ (removed in W10) | Responsive video wrappers (`custom.js:171-179`) | 2 KB min | Fluid iframes | **Done**: `aspect-ratio` on video iframes (`_media.css`) |
+| ~~jQuery.scrollUp 2.4.1~~ (removed in W10) | Back-to-top button | 2 KB min | Scroll-to-top | **Done**: 60-line `theme.js` back-to-top with a reduced-motion guard |
+| ~~jQuery~~ (no longer a dependency, W10) | `custom.js`, all of the above | core | Dependency of every library above | **Done**: the front end loads no jQuery (checked) |
 | Font Awesome 4.7 (SIL OFL fonts, MIT CSS) | About 11 icon glyphs; 6 font files, 1.08 MB on disk, 29 KB CSS | about 1.1 MB in zip | Icons | **Replace** with inline SVG for the few icons used; the attribution text in `readme.txt` also names the wrong licence (W12) |
 | normalize.css 8.0.1 (MIT) | `_reset.css` | small | Cross-browser reset | **Keep** or fold into a modern `@layer reset` (W11) |
 | Bootstrap 3 grid (MIT, copied) | Only `.container`, `.row`, `.col-md-6` | 12 KB min | Layout | **Remove**: those classes need about ten lines of CSS grid (W11) |
 | TGM-Plugin-Activation 2.6.1 (GPL-2.0+) | Recommends plugins on every admin load | 3,759 lines | Plugin nag | **Remove**: no required or recommended plugin (W07) |
 | Open Sans + Montserrat from Google Fonts | Body and headings; Montserrat is never used | external request | Typography | **Replace** with one self-hosted variable woff2 (W12) |
 
-Target after W10 to W12: no jQuery, no third-party JS except an optional masonry loaded only on the layout that needs it, one icon approach (inline SVG), one font family, about 20 KB gzip of JS per page.
+Result after W10: no jQuery and no third-party JavaScript on the front end; the theme ships 6.4 KB of minified JS in total (it was 284 KB with source maps and 60 KB without). Still to do: one icon approach (inline SVG) and one font family (W12).
 
 ## 3. Kirki
 

@@ -56,8 +56,6 @@ class Component_Tests extends Unit_Test_Case {
 		$this->assertNotEquals( false, has_action( 'wp_head', array( $this->component, 'action_add_pingback_header' ) ) );
 		$this->assertNotEquals( false, has_filter( 'body_class', array( $this->component, 'filter_body_classes_add_hfeed' ) ) );
 		$this->assertNotEquals( false, has_filter( 'embed_defaults', array( $this->component, 'filter_embed_dimensions' ) ) );
-		$this->assertNotEquals( false, has_filter( 'theme_scandir_exclusions', array( $this->component, 'filter_scandir_exclusions_for_optional_templates' ) ) );
-		$this->assertNotEquals( false, has_filter( 'script_loader_tag', array( $this->component, 'filter_script_loader_tag' ) ) );
 	}
 
 	/**

@@ -34,26 +34,14 @@
     display: none;
 }
 
-body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
-    top: 32px;
-}
-
 @media (max-width: 782px) {
-    body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
-        top: 46px;
-    }
-
     .main-navigation .user-profile-menu .sub-menu {
         border-top: 1px solid var(--global-border-color);
     }
 }
 
 @media (max-width: 600px) {
-    body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
-        top: 0;
-    }
-
-    body.admin-bar.sticky-header .has-sticky-header .main-navigation .primary-menu-container {
+    body.admin-bar.sticky-header .main-navigation .primary-menu-container {
         top: 0;
     }
 }

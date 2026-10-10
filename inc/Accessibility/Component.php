@@ -51,10 +51,11 @@ class Component implements Component_Interface {
 			get_theme_file_uri( '/assets/js/navigation.min.js' ),
 			array(),
 			knowx()->get_asset_version( get_theme_file_path( '/assets/js/navigation.min.js' ) ),
-			true
+			array(
+				'in_footer' => true,
+				'strategy'  => 'defer',
+			)
 		);
-		wp_script_add_data( 'knowx-navigation', 'async', true );
-		wp_script_add_data( 'knowx-navigation', 'precache', true );
 		wp_localize_script(
 			'knowx-navigation',
 			'knowxScreenReaderText',

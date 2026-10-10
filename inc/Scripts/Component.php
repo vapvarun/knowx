@@ -13,7 +13,7 @@ use function KnowX\KnowX\knowx;
 use function add_action;
 use function wp_enqueue_script;
 use function wp_register_script;
-use function wp_script_add_data;
+use function esc_html__;
 use function get_theme_file_uri;
 use function get_theme_file_path;
 use function _doing_it_wrong;
@@ -174,59 +174,17 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			return $this->js_files;
 		}
 
-		$enable_scrollup = knowx_is_truthy( knowx_mod( 'knowx_scroll_top' ) );
-
 		$js_files = array(
-			// Core vendor scripts.
-			'knowx-superfish' => array(
-				'file'     => 'superfish.min.js',
+			// Loader, table labels and the optional back-to-top button. No jQuery.
+			'knowx-theme' => array(
+				'file'     => 'theme.min.js',
 				'global'   => true,
-				'loading'  => 'async',
 				'footer'   => true,
-				'precache' => true,
-			),
-			'knowx-isotope-pkgd' => array(
-				'file'     => 'isotope.pkgd.min.js',
-				'global'   => true,
-				'loading'  => 'async',
-				'footer'   => true,
-				'precache' => true,
-			),
-			'knowx-fitvids' => array(
-				'file'     => 'fitvids.min.js',
-				'global'   => true,
-				'loading'  => 'async',
-				'footer'   => true,
-				'precache' => true,
-			),
-			'knowx-sticky-kit' => array(
-				'file'     => 'sticky-kit.min.js',
-				'global'   => true,
-				'loading'  => 'async',
-				'footer'   => true,
-				'precache' => true,
-			),
-
-			// Optional Scroll-up (theme mod controlled).
-			'knowx-scroll-up' => array(
-				'file'     => 'scrollup.min.js',
-				'global'   => $enable_scrollup,
-				'loading'  => 'async',
-				'footer'   => true,
-				'precache' => true,
-			),
-
-			// Main custom theme script.
-			'knowx-custom' => array(
-				'file'     => 'custom.min.js',
-				'global'   => true,
-				'deps'     => array( 'jquery', 'knowx-superfish', 'knowx-isotope-pkgd', 'knowx-fitvids', 'knowx-sticky-kit' ),
-				'footer'   => true,
-				'loading'  => 'async',
-				'precache' => true,
+				'strategy' => 'defer',
 				'localize' => array(
 					'knowxData' => array(
-						'enableScrollup' => $enable_scrollup,
+						'enableScrollup' => knowx_is_truthy( knowx_mod( 'knowx_scroll_top' ) ),
+						'scrollTopLabel' => esc_html__( 'Back to top', 'knowx' ),
 					),
 				),
 			),

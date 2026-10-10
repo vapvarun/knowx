@@ -502,6 +502,28 @@ article .entry-header {
     margin-bottom: 0;
 }
 
+/* Grid and masonry post lists: layout comes from CSS, no script. */
+.post-layout.grid-layout {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post-layout.masonry-layout {
+    column-width: 18rem;
+    column-gap: 30px;
+}
+
+.post-layout.masonry-layout .entry-layout {
+    float: none;
+    width: auto;
+    margin: 0 0 30px;
+    break-inside: avoid;
+}
+
+.post-layout.masonry-layout .grid-sizer {
+    display: none;
+}
+
 /*--------------------------------------------------------------
 # Content navigation
 --------------------------------------------------------------*/

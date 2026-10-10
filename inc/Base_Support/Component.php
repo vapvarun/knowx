@@ -44,8 +44,6 @@ class Component implements Component_Interface {
 		add_action( 'wp_head', array( $this, 'action_add_pingback_header' ) );
 		add_filter( 'body_class', array( $this, 'filter_body_classes_add_hfeed' ) );
 		add_filter( 'embed_defaults', array( $this, 'filter_embed_dimensions' ) );
-		add_filter( 'theme_scandir_exclusions', array( $this, 'filter_scandir_exclusions_for_optional_templates' ) );
-		add_filter( 'script_loader_tag', array( $this, 'filter_script_loader_tag' ), 10, 2 );
 		add_action( 'init', array( $this, 'knowx_theme_block_styles' ) );
 		add_action( 'init', array( $this, 'knowx_register_block_patterns' ) );
 	}
@@ -115,51 +113,6 @@ class Component implements Component_Interface {
 	public function filter_embed_dimensions( array $dimensions ): array {
 		$dimensions['width'] = 720;
 		return $dimensions;
-	}
-
-	/**
-	 * Excludes any directory named 'optional' from being scanned for theme template files.
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/theme_scandir_exclusions/
-	 *
-	 * @param array $exclusions the default directories to exclude.
-	 * @return array Filtered exclusions.
-	 */
-	public function filter_scandir_exclusions_for_optional_templates( array $exclusions ): array {
-		return array_merge(
-			$exclusions,
-			array( 'optional' )
-		);
-	}
-
-	/**
-	 * Adds async/defer attributes to enqueued / registered scripts.
-	 *
-	 * If #12009 lands in WordPress, this function can no-op since it would be handled in core.
-	 *
-	 * @link https://core.trac.wordpress.org/ticket/12009
-	 *
-	 * @param string $tag    The script tag.
-	 * @param string $handle The script handle.
-	 * @return string Script HTML string.
-	 */
-	public function filter_script_loader_tag( string $tag, string $handle ): string {
-
-		foreach ( array( 'async', 'defer' ) as $attr ) {
-			if ( ! wp_scripts()->get_data( $handle, $attr ) ) {
-				continue;
-			}
-
-			// Prevent adding attribute when already added in #12009.
-			if ( ! preg_match( ":\s$attr(=|>|\s):", $tag ) ) {
-				$tag = preg_replace( ':(?=></script>):', " $attr", $tag, 1 );
-			}
-
-			// Only allow async or defer, not both.
-			break;
-		}
-
-		return $tag;
 	}
 
 	/**

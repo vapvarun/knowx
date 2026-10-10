@@ -19,10 +19,10 @@ get_header();
 knowx()->print_styles( 'knowx-content' );
 knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
-$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
+$default_sidebar = knowx_mod( 'sidebar_option' );
 
-$post_layout  = get_theme_mod( 'blog_layout_option', knowx_defaults( 'blog-layout-option' ) );
-$post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
+$post_layout  = knowx_mod( 'blog_layout_option' );
+$post_per_row = 'col-md-' . knowx_mod( 'post_per_row' );
 
 ?>
 

@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings' => 'site_sticky_header',
 			'label'    => esc_html__( 'Enable Sticky Header ?', 'knowx' ),
 			'section'  => 'site_header_section',
-			'default'  => '1',
+			'default'  => 1,
 			'choices'  => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),

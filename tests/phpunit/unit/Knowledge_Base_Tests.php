@@ -10,6 +10,7 @@ namespace KnowX\KnowX\Tests\Unit;
 use Brain\Monkey\Functions;
 use KnowX\KnowX\Tests\Framework\Unit_Test_Case;
 
+require_once TESTS_THEME_DIR . '/inc/helpers.php';
 require_once TESTS_THEME_DIR . '/inc/knowledge-base.php';
 
 /**

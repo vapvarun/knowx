@@ -15,7 +15,7 @@
  * @return int[] Category ids.
  */
 function knowx_kb_excluded_ids() {
-	$raw = (string) get_theme_mod( 'knowx_exclude', '' );
+	$raw = (string) knowx_mod( 'knowx_exclude' );
 
 	return array_values( array_filter( array_map( 'absint', explode( ',', $raw ) ) ) );
 }
@@ -216,8 +216,8 @@ function knowx_kb_post_query( $exclude, $args = array() ) {
  */
 function knowx_kb_sections() {
 	$exclude  = knowx_kb_excluded_ids();
-	$per_cat  = max( 1, (int) get_theme_mod( 'knowx_posts', 10 ) );
-	$by_name  = 'name' === get_theme_mod( 'knowx_order', 'date' );
+	$per_cat  = max( 1, (int) knowx_mod( 'knowx_posts' ) );
+	$by_name  = 'name' === knowx_mod( 'knowx_order' );
 	$cache_id = 'sections-' . $per_cat . '-' . (int) $by_name . '-' . implode( ',', $exclude );
 
 	return knowx_kb_cached(

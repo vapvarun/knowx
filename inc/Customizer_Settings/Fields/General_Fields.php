@@ -57,7 +57,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings' => 'site_loader',
 			'label'    => esc_html__( 'Site Loader ?', 'knowx' ),
 			'section'  => 'site_loader',
-			'default'  => '2',
+			'default'  => 0,
 			'choices'  => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),
@@ -94,7 +94,7 @@ defined( 'ABSPATH' ) || exit;
 			'label'    => esc_attr__( 'Scroll Top', 'knowx' ),
 			'section'  => 'site_scroll_top',
 			'priority' => 10,
-			'default'  => '',
+			'default'  => 0,
 			'choices'  => array(
 				'on'  => esc_attr__( 'Yes', 'knowx' ),
 				'off' => esc_attr__( 'No', 'knowx' ),

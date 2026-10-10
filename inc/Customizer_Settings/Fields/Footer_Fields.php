@@ -11,20 +11,6 @@ defined( 'ABSPATH' ) || exit;
 	 *  Site Footer
 	 */
 	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'switch',
-		array(
-			'settings' => 'site_footer_bg',
-			'label'    => esc_html__( 'Customize Background ?', 'knowx' ),
-			'section'  => 'site_footer_section',
-			'default'  => 'off',
-			'choices'  => array(
-				'on'  => esc_html__( 'Yes', 'knowx' ),
-				'off' => esc_html__( 'No', 'knowx' ),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'background',
 		array(
 			'settings'        => 'background_setting',

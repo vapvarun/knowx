@@ -13,18 +13,6 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'color',
 		array(
-			'settings' => 'body_background_color',
-			'label'    => esc_html__( 'Body Background Color', 'knowx' ),
-			'section'  => 'site_skin_section',
-			'default'  => '#f7f7f9',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
 			'settings' => 'site_primary_color',
 			'label'    => esc_html__( 'Theme Color', 'knowx' ),
 			'section'  => 'site_skin_section',

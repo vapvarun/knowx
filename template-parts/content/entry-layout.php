@@ -7,8 +7,8 @@
 
 namespace KnowX\KnowX;
 
-$post_per_row    = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
-$post_box_layout = get_theme_mod( 'post_box_view_layout', knowx_defaults( 'post-box-view-layout' ) );
+$post_per_row    = 'col-md-' . knowx_mod( 'post_per_row' );
+$post_box_layout = knowx_mod( 'post_box_view_layout' );
 
 if ( $post_box_layout ) {
 	$layout_class = 'post-box-layout';

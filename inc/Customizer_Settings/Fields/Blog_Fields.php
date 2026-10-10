@@ -32,7 +32,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings'        => 'post_per_row',
 			'label'           => esc_html__( 'Post Per Row', 'knowx' ),
 			'section'         => 'site_blog_section',
-			'default'         => '4',
+			'default'         => '3',
 			'priority'        => 10,
 			'choices'         => array(
 				'12' => esc_html__( 'Column 1', 'knowx' ),
@@ -56,7 +56,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings' => 'post_box_view_layout',
 			'label'    => esc_html__( 'Post Box View Layout', 'knowx' ),
 			'section'  => 'site_blog_section',
-			'default'  => '',
+			'default'  => 0,
 			'choices'  => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),

@@ -7,8 +7,8 @@
  * @package knowx
  */
 
-// Default setting values.
-require get_template_directory() . '/inc/defaults.php';
+// Setting helpers.
+require get_template_directory() . '/inc/helpers.php';
 
 // Setup autoloader (via Composer or custom).
 if ( file_exists( get_template_directory() . '/vendor/autoload.php' ) ) {
@@ -61,6 +61,3 @@ require get_template_directory() . '/inc/knowledge-base.php';
 
 // Load the breadcrumb trail.
 require get_template_directory() . '/inc/breadcrumbs.php';
-
-// Custom WP Login Form.
-require get_template_directory() . '/inc/login.php';

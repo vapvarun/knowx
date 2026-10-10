@@ -154,7 +154,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			return $classes;
 		}
 
-		$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
+		$default_sidebar = knowx_mod( 'sidebar_option' );
 
 		if ( 'left' === $default_sidebar && $this->is_left_sidebar_active() ) {
 			$classes[] = 'has-sidebar-left';

@@ -48,7 +48,7 @@ class Component implements Component_Interface {
 	 * Site width body class.
 	 */
 	public function site_width_body_classes( array $classes ): array {
-		$classes[] = 'layout-' . get_theme_mod( 'site_layout', knowx_defaults( 'site-layout' ) );
+		$classes[] = 'layout-' . knowx_mod( 'site_layout' );
 
 		return $classes;
 	}
@@ -58,7 +58,7 @@ class Component implements Component_Interface {
 	 */
 	public function site_sticky_sidebar_body_classes( array $classes ): array {
 
-		$sticky_sidebar = get_theme_mod( 'sticky_sidebar_option', knowx_defaults( 'sticky-sidebar' ) );
+		$sticky_sidebar = knowx_mod( 'sticky_sidebar_option' );
 		if ( $sticky_sidebar ) {
 			$classes[] = 'sticky-sidebar-enable';
 		}
@@ -70,7 +70,7 @@ class Component implements Component_Interface {
 	 * Site sticky header body class.
 	 */
 	public function site_sticky_header_classes( array $classes ): array {
-		$sticky_header = get_theme_mod( 'site_sticky_header', knowx_defaults( 'site-sticky-header' ) );
+		$sticky_header = knowx_mod( 'site_sticky_header' );
 		if ( $sticky_header ) {
 			$classes[] = 'sticky-header';
 		}
@@ -254,26 +254,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// WP Login.
-		\KnowX\KnowX\Customizer_Framework\Panel::add(
-			'site_wp_login',
-			array(
-				'title'       => esc_html__( 'WP Login', 'knowx' ),
-				'priority'    => 31,
-				'description' => '',
-			)
-		);
-
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'site_wp_login_logo',
-			array(
-				'title'       => esc_html__( 'Logo', 'knowx' ),
-				'priority'    => 30,
-				'description' => '',
-				'panel'       => 'site_wp_login',
-			)
-		);
-
 		// Site Footer.
 		\KnowX\KnowX\Customizer_Framework\Panel::add(
 			'site_footer_panel',
@@ -304,16 +284,6 @@ class Component implements Component_Interface {
 				'panel'       => 'site_footer_panel',
 			)
 		);
-
-		// Site Performance.
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'site_performance_section',
-			array(
-				'title'       => esc_html__( 'Site Performance', 'knowx' ),
-				'priority'    => 31,
-				'description' => '',
-			)
-		);
 	}
 
 	/**
@@ -330,8 +300,6 @@ class Component implements Component_Interface {
 		require_once $fields_dir . 'Blog_Fields.php';
 		require_once $fields_dir . 'Sidebar_Fields.php';
 		require_once $fields_dir . 'Knowledge_Base_Fields.php';
-		require_once $fields_dir . 'WP_Login_Fields.php';
 		require_once $fields_dir . 'Footer_Fields.php';
-		require_once $fields_dir . 'Site_Performance.php';
 	}
 }

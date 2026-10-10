@@ -78,54 +78,6 @@ defined( 'ABSPATH' ) || exit;
 	);
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'hero_section_title_typo',
-			'label'    => esc_html__( 'Hero Section Title Typography', 'knowx' ),
-			'section'  => 'site_knowledge_section_one',
-			'default'  => array(
-				'font-family'    => '',
-				'variant'        => '',
-				'font-size'      => '',
-				'line-height'    => '',
-				'letter-spacing' => '',
-				'color'          => '#ffffff',
-				'text-transform' => 'none',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => '.knowx-section-hero .entry-title',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'hero_section_content_typo',
-			'label'    => esc_html__( 'Hero Section Content Typography', 'knowx' ),
-			'section'  => 'site_knowledge_section_one',
-			'default'  => array(
-				'font-family'    => '',
-				'variant'        => '',
-				'font-size'      => '',
-				'line-height'    => '',
-				'letter-spacing' => '',
-				'color'          => '#ffffff',
-				'text-transform' => 'none',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => '.knowx-section-hero .entry-summary, .knowx-section-hero .entry-summary p',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'custom',
 		array(
 			'settings' => 'custom-knowledge-divider-three',
@@ -203,54 +155,6 @@ defined( 'ABSPATH' ) || exit;
 	);
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'support_section_title_typo',
-			'label'    => esc_html__( 'Support Section Heading Typography', 'knowx' ),
-			'section'  => 'site_knowledge_section_one',
-			'default'  => array(
-				'font-family'    => '',
-				'variant'        => '',
-				'font-size'      => '',
-				'line-height'    => '',
-				'letter-spacing' => '',
-				'color'          => '#333333',
-				'text-transform' => 'none',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => '.knowx-support-title',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'support_section_content_typo',
-			'label'    => esc_html__( 'Support Section Content Typography', 'knowx' ),
-			'section'  => 'site_knowledge_section_one',
-			'default'  => array(
-				'font-family'    => '',
-				'variant'        => '',
-				'font-size'      => '',
-				'line-height'    => '',
-				'letter-spacing' => '',
-				'color'          => '#333333',
-				'text-transform' => 'none',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => '.knowx-support-content, .knowx-support-content p',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'text',
 		array(
 			'settings' => 'support_section_button_text',
@@ -324,6 +228,7 @@ defined( 'ABSPATH' ) || exit;
 			'label'       => esc_html__( 'Posts per category', 'knowx' ),
 			'description' => esc_html__( 'Only numeric characters allowed. Leave empty for 10.', 'knowx' ),
 			'section'     => 'site_knowledge_section_two',
+			'default'     => 10,
 		)
 	);
 

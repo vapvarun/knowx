@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings' => 'sticky_sidebar_option',
 			'label'    => esc_html__( 'Sticky Sidebar ?', 'knowx' ),
 			'section'  => 'site_sidebar_layout',
-			'default'  => '1',
+			'default'  => 1,
 			'choices'  => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),

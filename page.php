@@ -19,7 +19,7 @@ get_header();
 knowx()->print_styles( 'knowx-content' );
 knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
-$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
+$default_sidebar = knowx_mod( 'sidebar_option' );
 
 ?>
 

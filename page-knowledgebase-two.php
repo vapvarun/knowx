@@ -16,8 +16,8 @@ get_header();
 knowx()->print_styles( 'knowx-content' );
 
 $sections         = knowx_kb_sections();
-$show_description = 'yes' === get_theme_mod( 'knowx_cat_description', 'no' );
-$show_view_all    = 'yes' === get_theme_mod( 'knowx_view_all', 'no' );
+$show_description = 'yes' === knowx_mod( 'knowx_cat_description' );
+$show_view_all    = 'yes' === knowx_mod( 'knowx_view_all' );
 
 ?>
 
@@ -30,7 +30,7 @@ $show_view_all    = 'yes' === get_theme_mod( 'knowx_view_all', 'no' );
 	<?php
 	if ( have_posts() ) {
 
-		if ( 'yes' === get_theme_mod( 'knowx_page_title', 'yes' ) ) {
+		if ( 'yes' === knowx_mod( 'knowx_page_title' ) ) {
 			get_template_part( 'template-parts/content/page_header' );
 		}
 

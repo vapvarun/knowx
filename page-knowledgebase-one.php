@@ -15,14 +15,14 @@ get_header();
 
 knowx()->print_styles( 'knowx-content' );
 
-$hero_title   = get_theme_mod( 'hero_section_heading' );
-$hero_content = get_theme_mod( 'hero_section_content' );
+$hero_title   = knowx_mod( 'hero_section_heading' );
+$hero_content = knowx_mod( 'hero_section_content' );
 
-$support_title   = get_theme_mod( 'support_section_heading' );
-$support_content = get_theme_mod( 'support_section_content' );
+$support_title   = knowx_mod( 'support_section_heading' );
+$support_content = knowx_mod( 'support_section_content' );
 
-$support_button_text = get_theme_mod( 'support_section_button_text' );
-$support_button_link = get_theme_mod( 'support_section_button_link_url' );
+$support_button_text = knowx_mod( 'support_section_button_text' );
+$support_button_link = knowx_mod( 'support_section_button_link_url' );
 
 $hero_image = get_the_post_thumbnail_url( get_queried_object_id(), 'full' );
 $categories = knowx_kb_top_categories();

@@ -78,13 +78,12 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'typography',
 		array(
-			'settings' => 'h1_typography_option',
-			'label'    => esc_html__( 'H1 Tag Settings', 'knowx' ),
+			'settings' => 'headings_typography_option',
+			'label'    => esc_html__( 'Headings (H1 to H6)', 'knowx' ),
 			'section'  => 'headings_typography_section',
 			'default'  => array(
 				'font-family'    => 'Open Sans',
 				'variant'        => '500',
-				'font-size'      => '30px',
 				'line-height'    => '1.4',
 				'letter-spacing' => '0',
 				'color'          => '#333333',
@@ -94,132 +93,7 @@ defined( 'ABSPATH' ) || exit;
 			'priority' => 10,
 			'output'   => array(
 				array(
-					'element' => 'h1',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'h2_typography_option',
-			'label'    => esc_html__( 'H2 Tag Settings', 'knowx' ),
-			'section'  => 'headings_typography_section',
-			'default'  => array(
-				'font-family'    => 'Open Sans',
-				'variant'        => '500',
-				'font-size'      => '24px',
-				'line-height'    => '1.4',
-				'letter-spacing' => '0',
-				'color'          => '#333333',
-				'text-transform' => 'none',
-				'text-align'     => '',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => 'h2',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'h3_typography_option',
-			'label'    => esc_html__( 'H3 Tag Settings', 'knowx' ),
-			'section'  => 'headings_typography_section',
-			'default'  => array(
-				'font-family'    => 'Open Sans',
-				'variant'        => '500',
-				'font-size'      => '22px',
-				'line-height'    => '1.4',
-				'letter-spacing' => '0',
-				'color'          => '#333333',
-				'text-transform' => 'none',
-				'text-align'     => '',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => 'h3',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'h4_typography_option',
-			'label'    => esc_html__( 'H4 Tag Settings', 'knowx' ),
-			'section'  => 'headings_typography_section',
-			'default'  => array(
-				'font-family'    => 'Open Sans',
-				'variant'        => '500',
-				'font-size'      => '20px',
-				'line-height'    => '1.4',
-				'letter-spacing' => '0',
-				'color'          => '#333333',
-				'text-transform' => 'none',
-				'text-align'     => '',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => 'h4',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'h5_typography_option',
-			'label'    => esc_html__( 'H5 Tag Settings', 'knowx' ),
-			'section'  => 'headings_typography_section',
-			'default'  => array(
-				'font-family'    => 'Open Sans',
-				'variant'        => '500',
-				'font-size'      => '18px',
-				'line-height'    => '1.4',
-				'letter-spacing' => '0',
-				'color'          => '#333333',
-				'text-transform' => 'none',
-				'text-align'     => '',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => 'h5',
-				),
-			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'typography',
-		array(
-			'settings' => 'h6_typography_option',
-			'label'    => esc_html__( 'H6 Tag Settings', 'knowx' ),
-			'section'  => 'headings_typography_section',
-			'default'  => array(
-				'font-family'    => 'Open Sans',
-				'variant'        => '500',
-				'font-size'      => '16px',
-				'line-height'    => '1.4',
-				'letter-spacing' => '0',
-				'color'          => '#333333',
-				'text-transform' => 'none',
-				'text-align'     => '',
-			),
-			'priority' => 10,
-			'output'   => array(
-				array(
-					'element' => 'h6',
+					'element' => 'h1, h2, h3, h4, h5, h6',
 				),
 			),
 		)

@@ -42,7 +42,7 @@ class Component implements Component_Interface {
 			apply_filters(
 				'knowx_custom_background_args',
 				array(
-					'default-color' => 'ffffff',
+					'default-color' => 'f7f7f9',
 					'default-image' => '',
 				)
 			)

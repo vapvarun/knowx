@@ -45,7 +45,6 @@ class Component implements Component_Interface {
 			$site_header_bg_color                = get_theme_mod( 'site_header_bg_color' );
 			$menu_hover_color                    = get_theme_mod( 'menu_hover_color' );
 			$menu_active_color                   = get_theme_mod( 'menu_active_color' );
-			$body_background_color               = get_theme_mod( 'body_background_color' );
 			$site_primary_color                  = get_theme_mod( 'site_primary_color' );
 			$site_links_color                    = get_theme_mod( 'site_links_color' );
 			$site_links_focus_hover_color        = get_theme_mod( 'site_links_focus_hover_color' );
@@ -89,11 +88,6 @@ class Component implements Component_Interface {
 			if ( isset( $menu_active_color ) && ! empty( $menu_active_color ) ) {
 				$color      = get_theme_mod( 'menu_active_color' );
 				$color_var .= '--color-menu-active: ' . $color . ';';
-			}
-
-			if ( isset( $body_background_color ) && ! empty( $body_background_color ) ) {
-				$color      = get_theme_mod( 'body_background_color' );
-				$color_var .= '--color-theme-body: ' . $color . ';';
 			}
 
 			if ( isset( $site_primary_color ) && ! empty( $site_primary_color ) ) {

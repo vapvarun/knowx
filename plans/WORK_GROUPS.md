@@ -30,7 +30,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W05 | Security and correctness hardening | done | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
 | W06 | Visual baseline and settings inventory | done | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
 | W07 | Customizer_Framework port, Kirki removed | done | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
-| W08 | Settings redesign and audit | todo | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
+| W08 | Settings redesign and audit | done | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
 | W09 | Tokens, dark mode, colour output | todo | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
 | W10 | JavaScript: ordering, jQuery, libraries | todo | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
 | W11 | CSS: token migration, RTL, focus, responsive | todo | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
@@ -154,12 +154,16 @@ Plan phase 1. The BuddyX `inc/Customizer_Framework/` was copied and renamed to `
 - Note: the front end now prints each field's default as CSS (as Kirki did when it was active), so the default look is the designed one (for example the hero is `#03A9F4`); W09 puts this on tokens.
 
 ## W08 Settings redesign and audit (feeds B)
-- [ ] Section topology mirrors BuddyX plus a KnowX Knowledge Base panel; unused settings dropped; duplicates merged (`knowx_exclude` vs `knowx_exclude_posts`)
-- [ ] `output` CSS or `refresh` transport for every setting; no `postMessage` without preview JS (7 WP Login settings today, A section 4.19)
-- [ ] Defaults chosen once from BuddyX/TT5 practice (not from Kirki-era values); `site_loader` default off
-- [ ] Write new settings as 0/1 toggles (no legacy `'on'`/`'off'` handling needed)
-- [ ] Three-pass audit simplified: save round-trip, per-field render, live preview
-- Gate: each of the 11 sections ticked in checklist B.
+Colour settings are decided in W09 together with the token system; everything else is done here. No migration, so settings were cut and renamed freely.
+- [x] **82 settings down to 58** (63 fields incl. dividers): removed the WP Login panel (9 settings) and `inc/login.php` (login branding is plugin territory on wordpress.org), the Site Performance section (two settings nothing read), `site_footer_bg` and `site_sub_header_bg` (never read), the four hero/support typography controls and the sub-header typography control (static CSS already styles them), five of the six heading controls, and `body_background_color`
+- [x] Core first: the body background is core `custom-background` (default `#f7f7f9`), not a duplicate setting; headings are one **Headings (H1 to H6)** control for family, weight, line-height and colour, with the size scale in static CSS (`_typography.css`)
+- [x] One default source: `knowx_mod( $id )` returns the saved value or the default declared on the field; `knowx_defaults()` and every `get_theme_mod( ..., knowx_defaults() )` are gone (12 files); helpers live in `inc/helpers.php` with `knowx_is_truthy()`
+- [x] Every switch is a plain 0/1 default; `site_loader` is off by default; `post_per_row` default 3; `knowx_posts` default 10; switch consumers use `knowx_is_truthy()`
+- [x] No setting is unread (`docs/customizer-inventory.md`: "Settings with no reader and no output CSS: none"); no `postMessage` transport without preview support remains (the login settings were the only ones)
+- [x] Unit tests: 25 tests (accessor default, truthiness table, KB helpers, breadcrumbs); the unit bootstrap defines `ABSPATH` because framework files exit without it, which used to end the PHPUnit run silently
+- [x] **Three-pass audit on the real Customizer** (Chrome DevTools): (1) save round trip: six values including the headings typography array saved through `wp.customize.previewer.save()` and read back with WP-CLI, and the front end showed them (container width 1100px, loader markup, heading weight 700 and colour, hero heading, excluded category tile gone); (2) every one of the 58 theme settings has a rendered control and 13 sections focus without render errors; (3) live preview and dependent controls verified in W07
+- [ ] Colour settings (24), the footer and copyright colours and `site_container_width` output move to tokens in W09
+- Gate: lint 0; phpstan clean; phpcs 19 errors left (extra.php docblocks, page-knowledgebase-one, tests; scoped excludes unchanged); screenshots at 4 widths differ from W07 by at most 0.07%; zip 972 KB. **Passed 2026-10-10.**
 
 ## W09 Tokens, dark mode, colour output (feeds B, I)
 - [ ] `inc/Tokens`, `Color_Mode_Toggle` copied; `$simple_color_tokens` mapped to KnowX settings (24 colour settings and 13 `output` rules, C section 3)

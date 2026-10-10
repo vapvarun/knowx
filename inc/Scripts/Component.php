@@ -174,7 +174,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			return $this->js_files;
 		}
 
-		$enable_scrollup = (bool) get_theme_mod( 'knowx_scroll_top', false );
+		$enable_scrollup = knowx_is_truthy( knowx_mod( 'knowx_scroll_top' ) );
 
 		$js_files = array(
 			// Core vendor scripts.

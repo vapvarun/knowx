@@ -31,20 +31,20 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 		if ( is_front_page() ) {
 			return;
 		}
-		$site_subheader = get_theme_mod( 'site_sub_header', knowx_defaults( 'site-sub-header' ) );
-		if ( ! empty( $site_subheader ) ) {
+		$site_subheader = knowx_mod( 'site_sub_header' );
+		if ( knowx_is_truthy( $site_subheader ) ) {
 			?>
 		<div class="site-sub-header">
 			<div class="container">
 				<?php
-				$breadcrumbs = get_theme_mod( 'site_breadcrumbs', knowx_defaults( 'site-breadcrumbs' ) );
-				if ( ! empty( $breadcrumbs ) ) {
+				$breadcrumbs = knowx_mod( 'site_breadcrumbs' );
+				if ( knowx_is_truthy( $breadcrumbs ) ) {
 					knowx_the_breadcrumb();
 				}
 				?>
 				<?php
-				$site_search = get_theme_mod( 'site_search', knowx_defaults( 'site-search' ) );
-				if ( ! empty( $site_search ) ) {
+				$site_search = knowx_mod( 'site_search' );
+				if ( knowx_is_truthy( $site_search ) ) {
 					get_search_form();
 				}
 				?>
@@ -65,8 +65,8 @@ function knowx_the_breadcrumb() {
 // Site Loader.
 if ( ! function_exists( 'knowx_site_loader' ) ) {
 	function knowx_site_loader() {
-		$loader = get_theme_mod( 'site_loader', knowx_defaults( 'site-loader' ) );
-		if ( '1' == $loader ) {
+		$loader = knowx_mod( 'site_loader' );
+		if ( knowx_is_truthy( $loader ) ) {
 			echo '<div class="site-loader"><div class="loader-inner"><span class="dot"></span><span class="dot dot1"></span><span class="dot dot2"></span><span class="dot dot3"></span><span class="dot dot4"></span></div></div>';
 		}
 	}
@@ -85,7 +85,7 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 	 */
 	function knowx_footer_custom_text() {
 
-		$copyright = get_theme_mod( 'site_copyright_text' );
+		$copyright = knowx_mod( 'site_copyright_text' );
 		if ( ! empty( $copyright ) ) {
 			$copyright    = str_replace( '[current_year]', date_i18n( 'Y' ), $copyright );
 			$copyright    = str_replace( '[site_title]', '<span class="knowx-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $copyright );
@@ -172,34 +172,4 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
  */
 function knowx_template_uses_container() {
 	return ! is_page_template( array( 'full-width.php', 'page-knowledgebase-one.php' ) );
-}
-
-if ( ! function_exists( 'knowx_is_truthy' ) ) {
-	/**
-	 * Whether a setting value means "on".
-	 *
-	 * Accepts booleans, integers and the strings 1, on, yes, true and enable (case
-	 * insensitive). Unlike wp_validate_boolean(), the string "off" is false.
-	 *
-	 * @param mixed $value Raw setting value.
-	 * @return bool True when the value is truthy.
-	 */
-	function knowx_is_truthy( $value ): bool {
-		if ( is_bool( $value ) ) {
-			return $value;
-		}
-		if ( is_int( $value ) ) {
-			return 0 !== $value;
-		}
-		if ( is_string( $value ) ) {
-			$normalized = strtolower( trim( $value ) );
-			if ( in_array( $normalized, array( '1', 'on', 'yes', 'true', 'enable' ), true ) ) {
-				return true;
-			}
-			if ( in_array( $normalized, array( '0', '', 'off', 'no', 'false', 'disable' ), true ) ) {
-				return false;
-			}
-		}
-		return (bool) $value;
-	}
 }

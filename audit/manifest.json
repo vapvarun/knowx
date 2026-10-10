@@ -1,6 +1,6 @@
 {
   "theme": "knowx",
-  "version": "1.7.5",
+  "version": "2.0.0",
   "generated_by": "tools/build-manifest.py",
   "components": [
     "Accessibility",

@@ -303,3 +303,8 @@ ul.knowx-categories-lists ul.children li a {
     text-decoration: none;
 }
 /* stylelint-enable */
+/* Touch targets: list widgets (categories, archives, meta, pages) get 24px or more of height. */
+.widget li > a {
+    display: inline-block;
+    padding-block: 0.3em;
+}

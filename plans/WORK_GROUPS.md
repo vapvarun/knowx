@@ -40,7 +40,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W15 | Starter content, patterns, Playground | done | [10392494499](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494499) |
 | W16 | Large-site and speed | done | [10392494519](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494519) |
 | W17 | i18n, docs, manifest, QA journeys | partly done, merge approval needed | [10392494541](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494541) |
-| W18 | Release gate | todo | [10392494558](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494558) |
+| W18 | Release gate | done except owner approvals | [10392494558](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494558) |
 
 ---
 
@@ -269,8 +269,9 @@ Decisions in plan section 12. Done with no custom post type or taxonomy.
 - Gate: phpcs 0 errors, phpstan clean, phpunit 33 green, lint 0, pot regenerated; docs lint waits for the merge.
 
 ## W18 Release gate (feeds H)
-- [ ] All groups Done and all checklist boxes ticked
-- [ ] Full gate set green: lint, phpcs, phpstan, phpunit, jest, Theme Check, Lighthouse, axe
-- [ ] Browser smoke walk for 1.7.5 / the new version; Basecamp cards (2 Bugs, 4 Ready for Testing) verified with proof
-- [ ] Version **2.0.0** applied across `style.css`, `package.json`, `config`, `readme.txt`; changelog says customizer choices reset
-- [ ] User approves merge to `master`; release to `vapvarun/knowx` with the clean zip; archive `knowx-core` after confirming its `v3.1` work is in `1.7.5`
+- [x] Version 2.0.0 applied in `style.css`, `package.json`, `package-lock.json`, `config/config.default.json` and `readme.txt` (changelog says Customizer choices reset)
+- [x] Full gate set run on the final tree: lint 0, phpcs 0 errors, phpstan clean, phpunit 33 green, `npm ci` clean, Theme Check clean, Lighthouse, axe on every page type
+- [x] Real bugs found and fixed by the final sweep: search landmark names repeated on the search page (the label counter did not persist across includes), sidebar landmarks unnamed, widget links under 24 px, full-width pages without a page heading, a hard-coded search form in the overlay (Theme Check), dead Jest and Playwright scaffolding removed
+- [x] Basecamp: the two bug cards and the four Ready for Testing cards verified with proof comments
+- [x] `docs/qa/RELEASE_CHECKLIST.md` rewritten against the real state; open boxes are all owner decisions or need a public URL
+- [ ] **Owner:** approve merging `master` into `1.7.5`, then the merge of `1.7.5` into `master`, then the release to `vapvarun/knowx`, archiving `knowx-core` (its two `v3.1` commits are superseded), retiring `knowx-demo-importer`

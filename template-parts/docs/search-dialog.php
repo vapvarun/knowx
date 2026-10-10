@@ -13,11 +13,10 @@ $knowx_categories = $knowx_product ? array_merge( array( $knowx_product['id'] ),
 <dialog class="knowx-search-dialog" aria-label="<?php esc_attr_e( 'Search the documentation', 'knowx' ); ?>"
 	data-endpoint="<?php echo esc_url( rest_url( 'wp/v2/posts' ) ); ?>"
 	data-categories="<?php echo esc_attr( implode( ',', $knowx_categories ) ); ?>">
-	<form method="get" role="search" action="<?php echo esc_url( home_url( '/' ) ); ?>" class="knowx-search-form">
-		<label class="screen-reader-text" for="knowx-search-input"><?php esc_html_e( 'Search for:', 'knowx' ); ?></label>
-		<input id="knowx-search-input" type="search" name="s" autocomplete="off" placeholder="<?php esc_attr_e( 'Search articles', 'knowx' ); ?>">
+	<div class="knowx-search-form">
+		<?php get_search_form(); ?>
 		<button type="button" class="knowx-search-close"><?php esc_html_e( 'Close', 'knowx' ); ?></button>
-	</form>
+	</div>
 	<?php if ( $knowx_product ) : ?>
 		<label class="knowx-search-scope">
 			<input type="checkbox" checked>

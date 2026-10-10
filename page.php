@@ -28,7 +28,7 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 	<?php do_action( 'knowx_before_content' ); ?>
 
 	<?php if ( 'left' == $default_sidebar || 'both' == $default_sidebar ) : ?>
-		<aside id="secondary-left" class="left-sidebar widget-area">
+		<aside id="secondary-left" class="left-sidebar widget-area" aria-label="<?php esc_attr_e( 'Left sidebar', 'knowx' ); ?>">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_left_sidebar(); ?>
 			</div>
@@ -60,7 +60,7 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 
 	</main><!-- #primary -->
 	<?php if ( 'right' == $default_sidebar || 'both' == $default_sidebar ) : ?>
-		<aside id="secondary" class="primary-sidebar widget-area">
+		<aside id="secondary" class="primary-sidebar widget-area" aria-label="<?php esc_attr_e( 'Sidebar', 'knowx' ); ?>">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_right_sidebar(); ?>
 			</div>

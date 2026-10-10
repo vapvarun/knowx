@@ -11,6 +11,11 @@ namespace KnowX\KnowX;
 
 <div class="entry-content">
 	<?php
+	// Full-width pages print no visible title; keep a page heading for screen readers unless the content brings its own.
+	if ( false === stripos( get_the_content(), '<h1' ) ) {
+		the_title( '<h1 class="screen-reader-text">', '</h1>' );
+	}
+
 	the_content(
 		sprintf(
 			wp_kses(

@@ -58,3 +58,18 @@ if ( ! function_exists( 'knowx_is_truthy' ) ) {
 		return (bool) $value;
 	}
 }
+
+/**
+ * Accessible name for the next search form on the page.
+ *
+ * Every search landmark needs its own name: the first is the site search, the others are numbered.
+ *
+ * @return string Label.
+ */
+function knowx_search_form_label() {
+	static $count = 0;
+	++$count;
+
+	/* translators: %d: position of the search form on the page. */
+	return 1 === $count ? __( 'Site search', 'knowx' ) : sprintf( __( 'Search %d', 'knowx' ), $count );
+}

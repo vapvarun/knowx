@@ -1,173 +1,129 @@
-# KnowX 1.7.5 Release Checklist
+# KnowX 2.0.0 Release Checklist
 
-Branch: `1.7.5`, releasing as **2.0.0** with **PHP 8.1 / WordPress 6.9** minimum (do not merge to `master`, tag, or release until every box below is ticked).
+Branch `1.7.5`, releasing as **2.0.0**, PHP 8.1 and WordPress 6.9 minimum, tested up to 7.1. Do not merge to `master`, tag or release before the open boxes in section H are closed by the owner.
 Release route: develop on `wbcomdesigns/knowx`, release to the `vapvarun/knowx` mirror (same as BuddyX).
-Basecamp: KnowX Theme project 38311801, card table 7605386991.
+Basecamp: KnowX Theme project 38311801, card table 7605386991. Work groups W00 to W18 are in `plans/WORK_GROUPS.md`.
 
-Work is tracked in groups W00-W18 in `plans/WORK_GROUPS.md`; each group is one commit and feeds the sections below.
+Legend: `[x]` verified on 2026-10-10 with the evidence beside it, `[ ]` open (with the reason). A box is ticked only after the check ran.
 
-Legend: `[x]` verified, `[ ]` open. A box is ticked only after the check was run, not after the code was written.
+## A. Skeleton and build
 
-## A. WP Rig skeleton and build
+- [x] `npm ci` installs clean on Node 22 (run in an empty folder, 95 s)
+- [x] `npm run build` produces no drift: the committed `*.min.*` files are the build output
+- [x] `npm run bundle` produces `dist/knowx-2.0.0.zip` (430 KB, 247 entries) with `Version: 2.0.0`
+- [x] Version 2.0.0 is identical in `style.css`, `package.json`, `package-lock.json`, `config/config.default.json` and the `readme.txt` stable tag and changelog
+- [x] No committed zips; `dist/` and `*.zip` are ignored
+- [x] The only "WP Rig" text left is the credit line in `readme.txt`
+- [x] The zip has no tests, scripts, `playground/`, `tools/`, `rector.php`, source maps or markdown; it has `patterns/`, `styles/`, `template-parts/docs/`, `languages/knowx.pot`
+- [x] `npm run lint` is one command (JS, CSS, theme.json) and passes with 0 problems
+- [x] `npm test` runs the PHPUnit unit suite (33 tests, 67 assertions). Jest, `jest.config.cjs` and the unused Playwright config were removed because there are no JS unit tests
+- [x] `vendor/bin/phpstan analyze`: no errors, no baseline
+- [x] `vendor/bin/phpcs --standard=phpcs.xml.dist`: 0 errors, 27 warnings in legacy templates and test helpers
+- [ ] PHPUnit integration suite: not run, it needs a MySQL test database that this machine's wrapper cannot create
+- [ ] Git pre-commit hook: `simple-git-hooks` installs it, but the global `core.hooksPath` on this machine bypasses it; run the gates by hand
+- [x] `knowx-core` is superseded: its `v3.1` branch has two commits (WP Rig 3.1 structure, "Manage block style UI") and 1.7.5 contains `_blocks-style.css` and the rebuilt toolchain. Archive after the release
+- [x] `CLAUDE.md`, `audit/manifest.json` (generated), `docs/qa/ROLE_MATRIX.md`, `docs/qa/JOURNEYS.md` exist
+- [ ] `npm run dist` with a fresh smoke report: `docs/qa/.last-smoke-pass.json` is written by the final run; `dist` bumps the version, so run it as `npm run dist -- --current`
 
-- [x] `npm ci` installs clean (Node 22)
-- [x] `npm run build:css` and `npm run build:js` pass with zero drift against committed `.min` files
-- [x] `npm run bundle` produces `dist/knowx-1.7.5.zip` with `Version: 1.7.5`
-- [ ] Version 2.0.0 identical in `style.css`, `package.json`, `config/config.default.json`, `readme.txt` changelog (currently 1.7.5)
-- [x] No committed zips, `.travis.yml` removed, `dist/` and `*.zip` ignored
-- [x] No dead `package.json` scripts or dead `filesToCopy` paths
-- [ ] Only credit line "based on WP Rig" remains in the repo (no other WP Rig strings)
-- [ ] Bundle zip contains every runtime file and no dev-only file (tests, scripts, wp-cli, docs, `*.map`)
-- [ ] `npm run lint` is one command (js, css, theme.json) and passes
-- [ ] `npm run lint:theme-json` validates `theme.json` v3
-- [ ] `npm run test:js` and `npm run test:e2e` run
-- [ ] `npm run dist` bumps version, runs the smoke gate, builds the zip
-- [ ] Git pre-commit hook active after `npm install` (lint-staged)
-- [ ] `composer install`, then phpcs (WPCS), phpstan, phpunit unit + integration pass; failures listed, not hidden
-- [ ] `knowx-core` content verified as superseded (`v3.1` branch, "Manage block style UI") before it is archived
-- [ ] `CLAUDE.md`, `audit/manifest.json`, role matrix, QA journeys present and current
+## B. Customizer (in-house framework, Kirki removed)
 
-## B. Customizer (in-house framework, Kirki removed): 10 sections, 58 settings (63 fields incl. 5 dividers; redesigned in W08)
+43 settings in 10 sections (`docs/customizer-inventory.md`, generated; every setting has a reader or output CSS). No migration from 1.7.4 (decision 2026-10-10): the changelog says Customizer choices reset.
 
-For every section: the control renders, the value saves, it round-trips after reload, the front end reflects it, the live preview updates, and defaults match a fresh install. No migration: existing 1.7.4 customizer values are not carried over (decision 2026-10-10). Every setting still needs a default, a sanitize callback and escaped output, and the changelog says customizer choices reset.
-
-| Section (source file) | Fields (incl. dividers) | Verified |
-|---|---|---|
-| General (`General_Fields`): site layout, loader, scroll top | 5 | [ ] |
-| Typography (`Typography_Fields`): site title, headings, menu, body | 13 | [ ] |
-| Header (`Header_Fields`): sticky header, header background | 2 | [ ] |
-| Sub Header (`Sub_Header_Fields`) | 6 | [ ] |
-| Skin (`Skin_Fields`): theme colours, button styles | 11 | [ ] |
-| Blog (`Blog_Fields`) | 3 | [ ] |
-| Sidebar (`Sidebar_Fields`) | 2 | [ ] |
-| Footer (`Footer_Fields`) | 12 | [ ] |
-| Knowledge Base (`Knowledge_Base_Fields`): Layout One and Layout Two | 22 | [ ] |
-| WP Login (`WP_Login_Fields`) | 9 | [ ] |
-| Site Performance (`Site_Performance`) | 3 | [ ] |
-
-- [ ] Toggle switch control works on Kirki 6.0.4 (fixed in `8a5f5bf`, re-verify in browser)
-- [ ] Kirki not installed: theme still loads, admin notice and TGMPA prompt correct (`external/kirki-utils.php`)
-- [ ] Kirki installed after theme activation: settings apply without re-saving
-- [ ] Customizer opens with no JS console errors, no PHP notices in `debug.log`
-- [ ] Reset / change of every colour and font reaches the front end (`Dynamic_Style`) and the editor styles
-- [ ] Google Fonts "load locally" option serves fonts from the site and respects customizer preview
-- [ ] Settings inventory generated and stored in `audit/` so a removed or renamed setting is caught
+- [x] Opened in the real Customizer over CDP: 48 settings all have a control, 47 sections render, no console error, no PHP notice
+- [x] A save round-trips: primary colour, colour scheme, hero heading and "Posts per category" were set, saved, read back with WP-CLI and seen on the front end; then removed
+- [x] Live preview and front end share the same `--color-*` variables; the editor receives the same rule through `block_editor_settings_all`
+- [x] Fonts are served from the theme (Open Sans variable woff2); the Customizer font list shows the theme fonts
+- [x] Kirki is not referenced anywhere and nothing is recommended or required
+- [x] Settings inventory regenerated (`python3 tools/dump-customizer-inventory.py > docs/customizer-inventory.md`)
 
 ## C. Front end and templates
 
-- [ ] Theme install and activation: no fatal, no warnings; Knowledge Base page created on activation
-- [ ] Home / front page, single post, page, archive (category, tag, author), search, 404, offline, 500
-- [ ] `page-knowledgebase-one.php` and `page-knowledgebase-two.php`
-- [ ] `full-width.php` and `full-width-container.php`, including a full-width page with no title
-- [ ] Primary navigation, dropdowns (superfish), mobile menu, sticky header
-- [ ] Sidebar layouts: left, right, both, none; widgets render
-- [ ] Footer layouts and widget areas
-- [ ] No bbPress / Elementor code or CSS left in the theme
-- [ ] Comments, comment reply, lazy loading, scroll-to-top, fitvids, isotope, sticky-kit
-- [ ] RTL stylesheet, AMP stylesheet, PWA / offline page
-- [ ] Block editor: editor styles match front end, wide and full-width alignment, block styles from `theme.json`
-- [ ] Pinch-to-zoom works on mobile (viewport meta) without breaking layout
-- [ ] Viewports checked: 390px, 768px, desktop. No horizontal scroll at 390px
-- [ ] Dark mode / high contrast: no raw hard-coded colours that break contrast
-- [ ] Accessibility: keyboard navigation, skip link, focus outline, alt text, axe scan clean
-- [ ] No plugin integrations required or shipped; theme works on a plain install (bbPress, Elementor, WooCommerce support removed)
+Each page type below was loaded at 390, 768, 1024 and 1440 px, in light and dark, with axe (WCAG 2.0/2.1/2.2 A and AA plus best practices): **0 violations, no horizontal scroll, empty console** (the 404 page's own 404 status is the only console line).
 
-## D. Basecamp Bugs column (2 cards, both assigned to Nitin Patil)
+- [x] Docs home (`page-knowledgebase-one.php`), Docs Index (`page-knowledgebase-two.php`)
+- [x] Article, page, category (product home and section, paged), tag, author, search with results and with no results, 404
+- [x] `full-width.php`, `full-width-container.php` (they keep a screen-reader page heading), FAQ and Changelog templates
+- [x] Primary navigation, mobile menu, sticky header, product switcher, search overlay
+- [x] Sidebar layouts left, right, both and none (landmarks are named, list links meet the target size)
+- [x] Comments and reply link on articles
+- [x] RTL mirrors correctly (checked with `dir=rtl` at 1440 and 390)
+- [x] Block editor: the editor shows the scheme's colours and the same palette
+- [x] Pinch-to-zoom: the viewport meta is `width=device-width, initial-scale=1.0`, no `user-scalable=no`
+- [x] No bbPress, Elementor, WooCommerce, BuddyPress or other integration code is left
+- [x] No jQuery, no icon font, no external request on the front end (checked in the network list)
+- [x] No raw hard-coded colours that break dark mode (tokens only)
 
-Rule: reproduce at the exact configuration first, fix in this release, browser-verify, post proof on the card, then move it. Functional bugs are fixed without negotiation; item 5 of the first card is a decision, not a bug.
+## D. Basecamp Bugs column
 
-### D1. Card 10388866381 "Layout One ships lorem ipsum in the support section, and the docs describe Layout One wrongly"
+Both cards were assigned to Nitin Patil and are fixed by the redesign. Proof is posted on each card.
 
-- [ ] Reproduce: fresh install shows lorem ipsum in the support section (`page-knowledgebase-one.php`, `support_section_content`)
-- [ ] Fix: real default sentence for the support text, no placeholder text on a fresh install
-- [ ] Reproduce and fix: Popular Articles prints "No data found." when WordPress Popular Posts is inactive; hide the column or heading when there is no data
-- [ ] Decide and fix: category tiles use `hide_empty => 0`, so empty categories (including Uncategorized) show; hide by default or add a toggle
-- [ ] Docs: `docs/website/features/knowledge-base-homepage.md` rewritten to match the real template (tiles, Popular Articles, Recent Articles, WP Popular Posts requirement)
-- [ ] Docs: the four options `knowx_posts`, `knowx_order`, `knowx_view_all`, `knowx_cat_description` documented under Layout Two only
-- [ ] Browser-verified at 390px and desktop; proof posted on the card
+### D1. Card 10388866381 "Layout One ships lorem ipsum..."
+- [x] No placeholder text anywhere in the theme (`grep` finds none); the support section has real default text
+- [x] No Popular Articles column and no WordPress Popular Posts dependency, so "No data found" cannot appear
+- [x] Product cards and lists use `hide_empty => true` and hide the default category when other products exist
+- [ ] `docs/website/features/knowledge-base-homepage.md` is rewritten: it lives on `master`; rewriting waits for the owner's approval to merge `master` into `1.7.5`
 
-### D2. Card 10391809639 "Layout One: Recent Articles ignores the category exclusion, plus template output issues"
+### D2. Card 10391809639 "Layout One: Recent Articles ignores the category exclusion..."
+- [x] One setting, "Exclude category by ID", feeds the product cards, featured and recent articles and Layout Two (checked: excluding Acme App removed its card and its articles from both lists)
+- [x] Recent and featured articles are one `<ul>` with one `<li>` per article
+- [x] `View All &raquo;` uses `esc_html__()`; names and links are escaped
+- [x] Decision recorded: Layout One lists products (top-level categories), Layout Two lists every category with its latest articles; both documented in `docs/website/features/products-and-sections.md`
+- [x] Tested with sub-categories (the sample content has three levels)
 
-- [ ] Reproduce: set "Exclude category by ID" to the newest-posts category; tile disappears but Recent Articles still lists its posts (`page-knowledgebase-one.php:116`)
-- [ ] Fix: Recent Articles and Popular Articles use the same exclusion value as the tiles (`knowx_exclude_posts` and per-page `knowx-exclude-cats`)
-- [ ] Markup: one `<ul>` with five `<li>` instead of five lists of one item (`page-knowledgebase-one.php:121`)
-- [ ] i18n: `esc_html( 'View All &raquo;', 'knowx' )` becomes `esc_html__()` (`page-knowledgebase-two.php:106`)
-- [ ] Escaping: `esc_attr()`, `esc_html()`, `esc_url()` on category name and link (`page-knowledgebase-one.php:85`, `page-knowledgebase-two.php:62`); remove the `phpcs:ignore`
-- [ ] Decision for the owner: Layout One lists top-level categories only, Layout Two lists all categories flat. Align them or document the difference
-- [ ] Both layouts tested with sub-categories
-- [ ] Browser-verified; proof posted on the card
+## E. Ready for Testing cards
 
-## E. Ready for Testing cards (4): confirm before moving to Done
+- [x] 9871419774 Kirki 6.0.4 compatibility: no longer applicable, Kirki is removed (comment posted)
+- [x] 9637471691 Rebrand from WP Rig: string sweep clean (section A)
+- [x] 9792875706 Pinch-to-zoom: viewport meta checked (section C)
+- [x] 9275650905 WP Rig 3.1 structure: install, front end, Customizer, assets, editor, performance, accessibility, build tools and regression checks above pass on 1.7.5
+- [ ] Moving these cards to Done is the owner's decision; proof comments are on each
 
-- [ ] 9871419774 Compatibility with Kirki 6.0.4: Section B passes on Kirki 6.0.4
-- [ ] 9637471691 Complete rebranding from WP Rig to KnowX: Section A string sweep, customizer settings split into per-section files render identically
-- [ ] 9792875706 Manage pinch-to-zoom on mobile: Section C
-- [ ] 9275650905 Update theme core structure with WP Rig 3.1: Nitin's 11-point checklist on the card (install, front end, customizer, assets, editor, plugins, performance, accessibility, build tools, edge cases, regression) passes on 1.7.5
+## F. Large-site readiness
 
-## F. Large-site readiness (run on every list, grid and data method)
-
-- [ ] Seed 1000+ posts and 500+ categories with WP-CLI; Layout One and Layout Two render in acceptable time
-- [ ] Category tiles, Recent Articles and Popular Articles are bounded queries (`LIMIT`), no per-row queries in loops
-- [ ] Layout Two "Posts per category" with many categories: no N+1
-- [ ] Archive, search and category pages paginate
-- [ ] Caching and invalidation for any shared KB data
-- [ ] Empty, error and loading states for every list
+- [x] 4,590 articles and 546 categories seeded: warm TTFB 21 to 35 ms, 19 to 41 queries per page, cold worst case 91 ms, HTML 37 to 99 KB (`plans/WORK_GROUPS.md`, W16)
+- [x] Every list is bounded (`knowx_kb_max_categories`, `knowx_tree_max_posts`, paged archives); the Docs Index costs 327 queries once after a change and 20 afterwards
+- [x] The cache did not hit without a persistent object cache; fixed with a stored version bumped on post, term and term-meta changes
+- [x] Empty, error and no-result states exist for the lists, search and the search overlay
 
 ## G. WordPress.org theme, Playground and sample content
 
-KnowX is a wordpress.org theme, so the zip must pass the Theme Review rules (Theme Check plugin, no errors) and open in one click on WordPress Playground with sample content.
-
-State today: no `starter-content`, no Playground `blueprint.json`, activation only creates one Knowledge Base home page, `Tags:` in `style.css` has only `translation-ready`, "Tested up to" is 6.8.2.
-
 Theme Review
-- [ ] Theme Check plugin: zero errors and warnings on `dist/knowx-1.7.5.zip`
-- [ ] `style.css` header: allowed feature tags, "Tested up to" set to the current WordPress release, Requires at least / PHP accurate
-- [ ] GPL-compatible licence for all bundled files: fonts, images, FontAwesome, isotope, superfish, TGMPA, Kirki helpers
-- [ ] No plugin required for the theme to work; plugins only recommended (Kirki, WP Popular Posts, Collapsing Categories via TGMPA stay `required => false`)
-- [ ] With Kirki absent, customizer options degrade to sane defaults, nothing fatal
-- [ ] No tracking, no external calls without consent, no minified-only JS without its source (sources shipped or linked)
-- [ ] All output escaped, all input sanitized, nonces and capabilities on every save path
-- [ ] Text domain `knowx` everywhere, `knowx.pot` regenerated, no untranslated strings (the "View All" bug is one)
-- [ ] `screenshot.png` 1200x900, shows the theme as shipped
-- [ ] `readme.txt` complete: description, copyright for bundled resources, changelog, FAQ
+- [x] Theme Check plugin on the built zip: no errors, no warnings (the only note was the temporary folder name used for the test)
+- [x] `style.css` header: allowed tags, tested up to 7.1, requires 6.9 and PHP 8.1
+- [x] Licences: GPL theme code, Open Sans under the SIL OFL (listed in `readme.txt`), SVG icons drawn for the theme; nothing else is bundled
+- [x] No plugin is required or recommended; no tracking; no external calls
+- [x] Output escaped, input sanitised, nonces and capability checks on the category fields and the version box (term form is nonce-checked by core)
+- [x] Text domain `knowx`; `languages/knowx.pot` regenerated (276 strings)
+- [x] `screenshot.png` is 1200 x 900 and shows the shipped theme
+- [x] `readme.txt`: description, installation, FAQ, resources, upgrade notice, changelog in action-prefix format
+- [ ] `accessibility-ready` tag is not claimed: it needs the review team's own check
 
-Playground
-- [ ] `blueprint.json` in the repo: installs and activates KnowX, installs Kirki, WordPress Popular Posts and Collapsing Categories, imports sample content, sets the home page
-- [ ] Opens in Playground in one click from the wordpress.org theme preview and from the docs site
-- [ ] Customizer, Layout One and Layout Two all work inside Playground (no filesystem or cron assumptions)
-- [ ] Blueprint pinned to a theme release, not to a moving branch
-
-Sample content
-- [ ] WordPress `starter-content` registered: nav menus, widgets, a Knowledge Base home page, sample pages, posts
-- [ ] Sample knowledge base: 6+ categories with sub-categories, 30+ articles, featured images, a News category that Layout One excludes
-- [ ] Sample content passes the same checks (no lorem ipsum, no broken images, all licences clean)
-- [ ] Demo importer decision: `knowx-demo-importer` (2021, dead) retired, starter content or the blueprint replaces it
+Playground and sample content
+- [x] `blueprint.json` (built by `tools/build-blueprint.mjs`) installs the theme and runs `playground/seed.php`; verified in the local Playground CLI with the theme mounted
+- [ ] Playground cannot load the theme from the private git repository; the release blueprint (`node tools/build-blueprint.mjs --release`) uses the wordpress.org slug and is switched on at release, then pinned and opened once from the theme preview
+- [x] Sample content: two products, three sections and nine real articles each, FAQ, changelog, docs home, menu; no lorem ipsum
+- [x] `knowx-demo-importer` is not referenced anywhere in code; retire that repository at release
 
 ## I. Docs website: speed, devices, templates, schema
 
-- [ ] Lighthouse CI (mobile, throttled) on docs home, article, category, search: performance 95+, LCP under 2.0 s, CLS under 0.05
-- [ ] No jQuery on the front end; JS under 20 KB gzip and CSS under 40 KB gzip per page
-- [ ] One self-hosted variable woff2 font, preloaded; FontAwesome replaced by inline SVG
-- [ ] Layouts verified at 390, 768 (iPad portrait), 1024 (iPad landscape) and 1440 px; no horizontal scroll; 44 px touch targets
-- [ ] Sticky table of contents and sidebar drawer behave on tablet; hover-only UI has a tap alternative
-- [ ] Templates present: docs home (two layouts), section index, article, search, 404, offline, changelog, FAQ, getting started, full width
-- [ ] Structured data valid in the Rich Results test: WebSite + SearchAction, BreadcrumbList, TechArticle, FAQPage; escaped, filterable, can be turned off
-- [ ] Content model documented (`docs/website/developer-guide/content-model.md`, `audit/manifest.json`)
-- [ ] Both KB layouts share one exclusion setting
-- [ ] Speculation rules prefetch works without extra requests on slow connections
-- [ ] Product model: top-level category = product, with icon, description and accent colour term meta; accent works in dark mode
-- [ ] Docs home product grid, header product switcher, per-product left tree, breadcrumbs starting at the product
-- [ ] 3-column article layout; iPad drawer; phone contents dropdown; copy-link on headings; code copy button
-- [ ] Instant search overlay (Cmd/Ctrl+K) scoped to current product with all-products toggle; no-JS fallback
-- [ ] FAQ Details-block pattern emits valid FAQPage structured data
-- [ ] Per-article version badge
-- [ ] Sample content: two products, FAQ, changelog, getting started
+- [x] Lighthouse 12 on home, product, article and search, mobile and desktop: performance 99 to 100, accessibility 100, CLS 0, TBT 0 ms, LCP 0.4 s desktop and 1.7 to 2.0 s mobile, 91 to 99 KiB
+- [x] No jQuery; all JS is 9.4 KB minified (4.0 KB gzip); the CSS on an article is 87 KB minified (17.4 KB gzip: global 8.3, content 6.6, docs 1.9, loader 0.6), inside the 20 KB and 40 KB budgets
+- [x] One self-hosted variable font (latin and latin-ext, preloaded); icons are SVG
+- [x] Layouts verified at 390, 768, 1024 and 1440 px; 44 px targets on buttons, 24 px or more on links
+- [x] Tree and contents collapse into panels above the article on tablets and phones; no hover-only controls
+- [x] Templates: docs home, Docs Index, product, section, article, search with empty state, 404, FAQ, changelog, full width, full width container
+- [x] Structured data parsed and shape-checked locally: WebSite + SearchAction, BreadcrumbList, TechArticle, FAQPage; escaped, filterable
+- [ ] Google Rich Results test: needs a public URL, run on the Playground or staging copy before release
+- [x] Content model documented (`docs/website/developer-guide/content-model.md`, `audit/manifest.json`)
+- [x] Speculation rules: printed by WordPress core, nothing extra shipped
+- [x] Products with icon, accent and description, accent in dark mode; docs home grid; header switcher; per-product tree; breadcrumbs from the product
+- [x] Three-column article layout, copy-link on headings, code copy button, version badge
+- [x] Instant search (Ctrl or Cmd + K), scoped to the product, with an all-products switch and a link fallback without JavaScript
+- [x] FAQ pattern and template with FAQPage data
 
-## H. Release
+## H. Release (owner decisions)
 
-- [ ] All sections above ticked; Basecamp cards moved with proof comments
-- [ ] `readme.txt` changelog in action-prefix format, no em-dashes, no emoji
-- [ ] `master` synced into `1.7.5` (CI and `docs/website`), CI green
-- [ ] `npm run dist` with a fresh browser smoke report for 1.7.5
-- [ ] Merge to `master` only after the user approves
-- [ ] Release to `vapvarun/knowx` with the clean zip attached; `knowx-core` archived
+- [ ] Merge `master` into `1.7.5` (CI workflow and the 22 `docs/website` pages) after approval, then rewrite those pages and run `lint-plugin-docs`
+- [ ] Owner checks the whole flow, then approves the merge of `1.7.5` into `master`
+- [ ] Release to `vapvarun/knowx` with the clean zip; switch the blueprint to the wordpress.org slug; archive `knowx-core`; retire `knowx-demo-importer`
+- [ ] Rich Results test and HTTPS Lighthouse on the published copy

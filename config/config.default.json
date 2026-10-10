@@ -7,7 +7,7 @@
     "author": "wbcomdesigns",
     "author_uri": "https://wbcomdesigns.com",
     "description": "Free theme for a knowledge base",
-    "version": "1.7.5"
+    "version": "2.0.0"
   },
   "dev": {
     "browserSync": {

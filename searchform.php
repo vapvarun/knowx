@@ -7,13 +7,7 @@
 
 $knowx_search_id = wp_unique_id( 'search-field-' );
 
-// Every search landmark needs its own name; the first is the site search.
-static $knowx_search_count = 0;
-++$knowx_search_count;
-$knowx_search_label = 1 === $knowx_search_count
-	? __( 'Site search', 'knowx' )
-	/* translators: %d: position of the search form on the page. */
-	: sprintf( __( 'Search %d', 'knowx' ), $knowx_search_count );
+$knowx_search_label = knowx_search_form_label();
 ?>
 
 <form role="search" aria-label="<?php echo esc_attr( $knowx_search_label ); ?>" method="get" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">

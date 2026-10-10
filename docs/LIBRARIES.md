@@ -55,7 +55,7 @@ Plugin, not bundled. Removed entirely (W07); the in-house Customizer framework r
 | browser-sync, create-cert | Live reload dev server | Keep, dev convenience |
 | sharp, svgo | Image and SVG optimisation in the build | Keep |
 | archiver, fs-extra, del, mkdirp, rimraf, fast-glob, commander, inquirer, ansi-colors, fancy-log, deepmerge | Build scripts | Keep; audit for removal in W17 |
-| jest, jest-expect-message | JS unit tests | Keep |
+| ~~jest, jest-expect-message~~ (removed in W18) | There are no JS unit tests; the browser journeys cover the scripts | **Done**: removed with `jest.config.cjs` and the unused `playwright.config.ts` |
 | wp-pot-cli | Regenerates `languages/knowx.pot` | Keep (W17) |
 | autoprefixer 9, postcss-custom-media, chokidar-cli, replace-in-file, minimist, `eslint-config-standard` / `eslint-plugin-import` / `eslint-plugin-node`, `@eslint/js`, `globals` | Legacy, not imported by the scripts | Review and remove in W01 and W17 |
 | PHP: phpcs + WPCS + PHPCompatibility, phpstan + WordPress stubs, phpunit + Brain Monkey, rector, php-cs-fixer | Coding standard, static analysis, unit tests | Keep |

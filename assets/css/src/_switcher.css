@@ -123,9 +123,22 @@
 	gap: 0.5rem;
 }
 
-.knowx-search-form input[type="search"] {
+.knowx-search-form .searchform {
+	display: flex;
 	flex: 1;
+	gap: 0.5rem;
+	margin: 0;
+	max-width: none;
+}
+
+.knowx-search-form .searchform input[type="search"] {
+	flex: 1;
+	width: auto;
 	min-height: 44px;
+}
+
+.knowx-search-form .searchform .search-icon {
+	display: none;
 }
 
 .knowx-search-close {

@@ -38,13 +38,16 @@ class Component implements Component_Interface {
 		$theme_activated = get_option( 'knowx_theme_activated' );
 
 		if ( ! $theme_activated ) {
-			// Create the home page.
-			$page_id = $this->create_home_page();
+			// Reuse an existing Knowledge Base page instead of creating a duplicate.
+			$existing = get_page_by_path( 'knowledge-base' );
+			$page_id  = $existing ? $existing->ID : $this->create_home_page();
 
 			if ( $page_id ) {
-				// Set the page as front page.
-				update_option( 'show_on_front', 'page' );
-				update_option( 'page_on_front', $page_id );
+				// Only take over the front page when the site does not already use one.
+				if ( ! (int) get_option( 'page_on_front' ) ) {
+					update_option( 'show_on_front', 'page' );
+					update_option( 'page_on_front', $page_id );
+				}
 
 				// Mark theme as activated.
 				update_option( 'knowx_theme_activated', true );

@@ -55,21 +55,11 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 	}
 }
 
-/*
- * BREADCRUMBS
+/**
+ * Prints the breadcrumb trail.
  */
-// to include in functions.php.
-if ( ! function_exists( 'knowx_the_breadcrumb' ) ) {
-	function knowx_the_breadcrumb() {
-		$wpseo_titles = get_option( 'wpseo_titles' );
-		if ( function_exists( 'yoast_breadcrumb' ) && isset( $wpseo_titles['breadcrumbs-enable'] ) && 1 == $wpseo_titles['breadcrumbs-enable'] ) {
-			yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
-		} else {
-			echo '<div class="knowx-breadcrumbs">';
-				knowx_get_breadcrumb();
-			echo '</div>';
-		}
-	}
+function knowx_the_breadcrumb() {
+	knowx_get_breadcrumb();
 }
 
 // Site Loader.
@@ -126,25 +116,17 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 }
 
 /**
- * Categorized Blog
- * Find out if blog has more than one category.
+ * Whether the site has more than one category in use.
+ *
+ * @return bool True when posts are spread over several categories.
  */
-if ( ! function_exists( 'knowx_categorized_blog' ) ) {
-	function knowx_categorized_blog() {
-		if ( false === ( $all_the_cool_cats = get_transient( 'knowx_category_count' ) ) ) {
-
-			$all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
-			$all_the_cool_cats = count( $all_the_cool_cats );
-			set_transient( 'knowx_category_count', $all_the_cool_cats );
-
-		}
-
-		if ( 1 !== (int) $all_the_cool_cats ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+function knowx_categorized_blog() {
+	return (int) wp_count_terms(
+		array(
+			'taxonomy'   => 'category',
+			'hide_empty' => true,
+		)
+	) > 1;
 }
 
 /**
@@ -178,56 +160,6 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 
 }
 
-
-/**
- * Meta box for knowledge base page template
- */
-function knowx_metabox_callback( $post ) {
-	wp_nonce_field( 'knowx_meta_box', 'knowx_nonce' );
-	$cats_value = get_post_meta( $post->ID, 'knowx-exclude-cats', true );
-	?>
-	<p><?php esc_html_e( 'Setting for the Knowledge Base page template. This field will override the one in Customizer.', 'knowx' ); ?></p>
-	<p><strong><label for="knowx-cats"><?php esc_html_e( 'Exclude category by ID', 'knowx' ); ?></label></strong></p>
-	<input class="widefat" id="knowx-cats" type="text" name="knowx-cats" value="<?php echo esc_attr( $cats_value ); ?>" />
-	<p><?php esc_html_e( 'Use a comma to separate multiple categories.', 'knowx' ); ?></p>
-	<?php
-}
-
-function knowx_save_meta( $post_id ) {
-	if ( ! isset( $_POST['knowx_nonce'] ) ) {
-		return;
-	}
-	if ( ! wp_verify_nonce( $_POST['knowx_nonce'], 'knowx_meta_box' ) ) {
-		return;
-	}
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-	if ( ( get_post_type() != 'page' ) || ! current_user_can( 'edit_post', $post_id ) ) {
-		return;
-	}
-	if ( isset( $_POST['knowx-cats'] ) ) {
-		update_post_meta( $post_id, 'knowx-exclude-cats', sanitize_text_field( $_POST['knowx-cats'] ) );
-	}
-}
-add_action( 'save_post', 'knowx_save_meta' );
-
-
-/*
- * Set post views count using post meta
- */
-function setPostViews( $postID ) {
-	$countKey = 'post_views_count';
-	$count    = get_post_meta( $postID, $countKey, true );
-	if ( '' == $count ) {
-		$count = 0;
-		delete_post_meta( $postID, $countKey );
-		add_post_meta( $postID, $countKey, '0' );
-	} else {
-		++$count;
-		update_post_meta( $postID, $countKey, $count );
-	}
-}
 
 /**
  * Whether header.php should wrap the page content in a `.container`.

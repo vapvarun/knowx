@@ -54,19 +54,11 @@ require get_template_directory() . '/inc/functions.php';
 // Initialize the theme.
 call_user_func( 'KnowX\KnowX\knowx' );
 
-// Require plugin.php to use is_plugin_active() below.
-if ( ! function_exists( 'is_plugin_active' ) ) {
-	include_once ABSPATH . 'wp-admin/includes/plugin.php';
-}
-
-// Load webfont loader file.
-require get_template_directory() . '/inc/Webfont/class-knowx-webfont-loader.php';
-
 // Load theme extra function.
 require get_template_directory() . '/inc/extra.php';
 
-// Load theme breadcrubms function.
-require get_template_directory() . '/inc/class-knowx-breadcrubms.php';
+// Load the breadcrumb trail.
+require get_template_directory() . '/inc/breadcrumbs.php';
 
 // Custom WP Login Form.
 require get_template_directory() . '/inc/login.php';

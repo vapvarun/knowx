@@ -36,7 +36,7 @@ knowx()->print_styles( 'knowx-comments' );
 				printf(
 					/* translators: 1: title. */
 					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'knowx' ),
-					'<span>' . get_the_title() . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					'<span>' . esc_html( get_the_title() ) . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			} else {
 				printf(
@@ -44,7 +44,7 @@ knowx()->print_styles( 'knowx-comments' );
 					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $comment_count, 'comments title', 'knowx' ) ),
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					number_format_i18n( $comment_count ),
-					'<span>' . get_the_title() . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					'<span>' . esc_html( get_the_title() ) . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				);
 			}
 			?>

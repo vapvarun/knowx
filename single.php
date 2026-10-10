@@ -38,8 +38,6 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 		
 		<?php
 		if ( have_posts() ) {
-			setPostViews( get_the_ID() );
-
 			get_template_part( 'template-parts/content/page_header' );
 
 			$classes = get_body_class();

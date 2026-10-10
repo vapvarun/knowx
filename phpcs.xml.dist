@@ -44,8 +44,7 @@
 	<!-- Rewritten or deleted in later work groups; polished there, not twice (see plans/WORK_GROUPS.md). -->
 	<exclude-pattern>*/external/*</exclude-pattern>             <!-- W07: Kirki, TGMPA and knowx_defaults go -->
 	<exclude-pattern>*/inc/Kirki_Option/*</exclude-pattern>      <!-- W07: replaced by Customizer_Framework -->
-	<exclude-pattern>*/inc/Webfont/*</exclude-pattern>           <!-- W05/W12: removed, fonts via theme.json -->
-	<exclude-pattern>*/inc/class-knowx-breadcrubms.php</exclude-pattern> <!-- W14: replaced by a small breadcrumb helper -->
+
 	<exclude-pattern>*/external/class-tgm-plugin-activation.php</exclude-pattern>
 
 	<!--

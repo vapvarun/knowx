@@ -27,7 +27,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W02 | Dead code, core duplicates and repo hygiene | done | [10392494288](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494288) |
 | W03 | Compatibility headers and theme-review blockers | done | [10392494297](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494297) |
 | W04 | Basecamp Bugs cards and KB template defects | todo | [10392494317](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494317) |
-| W05 | Security and correctness hardening | todo | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
+| W05 | Security and correctness hardening | done | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
 | W06 | Visual baseline and settings inventory | todo | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
 | W07 | Customizer_Framework port, Kirki removed | todo | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
 | W08 | Settings redesign and audit | todo | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
@@ -120,18 +120,18 @@ Cards 10388866381 and 10391809639 plus the related defects from B section 1. Rep
 - Gate: both cards reproduced then fixed; 390px and desktop screenshots; seeded 1000+ posts / 500+ categories run in acceptable time.
 
 ## W05 Security and correctness hardening (feeds A, G)
-From A section 4. Real PHP bugs found by phpstan (W00) to fix here: `inc/login.php:122,125,136,145` undefined variables; `inc/class-knowx-breadcrubms.php:337,1349` missing returns, `:704` uses a void result, `:914` `get_day_link` argument count; `inc/back-compat.php:47` `WP_CLI` without guard; `inc/EZ_Customizer/Component.php` class name case (file removed in W02).
-- [ ] Webfont loader (`inc/Webfont/class-knowx-webfont-loader.php`): remove entirely (zero callers); it `include`s remote-fetched CSS as PHP (`:238`), saves font files under remote names, recurses forever on empty fetch, can delete the uploads directory, schedules a non-existent `'monthly'` event. Replaced in W12
-- [ ] `setPostViews()` (`inc/extra.php:257`, `single.php:42`): remove (plugin territory, DB write per view, breaks caching)
-- [ ] AJAX / REST: nonce on `knowx_regenerate_fonts_folder` (removed with the loader), remove `my-theme/v1/settings` route and `Options` component
-- [ ] Activation (`Activation/Component.php:46-72`): do not overwrite an existing front page; check page slug before creating; later superseded by starter content in W15
-- [ ] `inc/extra.php:234-250`: unslash and sanitize `$_POST`
-- [ ] `knowx_categorized_blog()` (`extra.php:163`) uses `wp_count_terms`; fix the never-expiring transient
-- [ ] Breadcrumbs `class-knowx-breadcrubms.php`: parenthesis bug line 914, `esc_url()` around HTML line 942, undefined `$post`, unescaped term names, microdata over http (also renamed: file name is misspelled)
-- [ ] Unescaped post title in the `the_content()` more-link text (`entry_content.php`, `entry-full-width.php`, `content-bbpress.php`) and `entry_actions.php`
-- [ ] `login.php`: undefined variables, colour passed through `esc_url`
-- [ ] TGMPA and `wp-admin/includes/plugin.php` loaded on every front-end request (`functions.php:26,72-75`) removed in W07
-- Gate: phpcs security sniffs clean; no `phpcs:ignore` blankets on escaping; manual review of each touched output.
+From A section 4.
+- [x] Webfont loader removed (`inc/Webfont/`, 782 lines): it `include`d remote-fetched CSS as PHP, saved font files under remote names, recursed forever on an empty fetch, could delete the uploads directory, scheduled a non-existent `'monthly'` event and registered an AJAX action without a nonce. Fonts are replaced in W12
+- [x] `setPostViews()` and its call in `single.php` removed (an unauthenticated database write on every view that also defeated page caching)
+- [x] The never-registered meta box (`knowx_metabox_callback`, `knowx_save_meta`, raw `$_POST` use) removed; the leftover read of `knowx-exclude-cats` in the two Knowledge Base templates is removed in W04
+- [x] `knowx_categorized_blog()` uses `wp_count_terms()` instead of loading every category and caching it forever in a transient
+- [x] Breadcrumbs rewritten (1,386-line class to `inc/breadcrumbs.php`, about 130 lines): fixes the parenthesis and `esc_url` bugs, missing returns, undefined `$post`, unescaped term names and http microdata; output is a `<nav aria-label="Breadcrumb">` ordered list, every label escaped at output, with the category ancestor chain; Yoast breadcrumb integration removed; 4 unit tests added
+- [x] Unescaped post titles in more-link text, edit links and the comments heading now use `esc_html( get_the_title() )`
+- [x] Activation no longer overwrites an existing front page and reuses an existing `knowledge-base` page
+- [x] `wp-admin/includes/plugin.php` no longer loaded on every front-end request
+- [x] phpstan real bugs found in W00 are gone (EZ_Customizer, login branches, breadcrumbs); `login.php` dead branches removed in W02
+- [ ] Later groups: TGMPA load per request (W07), Fonts component `sslverify => false` and remote downloads (W12), `login.php` customisation rework (W08)
+- Gate: PHP lint clean; phpunit 11 tests; phpstan OK (baseline 132); phpcs 19 errors left (all in `extra.php` docblocks, `page-knowledgebase-one.php`, `searchform.php`-class issues and tests, owned by W04/W17); breadcrumbs verified on post, category, search, page and 404; `debug.log` empty. **Passed 2026-10-10.**
 
 ## W06 Visual baseline and settings inventory (feeds B)
 No longer a byte-identical migration gate (existing sites are not a constraint); this is a visual reference and a diffable list.

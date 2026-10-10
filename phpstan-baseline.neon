@@ -253,30 +253,6 @@ parameters:
 			path: inc/Sidebars/Component.php
 
 		-
-			message: '#^Function get_day_link invoked with 1 parameter, 3 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: inc/class-knowx-breadcrubms.php
-
-		-
-			message: '#^Method KnowX_Breadcrumbs\:\:map_rewrite_tags\(\) should return array but return statement is missing\.$#'
-			identifier: return.missing
-			count: 1
-			path: inc/class-knowx-breadcrubms.php
-
-		-
-			message: '#^Method KnowX_Breadcrumbs\:\:trail\(\) should return string but return statement is missing\.$#'
-			identifier: return.missing
-			count: 1
-			path: inc/class-knowx-breadcrubms.php
-
-		-
-			message: '#^Result of method KnowX_Breadcrumbs\:\:get_post_types_by_slug\(\) \(void\) is used\.$#'
-			identifier: method.void
-			count: 1
-			path: inc/class-knowx-breadcrubms.php
-
-		-
 			message: '#^Function knowx_defaults not found\.$#'
 			identifier: function.notFound
 			count: 4

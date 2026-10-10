@@ -240,24 +240,18 @@ body.layout-boxed {
 }
 
 .knowx-trail-items {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
     list-style: none;
 }
 
-.knowx-trail-items,
-.knowx-trail-items li {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    border: none;
-    background: inherit;
-    text-indent: 0;
+.knowx-trail-item + .knowx-trail-item::before {
+    content: "/";
+    margin-inline: .5em;
+    opacity: .6;
 }
-
-.knowx-trail-items li:not(.trail-end)::after {
-    padding: 0 0.3em;
-    content: "\00bb";
-}
-
 
 /*--------------------------------------------------------------
 # Site Text Editor

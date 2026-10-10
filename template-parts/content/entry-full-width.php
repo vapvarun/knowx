@@ -22,7 +22,7 @@ namespace KnowX\KnowX;
 					),
 				)
 			),
-			get_the_title()
+			esc_html( get_the_title() )
 		)
 	);
 

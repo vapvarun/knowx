@@ -180,10 +180,8 @@ wp_delete_post( 2, true );
 
 update_option( 'show_on_front', 'page' );
 update_option( 'page_on_front', $home );
-update_option( 'default_category', (int) get_term_by( 'slug', 'orbit-helpdesk', 'category' )->term_id );
 update_option( 'blogname', 'Orbit Docs' );
 update_option( 'blogdescription', 'Help for Orbit Helpdesk and the Orbit API' );
-update_option( 'permalink_structure', '/%postname%/' );
 
 // Menu.
 $menu_id = wp_create_nav_menu( 'Main menu' );
@@ -204,4 +202,6 @@ $locations            = get_theme_mod( 'nav_menu_locations', array() );
 $locations['primary'] = $menu_id;
 set_theme_mod( 'nav_menu_locations', $locations );
 
-flush_rewrite_rules();
+global $wp_rewrite;
+$wp_rewrite->set_permalink_structure( '/%postname%/' );
+$wp_rewrite->flush_rules( true );

@@ -3,7 +3,7 @@
  * Title: Frequently asked questions
  * Slug: knowx/faq
  * Description: A list of questions that open to show the answer. The theme adds FAQ structured data for search engines.
- * Categories: text
+ * Categories: knowx-docs
  * Keywords: faq, questions, accordion
  *
  * @package knowx

@@ -14,6 +14,7 @@ use function add_action;
 use function add_filter;
 use function add_meta_box;
 use function add_post_type_support;
+use function register_block_pattern_category;
 use function register_post_meta;
 use function register_term_meta;
 use function wp_add_inline_style;
@@ -37,6 +38,7 @@ class Component implements Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'init', array( $this, 'action_register_meta' ) );
+		add_action( 'init', array( $this, 'action_register_pattern_category' ) );
 		add_action( 'wp_footer', array( $this, 'render_search_dialog' ) );
 		add_action( 'wp_head', array( $this, 'render_schema' ), 20 );
 		add_filter( 'the_content', 'knowx_add_heading_anchors', 20 );
@@ -50,6 +52,13 @@ class Component implements Component_Interface {
 		add_action( 'add_meta_boxes_post', array( $this, 'add_version_box' ) );
 		add_action( 'save_post_post', array( $this, 'save_version' ) );
 		add_action( 'pre_get_posts', array( $this, 'order_category_archives' ) );
+	}
+
+	/**
+	 * Registers the pattern category the theme's patterns (patterns/*.php) are listed under.
+	 */
+	public function action_register_pattern_category() {
+		register_block_pattern_category( 'knowx-docs', array( 'label' => __( 'KnowX Docs', 'knowx' ) ) );
 	}
 
 	/**

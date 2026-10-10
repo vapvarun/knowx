@@ -91,25 +91,14 @@
 .knowx-search-trigger {
 	display: inline-flex;
 	align-items: center;
-	gap: 0.4rem;
+	justify-content: center;
+	min-width: 44px;
 	min-height: 44px;
 	margin-inline-start: 0.5rem;
 	padding: 0 0.75rem;
 	border: 1px solid var(--global-border-color);
 	border-radius: var(--global-border-radius);
 	color: var(--global-font-color);
-}
-
-.knowx-search-trigger kbd {
-	font: inherit;
-	font-size: 0.75rem;
-	color: var(--color-muted);
-}
-
-@media (width <= 767px) {
-	.knowx-search-trigger kbd {
-		display: none;
-	}
 }
 
 .knowx-search-dialog {

@@ -75,6 +75,8 @@ input[type="submit"]:focus {
 }
 
 input[type="text"],
+
+input[type="search"],
 input[type="email"],
 input[type="url"],
 input[type="password"],
@@ -98,6 +100,8 @@ textarea {
 }
 
 input[type="text"]:focus,
+
+input[type="search"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
 input[type="password"]:focus,
@@ -164,6 +168,7 @@ select {
 
     @media (hover: none) and (pointer: coarse) {
         input[type="text"],
+        input[type="search"],
         input[type="email"],
         input[type="url"],
         input[type="password"],

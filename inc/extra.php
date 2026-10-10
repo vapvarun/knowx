@@ -229,3 +229,15 @@ function setPostViews( $postID ) {
 	}
 }
 
+/**
+ * Whether header.php should wrap the page content in a `.container`.
+ *
+ * Full width pages and the Knowledge Base Layout One page build their own
+ * full-bleed sections, so the container opened in header.php and closed in
+ * footer.php is skipped for them.
+ *
+ * @return bool True when the content is wrapped in a container.
+ */
+function knowx_template_uses_container() {
+	return ! is_page_template( array( 'full-width.php', 'page-knowledgebase-one.php' ) );
+}

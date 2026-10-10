@@ -28,7 +28,7 @@ $default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-opt
 	<?php do_action( 'knowx_before_content' ); ?>
 
 	<?php if ( 'left' == $default_sidebar || 'both' == $default_sidebar ) : ?>
-		<aside id="secondary" class="left-sidebar widget-area">
+		<aside id="secondary-left" class="left-sidebar widget-area">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_left_sidebar(); ?>
 			</div>

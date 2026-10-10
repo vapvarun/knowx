@@ -12,12 +12,9 @@
 namespace KnowX\KnowX;
 
 ?>
-	<?php
-	$classes = get_body_class();
-	if ( ! in_array( 'page-template-full-width', $classes ) ) {
-		?>
+	<?php if ( knowx_template_uses_container() ) : ?>
 		</div><!-- .container -->
-	<?php } ?>
+	<?php endif; ?>
 
 	<footer id="colophon" class="site-footer">
 			<div class="site-footer-wrapper">

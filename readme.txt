@@ -1,10 +1,10 @@
 === KnowX ===
 Contributors: wbcomdesigns
-Tags: translation-ready
-Requires at least: 4.8
-Tested up to: 6.8.2
-Requires PHP: 7.4
-Stable tag: trunk
+Tags: blog, education, custom-logo, custom-menu, featured-images, left-sidebar, right-sidebar, threaded-comments, translation-ready, rtl-language-support, theme-options, wide-blocks, editor-style, block-styles
+Requires at least: 6.9
+Tested up to: 7.1
+Requires PHP: 8.1
+Stable tag: 1.7.5
 License: GNU General Public License v3.0 (or later)
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

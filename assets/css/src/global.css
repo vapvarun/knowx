@@ -133,7 +133,7 @@ body.layout-boxed {
     content: none;
 }
 
-.site-sub-header>.container form#searchform,
+.site-sub-header>.container form.searchform,
 .site-sub-header>.container form#bbp-search-form {
     display: flex;
     position: relative;
@@ -148,7 +148,7 @@ body.layout-boxed {
 
 @media (max-width: 480px) {
 
-    .site-sub-header>.container form#searchform,
+    .site-sub-header>.container form.searchform,
     .site-sub-header>.container form#bbp-search-form {
         width: 100%;
         min-width: 100%;
@@ -363,7 +363,7 @@ button.media-menu-item {
     position: relative;
 }
 
-.knowx-hero-section-search form#searchform {
+.knowx-hero-section-search form.searchform {
     max-width: 500px;
     margin: auto;
     position: relative;

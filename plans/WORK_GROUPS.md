@@ -25,7 +25,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W00 | Trustworthy gates (tooling) | done | [10392494216](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494216) |
 | W01 | Lint debt cleared | done | [10392494270](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494270) |
 | W02 | Dead code, core duplicates and repo hygiene | done | [10392494288](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494288) |
-| W03 | Compatibility headers and theme-review blockers | todo | [10392494297](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494297) |
+| W03 | Compatibility headers and theme-review blockers | done | [10392494297](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494297) |
 | W04 | Basecamp Bugs cards and KB template defects | todo | [10392494317](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494317) |
 | W05 | Security and correctness hardening | todo | [10392494332](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494332) |
 | W06 | Visual baseline and settings inventory | todo | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
@@ -92,17 +92,16 @@ Verified with `git grep` before every delete. Principle added 2026-10-10: do not
 - Gate: build, bundle, phpunit (7 tests), phpstan (baseline 136), `php -l` clean; home, post, category, search and 404 screenshots at 390 / 768 / 1024 / 1440 show **0.00%** pixel difference against the W00 baseline. **Passed 2026-10-10.**
 
 ## W03 Compatibility headers and theme-review blockers (feeds A, G)
-- [ ] Minimum versions decided: **PHP 8.1, WordPress 6.9**, tested up to 7.1. Code already uses PHP 8.0 syntax (`Options/Component.php:141`, `Fonts/Component.php:331`, `Blocks/Component.php:166,194`) under a 7.4 header and 7.0 gate; make `style.css`, `readme.txt`, `functions.php` gate (`KNOWX_MINIMUM_*`) and composer all say PHP 8.1 / WP 6.9
-- [ ] `Requires at least` 6.9, `Tested up to` 7.1, `Stable tag` = version (not `trunk`)
-- [ ] `wp_body_open()` called in `header.php:27` (today only a custom `knowx_wp_body_open` action fires); remove the shim
-- [ ] HTML nesting: stray `</div>` from `.container` closed in `page-knowledgebase-one.php:28` and `full-width-container.php:36` and again in `footer.php:19`
-- [ ] `searchform.php`: label, `type="search"`, no duplicate ids `s` / `searchform`, accessible name on the icon link
-- [ ] duplicate `#primary-menu` (printed twice, `template-parts/header/navigation.php:46-55`) and duplicate `#secondary` in "both sidebars" mode; mobile close control is an `<a href="#">`
-- [ ] `sidebar-layout` logic: `Sidebars/Component.php:197,221` check the right sidebar twice (left never checked in "both")
-- [ ] `theme.json`: remove `customTemplates` / `templateParts` pointing at missing files (lines 304-365)
-- [ ] `style.css` tags: allowed feature tags (max count), add `accessibility-ready` only after W11 a11y fixes
-- [ ] `readme.txt`: FAQ, Upgrade Notice, Resources (licences for bundled assets), 1.7.5 changelog final
-- Gate: Theme Check plugin shows no blockers for these items.
+- [x] Minimum versions decided and applied: **PHP 8.1, WordPress 6.9**, tested up to 7.1 in `style.css` and `readme.txt`; `Stable tag` is the version (not `trunk`); composer platform PHP 8.1; phpcs `testVersion` 8.1-. The functions.php gate was removed in W02 because core enforces the headers
+- [x] `wp_body_open()` is core (W02)
+- [x] HTML nesting: the `.container` opened in `header.php` and closed in `footer.php` is now decided in one place (`knowx_template_uses_container()`), so Layout One and `full-width-container.php` no longer add a stray `</div>`; `<div>` open/close counts match on home, post, category, search, 404 and all three template test pages
+- [x] `searchform.php` rewritten: `role="search"`, visible-to-screen-readers label, `type="search"`, unique ids, the clear control is a `<button>` with an accessible name; CSS selectors moved from `#searchform` to `.searchform`
+- [x] No duplicate ids on home, post, 404 or search: mobile menu is `#primary-menu-mobile` (toggle `aria-controls` updated), left sidebar is `#secondary-left`, the mobile "Close" control is a `<button>`
+- [x] Sidebar layout logic fixed: `Sidebars::filter_body_classes` checked the right sidebar twice and never the left in "both" mode; strict comparisons; `sidebar.php` was removed in W02
+- [x] `theme.json`: removed `customTemplates` / `templateParts` that pointed at files that do not exist; schema pinned to 6.9
+- [x] `style.css` / `readme.txt` tags: feature and subject tags that are true today (`accessibility-ready` is not claimed until W11)
+- [ ] `readme.txt` FAQ, Upgrade Notice and Resources sections: written in W17 with the final feature set
+- Gate: PHP lint clean, phpunit 7 tests, phpstan OK (baseline regenerated), CSS/JS lint 0, theme.json validates; screenshots at 390 / 768 / 1024 / 1440 differ from the baseline by at most 0.01% (the search results page, from the new search form markup); no duplicate ids; `debug.log` empty. **Passed 2026-10-10.**
 
 ## W04 Basecamp Bugs cards and KB template defects (feeds D, F)
 Cards 10388866381 and 10391809639 plus the related defects from B section 1. Reproduce first, fix, browser-verify, post proof, move card.

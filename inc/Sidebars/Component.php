@@ -148,26 +148,20 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return array Filtered body classes.
 	 */
 	public function filter_body_classes( array $classes ): array {
+		global $template;
+
+		if ( in_array( basename( (string) $template ), array( 'front-page.php', '404.php' ), true ) ) {
+			return $classes;
+		}
+
 		$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
 
-		if ( $this->is_left_sidebar_active() && 'left' == $default_sidebar ) {
-			global $template;
-
-			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php' ) ) ) {
-				$classes[] = 'has-sidebar-left';
-			}
-		} elseif ( $this->is_right_sidebar_active() && 'right' == $default_sidebar ) {
-			global $template;
-
-			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php' ) ) ) {
-				$classes[] = 'has-sidebar-right';
-			}
-		} elseif ( $this->is_right_sidebar_active() && $this->is_right_sidebar_active() && 'both' == $default_sidebar ) {
-			global $template;
-
-			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php' ) ) ) {
-				$classes[] = 'has-sidebar-both';
-			}
+		if ( 'left' === $default_sidebar && $this->is_left_sidebar_active() ) {
+			$classes[] = 'has-sidebar-left';
+		} elseif ( 'right' === $default_sidebar && $this->is_right_sidebar_active() ) {
+			$classes[] = 'has-sidebar-right';
+		} elseif ( 'both' === $default_sidebar && $this->is_left_sidebar_active() && $this->is_right_sidebar_active() ) {
+			$classes[] = 'has-sidebar-both';
 		}
 
 		return $classes;

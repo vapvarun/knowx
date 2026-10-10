@@ -239,19 +239,19 @@ ul.knowx-categories-lists ul.children li a {
     border-radius: 0;
 }
 
-.widget #searchform input.text_input {
+.widget .searchform input.text_input {
     padding-left: 10px;
     width: 100%;
     padding-right: 65px;
 }
 
-.widget #searchform {
+.widget .searchform {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.widget #searchform input[type="submit"] {
+.widget .searchform input[type="submit"] {
     position: absolute;
     right: 3px;
     border-radius: 3px;

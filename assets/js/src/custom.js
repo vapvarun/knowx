@@ -60,7 +60,7 @@
 		});
 
 		$(
-			'#primary-menu a, .cart a.menu-icons-wrapper, .bp-icon-wrap, a.user-link, .site-sub-header a, .site-wrapper a'
+			'#primary-menu a, #primary-menu-mobile a, .cart a.menu-icons-wrapper, .bp-icon-wrap, a.user-link, .site-sub-header a, .site-wrapper a'
 		).focusin(function () {
 			$('.site-header .top-menu-search-container').hide();
 		});

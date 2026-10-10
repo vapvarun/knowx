@@ -39,9 +39,6 @@ namespace KnowX\KnowX;
 				</header><!-- #masthead -->
 			</div>
 	</div>
-<?php
-$classes = get_body_class();
-if ( ! in_array( 'page-template-full-width', $classes ) ) {
-	?>
+<?php if ( knowx_template_uses_container() ) : ?>
 	<div class="container">
-<?php } ?>
+<?php endif; ?>

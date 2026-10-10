@@ -33,7 +33,6 @@ knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 			}
 			?>
 		</main><!-- #primary -->
-	</div><!-- .container -->
 
 	<?php do_action( 'knowx_after_content' ); ?>
 <?php

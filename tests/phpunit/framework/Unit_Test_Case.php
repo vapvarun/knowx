@@ -40,6 +40,7 @@ class Unit_Test_Case extends TestCase {
 				'__',
 				'_x',
 				'esc_html__',
+				'esc_attr__',
 				'esc_html_x',
 				'esc_attr_x',
 

@@ -1,4 +1,5 @@
 module.exports = {
+	setupFilesAfterEnv: [ 'jest-expect-message' ],
 	transform: {},
 	testEnvironment: 'jsdom',
 	moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx'],

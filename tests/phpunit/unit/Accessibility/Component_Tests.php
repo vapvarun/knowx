@@ -76,7 +76,9 @@ class Component_Tests extends Unit_Test_Case {
 	 * @covers Component::action_enqueue_navigation_script()
 	 */
 	public function test_action_enqueue_navigation_script() {
-		$template_tags = $this->mockTemplateTags( array( 'get_asset_version' ) );
+		$template_tags = $this->mockTemplateTags( array( 'get_asset_version', 'is_amp' ) );
+
+		$template_tags->method( 'is_amp' )->willReturn( false );
 
 		$template_tags->expects( $this->once() )
 			->method( 'get_asset_version' )

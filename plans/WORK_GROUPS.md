@@ -15,7 +15,7 @@ Decisions in force: no Kirki, hybrid = classic theme + block features, existing 
 
 | Id | Group | Status | Basecamp card |
 |---|---|---|---|
-| W00 | Trustworthy gates (tooling) | todo | [10392494216](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494216) |
+| W00 | Trustworthy gates (tooling) | done | [10392494216](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494216) |
 | W01 | Lint debt cleared | todo | [10392494270](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494270) |
 | W02 | Dead code and repo hygiene | todo | [10392494288](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494288) |
 | W03 | Compatibility headers and theme-review blockers | todo | [10392494297](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494297) |
@@ -39,17 +39,29 @@ Decisions in force: no Kirki, hybrid = classic theme + block features, existing 
 
 ## W00 Trustworthy gates (feeds A)
 Why first: today the gates lie, so nothing after this can be proven. (tooling audit 2026-10-10)
-- [ ] phpcs: drop `css` from `extensions`, exclude `assets/`, `tests/`, `scripts/`, `optional/dev`, stale `*/gulp/tests/*`; set minimum WP version to match the header. Target: real PHP only (today inc 110, template-parts 6, root 24 errors)
-- [ ] phpstan: load WordPress stubs (`php-stubs/wordpress-stubs` bootstrap), regenerate the stale baseline (72 unmatched ignores)
-- [ ] phpunit: fix the failing Base_Support test (expected theme-support list) and the Accessibility error; both suites green
-- [ ] jest: remove the duplicate config (`package.json` `jest` key vs `jest.config.cjs`); `npm run test:js` runs
-- [ ] playwright: `testDir` exists (`tests/e2e/specs`) or the script is removed
-- [ ] `package.json` scripts added: `lint` (js + css + theme-json), `lint:theme-json` (port `validate-theme-json.js`), `test`, `dist`, `docs:check`
-- [ ] git hooks: `simple-git-hooks` + `lint-staged` (php -l via script, stylelint, eslint)
-- [ ] untrack artifacts: `tests/phpunit/.wp-tests-setup-complete`, `scripts/tests/prod-build/config.local.json`, decide `config/config.json`
-- [ ] bundle excludes: confirm zip has no dev files, no `.ts/.tsx` source copies, no inline source maps (C: `build-js.js:108` only strips maps when `NODE_ENV=production`, so the 4.6x JS bloat is in the zip)
-- [ ] `composer.json` platform / `Requires PHP` agree
-- Gate: `npm run lint`, `composer phpcs`, `phpstan`, `phpunit`, `jest` all run and report real numbers; recorded in this file.
+- [x] phpcs: PHP only, `assets/`, `scripts/`, `dist/`, `optional/dev`, TGMPA and `setup-wp-env.php` excluded; minimum WP 6.9, `testVersion` 8.1-. Real PHP now reports 189 errors / 82 warnings (was 4256 / 2127 with CSS and JS counted)
+- [x] phpstan: WordPress stubs loaded, baseline regenerated (148 entries, mostly Kirki classes that vanish in W07); real bugs recorded under W05 below
+- [x] phpunit: unit suite 10/10 green (Accessibility test mocks `is_amp` and `esc_attr__`; duplicate `custom-header` / `custom-background` support removed from `Base_Support`). Integration suite needs the WordPress test database and is not run yet
+- [x] jest: duplicate config removed (setup file now in `jest.config.cjs`); `npm run test:js` runs (no JS tests exist yet)
+- [x] playwright: no e2e script is exposed until specs exist (`tests/e2e/specs` is missing); added in W16/W17
+- [x] `package.json` scripts added: `lint`, `lint:theme-json`, `test`, `test:js`, `dist`. `docs:check` moves to W17 because the docs-manifest tools do not exist yet
+- [x] `simple-git-hooks` + `lint-staged` configured and installed. On this machine git uses the global `core.hooksPath` (`~/.config/git/hooks`), so the local pre-commit does not fire here; run `npm run lint` and the gates manually before committing, or chain the hook globally
+- [x] untracked generated artifacts (`tests/phpunit/.wp-tests-setup-complete`, `scripts/tests/prod-build/config.local.json`) and ignored them; `config/config.json` stays (theme identity)
+- [x] release JS no longer ships inline source maps (`build-js.js`; min.js in the zip 284 KB to 60 KB, zip 1.1 MB to 1.0 MB). The `.ts` / `.tsx` / `.cjs` sources copied beside the minified files are intentional: wordpress.org requires readable source for minified JS
+- [ ] `composer.json` platform and `Requires PHP` agree: done in W03 with the version decision (PHP 8.1, WP 6.9)
+- Gate: every command runs and reports a real number. **Passed 2026-10-10.**
+
+| Gate | Result |
+|---|---|
+| `npm run lint:theme-json` | pass (1 file) |
+| stylelint (`assets/css/src`) | 1870 errors (W01) |
+| eslint (`assets/js/src`) | 1047 errors (W01) |
+| phpcs (real PHP) | 189 errors, 82 warnings (W01) |
+| phpstan | OK with baseline of 148 |
+| phpunit unit | OK, 10 tests, 18 assertions |
+| jest | runs, no tests |
+| `php -l` | 0 failures |
+| bundle zip | 1.0 MB, `Version: 1.7.5` |
 
 ## W01 Lint debt cleared (feeds A)
 - [ ] stylelint: 1870 errors under `assets/css/src` (1638 autofixable) fixed; rebuild; visual diff on home, KB1, KB2, post, archive
@@ -102,7 +114,7 @@ Cards 10388866381 and 10391809639 plus the related defects from B section 1. Rep
 - Gate: both cards reproduced then fixed; 390px and desktop screenshots; seeded 1000+ posts / 500+ categories run in acceptable time.
 
 ## W05 Security and correctness hardening (feeds A, G)
-From A section 4.
+From A section 4. Real PHP bugs found by phpstan (W00) to fix here: `inc/login.php:122,125,136,145` undefined variables; `inc/class-knowx-breadcrubms.php:337,1349` missing returns, `:704` uses a void result, `:914` `get_day_link` argument count; `inc/back-compat.php:47` `WP_CLI` without guard; `inc/EZ_Customizer/Component.php` class name case (file removed in W02).
 - [ ] Webfont loader (`inc/Webfont/class-knowx-webfont-loader.php`): remove entirely (zero callers); it `include`s remote-fetched CSS as PHP (`:238`), saves font files under remote names, recurses forever on empty fetch, can delete the uploads directory, schedules a non-existent `'monthly'` event. Replaced in W12
 - [ ] `setPostViews()` (`inc/extra.php:257`, `single.php:42`): remove (plugin territory, DB write per view, breaks caching)
 - [ ] AJAX / REST: nonce on `knowx_regenerate_fonts_folder` (removed with the loader), remove `my-theme/v1/settings` route and `Options` component
@@ -153,7 +165,7 @@ From C section 4 and 5.
 - [ ] `$(window).load()` (`custom.js:264`) replaced; loader overlay cannot stay up on failure
 - [ ] `navigation.ts` inverted expand/collapse labels; `aria-expanded` sync; 55em JS vs 768px CSS breakpoint conflict
 - [ ] Drop libraries CSS or native features replace: sticky-kit, fitvids, scrollUp, lazyload; evaluate isotope and superfish; target no jQuery on the front end
-- [ ] Production build strips inline source maps; no `.ts/.tsx` copied into the zip
+- [x] Production build strips inline source maps (done in W00); `.ts/.tsx` sources beside minified files stay (wp.org requires readable source)
 - [ ] No `console.log` leftovers; no `innerHTML` with data
 - Gate: console clean on every template; JS under 20 KB gzip per page.
 

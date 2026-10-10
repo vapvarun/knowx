@@ -81,10 +81,6 @@ class Component implements Component_Interface {
 
 		// Add support for responsive embedded content.
 		add_theme_support( 'responsive-embeds' );
-
-		// Add support custom-header, custom-background.
-		add_theme_support( 'custom-header' );
-		add_theme_support( 'custom-background' );
 	}
 
 	/**

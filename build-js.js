@@ -8,7 +8,7 @@ import {
 	writeFileSync,
 } from 'fs';
 import path from 'path';
-import { paths, isProd } from './scripts/lib/constants.js';
+import { paths } from './scripts/lib/constants.js';
 import { replaceInlineJS } from './scripts/lib/utils.js';
 
 // Check if we're in watch mode
@@ -109,7 +109,7 @@ files.forEach((file) => {
 			entryPoints: [file],
 			outfile: outputPath,
 			minify: true,
-			sourcemap: isProd ? false : 'inline',
+			sourcemap: isWatchMode ? 'inline' : false,
 			bundle: !isCjs,
 			target: ['es6'],
 			loader: { '.js': 'jsx', '.jsx': 'jsx', '.ts': 'ts', '.tsx': 'tsx', '.cjs': 'js' },

@@ -141,6 +141,19 @@ Sample content
 - [ ] Sample content passes the same checks (no lorem ipsum, no broken images, all licences clean)
 - [ ] Demo importer decision: `knowx-demo-importer` (2021, dead) retired, starter content or the blueprint replaces it
 
+## I. Docs website: speed, devices, templates, schema
+
+- [ ] Lighthouse CI (mobile, throttled) on docs home, article, category, search: performance 95+, LCP under 2.0 s, CLS under 0.05
+- [ ] No jQuery on the front end; JS under 20 KB gzip and CSS under 40 KB gzip per page
+- [ ] One self-hosted variable woff2 font, preloaded; FontAwesome replaced by inline SVG
+- [ ] Layouts verified at 390, 768 (iPad portrait), 1024 (iPad landscape) and 1440 px; no horizontal scroll; 44 px touch targets
+- [ ] Sticky table of contents and sidebar drawer behave on tablet; hover-only UI has a tap alternative
+- [ ] Templates present: docs home (two layouts), section index, article, search, 404, offline, changelog, FAQ, getting started, full width
+- [ ] Structured data valid in the Rich Results test: WebSite + SearchAction, BreadcrumbList, TechArticle, FAQPage; escaped, filterable, can be turned off
+- [ ] Content model documented (`docs/website/developer-guide/content-model.md`, `audit/manifest.json`)
+- [ ] Both KB layouts share one exclusion setting
+- [ ] Speculation rules prefetch works without extra requests on slow connections
+
 ## H. Release
 
 - [ ] All sections above ticked; Basecamp cards moved with proof comments

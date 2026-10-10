@@ -130,3 +130,31 @@ What KnowX takes from it (KnowX stays a classic theme with its own Customizer, p
 8. **`readme.txt` and screenshot** follow the wp.org layout (1200x900 screenshot, changelog per version).
 
 Not taken: converting KnowX to a block theme. The user chose "lightweight like BuddyX", which is a classic theme with the in-house Customizer; the unused `scripts/convert-to-block-theme.js` can be removed.
+
+## 9. Docs website target: fast, responsive, templated, schema-ready (user requirement, 2026-10-10)
+
+KnowX is a documentation theme, so the finished result is judged as a docs site on phone, iPad and desktop. Interpretation used here (confirm with the user): "data schema" means schema.org structured data plus a documented content model. WordPress.org themes cannot register custom post types, so docs stay as posts, categories, tags and post meta.
+
+**Speed budgets (mobile, throttled, docs home + article + category + search)**
+- LCP under 2.0 s, CLS under 0.05, INP under 200 ms, Lighthouse performance 95+ (existing `.lighthouserc.cjs` becomes the gate).
+- No jQuery on the front end; JS under 20 KB gzip total per page; CSS under 40 KB gzip per page, split per template and loaded only where used.
+- Fonts: one self-hosted variable `woff2` family, `font-display: swap`, preloaded; FontAwesome replaced by inline SVG for the few icons used.
+- Images: `loading="lazy"`, `decoding="async"`, explicit width/height, `sizes`, WebP; first image eager.
+- Navigation: reuse BuddyX `Speculation_Rules` for instant page loads; no layout-blocking third-party calls; no remote font or webfont-loader fetch at render.
+- KB queries bounded and cached (fixes the unbounded per-category `get_posts` in Layout Two).
+
+**Responsive contract (checked at 390, 768, 1024, 1440 px)**
+- Phone 390: single column, collapsed menu, search first, 44 px touch targets, no horizontal scroll.
+- iPad portrait 768 and landscape 1024: two-column article with sticky table of contents, sidebar collapses to a drawer, hover-only behaviour replaced by tap.
+- Desktop 1440: readable measure (65-75 characters), sticky sidebar navigation, keyboard navigation and visible focus.
+- Logical CSS properties (`margin-inline`, `padding-block`) so RTL works; container queries for cards; dark mode through tokens.
+
+**Templates the theme must ship**
+- Docs home (Layout One and Layout Two, both from patterns), section/category index, single article (breadcrumbs, table of contents, last updated, previous/next, related, "was this helpful" link to a comment/contact), search results with empty state, 404, offline, changelog page template, FAQ page template, getting-started template, full-width template.
+
+**Schema and content model**
+- JSON-LD or microdata: `WebSite` with `SearchAction` on the home page, `BreadcrumbList` on every template that shows breadcrumbs, `TechArticle` (headline, dateModified, author) on articles, `FAQPage` generated from the FAQ pattern. Output escaped, filterable, and switchable off (SEO plugins may already emit it).
+- Content model documented in `docs/website/developer-guide/content-model.md` and `audit/manifest.json`: posts as articles, categories as sections (children allowed), tags as topics, post meta keys (`knowx-exclude-cats`, reading time, version), and every theme_mod ID.
+- Both layouts read the same exclusion setting (today they differ: `knowx_exclude_posts` vs `knowx_exclude`).
+
+**Verification**: Lighthouse CI on the four page types at mobile and desktop, axe scan, Rich Results test on the structured data, Playwright screenshots at the four widths, and the 1000+ post / 500+ category seed.

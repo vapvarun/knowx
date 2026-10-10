@@ -449,3 +449,146 @@ function knowx_render_toc( $items ) {
 function knowx_article_version( $post_id ) {
 	return (string) get_post_meta( (int) $post_id, 'knowx_version', true );
 }
+
+/**
+ * Plain text of a parsed block and everything inside it.
+ *
+ * @param array $block Parsed block.
+ * @return string Text with collapsed whitespace.
+ */
+function knowx_block_text( $block ) {
+	$html = '';
+	foreach ( (array) ( $block['innerContent'] ?? array() ) as $chunk ) {
+		$html .= is_string( $chunk ) ? $chunk : '';
+	}
+	foreach ( (array) ( $block['innerBlocks'] ?? array() ) as $inner ) {
+		$html .= ' ' . knowx_block_text( $inner );
+	}
+
+	return trim( (string) preg_replace( '/\s+/', ' ', html_entity_decode( strip_tags( $html ), ENT_QUOTES, 'UTF-8' ) ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- pure helper, kept free of WordPress functions so it can be unit tested.
+}
+
+/**
+ * Question and answer pairs from the core Details blocks of a parsed post.
+ *
+ * @param array $blocks Parsed blocks from parse_blocks().
+ * @return array[] Items with question and answer.
+ */
+function knowx_faq_from_blocks( $blocks ) {
+	$faq = array();
+	foreach ( $blocks as $block ) {
+		if ( 'core/details' === ( $block['blockName'] ?? '' ) ) {
+			$first = (string) ( $block['innerContent'][0] ?? '' );
+			if ( preg_match( '#<summary[^>]*>(.*?)</summary>#is', $first, $found ) ) {
+				$question = knowx_block_text( array( 'innerContent' => array( $found[1] ) ) );
+				$answer   = knowx_block_text( array( 'innerBlocks' => $block['innerBlocks'] ?? array() ) );
+				if ( '' !== $question && '' !== $answer ) {
+					$faq[] = array(
+						'question' => $question,
+						'answer'   => $answer,
+					);
+				}
+			}
+		}
+		if ( ! empty( $block['innerBlocks'] ) ) {
+			$faq = array_merge( $faq, knowx_faq_from_blocks( $block['innerBlocks'] ) );
+		}
+	}
+
+	return $faq;
+}
+
+/**
+ * Structured data (schema.org) for the current page, as a JSON-LD graph.
+ *
+ * Home: WebSite with a search action. Article: TechArticle and BreadcrumbList. Any page with two or more
+ * Details blocks: FAQPage.
+ *
+ * @return array[] Graph nodes; empty when there is nothing to describe.
+ */
+function knowx_schema_graph() {
+	$graph = array();
+
+	if ( is_front_page() ) {
+		$graph[] = array(
+			'@type'           => 'WebSite',
+			'@id'             => home_url( '/#website' ),
+			'url'             => home_url( '/' ),
+			'name'            => get_bloginfo( 'name' ),
+			'potentialAction' => array(
+				'@type'       => 'SearchAction',
+				'target'      => home_url( '/?s={search_term_string}' ),
+				'query-input' => 'required name=search_term_string',
+			),
+		);
+	}
+
+	if ( is_singular() ) {
+		$post_id = get_queried_object_id();
+		$url     = get_permalink( $post_id );
+
+		if ( is_singular( 'post' ) ) {
+			$product = knowx_current_product();
+			$article = array(
+				'@type'            => 'TechArticle',
+				'@id'              => $url . '#article',
+				'mainEntityOfPage' => $url,
+				'headline'         => get_the_title( $post_id ),
+				'description'      => wp_strip_all_tags( get_the_excerpt( $post_id ) ),
+				'datePublished'    => get_the_date( 'c', $post_id ),
+				'dateModified'     => get_the_modified_date( 'c', $post_id ),
+				'author'           => array(
+					'@type' => 'Person',
+					'name'  => get_the_author_meta( 'display_name', (int) get_post_field( 'post_author', $post_id ) ),
+				),
+			);
+			if ( $product ) {
+				$article['articleSection'] = $product['name'];
+			}
+			$graph[] = $article;
+		}
+
+		$crumbs   = array();
+		$position = 0;
+		foreach ( knowx_get_breadcrumb_items() as $item ) {
+			$crumb    = array(
+				'@type'    => 'ListItem',
+				'position' => ++$position,
+				'name'     => $item['label'],
+			);
+			$crumbs[] = $crumb + array( 'item' => ! empty( $item['url'] ) ? $item['url'] : $url );
+		}
+		if ( $crumbs ) {
+			$graph[] = array(
+				'@type'           => 'BreadcrumbList',
+				'itemListElement' => $crumbs,
+			);
+		}
+
+		$faq = knowx_faq_from_blocks( parse_blocks( (string) get_post_field( 'post_content', $post_id ) ) );
+		if ( count( $faq ) >= 2 ) {
+			$entities = array();
+			foreach ( $faq as $pair ) {
+				$entities[] = array(
+					'@type'          => 'Question',
+					'name'           => $pair['question'],
+					'acceptedAnswer' => array(
+						'@type' => 'Answer',
+						'text'  => $pair['answer'],
+					),
+				);
+			}
+			$graph[] = array(
+				'@type'      => 'FAQPage',
+				'mainEntity' => $entities,
+			);
+		}
+	}
+
+	/**
+	 * Filters the schema.org graph printed in the page head. Return an empty array to print nothing.
+	 *
+	 * @param array[] $graph Graph nodes.
+	 */
+	return (array) apply_filters( 'knowx_schema_graph', $graph );
+}

@@ -37,6 +37,8 @@ class Component implements Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'init', array( $this, 'action_register_meta' ) );
+		add_action( 'wp_footer', array( $this, 'render_search_dialog' ) );
+		add_action( 'wp_head', array( $this, 'render_schema' ), 20 );
 		add_filter( 'the_content', 'knowx_add_heading_anchors', 20 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'action_add_accent' ), 25 );
 
@@ -48,6 +50,31 @@ class Component implements Component_Interface {
 		add_action( 'add_meta_boxes_post', array( $this, 'add_version_box' ) );
 		add_action( 'save_post_post', array( $this, 'save_version' ) );
 		add_action( 'pre_get_posts', array( $this, 'order_category_archives' ) );
+	}
+
+	/**
+	 * Prints the schema.org graph as JSON-LD.
+	 */
+	public function render_schema() {
+		$graph = knowx_schema_graph();
+		if ( empty( $graph ) ) {
+			return;
+		}
+
+		echo '<script type="application/ld+json">' . wp_json_encode(
+			array(
+				'@context' => 'https://schema.org',
+				'@graph'   => $graph,
+			),
+			JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+		) . "</script>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON encoded with the hex tag flags.
+	}
+
+	/**
+	 * Prints the search overlay once, at the end of the page.
+	 */
+	public function render_search_dialog() {
+		get_template_part( 'template-parts/docs/search-dialog' );
 	}
 
 	/**

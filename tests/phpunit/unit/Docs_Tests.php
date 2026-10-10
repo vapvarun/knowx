@@ -65,4 +65,46 @@ class Docs_Tests extends Unit_Test_Case {
 		$this->assertSame( array( 10 ), knowx_tree_open_ids( $this->tree(), 0, 10 ) );
 		$this->assertSame( array(), knowx_tree_open_ids( $this->tree(), 1, 0 ) );
 	}
+
+	/**
+	 * Details blocks become question and answer pairs, nested blocks included.
+	 */
+	public function test_faq_from_blocks() {
+		$details = static function ( $question, $answer ) {
+			return array(
+				'blockName'    => 'core/details',
+				'innerContent' => array( '<details class="wp-block-details"><summary>' . $question . '</summary>', null, '</details>' ),
+				'innerBlocks'  => array(
+					array(
+						'blockName'    => 'core/paragraph',
+						'innerContent' => array( '<p>' . $answer . '</p>' ),
+						'innerBlocks'  => array(),
+					),
+				),
+			);
+		};
+		$blocks  = array(
+			$details( 'What is <strong>it</strong>?', 'A &amp; B.' ),
+			array(
+				'blockName'    => 'core/group',
+				'innerContent' => array(),
+				'innerBlocks'  => array( $details( 'Where?', 'Here.' ) ),
+			),
+			$details( '', 'No question' ),
+		);
+
+		$this->assertSame(
+			array(
+				array(
+					'question' => 'What is it?',
+					'answer'   => 'A & B.',
+				),
+				array(
+					'question' => 'Where?',
+					'answer'   => 'Here.',
+				),
+			),
+			knowx_faq_from_blocks( $blocks )
+		);
+	}
 }

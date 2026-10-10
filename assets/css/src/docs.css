@@ -500,3 +500,21 @@
 	display: inline-block;
 	padding-block: 0.4rem;
 }
+
+/* FAQ and changelog pages: one readable column. */
+.knowx-narrow {
+	grid-column: 1 / -1;
+	width: min(100%, 50rem);
+	margin-inline: auto;
+	padding-block: 2rem 4rem;
+}
+
+.knowx-narrow-changelog .entry-content h2 {
+	margin-block: 2.5rem 0.5rem;
+	padding-block-start: 1.5rem;
+	border-block-start: 1px solid var(--global-border-color);
+}
+
+.knowx-narrow .wp-block-details {
+	margin-block-end: 0.75rem;
+}

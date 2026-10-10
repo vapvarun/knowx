@@ -36,7 +36,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W11 | CSS: token migration, RTL, focus, responsive | done | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
 | W12 | Fonts and icons | done | [10392494459](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494459) |
 | W13 | theme.json, style variations, editor | done | [10392494471](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494471) |
-| W14 | Docs templates and structured data | todo | [10392494490](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494490) |
+| W14 | Docs templates and structured data | done | [10392494490](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494490) |
 | W15 | Starter content, patterns, Playground | todo | [10392494499](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494499) |
 | W16 | Large-site and speed | todo | [10392494519](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494519) |
 | W17 | i18n, docs, manifest, QA journeys | todo | [10392494541](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494541) |
@@ -128,7 +128,7 @@ From A section 4.
 - [x] `wp-admin/includes/plugin.php` no longer loaded on every front-end request
 - [x] phpstan real bugs found in W00 are gone (EZ_Customizer, login branches, breadcrumbs); `login.php` dead branches removed in W02
 - [ ] Later groups: TGMPA load per request (W07), Fonts component `sslverify => false` and remote downloads (W12), `login.php` customisation rework (W08)
-- Gate: PHP lint clean; phpunit 11 tests; phpstan OK (baseline 132); phpcs 19 errors left (all in `extra.php` docblocks, `page-knowledgebase-one.php`, `searchform.php`-class issues and tests, owned by W04/W17); breadcrumbs verified on post, category, search, page and 404; `debug.log` empty. **Passed 2026-10-10.**
+- Gate: PHP lint clean; phpunit 11 tests; phpstan OK (baseline 132); phpcs 18 errors left (all in `extra.php` docblocks, `page-knowledgebase-one.php`, `searchform.php`-class issues and tests, owned by W04/W17); breadcrumbs verified on post, category, search, page and 404; `debug.log` empty. **Passed 2026-10-10.**
 
 ## W06 Visual baseline and settings inventory (feeds B)
 No longer a byte-identical migration gate (existing sites are not a constraint); this is a visual reference and a diffable list.
@@ -163,7 +163,7 @@ Colour settings are decided in W09 together with the token system; everything el
 - [x] Unit tests: 25 tests (accessor default, truthiness table, KB helpers, breadcrumbs); the unit bootstrap defines `ABSPATH` because framework files exit without it, which used to end the PHPUnit run silently
 - [x] **Three-pass audit on the real Customizer** (Chrome DevTools): (1) save round trip: six values including the headings typography array saved through `wp.customize.previewer.save()` and read back with WP-CLI, and the front end showed them (container width 1100px, loader markup, heading weight 700 and colour, hero heading, excluded category tile gone); (2) every one of the 58 theme settings has a rendered control and 13 sections focus without render errors; (3) live preview and dependent controls verified in W07
 - [ ] Colour settings (24), the footer and copyright colours and `site_container_width` output move to tokens in W09
-- Gate: lint 0; phpstan clean; phpcs 19 errors left (extra.php docblocks, page-knowledgebase-one, tests; scoped excludes unchanged); screenshots at 4 widths differ from W07 by at most 0.07%; zip 972 KB. **Passed 2026-10-10.**
+- Gate: lint 0; phpstan clean; phpcs 18 errors left (extra.php docblocks, page-knowledgebase-one, tests; scoped excludes unchanged); screenshots at 4 widths differ from W07 by at most 0.07%; zip 972 KB. **Passed 2026-10-10.**
 
 ## W09 Tokens, dark mode, colour output (feeds B, I)
 Decision change: BuddyX's 2,079-line Tokens component carries Kirki-era purge logic, 96 tokens and the variation overlay that KnowX does not need, so a lean KnowX version was written instead (about 150 lines of PHP). The existing `--color-*` variable names stay (137 uses, no churn) and the mode attribute is `data-color-mode`; the earlier `--bx-*` prefix decision is dropped.
@@ -217,18 +217,18 @@ From C section 2, 3 and 7. Screenshots now use real device emulation (`shots2.sh
 - Gate: `lint:theme-json` passes (7 files), phpstan clean, phpunit 29 green, lint 0, zip 400 KB, axe 0 violations across 7 schemes x 4 pages x light/dark x 390/1280 px. **Passed 2026-10-10.**
 
 ## W14 Docs product: multi-product, search, FAQ, templates, structured data (feeds I)
-Decisions in plan section 12.
-- [ ] Product model: top-level category = product; term meta for icon, short description, accent colour (sanitised, escaped, edited on the category screen); token integration so accent works in dark mode
-- [ ] Docs home: product card grid (icon, description, article count), header product switcher, breadcrumbs start at the product
-- [ ] Article layout: 3 columns (collapsible section tree, article, sticky "On this page"); iPad drawer; phone contents dropdown; copy-link on headings; code-block copy button; last updated; previous/next; related
-- [ ] Section tree and product grid queries bounded and cached with invalidation on term/post changes
-- [ ] Instant search overlay on `/wp/v2/search` (Cmd/Ctrl+K), scoped to current product with "all products" toggle, keyboard and screen-reader accessible, no-JS fallback to the search page
-- [ ] FAQ: Details-block pattern, FAQ page template, optional FAQ-category accordion archive
-- [ ] Per-article "applies to version" label (post meta) shown as a badge
-- [ ] Templates: product home, section index, article, search results with empty state, changelog, FAQ, getting started, full width
-- [ ] schema.org: WebSite + SearchAction, BreadcrumbList, TechArticle, FAQPage generated from Details blocks; escaped, filterable, can be switched off
-- [ ] Content model documented (`docs/website/developer-guide/content-model.md`, `audit/manifest.json`)
-- Gate: Rich Results test passes on article, FAQ and home; search works with keyboard only; product switcher works at 390 / 768 / 1024 / 1440.
+Decisions in plan section 12. Done with no custom post type or taxonomy.
+- [x] Product model: top-level category = product; term meta for icon (12 shipped SVG icons) and accent colour edited on the category screen, also in REST; description is the core term description; accent drives the brand colour on that product's pages (dark mode derives from it)
+- [x] Docs home: product card grid (icon, description, article count with padded counts), header product switcher (details element, no JS), breadcrumbs already start at the product
+- [x] Article layout: three columns at 1100px and up (sticky section tree, article, sticky "On this page"); below that the tree and contents are collapsible panels above the article (the iPad drawer); copy-link on headings, copy button on code blocks, last updated, previous/next in tree order, "More in this section"
+- [x] Queries bounded and cached with invalidation on any post or term change (`knowx_product_tree` is two queries per product)
+- [x] Instant search: native dialog, Cmd/Ctrl+K or the header button, `/wp/v2/posts?search` (core REST; scoped by passing the product and its descendant ids, the search endpoint cannot filter by category), arrow-key navigation, scope toggle, status messages; the button is a plain link to the search page without JS
+- [x] FAQ: `knowx/faq` pattern from core Details blocks, FAQ page template, FAQPage JSON-LD built from the Details blocks. The optional FAQ-category accordion archive was left out: the FAQ page covers it and a category of posts already lists as an accordion-free list
+- [x] Per-article version badge (post meta, meta box, REST); Order field enabled on posts
+- [x] Templates: Docs Home, product home and section page (`category.php`), article, search with empty state (existing), changelog, FAQ, full width; "getting started" is an ordinary article
+- [x] schema.org: WebSite + SearchAction, TechArticle, BreadcrumbList, FAQPage; escaped with JSON hex flags, filterable
+- [x] Content model documented in `docs/website/developer-guide/content-model.md`; `audit/manifest.json` is created in W17
+- Gate: phpstan clean, phpunit 32 green, lint 0, axe 0 violations on article, product, section, FAQ, changelog and with the search dialog open (light and dark, 390 and 1280), no horizontal overflow at 390/768/1024/1440, search driven end to end. Google's Rich Results test needs a public URL so it runs in W18 against the Playground or staging site; the JSON-LD was parsed and checked against the schema.org shapes locally.
 
 ## W15 Starter content, patterns, Playground (feeds G)
 - [ ] `inc/Starter_Content`: two sample products (3 sections and 8-10 articles each), FAQ page, changelog page, getting-started article, menus, widgets, KB layout pages, no lorem ipsum

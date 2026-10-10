@@ -32,7 +32,7 @@ foreach ( array_merge( array( $knowx_tree['root'] ), $knowx_tree['nodes'] ) as $
 			array_filter(
 				$knowx_node['posts'],
 				static function ( $item ) {
-					return $item['id'] !== get_queried_object_id();
+					return get_queried_object_id() !== $item['id'];
 				}
 			),
 			0,

@@ -21,7 +21,7 @@ Open the inserter, choose **Patterns** and pick the **KnowX Docs** category.
 | Changelog entry | A release heading with New, Improve and Fix items. |
 | Contact support | A closing block with a heading, a sentence and a button. |
 
-Patterns use the theme's colours, so they follow your colour scheme and dark mode.
+Patterns use the theme's colours, so they follow your theme colour and dark mode.
 
 ## Add your own
 

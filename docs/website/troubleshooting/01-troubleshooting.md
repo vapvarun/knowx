@@ -32,7 +32,7 @@ Products can have their own accent colour. Edit the category under **Posts > Cat
 
 ## Colours I set do not apply
 
-A product's accent colour wins over the theme colour on that product's pages, and a colour you set in the Customizer wins over the colour scheme. Reset the field to return to the scheme.
+A product's accent colour wins over the theme colour on that product's pages. To use the theme colour there, set the product's accent to Automatic.
 
 ## Pretty permalinks give "Not found"
 

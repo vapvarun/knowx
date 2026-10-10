@@ -28,6 +28,6 @@ Activate it under **Appearance > Themes**.
 ## What you can override
 
 - Copy any template (`single.php`, `category.php`) or template part (`template-parts/docs/article.php`) into the child theme and edit it.
-- Add patterns in the child theme's `patterns` folder and colour schemes in its `styles` folder.
+- Add patterns in the child theme's `patterns` folder.
 - Change colours with CSS variables, for example `:root { --color-theme-primary: #0a7; }`. See `assets/css/src/_custom-properties.css`.
 - Use the [hooks](03-hooks.md).

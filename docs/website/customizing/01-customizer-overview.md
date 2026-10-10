@@ -6,8 +6,8 @@ Go to **Appearance > Customize**. KnowX has its own Customizer built in, so no p
 
 | Section | What it controls | Page |
 |---|---|---|
-| Colors | Colour scheme, theme colour (with quick picks) and page background | [Colour schemes and dark mode](02-colour-schemes-and-dark-mode.md) |
-| Dark Mode | Default light, dark or automatic mode and the visitor toggle | [Colour schemes and dark mode](02-colour-schemes-and-dark-mode.md) |
+| Colors | Theme colour (with quick picks) and page background | [Colours and dark mode](02-colours-and-dark-mode.md) |
+| Dark Mode | Default light, dark or automatic mode and the visitor toggle | [Colours and dark mode](02-colours-and-dark-mode.md) |
 | Typography: Site Title, Headings, Menu, Body | Fonts, sizes and colours of text | [Typography](03-typography.md) |
 | Header, Breadcrumb Bar | Sticky header, backgrounds, breadcrumbs and search box | [Header and breadcrumb bar](05-header-and-sub-header.md) |
 | General: Layout, Site Loader, Scroll Top | Page width, loading animation, back-to-top button | [Layout, sidebar and posts page](04-layout-sidebar-and-blog.md) |

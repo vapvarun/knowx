@@ -11,7 +11,7 @@ KnowX is a WordPress theme for documentation and FAQ sites. It works for one pro
 - Instant search that can be limited to the current product
 - FAQ and changelog page templates and a set of block patterns
 - schema.org data and a meta description
-- Light and dark mode, six colour schemes and one theme colour
+- Light and dark mode and one theme colour
 - A fast front end: no jQuery, no icon font, one self-hosted font and no external requests
 
 ## How a docs site is built

@@ -552,7 +552,7 @@ were hidden (via .neverending) before. */
 .site {
     margin: 0 auto;
     max-width: 100%;
-    overflow: hidden;
+    overflow: clip;
 }
 
 .blog .site-wrapper,

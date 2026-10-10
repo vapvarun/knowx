@@ -17,7 +17,7 @@ Run each at 390, 768, 1024 and 1440 px, in light and dark mode, with the sample 
 | J11 | Open the changelog page | One column, one heading per release |
 | J12 | Header Products menu | Lists every product, marks the current one, closes with Escape or a click elsewhere |
 | J13 | Toggle dark mode, reload | Choice is kept, no flash of light on load |
-| J14 | Customizer: pick each colour scheme | Preview updates; contrast stays readable; saving keeps it on the front end |
+| J14 | Customizer: pick a theme colour and a page background | Preview updates; links stay readable; saving keeps it on the front end |
 | J15 | Category screen: set icon and accent | Card and product pages use them; REST returns them |
 | J16 | Editor: Order and Applies to version | Order changes the position in the tree; the badge shows on the article |
 | J17 | Open a page with no JavaScript | Content, tree, contents and search page link all work |

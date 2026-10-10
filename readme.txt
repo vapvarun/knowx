@@ -1,6 +1,6 @@
 === KnowX ===
 Contributors: wbcomdesigns
-Tags: blog, education, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, rtl-language-support, theme-options, wide-blocks, editor-style, block-styles, style-variations, right-sidebar, full-width-template
+Tags: blog, education, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready, rtl-language-support, theme-options, wide-blocks, editor-style, block-styles, right-sidebar, full-width-template
 Requires at least: 6.9
 Tested up to: 7.1
 Requires PHP: 8.1
@@ -20,7 +20,7 @@ KnowX turns WordPress into a documentation site without a custom post type or a 
 * FAQ page template and pattern built from the core Details block, with FAQ structured data
 * Changelog page template and an "applies to version" badge on articles
 * schema.org data for the site, articles, breadcrumbs and FAQ
-* Light and dark mode with a visitor toggle, six colour schemes and a theme colour setting
+* Light and dark mode with a visitor toggle, a theme colour with quick picks and a page background colour
 * Open Sans served from your own site, no external requests, no jQuery
 * Works in the block editor with the same colours and fonts as the front end
 
@@ -107,7 +107,7 @@ Major release. The Kirki plugin is no longer used, there are fewer color options
 * New      - Instant search overlay (Ctrl or Cmd + K) that can be limited to the current product.
 * New      - FAQ and Changelog page templates, a docs pattern category and an "applies to version" badge.
 * New      - schema.org data for the site, articles, breadcrumbs and FAQ, and a meta description.
-* New      - Light and dark mode with a visitor toggle and six colour schemes.
+* New      - Light and dark mode with a visitor toggle and a theme colour setting.
 * New      - Sample content and a WordPress Playground blueprint.
 * Improve  - The Kirki plugin and the plugin recommendations are gone; the Customizer is built into the theme.
 * Improve  - Open Sans is served from your site, and the page loads no jQuery and no icon font.

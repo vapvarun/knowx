@@ -77,29 +77,6 @@ class Component implements Component_Interface {
 	}
 
 	/**
-	 * Colour scheme palette from `styles/<slug>.json`, or an empty array.
-	 *
-	 * @param string $slug Scheme slug saved by the Customizer.
-	 * @return string[] Palette as slug => colour.
-	 */
-	public static function scheme_palette( string $slug ): array {
-		if ( ! preg_match( '/^[a-z0-9-]+$/', $slug ) ) {
-			return array();
-		}
-		$file = get_template_directory() . '/styles/' . $slug . '.json';
-		$data = is_readable( $file ) ? wp_json_file_decode( $file, array( 'associative' => true ) ) : null;
-
-		$palette = array();
-		foreach ( (array) ( $data['settings']['color']['palette'] ?? array() ) as $entry ) {
-			$color = self::sanitize_color( $entry['color'] ?? '' );
-			if ( '' !== $color && isset( $entry['slug'] ) ) {
-				$palette[ $entry['slug'] ] = $color;
-			}
-		}
-		return $palette;
-	}
-
-	/**
 	 * Builds the `:root` rule from the settings the owner changed.
 	 *
 	 * Only saved values are printed; unsaved settings keep the stylesheet default.
@@ -109,22 +86,12 @@ class Component implements Component_Interface {
 	public function build_css(): string {
 		$declarations = '';
 
-		// A chosen colour scheme comes first; colours the owner set explicitly still win.
-		$scheme = self::scheme_palette( (string) get_theme_mod( 'site_color_scheme', '' ) );
-		if ( $scheme ) {
-			$declarations .= '--color-surface:' . $scheme['base'] . ';--color-theme-body:' . $scheme['tertiary'] . ';--color-surface-alt:' . $scheme['tertiary'] . ';'
-				. '--color-heading:' . $scheme['contrast'] . ';--global-font-color:color-mix(in srgb,' . $scheme['contrast'] . ' 80%,' . $scheme['base'] . ');'
-				. '--color-theme-secondary:' . $scheme['secondary'] . ';--color-muted:color-mix(in srgb,' . $scheme['contrast'] . ' 75%,' . $scheme['base'] . ');';
-		}
-
 		$primary = self::sanitize_color( get_theme_mod( 'site_primary_color', '' ) );
-		if ( '' === $primary && $scheme ) {
-			$primary = $scheme['primary'];
-		}
 		if ( '' !== $primary ) {
 			$declarations .= '--color-theme-primary:' . $primary . ';--color-on-primary:' . self::on_color( $primary ) . ';';
 
-			$link = self::link_colors( $primary, $scheme['tertiary'] ?? '#f7f7f9' );
+			$page = sanitize_hex_color_no_hash( get_theme_mod( 'background_color', '' ) );
+			$link = self::link_colors( $primary, $page ? '#' . $page : '#f7f7f9' );
 			if ( $link ) {
 				$declarations .= '--color-link:' . $link[0] . ';--color-link-hover:' . $link[1] . ';';
 			}

@@ -32,4 +32,4 @@ Go to **Appearance > Menus**, create a menu with your pages (for example Docs, F
 
 ## 6. Make it yours
 
-Open **Appearance > Customize**. Start with **Colors** for the colour scheme and theme colour, and **Site Identity** for the logo. See the [Customizer overview](../customizing/01-customizer-overview.md).
+Open **Appearance > Customize**. Start with **Colors** for the theme colour and page background, and **Site Identity** for the logo. See the [Customizer overview](../customizing/01-customizer-overview.md).

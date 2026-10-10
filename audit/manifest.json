@@ -234,14 +234,7 @@
       "inc/Docs/Component.php"
     ]
   },
-  "style_variations": [
-    "cool",
-    "minimal",
-    "monochrome",
-    "pastel",
-    "vibrant",
-    "warm"
-  ],
+  "style_variations": [],
   "asset_handles": {
     "styles": [
       "knowx-global",
@@ -295,7 +288,6 @@
     "site_breadcrumbs",
     "site_color_mode",
     "site_color_mode_toggle_show",
-    "site_color_scheme",
     "site_container_width",
     "site_copyright_background_color",
     "site_copyright_content_color",

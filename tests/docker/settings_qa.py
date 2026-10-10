@@ -36,7 +36,6 @@ BG = {'background-color': '#334455'}
 
 # setting -> list of values to try (one run per value)
 TESTS = [
-    ('site_color_scheme', ['cool', 'minimal', 'monochrome', 'pastel', 'vibrant', 'warm']),
     ('site_primary_color', ['#aa2255']),
     ('background_color', ['ffeedd']),
     ('site_color_mode', ['dark', 'auto']),
@@ -138,8 +137,6 @@ def snapshot(pages):
 
 # What the front end must contain after a setting is applied: (page, regex, should_be_present)
 EXPECT = {
-    ('site_color_scheme', 'cool'): ('docs home', r'--color-surface:#F8FAFC', True),
-    ('site_color_scheme', 'warm'): ('article', r'--color-theme-primary:#C2410C', True),
     ('background_color', 'ffeedd'): ('docs home', r'--color-theme-body:#ffeedd', True),
     ('site_primary_color', '#aa2255'): ('docs home', r'--color-theme-primary:#aa2255', True),
     ('site_color_mode', 'dark'): ('docs home', r'var mode="dark"', True),

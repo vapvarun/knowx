@@ -15,7 +15,7 @@ On a test site with 4,590 articles and 546 categories, pages took 21 to 35 ms on
 ## Accessibility
 
 - Skip link, visible focus, keyboard-operable menus, tree, search overlay and FAQ.
-- Colours meet WCAG AA contrast in light and dark mode, including every colour scheme.
+- Colours meet WCAG AA contrast in light and dark mode, including a custom theme colour (links are darkened until they pass).
 - Links and buttons have large touch targets; motion is reduced for visitors who ask for it.
 - Landmarks have unique names; icons are hidden from screen readers and every icon-only button has a label.
 - Right-to-left languages mirror correctly.

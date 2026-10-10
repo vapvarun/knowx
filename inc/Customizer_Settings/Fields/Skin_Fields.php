@@ -8,27 +8,8 @@
 defined( 'ABSPATH' ) || exit;
 
 	/**
-	 * Site Skin
+	 * Colors
 	 */
-	$knowx_schemes = array( '' => esc_html__( 'Default', 'knowx' ) );
-foreach ( (array) glob( get_template_directory() . '/styles/*.json' ) as $knowx_file ) {
-	$knowx_data = wp_json_file_decode( $knowx_file, array( 'associative' => true ) );
-	if ( ! empty( $knowx_data['title'] ) ) {
-		$knowx_schemes[ basename( $knowx_file, '.json' ) ] = esc_html( $knowx_data['title'] );
-	}
-}
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'select',
-		array(
-			'settings' => 'site_color_scheme',
-			'label'    => esc_html__( 'Colour Scheme', 'knowx' ),
-			'section'  => 'site_skin_section',
-			'default'  => '',
-			'choices'  => $knowx_schemes,
-			'priority' => 5,
-		)
-	);
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'color',
@@ -38,8 +19,7 @@ foreach ( (array) glob( get_template_directory() . '/styles/*.json' ) as $knowx_
 			'section'  => 'site_skin_section',
 			'default'  => '#03A9F4',
 			'choices'  => array(
-				'alpha'   => true,
-				// Quick picks under the picker: the colour schemes' brand colours and the product palette. Any other colour can still be chosen.
+				// Quick picks under the picker. Any other colour can still be chosen.
 				'palette' => array( '#03a9f4', '#2563eb', '#7c3aed', '#047857', '#b45309', '#be123c', '#0f766e', '#c2410c' ),
 			),
 			'priority' => 10,

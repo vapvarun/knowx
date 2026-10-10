@@ -60,7 +60,7 @@ class Field {
 		// shortcut form does not support 'image' as a type string — it would
 		// render as a plain text input).
 		'image'           => array( '\\WP_Customize_Setting', '\\WP_Customize_Image_Control', true ),
-		// Background is a Kirki-shape composite (color/image/repeat/position/
+		// Background is an array-shaped composite (color/image/repeat/position/
 		// size/attachment) — six sub-inputs, structured-array value.
 		'background'      => array( '\\WP_Customize_Setting', '\\KnowX\\KnowX\\Customizer_Framework\\Controls\\Background', true ),
 	);
@@ -135,7 +135,7 @@ class Field {
 	}
 
 	/**
-	 * Resolve Kirki-style 'auto' transport to postMessage if output is provided,
+	 * Resolve the 'auto' transport to postMessage if output is provided,
 	 * else refresh. Pass-through for refresh/postMessage.
 	 *
 	 * Default is 'auto' (was 'refresh' pre-5.1.0): when a field declares
@@ -167,7 +167,7 @@ class Field {
 		switch ( $type ) {
 			case 'color':
 				// Alpha-aware fields ('choices' => array('alpha' => true)) accept
-				// rgba / rgb / hex / hsla — matching master Kirki's color-alpha
+				// rgba / rgb / hex / hsla — matching the color-alpha
 				// sanitizer. WordPress core's sanitize_hex_color rejects rgba and
 				// returns NULL, which would silently null out customer-saved
 				// translucent colors on every customizer save (data loss).
@@ -215,7 +215,7 @@ class Field {
 	 *   - Functional: rgb(R,G,B) / rgba(R,G,B,A) / hsl(H,S%,L%) / hsla(H,S%,L%,A)
 	 *
 	 * Returns the trimmed input on match, or '' on invalid/empty input. Matches
-	 * the master Kirki ColorAlpha sanitizer's tolerance so customer-saved rgba
+	 * the color-alpha sanitizer's tolerance so customer-saved rgba
 	 * values from 5.0.x survive 5.1.0 customizer saves intact (no data loss).
 	 *
 	 * @param mixed $value Customer-submitted color value.
@@ -245,9 +245,9 @@ class Field {
 	/**
 	 * Coerce truthy values to 1, falsy to 0. Used for switch + checkbox.
 	 *
-	 * Accepts every shape Kirki produced + theme defaults:
+	 * Accepts every shape of switch value and the theme defaults:
 	 *   - '1', 1, true  → 1
-	 *   - 'on', 'yes', 'true', 'enable' → 1 (Kirki choices key, default values)
+	 *   - 'on', 'yes', 'true', 'enable' → 1 (choices key, default values)
 	 *   - '0', 0, false, '', null, 'off', 'no', 'disable' → 0
 	 *
 	 * This catches a customer-data-loss bug where switches with default 'on'
@@ -283,7 +283,7 @@ class Field {
 
 	/**
 	 * Sanitize a typography array. Whitelisted keys, plain text values.
-	 * Tolerant of Kirki legacy 'variant' key which is normalized at read time
+	 * Tolerant of the older 'variant' key which is normalized at read time
 	 * by Output_Builder, not here.
 	 */
 	public static function sanitize_typography( $value ): array {
@@ -359,7 +359,7 @@ class Field {
 	 * Build the args array passed to add_control() / control constructor.
 	 *
 	 * Strips framework-internal/setting keys; everything else passes through so
-	 * Kirki-shape args (fields, row_label, multiple, mode, etc.) reach control
+	 * array args (fields, row_label, multiple, mode, etc.) reach control
 	 * classes whose public properties match. Compiles array-form active_callback
 	 * to a closure.
 	 */
@@ -380,7 +380,7 @@ class Field {
 		$out['section']     = $args['section'];
 		$out['priority']    = $args['priority'] ?? 10;
 
-		// Compile array-form active_callback (Kirki shape) to a closure.
+		// Compile array-form active_callback (array shape) to a closure.
 		if ( isset( $out['active_callback'] ) && is_array( $out['active_callback'] ) ) {
 			require_once __DIR__ . '/Active_Callback.php';
 			$out['active_callback'] = Active_Callback::compile( $out['active_callback'] );

@@ -2,7 +2,7 @@
 /**
  * KnowX\KnowX\Customizer_Framework\Controls\Background
  *
- * Composite background picker (Kirki-shape):
+ * Composite background picker (array shape):
  *   - background-color      hex/rgba
  *   - background-image      attachment URL
  *   - background-repeat     repeat | no-repeat | repeat-x | repeat-y

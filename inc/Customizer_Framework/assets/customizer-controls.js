@@ -158,14 +158,14 @@
 			// structured/object values to hidden inputs, so hidden.value is unreliable).
 			// Merge over the field's PHP-declared default so partial saves (e.g.
 			// only the [color] sub-key was set in another section) don't blank out
-			// typography keys. Tolerant of Kirki legacy 'variant' key.
+			// typography keys. Tolerant of the older 'variant' key.
 			const settingVal = ctl.setting.get();
 			const defaultVal = ctl.params.default || {};
 			const merged = Object.assign({}, defaultVal,
 				(settingVal && typeof settingVal === 'object' && !Array.isArray(settingVal)) ? settingVal : {}
 			);
 			const initial = merged;
-			// Kirki legacy 'variant' may bake italic into the value (e.g. '700italic')
+			// Older 'variant' may bake italic into the value (e.g. '700italic')
 			let rawVariant = String(initial['font-weight'] || initial.variant || '400').toLowerCase();
 			let initialStyle = initial['font-style'] || 'normal';
 			if (rawVariant.indexOf('italic') !== -1) {
@@ -177,7 +177,7 @@
 
 			// Reflect the saved value.
 			familyEl.value = (initial && initial['font-family']) ? initial['font-family'] : '';
-			// If the saved value isn't in the catalog (e.g. an older Kirki
+			// If the saved value isn't in the catalog (e.g. an older
 			// pick), inject it so the control reflects reality.
 			const savedFam = (initial && initial['font-family']) ? initial['font-family'] : '';
 			if (savedFam && !familyEl.querySelector('option[value="' + window.CSS.escape(savedFam) + '"]')) {
@@ -219,7 +219,7 @@
 			if (alignEl) alignEl.value = initial['text-align'] || '';
 			if (decorEl) decorEl.value = initial['text-decoration'] || '';
 			// Push the hydrated value back into the setting so saving without
-			// changes still emits a coherent shape (Kirki preserved this).
+			// changes still emits a coherent shape .
 			hidden.value = JSON.stringify(initial);
 
 			const sync = () => {

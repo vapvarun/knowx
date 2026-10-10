@@ -3,7 +3,7 @@
  * KnowX\KnowX\Customizer_Framework\Controls\Custom_HTML
  *
  * Renders raw HTML from the setting's `default` value with a strict
- * whitelist via wp_kses. Mirrors Kirki's Custom field which had no
+ * whitelist via wp_kses. Takes arbitrary HTML with no
  * value semantics — just a way to drop info text or buttons into
  * the customizer UI.
  *
@@ -27,7 +27,7 @@ class Custom_HTML extends \WP_Customize_Control {
 	/**
 	 * Render the control content.
 	 *
-	 * The HTML body comes from $this->setting->default (Kirki convention).
+	 * The HTML body comes from $this->setting->default (by convention).
 	 * Strictly kses-filtered to a small whitelist that covers the patterns
 	 * KnowX uses today (info text + occasional buttons + links).
 	 */

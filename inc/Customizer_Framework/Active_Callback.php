@@ -12,18 +12,18 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Active_Callback
  *
- * Compiles Kirki-shape active_callback array conditions into a closure that
+ * Compiles array-form active_callback array conditions into a closure that
  * the WP_Customize_Control's evaluator can call. AND semantics across
  * multiple conditions; supported operators: ==, !=, >, <, in.
  *
- * Kirki shape:
+ * Array shape:
  *   array(
  *     array( 'setting' => 'enable_x', 'operator' => '==', 'value' => true ),
  *     array( 'setting' => 'mode',     'operator' => '==', 'value' => 'advanced' ),
  *   )
  *
  * KnowX free uses only '==' across all 54 active_callback chains today,
- * but the compiler supports the broader Kirki operator set for forward
+ * but the compiler supports a broader operator set for forward
  * compatibility (and because KnowX Pro field defs may use richer operators
  * once it adopts this framework).
  */
@@ -110,7 +110,7 @@ class Active_Callback {
 	 * - If BOTH sides look boolean (any of true/1/'1'/'on'/'yes'/'true'/'enable'
 	 *   for truthy, false/0/'0'/''/'off'/'no'/'false'/'disable'/null for falsy),
 	 *   compare them by their boolean class.
-	 * - Otherwise fall back to PHP loose equality (Kirki's original behavior).
+	 * - Otherwise fall back to PHP loose equality.
 	 *
 	 * Why this matters: Field::sanitize_bool_int normalizes new switch saves to
 	 * 0/1, but customers upgrading from 5.0.x carry literal 'on'/'off' theme_mod

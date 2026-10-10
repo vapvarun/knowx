@@ -13,12 +13,12 @@ defined( 'ABSPATH' ) || exit;
  * Output_Builder
  *
  * Iterates every registered field with a non-empty 'output' arg, reads its
- * theme_mod value, and emits inline CSS. Replaces Kirki's auto-CSS feature.
+ * theme_mod value, and emits inline CSS. Prints the output CSS from the saved values.
  *
  * Supports:
  *   - element / property / prefix / suffix / units (scalar values)
  *   - typography multi-property declaration block (object values)
- *   - Kirki legacy 'variant' key normalization to 'font-weight'
+ *   - 'variant' key normalization to 'font-weight'
  */
 class Output_Builder {
 
@@ -118,13 +118,13 @@ class Output_Builder {
 
 	/**
 	 * Build typography CSS declarations from a structured value array.
-	 * Accepts both modern keys ('font-weight', 'font-size', etc.) and Kirki
+	 * Accepts both modern keys ('font-weight', 'font-size', etc.) and the older
 	 * legacy 'variant' (mapped to font-weight, with 'regular' → 400, 'bold' → 700).
 	 */
 	protected static function typography_declarations( array $value ): string {
 		$decls = '';
 
-		// Kirki legacy: 'variant' → font-weight (and possibly font-style for *italic combos).
+		// Older 'variant' → font-weight (and possibly font-style for *italic combos).
 		if ( ! empty( $value['variant'] ) && empty( $value['font-weight'] ) ) {
 			$variant = strtolower( (string) $value['variant'] );
 			$weight  = $variant;

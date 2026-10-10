@@ -2,7 +2,7 @@
 /**
  * KnowX\KnowX\Customizer_Framework\Component class
  *
- * In-house Customizer framework — replaces Kirki dependency.
+ * In-house Customizer framework.
  * Designed to be portable across Wbcom themes (KnowX, KnowX Pro).
  *
  * @package knowx

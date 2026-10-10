@@ -3,7 +3,7 @@
  * KnowX\KnowX\Customizer_Framework\Controls\Toggle
  *
  * Visual on/off slider, stores 0 or 1. Field type string is 'switch' to
- * match Kirki's Checkbox_Switch naming; class is named 'Toggle' because
+ * name the switch control; class is named 'Toggle' because
  * 'Switch' is a reserved PHP keyword.
  *
  * @package knowx

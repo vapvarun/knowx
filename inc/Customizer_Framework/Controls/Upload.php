@@ -3,7 +3,7 @@
  * KnowX\KnowX\Customizer_Framework\Controls\Upload
  *
  * Generic file upload control extending WP core's upload control.
- * Just normalizes Kirki-style choices.mime_types into core's mime_type arg.
+ * Just normalizes choices.mime_types into core's mime_type arg.
  *
  * @package knowx
  */
@@ -23,14 +23,14 @@ class Upload extends \WP_Customize_Upload_Control {
 	public $type = 'knowx-upload';
 
 	/**
-	 * Constructor — bridges Kirki args to core's upload control args.
+	 * Constructor — bridges the array args to core's upload control args.
 	 *
 	 * @param \WP_Customize_Manager $manager
 	 * @param string                $id
 	 * @param array                 $args
 	 */
 	public function __construct( $manager, $id, $args = array() ) {
-		// Kirki passes mime types via choices.mime_types; core expects mime_type at top level.
+		// Mime types are passed via choices.mime_types; core expects mime_type at top level.
 		if ( isset( $args['choices']['mime_types'] ) ) {
 			$args['mime_type'] = $args['choices']['mime_types'];
 		}

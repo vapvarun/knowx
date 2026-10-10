@@ -1,9 +1,9 @@
 # KnowX Customizer Framework
 
-A theme-native, Kirki-compatible Customizer module. Built for KnowX 5.1.0+ and shipped as a portable namespace so KnowX Pro can consume the same API verbatim.
+A theme-native, Customizer module. Built for KnowX 5.1.0+ and shipped as a portable namespace so KnowX Pro can consume the same API verbatim.
 
 - 20 field types (12 custom controls + 8 core-dispatched)
-- Drop-in compatible with Kirki-shape args (settings/section/output/transport/active_callback/...)
+- Takes array arguments (settings/section/output/transport/active_callback/...)
 - Auto inline-CSS via `Output_Builder` (collects each field's `output` map and renders on `wp_head`)
 - Filter-based extensibility for adding/overriding control types
 
@@ -143,12 +143,12 @@ The 20 field types and the `output`/`active_callback` semantics are stable; cons
 
 ---
 
-## Kirki value-format compatibility
+## Value formats
 
-Two read-time normalizations let theme_mods saved by Kirki carry over without migration:
+Two read-time normalizations keep older saved values readable:
 
-1. **Typography `variant` → `font-weight`**: legacy `variant: 'regular'` / `'700'` / `'700italic'` translates to `font-weight` (+ `font-style: italic` when present). Implemented in both `Output_Builder::typography_declarations()` (PHP) and `customizer-preview.js::typographyCss()` (JS) so live-preview matches refresh output.
-2. **Switch boolean → int**: Kirki `switch` saved values may be `true`/`false`/`'on'`/`'off'`/`1`/`0`. Sanitized to `0`/`1` via `Field::sanitize_bool_int()`.
+1. **Typography `variant` → `font-weight`**: the `variant: 'regular'` / `'700'` / `'700italic'` translates to `font-weight` (+ `font-style: italic` when present). Implemented in both `Output_Builder::typography_declarations()` (PHP) and `customizer-preview.js::typographyCss()` (JS) so live-preview matches refresh output.
+2. **Switch boolean → int**: `switch` saved values may be `true`/`false`/`'on'`/`'off'`/`1`/`0`. Sanitized to `0`/`1` via `Field::sanitize_bool_int()`.
 
 ## Repeater / Sortable read-time decode
 
@@ -159,4 +159,4 @@ $rows = json_decode( get_theme_mod( 'my_repeater', '[]' ), true );
 $rows = is_array( $rows ) ? $rows : array();
 ```
 
-Kirki's `Kirki::get_option()` did this decode automatically; `get_theme_mod()` does not. This is a deliberate trade-off: we use core's getter and keep the framework dependency-free.
+`get_theme_mod()` does not decode them. This is deliberate: the framework uses core's getter and stays dependency-free.

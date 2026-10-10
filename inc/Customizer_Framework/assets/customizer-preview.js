@@ -45,7 +45,7 @@
 	 * Build CSS for a Typography object value (matches PHP Output_Builder).
 	 */
 	function typographyCss(element, val, exclude) {
-		// Kirki legacy 'variant' -> font-weight (+ font-style for italic combos)
+		// Older 'variant' -> font-weight (+ font-style for italic combos)
 		if (val.variant && !val['font-weight']) {
 			let v = String(val.variant).toLowerCase();
 			let style = '';

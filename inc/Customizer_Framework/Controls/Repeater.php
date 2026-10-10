@@ -31,7 +31,7 @@ class Repeater extends \WP_Customize_Control {
 	public $type = 'knowx-repeater';
 
 	/**
-	 * Row schema. Either passed at top level (Kirki shape) or as
+	 * Row schema. Either passed at top level (array shape) or as
 	 * choices['fields']. Map of field-key => { type, label, default? }.
 	 *
 	 * @var array

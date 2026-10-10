@@ -3,7 +3,7 @@
  * KnowX\KnowX\Customizer_Framework\Controls\Color
  *
  * Extends WP core's color control to support a curated palette and alpha
- * via the choices arg (Kirki-compatible).
+ * via the choices arg .
  *
  * @package knowx
  */

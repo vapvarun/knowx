@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 		'radio_image',
 		array(
 			'settings' => 'site_layout',
-			'label'    => esc_html__( 'Site Layout', 'knowx' ),
+			'label'    => esc_html__( 'Layout Style', 'knowx' ),
 			'section'  => 'site_layout',
 			'priority' => 10,
 			'default'  => 'wide',
@@ -32,11 +32,11 @@ defined( 'ABSPATH' ) || exit;
 		'dimension',
 		array(
 			'settings'    => 'site_container_width',
-			'label'       => esc_html__( 'Max Content Layout Width', 'knowx' ),
-			'description' => esc_html__( 'Select the maximum content width for your website (px)', 'knowx' ),
+			'label'       => esc_html__( 'Content Width', 'knowx' ),
+			'description' => esc_html__( 'Widest the page content gets, in pixels.', 'knowx' ),
 			'section'     => 'site_layout',
 			'default'     => '1170px',
-			'priority'    => 10,
+			'priority'    => 20,
 			'transport'   => 'auto',
 			'output'      => array(
 				array(
@@ -57,9 +57,10 @@ defined( 'ABSPATH' ) || exit;
 		'switch',
 		array(
 			'settings' => 'knowx_scroll_top',
-			'label'    => esc_attr__( 'Scroll Top', 'knowx' ),
-			'section'  => 'site_scroll_top',
-			'priority' => 10,
+			'label'    => esc_html__( 'Back to top button', 'knowx' ),
+			'description' => esc_html__( 'Shows a button after scrolling down a long page.', 'knowx' ),
+			'section'  => 'site_layout',
+			'priority' => 40,
 			'default'  => 0,
 			'choices'  => array(
 				'on'  => esc_attr__( 'Yes', 'knowx' ),
@@ -76,6 +77,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings' => 'knowx_corners',
 			'label'    => esc_html__( 'Corners', 'knowx' ),
+			'description' => esc_html__( 'Roundness of cards, buttons and inputs.', 'knowx' ),
 			'section'  => 'site_layout',
 			'default'  => 'soft',
 			'choices'  => array(
@@ -83,6 +85,6 @@ defined( 'ABSPATH' ) || exit;
 				'soft'   => esc_html__( 'Soft', 'knowx' ),
 				'round'  => esc_html__( 'Round', 'knowx' ),
 			),
-			'priority' => 20,
+			'priority' => 30,
 		)
 	);

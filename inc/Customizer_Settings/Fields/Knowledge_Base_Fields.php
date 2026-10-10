@@ -14,8 +14,8 @@ defined( 'ABSPATH' ) || exit;
 		'background',
 		array(
 			'settings'    => 'hero_section_background_setting',
-			'label'       => esc_html__( 'Hero Section Background Control', 'knowx' ),
-			'description' => esc_html__( 'Set hero section background color and image. Note: "Background Image" not apply when set page featured image from backend.', 'knowx' ),
+			'label'       => esc_html__( 'Hero Background', 'knowx' ),
+			'description' => esc_html__( 'Colour or image behind the top of the docs home. A featured image on the page is used instead of the image here.', 'knowx' ),
 			'section'     => 'site_knowledge_section_one',
 			'default'     => array(),
 			'transport'   => 'auto',
@@ -24,6 +24,7 @@ defined( 'ABSPATH' ) || exit;
 					'element' => '.knowx-section-hero',
 				),
 			),
+			'priority' => 10,
 		)
 	);
 
@@ -33,6 +34,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings' => 'custom-knowledge-divider-one',
 			'section'  => 'site_knowledge_section_one',
 			'default'  => '<hr>',
+			'priority' => 13,
 		)
 	);
 
@@ -40,13 +42,13 @@ defined( 'ABSPATH' ) || exit;
 		'text',
 		array(
 			'settings'    => 'hero_section_heading',
-			'label'       => esc_html__( 'Hero Section Heading', 'knowx' ),
+			'label'       => esc_html__( 'Hero Heading', 'knowx' ),
 			'section'     => 'site_knowledge_section_one',
 			'default'     => '',
 			'input_attrs' => array(
-				'placeholder' => esc_html__( 'Create a Knowledge Base with KnowX', 'knowx' ),
+				'placeholder' => esc_html__( 'Empty: the page title is used', 'knowx' ),
 			),
-			'priority'    => 10,
+			'priority'    => 11,
 		)
 	);
 
@@ -54,10 +56,10 @@ defined( 'ABSPATH' ) || exit;
 		'textarea',
 		array(
 			'settings' => 'hero_section_content',
-			'label'    => esc_html__( 'Hero Section Content', 'knowx' ),
+			'label'    => esc_html__( 'Hero Text', 'knowx' ),
 			'section'  => 'site_knowledge_section_one',
 			'default'  => '',
-			'priority' => 10,
+			'priority' => 12,
 		)
 	);
 
@@ -67,36 +69,24 @@ defined( 'ABSPATH' ) || exit;
 			'settings' => 'custom-knowledge-divider-two',
 			'section'  => 'site_knowledge_section_one',
 			'default'  => '<hr>',
+			'priority' => 30,
 		)
 	);
 
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'custom',
-		array(
-			'settings' => 'custom-knowledge-divider-three',
-			'section'  => 'site_knowledge_section_one',
-			'default'  => '<hr>',
-		)
-	);
+
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'text',
 		array(
 			'settings'    => 'knowx_exclude',
-			'label'       => esc_html__( 'Exclude category by ID', 'knowx' ),
-			'description' => esc_html__( 'Applies to both Knowledge Base layouts. Use a comma to separate multiple category IDs.', 'knowx' ),
+			'label'       => esc_html__( 'Hide Categories', 'knowx' ),
+			'description' => esc_html__( 'Category IDs to keep off the docs home, separated by commas. The ID is in the address bar when you edit a category. Their sub-categories are hidden too.', 'knowx' ),
 			'section'     => 'site_knowledge_section_one',
+			'priority' => 21,
 		)
 	);
 
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'custom',
-		array(
-			'settings' => 'custom-knowledge-divider-four',
-			'section'  => 'site_knowledge_section_one',
-			'default'  => '<hr>',
-		)
-	);
+
 
 	
 
@@ -104,13 +94,13 @@ defined( 'ABSPATH' ) || exit;
 		'text',
 		array(
 			'settings'    => 'support_section_heading',
-			'label'       => esc_html__( 'Support Section Heading', 'knowx' ),
+			'label'       => esc_html__( 'Support Heading', 'knowx' ),
 			'section'     => 'site_knowledge_section_one',
 			'default'     => '',
 			'input_attrs' => array(
-				'placeholder' => esc_html__( 'Can not find what you are looking for?', 'knowx' ),
+				'placeholder' => esc_html__( 'Empty: Can\'t find what you\'re looking for?', 'knowx' ),
 			),
-			'priority'    => 10,
+			'priority'    => 32,
 		)
 	);
 
@@ -118,10 +108,10 @@ defined( 'ABSPATH' ) || exit;
 		'textarea',
 		array(
 			'settings' => 'support_section_content',
-			'label'    => esc_html__( 'Support Section Content', 'knowx' ),
+			'label'    => esc_html__( 'Support Text', 'knowx' ),
 			'section'  => 'site_knowledge_section_one',
 			'default'  => '',
-			'priority' => 10,
+			'priority' => 33,
 		)
 	);
 
@@ -129,10 +119,10 @@ defined( 'ABSPATH' ) || exit;
 		'text',
 		array(
 			'settings' => 'support_section_button_text',
-			'label'    => esc_html__( 'Button Text', 'knowx' ),
+			'label'    => esc_html__( 'Support Button Text', 'knowx' ),
 			'section'  => 'site_knowledge_section_one',
 			'default'  => '',
-			'priority' => 10,
+			'priority' => 34,
 		)
 	);
 
@@ -140,10 +130,10 @@ defined( 'ABSPATH' ) || exit;
 		'url',
 		array(
 			'settings' => 'support_section_button_link_url',
-			'label'    => esc_html__( 'Button Link URL', 'knowx' ),
+			'label'    => esc_html__( 'Support Button Link', 'knowx' ),
 			'section'  => 'site_knowledge_section_one',
 			'default'  => '',
-			'priority' => 10,
+			'priority' => 35,
 		)
 	);
 
@@ -157,7 +147,7 @@ defined( 'ABSPATH' ) || exit;
 		'number',
 		array(
 			'settings'    => 'knowx_posts',
-			'label'       => esc_html__( 'Posts per category', 'knowx' ),
+			'label'       => esc_html__( 'Articles per category', 'knowx' ),
 			'description' => esc_html__( 'Only numeric characters allowed. Leave empty for 10.', 'knowx' ),
 			'section'     => 'site_knowledge_section_two',
 			'default'     => 10,
@@ -168,7 +158,7 @@ defined( 'ABSPATH' ) || exit;
 		'radio',
 		array(
 			'settings' => 'knowx_order',
-			'label'    => esc_html__( 'Order posts', 'knowx' ),
+			'label'    => esc_html__( 'Order articles', 'knowx' ),
 			'section'  => 'site_knowledge_section_two',
 			'default'  => 'date',
 			'choices'  => array(
@@ -228,6 +218,7 @@ defined( 'ABSPATH' ) || exit;
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),
 			),
+			'priority' => 22,
 		)
 	);
 
@@ -242,6 +233,7 @@ defined( 'ABSPATH' ) || exit;
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),
 			),
+			'priority' => 31,
 		)
 	);
 
@@ -258,6 +250,7 @@ defined( 'ABSPATH' ) || exit;
 				'cards'    => esc_html__( 'Product cards', 'knowx' ),
 				'sections' => esc_html__( 'Each product with its sections', 'knowx' ),
 			),
+			'priority' => 20,
 		)
 	);
 

@@ -2,7 +2,7 @@
 
 **Included in Free**
 
-These settings are under **Docs Home** and **Docs Index** in the Customizer.
+These settings are under **Customize > Docs** in the Customizer: **Docs Home**, **Articles** and **Docs Index**.
 
 ## Docs Home
 
@@ -10,12 +10,13 @@ The hero block at the top, the product cards, the featured and recent articles a
 
 | Setting | What it does |
 |---|---|
-| Hero background | Colour or image behind the hero. A featured image on the page is used if you set one. |
-| Hero heading and content | The title and text in the hero. If empty, the page title and excerpt are used. |
-| Exclude category by ID | Category IDs, separated by commas, hidden from the cards and from both lists (and from Layout Two). Their sub-categories are hidden too. |
+| Hero Background | Colour or image behind the hero. A featured image on the page is used if you set one. |
+| Hero Heading and Hero Text | The title and text in the hero. If empty, the page title and excerpt are used. |
+| Products on the docs home | Product cards (default), or each product with its sections. |
+| Hide Categories | Category IDs, separated by commas, kept off the docs home cards and lists and off the Docs Index. Find the ID in the address bar when you edit a category. Sub-categories are hidden too. |
 | Show the recent articles list | Hide the recent list on the docs home. |
 | Show the support block | Hide the closing support block. |
-| Support section heading, content, button text and link | The closing block. The button shows only when both its text and link are set. |
+| Support Heading, Support Text, Support Button Text and Support Button Link | The closing block. The button shows only when both its text and link are set. |
 
 Featured articles are your **sticky posts**. The recent list shows the articles changed last, with their date, five at a time, and skips the excluded categories.
 

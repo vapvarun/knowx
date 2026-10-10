@@ -2,14 +2,14 @@
 
 **Included in Free**
 
-Go to **Appearance > Customize** and open **Site Title**, **Headings**, **Menu** or **Body**.
+Go to **Appearance > Customize > Typography**. Each group opens from its title; Body Text is open first.
 
 | Group | Applies to |
 |---|---|
-| Site Title Settings and Site Tagline Settings | The name and tagline in the header |
+| Body Text | Paragraphs and all other text |
 | Headings (H1 to H6) | All headings in articles and pages |
-| Menu Settings | The main navigation |
-| Body (Settings) | Paragraphs and all other text |
+| Menu | The main navigation |
+| Site Title and Tagline | The name and the line under it in the header |
 
 Each group sets the font family, size, weight, line height, letter spacing, text transform and colour.
 

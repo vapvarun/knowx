@@ -1,4 +1,6 @@
 /**
+ * Customizer helpers: colour palettes for the Colors section, and collapsible font groups in Typography.
+ *
  * Colour palettes for the Colors section.
  *
  * Adds a row of palette cards at the top of the section. Choosing one fills the colour controls below it,
@@ -12,6 +14,38 @@
 	const palettes = data.palettes || {};
 	const ids = data.ids || [];
 	const text = data.strings || {};
+
+	/**
+	 * Typography: one control per text style, each a long list of inputs. Each group opens from its title, the first one is open.
+	 */
+	api.bind( 'ready', () => {
+		api.section( 'site_title_typography_section', ( section ) => {
+			section.container.on( 'expanded', () => {
+				const controls = Array.from( section.contentContainer[ 0 ].querySelectorAll( '.customize-control-knowx-typography' ) );
+				controls.forEach( ( control, index ) => {
+					const title = control.querySelector( '.customize-control-title' );
+					if ( ! title || control.dataset.knowxFold ) {
+						return;
+					}
+					control.dataset.knowxFold = '1';
+					title.setAttribute( 'role', 'button' );
+					title.setAttribute( 'tabindex', '0' );
+					const set = ( open ) => {
+						control.classList.toggle( 'knowx-folded', ! open );
+						title.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+					};
+					title.addEventListener( 'click', () => set( control.classList.contains( 'knowx-folded' ) ) );
+					title.addEventListener( 'keydown', ( event ) => {
+						if ( 'Enter' === event.key || ' ' === event.key ) {
+							event.preventDefault();
+							set( control.classList.contains( 'knowx-folded' ) );
+						}
+					} );
+					set( 0 === index );
+				} );
+			} );
+		} );
+	} );
 
 	if ( ! Object.keys( palettes ).length ) {
 		return;

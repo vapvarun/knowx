@@ -14,7 +14,8 @@ defined( 'ABSPATH' ) || exit;
 		'background',
 		array(
 			'settings'        => 'background_setting',
-			'label'           => esc_html__( 'Background Control', 'knowx' ),
+			'label'           => esc_html__( 'Footer Background', 'knowx' ),
+			'description' => esc_html__( 'Colour or image behind the footer widgets.', 'knowx' ),
 			'section'         => 'site_footer_section',
 			'default'         => array(),
 			'transport'       => 'auto',
@@ -30,6 +31,7 @@ defined( 'ABSPATH' ) || exit;
 					'value'    => '1',
 				),
 			),
+			'priority' => 10,
 		)
 	);
 
@@ -38,6 +40,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings' => 'site_footer_content_color',
 			'label'    => esc_html__( 'Footer Text', 'knowx' ),
+			'description' => esc_html__( 'Text in the footer.', 'knowx' ),
 			'section'  => 'site_skin_section',
 			'default'  => '#505050',
 			'priority' => 30,
@@ -51,11 +54,11 @@ defined( 'ABSPATH' ) || exit;
 		'textarea',
 		array(
 			'settings'    => 'site_copyright_text',
-			'label'       => esc_html__( 'Add Content', 'knowx' ),
+			'label'       => esc_html__( 'Copyright Line', 'knowx' ),
 			'description' => esc_html__( 'You can use [current_year], [site_title], [theme_author] shortcode if you want.', 'knowx' ),
-			'section'     => 'site_copyright_section',
+			'section'     => 'site_footer_section',
 			'default'     => esc_html__( 'Copyright © [current_year] [site_title] | Powered by [theme_author]', 'knowx' ),
-			'priority'    => 10,
+			'priority'    => 20,
 		)
 	);
 
@@ -64,6 +67,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings' => 'site_copyright_background_color',
 			'label'    => esc_html__( 'Copyright Background', 'knowx' ),
+			'description' => esc_html__( 'The line at the very bottom of the page.', 'knowx' ),
 			'section'  => 'site_skin_section',
 			'default'  => '#ffffff',
 			'priority' => 31,
@@ -75,6 +79,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings' => 'site_copyright_content_color',
 			'label'    => esc_html__( 'Copyright Text', 'knowx' ),
+			'description' => esc_html__( 'Text in that line.', 'knowx' ),
 			'section'  => 'site_skin_section',
 			'default'  => '#505050',
 			'priority' => 32,

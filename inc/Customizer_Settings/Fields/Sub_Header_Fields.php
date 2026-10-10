@@ -13,8 +13,9 @@ defined( 'ABSPATH' ) || exit;
 		'background',
 		array(
 			'settings'        => 'sub_header_background_setting',
-			'label'           => esc_html__( 'Background Control', 'knowx' ),
-			'section'         => 'site_sub_header_section',
+			'label'           => esc_html__( 'Breadcrumb Bar Background', 'knowx' ),
+			'description' => esc_html__( 'Colour or image behind the breadcrumbs.', 'knowx' ),
+			'section'         => 'site_header_section',
 			'default'         => array(),
 			'transport'       => 'auto',
 			'output'          => array(
@@ -29,6 +30,7 @@ defined( 'ABSPATH' ) || exit;
 					'value'    => '1',
 				),
 			),
+			'priority' => 30,
 		)
 	);
 
@@ -37,7 +39,8 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'        => 'site_breadcrumbs',
 			'label'           => esc_html__( 'Show breadcrumbs', 'knowx' ),
-			'section'         => 'site_sub_header_section',
+			'description' => esc_html__( 'The trail under the header: Home, product, section, article.', 'knowx' ),
+			'section'         => 'site_header_section',
 			'default'         => 1,
 			'choices'         => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
@@ -50,6 +53,7 @@ defined( 'ABSPATH' ) || exit;
 					'value'    => true,
 				),
 			),
+			'priority' => 20,
 		)
 	);
 

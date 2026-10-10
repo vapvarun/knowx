@@ -10,14 +10,14 @@ The theme has four footer widget areas: **Footer 1** to **Footer 4**. Add widget
 
 Assign a menu to the **Footer** location under **Appearance > Menus** to print a single row of links (privacy, terms, status page) above the copyright line. It shows nothing until a menu is assigned.
 
-## Footer Section
+## Footer
 
-- **Background control**: colour or image behind the footer.
+Go to **Appearance > Customize > Footer**.
+
+- **Footer Background**: colour or image behind the footer widgets.
 - The footer text colour is **Footer Text** under **Colors**.
 
-## Copyright Section
-
-- **Add content**: the copyright line. You can use these placeholders:
+- **Copyright Line**: the text at the very bottom. You can use these placeholders:
 
 | Placeholder | Replaced with |
 |---|---|

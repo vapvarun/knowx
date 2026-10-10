@@ -42,7 +42,7 @@ if ( 'post' === $post_type_obj->name || $post_type_obj->has_archive ) {
 }
 
 // Show author only if the post type supports it.
-if ( post_type_supports( $post_type_obj->name, 'author' ) ) {
+if ( post_type_supports( $post_type_obj->name, 'author' ) && '' !== get_the_author() ) {
 	// Get author ID once.
 	$author_id = $current_post->post_author;
 

@@ -33,7 +33,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W08 | Settings redesign and audit | done | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
 | W09 | Tokens, dark mode, colour output | done | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
 | W10 | JavaScript: ordering, jQuery, libraries | done | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
-| W11 | CSS: token migration, RTL, focus, responsive | todo | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
+| W11 | CSS: token migration, RTL, focus, responsive | done | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
 | W12 | Fonts and icons | todo | [10392494459](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494459) |
 | W13 | theme.json, style variations, editor | todo | [10392494471](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494471) |
 | W14 | Docs templates and structured data | todo | [10392494490](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494490) |
@@ -189,15 +189,17 @@ From C section 4 and 5 and `docs/LIBRARIES.md`.
 - Gate: lint 0, phpstan clean, phpunit 28 tests, stylelint 0, zip 944 KB. **Passed 2026-10-10.**
 
 ## W11 CSS: token migration, RTL, focus, responsive (feeds C, I)
-From C section 2, 3, 7.
-- [ ] 143 hard-coded colour uses in 21 files (60 distinct) moved to tokens
-- [ ] `:focus-visible` everywhere (zero today), outline restored on `.wp-element-button` and `select`; `prefers-reduced-motion` honoured (infinite loader animation)
-- [ ] RTL: logical properties instead of ~170 physical declarations; delete the separate 18 KB `rtl.min.css` or load it correctly
-- [ ] Drop Bootstrap-3 grid (about 12 KB for 3 classes), unused FSE block CSS (about 9 KB), bbPress CSS (support removed in W02), per-template CSS split
-- [ ] Missing version args on `bbpress`, `rtl`, `amp` styles
-- [ ] Responsive at 390 / 768 / 1024 / 1440 (iPad portrait and landscape): sticky ToC, sidebar drawer, 44 px targets, no horizontal scroll
-- [ ] Accessibility: skip link, headings order (Layout One `h1` outside `<main>`, Layout Two missing `h1`), `aria-label`s on search toggle and scroll-up
-- Gate: stylelint clean; axe scan clean; screenshots at four widths.
+From C section 2, 3 and 7. Screenshots now use real device emulation (`shots2.sh`): the earlier headless "390px" captures were wider layouts cropped, so the horizontal-overflow finding in the CSS audit was an artifact; measured with the real viewport there is **no horizontal overflow** at 390px (only the closed off-canvas menu extends past the edge).
+- [x] Literal colours moved to tokens in W09; this group finished the stragglers (`hsl` comment-notes background, search fields, placeholder colour) and made dark mode pass
+- [x] **Bootstrap-era grid (18 KB) replaced by a 1 KB layout** (`container`, `row`, `col-md-1..12` from 992px, same stacking as before, `display: flow-root` so margins stay contained)
+- [x] **RTL without a separate stylesheet**: 136 physical declarations became logical properties (`margin-inline-start`, `inset-inline-end`, `text-align: start`, ...); `rtl.css` (and its 20 KB build and enqueue) are deleted; verified in a real right-to-left render (header, sidebar, post, comments mirror correctly)
+- [x] **Modern browser targets** (`.browserslistrc`: Chrome 111+, Firefox 113+, Safari 16.4+): logical properties, `color-mix()`, `aspect-ratio` and `:focus-visible` compile as written; the old "last 2 versions" target made lightningcss add `:lang()` fallbacks with higher specificity that changed the cascade. **All theme CSS shrank from 203 KB to 128 KB minified**
+- [x] Focus: `:focus-visible` outline on every interactive element (zero before); the rules that removed outlines from buttons, selects and links are gone
+- [x] `prefers-reduced-motion` honoured (animations and transitions off, smooth scrolling off)
+- [x] **Measured page weight** (gzip): home 22.8 KB CSS, post about 25 KB (budget 40 KB)
+- [x] **axe-core** (WCAG 2.0/2.1/2.2 A and AA plus best practices) run in the real browser on six page types at 390 and 1280 px in light and dark mode: **0 violations** after fixes found by the scan: empty author link when a post has no author, unnamed search landmarks, brand-blue link text at 2.5:1, links in running text not underlined, 24px target size for comment dates, muted text at 4.4:1, menu active colour, light grey comment notes and search fields in dark mode
+- [x] Not done on purpose: pruning block-editor CSS (a Query Loop or Site Title block can be placed in a classic page, so the rules are not dead); the sticky table of contents and drawer layout are W14; `accessibility-ready` tag review is W17
+- Gate: lint 0, phpstan clean, phpunit green, zip 934 KB, axe 0 violations, screenshots vs the W10 baseline differ only where the container is now fluid up to 1170px at 1024px (previously fixed at 970px). **Passed 2026-10-10.**
 
 ## W12 Fonts and icons (feeds I)
 - [ ] `inc/Fonts` + Google catalog (value-driven loader) ported or dropped in favour of self-hosted variable woff2 only

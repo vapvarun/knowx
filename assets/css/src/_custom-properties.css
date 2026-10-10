@@ -22,7 +22,7 @@
     --color-surface: #fff;
     --color-surface-alt: #f2f3f5;
     --color-heading: #333;
-    --color-muted: #757575;
+    --color-muted: #6a6a6a;
     --global-border-color: #e5e5e5;
     --select-arrow: url(../images/arrow-down.svg);
 
@@ -31,8 +31,8 @@
     --color-link-hover: color-mix(in srgb, var(--color-theme-primary) 45%, #000);
     --color-theme-loader: var(--color-theme-primary);
     --color-site-title-hover: var(--color-theme-primary);
-    --color-menu-hover: var(--color-theme-primary);
-    --color-menu-active: var(--color-theme-primary);
+    --color-menu-hover: var(--color-link);
+    --color-menu-active: var(--color-link);
     --button-background-color: var(--color-theme-primary);
     --button-background-hover-color: color-mix(in srgb, var(--color-theme-primary) 80%, #000);
     --button-border-color: var(--color-theme-primary);

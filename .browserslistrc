@@ -1,2 +1,7 @@
-> 1%
-last 2 versions
+# Evergreen browsers from about 2023 on. CSS logical properties, color-mix(), aspect-ratio and :focus-visible are used as written, with no fallbacks.
+chrome >= 111
+edge >= 111
+firefox >= 113
+safari >= 16.4
+ios_saf >= 16.4
+samsung >= 22

@@ -16,11 +16,9 @@ a:active {
     color: var(--color-link-hover);
 }
 
-a:focus {
-    outline: thin dotted;
-}
-
-a:hover,
-a:active {
-    outline: 0;
+/* Links inside running text are underlined so colour is not the only cue. */
+.entry-content p a:not(.wp-element-button),
+.comment-content a,
+.comment-notes a {
+    text-decoration: underline;
 }

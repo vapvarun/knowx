@@ -40,24 +40,24 @@
 }
 
 .children {
-    margin-left: 1em;
-    padding-left: 0;
+    margin-inline-start: 1em;
+    padding-inline-start: 0;
 }
 
 @media (--content-query) {
     .children {
-        margin-left: 2em;
+        margin-inline-start: 2em;
     }
 }
 
 .comment-meta {
     position: relative;
-    margin-left: 75px;
+    margin-inline-start: 75px;
     font-size: inherit;
 }
 
 .comment-content {
-    margin-left: 70px;
+    margin-inline-start: 70px;
 }
 
 .comment-meta a,
@@ -76,7 +76,7 @@
 .comment .avatar,
 .review .avatar {
     position: absolute;
-    left: -70px;
+    inset-inline-start: -70px;
     width: 50px;
     height: 50px;
     border-radius: 50px;
@@ -86,7 +86,7 @@
     box-sizing: content-box;
     border: 5px solid var(--global-border-color);
     margin-top: 0;
-    margin-left: -5px;
+    margin-inline-start: -5px;
 }
 
 .comment-author {
@@ -111,8 +111,8 @@
 .comment-content ul,
 .comment-content ol {
     margin: 0;
-    padding-right: 3em;
-    padding-left: 3em;
+    padding-inline-end: 3em;
+    padding-inline-start: 3em;
 }
 
 .comment-content ol {
@@ -121,15 +121,15 @@
 
 .comment-content ul ul,
 .comment-content ol ol {
-    margin-right: 0;
-    margin-left: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
 }
 
 @media (--content-query) {
     .comment-content ul,
     .comment-content ol {
-        padding-right: 1.5em;
-        padding-left: 1.5em;
+        padding-inline-end: 1.5em;
+        padding-inline-start: 1.5em;
     }
 }
 
@@ -145,7 +145,7 @@
 
 .reply {
     margin-bottom: 0;
-    text-align: right;
+    text-align: end;
 }
 
 .comment-reply-link {
@@ -176,7 +176,7 @@
     margin-top: -1em;
     font-size: 0.9em;
     font-style: italic;
-    background: hsl(0, 0%, 95%);
+    background: var(--color-surface-alt);
 }
 
 /* stylelint-disable */
@@ -205,7 +205,7 @@
 
 .comment-form .comment-form-cookies-consent label {
     display: inline-block;
-    margin-left: 0.6em;
+    margin-inline-start: 0.6em;
 }
 
 .comment-form .required {
@@ -213,7 +213,7 @@
 }
 
 .comment-form .form-submit {
-    text-align: right;
+    text-align: end;
 }
 
 .pingback .comment-body {
@@ -227,3 +227,10 @@
     text-decoration: none;
 }
 /* stylelint-enable */
+
+/* Touch target for the comment date link. */
+.comment-metadata a {
+    display: inline-block;
+    min-height: 24px;
+    line-height: 24px;
+}

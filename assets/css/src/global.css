@@ -96,7 +96,7 @@ body.layout-boxed {
 .nav--toggle-sub ul.user-profile-menu .sub-menu::before,
 .bp-header-submenu::before,
 .user-profile-menu::before {
-    border-right-color: var(--color-header-bg);
+    border-inline-end-color: var(--color-header-bg);
 }
 
 
@@ -117,8 +117,8 @@ body.layout-boxed {
     padding: 10px 0;
     background: color-mix(in srgb, var(--color-surface) 50%, transparent);
     width: 100vw;
-    margin-left: -50vw;
-    left: 50%;
+    margin-inline-start: -50vw;
+    inset-inline-start: 50%;
     border-bottom: 1px solid var(--global-border-color);
 }
 
@@ -167,7 +167,7 @@ body.layout-boxed {
 .site-sub-header input[type="submit"]:hover,
 .site-sub-header input[type="submit"]:focus {
     position: absolute;
-    right: 0;
+    inset-inline-end: 0;
     text-indent: -9999999px;
     height: 38px;
     background: transparent;
@@ -207,7 +207,7 @@ body.layout-boxed {
 .site-sub-header .page-title,
 .site-sub-header .page-header {
     color: var(--color-heading);
-    margin-right: auto;
+    margin-inline-end: auto;
 }
 
 @media (--narrow-menu-query) {
@@ -227,7 +227,7 @@ body.layout-boxed {
 #breadcrumbs {
     font-size: 14px;
     margin: 10px 0;
-    margin-right: auto;
+    margin-inline-end: auto;
 }
 
 .knowx-breadcrumbs a,
@@ -348,8 +348,8 @@ button.media-menu-item {
     font-weight: 100;
     max-width: 85%;
     margin: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
 }
 
 .knowx-hero-section-search {
@@ -376,7 +376,7 @@ button.media-menu-item {
 .knowx-hero-section-search input[type="submit"]:focus {
     position: absolute;
     top: 0;
-    right: 0;
+    inset-inline-end: 0;
     text-indent: -9999999px;
     width: 55px;
     height: 55px;
@@ -600,7 +600,7 @@ button.media-menu-item {
 .knowx-knowledgebase-two li.post-name a {
     color: var(--color-heading);
     position: relative;
-    padding-left: 20px;
+    padding-inline-start: 20px;
     display: block;
 }
 
@@ -612,7 +612,7 @@ button.media-menu-item {
     content: "\f0f6 ";
     font-family: FontAwesome;
     position: absolute;
-    left: 0;
+    inset-inline-start: 0;
     width: 20px;
     display: block;
 }

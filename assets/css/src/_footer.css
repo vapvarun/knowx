@@ -43,11 +43,11 @@
 }
 
 .footer-widget:first-child {
-    margin-left: 0;
+    margin-inline-start: 0;
 }
 
 .footer-widget:last-child {
-    margin-right: 0;
+    margin-inline-end: 0;
 }
 
 @media (max-width: 991px) {
@@ -98,7 +98,7 @@
     z-index: 99;
     display: none;
     bottom: 20px;
-    right: 20px;
+    inset-inline-end: 20px;
     font-size: 24px;
     width: 40px;
     height: 40px;

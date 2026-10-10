@@ -5,14 +5,14 @@
 .primary-sidebar {
     width: 100%;
     max-width: var(--content-width);
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
 }
 
 @media (--content-query) {
     .primary-sidebar {
-        padding-left: 0;
-        padding-right: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
     }
 }
 

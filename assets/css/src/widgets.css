@@ -95,7 +95,7 @@ ul.knowx-categories-lists li a {
 }
 
 ul.knowx-categories-lists ul.children li a {
-    margin-left: 10px;
+    margin-inline-start: 10px;
 }
 
 /* Collapsing Widget */
@@ -134,12 +134,12 @@ ul.knowx-categories-lists ul.children li a {
 }
 
 .widget_collapscat li.collapsing.categories.expandable {
-    margin-left: 0;
+    margin-inline-start: 0;
     text-indent: 0;
 }
 
 .widget_collapscat span.sym {
-    padding-right: 10px;
+    padding-inline-end: 10px;
 }
 
 /* Search widget. */
@@ -177,7 +177,7 @@ ul.knowx-categories-lists ul.children li a {
 
 .widget_pages li ul,
 .widget_nav_menu li ul {
-    margin-left: 1em;
+    margin-inline-start: 1em;
 }
 
 /* Meta widget */
@@ -202,7 +202,7 @@ ul.knowx-categories-lists ul.children li a {
 
 .widget_recent_comments a:hover,
 .widget_recent_comments a:focus {
-    padding-left: 0;
+    padding-inline-start: 0;
 }
 
 /* RSS widget */
@@ -212,7 +212,7 @@ ul.knowx-categories-lists ul.children li a {
 }
 
 .widget li a.rsswidget {
-    padding-right: 0.5em;
+    padding-inline-end: 0.5em;
     font-size: 1em;
     line-height: 1.4;
 }
@@ -240,9 +240,9 @@ ul.knowx-categories-lists ul.children li a {
 }
 
 .widget .searchform input.text_input {
-    padding-left: 10px;
+    padding-inline-start: 10px;
     width: 100%;
-    padding-right: 65px;
+    padding-inline-end: 65px;
 }
 
 .widget .searchform {
@@ -253,7 +253,7 @@ ul.knowx-categories-lists ul.children li a {
 
 .widget .searchform input[type="submit"] {
     position: absolute;
-    right: 3px;
+    inset-inline-end: 3px;
     border-radius: 3px;
     height: 38px;
     line-height: 0;
@@ -268,7 +268,7 @@ ul.knowx-categories-lists ul.children li a {
     padding: 0.5em 0;
     font-size: 1em;
     font-weight: 500;
-    text-align: left;
+    text-align: start;
 }
 
 .widget_calendar thead {

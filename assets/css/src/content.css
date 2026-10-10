@@ -95,13 +95,13 @@ h2.entry-title a:hover {
     display: block;
     position: absolute;
     top: 6px;
-    left: 10px;
+    inset-inline-start: 10px;
     margin-bottom: 10px;
 }
 
 .post-categories a {
     display: inline-block;
-    margin-right: 3px;
+    margin-inline-end: 3px;
     margin-bottom: 3px;
     padding: 2px 6px;
     font-size: 11px;
@@ -137,11 +137,11 @@ h2.entry-title a:hover {
 .entry-meta .author.vcard,
 .entry-meta span.posted-by>a {
     text-transform: uppercase;
-    margin-left: 5px;
+    margin-inline-start: 5px;
 }
 
 .entry-meta .posted-by img {
-    margin-right: 5px;
+    margin-inline-end: 5px;
     border-radius: 100px;
 }
 
@@ -151,7 +151,7 @@ h2.entry-title a:hover {
 }
 
 .entry-meta>span {
-    margin-right: 10px;
+    margin-inline-end: 10px;
 }
 
 .entry-meta .entry-cat-links::before,
@@ -159,7 +159,7 @@ h2.entry-title a:hover {
 .entry-meta .entry-edit-link a::before,
 .entry-meta .entry-featured::before,
 .entry-meta .posted-on a::before {
-    margin-right: 4px;
+    margin-inline-end: 4px;
     font-family: FontAwesome;
     font-style: normal;
     font-weight: 400;
@@ -226,8 +226,8 @@ h2.entry-title a:hover {
 .page-content>*,
 .entry-content>*,
 .entry-summary>* {
-    margin-right: auto;
-    margin-left: auto;
+    margin-inline-end: auto;
+    margin-inline-start: auto;
     max-width: var(--content-width);
 }
 
@@ -237,7 +237,7 @@ h2.entry-title a:hover {
 .page-content ol:not(.comment-list),
 .entry-content ol:not(.comment-list),
 .entry-summary ol:not(.comment-list) {
-    margin-left: 1.05em;
+    margin-inline-start: 1.05em;
 }
 
 .page-header,
@@ -275,23 +275,23 @@ article .entry-header {
     .post-navigation,
     .page-navigation,
     .comments-area {
-        padding-left: 0;
-        padding-right: 0;
+        padding-inline-start: 0;
+        padding-inline-end: 0;
     }
 }
 
 .single-post .entry-content ul:not(.blocks-gallery-grid),
 .single-post .entry-content ol {
-    padding-right: 2.5em;
-    padding-left: 2.5em;
+    padding-inline-end: 2.5em;
+    padding-inline-start: 2.5em;
 }
 
 .entry-content ul ul,
 .entry-content ol ol {
-    margin-right: 0;
-    margin-left: 0;
-    padding-right: 1.5em;
-    padding-left: 1.5em;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    padding-inline-end: 1.5em;
+    padding-inline-start: 1.5em;
 }
 
 
@@ -307,7 +307,7 @@ article .entry-header {
 }
 
 .entry-footer span {
-    margin-right: 1em;
+    margin-inline-end: 1em;
 }
 
 .entry-footer {
@@ -319,8 +319,8 @@ article .entry-header {
 
 @media (--content-query) {
     .entry-footer {
-        padding-right: 0;
-        padding-left: 0;
+        padding-inline-end: 0;
+        padding-inline-start: 0;
     }
 }
 
@@ -546,8 +546,8 @@ article .entry-header {
 	.site-main .posts-navigation,
 	.site-main .post-navigation,
 	.site-main .pagination {
-		padding-left: 0;
-		padding-right: 0;
+		padding-inline-start: 0;
+		padding-inline-end: 0;
 	}
 }
 
@@ -587,7 +587,7 @@ article .entry-header {
 .pagination .page-numbers {
 	display: inline-block;
 	margin-bottom: 0.5em;
-	margin-right: 1em;
+	margin-inline-end: 1em;
 	border: 1px solid var(--color-link);
 	min-width: 1.75em;
 	line-height: 1.75;

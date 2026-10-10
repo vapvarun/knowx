@@ -14,21 +14,20 @@ get_header();
 knowx()->print_styles( 'knowx-content' );
 knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
-$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
+$default_sidebar = knowx_mod( 'sidebar_option' );
 
-$post_layout  = get_theme_mod( 'blog_layout_option', knowx_defaults( 'blog-layout-option' ) );
-$post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
+$post_layout  = knowx_mod( 'blog_layout_option' );
+$post_per_row = 'col-md-' . knowx_mod( 'post_per_row' );
 
 ?>
 
-<?php if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'archive' ) ) { ?>
 
 	<?php do_action( 'knowx_sub_header' ); ?>
 	
 	<?php do_action( 'knowx_before_content' ); ?>
 	
-	<?php if ( $default_sidebar == 'left' || $default_sidebar == 'both' ) : ?>
-		<aside id="secondary" class="left-sidebar widget-area">
+	<?php if ( 'left' == $default_sidebar || 'both' == $default_sidebar ) : ?>
+		<aside id="secondary-left" class="left-sidebar widget-area" aria-label="<?php esc_attr_e( 'Left sidebar', 'knowx' ); ?>">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_left_sidebar(); ?>
 			</div>
@@ -74,8 +73,8 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 
 	</main><!-- #primary -->
 	
-	<?php if ( $default_sidebar == 'right' || $default_sidebar == 'both' ) : ?>
-		<aside id="secondary" class="primary-sidebar widget-area">
+	<?php if ( 'right' == $default_sidebar || 'both' == $default_sidebar ) : ?>
+		<aside id="secondary" class="primary-sidebar widget-area" aria-label="<?php esc_attr_e( 'Sidebar', 'knowx' ); ?>">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_right_sidebar(); ?>
 			</div>
@@ -84,7 +83,6 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 
 	<?php do_action( 'knowx_after_content' ); ?>
 
-	<?php } ?>
 	
 <?php
 get_footer();

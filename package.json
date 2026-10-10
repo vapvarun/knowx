@@ -1,0 +1,101 @@
+{
+  "name": "knowx",
+  "version": "2.0.0",
+  "description": "Free theme for a knowledge base",
+  "author": "wbcomdesigns,vapvarun",
+  "license": "GPL-3.0-or-later",
+  "main": "index.php",
+  "homepage": "https://github.com/wbcomdesigns/knowx#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wbcomdesigns/knowx.git"
+  },
+  "engines": {
+    "node": ">=20.13.1",
+    "npm": ">=10.5.2"
+  },
+  "bugs": {
+    "url": "https://github.com/wbcomdesigns/knowx/issues"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.38.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@wordpress/eslint-plugin": "^21.6.0",
+    "@wordpress/stylelint-config": "^23.42.0",
+    "ansi-colors": "^4.1.3",
+    "archiver": "^6.0.2",
+    "autoprefixer": "^9.8.8",
+    "axe-core": "^4.14.0",
+    "browser-sync": "^2.29.3",
+    "browserslist": "^4.27.0",
+    "chokidar": "^3.6.0",
+    "chokidar-cli": "^3.0.0",
+    "commander": "^12.1.0",
+    "create-cert": "^1.0.6",
+    "cross-env": "^5.2.1",
+    "deepmerge": "^4.3.1",
+    "del": "^8.0.1",
+    "esbuild": "^0.25.11",
+    "eslint": "^8.57.1",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-node": "^11.1.0",
+    "fancy-log": "^1.3.3",
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.2",
+    "globals": "^15.15.0",
+    "inquirer": "^9.3.8",
+    "lightningcss": "^1.33.0",
+    "lint-staged": "^16.4.0",
+    "minimist": "^1.2.8",
+    "mkdirp": "^3.0.1",
+    "postcss-custom-media": "^11.0.6",
+    "replace-in-file": "^6.3.5",
+    "rimraf": "^6.0.1",
+    "sharp": "^0.33.5",
+    "simple-git-hooks": "^2.14.0",
+    "stylelint": "^16.25.0",
+    "svgo": "^3.3.2",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.2",
+    "wp-pot-cli": "^1.5.0"
+  },
+  "type": "module",
+  "scripts": {
+    "generateCert": "node scripts/cli.js generateCert",
+    "build:js": "node build-js.js",
+    "dev:js": "node build-js.js --dev",
+    "lint:js": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint \"assets/js/src/**/*.{js,jsx,ts,tsx}\"",
+    "build:css": "node build-css.js",
+    "dev:css": "node build-css.js --dev",
+    "lint:css": "stylelint \"assets/css/src/**/*.css\"",
+    "watch:js": "node build-js.js",
+    "watch:css": "npm run build:css && chokidar 'assets/css/src/**/*.css' -c 'npm run build:css'",
+    "dev": "node scripts/cli.js dev",
+    "build": "node scripts/cli.js build",
+    "build:phpcs": "node scripts/cli.js build --phpcs",
+    "images": "node scripts/cli.js images",
+    "bundle": "cross-env NODE_ENV=production node scripts/cli.js bundle",
+    "bundle:phpcs": "cross-env NODE_ENV=production node scripts/cli.js bundle --phpcs",
+    "bundle:check-all": "cross-env NODE_ENV=production node scripts/cli.js bundle --phpcs",
+    "setup": "npm install && composer install && node scripts/cli.js init",
+    "prepare": "simple-git-hooks",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:theme-json",
+    "lint:theme-json": "node scripts/validate-theme-json.js",
+    "dist": "node scripts/distribute.js",
+    "test": "composer test:unit"
+  },
+  "dependencies": {
+    "glob": "^11.0.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged --concurrent false"
+  },
+  "lint-staged": {
+    "*.php": "bash scripts/lint-php-staged.sh",
+    "assets/css/src/**/*.css": "npx stylelint --fix",
+    "assets/js/src/**/*.{js,jsx,ts,tsx}": "cross-env ESLINT_USE_FLAT_CONFIG=true eslint --fix",
+    "theme.json": "node scripts/validate-theme-json.js"
+  }
+}

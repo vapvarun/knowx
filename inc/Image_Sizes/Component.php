@@ -8,10 +8,10 @@
 namespace KnowX\KnowX\Image_Sizes;
 
 use KnowX\KnowX\Component_Interface;
-use function KnowX\KnowX\knowx;
 use WP_Post;
+
+use function KnowX\KnowX\knowx;
 use function add_filter;
-use function is_active_sidebar;
 
 /**
  * Class for managing responsive image sizes.

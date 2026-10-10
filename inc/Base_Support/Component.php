@@ -8,7 +8,6 @@
 namespace KnowX\KnowX\Base_Support;
 
 use KnowX\KnowX\Component_Interface;
-use KnowX\KnowX\Templating_Component_Interface;
 use function add_action;
 use function add_filter;
 use function add_theme_support;
@@ -17,8 +16,6 @@ use function pings_open;
 use function esc_url;
 use function get_bloginfo;
 use function wp_scripts;
-use function wp_get_theme;
-use function get_template;
 
 /**
  * Class for adding basic theme support, most of which is mandatory to be implemented by all themes.
@@ -27,7 +24,7 @@ use function get_template;
  * * `knowx()->get_version()`
  * * `knowx()->get_asset_version( string $filepath )`
  */
-class Component implements Component_Interface, Templating_Component_Interface {
+class Component implements Component_Interface {
 
 	/**
 	 * Gets the unique identifier for the theme component.
@@ -42,28 +39,20 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'after_setup_theme', array( $this, 'action_essential_theme_support' ) );
+		add_action( 'init', array( $this, 'action_title_tag_support' ), -999 );
+		add_action( 'after_setup_theme', array( $this, 'action_essential_theme_support' ), 1 );
 		add_action( 'wp_head', array( $this, 'action_add_pingback_header' ) );
 		add_filter( 'body_class', array( $this, 'filter_body_classes_add_hfeed' ) );
 		add_filter( 'embed_defaults', array( $this, 'filter_embed_dimensions' ) );
-		add_filter( 'theme_scandir_exclusions', array( $this, 'filter_scandir_exclusions_for_optional_templates' ) );
-		add_filter( 'script_loader_tag', array( $this, 'filter_script_loader_tag' ), 10, 2 );
 		add_action( 'init', array( $this, 'knowx_theme_block_styles' ) );
 		add_action( 'init', array( $this, 'knowx_register_block_patterns' ) );
 	}
 
 	/**
-	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
-	 *
-	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
-	 *               adding support for further arguments in the future.
+	 * Adds title-tag theme support very early.
 	 */
-	public function template_tags(): array {
-		return array(
-			'get_version'       => array( $this, 'get_version' ),
-			'get_asset_version' => array( $this, 'get_asset_version' ),
-		);
+	public function action_title_tag_support() {
+		add_theme_support( 'title-tag' );
 	}
 
 	/**
@@ -72,9 +61,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function action_essential_theme_support() {
 		// Add default RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
-
-		// Ensure WordPress manages the document title.
-		add_theme_support( 'title-tag' );
 
 		// Ensure WordPress theme features render in HTML5 markup.
 		add_theme_support(
@@ -93,10 +79,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		// Add support for responsive embedded content.
 		add_theme_support( 'responsive-embeds' );
-
-		// Add support custom-header, custom-background.
-		add_theme_support( 'custom-header' );
-		add_theme_support( 'custom-background' );
 	}
 
 	/**
@@ -131,82 +113,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function filter_embed_dimensions( array $dimensions ): array {
 		$dimensions['width'] = 720;
 		return $dimensions;
-	}
-
-	/**
-	 * Excludes any directory named 'optional' from being scanned for theme template files.
-	 *
-	 * @link https://developer.wordpress.org/reference/hooks/theme_scandir_exclusions/
-	 *
-	 * @param array $exclusions the default directories to exclude.
-	 * @return array Filtered exclusions.
-	 */
-	public function filter_scandir_exclusions_for_optional_templates( array $exclusions ): array {
-		return array_merge(
-			$exclusions,
-			array( 'optional' )
-		);
-	}
-
-	/**
-	 * Adds async/defer attributes to enqueued / registered scripts.
-	 *
-	 * If #12009 lands in WordPress, this function can no-op since it would be handled in core.
-	 *
-	 * @link https://core.trac.wordpress.org/ticket/12009
-	 *
-	 * @param string $tag    The script tag.
-	 * @param string $handle The script handle.
-	 * @return string Script HTML string.
-	 */
-	public function filter_script_loader_tag( string $tag, string $handle ): string {
-
-		foreach ( array( 'async', 'defer' ) as $attr ) {
-			if ( ! wp_scripts()->get_data( $handle, $attr ) ) {
-				continue;
-			}
-
-			// Prevent adding attribute when already added in #12009.
-			if ( ! preg_match( ":\s$attr(=|>|\s):", $tag ) ) {
-				$tag = preg_replace( ':(?=></script>):', " $attr", $tag, 1 );
-			}
-
-			// Only allow async or defer, not both.
-			break;
-		}
-
-		return $tag;
-	}
-
-	/**
-	 * Gets the theme version.
-	 *
-	 * @return string Theme version number.
-	 */
-	public function get_version(): string {
-		static $theme_version = null;
-
-		if ( null === $theme_version ) {
-			$theme_version = wp_get_theme( get_template() )->get( 'Version' );
-		}
-
-		return $theme_version;
-	}
-
-	/**
-	 * Gets the version for a given asset.
-	 *
-	 * Returns filemtime when WP_DEBUG is true, otherwise the theme version.
-	 *
-	 * @param string $filepath Asset file path.
-	 * @return string Asset version number.
-	 */
-	public function get_asset_version( string $filepath ): string {
-		if ( WP_DEBUG ) {
-			return (string) filemtime( $filepath );
-		}
-
-		return $this->get_version();
 	}
 
 	/**

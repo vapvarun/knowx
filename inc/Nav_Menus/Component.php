@@ -7,13 +7,15 @@
 
 namespace KnowX\KnowX\Nav_Menus;
 
+use WP_Post;
 use KnowX\KnowX\Component_Interface;
 use KnowX\KnowX\Templating_Component_Interface;
-use WP_Post;
+
+use function KnowX\KnowX\knowx;
 use function add_action;
 use function add_filter;
 use function register_nav_menus;
-// use function esc_html__;
+use function esc_html__;
 use function has_nav_menu;
 use function wp_nav_menu;
 

@@ -8,12 +8,17 @@
 namespace KnowX\KnowX\Customizer;
 
 use KnowX\KnowX\Component_Interface;
-use function KnowX\KnowX\knowx;
 use WP_Customize_Manager;
+
+use function KnowX\KnowX\knowx;
 use function add_action;
 use function bloginfo;
+use function wp_add_inline_style;
+use function wp_enqueue_style;
 use function wp_enqueue_script;
+use function wp_script_is;
 use function get_theme_file_uri;
+use function get_theme_file_path;
 
 /**
  * Class for managing Customizer integration.
@@ -35,25 +40,20 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_action( 'customize_register', array( $this, 'action_customize_register' ) );
 		add_action( 'customize_preview_init', array( $this, 'action_enqueue_customize_preview_js' ) );
-
-		add_action(
-			'customize_controls_enqueue_scripts',
-			function () {
-				$css_uri = get_theme_file_uri( '/assets/css/' );
-				wp_enqueue_style( 'knowx-customizer', $css_uri . 'knowx-customizer.min.css', '', time() );
-			}
-		);
 	}
 
 	/**
-	 * Adds postMessage support for site title and description, plus a custom Theme Options section.
+	 * Adds postMessage support and selective refresh for the site title and description.
 	 *
 	 * @param WP_Customize_Manager $wp_customize Customizer manager instance.
 	 */
 	public function action_customize_register( WP_Customize_Manager $wp_customize ) {
-		$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
-		$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
-		$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
+		foreach ( array( 'blogname', 'blogdescription', 'header_textcolor' ) as $setting_id ) {
+			$setting = $wp_customize->get_setting( $setting_id );
+			if ( $setting ) {
+				$setting->transport = 'postMessage';
+			}
+		}
 
 		if ( isset( $wp_customize->selective_refresh ) ) {
 			$wp_customize->selective_refresh->add_partial(
@@ -75,17 +75,6 @@ class Component implements Component_Interface {
 				)
 			);
 		}
-
-		/**
-		 * Theme options.
-		 */
-		$wp_customize->add_section(
-			'theme_options',
-			array(
-				'title'    => __( 'Theme Options', 'knowx' ),
-				'priority' => 130, // Before Additional CSS.
-			)
-		);
 	}
 
 	/**

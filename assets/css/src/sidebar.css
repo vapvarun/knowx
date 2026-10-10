@@ -1,0 +1,39 @@
+/*--------------------------------------------------------------
+# Sidebar
+--------------------------------------------------------------*/
+
+.primary-sidebar {
+    width: 100%;
+    max-width: var(--content-width);
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+}
+
+@media (--content-query) {
+    .primary-sidebar {
+        padding-inline-start: 0;
+        padding-inline-end: 0;
+    }
+}
+
+@media (--sidebar-query) {
+    .primary-sidebar {
+        padding: 0;
+    }
+}
+
+.sticky {
+    display: block;
+}
+
+/* Sticky sidebar without a script: it follows the page below the sticky header. */
+@media screen and (min-width: 60.0625em) {
+    .sticky-sidebar-enable .widget-area {
+        align-self: stretch;
+    }
+
+    .sticky-sidebar-enable .sticky-sidebar {
+        position: sticky;
+        top: calc(var(--wp-admin--admin-bar--height, 0px) + 5rem);
+    }
+}

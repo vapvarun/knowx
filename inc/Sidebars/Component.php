@@ -12,7 +12,7 @@ use KnowX\KnowX\Templating_Component_Interface;
 use function add_action;
 use function add_filter;
 use function register_sidebar;
-// use function esc_html__;
+use function esc_html__;
 use function is_active_sidebar;
 use function dynamic_sidebar;
 
@@ -27,10 +27,8 @@ use function dynamic_sidebar;
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
-	const LEFT_SIDEBAR_SLUG          = 'sidebar-left';
-	const RIGHT_SIDEBAR_SLUG         = 'sidebar-right';
-	const BBPRESS_LEFT_SIDEBAR_SLUG  = 'bbpress-sidebar-left';
-	const BBPRESS_RIGHT_SIDEBAR_SLUG = 'bbpress-sidebar-right';
+	const LEFT_SIDEBAR_SLUG  = 'sidebar-left';
+	const RIGHT_SIDEBAR_SLUG = 'sidebar-right';
 
 	/**
 	 * Gets the unique identifier for the theme component.
@@ -58,15 +56,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function template_tags(): array {
 		return array(
-			'is_left_sidebar_active'          => array( $this, 'is_left_sidebar_active' ),
-			'display_left_sidebar'            => array( $this, 'display_left_sidebar' ),
-			'is_right_sidebar_active'         => array( $this, 'is_right_sidebar_active' ),
-			'display_right_sidebar'           => array( $this, 'display_right_sidebar' ),
+			'is_left_sidebar_active'  => array( $this, 'is_left_sidebar_active' ),
+			'display_left_sidebar'    => array( $this, 'display_left_sidebar' ),
+			'is_right_sidebar_active' => array( $this, 'is_right_sidebar_active' ),
+			'display_right_sidebar'   => array( $this, 'display_right_sidebar' ),
 
-			'display_bbpress_left_sidebar'    => array( $this, 'display_bbpress_left_sidebar' ),
-			'is_bbpress_left_sidebar_active'  => array( $this, 'is_bbpress_left_sidebar_active' ),
-			'display_bbpress_right_sidebar'   => array( $this, 'display_bbpress_right_sidebar' ),
-			'is_bbpress_right_sidebar_active' => array( $this, 'is_bbpress_right_sidebar_active' ),
 		);
 	}
 
@@ -97,32 +91,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'after_title'   => '</h2>',
 			)
 		);
-
-		if ( function_exists( 'is_bbpress' ) ) {
-			register_sidebar(
-				array(
-					'name'          => esc_html__( 'bbPress Left Sidebar', 'knowx' ),
-					'id'            => static::BBPRESS_LEFT_SIDEBAR_SLUG,
-					'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
-					'before_widget' => '<section id="%1$s" class="widget %2$s">',
-					'after_widget'  => '</section>',
-					'before_title'  => '<h2 class="widget-title">',
-					'after_title'   => '</h2>',
-				)
-			);
-
-			register_sidebar(
-				array(
-					'name'          => esc_html__( 'bbPress Right Sidebar', 'knowx' ),
-					'id'            => static::BBPRESS_RIGHT_SIDEBAR_SLUG,
-					'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
-					'before_widget' => '<section id="%1$s" class="widget %2$s">',
-					'after_widget'  => '</section>',
-					'before_title'  => '<h2 class="widget-title">',
-					'after_title'   => '</h2>',
-				)
-			);
-		}
 
 		register_sidebar(
 			array(
@@ -180,51 +148,20 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return array Filtered body classes.
 	 */
 	public function filter_body_classes( array $classes ): array {
-		$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
+		global $template;
 
-		if ( $this->is_left_sidebar_active() && $default_sidebar == 'left' ) {
-			global $template;
-
-			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
-				$classes[] = 'has-sidebar-left';
-			}
-		} elseif ( $this->is_right_sidebar_active() && $default_sidebar == 'right' ) {
-			global $template;
-
-			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
-				$classes[] = 'has-sidebar-right';
-			}
-		} elseif ( $this->is_right_sidebar_active() && $this->is_right_sidebar_active() && $default_sidebar == 'both' ) {
-			global $template;
-
-			if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
-				$classes[] = 'has-sidebar-both';
-			}
+		if ( in_array( basename( (string) $template ), array( 'front-page.php', '404.php' ), true ) ) {
+			return $classes;
 		}
 
-		// bbPress
-		if ( function_exists( 'is_bbpress' ) ) {
-			$bbpress_sidebar = get_theme_mod( 'bbpress_sidebar_option', knowx_defaults( 'bbpress-sidebar-option' ) );
+		$default_sidebar = knowx_mod( 'sidebar_option' );
 
-			if ( $this->is_bbpress_left_sidebar_active() && $bbpress_sidebar == 'left' ) {
-				global $template;
-
-				if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
-					$classes[] = 'has-bbpress-sidebar-left';
-				}
-			} elseif ( $this->is_bbpress_right_sidebar_active() && $bbpress_sidebar == 'right' ) {
-				global $template;
-
-				if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
-					$classes[] = 'has-bbpress-sidebar-right';
-				}
-			} elseif ( $this->is_bbpress_right_sidebar_active() && $this->is_bbpress_right_sidebar_active() && $bbpress_sidebar == 'both' ) {
-				global $template;
-
-				if ( ! in_array( basename( $template ), array( 'front-page.php', '404.php', '500.php', 'offline.php' ) ) ) {
-					$classes[] = 'has-bbpress-sidebar-both';
-				}
-			}
+		if ( 'left' === $default_sidebar && $this->is_left_sidebar_active() ) {
+			$classes[] = 'has-sidebar-left';
+		} elseif ( 'right' === $default_sidebar && $this->is_right_sidebar_active() ) {
+			$classes[] = 'has-sidebar-right';
+		} elseif ( 'both' === $default_sidebar && $this->is_left_sidebar_active() && $this->is_right_sidebar_active() ) {
+			$classes[] = 'has-sidebar-both';
 		}
 
 		return $classes;
@@ -260,37 +197,5 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function display_right_sidebar() {
 		dynamic_sidebar( static::RIGHT_SIDEBAR_SLUG );
-	}
-
-	/**
-	 * Checks whether the bbpress left sidebar is active.
-	 *
-	 * @return bool True if the bbpress left sidebar is active, false otherwise.
-	 */
-	public function is_bbpress_left_sidebar_active(): bool {
-		return (bool) is_active_sidebar( static::BBPRESS_LEFT_SIDEBAR_SLUG );
-	}
-
-	/**
-	 * Displays the bbpress left sidebar.
-	 */
-	public function display_bbpress_left_sidebar() {
-		dynamic_sidebar( static::BBPRESS_LEFT_SIDEBAR_SLUG );
-	}
-
-	/**
-	 * Checks whether the bbpress right sidebar is active.
-	 *
-	 * @return bool True if the bbpress right sidebar is active, false otherwise.
-	 */
-	public function is_bbpress_right_sidebar_active(): bool {
-		return (bool) is_active_sidebar( static::BBPRESS_RIGHT_SIDEBAR_SLUG );
-	}
-
-	/**
-	 * Displays the bbpress right sidebar.
-	 */
-	public function display_bbpress_right_sidebar() {
-		dynamic_sidebar( static::BBPRESS_RIGHT_SIDEBAR_SLUG );
 	}
 }

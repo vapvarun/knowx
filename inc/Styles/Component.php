@@ -7,28 +7,30 @@
 
 namespace KnowX\KnowX\Styles;
 
-use function _doing_it_wrong;
-use function add_action;
-use function add_filter;
-use function add_query_arg;
-use function apply_filters;
-use function comments_open;
-use function esc_attr;
-use function esc_url;
-use function get_comments_number;
-use function get_theme_file_path;
-use function get_theme_file_uri;
-use function is_singular;
-use function post_password_required;
-use function wp_enqueue_style;
-use function wp_print_styles;
-use function wp_register_style;
 use KnowX\KnowX\Component_Interface;
 use KnowX\KnowX\Templating_Component_Interface;
 use function KnowX\KnowX\knowx;
+use function add_action;
+use function add_filter;
+use function wp_enqueue_style;
+use function wp_register_style;
 use function wp_style_add_data;
-use function wp_style_is;
+use function get_theme_file_uri;
+use function get_theme_file_path;
 use function wp_styles;
+use function esc_attr;
+use function esc_url;
+use function add_editor_style;
+use function wp_style_is;
+use function _doing_it_wrong;
+use function esc_html;
+use function wp_print_styles;
+use function post_password_required;
+use function is_singular;
+use function comments_open;
+use function get_comments_number;
+use function apply_filters;
+use function add_query_arg;
 
 /**
  * Class for managing stylesheets.
@@ -51,18 +53,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	protected $css_files;
 
 	/**
-	 * Associative array of Google Fonts to load, as $font_name => $font_variants pairs.
-	 *
-	 * Do not access this property directly, instead use the `get_google_fonts()` method.
-	 *
-	 * @var array
-	 */
-	protected $google_fonts;
-
-	/**
 	 * Gets the unique identifier for the theme component.
 	 *
-	 * @return string component slug
+	 * @return string Component slug.
 	 */
 	public function get_slug(): string {
 		return 'styles';
@@ -73,10 +66,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'action_enqueue_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'knowx_enqueue_admin_style' ) );
+		add_action( 'wp_head', array( $this, 'action_preload_font' ), 2 );
 		add_action( 'wp_head', array( $this, 'action_preload_styles' ) );
 		add_action( 'after_setup_theme', array( $this, 'action_add_editor_styles' ) );
-		add_filter( 'wp_resource_hints', array( $this, 'filter_resource_hints' ), 10, 2 );
 	}
 
 	/**
@@ -93,23 +85,21 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	}
 
 	/**
+	 * Preloads the main text font so it is ready before the first paint.
+	 */
+	public function action_preload_font() {
+		printf(
+			'<link rel="preload" href="%s" as="font" type="font/woff2" crossorigin>' . "\n",
+			esc_url( get_theme_file_uri( '/assets/fonts/open-sans/open-sans-latin-wght-normal.woff2' ) )
+		);
+	}
+
+	/**
 	 * Registers or enqueues stylesheets.
 	 *
 	 * Stylesheets that are global are enqueued. All other stylesheets are only registered, to be enqueued later.
 	 */
 	public function action_enqueue_styles() {
-		// Enqueue Google Fonts.
-		$google_fonts_url = $this->get_google_fonts_url();
-		if ( ! empty( $google_fonts_url ) ) {
-			if ( get_theme_mod( 'site_load_google_font_locally' ) && ! is_customize_preview() && ! is_admin() ) {
-				if ( get_theme_mod( 'site_preload_local_font' ) ) {
-					knowx_load_preload_local_fonts( $google_fonts_url );
-				}
-				wp_enqueue_style( 'knowx-fonts', knowx_get_webfont_url( $google_fonts_url ), array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
-			} else {
-				wp_enqueue_style( 'knowx-fonts', $google_fonts_url, array(), null ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
-			}
-		}
 
 		$css_uri = get_theme_file_uri( '/assets/css/' );
 		$css_dir = get_theme_file_path( '/assets/css/' );
@@ -126,44 +116,16 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			 * (unless preloading stylesheets is disabled, in which case stylesheets should be immediately
 			 * enqueued based on whether they are necessary for the page content).
 			 */
-			if ( $data['global'] || ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) ) {
-				wp_enqueue_style( $handle, $src, array(), $version, $data['media'] );
+			$global_style         = $data['global'];
+			$preloading_available = is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] );
+
+			if ( $global_style || ( ! $preloading_styles_enabled && $preloading_available ) ) {
+				wp_enqueue_style( $handle, $src, $data['deps'], $version, $data['media'] );
 			} else {
-				wp_register_style( $handle, $src, array(), $version, $data['media'] );
+				wp_register_style( $handle, $src, $data['deps'], $version, $data['media'] );
 			}
 
 			wp_style_add_data( $handle, 'precache', true );
-		}
-
-		// Enqueue bbPress CSS.
-		if ( function_exists( 'is_bbpress' ) ) {
-			wp_enqueue_style( 'knowx-bbpress', $css_uri . 'bbpress.min.css' );
-		}
-
-		// Enqueue RTL CSS.
-		if ( is_rtl() ) {
-			wp_enqueue_style( 'knowx-rtl', $css_uri . 'rtl.min.css' );
-		}
-
-		// Enqueue AMP CSS.
-		if ( knowx()->is_amp() ) {
-			wp_enqueue_style( 'knowx-amp', $css_uri . 'knowx-amp.min.css' );
-		}
-	}
-
-	/**
-	 * Register and enqueue a custom stylesheet in the WordPress admin.
-	 */
-	public function knowx_enqueue_admin_style( $hook ) {
-		// Admin CSS.
-		$css_uri = get_theme_file_uri( '/assets/css/' );
-		wp_enqueue_style( 'knowx-admin', $css_uri . '/admin.min.css' );
-
-		// Customizer JS.
-		global $pagenow;
-
-		if ( $pagenow === 'customize.php' ) {
-			wp_enqueue_script( 'knowx-customizer-script', get_theme_file_uri( '/assets/js/knowx-customizer.min.js' ), '', '', true );
 		}
 	}
 
@@ -173,11 +135,10 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Only stylesheets that have a 'preload_callback' provided will be considered. If that callback evaluates to true
 	 * for the current request, the stylesheet will be preloaded.
 	 *
-	 * Preloading is disabled when AMP is active, as AMP injects the stylesheets inline.
-	 *
-	 * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
+	 * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content
 	 */
 	public function action_preload_styles() {
+
 		// If preloading styles is disabled, return early.
 		if ( ! $this->preloading_styles_enabled() ) {
 			return;
@@ -187,6 +148,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 		$css_files = $this->get_css_files();
 		foreach ( $css_files as $handle => $data ) {
+
 			// Skip if stylesheet not registered.
 			if ( ! isset( $wp_styles->registered[ $handle ] ) ) {
 				continue;
@@ -204,7 +166,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 
 			$preload_uri = $wp_styles->registered[ $handle ]->src . '?ver=' . $wp_styles->registered[ $handle ]->ver;
 
-			echo '<link rel="preload" id="' . esc_attr( $handle ) . '-preload" href="' . esc_url( $preload_uri ) . '" as="style">';
+			echo '<link rel="preload" id="' . esc_attr( $handle ) . '-preload" href="' . esc_url( $preload_uri ) . '" as="style" onload="this.rel=\'stylesheet\'">';
 			echo "\n";
 		}
 	}
@@ -213,33 +175,9 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Enqueues WordPress theme styles for the editor.
 	 */
 	public function action_add_editor_styles() {
-		// Enqueue Google Fonts.
-		$google_fonts_url = $this->get_google_fonts_url();
-		if ( ! empty( $google_fonts_url ) ) {
-			add_editor_style( $this->get_google_fonts_url() );
-		}
 
 		// Enqueue block editor stylesheet.
 		add_editor_style( 'assets/css/editor/editor-styles.min.css' );
-	}
-
-	/**
-	 * Adds preconnect resource hint for Google Fonts.
-	 *
-	 * @param array  $urls          URLs to print for resource hints
-	 * @param string $relation_type the relation type the URLs are printed
-	 *
-	 * @return array URLs to print for resource hints
-	 */
-	public function filter_resource_hints( array $urls, string $relation_type ): array {
-		if ( 'preconnect' === $relation_type && wp_style_is( 'knowx-fonts', 'queue' ) ) {
-			$urls[] = array(
-				'href' => 'https://fonts.gstatic.com',
-				'crossorigin',
-			);
-		}
-
-		return $urls;
 	}
 
 	/**
@@ -255,6 +193,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @param string ...$handles One or more stylesheet handles.
 	 */
 	public function print_styles( string ...$handles ) {
+
 		// If preloading styles is disabled (and thus they have already been enqueued), return early.
 		if ( ! $this->preloading_styles_enabled() ) {
 			return;
@@ -269,12 +208,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					/* translators: %s: stylesheet handle */
 					_doing_it_wrong( __CLASS__ . '::print_styles()', esc_html( sprintf( __( 'Invalid theme stylesheet handle: %s', 'knowx' ), $handle ) ), 'KnowX 2.0.0' );
 				}
-
 				return $is_valid;
 			}
 		);
 
-		if ( empty( $handles ) ) {
+		if ( array() === $handles ) {
 			return;
 		}
 
@@ -289,12 +227,13 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * By default, this method returns true unless the page is being served in AMP. The
 	 * {@see 'knowx_preloading_styles_enabled'} filter can be used to tweak the return value.
 	 *
-	 * @return bool true if preloading stylesheets and injecting them is enabled, false otherwise
+	 * @return bool True if preloading stylesheets and injecting them is enabled, false otherwise.
 	 */
-	protected function preloading_styles_enabled() {
-		$preloading_styles_enabled = ! knowx()->is_amp();
+	protected function preloading_styles_enabled(): bool {
 
-		/*
+		$preloading_styles_enabled = true;
+
+		/**
 		 * Filters whether to preload stylesheets and inject their link tags within the page content.
 		 *
 		 * @param bool $preloading_styles_enabled Whether preloading stylesheets and injecting them is enabled.
@@ -305,7 +244,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	/**
 	 * Gets all CSS files.
 	 *
-	 * @return array associative array of $handle => $data pairs
+	 * @return array Associative array of $handle => $data pairs.
 	 */
 	protected function get_css_files(): array {
 		if ( is_array( $this->css_files ) ) {
@@ -313,27 +252,31 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 
 		$css_files = array(
-			'knowx-global'           => array(
+			'knowx-global'      => array(
 				'file'   => 'global.min.css',
 				'global' => true,
 			),
-			'knowx-comments'         => array(
+			'knowx-comments'    => array(
 				'file'             => 'comments.min.css',
 				'preload_callback' => function () {
 					return ! post_password_required() && is_singular() && ( comments_open() || get_comments_number() );
 				},
 			),
-			'knowx-content'          => array(
+			'knowx-content'     => array(
 				'file'             => 'content.min.css',
 				'preload_callback' => '__return_false',
 			),
-			'knowx-sidebar'          => array(
+			'knowx-docs'        => array(
+				'file'             => 'docs.min.css',
+				'preload_callback' => '__return_false',
+			),
+			'knowx-sidebar'     => array(
 				'file' => 'sidebar.min.css',
 			),
-			'knowx-widgets'          => array(
+			'knowx-widgets'     => array(
 				'file' => 'widgets.min.css',
 			),
-			'knowx-front-page'       => array(
+			'knowx-front-page'  => array(
 				'file'             => 'front-page.min.css',
 				'preload_callback' => function () {
 					global $template;
@@ -341,12 +284,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					return 'front-page.php' === basename( $template );
 				},
 			),
-			'knowx-site-loader'      => array(
+			'knowx-site-loader' => array(
 				'file'   => 'loaders.min.css',
-				'global' => true,
-			),
-			'knowx-load-fontawesome' => array(
-				'file'   => 'fontawesome.min.css',
 				'global' => true,
 			),
 		);
@@ -377,72 +316,12 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					'global'           => false,
 					'preload_callback' => null,
 					'media'            => 'all',
+					'deps'             => array(),
 				),
 				$data
 			);
 		}
 
 		return $this->css_files;
-	}
-
-	/**
-	 * Returns Google Fonts used in theme.
-	 *
-	 * @return array associative array of $font_name => $font_variants pairs
-	 */
-	protected function get_google_fonts(): array {
-		if ( is_array( $this->google_fonts ) ) {
-			return $this->google_fonts;
-		}
-
-		$google_fonts = array(
-			'Open Sans' => array( '300', '300i', '400', '400i', '700', '700i', '900&display=swap' ),
-		);
-
-		/*
-		 * Filters default Google Fonts.
-		 *
-		 * @param array $google_fonts Associative array of $font_name => $font_variants pairs.
-		 */
-		$this->google_fonts = (array) apply_filters( 'knowx_google_fonts', $google_fonts );
-
-		return $this->google_fonts;
-	}
-
-	/**
-	 * Returns the Google Fonts URL to use for enqueuing Google Fonts CSS.
-	 *
-	 * Uses `latin` subset by default. To use other subsets, add a `subset` key to $query_args and the desired value.
-	 *
-	 * @return string google Fonts URL, or empty string if no Google Fonts should be used
-	 */
-	protected function get_google_fonts_url(): string {
-		$google_fonts = $this->get_google_fonts();
-
-		if ( empty( $google_fonts ) ) {
-			return '';
-		}
-
-		$font_families = array();
-
-		foreach ( $google_fonts as $font_name => $font_variants ) {
-			if ( ! empty( $font_variants ) ) {
-				if ( ! is_array( $font_variants ) ) {
-					$font_variants = explode( ',', str_replace( ' ', '', $font_variants ) );
-				}
-
-				$font_families[] = $font_name . ':' . implode( ',', $font_variants );
-				continue;
-			}
-
-			$font_families[] = $font_name;
-		}
-
-		$query_args = array(
-			'family'  => implode( '|', $font_families ),
-			'display' => 'swap',
-		);
-
-		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
 	}
 }

@@ -12,15 +12,11 @@
 namespace KnowX\KnowX;
 
 ?>
-	<?php
-	$classes = get_body_class();
-	if ( ! in_array( 'page-template-full-width', $classes ) ) {
-		?>
+	<?php if ( knowx_template_uses_container() ) : ?>
 		</div><!-- .container -->
-	<?php } ?>
+	<?php endif; ?>
 
 	<footer id="colophon" class="site-footer">
-		<?php if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'footer' ) ) : ?>
 			<div class="site-footer-wrapper">
 				<div class="container">
 					<?php
@@ -41,7 +37,6 @@ namespace KnowX\KnowX;
 			</div><!-- .site-footer-wrapper -->
 
 			<?php get_template_part( 'template-parts/footer/info' ); ?>
-		<?php endif; ?>
 	</footer><!-- #colophon -->
 
 </div><!-- #page -->

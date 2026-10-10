@@ -1,0 +1,99 @@
+/**
+ * Theme behaviour that CSS cannot do: the page loader, table cell labels and the back-to-top button.
+ * No jQuery; menus live in navigation.ts.
+ */
+(function () {
+	'use strict';
+
+	const data = window.knowxData || {};
+
+	/**
+	 * Hides the page loader when the page has loaded, and never leaves it covering the page.
+	 */
+	function initLoader() {
+		const loader = document.querySelector('.site-loader');
+		if (!loader) {
+			return;
+		}
+
+		const hide = () => loader.classList.add('loaded');
+
+		if (document.readyState === 'complete') {
+			hide();
+		} else {
+			window.addEventListener('load', hide);
+		}
+		window.setTimeout(hide, 4000);
+	}
+
+	/**
+	 * Copies each column heading onto its cells so tables can stack on small screens.
+	 */
+	function initTables() {
+		document.querySelectorAll('table').forEach((table) => {
+			const heads = Array.from(table.querySelectorAll('thead th')).map(
+				(th) => th.textContent.trim()
+			);
+
+			table.querySelectorAll('tbody tr').forEach((row) => {
+				Array.from(row.children).forEach((cell, index) => {
+					if (heads[index]) {
+						cell.setAttribute('data-attr', heads[index]);
+					}
+				});
+			});
+		});
+	}
+
+	/**
+	 * Adds a back-to-top button that appears after scrolling down.
+	 */
+	function initScrollTop() {
+		if (!data.enableScrollup) {
+			return;
+		}
+
+		const button = document.createElement('a');
+		button.id = 'scrollUp';
+		button.href = '#page';
+		button.setAttribute('aria-label', data.scrollTopLabel || 'Back to top');
+		button.innerHTML =
+			'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 15l6-6 6 6"/></svg>';
+		document.body.appendChild(button);
+
+		const reduceMotion = window.matchMedia(
+			'(prefers-reduced-motion: reduce)'
+		);
+		let ticking = false;
+
+		const update = () => {
+			button.classList.toggle('is-visible', window.scrollY > 300);
+			ticking = false;
+		};
+
+		window.addEventListener(
+			'scroll',
+			() => {
+				if (!ticking) {
+					ticking = true;
+					window.requestAnimationFrame(update);
+				}
+			},
+			{ passive: true }
+		);
+
+		button.addEventListener('click', (event) => {
+			event.preventDefault();
+			window.scrollTo({
+				top: 0,
+				behavior: reduceMotion.matches ? 'auto' : 'smooth',
+			});
+		});
+
+		update();
+	}
+
+	initLoader();
+	initTables();
+	initScrollTop();
+})();

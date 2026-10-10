@@ -1,0 +1,39 @@
+/*--------------------------------------------------------------
+# Colour mode toggle
+--------------------------------------------------------------*/
+
+.site-header button.color-mode-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin-inline-start: 0.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--global-font-color);
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.site-header button.color-mode-toggle:hover {
+    background: var(--color-surface-alt);
+}
+
+.site-header button.color-mode-toggle:focus-visible {
+    outline: 2px solid var(--color-theme-primary);
+    outline-offset: 2px;
+}
+
+.color-mode-icon {
+    display: none;
+}
+
+:root:not([data-color-mode]) .color-mode-icon--light,
+:root[data-color-mode="light"] .color-mode-icon--light,
+:root[data-color-mode="dark"] .color-mode-icon--dark,
+:root[data-color-mode="auto"] .color-mode-icon--auto {
+    display: block;
+}

@@ -1,0 +1,7 @@
+{
+  "release_version": "2.0.0",
+  "ran_at": "2026-10-10T09:00:00Z",
+  "walk": "CDP browser sweep: 15 page types x light/dark x 390/1280 (axe), x 390/768/1024/1440 (overflow, console); sidebar layouts; RTL; search overlay; Customizer round trip; Playground CLI sample site",
+  "failures": [],
+  "debug_log_issues": []
+}

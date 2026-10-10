@@ -1,0 +1,23 @@
+
+/*--------------------------------------------------------------
+# Links
+--------------------------------------------------------------*/
+/* stylelint-disable */
+a {
+    color: var(--color-link);
+    text-decoration: none;
+}
+/* stylelint-enable */
+
+a:hover,
+a:focus,
+a:active {
+    color: var(--color-link-hover);
+}
+
+/* Links inside running text are underlined so colour is not the only cue. */
+.entry-content p a:not(.wp-element-button),
+.comment-content a,
+.comment-notes a {
+    text-decoration: underline;
+}

@@ -8,7 +8,7 @@
 namespace KnowX\KnowX;
 
 // Get post object and type once.
-$post          = get_post();
+$current_post  = get_post();
 $post_type_obj = get_post_type_object( get_post_type() );
 
 // Initialize output variables.
@@ -42,9 +42,9 @@ if ( 'post' === $post_type_obj->name || $post_type_obj->has_archive ) {
 }
 
 // Show author only if the post type supports it.
-if ( post_type_supports( $post_type_obj->name, 'author' ) ) {
+if ( post_type_supports( $post_type_obj->name, 'author' ) && '' !== get_the_author() ) {
 	// Get author ID once.
-	$author_id = $post->post_author;
+	$author_id = $current_post->post_author;
 
 	// Get author link once.
 	$author_url  = get_author_posts_url( $author_id );
@@ -58,11 +58,11 @@ if ( post_type_supports( $post_type_obj->name, 'author' ) ) {
 }
 
 // Show parent post only if available and if the post type is 'attachment'.
-if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
+if ( ! empty( $current_post->post_parent ) && 'attachment' === get_post_type() ) {
 	$parent_string = sprintf(
 		'<a href="%1$s">%2$s</a>',
-		esc_url( get_permalink( $post->post_parent ) ),
-		esc_html( get_the_title( $post->post_parent ) )
+		esc_url( get_permalink( $current_post->post_parent ) ),
+		esc_html( get_the_title( $current_post->post_parent ) )
 	);
 }
 
@@ -74,8 +74,8 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 		?>
 		<span class="posted-by">
 			<?php
+			echo get_avatar( get_the_author_meta( 'user_email' ), '26' );
 			/* translators: %s: post author */
-			echo get_avatar( get_the_author_meta( 'user_email' ), $size = '26' );
 			$author_byline = _x( 'By %s', 'post author', 'knowx' );
 			if ( ! empty( $time_string ) ) {
 				/* translators: %s: post author */
@@ -113,11 +113,7 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 		?>
 		<span class="posted-on">
 			<?php
-			printf(
-				/* translators: %s: post date */
-				esc_html_x( ' %s', 'post date', 'knowx' ),
-				$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			);
+			echo ' ' . wp_kses_post( $time_string );
 			?>
 		</span>
 		<?php

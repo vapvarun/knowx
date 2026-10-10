@@ -61,11 +61,11 @@ KnowX is a classic theme with block features. The editor shows the same colours 
 
 = Does it support dark mode? =
 
-Yes. Visitors can switch with the toggle in the header, or you can set the default under Appearance > Customize > Site Skin.
+Yes. Visitors can switch with the toggle in the header, or you can set the default under Appearance > Customize > Dark Mode.
 
 = What happened to Kirki and the old color options? =
 
-Version 2.0.0 no longer needs the Kirki plugin and has fewer color settings, because the other colors are derived from the theme color. Check Appearance > Customize > Site Skin after updating.
+Version 2.0.0 no longer needs the Kirki plugin and has fewer color settings, because the other colors are derived from the theme color. Check Appearance > Customize > Colors after updating.
 
 == Resources ==
 

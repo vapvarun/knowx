@@ -130,6 +130,12 @@ class Component implements Component_Interface {
 			}
 		}
 
+		// Core's Background Color, moved into Site Skin. Dark mode keeps its own page colour.
+		$page = sanitize_hex_color_no_hash( get_theme_mod( 'background_color', '' ) );
+		if ( $page && strtolower( $page ) !== strtolower( (string) get_theme_support( 'custom-background', 'default-color' ) ) ) {
+			$declarations .= '--color-theme-body:#' . $page . ';';
+		}
+
 		foreach ( self::VARIABLES as $setting => $variable ) {
 			$color = self::sanitize_color( get_theme_mod( $setting, '' ) );
 			if ( '' !== $color ) {

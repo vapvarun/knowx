@@ -2,9 +2,9 @@
 
 **Included in Free**
 
-These settings are under **Knowledge Base Layout One** and **Knowledge Base Layout Two** in the Customizer.
+These settings are under **Docs Home** and **Docs Index** in the Customizer.
 
-## Layout One: the Docs Home template
+## Docs Home
 
 The hero block at the top, the product cards, the featured and recent articles and the support block.
 
@@ -25,7 +25,7 @@ With **one product**, the home shows that product's sections as cards instead of
 
 ## Articles
 
-**Customize > Knowledge Base > Articles** has one switch for each part of an article page:
+**Customize > Docs > Articles** has one switch for each part of an article page:
 
 | Switch | What it hides |
 |---|---|
@@ -39,7 +39,7 @@ With **one product**, the home shows that product's sections as cards instead of
 
 The date is the last modified date of the post, and it is also sent as `dateModified` in the page's structured data.
 
-## Layout Two: the Docs Index template
+## Docs Index
 
 A list of every category with its latest articles.
 

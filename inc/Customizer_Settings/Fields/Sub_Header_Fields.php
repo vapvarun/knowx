@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 		'switch',
 		array(
 			'settings' => 'site_sub_header',
-			'label'    => esc_html__( 'Site Sub Header?', 'knowx' ),
+			'label'    => esc_html__( 'Show the breadcrumb bar', 'knowx' ),
 			'section'  => 'site_sub_header_section',
 			'default'  => 1,
 			'choices'  => array(
@@ -51,7 +51,7 @@ defined( 'ABSPATH' ) || exit;
 		'switch',
 		array(
 			'settings'        => 'site_breadcrumbs',
-			'label'           => esc_html__( 'Site Breadcrumbs?', 'knowx' ),
+			'label'           => esc_html__( 'Show breadcrumbs', 'knowx' ),
 			'section'         => 'site_sub_header_section',
 			'default'         => 1,
 			'choices'         => array(
@@ -72,7 +72,7 @@ defined( 'ABSPATH' ) || exit;
 		'switch',
 		array(
 			'settings'        => 'site_search',
-			'label'           => esc_html__( 'Site Search?', 'knowx' ),
+			'label'           => esc_html__( 'Show a search box in the bar', 'knowx' ),
 			'section'         => 'site_sub_header_section',
 			'default'         => 0,
 			'choices'         => array(

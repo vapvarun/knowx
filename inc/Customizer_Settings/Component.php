@@ -95,7 +95,7 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_layout',
 			array(
-				'title'       => esc_html__( 'Site Layout', 'knowx' ),
+				'title'       => esc_html__( 'Layout', 'knowx' ),
 				'priority'    => 30,
 				'description' => '',
 				'panel'       => 'site_layout_panel',
@@ -106,10 +106,9 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_color_mode_section',
 			array(
-				'title'       => esc_html__( 'Color Mode', 'knowx' ),
-				'priority'    => 30,
+				'title'       => esc_html__( 'Dark Mode', 'knowx' ),
+				'priority'    => 23,
 				'description' => '',
-				'panel'       => 'site_layout_panel',
 			)
 		);
 
@@ -140,7 +139,7 @@ class Component implements Component_Interface {
 			'typography_panel',
 			array(
 				'title'       => esc_html__( 'Typography', 'knowx' ),
-				'priority'    => 30,
+				'priority'    => 25,
 				'description' => '',
 			)
 		);
@@ -189,8 +188,8 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_header_section',
 			array(
-				'title'       => esc_html__( 'Site Header', 'knowx' ),
-				'priority'    => 30,
+				'title'       => esc_html__( 'Header', 'knowx' ),
+				'priority'    => 28,
 				'description' => '',
 			)
 		);
@@ -199,8 +198,8 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_sub_header_section',
 			array(
-				'title'       => esc_html__( 'Site Sub Header', 'knowx' ),
-				'priority'    => 30,
+				'title'       => esc_html__( 'Breadcrumb Bar', 'knowx' ),
+				'priority'    => 29,
 				'description' => '',
 			)
 		);
@@ -209,8 +208,8 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_skin_section',
 			array(
-				'title'       => esc_html__( 'Site Skin', 'knowx' ),
-				'priority'    => 30,
+				'title'       => esc_html__( 'Colors', 'knowx' ),
+				'priority'    => 22,
 				'description' => '',
 			)
 		);
@@ -219,8 +218,8 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_blog_section',
 			array(
-				'title'       => esc_html__( 'Site Blog', 'knowx' ),
-				'priority'    => 30,
+				'title'       => esc_html__( 'Posts Page', 'knowx' ),
+				'priority'    => 32,
 				'description' => '',
 			)
 		);
@@ -229,8 +228,8 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_sidebar_layout',
 			array(
-				'title'       => esc_html__( 'Site Sidebar', 'knowx' ),
-				'priority'    => 30,
+				'title'       => esc_html__( 'Sidebar', 'knowx' ),
+				'priority'    => 32,
 				'description' => '',
 			)
 		);
@@ -239,7 +238,7 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Panel::add(
 			'knowledge_panel',
 			array(
-				'title'       => esc_html__( 'Knowledge Base', 'knowx' ),
+				'title'       => esc_html__( 'Docs', 'knowx' ),
 				'priority'    => 31,
 				'description' => '',
 			)
@@ -248,7 +247,7 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_knowledge_section_one',
 			array(
-				'title'       => esc_html__( 'Knowledge Base Layout One', 'knowx' ),
+				'title'       => esc_html__( 'Docs Home', 'knowx' ),
 				'priority'    => 30,
 				'description' => '',
 				'panel'       => 'knowledge_panel',
@@ -268,7 +267,7 @@ class Component implements Component_Interface {
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_knowledge_section_two',
 			array(
-				'title'       => esc_html__( 'Knowledge Base Layout Two', 'knowx' ),
+				'title'       => esc_html__( 'Docs Index', 'knowx' ),
 				'priority'    => 30,
 				'description' => '',
 				'panel'       => 'knowledge_panel',

@@ -31,6 +31,24 @@ class Component implements Component_Interface {
 	 */
 	public function initialize() {
 		add_action( 'after_setup_theme', array( $this, 'action_add_custom_background_support' ) );
+		add_action( 'customize_register', array( $this, 'action_customize_register' ), 20 );
+	}
+
+	/**
+	 * Puts the core Background Color control in Site Skin next to the other colours and drops the image controls.
+	 *
+	 * The colour itself is printed as the `--color-theme-body` token (see the Tokens component).
+	 *
+	 * @param \WP_Customize_Manager $wp_customize Customizer manager instance.
+	 */
+	public function action_customize_register( $wp_customize ) {
+		$control = $wp_customize->get_control( 'background_color' );
+		if ( $control ) {
+			$control->section  = 'site_skin_section';
+			$control->label    = __( 'Page Background Color', 'knowx' );
+			$control->priority = 12;
+		}
+		$wp_customize->remove_section( 'background_image' );
 	}
 
 	/**
@@ -42,8 +60,10 @@ class Component implements Component_Interface {
 			apply_filters(
 				'knowx_custom_background_args',
 				array(
-					'default-color' => 'f7f7f9',
-					'default-image' => '',
+					'default-color'    => 'f7f7f9',
+					'default-image'    => '',
+					// Core's body rule would ignore dark mode; the Tokens component prints the colour instead.
+					'wp-head-callback' => '__return_false',
 				)
 			)
 		);

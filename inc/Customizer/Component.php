@@ -48,7 +48,7 @@ class Component implements Component_Interface {
 	 * @param WP_Customize_Manager $wp_customize Customizer manager instance.
 	 */
 	public function action_customize_register( WP_Customize_Manager $wp_customize ) {
-		foreach ( array( 'blogname', 'blogdescription', 'header_textcolor' ) as $setting_id ) {
+		foreach ( array( 'blogname', 'blogdescription' ) as $setting_id ) {
 			$setting = $wp_customize->get_setting( $setting_id );
 			if ( $setting ) {
 				$setting->transport = 'postMessage';

@@ -37,7 +37,11 @@ foreach ( (array) glob( get_template_directory() . '/styles/*.json' ) as $knowx_
 			'label'    => esc_html__( 'Theme Color', 'knowx' ),
 			'section'  => 'site_skin_section',
 			'default'  => '#03A9F4',
-			'choices'  => array( 'alpha' => true ),
+			'choices'  => array(
+				'alpha'   => true,
+				// Quick picks under the picker: the colour schemes' brand colours and the product palette. Any other colour can still be chosen.
+				'palette' => array( '#03a9f4', '#2563eb', '#7c3aed', '#047857', '#b45309', '#be123c', '#0f766e', '#c2410c' ),
+			),
 			'priority' => 10,
 		)
 	);

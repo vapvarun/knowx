@@ -51,4 +51,4 @@ On **Posts > Categories**, a top-level category has two more fields next to its 
 
 When there are two or more products, search results show **All products** and one button per product. Choosing a product limits the results to that product and its sections.
 
-**Customize > Knowledge Base > Layout One > Products on the docs home** switches between product cards and each product listed with its sections.
+**Customize > Docs > Docs Home > Products on the docs home** switches between product cards and each product listed with its sections.

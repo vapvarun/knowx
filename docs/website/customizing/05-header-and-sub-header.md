@@ -2,14 +2,14 @@
 
 **Included in Free**
 
-## Site Header
+## Header
 
 - **Sticky header**: keep the header at the top while scrolling. On by default.
 - **Background colour**: the header colour. Leave empty to follow the colour scheme and dark mode.
 
 The header holds the logo or site title, the primary menu, the search button, the **Products** menu and the dark mode toggle.
 
-## Site Sub Header
+## Breadcrumb Bar
 
 The bar under the header, shown on every page except the front page.
 

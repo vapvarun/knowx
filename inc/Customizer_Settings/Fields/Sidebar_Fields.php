@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
 		'switch',
 		array(
 			'settings' => 'sticky_sidebar_option',
-			'label'    => esc_html__( 'Sticky Sidebar ?', 'knowx' ),
+			'label'    => esc_html__( 'Keep the sidebar in view while scrolling', 'knowx' ),
 			'section'  => 'site_sidebar_layout',
 			'default'  => 1,
 			'choices'  => array(

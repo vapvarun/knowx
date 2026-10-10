@@ -55,7 +55,7 @@ defined( 'ABSPATH' ) || exit;
 		'switch',
 		array(
 			'settings' => 'site_loader',
-			'label'    => esc_html__( 'Site Loader ?', 'knowx' ),
+			'label'    => esc_html__( 'Show a loading animation', 'knowx' ),
 			'section'  => 'site_loader',
 			'default'  => 0,
 			'choices'  => array(

@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit;
 		'switch',
 		array(
 			'settings' => 'site_sticky_header',
-			'label'    => esc_html__( 'Enable Sticky Header ?', 'knowx' ),
+			'label'    => esc_html__( 'Keep the header in view while scrolling', 'knowx' ),
 			'section'  => 'site_header_section',
 			'default'  => 1,
 			'choices'  => array(

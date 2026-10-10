@@ -22,3 +22,12 @@ Run each at 390, 768, 1024 and 1440 px, in light and dark mode, with the sample 
 | J16 | Editor: Order and Applies to version | Order changes the position in the tree; the badge shows on the article |
 | J17 | Open a page with no JavaScript | Content, tree, contents and search page link all work |
 | J18 | 404 and empty category | Friendly message with a search form |
+| J19 | Fresh install, open the home page with no Customizer changes | Hero, product cards, recent articles and the support block look finished; Customizer, Docs, Docs Home switches between cards and sections |
+| J20 | Site with one product (`seed-single.php`) | Home lists that product's sections directly, no product switcher or card |
+| J21 | Customizer, Docs, Articles: turn "updated date" off | Date disappears from article, section and product pages; on again brings it back |
+| J22 | Search with results; archive (date, tag, author) | Docs-style list with filter chips and excerpts; pagination works |
+| J23 | Post a comment, reply to one | Form and list are styled as cards in light and dark; reply link works |
+| J24 | Insert each pattern in the block editor | Appears in the inserter, renders on the front end and in the editor, passes axe |
+| J25 | Customizer, Colors: click each palette card, then change one colour, then reset | Palette applies to buttons, links and surfaces; own colour wins; reset returns the defaults; text stays readable |
+| J26 | Customizer: open every section, close and open Typography groups | Every control shows; closed groups still show their title; no empty section |
+| J27 | Appearance, Menus: assign a menu to Footer | Links appear in the footer bar; unassigned shows nothing |

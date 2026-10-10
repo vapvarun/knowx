@@ -184,7 +184,7 @@ $single     = 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] 
 				</h2>
 			</div>
 			<div class="knowx-support-content">
-				<p><?php echo esc_html( ! empty( $support_content ) ? $support_content : __( 'Search the articles above, or get in touch and we will help you.', 'knowx' ) ); ?></p>
+				<p><?php echo esc_html( ! empty( $support_content ) ? $support_content : ( ! empty( $support_button_text ) && ! empty( $support_button_link ) ? __( 'Search the articles above, or get in touch and we will help you.', 'knowx' ) : __( 'Search the articles above to find what you need.', 'knowx' ) ) ); ?></p>
 			</div>
 			<?php if ( ! empty( $support_button_text ) && ! empty( $support_button_link ) ) : ?>
 			<div class="knowx-support-button">

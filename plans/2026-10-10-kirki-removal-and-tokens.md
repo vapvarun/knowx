@@ -195,3 +195,10 @@ Cleanup this implies: `theme.json` currently declares `customTemplates` (lines 3
 7. **Sample content:** two sample products, each with 3 sections and 8-10 articles, one FAQ page, one changelog page and a getting-started article; no lorem ipsum.
 
 Constraints these imply: no custom post type or taxonomy (wordpress.org rule), no required plugin, term meta and post meta sanitised and escaped, product grid and tree queries bounded and cached (2000+ posts, 500+ categories), everything works without JS except search overlay and copy buttons (progressive enhancement).
+
+## 13. Release decisions (user, 2026-10-10)
+
+- Version **2.0.0**.
+- Minimum **PHP 8.1** and **WordPress 6.9**, tested up to 7.1.
+- **Keep nothing extra**: no bbPress, Elementor, WooCommerce, BuddyPress or LearnDash integration. The theme works on a plain WordPress install and every feature is native.
+- Work is tracked as one Basecamp card per group W00-W18 in the KnowX board (Ready for Development column), plus `plans/WORK_GROUPS.md` in the repo.

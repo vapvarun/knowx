@@ -66,13 +66,14 @@ Verify each before deleting (grep callers); A section 3, B section 6, C sections
 - [ ] `scripts/`: remove block tooling (`blocks.js`, `build-all-blocks.js`, `build-blocks.js`, `templates/block`), `convert-to-block-theme.js`, `dev-modern.js`, `start.js` if unused, prod-build tests with mmenu-light
 - [ ] dead functions: `knowx_site_menu_icon`, `knowx_metabox_callback`/`knowx_save_meta` (decide: register meta box or drop), `Template_Tags::get_theme_asset`, `Comments::filter_comment_form_defaults`, `knowx_log`, `knowx_is_login_page`
 - [ ] `login.php:122-151` undefined-variable branches
+- [ ] No extra plugin integrations (decision 2026-10-10): remove bbPress support (`bbpress.php`, `template-parts/content/content-bbpress.php`, `bbpress.css`, `bbpress_sidebar_option`, `custom_bbp_no_breadcrumb`) and Elementor location checks (`elementor_theme_do_location` in `404.php`, `archive.php`, `footer.php`, `header.php`, `single.php`)
 - [ ] unused JS/CSS: `global.min.js` never enqueued, `admin/knowx-customizer.js` never loaded, `knowx-customizer.css`, 9 PNG layout pickers (tied to Kirki, removed in W07)
 - [ ] duplicate helpers (`get_version`/`get_asset_version`, two footer-copyright branches, duplicate `add_theme_support` for custom-header/background)
 - Gate: build, bundle and `php -l` pass; browser smoke on home, KB1, KB2, single, archive, 404 shows no regressions.
 
 ## W03 Compatibility headers and theme-review blockers (feeds A, G)
-- [ ] Decide minimum PHP. Code uses PHP 8.0 syntax (`Options/Component.php:141`, `Fonts/Component.php:331`, `Blocks/Component.php:166,194`) under a 7.4 header and a 7.0 gate. TT5 uses 7.2, BuddyX 8.1. Header, `functions.php` gate and composer agree after this
-- [ ] `Requires at least` 6.7 or higher (theme.json v3 needs 6.6), `Tested up to` 7.1, `Stable tag` = version (not `trunk`)
+- [ ] Minimum versions decided: **PHP 8.1, WordPress 6.9**, tested up to 7.1. Code already uses PHP 8.0 syntax (`Options/Component.php:141`, `Fonts/Component.php:331`, `Blocks/Component.php:166,194`) under a 7.4 header and 7.0 gate; make `style.css`, `readme.txt`, `functions.php` gate (`KNOWX_MINIMUM_*`) and composer all say PHP 8.1 / WP 6.9
+- [ ] `Requires at least` 6.9, `Tested up to` 7.1, `Stable tag` = version (not `trunk`)
 - [ ] `wp_body_open()` called in `header.php:27` (today only a custom `knowx_wp_body_open` action fires); remove the shim
 - [ ] HTML nesting: stray `</div>` from `.container` closed in `page-knowledgebase-one.php:28` and `full-width-container.php:36` and again in `footer.php:19`
 - [ ] `searchform.php`: label, `type="search"`, no duplicate ids `s` / `searchform`, accessible name on the icon link
@@ -160,7 +161,7 @@ From C section 2, 3, 7.
 - [ ] 143 hard-coded colour uses in 21 files (60 distinct) moved to tokens
 - [ ] `:focus-visible` everywhere (zero today), outline restored on `.wp-element-button` and `select`; `prefers-reduced-motion` honoured (infinite loader animation)
 - [ ] RTL: logical properties instead of ~170 physical declarations; delete the separate 18 KB `rtl.min.css` or load it correctly
-- [ ] Drop Bootstrap-3 grid (about 12 KB for 3 classes), unused FSE block CSS (about 9 KB), bbPress CSS loaded sitewide (`function_exists('is_bbpress')`), per-template CSS split
+- [ ] Drop Bootstrap-3 grid (about 12 KB for 3 classes), unused FSE block CSS (about 9 KB), bbPress CSS (support removed in W02), per-template CSS split
 - [ ] Missing version args on `bbpress`, `rtl`, `amp` styles
 - [ ] Responsive at 390 / 768 / 1024 / 1440 (iPad portrait and landscape): sticky ToC, sidebar drawer, 44 px targets, no horizontal scroll
 - [ ] Accessibility: skip link, headings order (Layout One `h1` outside `<main>`, Layout Two missing `h1`), `aria-label`s on search toggle and scroll-up
@@ -217,5 +218,5 @@ Decisions in plan section 12.
 - [ ] All groups Done and all checklist boxes ticked
 - [ ] Full gate set green: lint, phpcs, phpstan, phpunit, jest, Theme Check, Lighthouse, axe
 - [ ] Browser smoke walk for 1.7.5 / the new version; Basecamp cards (2 Bugs, 4 Ready for Testing) verified with proof
-- [ ] Version decision (2.0.0 recommended) applied across `style.css`, `package.json`, `config`, `readme.txt`; changelog says customizer choices reset
+- [ ] Version **2.0.0** applied across `style.css`, `package.json`, `config`, `readme.txt`; changelog says customizer choices reset
 - [ ] User approves merge to `master`; release to `vapvarun/knowx` with the clean zip; archive `knowx-core` after confirming its `v3.1` work is in `1.7.5`

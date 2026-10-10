@@ -1,6 +1,6 @@
 # KnowX 1.7.5 Release Checklist
 
-Branch: `1.7.5` (do not merge to `master`, tag, or release until every box below is ticked).
+Branch: `1.7.5`, releasing as **2.0.0** with **PHP 8.1 / WordPress 6.9** minimum (do not merge to `master`, tag, or release until every box below is ticked).
 Release route: develop on `wbcomdesigns/knowx`, release to the `vapvarun/knowx` mirror (same as BuddyX).
 Basecamp: KnowX Theme project 38311801, card table 7605386991.
 
@@ -13,7 +13,7 @@ Legend: `[x]` verified, `[ ]` open. A box is ticked only after the check was run
 - [x] `npm ci` installs clean (Node 22)
 - [x] `npm run build:css` and `npm run build:js` pass with zero drift against committed `.min` files
 - [x] `npm run bundle` produces `dist/knowx-1.7.5.zip` with `Version: 1.7.5`
-- [x] Version identical in `style.css`, `package.json`, `config/config.default.json`, `readme.txt` changelog
+- [ ] Version 2.0.0 identical in `style.css`, `package.json`, `config/config.default.json`, `readme.txt` changelog (currently 1.7.5)
 - [x] No committed zips, `.travis.yml` removed, `dist/` and `*.zip` ignored
 - [x] No dead `package.json` scripts or dead `filesToCopy` paths
 - [ ] Only credit line "based on WP Rig" remains in the repo (no other WP Rig strings)
@@ -62,7 +62,7 @@ For every section: the control renders, the value saves, it round-trips after re
 - [ ] Primary navigation, dropdowns (superfish), mobile menu, sticky header
 - [ ] Sidebar layouts: left, right, both, none; widgets render
 - [ ] Footer layouts and widget areas
-- [ ] bbPress templates (`bbpress.php`) and `bbpress.min.css` only loaded when bbPress is active
+- [ ] No bbPress / Elementor code or CSS left in the theme
 - [ ] Comments, comment reply, lazy loading, scroll-to-top, fitvids, isotope, sticky-kit
 - [ ] RTL stylesheet, AMP stylesheet, PWA / offline page
 - [ ] Block editor: editor styles match front end, wide and full-width alignment, block styles from `theme.json`
@@ -70,7 +70,7 @@ For every section: the control renders, the value saves, it round-trips after re
 - [ ] Viewports checked: 390px, 768px, desktop. No horizontal scroll at 390px
 - [ ] Dark mode / high contrast: no raw hard-coded colours that break contrast
 - [ ] Accessibility: keyboard navigation, skip link, focus outline, alt text, axe scan clean
-- [ ] Plugin compatibility: bbPress, WordPress Popular Posts, WooCommerce, BuddyPress
+- [ ] No plugin integrations required or shipped; theme works on a plain install (bbPress, Elementor, WooCommerce support removed)
 
 ## D. Basecamp Bugs column (2 cards, both assigned to Nitin Patil)
 

@@ -670,6 +670,19 @@
 	margin-block-end: 1.5rem;
 }
 
-.knowx-search-results .search-form {
+.knowx-narrow .searchform {
+	display: flex;
+	gap: 0.5rem;
 	margin-block-start: 1rem;
+}
+
+.knowx-narrow .searchform .text_input {
+	flex: 1;
+	min-width: 0;
+}
+
+/* 404 */
+.knowx-404 h2 {
+	margin-block: 2rem 0.5rem;
+	font-size: 1.125rem;
 }

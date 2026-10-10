@@ -39,8 +39,14 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_action( 'init', array( $this, 'action_register_meta' ) );
 		add_action( 'init', array( $this, 'action_register_pattern_category' ) );
+		// Any change that can alter a product list, tree or count refreshes the cached docs data.
+		foreach ( array( 'save_post', 'deleted_post', 'transition_post_status', 'set_object_terms', 'created_category', 'edited_category', 'delete_category', 'added_term_meta', 'updated_term_meta', 'deleted_term_meta', 'update_option_sticky_posts' ) as $hook ) {
+			add_action( $hook, 'knowx_kb_bump_version' );
+		}
+
 		add_action( 'wp_footer', array( $this, 'render_search_dialog' ) );
 		add_action( 'wp_head', array( $this, 'render_schema' ), 20 );
+		add_action( 'wp_head', array( $this, 'render_meta_description' ), 2 );
 		add_filter( 'the_content', 'knowx_add_heading_anchors', 20 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'action_add_accent' ), 25 );
 
@@ -59,6 +65,16 @@ class Component implements Component_Interface {
 	 */
 	public function action_register_pattern_category() {
 		register_block_pattern_category( 'knowx-docs', array( 'label' => __( 'KnowX Docs', 'knowx' ) ) );
+	}
+
+	/**
+	 * Prints the meta description.
+	 */
+	public function render_meta_description() {
+		$description = knowx_meta_description();
+		if ( '' !== $description ) {
+			echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+		}
 	}
 
 	/**

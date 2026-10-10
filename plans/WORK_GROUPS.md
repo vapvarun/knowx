@@ -38,7 +38,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W13 | theme.json, style variations, editor | done | [10392494471](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494471) |
 | W14 | Docs templates and structured data | done | [10392494490](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494490) |
 | W15 | Starter content, patterns, Playground | done | [10392494499](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494499) |
-| W16 | Large-site and speed | todo | [10392494519](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494519) |
+| W16 | Large-site and speed | done | [10392494519](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494519) |
 | W17 | i18n, docs, manifest, QA journeys | todo | [10392494541](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494541) |
 | W18 | Release gate | todo | [10392494558](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494558) |
 
@@ -240,10 +240,22 @@ Decisions in plan section 12. Done with no custom post type or taxonomy.
 - Gate: fresh Playground (local CLI) shows a complete docs site; axe 0 violations on home, article, product, section, FAQ, changelog and search (light and dark, 390 and 1280); no horizontal overflow at 390/768/1024/1440; zip 430 KB. **Passed 2026-10-10.**
 
 ## W16 Large-site and speed (feeds F, I)
-- [ ] Seed 1000+ posts and 500+ categories with WP-CLI; check KB1, KB2, archives, search
-- [ ] Lighthouse CI on four page types, mobile and desktop: performance 95+, LCP under 2.0 s, CLS under 0.05
-- [ ] No unbounded queries; caching with invalidation for shared KB data; speculation rules on
-- Gate: numbers recorded in this file.
+- [x] Seeded 4,590 articles and 546 categories (6 products x 90 sections, a few sections with 40 articles) with WP-CLI, then removed again. Docs home, product home, section page (page 2), article, search and the Docs Index template were measured with curl (TTFB) and per-request query counts
+
+| Page | Cold TTFB | Warm TTFB | Queries (warm) | HTML |
+|---|---|---|---|---|
+| Docs home | 47 ms | 21 ms | 19 | 40 KB (9 KB gzip) |
+| Product home (90 sections) | 55 ms | 31 ms | 19 | 37 KB |
+| Section page (40 articles, paged) | 58 ms | 35 ms | 31 | 43 KB |
+| Article (tree capped at 500) | 58 ms | 35 ms | 41 | 54 KB (12 KB gzip) |
+| Docs Index, 100 sections | 91 ms | 31 ms | 20 (327 cold) | 99 KB (13 KB gzip) |
+| Search | 49 ms | n/a | 36 | 94 KB |
+
+- [x] Bug found by the run: the shared docs cache was keyed on the object cache's "last changed" stamps, which are rebuilt on every request when no persistent object cache exists, so the transient never hit (327 queries on the Docs Index every time). It now uses a stored version option that is bumped on post, term and term-meta changes; a unit test covers the key change
+- [x] Scripts now go through core's `strategy` argument (defer, footer) instead of a custom attribute filter; a meta description is printed unless an SEO plugin is active (`knowx_meta_description` filter)
+- [x] Core's speculative loading is already printed (`speculationrules`), nothing added by the theme
+- [x] Lighthouse 12 (local HTTP, simulated slow 4G for mobile) on home, product home, article and search, mobile and desktop: performance 99 to 100, accessibility 100, CLS 0, TBT 0 ms, LCP 0.4 s desktop and 1.7 to 2.0 s mobile (article 1.96 s), transfer 91 to 99 KiB. Best practices 79 and SEO 91 to 92 come from the local site (HTTP, no HTTP/2, no cache headers) and from the missing meta description fixed above; search pages are `noindex` by WordPress core on purpose
+- Gate: numbers above. **Passed 2026-10-10**; the mobile LCP is at the 2.0 s limit, so W18 re-measures on the Playground or staging copy over HTTPS.
 
 ## W17 i18n, docs, manifest, QA journeys (feeds A, G)
 - [ ] Merge `master` into `1.7.5` (CI and `docs/website`), user approval first

@@ -592,3 +592,36 @@ function knowx_schema_graph() {
 	 */
 	return (array) apply_filters( 'knowx_schema_graph', $graph );
 }
+
+/**
+ * Text for the meta description of the current page.
+ *
+ * Article or page: its excerpt. Category: its description. Front page: the page excerpt or the site tagline.
+ * Empty when the page has nothing to describe, or when an SEO plugin is active and prints its own.
+ *
+ * @return string Plain text of at most 160 characters.
+ */
+function knowx_meta_description() {
+	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' ) ) {
+		return '';
+	}
+
+	$text = '';
+	if ( is_singular() ) {
+		$text = get_the_excerpt( get_queried_object_id() );
+	} elseif ( is_category() ) {
+		$text = term_description();
+	}
+	if ( '' === trim( wp_strip_all_tags( $text ) ) && is_front_page() ) {
+		$text = get_bloginfo( 'description', 'display' );
+	}
+
+	$text = trim( (string) preg_replace( '/\s+/', ' ', wp_strip_all_tags( $text ) ) );
+
+	/**
+	 * Filters the meta description. Return an empty string to print none.
+	 *
+	 * @param string $text Description.
+	 */
+	return (string) apply_filters( 'knowx_meta_description', wp_html_excerpt( $text, 160, '...' ) );
+}

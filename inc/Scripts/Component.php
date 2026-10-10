@@ -35,7 +35,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * $data must be an array with keys:
 	 * - 'file' (file path relative to 'assets/js' directory) - required
 	 * - 'global' (whether the file should immediately be enqueued instead of just being registered)
-	 * - 'loading' (whether the file should be loaded 'async' or 'defer')
+	 * - 'strategy' ('defer' or 'async', default 'defer')
 	 * - 'footer' (whether the file should be loaded in the footer)
 	 * - 'deps' (array of dependencies)
 	 * - 'localize' (array of variables to inject with wp_localize_scripts)
@@ -93,25 +93,19 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$src     = $js_uri . $data['file'];
 			$version = knowx()->get_asset_version( $js_dir . $data['file'] );
 
-			/*
-			 * Enqueue global JavaScript files immediately and register the other ones for later use.
-			 */
+			// Core's loading strategy (WordPress 6.3): scripts print in the footer and do not block rendering.
+			$args = array(
+				'strategy'  => $data['strategy'],
+				'in_footer' => $data['footer'],
+			);
+
+			// Global files are enqueued immediately; the others are registered for template parts to print.
 			if ( $data['global'] ) {
-				wp_enqueue_script( $handle, $src, $data['deps'], $version, $data['footer'] );
+				wp_enqueue_script( $handle, $src, $data['deps'], $version, $args );
 			} else {
-				wp_register_script( $handle, $src, $data['deps'], $version, $data['footer'] );
+				wp_register_script( $handle, $src, $data['deps'], $version, $args );
 			}
 
-			/**
-			 * Set async and deferred attributes.
-			 */
-			if ( 'async' === $data['loading'] ) {
-				wp_script_add_data( $handle, 'async', true );
-			}
-			if ( 'defer' === $data['loading'] ) {
-				wp_script_add_data( $handle, 'defer', true );
-			}
-			
 			/**
 			 * Add precache for specific scripts.
 			 */
@@ -232,7 +226,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			$this->js_files[ $handle ] = array_merge(
 				array(
 					'global'   => false,
-					'loading'  => null,
+					'strategy' => 'defer',
 					'footer'   => false,
 					'deps'     => array(),
 					'localize' => null,

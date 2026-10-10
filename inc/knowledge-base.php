@@ -21,6 +21,25 @@ function knowx_kb_excluded_ids() {
 }
 
 /**
+ * Version stamp of the docs data. It changes whenever a post, a category or category meta changes.
+ *
+ * Stored in an option on purpose: the "last changed" values of the object cache are rebuilt on every
+ * request when the site has no persistent object cache, so a transient keyed on them never hits.
+ *
+ * @return string Version.
+ */
+function knowx_kb_version() {
+	return (string) get_option( 'knowx_kb_version', '0' );
+}
+
+/**
+ * Invalidates every cached docs result. Hooked to the post and term actions in the Docs component.
+ */
+function knowx_kb_bump_version() {
+	update_option( 'knowx_kb_version', (string) microtime( true ) );
+}
+
+/**
  * Returns cached data and rebuilds it whenever any post or term changes.
  *
  * @param string   $key      Cache key, include every input that changes the result.
@@ -28,13 +47,12 @@ function knowx_kb_excluded_ids() {
  * @return array Cached data.
  */
 function knowx_kb_cached( $key, $callback ) {
-	$version   = wp_cache_get_last_changed( 'posts' ) . wp_cache_get_last_changed( 'terms' );
-	$transient = 'knowx_kb_' . md5( $key . $version );
+	$transient = 'knowx_kb_' . md5( $key . knowx_kb_version() );
 	$data      = get_transient( $transient );
 
 	if ( ! is_array( $data ) ) {
 		$data = (array) $callback();
-		set_transient( $transient, $data, HOUR_IN_SECONDS );
+		set_transient( $transient, $data, DAY_IN_SECONDS );
 	}
 
 	return $data;

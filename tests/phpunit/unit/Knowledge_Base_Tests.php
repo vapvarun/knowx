@@ -59,7 +59,7 @@ class Knowledge_Base_Tests extends Unit_Test_Case {
 	 * Cached data is returned without calling the builder again.
 	 */
 	public function test_cached_data_skips_the_builder() {
-		Functions\when( 'wp_cache_get_last_changed' )->justReturn( '1' );
+		Functions\when( 'get_option' )->justReturn( '1' );
 		Functions\when( 'get_transient' )->justReturn( array( 'cached' ) );
 
 		$result = knowx_kb_cached(
@@ -70,5 +70,36 @@ class Knowledge_Base_Tests extends Unit_Test_Case {
 		);
 
 		$this->assertSame( array( 'cached' ), $result );
+	}
+
+	/**
+	 * A new version stamp changes the transient name, so every cached result is rebuilt.
+	 */
+	public function test_new_version_misses_the_cache() {
+		$names = array();
+		Functions\when( 'get_option' )->justReturn( '1' );
+		Functions\when( 'get_transient' )->alias(
+			static function ( $name ) use ( &$names ) {
+				$names[] = $name;
+				return false;
+			}
+		);
+		Functions\when( 'set_transient' )->justReturn( true );
+
+		knowx_kb_cached(
+			'k',
+			static function () {
+				return array( 1 );
+			}
+		);
+		Functions\when( 'get_option' )->justReturn( '2' );
+		knowx_kb_cached(
+			'k',
+			static function () {
+				return array( 1 );
+			}
+		);
+
+		$this->assertCount( 2, array_unique( $names ) );
 	}
 }

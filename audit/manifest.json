@@ -149,13 +149,41 @@
     "page-knowledgebase-two.php": "Docs Index"
   },
   "patterns": {
+    "patterns/api-endpoint.php": {
+      "title": "API endpoint",
+      "slug": "knowx/api-endpoint"
+    },
+    "patterns/article-feedback.php": {
+      "title": "Still need help",
+      "slug": "knowx/article-feedback"
+    },
+    "patterns/callout-danger.php": {
+      "title": "Danger callout",
+      "slug": "knowx/callout-danger"
+    },
     "patterns/callout-note.php": {
       "title": "Note callout",
       "slug": "knowx/callout-note"
     },
+    "patterns/callout-tip.php": {
+      "title": "Tip callout",
+      "slug": "knowx/callout-tip"
+    },
+    "patterns/callout-warning.php": {
+      "title": "Warning callout",
+      "slug": "knowx/callout-warning"
+    },
     "patterns/changelog-entry.php": {
       "title": "Changelog entry",
       "slug": "knowx/changelog-entry"
+    },
+    "patterns/compatibility-table.php": {
+      "title": "Compatibility table",
+      "slug": "knowx/compatibility-table"
+    },
+    "patterns/docs-home.php": {
+      "title": "Docs home",
+      "slug": "knowx/docs-home"
     },
     "patterns/faq.php": {
       "title": "Frequently asked questions",
@@ -165,9 +193,21 @@
       "title": "Getting started steps",
       "slug": "knowx/getting-started-steps"
     },
+    "patterns/next-steps.php": {
+      "title": "Next steps",
+      "slug": "knowx/next-steps"
+    },
+    "patterns/prerequisites.php": {
+      "title": "Prerequisites",
+      "slug": "knowx/prerequisites"
+    },
     "patterns/support-cta.php": {
       "title": "Contact support",
       "slug": "knowx/support-cta"
+    },
+    "patterns/troubleshooting.php": {
+      "title": "Troubleshooting",
+      "slug": "knowx/troubleshooting"
     }
   },
   "pattern_categories": {

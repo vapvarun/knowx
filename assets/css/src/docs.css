@@ -378,34 +378,6 @@
 	outline-offset: 2px;
 }
 
-/* Code blocks get a copy button from docs.js. */
-.knowx-code {
-	position: relative;
-}
-
-.knowx-copy {
-	position: absolute;
-	inset-block-start: 0.5rem;
-	inset-inline-end: 0.5rem;
-	min-height: 32px;
-	padding: 0 0.6rem;
-	border: 1px solid rgb(255 255 255 / 30%);
-	border-radius: var(--global-border-radius);
-	background: rgb(255 255 255 / 10%);
-	color: #fff;
-	font-size: 0.8125rem;
-	cursor: pointer;
-}
-
-.knowx-copy:hover {
-	background: rgb(255 255 255 / 20%);
-}
-
-.knowx-copy:focus-visible {
-	outline: 2px solid #fff;
-	outline-offset: 2px;
-}
-
 /* Previous and next. */
 .knowx-pager {
 	display: grid;

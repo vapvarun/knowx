@@ -51,14 +51,14 @@ Done 2026-10-10: show TOC, show prev/next, show More in this section, show versi
 
 ## G. Patterns to add (category `knowx-docs`; five exist: callout, changelog entry, FAQ, steps, support CTA)
 
-- [ ] Warning and danger callouts (same markup as the note).
-- [ ] Prerequisites list.
-- [ ] Troubleshooting (symptom, cause, fix).
-- [ ] API endpoint (method, URL, parameters table, example).
-- [ ] Compatibility table (version by version).
-- [ ] Related articles and Next steps.
-- [ ] Was this helpful? (links to support, no storage).
-- [ ] Docs home built from blocks (hero, product grid, recent, support) for sites that prefer the editor.
+- [x] Warning and danger callouts (same markup as the note).
+- [x] Prerequisites list.
+- [x] Troubleshooting (symptom, cause, fix).
+- [x] API endpoint (method, URL, parameters table, example).
+- [x] Compatibility table (version by version).
+- [x] Related articles and Next steps.
+- [x] Was this helpful? (links to support, no storage).
+- [x] Docs home built from blocks (hero, product grid, recent, support) for sites that prefer the editor.
 
 ## H. Verification for each item
 

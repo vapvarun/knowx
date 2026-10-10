@@ -158,3 +158,18 @@ KnowX is a documentation theme, so the finished result is judged as a docs site 
 - Both layouts read the same exclusion setting (today they differ: `knowx_exclude_posts` vs `knowx_exclude`).
 
 **Verification**: Lighthouse CI on the four page types at mobile and desktop, axe scan, Rich Results test on the structured data, Playwright screenshots at the four widths, and the 1000+ post / 500+ category seed.
+
+## 10. Decision: hybrid means classic theme plus block features (user, 2026-10-10)
+
+KnowX stays a classic PHP theme (`wp_is_block_theme()` stays false; no `templates/index.html`). Existing sites keep their templates and the in-house Customizer.
+
+What "hybrid" adds:
+1. `theme.json` v3 is the design source: palette, font sizes, spacing, layout widths, element and block styles; the `--bx-*` tokens read `--wp--preset--*` where a preset exists.
+2. Block patterns (`patterns/*.php` with docblock headers) carry the KB layouts, hero, category grid, article list, FAQ and the starter content.
+3. Style variations in `styles/*.json` (the BuddyX eight) and block style variations.
+4. Block-editor support: editor styles that match the front end, `wp-block-styles`, wide and full alignments.
+5. Optional later step: header/footer as block template parts rendered with `block_template_part()` from the PHP templates, only if it does not change the markup customers rely on.
+
+What it does not do: convert PHP templates to HTML templates, remove the Customizer, or move settings to the Site Editor. That stays a possible future release.
+
+Cleanup this implies: `theme.json` currently declares `customTemplates` (lines 304-343) and `templateParts` (lines 344-365) for files that do not exist; remove or replace them with real classic `Template Name:` entries so Theme Check and the editor stay consistent. Remove `scripts/convert-to-block-theme.js`.

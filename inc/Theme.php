@@ -156,6 +156,7 @@ class Theme {
 			new Customizer_Settings\Component(),
 			new Tokens\Component(),
 			new Color_Mode\Component(),
+			new Docs\Component(),
 			new Activation\Component(),
 		);
 		return $components;

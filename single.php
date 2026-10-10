@@ -14,6 +14,13 @@ get_header();
 knowx()->print_styles( 'knowx-content' );
 knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
+// Articles that belong to a product use the docs layout.
+if ( knowx_current_product() ) {
+	get_template_part( 'template-parts/docs/single' );
+	get_footer();
+	return;
+}
+
 $default_sidebar = knowx_mod( 'sidebar_option' );
 
 $post_layout  = knowx_mod( 'blog_layout_option' );
@@ -26,7 +33,7 @@ $post_per_row = 'col-md-' . knowx_mod( 'post_per_row' );
 	
 	<?php do_action( 'knowx_before_content' ); ?>
 
-	<?php if ( 'left' == $default_sidebar || 'both' == $default_sidebar ) : ?>
+	<?php if ( 'left' === $default_sidebar || 'both' === $default_sidebar ) : ?>
 		<aside id="secondary-left" class="left-sidebar widget-area">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_left_sidebar(); ?>
@@ -41,7 +48,7 @@ $post_per_row = 'col-md-' . knowx_mod( 'post_per_row' );
 			get_template_part( 'template-parts/content/page_header' );
 
 			$classes = get_body_class();
-			if ( in_array( 'blog', $classes ) || in_array( 'archive', $classes ) || in_array( 'search', $classes ) ) {
+			if ( in_array( 'blog', $classes, true ) || in_array( 'archive', $classes, true ) || in_array( 'search', $classes, true ) ) {
 				?>
 			<div class="post-layout row <?php echo esc_attr( $post_layout ); ?>">
 			<div class="grid-sizer <?php echo esc_attr( $post_per_row ); ?>"></div>
@@ -72,7 +79,7 @@ $post_per_row = 'col-md-' . knowx_mod( 'post_per_row' );
 		?>
 
 	</main><!-- #primary -->
-	<?php if ( 'right' == $default_sidebar || 'both' == $default_sidebar ) : ?>
+	<?php if ( 'right' === $default_sidebar || 'both' === $default_sidebar ) : ?>
 		<aside id="secondary" class="primary-sidebar widget-area">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_right_sidebar(); ?>

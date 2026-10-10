@@ -1,0 +1,85 @@
+/*--------------------------------------------------------------
+# Product switcher (header)
+--------------------------------------------------------------*/
+
+.knowx-switcher {
+	position: relative;
+	margin-inline-start: 0.5rem;
+}
+
+.knowx-switcher summary {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	min-height: 44px;
+	padding: 0 0.75rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--global-border-radius);
+	color: var(--color-heading);
+	font-weight: 600;
+	cursor: pointer;
+	list-style: none;
+}
+
+.knowx-switcher summary::-webkit-details-marker {
+	display: none;
+}
+
+.knowx-switcher summary::after {
+	content: "";
+	width: 0.6em;
+	height: 0.6em;
+	background: currentcolor;
+	mask: url(../images/icon-chevron-down.svg) center / contain no-repeat;
+}
+
+.knowx-switcher[open] summary::after {
+	transform: rotate(180deg);
+}
+
+.knowx-switcher summary:focus-visible {
+	outline: 2px solid var(--color-theme-primary);
+	outline-offset: 2px;
+}
+
+.knowx-switcher-list {
+	position: absolute;
+	inset-block-start: calc(100% + 0.25rem);
+	inset-inline-end: 0;
+	z-index: 10000;
+	min-width: 14rem;
+	margin: 0;
+	padding: 0.35rem;
+	list-style: none;
+	background: var(--color-surface);
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--global-border-radius);
+	box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+.knowx-switcher-list a {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	min-height: 44px;
+	padding: 0 0.6rem;
+	border-radius: var(--global-border-radius);
+	color: var(--color-heading);
+}
+
+.knowx-switcher-list a:hover,
+.knowx-switcher-list a[aria-current] {
+	background: var(--color-surface-alt);
+}
+
+.knowx-icon {
+	display: inline-flex;
+	color: var(--color-link);
+}
+
+@media (width <= 767px) {
+	.knowx-switcher-list {
+		inset-inline-end: auto;
+		inset-inline-start: 0;
+	}
+}

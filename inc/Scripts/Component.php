@@ -188,6 +188,19 @@ class Component implements Component_Interface, Templating_Component_Interface {
 					),
 				),
 			),
+			'knowx-docs'  => array(
+				'file'     => 'docs.min.js',
+				'global'   => true,
+				'footer'   => true,
+				'strategy' => 'defer',
+				'localize' => array(
+					'knowxDocs' => array(
+						'copy'       => esc_html__( 'Copy', 'knowx' ),
+						'copied'     => esc_html__( 'Copied', 'knowx' ),
+						'linkCopied' => esc_html__( 'Link copied', 'knowx' ),
+					),
+				),
+			),
 		);
 
 		/**

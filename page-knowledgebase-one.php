@@ -1,7 +1,7 @@
 <?php
 /**
- * Template Name: Knowledge Base Layout One
- * Description: Template for displaying Categories and Posts
+ * Template Name: Docs Home
+ * Description: Product cards, featured and recent articles
  * Template Post Type: page
  *
  * @link https://codex.wordpress.org/Template_Hierarchy
@@ -13,7 +13,7 @@ namespace KnowX\KnowX;
 
 get_header();
 
-knowx()->print_styles( 'knowx-content' );
+knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 
 $hero_title   = knowx_mod( 'hero_section_heading' );
 $hero_content = knowx_mod( 'hero_section_content' );
@@ -25,7 +25,7 @@ $support_button_text = knowx_mod( 'support_section_button_text' );
 $support_button_link = knowx_mod( 'support_section_button_link_url' );
 
 $hero_image = get_the_post_thumbnail_url( get_queried_object_id(), 'full' );
-$categories = knowx_kb_top_categories();
+$products   = knowx_products();
 $featured   = knowx_kb_featured_posts();
 $recent     = knowx_kb_recent_posts();
 $column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
@@ -61,14 +61,21 @@ $column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
 
 	<div class="container">
 
-		<?php if ( ! empty( $categories ) ) : ?>
-		<div id="knowx-categories-columns-three" class="knowx-knowledgebase-one">
-			<?php foreach ( $categories as $category ) : ?>
-				<ul class="cat-list">
-					<li class="cat-name"><h2><a href="<?php echo esc_url( $category['url'] ); ?>"><?php echo esc_html( $category['name'] ); ?></a></h2></li>
-				</ul>
+		<?php if ( ! empty( $products ) ) : ?>
+		<ul class="knowx-products">
+			<?php foreach ( $products as $product ) : ?>
+				<li>
+					<a class="knowx-product-card" href="<?php echo esc_url( $product['url'] ); ?>"<?php echo $product['accent'] ? ' style="--card-accent:' . esc_attr( $product['accent'] ) . '"' : ''; ?>>
+						<span class="knowx-icon"><?php echo knowx_icon_svg( $product['icon'], 32 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped in knowx_icon_svg(). ?></span>
+						<h2><?php echo esc_html( $product['name'] ); ?></h2>
+						<?php if ( '' !== $product['description'] ) : ?>
+							<p><?php echo esc_html( $product['description'] ); ?></p>
+						<?php endif; ?>
+						<span class="knowx-product-count"><?php echo esc_html( knowx_article_count_label( $product['count'] ) ); ?></span>
+					</a>
+				</li>
 			<?php endforeach; ?>
-		</div><!-- #knowx-categories-columns-three -->
+		</ul>
 		<?php endif; ?>
 
 		<?php if ( ! empty( $featured ) || ! empty( $recent ) ) : ?>

@@ -29,6 +29,7 @@
 @import "_footer.css";
 @import "_accessibility.css";
 @import "_color-mode.css";
+@import "_switcher.css";
 
 body.elementor-editor-active .site-header-wrapper {
     z-index: 99;

@@ -59,5 +59,8 @@ require get_template_directory() . '/inc/extra.php';
 // Load the Knowledge Base data helpers.
 require get_template_directory() . '/inc/knowledge-base.php';
 
+// Load the docs data helpers (products, section tree, contents list).
+require get_template_directory() . '/inc/docs.php';
+
 // Load the breadcrumb trail.
 require get_template_directory() . '/inc/breadcrumbs.php';

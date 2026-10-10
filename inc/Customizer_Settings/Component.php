@@ -84,22 +84,12 @@ class Component implements Component_Interface {
 	 */
 	public function add_panels_and_sections() {
 		// Site Layout.
-		\KnowX\KnowX\Customizer_Framework\Panel::add(
-			'site_layout_panel',
-			array(
-				'title'       => esc_html__( 'General', 'knowx' ),
-				'priority'    => 30,
-				'description' => '',
-			)
-		);
-
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_layout',
 			array(
 				'title'       => esc_html__( 'Layout', 'knowx' ),
 				'priority'    => 30,
 				'description' => '',
-				'panel'       => 'site_layout_panel',
 			)
 		);
 
@@ -115,19 +105,9 @@ class Component implements Component_Interface {
 
 		// Site Loader.
 		// Site Scroll Top.
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'site_scroll_top',
-			array(
-				'title'       => esc_html__( 'Scroll Top', 'knowx' ),
-				'priority'    => 30,
-				'description' => '',
-				'panel'       => 'site_layout_panel',
-			)
-		);
-
 		// Typography.
-		\KnowX\KnowX\Customizer_Framework\Panel::add(
-			'typography_panel',
+		\KnowX\KnowX\Customizer_Framework\Section::add(
+			'site_title_typography_section',
 			array(
 				'title'       => esc_html__( 'Typography', 'knowx' ),
 				'priority'    => 25,
@@ -135,66 +115,17 @@ class Component implements Component_Interface {
 			)
 		);
 
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'site_title_typography_section',
-			array(
-				'title'       => esc_html__( 'Site Title', 'knowx' ),
-				'priority'    => 30,
-				'description' => '',
-				'panel'       => 'typography_panel',
-			)
-		);
-
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'headings_typography_section',
-			array(
-				'title'       => esc_html__( 'Headings', 'knowx' ),
-				'priority'    => 30,
-				'description' => '',
-				'panel'       => 'typography_panel',
-			)
-		);
-
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'menu_typography_section',
-			array(
-				'title'       => esc_html__( 'Menu', 'knowx' ),
-				'priority'    => 30,
-				'description' => '',
-				'panel'       => 'typography_panel',
-			)
-		);
-
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'body_typography_section',
-			array(
-				'title'       => esc_html__( 'Body', 'knowx' ),
-				'priority'    => 30,
-				'description' => '',
-				'panel'       => 'typography_panel',
-			)
-		);
-
 		// Site Header.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_header_section',
 			array(
-				'title'       => esc_html__( 'Header', 'knowx' ),
+				'title'       => esc_html__( 'Header and Breadcrumbs', 'knowx' ),
 				'priority'    => 28,
 				'description' => '',
 			)
 		);
 
 		// Site Sub Header.
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'site_sub_header_section',
-			array(
-				'title'       => esc_html__( 'Breadcrumb Bar', 'knowx' ),
-				'priority'    => 29,
-				'description' => '',
-			)
-		);
-
 		// Site Skin.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_skin_section',
@@ -257,35 +188,16 @@ class Component implements Component_Interface {
 		);
 
 		// Site Footer.
-		\KnowX\KnowX\Customizer_Framework\Panel::add(
-			'site_footer_panel',
-			array(
-				'title'       => esc_html__( 'Site Footer', 'knowx' ),
-				'priority'    => 31,
-				'description' => '',
-			)
-		);
-
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_footer_section',
 			array(
-				'title'       => esc_html__( 'Footer Section', 'knowx' ),
-				'priority'    => 30,
+				'title'       => esc_html__( 'Footer', 'knowx' ),
+				'priority'    => 33,
 				'description' => '',
-				'panel'       => 'site_footer_panel',
 			)
 		);
 
 		// Site Copyright.
-		\KnowX\KnowX\Customizer_Framework\Section::add(
-			'site_copyright_section',
-			array(
-				'title'       => esc_html__( 'Copyright Section', 'knowx' ),
-				'priority'    => 31,
-				'description' => '',
-				'panel'       => 'site_footer_panel',
-			)
-		);
 	}
 
 	/**
@@ -312,8 +224,8 @@ class Component implements Component_Interface {
 		$base = get_template_directory_uri() . '/inc/Customizer_Framework/assets/';
 		$ver  = wp_get_theme()->get( 'Version' );
 
-		wp_enqueue_style( 'knowx-palettes', $base . 'knowx-palettes.css', array(), $ver );
-		wp_enqueue_script( 'knowx-palettes', $base . 'knowx-palettes.js', array( 'customize-controls' ), $ver, true );
+		wp_enqueue_style( 'knowx-customizer', $base . 'knowx-customizer.css', array(), $ver );
+		wp_enqueue_script( 'knowx-customizer', $base . 'knowx-customizer.js', array( 'customize-controls' ), $ver, true );
 
 		$palettes = \KnowX\KnowX\Tokens\Component::palettes();
 		$first    = reset( $palettes );
@@ -328,7 +240,7 @@ class Component implements Component_Interface {
 		}
 		$defaults['background_color'] = '#' . ltrim( (string) get_theme_support( 'custom-background', 'default-color' ), '#' );
 		wp_localize_script(
-			'knowx-palettes',
+			'knowx-customizer',
 			'knowxPalettes',
 			array(
 				'palettes' => $palettes,

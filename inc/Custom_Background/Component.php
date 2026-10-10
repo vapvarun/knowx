@@ -44,9 +44,10 @@ class Component implements Component_Interface {
 	public function action_customize_register( $wp_customize ) {
 		$control = $wp_customize->get_control( 'background_color' );
 		if ( $control ) {
-			$control->section  = 'site_skin_section';
-			$control->label    = __( 'Page Background Color', 'knowx' );
-			$control->priority = 14;
+			$control->section     = 'site_skin_section';
+			$control->label       = __( 'Page Background Color', 'knowx' );
+			$control->priority    = 14;
+			$control->description = __( 'The page behind the content. Dark mode keeps its own page colour.', 'knowx' );
 		}
 		$wp_customize->remove_section( 'background_image' );
 	}

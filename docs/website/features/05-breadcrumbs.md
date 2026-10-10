@@ -6,7 +6,7 @@ The trail shows where a reader is, for example Home > Acme App > Getting started
 
 ## Settings
 
-Under **Breadcrumb Bar** in the Customizer, **Show the breadcrumb bar** and **Show breadcrumbs** must both be on. They are on by default. The trail is hidden on the front page.
+Under **Header and Breadcrumbs** in the Customizer, **Show breadcrumbs** must be on. It is on by default. The trail is hidden on the front page.
 
 ## Developers
 

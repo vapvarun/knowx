@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) || exit;
 	'radio',
 	array(
 		'settings'    => 'site_color_mode',
-		'label'       => esc_html__( 'Default color mode', 'knowx' ),
+		'label'       => esc_html__( 'Default mode', 'knowx' ),
 		'description' => esc_html__( 'Automatic follows the visitor\'s device setting.', 'knowx' ),
 		'section'     => 'site_color_mode_section',
 		'default'     => 'light',

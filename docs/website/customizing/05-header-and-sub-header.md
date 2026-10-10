@@ -1,20 +1,22 @@
-# Header and sub header
+# Header and breadcrumbs
 
 **Included in Free**
 
 ## Header
+
+Go to **Appearance > Customize > Header and Breadcrumbs**.
 
 - **Sticky header**: keep the header at the top while scrolling. On by default.
 - The header colour is **Header Background** under **Colors**.
 
 The header holds the logo or site title, the primary menu, the search button, the **Products** menu and the dark mode toggle.
 
-## Breadcrumb Bar
+## Breadcrumbs
 
 The bar under the header, shown on every page except the front page.
 
 - **Show breadcrumbs**: show or hide the bar with the trail Home, product, section, article. On by default.
-- **Background**: colour or image for the bar.
+- **Breadcrumb Bar Background**: colour or image for the bar.
 
 ## Menus
 

@@ -14,7 +14,8 @@ defined( 'ABSPATH' ) || exit;
 		'typography',
 		array(
 			'settings' => 'site_title_typography_option',
-			'label'    => esc_html__( 'Site Title Settings', 'knowx' ),
+			'label'    => esc_html__( 'Site Title', 'knowx' ),
+			'description' => esc_html__( 'The name of your site in the header.', 'knowx' ),
 			'section'  => 'site_title_typography_section',
 			'default'  => array(
 				'font-family'    => 'Open Sans',
@@ -25,7 +26,7 @@ defined( 'ABSPATH' ) || exit;
 				'text-transform' => 'none',
 				'text-align'     => 'left',
 			),
-			'priority' => 10,
+			'priority' => 40,
 			'output'   => array(
 				array(
 					'element' => '.site-title a',
@@ -38,7 +39,8 @@ defined( 'ABSPATH' ) || exit;
 		'typography',
 		array(
 			'settings' => 'site_tagline_typography_option',
-			'label'    => esc_html__( 'Site Tagline Settings', 'knowx' ),
+			'label'    => esc_html__( 'Tagline', 'knowx' ),
+			'description' => esc_html__( 'The line under the site name.', 'knowx' ),
 			'section'  => 'site_title_typography_section',
 			'default'  => array(
 				'font-family'    => 'Open Sans',
@@ -49,7 +51,7 @@ defined( 'ABSPATH' ) || exit;
 				'text-transform' => 'none',
 				'text-align'     => 'left',
 			),
-			'priority' => 10,
+			'priority' => 50,
 			'output'   => array(
 				array(
 					'element' => '.site-description',
@@ -66,7 +68,8 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings' => 'headings_typography_option',
 			'label'    => esc_html__( 'Headings (H1 to H6)', 'knowx' ),
-			'section'  => 'headings_typography_section',
+			'description' => esc_html__( 'One font for every heading, with its colour.', 'knowx' ),
+			'section'  => 'site_title_typography_section',
 			'default'  => array(
 				'font-family'    => 'Open Sans',
 				'variant'        => '700',
@@ -75,7 +78,7 @@ defined( 'ABSPATH' ) || exit;
 				'text-transform' => 'none',
 				'text-align'     => '',
 			),
-			'priority' => 10,
+			'priority' => 20,
 			'output'   => array(
 				array(
 					'element' => 'h1, h2, h3, h4, h5, h6',
@@ -91,8 +94,9 @@ defined( 'ABSPATH' ) || exit;
 		'typography',
 		array(
 			'settings' => 'menu_typography_option',
-			'label'    => esc_html__( 'Menu Settings', 'knowx' ),
-			'section'  => 'menu_typography_section',
+			'label'    => esc_html__( 'Menu', 'knowx' ),
+			'description' => esc_html__( 'Font and colour of the main menu.', 'knowx' ),
+			'section'  => 'site_title_typography_section',
 			'default'  => array(
 				'font-family'    => 'Open Sans',
 				'variant'        => '500',
@@ -102,7 +106,7 @@ defined( 'ABSPATH' ) || exit;
 				'text-transform' => 'none',
 				'text-align'     => 'left',
 			),
-			'priority' => 10,
+			'priority' => 30,
 			'output'   => array(
 				array(
 					'element' => '.main-navigation a, .main-navigation ul li a, .nav--toggle-sub li.menu-item-has-children, .nav--toggle-small .menu-toggle',
@@ -122,8 +126,9 @@ defined( 'ABSPATH' ) || exit;
 		'typography',
 		array(
 			'settings' => 'typography_option',
-			'label'    => esc_html__( 'Settings', 'knowx' ),
-			'section'  => 'body_typography_section',
+			'label'    => esc_html__( 'Body Text', 'knowx' ),
+			'description' => esc_html__( 'Font, size and colour of the text in articles and pages.', 'knowx' ),
+			'section'  => 'site_title_typography_section',
 			'default'  => array(
 				'font-family'    => 'Open Sans',
 				'variant'        => 'regular',

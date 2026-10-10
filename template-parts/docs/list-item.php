@@ -11,7 +11,7 @@ $knowx_version = knowx_article_version( get_the_ID() );
 ?>
 <?php
 $knowx_trail = array();
-if ( is_search() ) {
+if ( is_search() || is_tag() || is_date() || is_author() ) {
 	$knowx_cats = get_the_category();
 	if ( $knowx_cats ) {
 		$knowx_ids = array_reverse( get_ancestors( $knowx_cats[0]->term_id, 'category', 'taxonomy' ) );
@@ -26,7 +26,7 @@ if ( is_search() ) {
 		<p class="knowx-crumb"><?php echo esc_html( implode( ' / ', $knowx_trail ) ); ?></p>
 	<?php endif; ?>
 	<h2><a href="<?php the_permalink(); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
-	<?php if ( '' !== $knowx_version ) : ?>
+	<?php if ( '' !== $knowx_version && knowx_is_truthy( knowx_mod( 'knowx_show_version' ) ) ) : ?>
 		<span class="knowx-version">
 			<?php
 			/* translators: %s: product version. */

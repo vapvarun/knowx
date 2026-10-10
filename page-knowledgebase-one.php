@@ -26,9 +26,10 @@ $support_button_link = knowx_mod( 'support_section_button_link_url' );
 
 $hero_image = get_the_post_thumbnail_url( get_queried_object_id(), 'full' );
 $products   = knowx_products();
-$featured   = knowx_kb_featured_posts();
-$recent     = knowx_kb_recent_posts();
-$column     = empty( $featured ) ? 'col-md-12' : 'col-md-6';
+$home_count = max( 1, (int) knowx_mod( 'knowx_home_count' ) );
+$featured   = knowx_kb_featured_posts( $home_count );
+$recent     = knowx_is_truthy( knowx_mod( 'knowx_show_recent' ) ) ? knowx_kb_recent_posts( $home_count ) : array();
+$column     = ( empty( $featured ) || empty( $recent ) ) ? 'col-md-12' : 'col-md-6';
 $show_date  = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) );
 $single     = 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] ) : null;
 
@@ -168,6 +169,7 @@ $single     = 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] 
 
 	</div><!-- .container -->
 
+	<?php if ( knowx_is_truthy( knowx_mod( 'knowx_show_support' ) ) ) : ?>
 	<div class="knowx-support-section">
 		<div class="container">
 			<div class="knowx-support-heading">
@@ -185,6 +187,7 @@ $single     = 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] 
 			<?php endif; ?>
 		</div><!-- .container -->
 	</div><!-- .knowx-support-section -->
+	<?php endif; ?>
 </main><!-- #primary -->
 
 	<?php do_action( 'knowx_after_content' ); ?>

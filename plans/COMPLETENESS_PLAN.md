@@ -26,14 +26,14 @@ Status 2026-10-10. Found by reviewing the shipped pages with fresh eyes. Nothing
 
 ## D. Archives
 
-- [ ] Tag, date and author archives use the docs list (like search), no default widget sidebar.
+- [x] Tag, date and author archives use the docs list (like search), no default widget sidebar.
 - [ ] Tag cloud block on the docs home or in the sidebar (core block, no code).
 
 ## E. Customizer settings still missing
 
 | Setting | Why |
 |---|---|
-| Show last updated on articles | Some sites do not want dates |
+| Show last updated on articles | done |
 | Show contents (TOC) on articles | Short articles |
 | Show previous / next on articles | Same |
 | Show version badge | Single-product sites without versions |
@@ -41,6 +41,8 @@ Status 2026-10-10. Found by reviewing the shipped pages with fresh eyes. Nothing
 | Docs home sections: show / hide featured, recent, support | Remove blocks a site does not need |
 | Footer menu location and a "Help" link row | Only a primary menu exists |
 | Default article comments on / off for new posts | Docs rarely want comments |
+
+Done 2026-10-10: show TOC, show prev/next, show More in this section, show version badge, home recent and support toggles, home list size, footer menu location. Left to core: comments default for new posts (Settings > Discussion).
 
 ## F. Widgets and blocks
 

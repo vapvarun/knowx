@@ -4,7 +4,11 @@
 
 ## Footer widgets
 
-The theme has three footer widget areas: **Footer 1**, **Footer 2** and **Footer 3**. Add widgets under **Appearance > Widgets**.
+The theme has four footer widget areas: **Footer 1** to **Footer 4**. Add widgets under **Appearance > Widgets**.
+
+## Footer menu
+
+Assign a menu to the **Footer** location under **Appearance > Menus** to print a single row of links (privacy, terms, status page) above the copyright line. It shows nothing until a menu is assigned.
 
 ## Footer Section
 

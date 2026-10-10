@@ -35,3 +35,7 @@ In the editor sidebar, the **Docs** box has an **Applies to version** field. Wha
 ## Large sites
 
 The lists are cached and refresh when you publish, edit or delete a post or change a category. A product tree lists up to 500 articles; the section links always reach the full list. You can change the limits with the `knowx_kb_max_categories` and `knowx_tree_max_posts` filters.
+
+## Search results, tags, dates and authors
+
+Search results and the tag, date and author archives use the same article list as a section page. Search results and these archives print the product and section above each title, so a reader can tell two articles with the same name apart. The blog layout and sidebar settings apply to the posts page only.

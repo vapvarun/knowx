@@ -23,7 +23,9 @@ PAGES = {
     'section': '/category/orbit-api-guides/',
     'article': '/get-an-api-key/',
     'plain post': '/plain-post/',
+    'blog index': '/?page_id=BLOG',
     'date archive': '/2026/',
+    'tag archive': '/tag/api/',
     'search': '/?s=webhook',
     'faq': '/faq/',
     'docs index': '/?page_id=INDEX',
@@ -53,6 +55,15 @@ TESTS = [
     ('sub_header_background_setting', [BG]),
     ('site_breadcrumbs', [0]),
     ('site_search', [1]),
+    ('knowx_show_updated', [0]),
+    ('knowx_show_toc', [0]),
+    ('knowx_show_pager', [0]),
+    ('knowx_show_related', [0]),
+    ('knowx_show_version', [0]),
+    ('knowx_recent_by', ['newest']),
+    ('knowx_home_count', ['3']),
+    ('knowx_show_recent', [0]),
+    ('knowx_show_support', [0]),
     ('blog_layout_option', ['grid-layout', 'masonry-layout']),
     ('post_per_row', ['6']),
     ('post_box_view_layout', [1]),
@@ -142,12 +153,20 @@ EXPECT = {
     ('site_sub_header', 0): ('article', r'site-sub-header', False),
     ('site_breadcrumbs', 0): ('article', r'knowx-breadcrumbs', False),
     ('site_search', 1): ('article', 'COUNT_UP', True),
-    ('blog_layout_option', 'grid-layout'): ('date archive', r'grid-layout', True),
-    ('blog_layout_option', 'masonry-layout'): ('date archive', r'masonry-layout', True),
-    ('post_per_row', '6'): ('date archive', r'col-md-6', True),
-    ('sidebar_option', 'left'): ('date archive', r'id="secondary-left"', True),
-    ('sidebar_option', 'both'): ('date archive', r'id="secondary"', True),
-    ('sidebar_option', 'none'): ('date archive', r'<aside id="secondary', False),
+    ('knowx_show_updated', 0): ('article', r'Last updated', False),
+    ('knowx_show_toc', 0): ('article', r'class="knowx-toc', False),
+    ('knowx_show_pager', 0): ('article', r'class="knowx-pager"', False),
+    ('knowx_show_related', 0): ('article', r'class="knowx-related"', False),
+    ('knowx_show_version', 0): ('article', r'class="knowx-version"', False),
+    ('knowx_recent_by', 'newest'): ('docs home', r'Recent Articles', True),
+    ('knowx_show_recent', 0): ('docs home', r'class="knowx-recent-posts"', False),
+    ('knowx_show_support', 0): ('docs home', r'class="knowx-support-section"', False),
+    ('blog_layout_option', 'grid-layout'): ('blog index', r'grid-layout', True),
+    ('blog_layout_option', 'masonry-layout'): ('blog index', r'masonry-layout', True),
+    ('post_per_row', '6'): ('blog index', r'col-md-6', True),
+    ('sidebar_option', 'left'): ('blog index', r'id="secondary-left"', True),
+    ('sidebar_option', 'both'): ('blog index', r'id="secondary"', True),
+    ('sidebar_option', 'none'): ('blog index', r'<aside id="secondary', False),
     ('hero_section_heading', 'Hero heading QA'): ('docs home', r'Hero heading QA', True),
     ('hero_section_content', 'Hero content QA'): ('docs home', r'Hero content QA', True),
     ('knowx_exclude', 'CATEXCL'): ('docs home', r'Orbit API</h2>', False),
@@ -198,7 +217,11 @@ def main():
     if not index_id:
         index_id = wp('post', 'create', '--post_type=page', '--post_title=Docs Index', '--post_status=publish', '--porcelain')
         wp('post', 'meta', 'update', index_id, '_wp_page_template', 'page-knowledgebase-two.php')
-    pages = {k: v.replace('INDEX', index_id) for k, v in PAGES.items()}
+    blog_id = wp('post', 'list', '--post_type=page', '--name=blog', '--field=ID')
+    if not blog_id:
+        blog_id = wp('post', 'create', '--post_type=page', '--post_title=Blog', '--post_status=publish', '--porcelain')
+    wp('option', 'update', 'page_for_posts', blog_id)
+    pages = {k: v.replace('INDEX', index_id).replace('BLOG', blog_id) for k, v in PAGES.items()}
     cat_id = wp('term', 'get', 'category', '--by=slug', 'orbit-api', '--field=term_id')
 
     wp('eval', 'knowx_kb_bump_version();')

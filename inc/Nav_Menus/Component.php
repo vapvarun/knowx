@@ -68,6 +68,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		register_nav_menus(
 			array(
 				static::PRIMARY_NAV_MENU_SLUG => esc_html__( 'Primary', 'knowx' ),
+				'footer'                      => esc_html__( 'Footer', 'knowx' ),
 			)
 		);
 	}

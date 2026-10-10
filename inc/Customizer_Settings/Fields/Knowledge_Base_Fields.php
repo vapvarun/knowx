@@ -265,3 +265,103 @@ defined( 'ABSPATH' ) || exit;
 			),
 		)
 	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_toc',
+			'label'    => esc_html__( 'Show the contents list (On this page)', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_pager',
+			'label'    => esc_html__( 'Show previous and next links', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_related',
+			'label'    => esc_html__( 'Show More in this section', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_version',
+			'label'    => esc_html__( 'Show the version badge', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_recent',
+			'label'    => esc_html__( 'Show the recent articles list', 'knowx' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings' => 'knowx_show_support',
+			'label'    => esc_html__( 'Show the support block', 'knowx' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => 1,
+			'choices'  => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'select',
+		array(
+			'settings' => 'knowx_home_count',
+			'label'    => esc_html__( 'Articles in the featured and recent lists', 'knowx' ),
+			'section'  => 'site_knowledge_section_one',
+			'default'  => '5',
+			'choices'  => array(
+				'3'  => '3',
+				'5'  => '5',
+				'8'  => '8',
+				'10' => '10',
+			),
+		)
+	);

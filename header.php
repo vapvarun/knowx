@@ -36,6 +36,8 @@ namespace KnowX\KnowX;
 					<?php get_template_part( 'template-parts/header/branding' ); ?>
 
 					<?php get_template_part( 'template-parts/header/navigation' ); ?>
+
+					<?php knowx()->color_mode_toggle(); ?>
 				</header><!-- #masthead -->
 			</div>
 	</div>

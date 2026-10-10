@@ -22,7 +22,6 @@ defined( 'ABSPATH' ) || exit;
 				'font-size'      => '38px',
 				'line-height'    => '1.2',
 				'letter-spacing' => '0',
-				'color'          => '#333333',
 				'text-transform' => 'none',
 				'text-align'     => 'left',
 			),
@@ -32,18 +31,6 @@ defined( 'ABSPATH' ) || exit;
 					'element' => '.site-title a',
 				),
 			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
-			'settings' => 'site_title_hover_color',
-			'label'    => esc_html__( 'Site Title Hover Color', 'knowx' ),
-			'section'  => 'site_title_typography_section',
-			'default'  => '#03A9F4',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
 		)
 	);
 
@@ -59,7 +46,6 @@ defined( 'ABSPATH' ) || exit;
 				'font-size'      => '14px',
 				'line-height'    => '1.4',
 				'letter-spacing' => '0',
-				'color'          => '#757575',
 				'text-transform' => 'none',
 				'text-align'     => 'left',
 			),
@@ -86,7 +72,6 @@ defined( 'ABSPATH' ) || exit;
 				'variant'        => '500',
 				'line-height'    => '1.4',
 				'letter-spacing' => '0',
-				'color'          => '#333333',
 				'text-transform' => 'none',
 				'text-align'     => '',
 			),
@@ -114,7 +99,6 @@ defined( 'ABSPATH' ) || exit;
 				'font-size'      => '14px',
 				'line-height'    => '1.6',
 				'letter-spacing' => '0.02em',
-				'color'          => '#222222',
 				'text-transform' => 'none',
 				'text-align'     => 'left',
 			),
@@ -128,30 +112,6 @@ defined( 'ABSPATH' ) || exit;
 					'property' => 'border-color',
 				),
 			),
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
-			'settings' => 'menu_hover_color',
-			'label'    => esc_html__( 'Menu Hover Color', 'knowx' ),
-			'section'  => 'menu_typography_section',
-			'default'  => '#03A9F4',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
-			'settings' => 'menu_active_color',
-			'label'    => esc_html__( 'Menu Active Color', 'knowx' ),
-			'section'  => 'menu_typography_section',
-			'default'  => '#03A9F4',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
 		)
 	);
 
@@ -170,7 +130,6 @@ defined( 'ABSPATH' ) || exit;
 				'font-size'      => '14px',
 				'line-height'    => '1.6',
 				'letter-spacing' => '0',
-				'color'          => '#505050',
 				'text-transform' => 'none',
 				'text-align'     => 'left',
 			),

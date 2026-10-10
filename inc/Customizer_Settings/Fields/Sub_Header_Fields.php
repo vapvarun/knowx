@@ -30,14 +30,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings'        => 'sub_header_background_setting',
 			'label'           => esc_html__( 'Background Control', 'knowx' ),
 			'section'         => 'site_sub_header_section',
-			'default'         => array(
-				'background-color'      => 'rgba(255,255,255,0.5)',
-				'background-image'      => '',
-				'background-repeat'     => 'repeat',
-				'background-position'   => 'center center',
-				'background-size'       => 'cover',
-				'background-attachment' => 'scroll',
-			),
+			'default'         => array(),
 			'transport'       => 'auto',
 			'output'          => array(
 				array(

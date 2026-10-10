@@ -65,25 +65,6 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
-			'settings'        => 'site_loader_bg',
-			'label'           => esc_html__( 'Site Loader Background', 'knowx' ),
-			'section'         => 'site_loader',
-			'default'         => '#03A9F4',
-			'choices'         => array( 'alpha' => true ),
-			'priority'        => 10,
-			'active_callback' => array(
-				array(
-					'setting'  => 'site_loader',
-					'operator' => '==',
-					'value'    => '1',
-				),
-			),
-		)
-	);
-
 	/*
 	 *  Scroll Top
 	 */

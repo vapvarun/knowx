@@ -15,7 +15,7 @@
     font-family: var(--highlight-font-family);
     font-size: 80%;
     line-height: 0 !important;
-    color: #111;
+    color: var(--color-heading);
     text-transform: uppercase;
     border: 0;
     border-radius: 0;
@@ -115,7 +115,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         right: 0;
         width: 340px;
         overflow: auto;
-        background-color: #fff;
+        background-color: var(--color-surface);
         z-index: 9999;
         transform: translate3d(340px, 0, 0);
         transition: all .2s ease;
@@ -182,7 +182,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         width: 15px;
         height: 2px;
         display: inline-block;
-        background-color: #fff;
+        background-color: var(--color-surface);
         -webkit-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
         -moz-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
         -o-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
@@ -232,7 +232,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     }
 
     .main-navigation ul.menu li+li {
-        border-top: 1px solid rgba(34, 36, 38, .1);
+        border-top: 1px solid var(--global-border-color);
     }
 
     .main-navigation ul li.menu-item-has-children {
@@ -278,7 +278,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         top: 50%;
         width: 60%;
         height: 60%;
-        border: solid #000;
+        border: solid var(--color-heading);
         border-width: 0 2px 2px 0;
         transform: translateY(-50%) rotate(45deg);
     }
@@ -289,7 +289,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         top: 100%;
         right: 0;
         flex-direction: column;
-        background: #fff;
+        background: var(--color-surface);
         margin-left: 0;
         z-index: 1;
         text-shadow: none;
@@ -316,8 +316,8 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
         height: 0;
         top: 0;
         right: 28px;
-        border: 7px solid #000;
-        border-color: #fff #fff transparent transparent;
+        border: 7px solid var(--color-heading);
+        border-color: var(--color-surface) var(--color-surface) transparent transparent;
         -webkit-transform-origin: 0 0;
         -ms-transform-origin: 0 0;
         transform-origin: 0 0;
@@ -452,7 +452,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
     width: 100%;
     padding: 0.5em 1em 0.5em 0;
     text-decoration: none;
-    color: #222;
+    color: var(--color-heading);
 }
 
 .main-navigation a:hover {
@@ -590,7 +590,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 .menu-icons-wrapper .searchform {
     max-width: 250px;
     position: relative;
-    background: #fff;
+    background: var(--color-surface);
     margin: 0;
     padding: 5px 15px;
     padding-right: 40px;
@@ -612,7 +612,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 .menu-icons-wrapper .searchform input[type="search"],
 .cart-info::before,
 .cart-total::before {
-    color: #aaa;
+    color: var(--color-muted);
 }
 
 .searchform .search-icon {
@@ -638,7 +638,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 }
 
 .menu-icons-wrapper .searchform input[type="submit"]:focus {
-    border: 1px dotted #aaa;
+    border: 1px dotted var(--color-muted);
 }
 
 .menu-icons-wrapper .searchform::before {
@@ -654,7 +654,7 @@ body.admin-bar.sticky-header .site-header-wrapper.has-sticky-header {
 }
 
 .menu-icons-wrapper .searchform::before {
-    color: #c2c2c2;
+    color: var(--color-muted);
 }
 
 .menu-icons-wrapper .cart sup {

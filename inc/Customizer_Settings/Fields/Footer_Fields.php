@@ -16,14 +16,7 @@ defined( 'ABSPATH' ) || exit;
 			'settings'        => 'background_setting',
 			'label'           => esc_html__( 'Background Control', 'knowx' ),
 			'section'         => 'site_footer_section',
-			'default'         => array(
-				'background-color'      => 'rgba(255,255,255,0.8)',
-				'background-image'      => '',
-				'background-repeat'     => 'repeat',
-				'background-position'   => 'center center',
-				'background-size'       => 'cover',
-				'background-attachment' => 'scroll',
-			),
+			'default'         => array(),
 			'transport'       => 'auto',
 			'output'          => array(
 				array(
@@ -43,46 +36,10 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'color',
 		array(
-			'settings' => 'site_footer_title_color',
-			'label'    => esc_html__( 'Title Color', 'knowx' ),
-			'section'  => 'site_footer_section',
-			'default'  => '#333333',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
 			'settings' => 'site_footer_content_color',
 			'label'    => esc_html__( 'Content Color', 'knowx' ),
 			'section'  => 'site_footer_section',
 			'default'  => '#505050',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
-			'settings' => 'site_footer_links_color',
-			'label'    => esc_html__( 'Link Color', 'knowx' ),
-			'section'  => 'site_footer_section',
-			'default'  => '#222222',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
-			'settings' => 'site_footer_links_hover_color',
-			'label'    => esc_html__( 'Link Hover', 'knowx' ),
-			'section'  => 'site_footer_section',
-			'default'  => '#03A9F4',
 			'choices'  => array( 'alpha' => true ),
 			'priority' => 10,
 		)
@@ -118,18 +75,6 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'color',
 		array(
-			'settings' => 'site_copyright_border_color',
-			'label'    => esc_html__( 'Border Color', 'knowx' ),
-			'section'  => 'site_copyright_section',
-			'default'  => '#e8e8e8',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
 			'settings' => 'site_copyright_content_color',
 			'label'    => esc_html__( 'Content Color', 'knowx' ),
 			'section'  => 'site_copyright_section',
@@ -139,26 +84,4 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
-			'settings' => 'site_copyright_links_color',
-			'label'    => esc_html__( 'Link Color', 'knowx' ),
-			'section'  => 'site_copyright_section',
-			'default'  => '#222222',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
-		)
-	);
-
-	\KnowX\KnowX\Customizer_Framework\Field::add(
-		'color',
-		array(
-			'settings' => 'site_copyright_links_hover_color',
-			'label'    => esc_html__( 'Link Hover Color', 'knowx' ),
-			'section'  => 'site_copyright_section',
-			'default'  => '#03A9F4',
-			'choices'  => array( 'alpha' => true ),
-			'priority' => 10,
-		)
-	);
+	

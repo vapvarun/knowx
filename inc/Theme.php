@@ -155,7 +155,8 @@ class Theme {
 			new Scripts\Component(),
 			new Excerpts\Component(),
 			new Customizer_Settings\Component(),
-			new Dynamic_Style\Component(),
+			new Tokens\Component(),
+			new Color_Mode\Component(),
 			new Activation\Component(),
 		);
 		return $components;

@@ -13,8 +13,61 @@
     --highlight-font-family: "Open Sans", "Helvetica Neue", "Arial Narrow", sans-serif;
     --content-width: 100%;
     --dropdown-symbol-width: 0.7em;
+    /* Brand: Customizer > Site Skin > Theme Color. --color-on-primary is picked for contrast. */
+    --color-theme-primary: #03a9f4;
+    --color-on-primary: #111;
+
+    /* Neutral surfaces and text; the dark palette below overrides these. */
+    --color-theme-body: #f7f7f9;
+    --color-surface: #fff;
+    --color-surface-alt: #f2f3f5;
+    --color-heading: #333;
+    --color-muted: #757575;
+    --global-border-color: #e5e5e5;
+    --select-arrow: url(../images/arrow-down.svg);
+
+    /* Everything below derives from the brand and neutrals. */
+    --color-link: color-mix(in srgb, var(--color-theme-primary) 68%, #000);
+    --color-link-hover: color-mix(in srgb, var(--color-theme-primary) 45%, #000);
+    --color-theme-loader: var(--color-theme-primary);
+    --color-site-title-hover: var(--color-theme-primary);
+    --color-menu-hover: var(--color-theme-primary);
+    --color-menu-active: var(--color-theme-primary);
+    --button-background-color: var(--color-theme-primary);
+    --button-background-hover-color: color-mix(in srgb, var(--color-theme-primary) 80%, #000);
+    --button-border-color: var(--color-theme-primary);
+    --button-border-hover-color: var(--button-background-hover-color);
+    --button-text-color: var(--color-on-primary);
+    --button-text-hover-color: var(--color-on-primary);
+
+    --color-header-bg: var(--color-surface);
+    --color-footer-title: var(--color-heading);
+    --color-footer-content: var(--global-font-color);
+    --color-footer-link: var(--color-heading);
+    --color-footer-link-hover: var(--color-link);
+    --color-copyright-bg: var(--color-surface);
+    --color-copyright-content: var(--global-font-color);
+    --copyright-border-color: var(--global-border-color);
+    --color-copyright-link: var(--color-heading);
+    --color-copyright-link-hover: var(--color-link);
+
+    --color-quote-border: #111;
+    --color-quote-citation: #6c7781;
+
+    /* Heading colors */
+    --color-h1: var(--color-heading);
+    --color-h2: var(--color-heading);
+    --color-h3: var(--color-heading);
+    --color-h4: var(--color-heading);
+    --color-h5: var(--color-heading);
+    --color-h6: var(--color-heading);
+
+    /* Block backgrounds */
+    --color-block-bg-subtle: var(--color-surface-alt);
+    --color-code-bg: #2d2d2d;
+    --color-code-text: #f8f8f2;
+
     /* Custom editor colors */
-    --color-theme-primary: #03A9F4;
     --color-theme-secondary: #41848f;
     --color-theme-red: #c0392b;
     --color-theme-green: #27ae60;
@@ -25,47 +78,6 @@
     --color-theme-white: #ecf0f1;
     --color-custom-daylight: #97c0b7;
     --color-custom-sun: #eee9d1;
-    --color-theme-loader: #03A9F4;
-    --color-site-title-hover: #03A9F4;
-    --color-theme-body: #f7f7f9;
-    --color-header-bg: #fff;
-    --color-menu-hover: #03A9F4;
-    --color-menu-active: #03A9F4;
-    --color-link: #03A9F4;
-    --color-link-hover: #222;
-    --global-border-color: #e5e5e5;
-    --button-text-color: #fff;
-    --button-text-hover-color: #fff;
-    --button-background-color: #03A9F4;
-    --button-background-hover-color: #222;
-    --button-border-color: #03A9F4;
-    --button-border-hover-color: #222;
-
-    --color-footer-title: #333;
-    --color-footer-content: #505050;
-    --color-footer-link: #222;
-    --color-footer-link-hover: #03A9F4;
-    --color-copyright-bg: #fff;
-    --color-copyright-content: #505050;
-    --copyright-border-color: #e8e8e8;
-    --color-copyright-link: #222;
-    --color-copyright-link-hover: #03A9F4;
-
-    --color-quote-border: #111;
-    --color-quote-citation: #6c7781;
-
-    /* Heading colors */
-    --color-h1: #333;
-    --color-h2: #333;
-    --color-h3: #333;
-    --color-h4: #444;
-    --color-h5: #555;
-    --color-h6: #666;
-
-    /* Block backgrounds */
-    --color-block-bg-subtle: #f7f7f9;
-    --color-code-bg: #2d2d2d;
-    --color-code-text: #f8f8f2;
 
     /* Border radius */
     --global-border-radius: 4px;
@@ -74,8 +86,8 @@
     --textarea-border-radius: 4px;
 
     /* Site identity */
-    --color-site-title: #333;
-    --color-site-tagline: #666;
+    --color-site-title: var(--color-heading);
+    --color-site-tagline: var(--color-muted);
 
     /* Custom editor font sizes */
     --font-size-small: calc(16 / var(--global-font-size) * 1rem);
@@ -84,4 +96,47 @@
     --font-size-larger: calc(48 / var(--global-font-size) * 1rem);
     /* Global container width */
     --container-width: 1170px;
+}
+
+/* Dark palette: chosen with the toggle or the Customizer, or automatically from the visitor's system setting. */
+:root[data-color-mode="dark"] {
+    --color-theme-body: #0f1115;
+    --color-surface: #181b21;
+    --color-surface-alt: #20242b;
+    --global-font-color: #c9ced6;
+    --color-heading: #f3f4f6;
+    --color-muted: #9aa1ac;
+    --global-border-color: #2c313a;
+    --select-arrow: url(../images/arrow-down-light.svg);
+    --color-link: color-mix(in srgb, var(--color-theme-primary) 55%, #fff);
+    --color-link-hover: color-mix(in srgb, var(--color-theme-primary) 35%, #fff);
+    --color-header-bg: var(--color-surface);
+    --color-footer-content: var(--global-font-color);
+    --color-copyright-bg: var(--color-surface);
+    --color-copyright-content: var(--global-font-color);
+    --color-quote-border: #c9ced6;
+    --color-quote-citation: #9aa1ac;
+    color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root[data-color-mode="auto"] {
+        --color-theme-body: #0f1115;
+        --color-surface: #181b21;
+        --color-surface-alt: #20242b;
+        --global-font-color: #c9ced6;
+        --color-heading: #f3f4f6;
+        --color-muted: #9aa1ac;
+        --global-border-color: #2c313a;
+    --select-arrow: url(../images/arrow-down-light.svg);
+        --color-link: color-mix(in srgb, var(--color-theme-primary) 55%, #fff);
+        --color-link-hover: color-mix(in srgb, var(--color-theme-primary) 35%, #fff);
+        --color-header-bg: var(--color-surface);
+        --color-footer-content: var(--global-font-color);
+        --color-copyright-bg: var(--color-surface);
+        --color-copyright-content: var(--global-font-color);
+        --color-quote-border: #c9ced6;
+        --color-quote-citation: #9aa1ac;
+        color-scheme: dark;
+    }
 }

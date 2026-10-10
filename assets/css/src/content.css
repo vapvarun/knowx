@@ -61,7 +61,7 @@ h2.entry-title a {
 }
 
 h2.entry-title a:hover {
-    color: var(--color-theme-primary);
+    color: var(--color-link);
 }
 
 .single-post .entry-header h1.entry-title {
@@ -80,7 +80,7 @@ h2.entry-title a:hover {
 
 .post-layout:not(.grid-layout):not(.masory-layout) .entry-layout .entry-content,
 .default-layout .entry-layout .entry-content {
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid var(--global-border-color);
 }
 
 .entry-header {
@@ -107,7 +107,7 @@ h2.entry-title a:hover {
     font-size: 11px;
     line-height: 1.5;
     background: var(--color-theme-primary);
-    color: #fff !important;
+    color: var(--color-on-primary) !important;
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 2px;
@@ -192,7 +192,7 @@ h2.entry-title a:hover {
 /* Post box layout */
 .post-box-layout .knowx-post-content-wrapper {
     position: relative;
-    background: #fff;
+    background: var(--color-surface);
     padding: 1em;
     border-radius: 4px;
 }
@@ -314,7 +314,7 @@ article .entry-header {
     clear: both;
     margin-bottom: 0;
     padding: 1.5em 0 0;
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid var(--global-border-color);
 }
 
 @media (--content-query) {
@@ -362,7 +362,7 @@ article .entry-header {
 
 .has-theme-primary-color,
 .has-theme-primary-color a {
-    color: var(--color-theme-primary);
+    color: var(--color-link);
 }
 
 .has-theme-primary-background-color {

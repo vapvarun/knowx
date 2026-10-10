@@ -14,7 +14,7 @@
 .widget-area .widget {
     position: relative;
     margin-bottom: 30px;
-    background: #fff;
+    background: var(--color-surface);
     padding: 1em;
     border-radius: 4px;
 }
@@ -63,7 +63,7 @@
 /* Archive and Categories widgets */
 .widget_categories li,
 .widget_archive li {
-    color: #7d7d7d;
+    color: var(--color-muted);
     line-height: 1.3;
     padding-bottom: .5em;
     margin-bottom: 5px;
@@ -159,7 +159,7 @@ ul.knowx-categories-lists ul.children li a {
     display: block;
     padding: 0.6em 0;
     text-decoration: none;
-    border-bottom: 1px dashed #808080;
+    border-bottom: 1px dashed var(--color-muted);
 }
 
 .widget_pages a:hover,
@@ -167,7 +167,7 @@ ul.knowx-categories-lists ul.children li a {
 .widget_nav_menu a:hover,
 .widget_nav_menu a:focus {
     text-decoration: none;
-    border-bottom: 1px dashed #808080;
+    border-bottom: 1px dashed var(--color-muted);
 }
 
 .widget_pages li,
@@ -219,7 +219,7 @@ ul.knowx-categories-lists ul.children li a {
 
 .rss-date,
 .widget_rss cite {
-    color: #333;
+    color: var(--color-heading);
     font-size: 0.8em;
 }
 
@@ -235,7 +235,7 @@ ul.knowx-categories-lists ul.children li a {
     box-sizing: border-box;
     width: 100%;
     padding: 0.5em 1em;
-    border: 1px solid #c3c3c3;
+    border: 1px solid var(--global-border-color);
     border-radius: 0;
 }
 
@@ -273,7 +273,7 @@ ul.knowx-categories-lists ul.children li a {
 
 .widget_calendar thead {
     background: transparent;
-    color: #333;
+    color: var(--color-heading);
 }
 
 .widget_calendar th {
@@ -289,12 +289,12 @@ ul.knowx-categories-lists ul.children li a {
     padding: 0.2em;
     font-size: 0.8em;
     text-align: center;
-    background: #fff;
-    border: 1px solid #ccc;
+    background: var(--color-surface);
+    border: 1px solid var(--global-border-color);
 }
 
 .widget_calendar .pad {
-    background: #eaeaea;
+    background: var(--color-surface-alt);
 }
 
 /* stylelint-disable */

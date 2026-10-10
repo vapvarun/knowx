@@ -72,7 +72,7 @@
 
   .fa-border {
     padding: .2em .25em .15em;
-    border: solid 0.08em #eee;
+    border: solid 0.08em var(--global-border-color);
     border-radius: .1em;
   }
 

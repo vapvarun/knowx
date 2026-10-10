@@ -17,14 +17,7 @@ defined( 'ABSPATH' ) || exit;
 			'label'       => esc_html__( 'Hero Section Background Control', 'knowx' ),
 			'description' => esc_html__( 'Set hero section background color and image. Note: "Background Image" not apply when set page featured image from backend.', 'knowx' ),
 			'section'     => 'site_knowledge_section_one',
-			'default'     => array(
-				'background-color'      => 'rgba(3, 169, 244, 1)',
-				'background-image'      => '',
-				'background-repeat'     => 'repeat',
-				'background-position'   => 'center center',
-				'background-size'       => 'cover',
-				'background-attachment' => 'scroll',
-			),
+			'default'     => array(),
 			'transport'   => 'auto',
 			'output'      => array(
 				array(
@@ -112,14 +105,7 @@ defined( 'ABSPATH' ) || exit;
 			'label'       => esc_html__( 'Support Section Background Control', 'knowx' ),
 			'description' => esc_html__( 'Set support section background color and image.', 'knowx' ),
 			'section'     => 'site_knowledge_section_one',
-			'default'     => array(
-				'background-color'      => 'rgba(236,236,236,.94)',
-				'background-image'      => '',
-				'background-repeat'     => 'repeat',
-				'background-position'   => 'center center',
-				'background-size'       => 'cover',
-				'background-attachment' => 'scroll',
-			),
+			'default'     => array(),
 			'transport'   => 'auto',
 			'output'      => array(
 				array(

@@ -31,7 +31,7 @@ Per group: implement, run the gates, check in the browser (headless screenshots 
 | W06 | Visual baseline and settings inventory | done | [10392494340](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494340) |
 | W07 | Customizer_Framework port, Kirki removed | done | [10392494356](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494356) |
 | W08 | Settings redesign and audit | done | [10392494374](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494374) |
-| W09 | Tokens, dark mode, colour output | todo | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
+| W09 | Tokens, dark mode, colour output | done | [10392494401](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494401) |
 | W10 | JavaScript: ordering, jQuery, libraries | todo | [10392494423](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494423) |
 | W11 | CSS: token migration, RTL, focus, responsive | todo | [10392494445](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494445) |
 | W12 | Fonts and icons | todo | [10392494459](https://app.basecamp.com/5798509/buckets/38311801/card_tables/cards/10392494459) |
@@ -166,11 +166,17 @@ Colour settings are decided in W09 together with the token system; everything el
 - Gate: lint 0; phpstan clean; phpcs 19 errors left (extra.php docblocks, page-knowledgebase-one, tests; scoped excludes unchanged); screenshots at 4 widths differ from W07 by at most 0.07%; zip 972 KB. **Passed 2026-10-10.**
 
 ## W09 Tokens, dark mode, colour output (feeds B, I)
-- [ ] `inc/Tokens`, `Color_Mode_Toggle` copied; `$simple_color_tokens` mapped to KnowX settings (24 colour settings and 13 `output` rules, C section 3)
-- [ ] `Dynamic_Style` replaced by Tokens + Output_Builder; one `:root` block; no `!important`
-- [ ] Static fallbacks now equal the token defaults (C: line-height 1.4 vs 1.6, hero `#21b4db` vs `#03a9f4`, title `#333332` vs `#333` differ today)
-- [ ] Undefined variables fixed (`--border-color-dark`, `--color-link-active`), `--font-size-small` larger than regular fixed; one palette slug set across `theme.json`, `Editor/Component.php`, CSS
-- Gate: default install renders consistently with Kirki absent; dark mode passes contrast.
+Decision change: BuddyX's 2,079-line Tokens component carries Kirki-era purge logic, 96 tokens and the variation overlay that KnowX does not need, so a lean KnowX version was written instead (about 150 lines of PHP). The existing `--color-*` variable names stay (137 uses, no churn) and the mode attribute is `data-color-mode`; the earlier `--bx-*` prefix decision is dropped.
+- [x] **Colour settings cut from 23 to 5** (`site_primary_color`, `site_header_bg_color`, `site_footer_content_color`, `site_copyright_background_color`, `site_copyright_content_color`); links, hovers, buttons, borders, menu, title hover and loader colours are derived in CSS with `color-mix()` from the brand colour (settings now 43 + the two colour-mode fields)
+- [x] `inc/Tokens/Component.php` replaces `Dynamic_Style`: prints one `:root{...}` rule with only the colours the owner changed, picks a white or near-black label (`--color-on-primary`) for contrast, and computes a link colour that reaches 4.5:1 on the page background for any brand colour; colour values are validated before printing (hex, rgb, hsl only)
+- [x] `_custom-properties.css` reorganised: brand, neutral surfaces and text, derived variables, then a **dark palette** (`:root[data-color-mode="dark"]` and the same under `prefers-color-scheme: dark` for automatic mode, with `color-scheme: dark`)
+- [x] `inc/Color_Mode/Component.php`: Customizer "Color Mode" section (default light / dark / automatic, header toggle on/off), an inline script that sets the mode before first paint (no flash), and an accessible toggle button (three inline SVG icons, aria-label per state); the 40-line toggle script loads only when the toggle is on
+- [x] Typography fields no longer carry colours (headings, body, menu and site title colours come from tokens); background fields default to empty so the stylesheet owns the surfaces
+- [x] Stylesheet migration: 51 literal colour declarations moved to tokens by a property-aware script and about 25 by hand (surfaces, text, borders, hero and tile text on the brand colour, KB hero follows the brand colour); the remaining literals are intentional (white on black overlays, neutral shadows, error red); two SVG arrows are themed for dark mode (CSS mask for the chevron, a light SVG for select arrows)
+- [x] Tests: 28 unit tests including `on_color`, link contrast for four brand colours and colour sanitising
+- [x] **Measured contrast** (computed colours in the real browser, 18 text/background pairs per page, six page types, light and dark, default / purple / yellow brand): **no failures** after the link-colour and breadcrumb fixes; the toggle cycles light, dark, auto, updates its aria-label and stores the choice
+- [ ] Remaining colour work in W11: focus styles and the editor stylesheet palette
+- Gate: PHP lint, phpstan clean, phpunit 28 tests, stylelint and eslint 0, zip 978 KB; light-mode screenshots differ from W08 by at most 1.04% (darker, readable link blue; dark hero text on the brand blue); dark mode reviewed in screenshots. **Passed 2026-10-10.**
 
 ## W10 JavaScript: ordering, jQuery, libraries (feeds I)
 From C section 4 and 5.

@@ -102,6 +102,17 @@ class Component implements Component_Interface {
 			)
 		);
 
+		// Color mode.
+		\KnowX\KnowX\Customizer_Framework\Section::add(
+			'site_color_mode_section',
+			array(
+				'title'       => esc_html__( 'Color Mode', 'knowx' ),
+				'priority'    => 30,
+				'description' => '',
+				'panel'       => 'site_layout_panel',
+			)
+		);
+
 		// Site Loader.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_loader',
@@ -293,6 +304,7 @@ class Component implements Component_Interface {
 		$fields_dir = __DIR__ . '/Fields/';
 
 		require_once $fields_dir . 'General_Fields.php';
+		require_once $fields_dir . 'Color_Mode_Fields.php';
 		require_once $fields_dir . 'Typography_Fields.php';
 		require_once $fields_dir . 'Header_Fields.php';
 		require_once $fields_dir . 'Sub_Header_Fields.php';

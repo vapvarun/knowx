@@ -28,6 +28,7 @@
 @import "_header.css";
 @import "_footer.css";
 @import "_accessibility.css";
+@import "_color-mode.css";
 
 body.elementor-editor-active .site-header-wrapper {
     z-index: 99;
@@ -111,10 +112,10 @@ body.layout-boxed {
 
 .site-sub-header {
     position: relative;
-    color: #505050;
+    color: var(--global-font-color);
     margin-bottom: 1rem;
     padding: 10px 0;
-    background: rgba(255, 255, 255, 0.5);
+    background: color-mix(in srgb, var(--color-surface) 50%, transparent);
     width: 100vw;
     margin-left: -50vw;
     left: 50%;
@@ -178,7 +179,7 @@ body.layout-boxed {
 }
 
 .site-sub-header input[type="submit"]:focus {
-    outline: thin dotted #111;
+    outline: thin dotted var(--color-heading);
 }
 
 @media (max-width: 991px) {
@@ -205,7 +206,7 @@ body.layout-boxed {
 .site-sub-header .entry-title,
 .site-sub-header .page-title,
 .site-sub-header .page-header {
-    color: #111;
+    color: var(--color-heading);
     margin-right: auto;
 }
 
@@ -231,7 +232,7 @@ body.layout-boxed {
 
 .knowx-breadcrumbs a,
 #breadcrumbs a {
-    color: var(--color-theme-primary);
+    color: var(--color-link);
 }
 
 .knowx-breadcrumbs a:hover,
@@ -264,17 +265,17 @@ body.layout-boxed {
 
 .wp-editor-wrap .wp-switch-editor.switch-tmce,
 .wp-editor-wrap .wp-switch-editor.switch-html {
-    background: #f5f5f5;
-    border-color: #e2e2e2;
-    color: #555;
+    background: var(--color-surface-alt);
+    border-color: var(--global-border-color);
+    color: var(--color-muted);
 }
 
 .wp-editor-wrap.html-active .switch-tmce {
-    border-color: #e2e2e2;
+    border-color: var(--global-border-color);
 }
 
 .wp-editor-wrap.tmce-active .switch-tmce {
-    border-color: #e2e2e2;
+    border-color: var(--global-border-color);
 }
 
 .mce-container iframe,
@@ -302,7 +303,7 @@ body.layout-boxed {
 }
 
 .mce-toolbar .mce-listbox button:hover {
-    color: #595959;
+    color: var(--color-muted);
 }
 
 .mce-toolbar .mce-btn-group .mce-btn button {
@@ -311,7 +312,7 @@ body.layout-boxed {
 }
 
 button.media-menu-item {
-    color: #72777c !important;
+    color: var(--color-muted) !important;
 }
 
 .media-router .media-menu-item:hover {
@@ -325,7 +326,7 @@ button.media-menu-item {
 --------------------------------------------------------------*/
 
 .knowx-section-hero {
-    background-color: #21b4db;
+    background-color: var(--color-theme-primary);
     background-blend-mode: color-burn;
     background-position: 50% 0;
     background-size: cover;
@@ -334,14 +335,14 @@ button.media-menu-item {
 }
 
 .knowx-section-hero h1.entry-title {
-    color: #fff;
+    color: var(--color-on-primary);
     font-size: 2.133rem;
     line-height: 1.1;
     margin-top: 40px;
 }
 
 .knowx-section-hero .entry-summary {
-    color: #fff;
+    color: var(--color-on-primary);
     font-size: 1rem;
     line-height: 1.5;
     font-weight: 100;
@@ -388,7 +389,7 @@ button.media-menu-item {
 }
 
 .knowx-hero-section-search input[type="submit"]:focus {
-    outline: thin dotted #111;
+    outline: thin dotted var(--color-heading);
 }
 
 @media (min-width: 960px) {
@@ -430,7 +431,7 @@ button.media-menu-item {
 
 .knowx-knowledgebase-one ul.cat-list li.cat-name a:hover {
     background: var(--color-theme-primary);
-    color: #fff;
+    color: var(--color-on-primary);
 }
 
 #knowx-categories-columns-three {
@@ -485,7 +486,7 @@ button.media-menu-item {
 .knowx-popular-posts ul li a,
 .knowx-recent-posts ul li a {
     display: block;
-    color: #222;
+    color: var(--color-heading);
     font-size: 1rem;
 }
 
@@ -495,15 +496,13 @@ button.media-menu-item {
     width: 1.4em;
     height: 1.4em;
     float: right;
-    background-image: url(../images/right-arrow-angle.svg);
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: 15px;
+    background-color: currentcolor;
+    mask: url(../images/right-arrow-angle.svg) no-repeat 50% 50% / 15px;
 }
 
 .knowx-popular-posts ul li a:hover,
 .knowx-recent-posts ul li a:hover {
-    color: var(--color-theme-primary);
+    color: var(--color-link);
 }
 
 .knowx-popular-posts ul li .wpp-meta.post-stats {
@@ -514,7 +513,7 @@ button.media-menu-item {
     margin: 0;
     padding: 70px 0;
     text-align: center;
-    background-color: rgba(236, 236, 236, .94);
+    background-color: color-mix(in srgb, var(--color-surface-alt) 94%, transparent);
     background-blend-mode: color-burn;
     background-position: 50% 50%;
     background-size: cover;
@@ -530,7 +529,7 @@ button.media-menu-item {
 .knowx-support-section .knowx-support-content {
     font-size: 1.3rem;
     line-height: 1.5;
-    color: #333;
+    color: var(--color-heading);
     font-weight: 100;
     text-align: center;
 }
@@ -599,7 +598,7 @@ button.media-menu-item {
 }
 
 .knowx-knowledgebase-two li.post-name a {
-    color: #222;
+    color: var(--color-heading);
     position: relative;
     padding-left: 20px;
     display: block;
@@ -627,7 +626,7 @@ button.media-menu-item {
 --------------------------------------------------------------*/
 
 .single-post .site-main {
-    background-color: #fff;
+    background-color: var(--color-surface);
     margin: 1rem 0;
     padding: 25px;
     border-radius: 4px;

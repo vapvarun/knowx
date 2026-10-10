@@ -206,3 +206,7 @@ Constraints these imply: no custom post type or taxonomy (wordpress.org rule), n
 ## 14. Principle: WordPress is always present (user, 2026-10-10)
 
 The theme must not re-implement anything WordPress core already provides. `docs/LIBRARIES.md` section 1 lists each core feature we rely on and the duplicate we removed or will remove. Every new feature is checked against core first (Details block for FAQ, REST search, `theme.json` fonts, `custom-background`, `wp_body_open()`, script `strategy`, native lazy loading, core speculative loading, `responsive-embeds`), and every shipped library needs a justification in `docs/LIBRARIES.md`.
+
+## 15. Update to section 3 item 1 (W09, 2026-10-10)
+
+The `--bx-*` token prefix was dropped. KnowX keeps its existing `--color-*` variables and uses `data-color-mode` for the mode attribute; the Tokens component is a lean KnowX version, not a copy of BuddyX's.

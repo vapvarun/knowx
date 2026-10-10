@@ -11,3 +11,4 @@ parameters:
         - assets/
         - languages/
         - scripts/
+        - playground/

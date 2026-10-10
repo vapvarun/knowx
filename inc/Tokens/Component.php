@@ -12,7 +12,7 @@ use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function add_filter;
 use function get_template_directory;
-use function wp_add_inline_style;
+use function is_customize_preview;
 use function wp_json_file_decode;
 
 /**
@@ -50,18 +50,53 @@ class Component implements Component_Interface {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'wp_enqueue_scripts', array( $this, 'action_add_tokens' ), 20 );
+		add_action( 'wp_head', array( $this, 'action_print_tokens' ), 20 );
+		add_action( 'customize_register', array( $this, 'action_customize_register' ), 100 );
 		add_filter( 'block_editor_settings_all', array( $this, 'filter_editor_settings' ) );
 	}
 
 	/**
-	 * Attaches the saved colours to the main stylesheet.
+	 * Prints the saved colours after the stylesheets.
+	 *
+	 * In the Customizer preview the tag is always printed, so the live preview has an element to replace.
 	 */
-	public function action_add_tokens() {
+	public function action_print_tokens() {
 		$css = $this->build_css();
-		if ( '' !== $css ) {
-			wp_add_inline_style( 'knowx-global', $css );
+		if ( '' !== $css || is_customize_preview() ) {
+			echo '<style id="knowx-tokens">' . $css . '</style>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Colours are validated in build_css().
 		}
+	}
+
+	/**
+	 * Updates the colours in the Customizer preview without reloading it.
+	 *
+	 * The preview asks the server for the same rule the front end prints and swaps the style tag.
+	 *
+	 * @param \WP_Customize_Manager $wp_customize Customizer manager.
+	 */
+	public function action_customize_register( $wp_customize ) {
+		if ( ! isset( $wp_customize->selective_refresh ) ) {
+			return;
+		}
+
+		$ids = array_merge( array_keys( self::VARIABLES ), array( 'site_primary_color', 'site_link_color', 'site_surface_color', 'background_color', 'knowx_corners' ) );
+		foreach ( $ids as $id ) {
+			$setting = $wp_customize->get_setting( $id );
+			if ( $setting ) {
+				$setting->transport = 'postMessage';
+			}
+		}
+
+		$wp_customize->selective_refresh->add_partial(
+			'knowx_tokens',
+			array(
+				'selector'            => '#knowx-tokens',
+				'settings'            => $ids,
+				'container_inclusive' => true,
+				'fallback_refresh'    => true,
+				'render_callback'     => array( $this, 'action_print_tokens' ),
+			)
+		);
 	}
 
 	/**

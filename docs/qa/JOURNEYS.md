@@ -31,3 +31,4 @@ Run each at 390, 768, 1024 and 1440 px, in light and dark mode, with the sample 
 | J25 | Customizer, Colors: click each palette card, then change one colour, then reset | Palette applies to buttons, links and surfaces; own colour wins; reset returns the defaults; text stays readable |
 | J26 | Customizer: open every section, close and open Typography groups | Every control shows; closed groups still show their title; no empty section |
 | J27 | Appearance, Menus: assign a menu to Footer | Links appear in the footer bar; unassigned shows nothing |
+| J28 | Customizer, Colors: change theme, heading, page background colours and Corners | The preview updates at once without reloading; clearing a colour returns the default; Publish keeps it on the front end |

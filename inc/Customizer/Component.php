@@ -84,7 +84,7 @@ class Component implements Component_Interface {
 		wp_enqueue_script(
 			'knowx-customizer',
 			get_theme_file_uri( '/assets/js/customizer.min.js' ),
-			array( 'customize-preview' ),
+			array( 'customize-preview', 'customize-selective-refresh' ),
 			knowx()->get_asset_version( get_theme_file_path( '/assets/js/customizer.min.js' ) ),
 			true
 		);

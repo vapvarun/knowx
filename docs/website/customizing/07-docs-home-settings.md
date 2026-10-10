@@ -35,6 +35,8 @@ With **one product**, the home shows that product's sections as cards instead of
 | Show More in this section | The related list under the article |
 | Show the version badge | The version label on articles and lists |
 
+**Order articles in a section** sets the order inside a section after the page order: newest first (default), by title, or last updated first. Product and section pages also print the date of their newest article, unless the last updated date is turned off.
+
 The date is the last modified date of the post, and it is also sent as `dateModified` in the page's structured data.
 
 ## Layout Two: the Docs Index template

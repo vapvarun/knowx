@@ -205,9 +205,17 @@
       "title": "Next steps",
       "slug": "knowx/next-steps"
     },
+    "patterns/popular-tags.php": {
+      "title": "Popular tags",
+      "slug": "knowx/popular-tags"
+    },
     "patterns/prerequisites.php": {
       "title": "Prerequisites",
       "slug": "knowx/prerequisites"
+    },
+    "patterns/recently-updated.php": {
+      "title": "Recently updated",
+      "slug": "knowx/recently-updated"
     },
     "patterns/support-cta.php": {
       "title": "Contact support",
@@ -271,6 +279,7 @@
     "knowx_posts",
     "knowx_recent_by",
     "knowx_scroll_top",
+    "knowx_section_sort",
     "knowx_show_pager",
     "knowx_show_recent",
     "knowx_show_related",
@@ -340,6 +349,7 @@
     "knowx_render_toc",
     "knowx_render_tree",
     "knowx_schema_graph",
+    "knowx_term_updated",
     "knowx_toc_items",
     "knowx_tree_flat",
     "knowx_tree_max_posts",

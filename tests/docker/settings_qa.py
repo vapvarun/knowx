@@ -83,6 +83,7 @@ TESTS = [
     ('knowx_cat_description', ['yes']),
     ('knowx_posts', [1]),
     ('knowx_order', ['name']),
+    ('knowx_section_sort', ['title', 'updated']),
     ('background_setting', [BG]),
     ('site_footer_content_color', ['#ff0000']),
     ('site_copyright_text', ['Copyright QA [current_year] [site_title]']),
@@ -94,7 +95,8 @@ TESTS = [
 NOTES = {
     'site_color_mode_toggle_show': 'adds the toggle button',
     'knowx_posts': 'only the Docs Index template',
-    'knowx_order': 'only the Docs Index and section pages',
+    'knowx_order': 'only the Docs Index',
+    'knowx_section_sort': 'only section pages, and only when the articles differ in the sorted field',
 }
 
 

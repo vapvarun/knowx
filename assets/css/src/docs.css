@@ -721,3 +721,9 @@ p.knowx-item-date {
 	color: var(--color-heading);
 	text-decoration: none;
 }
+
+.knowx-term-updated {
+	margin: 0.25rem 0 0;
+	font-size: 0.875rem;
+	color: var(--color-muted);
+}

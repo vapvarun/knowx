@@ -19,6 +19,7 @@ $knowx_product = knowx_current_product();
 $knowx_tree    = $knowx_product ? knowx_product_tree( $knowx_product['id'] ) : null;
 $knowx_is_root = $knowx_product && $knowx_product['id'] === (int) $knowx_term->term_id;
 $knowx_per     = 5;
+$knowx_updated = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ? knowx_term_updated( $knowx_term->term_id ) : null;
 ?>
 <?php do_action( 'knowx_sub_header' ); ?>
 <?php do_action( 'knowx_before_content' ); ?>
@@ -49,6 +50,14 @@ $knowx_per     = 5;
 				<?php endif; ?>
 			<?php elseif ( ! $knowx_is_root ) : ?>
 				<p class="knowx-term-meta"><?php echo esc_html( knowx_article_count_label( $knowx_term->count ) ); ?></p>
+			<?php endif; ?>
+			<?php if ( $knowx_updated ) : ?>
+				<p class="knowx-term-updated">
+					<?php
+					/* translators: %s: date the newest article was changed. */
+					printf( esc_html__( 'Updated %s', 'knowx' ), '<time datetime="' . esc_attr( $knowx_updated['iso'] ) . '">' . esc_html( $knowx_updated['date'] ) . '</time>' );
+					?>
+				</p>
 			<?php endif; ?>
 		</header>
 

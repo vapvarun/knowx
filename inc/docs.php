@@ -669,3 +669,37 @@ function knowx_meta_description() {
 	 */
 	return (string) apply_filters( 'knowx_meta_description', wp_html_excerpt( $text, 160, '...' ) );
 }
+
+/**
+ * The newest last-modified date among the articles of a product or section, children included.
+ *
+ * @param int $term_id Category id.
+ * @return array|null Items `date` (display) and `iso`, or null when the category has no articles.
+ */
+function knowx_term_updated( $term_id ) {
+	$term_id = (int) $term_id;
+
+	return knowx_kb_cached(
+		'updated-' . $term_id,
+		static function () use ( $term_id ) {
+			$latest = get_posts(
+				array(
+					'post_type'              => 'post',
+					'cat'                    => $term_id,
+					'numberposts'            => 1,
+					'orderby'                => 'modified',
+					'order'                  => 'DESC',
+					'ignore_sticky_posts'    => true,
+					'no_found_rows'          => true,
+					'update_post_term_cache' => false,
+					'update_post_meta_cache' => false,
+				)
+			);
+
+			return $latest ? array(
+				'date' => get_the_modified_date( '', $latest[0] ),
+				'iso'  => get_the_modified_date( 'c', $latest[0] ),
+			) : null;
+		}
+	);
+}

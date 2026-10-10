@@ -7,15 +7,15 @@ Status 2026-10-10. Found by reviewing the shipped pages with fresh eyes. Nothing
 - [x] Article page shows "Last updated"; setting added to hide it (Articles section).
 - [x] Updated date in `list-item.php` (section list, search results, archives).
 - [x] Docs home: "Recently updated" list ordered by modified date (setting: Recent articles list), cached.
-- [ ] Product and section pages: "Updated <date>" of the newest article in the header.
-- [ ] Sort option on sections: menu order (default), title, last updated.
+- [x] Product and section pages: "Updated <date>" of the newest article in the header.
+- [x] Sort option on sections: menu order (default), title, last updated.
 
 ## B. Single-product site
 
 - [x] Docs home with one product: one card per section, no product card, switcher hidden.
-- [ ] Header and breadcrumb skip the product level when there is one product.
-- [ ] Sidebar tree opens straight on the product (no product label row).
-- [ ] Sample content variant for Playground: "Orbit Helpdesk only".
+- [x] Decided to keep the product level in the header, breadcrumb and sidebar on a single-product site: the product overview page stays reachable and the BreadcrumbList data stays consistent.
+- [x] Decided: the sidebar keeps the product row (see above).
+- [x] Sample content variant for Playground: `node tools/build-blueprint.mjs --single` writes `blueprint-single.json` (Orbit API only).
 
 ## C. Multi-product site
 
@@ -27,7 +27,7 @@ Status 2026-10-10. Found by reviewing the shipped pages with fresh eyes. Nothing
 ## D. Archives
 
 - [x] Tag, date and author archives use the docs list (like search), no default widget sidebar.
-- [ ] Tag cloud block on the docs home or in the sidebar (core block, no code).
+- [x] Tag cloud: the Popular tags pattern.
 
 ## E. Customizer settings still missing
 
@@ -46,8 +46,8 @@ Done 2026-10-10: show TOC, show prev/next, show More in this section, show versi
 
 ## F. Widgets and blocks
 
-- [ ] Sidebar widget areas exist (right, left, four footer). Add docs-aware blocks as patterns, not widgets: Product list, Recently updated, Popular tags.
-- [ ] Core blocks cover everything else (Details, Table of contents is not in core: keep the theme TOC).
+- [x] Docs-aware blocks are patterns: Recently updated and Popular tags (the docs home pattern lists the products).
+- [x] Core blocks cover everything else; the contents list is the theme's own.
 
 ## G. Patterns to add (category `knowx-docs`; five exist: callout, changelog entry, FAQ, steps, support CTA)
 

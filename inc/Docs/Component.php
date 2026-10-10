@@ -387,17 +387,24 @@ class Component implements Component_Interface {
 			return;
 		}
 
-		$query->set(
-			'orderby',
-			'name' === knowx_mod( 'knowx_order' )
-				? array(
-					'menu_order' => 'ASC',
-					'title'      => 'ASC',
-				)
-				: array(
-					'menu_order' => 'ASC',
-					'date'       => 'DESC',
-				)
-		);
+		$sort = knowx_mod( 'knowx_section_sort' );
+		if ( 'title' === $sort ) {
+			$orderby = array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			);
+		} elseif ( 'updated' === $sort ) {
+			$orderby = array(
+				'menu_order' => 'ASC',
+				'modified'   => 'DESC',
+			);
+		} else {
+			$orderby = array(
+				'menu_order' => 'ASC',
+				'date'       => 'DESC',
+			);
+		}
+
+		$query->set( 'orderby', $orderby );
 	}
 }

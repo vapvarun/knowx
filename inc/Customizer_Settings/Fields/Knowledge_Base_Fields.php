@@ -379,3 +379,18 @@ defined( 'ABSPATH' ) || exit;
 			),
 		)
 	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'radio',
+		array(
+			'settings' => 'knowx_section_sort',
+			'label'    => esc_html__( 'Order articles in a section', 'knowx' ),
+			'section'  => 'site_articles_section',
+			'default'  => 'date',
+			'choices'  => array(
+				'date'    => esc_html__( 'Newest first (after the page order)', 'knowx' ),
+				'title'   => esc_html__( 'By title (after the page order)', 'knowx' ),
+				'updated' => esc_html__( 'Last updated first (after the page order)', 'knowx' ),
+			),
+		)
+	);

@@ -15,6 +15,8 @@ Open the inserter, choose **Patterns** and pick the **KnowX Docs** category.
 | Compatibility table | Versions against the platform they need, with a status. |
 | Next steps | A list of the articles to read next. |
 | Still need help | A note with Contact support and Suggest an edit buttons. Point the buttons at your own pages. |
+| Recently updated | The five articles changed last, as a Query Loop ordered by modified date. The modified date shows once an article has been edited after it was published. |
+| Popular tags | A tag cloud under "Browse by topic". |
 | Docs home | A hero with search, two product columns and the latest articles, built from blocks, for a home page that does not use the Docs Home template. |
 | Changelog entry | A release heading with New, Improve and Fix items. |
 | Contact support | A closing block with a heading, a sentence and a button. |

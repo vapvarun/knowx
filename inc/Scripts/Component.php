@@ -13,6 +13,7 @@ use function KnowX\KnowX\knowx;
 use function add_action;
 use function wp_enqueue_script;
 use function wp_register_script;
+use function wp_set_script_translations;
 use function esc_html__;
 use function get_theme_file_uri;
 use function get_theme_file_path;
@@ -106,6 +107,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				wp_register_script( $handle, $src, $data['deps'], $version, $args );
 			}
 
+			// Strings with a plural form are translated in the script with wp.i18n (_n).
+			if ( in_array( 'wp-i18n', $data['deps'], true ) ) {
+				wp_set_script_translations( $handle, 'knowx', get_theme_file_path( '/languages' ) );
+			}
+
 			/**
 			 * Add precache for specific scripts.
 			 */
@@ -187,15 +193,13 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				'global'   => true,
 				'footer'   => true,
 				'strategy' => 'defer',
+				'deps'     => array( 'wp-i18n' ),
 				'localize' => array(
 					'knowxDocs' => array(
 						'copy'       => esc_html__( 'Copy', 'knowx' ),
 						'copied'     => esc_html__( 'Copied', 'knowx' ),
 						'linkCopied' => esc_html__( 'Link copied', 'knowx' ),
 						'searching'  => esc_html__( 'Searching...', 'knowx' ),
-						'resultOne'  => esc_html__( '1 result. Use the arrow keys to move through it.', 'knowx' ),
-						/* translators: %d: number of results, two or more. */
-						'results'    => esc_html__( '%d results. Use the arrow keys to move through them.', 'knowx' ),
 						'none'       => esc_html__( 'No articles found. Press Enter to search the whole site.', 'knowx' ),
 						'error'      => esc_html__( 'Search is not available right now. Press Enter to use the search page.', 'knowx' ),
 					),

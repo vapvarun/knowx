@@ -179,14 +179,22 @@ From C section 2, 3, 7.
 - [ ] Editor styles match the front end; palettes consistent
 - Gate: `lint:theme-json` passes; editor and front end compared side by side.
 
-## W14 Docs templates and structured data (feeds I)
-- [ ] Templates: section index, article (breadcrumbs, ToC, last updated, previous/next, related), search with empty state, changelog, FAQ, getting started, full width
-- [ ] schema.org markup: WebSite + SearchAction, BreadcrumbList, TechArticle, FAQPage; escaped, filterable, can be switched off
+## W14 Docs product: multi-product, search, FAQ, templates, structured data (feeds I)
+Decisions in plan section 12.
+- [ ] Product model: top-level category = product; term meta for icon, short description, accent colour (sanitised, escaped, edited on the category screen); token integration so accent works in dark mode
+- [ ] Docs home: product card grid (icon, description, article count), header product switcher, breadcrumbs start at the product
+- [ ] Article layout: 3 columns (collapsible section tree, article, sticky "On this page"); iPad drawer; phone contents dropdown; copy-link on headings; code-block copy button; last updated; previous/next; related
+- [ ] Section tree and product grid queries bounded and cached with invalidation on term/post changes
+- [ ] Instant search overlay on `/wp/v2/search` (Cmd/Ctrl+K), scoped to current product with "all products" toggle, keyboard and screen-reader accessible, no-JS fallback to the search page
+- [ ] FAQ: Details-block pattern, FAQ page template, optional FAQ-category accordion archive
+- [ ] Per-article "applies to version" label (post meta) shown as a badge
+- [ ] Templates: product home, section index, article, search results with empty state, changelog, FAQ, getting started, full width
+- [ ] schema.org: WebSite + SearchAction, BreadcrumbList, TechArticle, FAQPage generated from Details blocks; escaped, filterable, can be switched off
 - [ ] Content model documented (`docs/website/developer-guide/content-model.md`, `audit/manifest.json`)
-- Gate: Rich Results test passes on article, FAQ and home.
+- Gate: Rich Results test passes on article, FAQ and home; search works with keyboard only; product switcher works at 390 / 768 / 1024 / 1440.
 
 ## W15 Starter content, patterns, Playground (feeds G)
-- [ ] `inc/Starter_Content`: 6+ categories with children, 30+ articles, menus, widgets, KB home and layout pages, no lorem ipsum
+- [ ] `inc/Starter_Content`: two sample products (3 sections and 8-10 articles each), FAQ page, changelog page, getting-started article, menus, widgets, KB layout pages, no lorem ipsum
 - [ ] KB patterns in `patterns/` with docblock headers and registered categories
 - [ ] `blueprint.json` installs and activates the theme and imports the sample content (no Kirki step); opens in Playground in one click
 - [ ] Remove the `knowx-demo-importer` dependency; retire that repo

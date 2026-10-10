@@ -27,11 +27,11 @@ Legend: `[x]` verified, `[ ]` open. A box is ticked only after the check was run
 - [ ] `knowx-core` content verified as superseded (`v3.1` branch, "Manage block style UI") before it is archived
 - [ ] `CLAUDE.md`, `audit/manifest.json`, role matrix, QA journeys present and current
 
-## B. Customizer (Kirki 6.0.4): 11 sections, 85 settings
+## B. Customizer (in-house framework, Kirki removed): 11 sections, 84 settings (90 fields incl. 6 dividers)
 
 For every section: the control renders, the value saves, it round-trips after reload, the front end reflects it, the live preview updates, and defaults match a fresh install. No migration: existing 1.7.4 customizer values are not carried over (decision 2026-10-10). Every setting still needs a default, a sanitize callback and escaped output, and the changelog says customizer choices reset.
 
-| Section (source file) | Settings | Verified |
+| Section (source file) | Fields (incl. dividers) | Verified |
 |---|---|---|
 | General (`General_Fields`): site layout, loader, scroll top | 5 | [ ] |
 | Typography (`Typography_Fields`): site title, headings, menu, body | 13 | [ ] |
@@ -155,6 +155,13 @@ Sample content
 - [ ] Content model documented (`docs/website/developer-guide/content-model.md`, `audit/manifest.json`)
 - [ ] Both KB layouts share one exclusion setting
 - [ ] Speculation rules prefetch works without extra requests on slow connections
+- [ ] Product model: top-level category = product, with icon, description and accent colour term meta; accent works in dark mode
+- [ ] Docs home product grid, header product switcher, per-product left tree, breadcrumbs starting at the product
+- [ ] 3-column article layout; iPad drawer; phone contents dropdown; copy-link on headings; code copy button
+- [ ] Instant search overlay (Cmd/Ctrl+K) scoped to current product with all-products toggle; no-JS fallback
+- [ ] FAQ Details-block pattern emits valid FAQPage structured data
+- [ ] Per-article version badge
+- [ ] Sample content: two products, FAQ, changelog, getting started
 
 ## H. Release
 

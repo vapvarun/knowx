@@ -183,3 +183,15 @@ Cleanup this implies: `theme.json` currently declares `customTemplates` (lines 3
 - Consequence to put in the changelog: updating from 1.7.4 resets customizer choices to the new defaults. Release as a major version (2.0.0 recommended) so it is clearly not a drop-in patch.
 
 **No migration code** (user, 2026-10-10): the theme ships no upgrade routine, no legacy `'on'`/`'off'` handling and no setting-ID mapping. Grouped work items are tracked in `plans/WORK_GROUPS.md`.
+
+## 12. Product decisions: a modern multi-product Docs and FAQ theme (user, 2026-10-10)
+
+1. **Search:** instant search overlay (Cmd/Ctrl+K or click) using core `/wp/v2/search`, keyboard navigable, vanilla JS loaded on first use, falls back to the normal search page without JS. Scoped to the current product with an "all products" toggle.
+2. **FAQ:** FAQ block pattern built from the core Details block plus an FAQ page template; the theme reads those Details blocks and emits `FAQPage` structured data. Optional FAQ-category archive rendering posts as an accordion.
+3. **Article layout:** 3 columns. Left: collapsible section tree. Centre: breadcrumbs, last updated, copy-link on headings, code blocks with a copy button, previous/next. Right: sticky "On this page" contents. iPad: the tree becomes a drawer; phone: one column with a contents dropdown.
+4. **Structure:** categories are sections, posts are articles, with an optional per-article order.
+5. **Multi-product:** a top-level category is a product; its children are sections. Per-product icon, short description and accent colour are category term meta edited on the category screen and fed to the token system (dark mode still works). Docs home shows a product card grid (icon, description, article count); a header product switcher jumps between products; the left tree shows only the current product; breadcrumbs start at the product.
+6. **Versions:** an optional "applies to version" label per article (post meta) shown as a badge. No duplicated versioned doc trees.
+7. **Sample content:** two sample products, each with 3 sections and 8-10 articles, one FAQ page, one changelog page and a getting-started article; no lorem ipsum.
+
+Constraints these imply: no custom post type or taxonomy (wordpress.org rule), no required plugin, term meta and post meta sanitised and escaped, product grid and tree queries bounded and cached (2000+ posts, 500+ categories), everything works without JS except search overlay and copy buttons (progressive enhancement).

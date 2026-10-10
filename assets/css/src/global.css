@@ -511,9 +511,14 @@ button.media-menu-item {
     content: "";
     width: 1.4em;
     height: 1.4em;
-    float: right;
+    float: inline-end;
     background-color: currentcolor;
     mask: url(../images/right-arrow-angle.svg) no-repeat 50% 50% / 15px;
+}
+
+[dir="rtl"] .knowx-popular-posts ul li a::after,
+[dir="rtl"] .knowx-recent-posts ul li a::after {
+    transform: scaleX(-1);
 }
 
 .knowx-popular-posts ul li a:hover,

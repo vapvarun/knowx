@@ -1743,6 +1743,7 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 /* Code blocks get a copy button from docs.js. */
 .knowx-code {
 	position: relative;
+	direction: ltr;
 }
 
 .knowx-copy {

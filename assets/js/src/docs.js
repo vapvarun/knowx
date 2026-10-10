@@ -4,6 +4,7 @@
  */
 (() => {
 	const strings = window.knowxDocs || {};
+	const { _n, sprintf } = window.wp.i18n;
 	const live = document.createElement('div');
 	live.className = 'screen-reader-text';
 	live.setAttribute('role', 'status');
@@ -117,11 +118,15 @@
 				});
 				if (!posts.length) {
 					status.textContent = strings.none;
-				} else if (posts.length === 1) {
-					status.textContent = strings.resultOne;
 				} else {
-					status.textContent = strings.results.replace(
-						'%d',
+					status.textContent = sprintf(
+						/* translators: %d: number of results. */
+						_n(
+							'%d result. Use the arrow keys to move through it.',
+							'%d results. Use the arrow keys to move through them.',
+							posts.length,
+							'knowx'
+						),
 						posts.length
 					);
 				}

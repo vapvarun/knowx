@@ -184,4 +184,20 @@
 			}
 		});
 	}
+
+	// Header Products menu: Escape and a click elsewhere close it, like the mobile drawer.
+	const switcher = document.querySelector('details.knowx-switcher');
+	if (switcher) {
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && switcher.open) {
+				switcher.open = false;
+				switcher.querySelector('summary')?.focus();
+			}
+		});
+		document.addEventListener('click', (event) => {
+			if (switcher.open && !switcher.contains(event.target)) {
+				switcher.open = false;
+			}
+		});
+	}
 })();

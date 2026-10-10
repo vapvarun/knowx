@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 				'line-height'    => '1.2',
 				'letter-spacing' => '0',
 				'text-transform' => 'none',
-				'text-align'     => 'left',
+				'text-align'     => '',
 			),
 			'priority' => 40,
 			'output'   => array(
@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) || exit;
 				'line-height'    => '1.4',
 				'letter-spacing' => '0',
 				'text-transform' => 'none',
-				'text-align'     => 'left',
+				'text-align'     => '',
 			),
 			'priority' => 50,
 			'output'   => array(
@@ -104,7 +104,7 @@ defined( 'ABSPATH' ) || exit;
 				'line-height'    => '1.6',
 				'letter-spacing' => '0.02em',
 				'text-transform' => 'none',
-				'text-align'     => 'left',
+				'text-align'     => '',
 			),
 			'priority' => 30,
 			'output'   => array(
@@ -136,7 +136,7 @@ defined( 'ABSPATH' ) || exit;
 				'line-height'    => '1.7',
 				'letter-spacing' => '0',
 				'text-transform' => 'none',
-				'text-align'     => 'left',
+				'text-align'     => '',
 			),
 			'priority' => 10,
 			'output'   => array(

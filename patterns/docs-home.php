@@ -11,8 +11,8 @@
 
 ?>
 <!-- wp:group {"align":"full","className":"knowx-pattern-hero","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull knowx-pattern-hero"><!-- wp:heading {"textAlign":"center","level":1} -->
-<h1 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'How can we help?', 'knowx' ); ?></h1>
+<div class="wp-block-group alignfull knowx-pattern-hero"><!-- wp:heading {"textAlign":"center","level":2} -->
+<h2 class="wp-block-heading has-text-align-center"><?php esc_html_e( 'How can we help?', 'knowx' ); ?></h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center"} -->

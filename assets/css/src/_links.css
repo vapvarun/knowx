@@ -18,6 +18,7 @@ a:active {
 /* Links inside running text are underlined so colour is not the only cue. */
 .entry-content p a:not(.wp-element-button),
 .comment-content a,
-.comment-notes a {
+.comment-notes a,
+.wp-block-latest-comments__comment-meta a {
     text-decoration: underline;
 }

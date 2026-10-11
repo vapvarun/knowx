@@ -12,7 +12,7 @@
  * @package knowx
  */
 
-import { execFile as execFileCb, spawn } from 'node:child_process';
+import { execFile as execFileCb, execFileSync, spawn } from 'node:child_process';
 import { promisify } from 'node:util';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -184,6 +184,26 @@ function getThemeSlug() {
 }
 
 /**
+ * Fail the release when the zip holds anything that is not theme code: documentation, plans,
+ * audit and QA files, tests, build tooling or Markdown. The build copies a fixed list of files,
+ * so this only trips when someone widens that list by mistake.
+ *
+ * @param {string} zipPath Path of the zip to check.
+ */
+function assertCleanZip(zipPath) {
+	const forbidden =
+		/^[^/]+\/(plans|audit|docs|tests|tools|scripts|playground|config|node_modules|vendor|\.github)\/|\.md$|\.map$|(^|\/)(CLAUDE\.md|AGENTS\.md|composer\.(json|lock)|package(-lock)?\.json|phpcs\.xml\.dist|phpstan\.neon\.dist|phpunit[^/]*\.xml\.dist|blueprint[^/]*\.json|build-(css|js)\.js)$/;
+	const entries = execFileSync('unzip', ['-Z1', zipPath], { encoding: 'utf8' }).split('\n').filter(Boolean);
+	const bad = entries.filter((entry) => forbidden.test(entry));
+	if (bad.length) {
+		console.error('\nThe zip contains files that must not ship:');
+		bad.forEach((entry) => console.error(`  ${entry}`));
+		process.exit(1);
+	}
+	console.log(`Zip contents checked: ${entries.length} entries, no docs, plans, audit, QA, tests or tooling.`);
+}
+
+/**
  * Move and rename the generated zip with version
  */
 function renameZipWithVersion(version) {
@@ -305,6 +325,10 @@ async function main() {
 
 	// Rename zip with version
 	const zipPath = renameZipWithVersion(version);
+
+	if (zipPath) {
+		assertCleanZip(zipPath);
+	}
 
 	if (zipPath) {
 		console.log('\n' + '='.repeat(50));

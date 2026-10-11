@@ -1,0 +1,62 @@
+{
+  "plugin_slug": "knowx",
+  "plugin_name": "KnowX",
+  "type": "theme",
+  "main_file": "style.css",
+  "version_source": "style.css:Version",
+  "version_constant": null,
+  "db_version_option": null,
+  "text_domain": "knowx",
+  "table_prefix": null,
+  "cron_prefix": null,
+  "rest_namespace": null,
+  "test_site_url": "http://knowx.local",
+  "test_site_path": null,
+  "theme_path": null,
+  "wp_path": null,
+  "personas": {
+    "admin": "admin",
+    "editor": null,
+    "moderator": null,
+    "member": null
+  },
+  "integrations": [],
+  "basecamp": {
+    "project_id": "38311801",
+    "card_table_id": "7605386991",
+    "bugs_column_id": "7605388587",
+    "ready_for_testing_column_id": "7605386995"
+  },
+  "pro_slug": null,
+  "pro_version_constant": null,
+  "seed_scripts": [
+    "playground/seed.php"
+  ],
+  "fixture_cleanup_sql": [
+    "foreach ( array( 'site_primary_color', 'site_link_color', 'site_text_color', 'site_heading_color', 'background_color', 'site_surface_color', 'site_header_bg_color', 'site_footer_content_color', 'site_copyright_background_color', 'site_copyright_content_color', 'knowx_corners', 'knowx_exclude', 'knowx_home_layout', 'knowx_show_updated', 'knowx_show_recent', 'sidebar_option', 'site_color_mode' ) as $m ) { remove_theme_mod( $m ); }"
+  ],
+  "debug_log_whitelist": [],
+  "cron_whitelist": [],
+  "release_pipeline": {
+    "type": "node",
+    "command": "node scripts/distribute.js --current --no-tag",
+    "output_zip": "dist/knowx-{version}.zip",
+    "gate_script": "scripts/release-smoke-gate.js",
+    "ungated_command": "NODE_ENV=production node scripts/cli.js bundle",
+    "gate_note": "Package with command, never ungated_command. Both build the same zip, but only scripts/distribute.js calls runSmokeGate(); going through scripts/cli.js bundle skips the browser-smoke release gate."
+  },
+  "report_path": "docs/qa/.last-smoke-pass.json",
+  "smoke_journeys": [
+    "C.visitor.home-and-products",
+    "C.visitor.article-and-navigation",
+    "C.visitor.search-archive-404",
+    "C.visitor.comments",
+    "C.visitor.rtl",
+    "C.owner.fresh-install-defaults",
+    "C.owner.palettes-and-colours",
+    "C.owner.customizer-every-section",
+    "C.owner.editor-order-and-patterns",
+    "C.owner.single-product-site",
+    "D.regression-guards"
+  ]
+}

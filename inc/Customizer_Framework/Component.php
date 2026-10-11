@@ -3,7 +3,7 @@
  * KnowX\KnowX\Customizer_Framework\Component class
  *
  * In-house Customizer framework.
- * Designed to be portable across Wbcom themes (KnowX, KnowX Pro).
+ * Written to be portable: it only depends on the theme namespace.
  *
  * @package knowx
  */
@@ -186,23 +186,6 @@ class Component {
 		wp_add_inline_script(
 			$handle,
 			'window.knowxCustomizerActiveCallbacks = ' . wp_json_encode( $active_callbacks ) . ';',
-			'before'
-		);
-
-		// Tooltip popover map intentionally emitted empty.
-		//
-		// The `tooltip` arg on each field is now rendered as the control's
-		// inline description (see Field::build_control_args). The standalone
-		// click-to-open popover variant overlaid adjacent toggle/switch
-		// controls and blocked clicks on the next setting in the section -
-		// reported as making the customizer almost unusable on 5.1.0. The
-		// empty map keeps customizer-controls.js's existing
-		// renderTooltipTriggers() loop safe (no entries -> no icons drawn)
-		// without removing the JS routine, which lets us re-enable popovers
-		// later with anchored positioning if we choose.
-		wp_add_inline_script(
-			$handle,
-			'window.knowxCustomizerTooltips = {};',
 			'before'
 		);
 	}

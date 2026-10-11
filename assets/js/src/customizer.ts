@@ -48,3 +48,28 @@ window.wp.customize<string>('blogdescription', function (value) {
 		setTextContent('.site-description', to);
 	});
 });
+
+// Colours and corners: the server re-prints the rule and core swaps the style tag.
+// The swapped-in tag is not applied by the browser, so it is rebuilt with createElement and added at the end of the head.
+const refresh = (
+	window.wp.customize as unknown as {
+		selectiveRefresh?: {
+			bind: (
+				event: string,
+				callback: (placement: { partial: { id: string } }) => void
+			) => void;
+		};
+	}
+).selectiveRefresh;
+refresh?.bind('partial-content-rendered', function (placement) {
+	if ('knowx_tokens' === placement.partial.id) {
+		const tag = document.getElementById('knowx-tokens');
+		if (tag) {
+			const style = document.createElement('style');
+			style.id = 'knowx-tokens';
+			style.textContent = tag.textContent;
+			tag.remove();
+			document.head.appendChild(style);
+		}
+	}
+});

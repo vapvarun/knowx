@@ -3,7 +3,7 @@
  * KnowX\KnowX\Customizer_Framework\Controls\Checkbox
  *
  * Standard checkbox. Different from Toggle (which renders a visual on/off
- * slider for the 'switch' field type). Used by KnowX Pro for dense
+ * slider for the 'switch' field type). Use it for dense
  * option lists where a traditional checkbox UX is preferred.
  *
  * @package knowx

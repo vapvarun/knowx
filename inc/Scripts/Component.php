@@ -17,17 +17,11 @@ use function wp_set_script_translations;
 use function esc_html__;
 use function get_theme_file_uri;
 use function get_theme_file_path;
-use function _doing_it_wrong;
-use function esc_html;
-use function wp_print_scripts;
 use function apply_filters;
 use function wp_localize_script;
 
 /**
  * Class for managing javascript files.
- *
- * Exposes template tags:
- * * `knowx()->print_scripts()`
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
@@ -40,10 +34,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * - 'footer' (whether the file should be loaded in the footer)
 	 * - 'deps' (array of dependencies)
 	 * - 'localize' (array of variables to inject with wp_localize_scripts)
-	 *
-	 * Not currently implemented
-	 * 'preload_callback'
-	 * (callback function determining whether the file should be preloaded for the current request).
 	 *
 	 * Do not access this property directly, instead use the `get_js_files()` method.
 	 *
@@ -71,12 +61,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *               a callable or an array with key 'callback'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags(): array {
 		return array(
-			'print_scripts' => array( $this, 'print_scripts' ),
 		);
 	}
 
@@ -113,13 +102,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			}
 
 			/**
-			 * Add precache for specific scripts.
-			 */
-			if ( ! empty( $data['precache'] ) ) {
-				wp_script_add_data( $handle, 'precache', true );
-			}
-
-			/**
 			 *  Uses wp_localize_scripts
 			 */
 			if ( $data['localize'] ) {
@@ -128,40 +110,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Prints JavaScript <script> tags directly.
-	 *
-	 * This should be used for JavaScript files that aren't global and thus should only be loaded if the HTML markup
-	 * they are responsible for is actually present. Template parts should use this method when the related markup
-	 * requires a specific JavaScript file to be loaded. If preloading JavaScript files is disabled, this method will not do
-	 * anything.
-	 *
-	 * If the `<script>` tag for a given JavaScript file has already been printed, it will be skipped.
-	 *
-	 * @param string ...$handles One or more JavaScript file handles.
-	 */
-	public function print_scripts( string ...$handles ): void {
-
-		$js_files = $this->get_js_files();
-		$handles  = array_filter(
-			$handles,
-			function ( $handle ) use ( $js_files ) {
-				$is_valid = isset( $js_files[ $handle ] ) && ! $js_files[ $handle ]['global'];
-				if ( ! $is_valid ) {
-					/* translators: %s: JS handle */
-					_doing_it_wrong( __CLASS__ . '::print_scripts()', esc_html( sprintf( __( 'Invalid theme JS handle: %s', 'knowx' ), $handle ) ), 'KnowX 2.0.0' );
-				}
-				return $is_valid;
-			}
-		);
-
-		if ( array() === $handles ) {
-			return;
-		}
-
-		wp_print_scripts( $handles );
 	}
 
 	/**
@@ -214,8 +162,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		 * @param array $js_files Associative array of JS files, as $handle => $data pairs.
 		 *                         $data must be an array with keys 'file' (file path relative to 'assets/js'
 		 *                         directory), and optionally 'global' (whether the file should immediately be
-		 *                         enqueued instead of just being registered) and 'preload_callback' (callback)
-		 *                         function determining whether the file should be preloaded for the current request).
+		 *                         enqueued instead of just being registered), 'deps', 'footer', 'strategy' and
+		 *                         'localize'.
 		 */
 		$js_files = apply_filters( 'knowx_js_files', $js_files );
 

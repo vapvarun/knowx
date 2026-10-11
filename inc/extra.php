@@ -47,18 +47,11 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 		?>
 		<div class="site-sub-header">
 			<div class="container">
-				<?php knowx_the_breadcrumb(); ?>
+				<?php knowx_get_breadcrumb(); ?>
 			</div>
 		</div>
 		<?php
 	}
-}
-
-/**
- * Prints the breadcrumb trail.
- */
-function knowx_the_breadcrumb() {
-	knowx_get_breadcrumb();
 }
 
 /**
@@ -115,8 +108,6 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 	 * Prints the author, date and category line of a post.
 	 */
 	function knowx_posted_on() {
-
-		global $post;
 
 		if ( is_sticky() && is_home() && ! is_paged() ) {
 			echo '<span class="entry-featured">' . esc_html__( 'Sticky', 'knowx' ) . '</span>';

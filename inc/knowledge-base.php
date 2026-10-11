@@ -158,34 +158,6 @@ function knowx_kb_max_categories() {
 }
 
 /**
- * Top-level categories that contain posts (Layout One tiles).
- *
- * @return array[] Category items.
- */
-function knowx_kb_top_categories() {
-	$exclude = knowx_kb_excluded_ids();
-
-	return knowx_kb_cached(
-		'top-' . implode( ',', $exclude ),
-		static function () use ( $exclude ) {
-			return knowx_kb_map_terms(
-				get_terms(
-					array(
-						'taxonomy'   => 'category',
-						'parent'     => 0,
-						'hide_empty' => true,
-						'exclude'    => $exclude,
-						'orderby'    => 'name',
-						'order'      => 'ASC',
-						'number'     => knowx_kb_max_categories(),
-					)
-				)
-			);
-		}
-	);
-}
-
-/**
  * Recently updated posts outside the excluded categories.
  *
  * @param int $limit Number of posts.

@@ -22,10 +22,9 @@ defined( 'ABSPATH' ) || exit;
  *     array( 'setting' => 'mode',     'operator' => '==', 'value' => 'advanced' ),
  *   )
  *
- * KnowX free uses only '==' across all 54 active_callback chains today,
- * but the compiler supports a broader operator set for forward
- * compatibility (and because KnowX Pro field defs may use richer operators
- * once it adopts this framework).
+ * The theme uses only '==' in its active_callback chains today (the Customizer
+ * hides Sidebar-related controls that way), but the compiler supports a broader
+ * operator set.
  */
 class Active_Callback {
 
@@ -52,12 +51,9 @@ class Active_Callback {
 					case '===':
 						// Boolean-equivalent comparison so 'on'/'1'/1/true all match
 						// when expected is true/'1'/1, and 'off'/''/0/false match
-						// when expected is false/'0'/0/''. Pre-fix sites upgrading
-						// from 5.0.x carry legacy 'on'/'off' theme_mods that PHP's
-						// loose comparison treats as != '1' / != '0', causing
-						// dependent controls (Site Footer / Sub Header background
-						// fields, etc.) to be hidden on first customizer load even
-						// when their parent toggle is ON.
+						// when expected is false/'0'/0/''. Saved values may be
+						// the legacy 'on'/'off' strings, which PHP's loose comparison treats
+						// as != '1' / != '0'.
 						if ( ! self::values_equal( $actual, $expected ) ) {
 							return false;
 						}
@@ -112,10 +108,9 @@ class Active_Callback {
 	 *   compare them by their boolean class.
 	 * - Otherwise fall back to PHP loose equality.
 	 *
-	 * Why this matters: Field::sanitize_bool_int normalizes new switch saves to
-	 * 0/1, but customers upgrading from 5.0.x carry literal 'on'/'off' theme_mod
-	 * values that pre-date the sanitizer. Active_Callback conditions were
-	 * authored against the sanitized 0/1 form and broke for those upgraders.
+	 * Why this matters: Field::sanitize_bool_int normalizes switch saves to 0/1,
+	 * but a saved value can still be the literal 'on'/'off' string, and the
+	 * conditions are written against the sanitized 0/1 form.
 	 *
 	 * @param mixed $a First value (typically the saved theme_mod).
 	 * @param mixed $b Second value (typically the condition's expected value).

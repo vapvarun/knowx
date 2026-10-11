@@ -21,7 +21,6 @@ use function dynamic_sidebar;
  *
  * Exposes template tags:
  * * `knowx()->is_right_sidebar_active()`
- * * `knowx()->display_primary_sidebar()`
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/
  */
@@ -51,13 +50,13 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *               a callable or an array with key 'callback'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags(): array {
 		return array(
-			'is_left_sidebar_active'  => array( $this, 'is_left_sidebar_active' ),
 			'display_left_sidebar'    => array( $this, 'display_left_sidebar' ),
+			'is_left_sidebar_active'  => array( $this, 'is_left_sidebar_active' ),
 			'is_right_sidebar_active' => array( $this, 'is_right_sidebar_active' ),
 			'display_right_sidebar'   => array( $this, 'display_right_sidebar' ),
 
@@ -150,7 +149,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function filter_body_classes( array $classes ): array {
 		global $template;
 
-		if ( in_array( basename( (string) $template ), array( 'front-page.php', '404.php' ), true ) ) {
+		if ( in_array( basename( (string) $template ), array( '404.php' ), true ) ) {
 			return $classes;
 		}
 

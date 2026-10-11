@@ -129,10 +129,7 @@ class Theme {
 	/**
 	 * Gets the default theme components.
 	 *
-	 * This method is called if no components are passed to the constructor, which is the common scenario.Theme Editor
-	 *
-	 * Theme Editor: 'editor-styles'
-	 * Block Styles: 'wp-block-styles'
+	 * This method is called if no components are passed to the constructor, which is the common scenario.
 	 *
 	 * @return array List of theme components to use by default.
 	 */

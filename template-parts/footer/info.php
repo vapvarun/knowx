@@ -27,9 +27,5 @@ namespace KnowX\KnowX;
 		<?php echo knowx_footer_custom_text(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</div>
 
-	<?php
-	if ( function_exists( 'the_privacy_policy_link' ) ) {
-		the_privacy_policy_link();
-	}
-	?>
+	<?php the_privacy_policy_link(); ?>
 </div><!-- .site-info -->

@@ -12,7 +12,6 @@ use KnowX\KnowX\Templating_Component_Interface;
 
 use function add_action;
 use function esc_attr;
-use function esc_attr__;
 use function esc_html__;
 use function get_theme_file_path;
 use function get_theme_file_uri;

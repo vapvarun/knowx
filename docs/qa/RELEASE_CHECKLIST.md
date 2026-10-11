@@ -128,3 +128,25 @@ Playground and sample content
 - [ ] Owner checks the whole flow and approves the release
 - [ ] Release to `vapvarun/knowx` with the clean zip; switch the blueprint to the wordpress.org slug; archive `knowx-core`; retire `knowx-demo-importer`
 - [ ] Rich Results test and HTTPS Lighthouse on the published copy
+
+## J. Releasing with the release skill
+
+To release, tell Claude: "use the release skill to release the theme". Everything the skill reads is in the repo; the owner decisions in section H still come first. Prepared 2026-10-11.
+
+| Skill step | KnowX |
+|---|---|
+| Repos | Develop on `wbcomdesigns/knowx` (private, Actions off by design, branch `master`). Release to `vapvarun/knowx` (public, Actions on, branch `master`, local remote name `public`). |
+| Version check (step 4) | `style.css` `Version`, `readme.txt` `Stable tag`, `package.json`, `config/config.default.json` `theme.version`. No version constant in PHP. All are 2.0.0. |
+| Changelog (step 5) | `readme.txt` `= 2.0.0 - October 2026 =` in action-prefix format. The skill's `awk` for `= X.Y.Z =` also matches the Upgrade Notice heading; use the line with the date. |
+| Gate A | `find . -name '*.php'` lint on PHP 8.1 to 8.4 (checked 8.1 and 8.4 in Docker), `vendor/bin/phpstan analyze --memory-limit=1G`, `vendor/bin/phpcs --standard=phpcs.xml.dist`. |
+| Gate C | `docs/qa/qa-config.json` and `docs/qa/AGENT_SMOKE_RUNBOOK.md` exist. The `wp-plugin-smoke` skill writes `docs/qa/.last-smoke-pass.json` at release time (version-keyed, stale after 24 h, so it is never committed ahead). |
+| Gate D | `python3 tools/build-manifest.py` before the version commit. The skill's freshness test compares commit times of `audit/manifest.json` and the source folder (`inc/` here, not `includes/`), so commit the manifest after the last change under `inc/`. Right now the manifest commit is older than the newest `inc/` commit although `build-manifest.py` produces no diff, so the timestamp test reports it stale; the generated content is current, so record that and continue, or add a harmless regenerated change to commit. |
+| Build (step 6) | `npm ci && npm run build`, then package with `node scripts/distribute.js --current --no-tag` (the gated path). `npm run bundle` builds the same zip but skips the smoke gate. Output `dist/knowx-2.0.0.zip` (about 426 KB, `Version: 2.0.0`). |
+| Zip check (step 7) | 253 entries. Has source and minified `*.css` and `*.js`, `LICENSE`, `readme.txt`, `screenshot.png`, `theme.json`, `patterns/`, `template-parts/docs/`, `languages/knowx.pot`, fonts. Has no `node_modules`, tests, `playground/`, `tools/`, `docs/`, `plans/`, `audit/`, source maps, markdown, `CLAUDE.md` or build scripts. (The TypeScript sources `assets/js/customizer.tsx` and `navigation.ts` ship next to their `.min.js` files.) |
+| Theme Check (step 7.5) | Install the Theme Check plugin in the Docker stack and run `wp theme-check run knowx` on the installed zip. Last run: no errors, one advisory warning (core `default` text domain for the stock Uncategorized string). |
+| Docker install (step 8) | `wp theme install dist/knowx-2.0.0.zip --activate` on a fresh WordPress (`tests/docker`), then `playground/seed.php`; front end returns 200, debug log clean, `tests/docker/settings_qa.py` and `customizer-ui-check.js` pass. |
+| Translations | Regenerate `languages/knowx.pot` last, with the command in the runbook (D10). |
+| Merge (step 3, 9) | The public repo has an unrelated history. Create the release branch from the exact tree: `git checkout -b 2.0.0 master && git merge --allow-unrelated-histories -s ours public/master`. The branch then has the public history as an ancestor and a normal PR into `vapvarun/knowx` `master` works (checked in a throwaway clone: 0 file differences from `master`). CI on the public repo must be green (PHP lint 8.1 to 8.4 and `theme.json` validation block; PHPStan, WPCS and Stylelint are advisory). |
+| Branch protection (step 2.9) | `vapvarun/knowx` `master` has none yet. The skill applies it on the first release (needs the owner's go-ahead because it changes the public repo). |
+| GitHub release (step 10) | Tag `v2.0.0` on the public repo, zip attached, title `KnowX 2.0.0 - one-line summary`, body copied from the `readme.txt` bullets plus `Full changelog:` from `node ~/Code/wbcom-services/scripts/changelog-url.mjs vapvarun/knowx` (resolves to `https://wbcomdesigns.com/release-notes/knowx-theme/`). |
+| After the release | `node tools/build-blueprint.mjs --release`, Rich Results test and HTTPS Lighthouse on a public copy, archive `knowx-core`, retire `knowx-demo-importer`. |

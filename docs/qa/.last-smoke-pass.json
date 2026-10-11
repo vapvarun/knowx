@@ -1,15 +1,15 @@
 {
   "mode": "single",
   "release_version": "2.0.0",
-  "ran_at": "2026-10-11T04:40:56Z",
+  "ran_at": "2026-10-11T06:50:58Z",
   "sections": {
     "C_core_flows": {
-      "pass": 20,
+      "pass": 21,
       "fail": 0,
       "skipped": 0
     },
     "D_regression_guards": {
-      "pass": 13,
+      "pass": 16,
       "fail": 0,
       "skipped": 0
     },
@@ -42,26 +42,26 @@
     {
       "id": "J13",
       "reason": "not run in this walk",
-      "needs": "dark mode toggle persistence after reload; covered by the QA pass on 2026-10-10"
+      "needs": "dark mode toggle persistence after reload; covered by the earlier QA pass"
     },
     {
       "id": "J15",
       "reason": "not run in this walk",
-      "needs": "category screen icon and accent save; covered by the QA pass on 2026-10-10"
+      "needs": "category screen icon and accent save; covered by the earlier QA pass"
     },
     {
       "id": "J17",
       "reason": "not run in this walk",
-      "needs": "page with JavaScript disabled; covered by the QA pass on 2026-10-10"
+      "needs": "page with JavaScript disabled; covered by the earlier QA pass"
     },
     {
       "id": "J20",
       "reason": "simulated, not run with seed-single.php",
-      "needs": "single-product layout was checked by excluding one product on the two-product seed (no switcher, no cards, sections listed directly)"
+      "needs": "single-product layout checked by excluding one product on the two-product seed"
     },
     {
       "id": "J23.post-comment",
-      "reason": "form render checked, submission not run",
+      "reason": "form render checked with comments switched on, submission not run",
       "needs": "post and reply a comment"
     },
     {

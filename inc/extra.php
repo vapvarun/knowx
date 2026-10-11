@@ -56,7 +56,7 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 		?>
 		<div class="site-sub-header">
 			<div class="container">
-				<?php knowx_get_breadcrumb(); ?>
+				<?php knowx_the_breadcrumb(); ?>
 			</div>
 		</div>
 		<?php

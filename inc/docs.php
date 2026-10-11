@@ -591,6 +591,25 @@ function knowx_schema_graph() {
 			if ( $product ) {
 				$article['articleSection'] = $product['name'];
 			}
+
+			// Search engines recommend a publisher and an image for an article.
+			$logo = knowx_schema_logo_url();
+			$img  = get_the_post_thumbnail_url( $post_id, 'full' );
+			$img  = $img ? $img : $logo;
+			if ( $img ) {
+				$article['image'] = $img;
+			}
+			$article['publisher'] = array(
+				'@type' => 'Organization',
+				'name'  => get_bloginfo( 'name' ),
+				'url'   => home_url( '/' ),
+			);
+			if ( $logo ) {
+				$article['publisher']['logo'] = array(
+					'@type' => 'ImageObject',
+					'url'   => $logo,
+				);
+			}
 			$graph[] = $article;
 		}
 
@@ -611,7 +630,8 @@ function knowx_schema_graph() {
 			);
 		}
 
-		$faq = knowx_faq_from_blocks( parse_blocks( (string) get_post_field( 'post_content', $post_id ) ) );
+		$faq_allowed = knowx_is_truthy( knowx_mod( 'knowx_faq_schema' ) ) && 'off' !== get_post_meta( $post_id, 'knowx_faq_schema', true );
+		$faq         = $faq_allowed ? knowx_faq_from_blocks( parse_blocks( (string) get_post_field( 'post_content', $post_id ) ) ) : array();
 		if ( count( $faq ) >= 2 ) {
 			$entities = array();
 			foreach ( $faq as $pair ) {
@@ -649,6 +669,18 @@ function knowx_schema_graph() {
 	 * @param array[] $graph Graph nodes.
 	 */
 	return (array) apply_filters( 'knowx_schema_graph', $graph );
+}
+
+/**
+ * The site logo, or the site icon, as an absolute URL for structured data.
+ *
+ * @return string URL or an empty string.
+ */
+function knowx_schema_logo_url() {
+	$logo_id = (int) get_theme_mod( 'custom_logo' );
+	$logo    = $logo_id ? wp_get_attachment_image_url( $logo_id, 'full' ) : '';
+
+	return $logo ? $logo : (string) get_site_icon_url( 512 );
 }
 
 /**
@@ -814,6 +846,21 @@ function knowx_home_view() {
 	$featured = knowx_kb_featured_posts( $count );
 	$recent   = knowx_is_truthy( knowx_mod( 'knowx_show_recent' ) ) ? knowx_kb_recent_posts( $count ) : array();
 
+	// Two lists sit side by side only when both are worth a column, and then they are the same length.
+	// Otherwise they stack, so there is never a half-empty column.
+	$side_by_side = count( $featured ) >= 3 && count( $recent ) >= 3;
+	if ( $side_by_side ) {
+		$length   = min( count( $featured ), count( $recent ) );
+		$featured = array_slice( $featured, 0, $length );
+		$recent   = array_slice( $recent, 0, $length );
+	}
+
+	// The support block needs somewhere to send the reader, or text the owner wrote.
+	$support_link = (string) knowx_mod( 'support_section_button_link_url' );
+	$support_text = (string) knowx_mod( 'support_section_button_text' );
+	$show_support = knowx_is_truthy( knowx_mod( 'knowx_show_support' ) )
+		&& ( ( '' !== $support_link && '' !== $support_text ) || '' !== trim( (string) knowx_mod( 'support_section_content' ) ) );
+
 	return array(
 		'hero_title'          => knowx_mod( 'hero_section_heading' ),
 		'hero_content'        => knowx_mod( 'hero_section_content' ),
@@ -826,7 +873,8 @@ function knowx_home_view() {
 		'home_count'          => $count,
 		'featured'            => $featured,
 		'recent'              => $recent,
-		'column'              => ( empty( $featured ) || empty( $recent ) ) ? 'col-md-12' : 'col-md-6',
+		'column'              => $side_by_side ? 'col-md-6' : 'col-md-12',
+		'show_support'        => $show_support,
 		'show_date'           => knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ),
 		'single'              => 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] ) : null,
 	);

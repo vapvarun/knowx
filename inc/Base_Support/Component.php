@@ -39,7 +39,7 @@ class Component implements Component_Interface {
 		add_action( 'wp_head', array( $this, 'action_add_pingback_header' ) );
 		add_filter( 'body_class', array( $this, 'filter_body_classes_add_hfeed' ) );
 		add_filter( 'embed_defaults', array( $this, 'filter_embed_dimensions' ) );
-		add_action( 'init', array( $this, 'knowx_theme_block_styles' ) );
+		add_action( 'init', array( $this, 'action_register_block_styles' ) );
 	}
 
 	/**
@@ -112,7 +112,7 @@ class Component implements Component_Interface {
 	/**
 	 * Register block styles.
 	 */
-	public function knowx_theme_block_styles() {
+	public function action_register_block_styles() {
 		$callouts = array(
 			'knowx-note'    => __( 'Note', 'knowx' ),
 			'knowx-tip'     => __( 'Tip', 'knowx' ),

@@ -132,7 +132,7 @@ function knowx_build_breadcrumb_items() {
 /**
  * Prints the breadcrumb trail.
  */
-function knowx_get_breadcrumb() {
+function knowx_the_breadcrumb() {
 	$items = knowx_get_breadcrumb_items();
 	if ( empty( $items ) ) {
 		return;

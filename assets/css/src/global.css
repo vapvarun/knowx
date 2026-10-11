@@ -211,6 +211,20 @@ body.layout-boxed {
     list-style: none;
 }
 
+/* On phones the trail stays on one line and scrolls; docs.js shows the end of it. */
+@media (width <= 600px) {
+    .knowx-trail-items {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        scrollbar-width: none;
+    }
+
+    .knowx-trail-item {
+        flex: none;
+    }
+}
+
 .knowx-trail-item + .knowx-trail-item::before {
     content: "/";
     margin-inline: .5em;

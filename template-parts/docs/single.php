@@ -39,14 +39,14 @@ do_action( 'knowx_before_content' );
 <div class="knowx-docs">
 	<?php get_template_part( 'template-parts/docs/sidebar' ); ?>
 
-	<main id="primary" class="knowx-docs-main">
-		<?php if ( $knowx_toc ) : ?>
-			<details class="knowx-toc-panel">
-				<summary><?php esc_html_e( 'On this page', 'knowx' ); ?></summary>
-				<?php knowx_render_toc( $knowx_toc ); ?>
-			</details>
-		<?php endif; ?>
+	<?php if ( $knowx_toc ) : ?>
+		<details class="knowx-toc-panel">
+			<summary><?php esc_html_e( 'On this page', 'knowx' ); ?></summary>
+			<?php knowx_render_toc( $knowx_toc ); ?>
+		</details>
+	<?php endif; ?>
 
+	<main id="primary" class="knowx-docs-main">
 		<?php echo $knowx_article; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup built by the article template part. ?>
 
 		<?php if ( $knowx_prev || $knowx_next ) : ?>
@@ -71,8 +71,10 @@ do_action( 'knowx_before_content' );
 			</section>
 		<?php endif; ?>
 
+		<?php get_template_part( 'template-parts/docs/help' ); ?>
+
 		<?php
-		if ( comments_open() || get_comments_number() ) {
+		if ( knowx_is_truthy( knowx_mod( 'knowx_article_comments' ) ) && ( comments_open() || get_comments_number() ) ) {
 			knowx()->print_styles( 'knowx-comments' );
 			comments_template();
 		}

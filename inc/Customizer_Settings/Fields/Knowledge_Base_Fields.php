@@ -190,6 +190,36 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'switch',
 		array(
+			'settings'    => 'knowx_article_comments',
+			'label'       => esc_html__( 'Show comments on articles', 'knowx' ),
+			'description' => esc_html__( 'Off by default: readers get a "Still need help" block that links to your support page instead. Turn it on for community-answered docs.', 'knowx' ),
+			'section'     => 'site_articles_section',
+			'default'     => 0,
+			'choices'     => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
+			'settings'    => 'knowx_faq_schema',
+			'label'       => esc_html__( 'FAQ structured data', 'knowx' ),
+			'description' => esc_html__( 'Mark pages with two or more Details blocks as a FAQ for search engines. You can also switch it off for a single page in the page editor.', 'knowx' ),
+			'section'     => 'site_articles_section',
+			'default'     => 1,
+			'choices'     => array(
+				'on'  => esc_html__( 'Yes', 'knowx' ),
+				'off' => esc_html__( 'No', 'knowx' ),
+			),
+		)
+	);
+
+	\KnowX\KnowX\Customizer_Framework\Field::add(
+		'switch',
+		array(
 			'settings' => 'knowx_show_toc',
 			'label'    => esc_html__( 'Show the contents list (On this page)', 'knowx' ),
 			'section'  => 'site_articles_section',

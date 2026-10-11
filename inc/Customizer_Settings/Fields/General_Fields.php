@@ -56,13 +56,13 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'switch',
 		array(
-			'settings' => 'knowx_scroll_top',
-			'label'    => esc_html__( 'Back to top button', 'knowx' ),
+			'settings'    => 'knowx_scroll_top',
+			'label'       => esc_html__( 'Back to top button', 'knowx' ),
 			'description' => esc_html__( 'Shows a button after scrolling down a long page.', 'knowx' ),
-			'section'  => 'site_layout',
-			'priority' => 40,
-			'default'  => 0,
-			'choices'  => array(
+			'section'     => 'site_layout',
+			'priority'    => 40,
+			'default'     => 0,
+			'choices'     => array(
 				'on'  => esc_attr__( 'Yes', 'knowx' ),
 				'off' => esc_attr__( 'No', 'knowx' ),
 			),
@@ -75,16 +75,16 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'radio',
 		array(
-			'settings' => 'knowx_corners',
-			'label'    => esc_html__( 'Corners', 'knowx' ),
+			'settings'    => 'knowx_corners',
+			'label'       => esc_html__( 'Corners', 'knowx' ),
 			'description' => esc_html__( 'Roundness of cards, buttons and inputs.', 'knowx' ),
-			'section'  => 'site_layout',
-			'default'  => 'soft',
-			'choices'  => array(
+			'section'     => 'site_layout',
+			'default'     => 'soft',
+			'choices'     => array(
 				'square' => esc_html__( 'Square', 'knowx' ),
 				'soft'   => esc_html__( 'Soft', 'knowx' ),
 				'round'  => esc_html__( 'Round', 'knowx' ),
 			),
-			'priority' => 30,
+			'priority'    => 30,
 		)
 	);

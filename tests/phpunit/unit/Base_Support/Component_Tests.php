@@ -13,7 +13,7 @@ use Mockery;
 use KnowX\KnowX\Base_Support\Component;
 
 /**
- * Class unit-testing the accessibility component.
+ * Class unit-testing the base support component.
  *
  * @group hooks
  */

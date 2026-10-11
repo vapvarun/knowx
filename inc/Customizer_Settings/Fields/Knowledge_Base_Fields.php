@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 					'element' => '.knowx-section-hero',
 				),
 			),
-			'priority' => 10,
+			'priority'    => 10,
 		)
 	);
 
@@ -82,13 +82,13 @@ defined( 'ABSPATH' ) || exit;
 			'label'       => esc_html__( 'Hide Categories', 'knowx' ),
 			'description' => esc_html__( 'Category IDs to keep off the docs home, separated by commas. The ID is in the address bar when you edit a category. Their sub-categories are hidden too.', 'knowx' ),
 			'section'     => 'site_knowledge_section_one',
-			'priority' => 21,
+			'priority'    => 21,
 		)
 	);
 
 
 
-	
+
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'text',
@@ -139,9 +139,9 @@ defined( 'ABSPATH' ) || exit;
 
 
 
-	
 
-	
+
+
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'number',
@@ -201,11 +201,11 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	
 
-	
 
-	
+
+
+
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'switch',
@@ -237,7 +237,7 @@ defined( 'ABSPATH' ) || exit;
 		)
 	);
 
-	
+
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'radio',

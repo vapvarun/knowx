@@ -434,34 +434,36 @@ function knowx_add_heading_anchors( $content ) {
 
 	$content = (string) preg_replace_callback(
 		'#<h([23])([^>]*)>(.*?)</h\1>#is',
-		static function ( $match ) use ( &$items, &$used ) {
-			$text = trim( wp_strip_all_tags( $match[3] ) );
+		static function ( $heading ) use ( &$items, &$used ) {
+			$text = trim( wp_strip_all_tags( $heading[3] ) );
 			if ( '' === $text ) {
-				return $match[0];
+				return $heading[0];
 			}
 
-			if ( preg_match( '/\sid=(["\'])(.*?)\1/', $match[2], $existing ) ) {
+			if ( preg_match( '/\sid=(["\'])(.*?)\1/', $heading[2], $existing ) ) {
 				$id    = $existing[2];
-				$attrs = $match[2];
+				$attrs = $heading[2];
 			} else {
 				$base = sanitize_title( $text );
 				$id   = '' !== $base ? $base : 'section';
-				for ( $n = 2; in_array( $id, $used, true ); $n++ ) {
+				$n    = 2;
+				while ( in_array( $id, $used, true ) ) {
 					$id = $base . '-' . $n;
+					++$n;
 				}
-				$attrs = $match[2] . ' id="' . esc_attr( $id ) . '"';
+				$attrs = $heading[2] . ' id="' . esc_attr( $id ) . '"';
 			}
 			$used[]  = $id;
 			$items[] = array(
 				'id'    => $id,
 				'text'  => $text,
-				'level' => (int) $match[1],
+				'level' => (int) $heading[1],
 			);
 
 			/* translators: %s: section heading. */
 			$label = sprintf( __( 'Link to section: %s', 'knowx' ), $text );
 
-			return sprintf( '<h%1$s%2$s>%3$s <a class="knowx-anchor" href="#%4$s" aria-label="%5$s"></a></h%1$s>', $match[1], $attrs, $match[3], esc_attr( $id ), esc_attr( $label ) );
+			return sprintf( '<h%1$s%2$s>%3$s <a class="knowx-anchor" href="#%4$s" aria-label="%5$s"></a></h%1$s>', $heading[1], $attrs, $heading[3], esc_attr( $id ), esc_attr( $label ) );
 		},
 		$content
 	);
@@ -635,7 +637,7 @@ function knowx_schema_graph() {
 			array_filter(
 				$graph,
 				static function ( $node ) {
-					return 'FAQPage' === ( $node['@type'] ?? '' );
+					return 'FAQPage' === $node['@type'];
 				}
 			)
 		);

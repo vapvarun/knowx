@@ -15,7 +15,7 @@ get_header();
 
 knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 
-$sections         = knowx_kb_sections();
+$sections = knowx_kb_sections();
 
 ?>
 

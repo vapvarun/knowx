@@ -465,7 +465,7 @@ class Component implements Component_Interface {
 	 * @param \WP_Post $post    Post.
 	 */
 	public function invalidate_on_delete_post( $post_id, $post ) {
-		if ( $post instanceof \WP_Post && 'post' === $post->post_type ) {
+		if ( 'post' === $post->post_type ) {
 			$this->invalidate();
 		}
 	}

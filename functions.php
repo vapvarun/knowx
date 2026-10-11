@@ -18,14 +18,12 @@ if ( file_exists( get_template_directory() . '/vendor/autoload.php' ) ) {
 	 * Custom autoloader function for theme classes.
 	 *
 	 * @param string $class_name Class name to load.
-	 *
-	 * @return bool true if the class was loaded, false otherwise
 	 */
 	function _knowx_autoload( $class_name ) {
 		$namespace = 'KnowX\KnowX';
 
 		if ( strpos( $class_name, $namespace . '\\' ) !== 0 ) {
-			return false;
+			return;
 		}
 
 		$parts = explode( '\\', substr( $class_name, strlen( $namespace . '\\' ) ) );
@@ -36,13 +34,9 @@ if ( file_exists( get_template_directory() . '/vendor/autoload.php' ) ) {
 		}
 		$path .= '.php';
 
-		if ( ! file_exists( $path ) ) {
-			return false;
+		if ( file_exists( $path ) ) {
+			require_once $path;
 		}
-
-		require_once $path;
-
-		return true;
 	}
 	spl_autoload_register( '_knowx_autoload' );
 }

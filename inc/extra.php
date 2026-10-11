@@ -133,7 +133,7 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 		}
 
 		// With a featured image the categories sit on the image (entry_header.php); without one they are listed here.
-		if ( ! ( has_post_thumbnail() && ! is_search() ) && in_array( 'category', get_object_taxonomies( get_post_type() ) ) && knowx_categorized_blog() ) {
+		if ( ! ( has_post_thumbnail() && ! is_search() ) && in_array( 'category', get_object_taxonomies( get_post_type() ), true ) && knowx_categorized_blog() ) {
 			echo '<span class="entry-cat-links">' . get_the_category_list( ', ' ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 

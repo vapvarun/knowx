@@ -39,7 +39,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @var array
 	 */
-	protected $js_files;
+	protected ?array $js_files = null;
 
 	/**
 	 * Gets the unique identifier for the theme component.
@@ -118,7 +118,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return array Associative array of $handle => $data pairs.
 	 */
 	protected function get_js_files(): array {
-		if ( is_array( $this->js_files ) ) {
+		if ( null !== $this->js_files ) {
 			return $this->js_files;
 		}
 

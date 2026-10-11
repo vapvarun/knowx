@@ -258,8 +258,8 @@ function knowx_kb_post_query( $exclude, $args = array() ) {
  * @return array[] Category items, each with a `posts` list.
  */
 function knowx_kb_sections() {
-	$exclude  = knowx_kb_excluded_ids();
-	$per_cat  = (int) knowx_mod( 'knowx_posts' );
+	$exclude = knowx_kb_excluded_ids();
+	$per_cat = (int) knowx_mod( 'knowx_posts' );
 	if ( $per_cat < 1 ) {
 		$per_cat = 10; // An empty field means the default.
 	}

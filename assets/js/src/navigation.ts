@@ -14,6 +14,42 @@ function initNavigation(): void {
 	initNavToggleSubmenus();
 	initNavToggleSmall();
 	watchForWindowSizeChanges();
+	initDesktopSubmenuKeyboard();
+}
+
+/**
+ * On wide screens a submenu opens when focus is inside it (CSS :focus-within), so keyboard users
+ * can reach the child items with Tab. Escape closes it again and puts focus back on the parent link.
+ *
+ * @return {void}
+ */
+function initDesktopSubmenuKeyboard(): void {
+	document.addEventListener('keydown', (event) => {
+		if (event.key !== 'Escape' || isMobileWidth()) {
+			return;
+		}
+		const parentItem = (event.target as HTMLElement).closest<HTMLElement>(
+			'.nav--toggle-sub li.menu-item-has-children'
+		);
+		if (!parentItem) {
+			return;
+		}
+		parentItem.classList.add('knowx-dismissed');
+		parentItem.querySelector<HTMLElement>(':scope > a')?.focus();
+	});
+
+	// The submenu may open again once focus or the pointer leaves the item.
+	const reopen = (event: Event) => {
+		document
+			.querySelectorAll<HTMLElement>('.knowx-dismissed')
+			.forEach((item) => {
+				if (!item.contains(event.target as Node)) {
+					item.classList.remove('knowx-dismissed');
+				}
+			});
+	};
+	document.addEventListener('focusin', reopen);
+	document.addEventListener('mouseover', reopen);
 }
 
 /**

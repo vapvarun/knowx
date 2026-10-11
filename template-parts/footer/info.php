@@ -7,6 +7,13 @@
 
 namespace KnowX\KnowX;
 
+$knowx_copyright = knowx_footer_custom_text();
+$knowx_privacy   = get_the_privacy_policy_link();
+
+// Nothing to show: no footer menu, no copyright line and no privacy page.
+if ( '' === trim( wp_strip_all_tags( $knowx_copyright ) ) && '' === $knowx_privacy && ! has_nav_menu( 'footer' ) ) {
+	return;
+}
 ?>
 <div class="site-info">
 	<?php if ( has_nav_menu( 'footer' ) ) : ?>
@@ -23,9 +30,11 @@ namespace KnowX\KnowX;
 			?>
 		</nav>
 	<?php endif; ?>
-	<div class="container">	
-		<?php echo knowx_footer_custom_text(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-	</div>
+	<?php if ( '' !== trim( wp_strip_all_tags( $knowx_copyright ) ) ) : ?>
+		<div class="container">
+			<?php echo $knowx_copyright; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+		</div>
+	<?php endif; ?>
 
-	<?php the_privacy_policy_link(); ?>
+	<?php echo $knowx_privacy; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core builds the link. ?>
 </div><!-- .site-info -->

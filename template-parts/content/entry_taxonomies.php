@@ -14,6 +14,8 @@ $taxonomies = wp_list_filter(
 	)
 );
 
+// Print the wrapper only when at least one term list exists.
+ob_start();
 ?>
 <div class="entry-taxonomies">
 	<?php
@@ -61,3 +63,8 @@ $taxonomies = wp_list_filter(
 	}
 	?>
 </div><!-- .entry-taxonomies -->
+<?php
+$knowx_taxonomies = ob_get_clean();
+if ( false !== strpos( $knowx_taxonomies, 'term-links' ) ) {
+	echo $knowx_taxonomies; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above from escaped term lists.
+}

@@ -45,18 +45,14 @@ class Component implements Component_Interface {
 	 * @return string A source size value for use in a content image 'sizes' attribute.
 	 */
 	public function filter_content_image_sizes_attr( string $sizes, array $size ): string {
-		$width = $size[0];
-
-		if ( 740 <= $width ) {
-			$sizes = '100vw';
+		// Small and medium images keep core's value, which caps the size at the image width.
+		if ( 740 > $size[0] ) {
+			return $sizes;
 		}
 
 		$content = $this->content_width();
-		if ( '100vw' !== $content ) {
-			$sizes = '(min-width: 960px) ' . $content . ', 100vw';
-		}
 
-		return $sizes;
+		return '100vw' === $content ? '100vw' : '(min-width: 960px) ' . $content . ', 100vw';
 	}
 
 	/**

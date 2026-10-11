@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-10T19:36:37+00:00\n"
+"POT-Creation-Date: 2026-10-11T05:43:14+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: knowx\n"
@@ -40,21 +40,21 @@ msgid "https://github.com/vapvarun/knowx"
 msgstr ""
 
 #. translators: %s: number of sections.
-#: category.php:42
+#: category.php:43
 #, php-format
 msgid "%s section"
 msgid_plural "%s sections"
 msgstr[0] ""
 msgstr[1] ""
 
-#: category.php:49
+#: category.php:50
 msgid "Start here"
 msgstr ""
 
 #. translators: %s: date the newest article was changed.
 #. translators: %s: date the article was last changed.
-#: category.php:58
-#: template-parts/docs/list-item.php:42
+#: category.php:59
+#: template-parts/docs/list-item.php:33
 #, php-format
 msgid "Updated %s"
 msgstr ""
@@ -79,8 +79,8 @@ msgid "Comments are disabled."
 msgstr ""
 
 #: footer.php:28
-#: inc/Customizer_Settings/Component.php:194
-#: inc/Nav_Menus/Component.php:71
+#: inc/Customizer_Settings/Component.php:191
+#: inc/Nav_Menus/Component.php:68
 msgid "Footer"
 msgstr ""
 
@@ -96,11 +96,11 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: inc/Accessibility/Component.php:63
+#: inc/Accessibility/Component.php:60
 msgid "Expand child menu"
 msgstr ""
 
-#: inc/Accessibility/Component.php:64
+#: inc/Accessibility/Component.php:61
 msgid "Collapse child menu"
 msgstr ""
 
@@ -110,8 +110,8 @@ msgid "Main menu"
 msgstr ""
 
 #: inc/Activation/Component.php:80
-#: inc/Customizer_Settings/Component.php:154
-#: inc/Docs/Component.php:434
+#: inc/Customizer_Settings/Component.php:151
+#: inc/Docs/Component.php:517
 msgid "Docs"
 msgstr ""
 
@@ -123,23 +123,23 @@ msgstr ""
 msgid "Welcome to our Knowledge Base. Here you can find articles, guides, and resources to help you."
 msgstr ""
 
-#: inc/Base_Support/Component.php:123
+#: inc/Base_Support/Component.php:117
 msgid "Note"
 msgstr ""
 
-#: inc/Base_Support/Component.php:124
+#: inc/Base_Support/Component.php:118
 msgid "Tip"
 msgstr ""
 
-#: inc/Base_Support/Component.php:125
+#: inc/Base_Support/Component.php:119
 msgid "Warning"
 msgstr ""
 
-#: inc/Base_Support/Component.php:126
+#: inc/Base_Support/Component.php:120
 msgid "Danger"
 msgstr ""
 
-#: inc/Base_Support/Component.php:142
+#: inc/Base_Support/Component.php:136
 msgid "Borders"
 msgstr ""
 
@@ -166,19 +166,19 @@ msgstr ""
 msgid "Breadcrumb"
 msgstr ""
 
-#: inc/Color_Mode/Component.php:128
+#: inc/Color_Mode/Component.php:127
 msgid "Light mode. Switch to dark mode."
 msgstr ""
 
-#: inc/Color_Mode/Component.php:129
+#: inc/Color_Mode/Component.php:128
 msgid "Dark mode. Switch to automatic mode."
 msgstr ""
 
-#: inc/Color_Mode/Component.php:130
+#: inc/Color_Mode/Component.php:129
 msgid "Automatic mode. Switch to light mode."
 msgstr ""
 
-#: inc/Color_Mode/Component.php:133
+#: inc/Color_Mode/Component.php:132
 msgid "Switch color mode"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgid "Position"
 msgstr ""
 
 #: inc/Customizer_Framework/Controls/Background.php:83
-#: inc/Customizer_Framework/Controls/Typography.php:138
+#: inc/Customizer_Framework/Controls/Typography.php:137
 msgid "Size"
 msgstr ""
 
@@ -217,112 +217,112 @@ msgstr ""
 msgid "Add %s"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:66
+#: inc/Customizer_Framework/Controls/Typography.php:65
 msgid "Theme fonts"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:67
+#: inc/Customizer_Framework/Controls/Typography.php:66
 msgid "Installed fonts"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:85
+#: inc/Customizer_Framework/Controls/Typography.php:84
 msgid "Default (theme)"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:86
+#: inc/Customizer_Framework/Controls/Typography.php:85
 msgid "Saved"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:87
+#: inc/Customizer_Framework/Controls/Typography.php:86
 msgid "Search fonts…"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:118
+#: inc/Customizer_Framework/Controls/Typography.php:117
 msgid "Family"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:124
+#: inc/Customizer_Framework/Controls/Typography.php:123
 msgid "Weight"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:128
+#: inc/Customizer_Framework/Controls/Typography.php:127
 msgid "Style"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:130
+#: inc/Customizer_Framework/Controls/Typography.php:129
 msgid "Normal"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:131
+#: inc/Customizer_Framework/Controls/Typography.php:130
 msgid "Italic"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:142
+#: inc/Customizer_Framework/Controls/Typography.php:141
 msgid "Line height"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:149
+#: inc/Customizer_Framework/Controls/Typography.php:148
 msgid "Letter"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:153
+#: inc/Customizer_Framework/Controls/Typography.php:152
 msgid "Transform"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:155
-#: inc/Customizer_Framework/Controls/Typography.php:177
+#: inc/Customizer_Framework/Controls/Typography.php:154
+#: inc/Customizer_Framework/Controls/Typography.php:176
 msgid "None"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:156
+#: inc/Customizer_Framework/Controls/Typography.php:155
 msgid "UPPER"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:157
+#: inc/Customizer_Framework/Controls/Typography.php:156
 msgid "lower"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:158
+#: inc/Customizer_Framework/Controls/Typography.php:157
 msgid "Capitalize"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:165
+#: inc/Customizer_Framework/Controls/Typography.php:164
 msgid "Align"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:167
+#: inc/Customizer_Framework/Controls/Typography.php:166
 msgid "Inherit"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:168
+#: inc/Customizer_Framework/Controls/Typography.php:167
 msgid "Left"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:169
+#: inc/Customizer_Framework/Controls/Typography.php:168
 msgid "Center"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:170
+#: inc/Customizer_Framework/Controls/Typography.php:169
 msgid "Right"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:171
+#: inc/Customizer_Framework/Controls/Typography.php:170
 msgid "Justify"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:175
+#: inc/Customizer_Framework/Controls/Typography.php:174
 msgid "Decoration"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:178
+#: inc/Customizer_Framework/Controls/Typography.php:177
 msgid "Underline"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:179
+#: inc/Customizer_Framework/Controls/Typography.php:178
 msgid "Strikethrough"
 msgstr ""
 
-#: inc/Customizer_Framework/Controls/Typography.php:180
+#: inc/Customizer_Framework/Controls/Typography.php:179
 msgid "Overline"
 msgstr ""
 
@@ -334,48 +334,46 @@ msgstr ""
 msgid "Dark Mode"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:112
+#: inc/Customizer_Settings/Component.php:111
 msgid "Typography"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:122
+#: inc/Customizer_Settings/Component.php:121
 msgid "Header and Breadcrumbs"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:133
+#: inc/Customizer_Settings/Component.php:131
 msgid "Colors"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:144
-#: index.php:79
-#: page.php:63
-#: single.php:80
+#: inc/Customizer_Settings/Component.php:141
+#: template-parts/layout/sidebar-right.php:14
 msgid "Sidebar"
 msgstr ""
 
 #. Template Name of the theme
-#: inc/Customizer_Settings/Component.php:163
+#: inc/Customizer_Settings/Component.php:160
 msgid "Docs Home"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:173
+#: inc/Customizer_Settings/Component.php:170
 msgid "Articles"
 msgstr ""
 
 #. Template Name of the theme
-#: inc/Customizer_Settings/Component.php:183
+#: inc/Customizer_Settings/Component.php:180
 msgid "Docs Index"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:250
+#: inc/Customizer_Settings/Component.php:246
 msgid "Palettes"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:251
+#: inc/Customizer_Settings/Component.php:247
 msgid "Pick a starting point, then change any colour below."
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:252
+#: inc/Customizer_Settings/Component.php:248
 msgid "Default"
 msgstr ""
 
@@ -396,8 +394,8 @@ msgid "Dark"
 msgstr ""
 
 #: inc/Customizer_Settings/Fields/Color_Mode_Fields.php:21
-#: inc/Docs/Component.php:345
-#: inc/Docs/Component.php:372
+#: inc/Docs/Component.php:353
+#: inc/Docs/Component.php:380
 msgid "Automatic"
 msgstr ""
 
@@ -417,39 +415,39 @@ msgstr ""
 msgid "Colour or image behind the footer widgets."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:42
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:35
 msgid "Footer Text"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:43
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:36
 msgid "Text in the footer."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:57
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:50
 msgid "Copyright Line"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:58
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:51
 msgid "You can use [current_year], [site_title], [theme_author] shortcode if you want."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:60
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:53
 msgid "Copyright © [current_year] [site_title] | Powered by [theme_author]"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:69
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:62
 msgid "Copyright Background"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:70
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:63
 msgid "The line at the very bottom of the page."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:81
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:74
 msgid "Copyright Text"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Footer_Fields.php:82
+#: inc/Customizer_Settings/Fields/Footer_Fields.php:75
 msgid "Text in that line."
 msgstr ""
 
@@ -480,7 +478,7 @@ msgstr ""
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:218
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:233
 #: inc/Customizer_Settings/Fields/Sidebar_Fields.php:38
-#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:46
+#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:39
 msgid "Yes"
 msgstr ""
 
@@ -491,7 +489,7 @@ msgstr ""
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:219
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:234
 #: inc/Customizer_Settings/Fields/Sidebar_Fields.php:39
-#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:47
+#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:40
 msgid "No"
 msgstr ""
 
@@ -699,11 +697,11 @@ msgstr ""
 msgid "Colour or image behind the breadcrumbs."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:41
+#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:34
 msgid "Show breadcrumbs"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:42
+#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:35
 msgid "The trail under the header: Home, product, section, article."
 msgstr ""
 
@@ -822,106 +820,110 @@ msgstr ""
 msgid "Link to section: %s"
 msgstr ""
 
-#: inc/Docs/Component.php:73
+#: inc/Docs/Component.php:81
 msgid "KnowX Docs"
 msgstr ""
 
-#: inc/Docs/Component.php:128
+#: inc/Docs/Component.php:136
 msgid "Sorry, you are not allowed to edit this post."
 msgstr ""
 
-#: inc/Docs/Component.php:139
+#: inc/Docs/Component.php:147
 msgid "The order of the article inside its section."
 msgstr ""
 
-#: inc/Docs/Component.php:266
-#: inc/Docs/Component.php:305
-#: inc/Docs/Component.php:341
+#: inc/Docs/Component.php:274
+#: inc/Docs/Component.php:313
+#: inc/Docs/Component.php:349
 msgid "Product icon"
 msgstr ""
 
-#: inc/Docs/Component.php:268
-#: inc/Docs/Component.php:308
+#: inc/Docs/Component.php:276
+#: inc/Docs/Component.php:316
 msgid "Shown on the product card when this is a top-level category."
 msgstr ""
 
-#: inc/Docs/Component.php:271
-#: inc/Docs/Component.php:312
-#: inc/Docs/Component.php:368
+#: inc/Docs/Component.php:279
+#: inc/Docs/Component.php:320
+#: inc/Docs/Component.php:376
 msgid "Product accent colour"
 msgstr ""
 
-#: inc/Docs/Component.php:273
-#: inc/Docs/Component.php:315
+#: inc/Docs/Component.php:281
+#: inc/Docs/Component.php:323
 msgid "Buttons and links on this product use this colour. Automatic picks one from the theme palette when the site has several products."
 msgstr ""
 
-#: inc/Docs/Component.php:285
-#: inc/Docs/Component.php:319
+#: inc/Docs/Component.php:293
+#: inc/Docs/Component.php:327
 msgid "Product order"
 msgstr ""
 
-#: inc/Docs/Component.php:287
-#: inc/Docs/Component.php:322
+#: inc/Docs/Component.php:295
+#: inc/Docs/Component.php:330
 msgid "Products are listed from the lowest number to the highest, then by name."
 msgstr ""
 
-#: inc/Docs/Component.php:290
-#: inc/Docs/Component.php:326
+#: inc/Docs/Component.php:298
+#: inc/Docs/Component.php:334
 msgid "Start here link"
 msgstr ""
 
-#: inc/Docs/Component.php:292
-#: inc/Docs/Component.php:329
+#: inc/Docs/Component.php:300
+#: inc/Docs/Component.php:337
 msgid "Where the Start here button on the product page goes. Leave empty to open the first article."
 msgstr ""
 
-#: inc/Docs/Component.php:384
+#: inc/Docs/Component.php:392
 msgid "Your own"
 msgstr ""
 
-#: inc/Docs/Component.php:386
+#: inc/Docs/Component.php:394
 msgid "Your own colour"
 msgstr ""
 
-#: inc/Docs/Component.php:446
+#: inc/Docs/Component.php:529
 msgid "Applies to version"
 msgstr ""
 
-#: inc/Docs/Component.php:448
+#: inc/Docs/Component.php:531
 msgid "e.g. 2.4"
 msgstr ""
 
-#: inc/Docs/Component.php:449
+#: inc/Docs/Component.php:532
 msgid "Shown as a badge on the article. Leave empty when it applies to every version."
 msgstr ""
 
 #. translators: %s: Post title.
 #. translators: %s: Name of current post. Only visible to screen readers
-#: inc/Excerpts/Component.php:44
+#: inc/Excerpts/Component.php:43
 #: template-parts/content/entry-full-width.php:23
 #: template-parts/content/entry_content.php:19
 #, php-format
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
 
-#: inc/extra.php:132
+#: inc/extra.php:76
+msgid "KnowX WordPress Theme"
+msgstr ""
+
+#: inc/extra.php:113
 msgid "Sticky"
 msgstr ""
 
-#: inc/extra.php:143
+#: inc/extra.php:125
 msgid "Leave a comment"
 msgstr ""
 
-#: inc/extra.php:143
+#: inc/extra.php:125
 msgid "1 Comment"
 msgstr ""
 
-#: inc/extra.php:143
+#: inc/extra.php:125
 msgid "% Comments"
 msgstr ""
 
-#: inc/extra.php:148
+#: inc/extra.php:130
 msgid "Edit"
 msgstr ""
 
@@ -936,79 +938,77 @@ msgstr ""
 msgid "Search %d"
 msgstr ""
 
-#: inc/Nav_Menus/Component.php:70
+#: inc/Nav_Menus/Component.php:67
 msgid "Primary"
 msgstr ""
 
-#. translators: %s: JS handle
-#: inc/Scripts/Component.php:154
-#, php-format
-msgid "Invalid theme JS handle: %s"
-msgstr ""
-
-#: inc/Scripts/Component.php:187
+#: inc/Scripts/Component.php:135
 msgid "Back to top"
 msgstr ""
 
-#: inc/Scripts/Component.php:199
+#: inc/Scripts/Component.php:147
 msgid "Copy"
 msgstr ""
 
-#: inc/Scripts/Component.php:200
+#: inc/Scripts/Component.php:148
 msgid "Copied"
 msgstr ""
 
-#: inc/Scripts/Component.php:201
+#: inc/Scripts/Component.php:149
 msgid "Link copied"
 msgstr ""
 
-#: inc/Scripts/Component.php:202
+#: inc/Scripts/Component.php:150
+msgid "Copy is not available on this page"
+msgstr ""
+
+#: inc/Scripts/Component.php:151
 msgid "Searching..."
 msgstr ""
 
-#: inc/Scripts/Component.php:203
+#: inc/Scripts/Component.php:152
 msgid "No articles found. Press Enter to search the whole site."
 msgstr ""
 
-#: inc/Scripts/Component.php:204
+#: inc/Scripts/Component.php:153
 msgid "Search is not available right now. Press Enter to use the search page."
 msgstr ""
 
-#: inc/Sidebars/Component.php:73
+#: inc/Sidebars/Component.php:72
 msgid "Right Sidebar"
 msgstr ""
 
-#: inc/Sidebars/Component.php:75
-#: inc/Sidebars/Component.php:87
-#: inc/Sidebars/Component.php:99
-#: inc/Sidebars/Component.php:111
-#: inc/Sidebars/Component.php:123
-#: inc/Sidebars/Component.php:135
+#: inc/Sidebars/Component.php:74
+#: inc/Sidebars/Component.php:86
+#: inc/Sidebars/Component.php:98
+#: inc/Sidebars/Component.php:110
+#: inc/Sidebars/Component.php:122
+#: inc/Sidebars/Component.php:134
 msgid "Add widgets here."
 msgstr ""
 
-#: inc/Sidebars/Component.php:85
+#: inc/Sidebars/Component.php:84
 msgid "Left Sidebar"
 msgstr ""
 
-#: inc/Sidebars/Component.php:97
+#: inc/Sidebars/Component.php:96
 msgid "Footer 1"
 msgstr ""
 
-#: inc/Sidebars/Component.php:109
+#: inc/Sidebars/Component.php:108
 msgid "Footer 2"
 msgstr ""
 
-#: inc/Sidebars/Component.php:121
+#: inc/Sidebars/Component.php:120
 msgid "Footer 3"
 msgstr ""
 
-#: inc/Sidebars/Component.php:133
+#: inc/Sidebars/Component.php:132
 msgid "Footer 4"
 msgstr ""
 
 #. translators: %s: stylesheet handle
-#: inc/Styles/Component.php:209
+#: inc/Styles/Component.php:203
 #, php-format
 msgid "Invalid theme stylesheet handle: %s"
 msgstr ""
@@ -1049,30 +1049,24 @@ msgstr ""
 msgid "No theme component with the slug %s exists."
 msgstr ""
 
-#: inc/Tokens/Component.php:125
+#: inc/Tokens/Component.php:123
 msgid "Ocean"
 msgstr ""
 
-#: inc/Tokens/Component.php:126
+#: inc/Tokens/Component.php:124
 msgid "Forest"
 msgstr ""
 
-#: inc/Tokens/Component.php:127
+#: inc/Tokens/Component.php:125
 msgid "Sunset"
 msgstr ""
 
-#: inc/Tokens/Component.php:128
+#: inc/Tokens/Component.php:126
 msgid "Berry"
 msgstr ""
 
-#: inc/Tokens/Component.php:129
+#: inc/Tokens/Component.php:127
 msgid "Slate"
-msgstr ""
-
-#: index.php:32
-#: page.php:31
-#: single.php:35
-msgid "Left sidebar"
 msgstr ""
 
 #. Template Name of the theme
@@ -1083,43 +1077,43 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: page-knowledgebase-one.php:62
+#: page-knowledgebase-one.php:61
 msgid "Popular:"
 msgstr ""
 
-#: page-knowledgebase-one.php:77
+#: page-knowledgebase-one.php:76
 msgid "Your documentation starts here"
 msgstr ""
 
-#: page-knowledgebase-one.php:80
+#: page-knowledgebase-one.php:79
 msgid "Add your first product: create a category with no parent, give it an icon and a description, then publish articles in its sections."
 msgstr ""
 
-#: page-knowledgebase-one.php:82
+#: page-knowledgebase-one.php:81
 msgid "Add a product"
 msgstr ""
 
-#: page-knowledgebase-one.php:84
+#: page-knowledgebase-one.php:83
 msgid "The documentation is being written. Please check back soon."
 msgstr ""
 
-#: page-knowledgebase-one.php:146
+#: page-knowledgebase-one.php:145
 msgid "Featured Articles"
 msgstr ""
 
-#: page-knowledgebase-one.php:158
+#: page-knowledgebase-one.php:157
 msgid "Recently Updated"
 msgstr ""
 
-#: page-knowledgebase-one.php:183
+#: page-knowledgebase-one.php:182
 msgid "Can't find what you're looking for?"
 msgstr ""
 
-#: page-knowledgebase-one.php:187
+#: page-knowledgebase-one.php:186
 msgid "Search the articles above, or get in touch and we will help you."
 msgstr ""
 
-#: page-knowledgebase-one.php:187
+#: page-knowledgebase-one.php:186
 msgid "Search the articles above to find what you need."
 msgstr ""
 
@@ -1386,28 +1380,39 @@ msgctxt "Pattern description"
 msgid "A hero with search, product columns and the newest articles, built from blocks."
 msgstr ""
 
-#: patterns/docs-home.php:15
+#: patterns/docs-home.php:14
+#: patterns/docs-home.php:17
+msgid "Search"
+msgstr ""
+
+#: patterns/docs-home.php:16
+#: searchform.php:15
+#: template-parts/docs/search-dialog.php:13
+msgid "Search the documentation"
+msgstr ""
+
+#: patterns/docs-home.php:24
 msgid "How can we help?"
 msgstr ""
 
-#: patterns/docs-home.php:19
+#: patterns/docs-home.php:28
 msgid "Guides, references and answers for every product."
 msgstr ""
 
-#: patterns/docs-home.php:29
+#: patterns/docs-home.php:38
 msgid "Product one"
 msgstr ""
 
-#: patterns/docs-home.php:33
-#: patterns/docs-home.php:45
+#: patterns/docs-home.php:42
+#: patterns/docs-home.php:54
 msgid "One sentence about what this product does."
 msgstr ""
 
-#: patterns/docs-home.php:41
+#: patterns/docs-home.php:50
 msgid "Product two"
 msgstr ""
 
-#: patterns/docs-home.php:52
+#: patterns/docs-home.php:61
 msgid "Latest articles"
 msgstr ""
 
@@ -1427,6 +1432,12 @@ msgstr ""
 
 #: patterns/faq.php:18
 msgid "How do I get started?"
+msgstr ""
+
+#: patterns/faq.php:18
+#: patterns/faq.php:24
+#: patterns/faq.php:30
+msgid "Write the answer"
 msgstr ""
 
 #: patterns/faq.php:19
@@ -1645,11 +1656,6 @@ msgstr ""
 msgid "Search for:"
 msgstr ""
 
-#: searchform.php:15
-#: template-parts/docs/search-dialog.php:13
-msgid "Search the documentation"
-msgstr ""
-
 #: searchform.php:16
 msgid "Clear search"
 msgstr ""
@@ -1674,20 +1680,8 @@ msgstr ""
 
 #: template-parts/content/entry-full-width.php:36
 #: template-parts/content/entry-page.php:36
-#: template-parts/content/entry_content.php:36
+#: template-parts/content/entry_content.php:34
 msgid "Pages:"
-msgstr ""
-
-#. translators: %s: post title
-#: template-parts/content/entry_actions.php:21
-#, php-format
-msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
-msgstr ""
-
-#. translators: %s: post title
-#: template-parts/content/entry_actions.php:40
-#, php-format
-msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
 #. translators: %s: post author
@@ -1719,25 +1713,19 @@ msgid "in %s"
 msgstr ""
 
 #. translators: separator between taxonomy terms
-#: template-parts/content/entry_taxonomies.php:24
+#: template-parts/content/entry_taxonomies.php:26
 msgctxt "list item separator"
 msgid ", "
 msgstr ""
 
 #. translators: %s: list of taxonomy terms
-#: template-parts/content/entry_taxonomies.php:31
-#, php-format
-msgid "Posted in %s"
-msgstr ""
-
-#. translators: %s: list of taxonomy terms
-#: template-parts/content/entry_taxonomies.php:37
+#: template-parts/content/entry_taxonomies.php:38
 #, php-format
 msgid "Tagged %s"
 msgstr ""
 
 #. translators: %s: taxonomy name
-#: template-parts/content/entry_taxonomies.php:44
+#: template-parts/content/entry_taxonomies.php:45
 #, php-format
 msgid "%s:"
 msgstr ""
@@ -1765,17 +1753,7 @@ msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searc
 msgstr ""
 
 #: template-parts/content/page_header.php:14
-msgid "Oops! That page can&rsquo;t be found."
-msgstr ""
-
-#: template-parts/content/page_header.php:22
 msgid "Nothing Found"
-msgstr ""
-
-#. translators: %s: search query
-#: template-parts/content/page_header.php:41
-#, php-format
-msgid "Search Results for: %s"
 msgstr ""
 
 #: template-parts/content/pagination.php:13
@@ -1794,7 +1772,7 @@ msgstr ""
 
 #. translators: %s: product version.
 #: template-parts/docs/article.php:20
-#: template-parts/docs/list-item.php:33
+#: template-parts/docs/list-item.php:24
 #, php-format
 msgid "Version %s"
 msgstr ""
@@ -1817,7 +1795,7 @@ msgid "Only in %s"
 msgstr ""
 
 #. translators: %s: number of articles.
-#: template-parts/docs/section-grid.php:40
+#: template-parts/docs/section-grid.php:41
 #, php-format
 msgid "View all %s article"
 msgid_plural "View all %s articles"
@@ -1832,29 +1810,29 @@ msgstr ""
 msgid "Product overview"
 msgstr ""
 
-#: template-parts/docs/single.php:55
-#: template-parts/docs/single.php:93
-#: template-parts/docs/single.php:94
+#: template-parts/docs/single.php:39
+#: template-parts/docs/single.php:77
+#: template-parts/docs/single.php:78
 msgid "On this page"
 msgstr ""
 
-#: template-parts/docs/single.php:63
+#: template-parts/docs/single.php:47
 msgid "Previous and next article"
 msgstr ""
 
-#: template-parts/docs/single.php:65
+#: template-parts/docs/single.php:49
 msgid "Previous"
 msgstr ""
 
-#: template-parts/docs/single.php:68
+#: template-parts/docs/single.php:52
 msgid "Next"
 msgstr ""
 
-#: template-parts/docs/single.php:75
+#: template-parts/docs/single.php:59
 msgid "More in this section"
 msgstr ""
 
-#: template-parts/footer/info.php:13
+#: template-parts/footer/info.php:20
 msgid "Footer menu"
 msgstr ""
 
@@ -1870,8 +1848,12 @@ msgstr ""
 msgid "Search docs"
 msgstr ""
 
+#: template-parts/layout/sidebar-left.php:14
+msgid "Left sidebar"
+msgstr ""
+
 #. translators: %d: number of results.
-#: assets/js/src/docs.js:124
+#: assets/js/src/docs.js:131
 #, js-format
 msgid "%d result. Use the arrow keys to move through it."
 msgid_plural "%d results. Use the arrow keys to move through them."

@@ -17,7 +17,7 @@ Verdicts: **Keep**, **Replace** (native or core feature does it), **Remove** (no
 | Current-menu `aria-current` | Core nav walkers set it | Duplicate filter removed (W02) |
 | Fonts | `theme.json` `fontFace` self-hosting | Replace the webfont downloader and Google loader (W12) |
 | Accordions (FAQ) | Core Details block | No accordion JS (W14) |
-| Search | REST `/wp/v2/search` | Instant-search overlay uses it, no search library (W14) |
+| Search | REST `/wp/v2/posts?search=` | Instant-search overlay uses it, no search library (W14) |
 | Background colour / image | Core `custom-background` | Do not duplicate in own settings (W08) |
 | Embeds sizing | `responsive-embeds` support | FitVids removed (W10) |
 | Logo, title, home page, menus, widgets | Core Customizer panels | Not rebuilt in our settings (W08) |
@@ -34,17 +34,13 @@ Verdicts: **Keep**, **Replace** (native or core feature does it), **Remove** (no
 | ~~jQuery~~ (no longer a dependency, W10) | `custom.js`, all of the above | core | Dependency of every library above | **Done**: the front end loads no jQuery (checked) |
 | ~~Font Awesome 4.7~~ (removed in W12) | About 11 icon glyphs, 1.1 MB | 1.1 MB | Icons | **Done**: CSS-mask SVG files and inline SVG; readme attribution to update in W17 |
 | normalize.css 8.0.1 (MIT) | `_reset.css` | small | Cross-browser reset | **Keep** or fold into a modern `@layer reset` (W11) |
-| Bootstrap 3 grid (MIT, copied) | Only `.container`, `.row`, `.col-md-6` | 12 KB min | Layout | **Remove**: those classes need about ten lines of CSS grid (W11) |
-| TGM-Plugin-Activation 2.6.1 (GPL-2.0+) | Recommends plugins on every admin load | 3,759 lines | Plugin nag | **Remove**: no required or recommended plugin (W07) |
+| ~~Bootstrap 3 grid~~ (removed in W11) | Only `.container`, `.row`, `.col-md-6` and `.col-md-12` | 12 KB min | Layout | **Done**: about ten lines in `_grid.css` |
+| ~~TGM-Plugin-Activation 2.6.1~~ (removed in W07) | Recommended plugins on every admin load | 3,759 lines | Plugin nag | **Done**: no required or recommended plugin |
 | ~~Open Sans + Montserrat from Google Fonts~~ (removed in W12) | Body and headings | external request | Typography | **Done**: Open Sans variable woff2 self-hosted (about 90 KB), declared in `theme.json`, one preload |
 
 Result after W10: no jQuery and no third-party JavaScript on the front end; the theme ships 6.4 KB of minified JS in total (it was 284 KB with source maps and 60 KB without). After W12: icons are SVG and the only font is self-hosted Open Sans; no external request.
 
-## 3. Kirki
-
-Plugin, not bundled. Removed entirely (W07); the in-house Customizer framework replaces it.
-
-## 4. Build tools (development only, never shipped)
+## 3. Build tools (development only, never shipped)
 
 | Tool | Why | Verdict |
 |---|---|---|
@@ -62,7 +58,7 @@ Plugin, not bundled. Removed entirely (W07); the in-house Customizer framework r
 
 Removed because nothing used them: `postcss-custom-media`, `axe-core`, `minimist`, `replace-in-file`, `wp-pot-cli` (the template is made with `wp i18n make-pot`), `eslint-config-standard`, `eslint-plugin-node`, `@eslint/js` and `glob`. Removed in W02: `@wordpress/block-editor`, `blocks`, `components`, `create-block`, `data`, `scripts`, `server-side-render`, `react`, `react-dom`, `@parcel/css`, `cssnano`, `esbuild-loader`, `esm`, `import-fresh`, `npm-run-all`, `tiny-lr`, `vinyl`, `wp-cli` (1,145 packages).
 
-## 5. How a library earns its place
+## 4. How a library earns its place
 
 1. Core or a native browser feature cannot do it.
 2. It is GPL-compatible and listed with its licence in `readme.txt`.

@@ -25,6 +25,9 @@
     "Tokens"
   ],
   "filters": {
+    "knowx_breadcrumb_items": [
+      "inc/breadcrumbs.php"
+    ],
     "knowx_color_palettes": [
       "inc/Tokens/Component.php"
     ],

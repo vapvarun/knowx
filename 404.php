@@ -14,13 +14,22 @@ get_header();
 knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 
 ?>
-	<?php do_action( 'knowx_sub_header' ); ?>
-	<?php do_action( 'knowx_before_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_sub_header' );
+	?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_before_content' );
+	?>
 
 	<main id="primary" class="knowx-narrow">
 			<?php get_template_part( 'template-parts/content/error', '404' ); ?>
 	</main><!-- #primary -->
 	
-	<?php do_action( 'knowx_after_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_after_content' );
+	?>
 <?php
 get_footer();

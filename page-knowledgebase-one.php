@@ -67,7 +67,10 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 		</div>
 	</div>
 
-	<?php do_action( 'knowx_before_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_before_content' );
+	?>
 
 	<div class="container">
 
@@ -195,6 +198,9 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 	<?php endif; ?>
 </main><!-- #primary -->
 
-	<?php do_action( 'knowx_after_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_after_content' );
+	?>
 <?php
 get_footer();

@@ -79,7 +79,7 @@ function handleToggleSubMenuEvents(parentMenuItem: ParentNode): void {
 						'li.menu-item--toggled-on'
 					);
 				parentMenuItemsToggled.forEach((menuItem) =>
-					toggleSubMenu(menuItem, false)
+					toggleSubMenu(menuItem)
 				);
 			}
 		}
@@ -96,7 +96,7 @@ function handleToggleSubMenuEvents(parentMenuItem: ParentNode): void {
 				'li'
 			) as HTMLElement | null;
 			if (parentLi) {
-				toggleSubMenu(parentLi, false);
+				toggleSubMenu(parentLi);
 			}
 		}
 	});
@@ -231,21 +231,10 @@ function processEachSubMenu(
 		if (!subMenuParentLink) {
 			parentMenuItem.style.cursor = 'pointer';
 			parentMenuItem.addEventListener('click', (e) => {
-				// Only handle clicks directly on the parent item, not its children
-				if (
-					e.target === parentMenuItem ||
-					parentMenuItem.contains(e.target as Node)
-				) {
-					// Don't toggle if the click was on a child link or button
-					const isChildLink = (e.target as HTMLElement).closest(
-						'a, button'
-					);
-					if (
-						!isChildLink ||
-						isChildLink.parentElement === parentMenuItem
-					) {
-						toggleSubMenu(parentMenuItem);
-					}
+				// A click on a link or a button is handled by that element (the dropdown button
+				// has its own handler), so only the plain text of the item toggles here.
+				if (!(e.target as HTMLElement).closest('a, button')) {
+					toggleSubMenu(parentMenuItem);
 				}
 			});
 		}
@@ -326,10 +315,6 @@ function convertDropdownToToggleButton(
 function initEachNavToggleSmall(): void {
 	const menuToggles = document.querySelectorAll<HTMLElement>('.menu-toggle');
 
-	if (!menuToggles) {
-		return;
-	}
-
 	menuToggles.forEach((menuToggle) => {
 		menuToggle.setAttribute('aria-expanded', 'false');
 
@@ -385,14 +370,10 @@ function toggleMenuToggleState(e: Event) {
 /**
  * Toggles the sub-menu visibility and accessibility attributes for a given parent menu item.
  *
- * @param {HTMLElement} parentMenuItem            - The parent menu item whose sub-menu is to be toggled.
- * @param {boolean}     [limitOpenSubmenus=false] - If set to true, limits the number of open submenus to one.
+ * @param {HTMLElement} parentMenuItem - The parent menu item whose sub-menu is to be toggled.
  * @return {void}
  */
-function toggleSubMenu(
-	parentMenuItem: HTMLElement,
-	limitOpenSubmenus = false
-): void {
+function toggleSubMenu(parentMenuItem: HTMLElement): void {
 	const toggleButton = parentMenuItem.querySelector<HTMLElement>(
 		'.dropdown-toggle, .wp-block-navigation-submenu__toggle'
 	);
@@ -422,25 +403,7 @@ function toggleSubMenu(
 		parentMenuItem.classList.remove('menu-item--toggled-on');
 		subMenu!.classList.remove('toggle-show');
 		toggleButton.setAttribute('aria-label', knowxScreenReaderText.expand);
-
-		if (limitOpenSubmenus) {
-			const subMenuItemsToggled =
-				parentMenuItem.querySelectorAll<HTMLElement>(
-					'.menu-item--toggled-on'
-				);
-			subMenuItemsToggled.forEach((menuItem) => toggleSubMenu(menuItem));
-		}
 	} else {
-		if (limitOpenSubmenus) {
-			const parentMenuItemsToggled =
-				parentMenuItem.parentNode!.querySelectorAll<HTMLElement>(
-					'li.menu-item--toggled-on'
-				);
-			parentMenuItemsToggled.forEach((menuItem) =>
-				toggleSubMenu(menuItem)
-			);
-		}
-
 		parentMenuItem.classList.add('menu-item--toggled-on');
 		subMenu!.classList.add('toggle-show');
 		toggleButton.setAttribute('aria-label', knowxScreenReaderText.collapse);

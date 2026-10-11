@@ -23,6 +23,8 @@
 			announce(done);
 			return true;
 		} catch (e) {
+			// No Clipboard API (a page that is not served over HTTPS) or permission denied.
+			announce(strings.copyFailed);
 			return false;
 		}
 	};
@@ -42,6 +44,11 @@
 				)
 			) {
 				button.textContent = strings.copied;
+				setTimeout(() => {
+					button.textContent = strings.copy;
+				}, 1800);
+			} else {
+				button.textContent = strings.copyFailed;
 				setTimeout(() => {
 					button.textContent = strings.copy;
 				}, 1800);

@@ -72,33 +72,23 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 	 */
 	function knowx_footer_custom_text() {
 
-		$copyright = knowx_mod( 'site_copyright_text' );
-		if ( ! empty( $copyright ) ) {
-			$copyright    = str_replace( '[current_year]', date_i18n( 'Y' ), $copyright );
-			$copyright    = str_replace( '[site_title]', '<span class="knowx-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $copyright );
-			$theme_author = apply_filters(
-				'knowx_theme_author',
-				array(
-					'theme_name'       => esc_html( 'KnowX WordPress Theme', 'knowx' ),
-					'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/knowx-theme/' ),
-				)
-			);
-			$copyright    = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $copyright );
-			return apply_filters( 'knowx_footer_copyright_text', $copyright );
-		} else {
-			$output       = 'Copyright © [current_year] [site_title] | Powered by [theme_author]';
-			$output       = str_replace( '[current_year]', date_i18n( 'Y' ), $output );
-			$output       = str_replace( '[site_title]', '<span class="knowx-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $output );
-			$theme_author = apply_filters(
-				'knowx_theme_author',
-				array(
-					'theme_name'       => esc_html( 'KnowX WordPress Theme', 'knowx' ),
-					'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/knowx-theme/' ),
-				)
-			);
-			$output       = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $output );
-			return apply_filters( 'knowx_footer_copyright_text', $output );
+		$copyright = (string) knowx_mod( 'site_copyright_text' );
+		if ( '' === trim( $copyright ) ) {
+			return '';
 		}
+
+		$theme_author = apply_filters(
+			'knowx_theme_author',
+			array(
+				'theme_name'       => esc_html__( 'KnowX WordPress Theme', 'knowx' ),
+				'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/knowx-theme/' ),
+			)
+		);
+		$copyright    = str_replace( '[current_year]', date_i18n( 'Y' ), $copyright );
+		$copyright    = str_replace( '[site_title]', '<span class="knowx-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $copyright );
+		$copyright    = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $copyright );
+
+		return apply_filters( 'knowx_footer_copyright_text', $copyright );
 	}
 }
 

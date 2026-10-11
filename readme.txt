@@ -31,7 +31,7 @@ KnowX turns WordPress into a documentation site without a custom post type or a 
 3. Publish articles in those categories. Use the Order field in the editor to sort articles inside a section.
 4. Create a page with the template "Docs Home" and set it as your homepage under Settings > Reading.
 
-To see a finished site first, open the sample content in WordPress Playground (see blueprint.json in the theme repository) or run `wp eval-file wp-content/themes/knowx/playground/seed.php` on an empty test site.
+To see a finished site first, open the sample content in WordPress Playground (blueprint.json in the theme repository, github.com/vapvarun/knowx) or run playground/seed.php from the repository with `wp eval-file` on an empty test site.
 
 == Frequently Asked Questions ==
 

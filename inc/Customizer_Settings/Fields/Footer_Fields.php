@@ -24,13 +24,6 @@ defined( 'ABSPATH' ) || exit;
 					'element' => '.site-footer-wrapper',
 				),
 			),
-			'active_callback' => array(
-				array(
-					'setting'  => 'site_footer_bg',
-					'operator' => '==',
-					'value'    => '1',
-				),
-			),
 			'priority' => 10,
 		)
 	);

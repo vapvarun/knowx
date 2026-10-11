@@ -45,7 +45,7 @@ class Active_Callback {
 				if ( '' === $setting ) {
 					continue;
 				}
-				$actual = get_theme_mod( $setting );
+				$actual = function_exists( 'knowx_mod' ) ? knowx_mod( $setting ) : get_theme_mod( $setting );
 
 				switch ( $operator ) {
 					case '==':

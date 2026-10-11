@@ -9,6 +9,15 @@
  * @package knowx
  */
 
+$knowx_search_attrs = wp_json_encode(
+	array(
+		'label'       => __( 'Search', 'knowx' ),
+		'showLabel'   => false,
+		'placeholder' => __( 'Search the documentation', 'knowx' ),
+		'buttonText'  => __( 'Search', 'knowx' ),
+	)
+);
+
 ?>
 <!-- wp:group {"align":"full","className":"knowx-pattern-hero","layout":{"type":"constrained"}} -->
 <div class="wp-block-group alignfull knowx-pattern-hero"><!-- wp:heading {"textAlign":"center","level":2} -->
@@ -19,16 +28,7 @@
 <p class="has-text-align-center"><?php esc_html_e( 'Guides, references and answers for every product.', 'knowx' ); ?></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:search <?php
-echo wp_json_encode(
-	array(
-		'label'       => __( 'Search', 'knowx' ),
-		'showLabel'   => false,
-		'placeholder' => __( 'Search the documentation', 'knowx' ),
-		'buttonText'  => __( 'Search', 'knowx' ),
-	)
-);
-?> /--></div>
+<!-- wp:search <?php echo $knowx_search_attrs; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON encoded below. ?> /--></div>
 <!-- /wp:group -->
 
 <!-- wp:columns -->

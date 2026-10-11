@@ -7,8 +7,10 @@
 
 namespace KnowX\KnowX;
 
+$knowx_post = get_post();
+
 $taxonomies = wp_list_filter(
-	get_object_taxonomies( $post, 'objects' ),
+	get_object_taxonomies( $knowx_post, 'objects' ),
 	array(
 		'public' => true,
 	)
@@ -33,13 +35,13 @@ ob_start();
 		switch ( $taxo->name ) {
 			case 'post_tag':
 				$class = 'tag-links term-links';
-				$list  = get_the_tag_list( '', esc_html( $separator ), '', $post->ID );
+				$list  = get_the_tag_list( '', esc_html( $separator ), '', $knowx_post->ID );
 				/* translators: %s: list of taxonomy terms */
 				$placeholder_text = __( 'Tagged %s', 'knowx' );
 				break;
 			default:
 				$class            = str_replace( '_', '-', $taxo->name ) . '-links term-links';
-				$list             = get_the_term_list( $post->ID, $taxo->name, '', esc_html( $separator ), '' );
+				$list             = get_the_term_list( $knowx_post->ID, $taxo->name, '', esc_html( $separator ), '' );
 				$placeholder_text = sprintf(
 					/* translators: %s: taxonomy name */
 					__( '%s:', 'knowx' ),

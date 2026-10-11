@@ -39,13 +39,7 @@
 	<exclude-pattern>*/playground/*</exclude-pattern>
 	<exclude-pattern>*/assets/*</exclude-pattern>
 	<exclude-pattern>*/scripts/*</exclude-pattern>
-	<exclude-pattern>*/optional/dev/*</exclude-pattern>
 	<exclude-pattern>*/tests/phpunit/setup-wp-env.php</exclude-pattern>
-
-	<!-- Rewritten or deleted in later work groups; polished there, not twice (see plans/WORK_GROUPS.md). -->
-	<exclude-pattern>*/inc/Customizer_Settings/*</exclude-pattern> <!-- W08: settings are redesigned and cleaned there -->
-
-	<exclude-pattern>*/external/class-tgm-plugin-activation.php</exclude-pattern>
 
 	<!--
 	#############################################################################

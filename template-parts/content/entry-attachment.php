@@ -26,7 +26,7 @@ if ( is_singular( get_post_type() ) ) {
 		$attachment_navigation = '';
 
 		ob_start();
-		previous_image_link( false );
+		previous_image_link( 'thumbnail' );
 		$prev_link = ob_get_clean();
 		if ( ! empty( $prev_link ) ) {
 			$attachment_navigation .= '<div class="nav-previous">';
@@ -36,7 +36,7 @@ if ( is_singular( get_post_type() ) ) {
 		}
 
 		ob_start();
-		next_image_link( false );
+		next_image_link( 'thumbnail' );
 		$next_link = ob_get_clean();
 		if ( ! empty( $next_link ) ) {
 			$attachment_navigation .= '<div class="nav-next">';

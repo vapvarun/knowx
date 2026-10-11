@@ -18,6 +18,17 @@ use RuntimeException;
  *
  * Its instance can be accessed through `knowx()`. For example, if there is a template tag called `posted_on`, it can
  * be accessed via `knowx()->posted_on()`.
+ *
+ * Tags are provided by the components (see each `template_tags()`), so the editor and PHPStan cannot see them:
+ *
+ * @method void   print_styles( string ...$handles )
+ * @method void   the_comments( array $args = array() )
+ * @method void   color_mode_toggle()
+ * @method bool   is_left_sidebar_active()
+ * @method bool   is_right_sidebar_active()
+ * @method void   display_left_sidebar()
+ * @method void   display_right_sidebar()
+ * @method void   display_primary_nav_menu( array $args = array() )
  */
 class Template_Tags {
 

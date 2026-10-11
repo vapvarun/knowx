@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'        => 'background_setting',
 			'label'           => esc_html__( 'Footer Background', 'knowx' ),
-			'description' => esc_html__( 'Colour or image behind the footer widgets.', 'knowx' ),
+			'description'     => esc_html__( 'Colour or image behind the footer widgets.', 'knowx' ),
 			'section'         => 'site_footer_section',
 			'default'         => array(),
 			'transport'       => 'auto',
@@ -24,19 +24,19 @@ defined( 'ABSPATH' ) || exit;
 					'element' => '.site-footer-wrapper',
 				),
 			),
-			'priority' => 10,
+			'priority'        => 10,
 		)
 	);
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'color',
 		array(
-			'settings' => 'site_footer_content_color',
-			'label'    => esc_html__( 'Footer Text', 'knowx' ),
+			'settings'    => 'site_footer_content_color',
+			'label'       => esc_html__( 'Footer Text', 'knowx' ),
 			'description' => esc_html__( 'Text in the footer.', 'knowx' ),
-			'section'  => 'site_skin_section',
-			'default'  => '#505050',
-			'priority' => 30,
+			'section'     => 'site_skin_section',
+			'default'     => '#505050',
+			'priority'    => 30,
 		)
 	);
 
@@ -58,23 +58,23 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'color',
 		array(
-			'settings' => 'site_copyright_background_color',
-			'label'    => esc_html__( 'Copyright Background', 'knowx' ),
+			'settings'    => 'site_copyright_background_color',
+			'label'       => esc_html__( 'Copyright Background', 'knowx' ),
 			'description' => esc_html__( 'The line at the very bottom of the page.', 'knowx' ),
-			'section'  => 'site_skin_section',
-			'default'  => '#ffffff',
-			'priority' => 31,
+			'section'     => 'site_skin_section',
+			'default'     => '#ffffff',
+			'priority'    => 31,
 		)
 	);
 
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'color',
 		array(
-			'settings' => 'site_copyright_content_color',
-			'label'    => esc_html__( 'Copyright Text', 'knowx' ),
+			'settings'    => 'site_copyright_content_color',
+			'label'       => esc_html__( 'Copyright Text', 'knowx' ),
 			'description' => esc_html__( 'Text in that line.', 'knowx' ),
-			'section'  => 'site_skin_section',
-			'default'  => '#505050',
-			'priority' => 32,
+			'section'     => 'site_skin_section',
+			'default'     => '#505050',
+			'priority'    => 32,
 		)
 	);

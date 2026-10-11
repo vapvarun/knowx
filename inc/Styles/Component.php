@@ -46,7 +46,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @var array
 	 */
-	protected $css_files;
+	protected ?array $css_files = null;
 
 	/**
 	 * Gets the unique identifier for the theme component.
@@ -240,7 +240,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return array Associative array of $handle => $data pairs.
 	 */
 	protected function get_css_files(): array {
-		if ( is_array( $this->css_files ) ) {
+		if ( null !== $this->css_files ) {
 			return $this->css_files;
 		}
 

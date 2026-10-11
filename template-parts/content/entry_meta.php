@@ -44,7 +44,7 @@ if ( 'post' === $post_type_obj->name || $post_type_obj->has_archive ) {
 // Show author only if the post type supports it.
 if ( post_type_supports( $post_type_obj->name, 'author' ) && '' !== get_the_author() ) {
 	// Get author ID once.
-	$author_id = $current_post->post_author;
+	$author_id = (int) $current_post->post_author;
 
 	// Get author link once.
 	$author_url  = get_author_posts_url( $author_id );
@@ -74,7 +74,7 @@ if ( ! empty( $current_post->post_parent ) && 'attachment' === get_post_type() )
 		?>
 		<span class="posted-by">
 			<?php
-			echo get_avatar( get_the_author_meta( 'user_email' ), '26' );
+			echo get_avatar( get_the_author_meta( 'user_email' ), 26 );
 			/* translators: %s: post author */
 			$author_byline = _x( 'By %s', 'post author', 'knowx' );
 			if ( ! empty( $time_string ) ) {

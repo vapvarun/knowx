@@ -23,7 +23,7 @@ if ( '' === trim( wp_strip_all_tags( $knowx_copyright ) ) && '' === $knowx_priva
 				array(
 					'theme_location' => 'footer',
 					'menu_class'     => 'footer-menu',
-					'container'      => false,
+					'container'      => '',
 					'depth'          => 1,
 				)
 			);

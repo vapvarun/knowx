@@ -170,4 +170,48 @@ class Docs_Tests extends Integration_Test_Case {
 
 		$this->assertSame( $before, $count_rows() );
 	}
+
+	/**
+	 * An article gets TechArticle and BreadcrumbList data, and two Details blocks make an FAQPage.
+	 */
+	public function test_schema_graph_has_article_breadcrumbs_and_faq() {
+		// An editor who may save unfiltered HTML, so the Details blocks are kept.
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+		$category = self::factory()->category->create( array( 'name' => 'Schema product' ) );
+		$content  = '<!-- wp:details --><details class="wp-block-details"><summary>One?</summary><!-- wp:paragraph --><p>Yes.</p><!-- /wp:paragraph --></details><!-- /wp:details -->'
+			. '<!-- wp:details --><details class="wp-block-details"><summary>Two?</summary><!-- wp:paragraph --><p>Also yes.</p><!-- /wp:paragraph --></details><!-- /wp:details -->';
+		$post_id  = self::factory()->post->create(
+			array(
+				'post_title'    => 'Schema article',
+				'post_content'  => $content,
+				'post_category' => array( $category ),
+			)
+		);
+		$this->go_to( get_permalink( $post_id ) );
+
+		$types = wp_list_pluck( knowx_schema_graph(), '@type' );
+
+		$this->assertContains( 'TechArticle', $types );
+		$this->assertContains( 'BreadcrumbList', $types );
+		$this->assertContains( 'FAQPage', $types );
+	}
+
+	/**
+	 * The category fields are saved for a user who can edit the term and ignored for one who cannot.
+	 */
+	public function test_category_fields_need_the_edit_capability() {
+		$term_id = self::factory()->category->create();
+		$docs    = new \KnowX\KnowX\Docs\Component();
+
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'subscriber' ) ) );
+		$_POST['knowx_order'] = '5';
+		$docs->save_term_fields( $term_id );
+		$this->assertSame( '', (string) get_term_meta( $term_id, 'knowx_order', true ) );
+
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+		$docs->save_term_fields( $term_id );
+		$this->assertSame( '5', (string) get_term_meta( $term_id, 'knowx_order', true ) );
+
+		unset( $_POST['knowx_order'] );
+	}
 }

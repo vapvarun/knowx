@@ -7,10 +7,11 @@
 
 namespace KnowX\KnowX\Customizer_Settings;
 
+use KnowX\KnowX\Component_Interface;
+
 use function add_action;
 use function add_filter;
 use function get_template_directory_uri;
-use KnowX\KnowX\Component_Interface;
 
 /**
  * Class for registering the Customizer sections and fields.
@@ -47,6 +48,9 @@ class Component implements Component_Interface {
 
 	/**
 	 * Site width body class.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array Body classes.
 	 */
 	public function site_width_body_classes( array $classes ): array {
 		$classes[] = 'layout-' . knowx_mod( 'site_layout' );
@@ -56,6 +60,9 @@ class Component implements Component_Interface {
 
 	/**
 	 * Site sticky sidebar body class.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array Body classes.
 	 */
 	public function site_sticky_sidebar_body_classes( array $classes ): array {
 
@@ -69,6 +76,9 @@ class Component implements Component_Interface {
 
 	/**
 	 * Site sticky header body class.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array Body classes.
 	 */
 	public function site_sticky_header_classes( array $classes ): array {
 		$sticky_header = knowx_mod( 'site_sticky_header' );
@@ -193,7 +203,6 @@ class Component implements Component_Interface {
 				'description' => '',
 			)
 		);
-
 	}
 
 	/**

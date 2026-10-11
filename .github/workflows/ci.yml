@@ -44,7 +44,7 @@ jobs:
       - name: WordPress coding standards (repo config, 0 errors and 0 warnings)
         run: vendor/bin/phpcs --standard=phpcs.xml.dist
       - name: PHPStan level 5
-        run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=2G
       - name: Unit tests
         run: vendor/bin/phpunit
 

@@ -656,7 +656,13 @@ pre.wp-block-code {
 	margin: 1.5em 0;
 	border: 1px solid var(--global-border-color);
 	border-radius: var(--global-border-radius);
+	background-color: var(--color-surface);
 	overflow: hidden;
+}
+
+/* Stacked questions keep one even gap. */
+.wp-block-details + .wp-block-details {
+	margin-block-start: 0.75rem;
 }
 
 .wp-block-details summary {
@@ -709,6 +715,15 @@ pre.wp-block-code {
 
 .wp-block-details > *:not(summary):first-of-type {
 	margin-top: 1em;
+}
+
+.wp-block-details > *:not(summary):last-child {
+	margin-bottom: 1.25em;
+}
+
+.wp-block-details summary:focus-visible {
+	outline: 2px solid var(--color-link);
+	outline-offset: -2px;
 }
 
 /*--------------------------------------------------------------

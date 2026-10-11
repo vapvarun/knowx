@@ -21,8 +21,6 @@ if ( knowx_current_product() ) {
 	return;
 }
 
-$default_sidebar = knowx_mod( 'sidebar_option' );
-
 
 ?>
 
@@ -31,13 +29,7 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 	
 	<?php do_action( 'knowx_before_content' ); ?>
 
-	<?php if ( 'left' === $default_sidebar || 'both' === $default_sidebar ) : ?>
-		<aside id="secondary-left" class="left-sidebar widget-area" aria-label="<?php esc_attr_e( 'Left sidebar', 'knowx' ); ?>">
-			<div class="sticky-sidebar">
-				<?php knowx()->display_left_sidebar(); ?>
-			</div>
-		</aside>
-	<?php endif; ?>
+	<?php get_template_part( 'template-parts/layout/sidebar', 'left' ); ?>
 	
 	<main id="primary" class="site-main">
 		
@@ -45,30 +37,10 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 		if ( have_posts() ) {
 			get_template_part( 'template-parts/content/page_header' );
 
-			$classes = get_body_class();
-			if ( in_array( 'blog', $classes, true ) || in_array( 'archive', $classes, true ) || in_array( 'search', $classes, true ) ) {
-				?>
-			<div class="post-layout row default-layout">
-				<?php
-				while ( have_posts() ) {
+			while ( have_posts() ) {
+				the_post();
 
-					the_post();
-
-					get_template_part( 'template-parts/content/entry', 'layout' );
-				}
-				?>
-				</div>
-				<?php
-			} else {
-				while ( have_posts() ) {
-					the_post();
-
-					get_template_part( 'template-parts/content/entry', get_post_type() );
-				}
-			}
-
-			if ( ! is_singular() ) {
-				get_template_part( 'template-parts/content/pagination' );
+				get_template_part( 'template-parts/content/entry', get_post_type() );
 			}
 		} else {
 			get_template_part( 'template-parts/content/error' );
@@ -76,13 +48,7 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 		?>
 
 	</main><!-- #primary -->
-	<?php if ( 'right' === $default_sidebar || 'both' === $default_sidebar ) : ?>
-		<aside id="secondary" class="primary-sidebar widget-area" aria-label="<?php esc_attr_e( 'Sidebar', 'knowx' ); ?>">
-			<div class="sticky-sidebar">
-				<?php knowx()->display_right_sidebar(); ?>
-			</div>
-		</aside>
-	<?php endif; ?>
+	<?php get_template_part( 'template-parts/layout/sidebar', 'right' ); ?>
 
 	<?php do_action( 'knowx_after_content' ); ?>
 

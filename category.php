@@ -45,7 +45,7 @@ $knowx_updated = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ? knowx_te
 					<span aria-hidden="true">&middot;</span>
 					<?php echo esc_html( knowx_article_count_label( $knowx_product['count'] ) ); ?>
 				</p>
-				<?php $knowx_start = '' !== $knowx_product['start'] ? $knowx_product['start'] : ( $knowx_first ? $knowx_first[0]['url'] : '' ); ?>
+				<?php $knowx_start = knowx_start_url( $knowx_product, $knowx_first ); ?>
 				<?php if ( '' !== $knowx_start ) : ?>
 					<a class="knowx-start" href="<?php echo esc_url( $knowx_start ); ?>"><?php esc_html_e( 'Start here', 'knowx' ); ?></a>
 				<?php endif; ?>

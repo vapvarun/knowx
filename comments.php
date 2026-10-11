@@ -31,7 +31,7 @@ knowx()->print_styles( 'knowx-comments' );
 		?>
 		<h2 class="comments-title">
 			<?php
-			$comment_count = get_comments_number();
+			$comment_count = (int) get_comments_number();
 			if ( 1 === $comment_count ) {
 				printf(
 					/* translators: 1: title. */
@@ -62,6 +62,12 @@ knowx()->print_styles( 'knowx-comments' );
 		}
 	}
 
-	comment_form();
+	comment_form(
+		array(
+			// An h2, so the heading levels never skip when a post has no comments yet.
+			'title_reply_before' => '<h2 id="reply-title" class="comment-reply-title">',
+			'title_reply_after'  => '</h2>',
+		)
+	);
 	?>
 </div><!-- #comments -->

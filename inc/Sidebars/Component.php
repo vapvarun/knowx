@@ -154,6 +154,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			return $classes;
 		}
 
+		// Docs pages (product, section, search, archives and product articles) have no sidebar.
+		if ( is_search() || is_archive() || is_404() || ( is_singular( 'post' ) && knowx_current_product() ) || is_page_template( array( 'page-faq.php', 'page-changelog.php', 'full-width.php', 'full-width-container.php', 'page-knowledgebase-one.php', 'page-knowledgebase-two.php' ) ) ) {
+			return $classes;
+		}
+
 		$default_sidebar = knowx_mod( 'sidebar_option' );
 
 		if ( 'left' === $default_sidebar && $this->is_left_sidebar_active() ) {

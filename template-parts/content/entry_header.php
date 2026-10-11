@@ -16,8 +16,10 @@ namespace KnowX\KnowX;
 	}
 	?>
 
-	<div class="post-categories"><?php the_category( ' ' ); ?></div>
-	
+	<?php if ( has_post_thumbnail() && ! is_search() ) : ?>
+		<div class="post-categories"><?php the_category( ' ' ); ?></div>
+	<?php endif; ?>
+
 	<?php
 	if ( ! is_singular() ) {
 		get_template_part( 'template-parts/content/entry_title', get_post_type() );

@@ -15,19 +15,19 @@
 <!-- /wp:heading -->
 
 <!-- wp:details -->
-<details class="wp-block-details"><summary><?php esc_html_e( 'How do I get started?', 'knowx' ); ?></summary><!-- wp:paragraph {"placeholder":"Write the answer"} -->
+<details class="wp-block-details"><summary><?php esc_html_e( 'How do I get started?', 'knowx' ); ?></summary><!-- wp:paragraph <?php echo wp_json_encode( array( 'placeholder' => __( 'Write the answer', 'knowx' ) ) ); ?> -->
 <p><?php esc_html_e( 'Start with the getting started guide, then follow the setup steps for your product.', 'knowx' ); ?></p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 
 <!-- wp:details -->
-<details class="wp-block-details"><summary><?php esc_html_e( 'Where can I get help?', 'knowx' ); ?></summary><!-- wp:paragraph {"placeholder":"Write the answer"} -->
+<details class="wp-block-details"><summary><?php esc_html_e( 'Where can I get help?', 'knowx' ); ?></summary><!-- wp:paragraph <?php echo wp_json_encode( array( 'placeholder' => __( 'Write the answer', 'knowx' ) ) ); ?> -->
 <p><?php esc_html_e( 'Search the documentation, or contact support from the link at the bottom of any page.', 'knowx' ); ?></p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 
 <!-- wp:details -->
-<details class="wp-block-details"><summary><?php esc_html_e( 'Which versions are supported?', 'knowx' ); ?></summary><!-- wp:paragraph {"placeholder":"Write the answer"} -->
+<details class="wp-block-details"><summary><?php esc_html_e( 'Which versions are supported?', 'knowx' ); ?></summary><!-- wp:paragraph <?php echo wp_json_encode( array( 'placeholder' => __( 'Write the answer', 'knowx' ) ) ); ?> -->
 <p><?php esc_html_e( 'The latest release and the one before it. Each article shows the version it applies to.', 'knowx' ); ?></p>
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->

@@ -629,12 +629,34 @@ function knowx_schema_graph() {
 		}
 	}
 
+	// An SEO plugin prints the site, breadcrumb and article schema; only the FAQ, which it cannot build from Details blocks, stays.
+	if ( knowx_seo_plugin_active() ) {
+		$graph = array_values(
+			array_filter(
+				$graph,
+				static function ( $node ) {
+					return 'FAQPage' === ( $node['@type'] ?? '' );
+				}
+			)
+		);
+	}
+
 	/**
 	 * Filters the schema.org graph printed in the page head. Return an empty array to print nothing.
 	 *
 	 * @param array[] $graph Graph nodes.
 	 */
 	return (array) apply_filters( 'knowx_schema_graph', $graph );
+}
+
+/**
+ * Whether an SEO plugin (Yoast, Rank Math, All in One SEO, SEOPress, The SEO Framework) prints the
+ * meta description and the site, breadcrumb and article schema itself.
+ *
+ * @return bool True when one is active.
+ */
+function knowx_seo_plugin_active() {
+	return defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' );
 }
 
 /**
@@ -646,7 +668,7 @@ function knowx_schema_graph() {
  * @return string Plain text of at most 160 characters.
  */
 function knowx_meta_description() {
-	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' ) ) {
+	if ( knowx_seo_plugin_active() ) {
 		return '';
 	}
 
@@ -701,5 +723,109 @@ function knowx_term_updated( $term_id ) {
 				'iso'  => get_the_modified_date( 'c', $latest[0] ),
 			) : null;
 		}
+	);
+}
+
+/**
+ * Product and section names above an article card, for lists that mix products (search, tag, date, author).
+ *
+ * @return string[] Category names from the product down to the section; empty on other pages.
+ */
+function knowx_entry_trail() {
+	if ( ! ( is_search() || is_tag() || is_date() || is_author() ) ) {
+		return array();
+	}
+
+	$cats = get_the_category();
+	if ( ! $cats ) {
+		return array();
+	}
+
+	$trail = array();
+	$ids   = array_reverse( get_ancestors( $cats[0]->term_id, 'category', 'taxonomy' ) );
+	foreach ( array_merge( $ids, array( $cats[0]->term_id ) ) as $id ) {
+		$trail[] = get_cat_name( $id );
+	}
+
+	return $trail;
+}
+
+/**
+ * Previous, next and related articles for the current article.
+ *
+ * @param array[] $flat Articles of the product in reading order (knowx_tree_flat()).
+ * @param array   $tree Product tree (knowx_product_tree()).
+ * @return array Keys `prev` and `next` (item or null) and `related` (up to five items of the same section).
+ */
+function knowx_article_neighbours( $flat, $tree ) {
+	$current = get_queried_object_id();
+	$index   = array_search( $current, wp_list_pluck( $flat, 'id' ), true );
+	$related = array();
+
+	foreach ( array_merge( array( $tree['root'] ), $tree['nodes'] ) as $node ) {
+		if ( in_array( $current, wp_list_pluck( $node['posts'], 'id' ), true ) ) {
+			$related = array_slice(
+				array_filter(
+					$node['posts'],
+					static function ( $item ) use ( $current ) {
+						return $current !== $item['id'];
+					}
+				),
+				0,
+				5
+			);
+			break;
+		}
+	}
+
+	return array(
+		'prev'    => false !== $index && $index > 0 ? $flat[ $index - 1 ] : null,
+		'next'    => false !== $index && isset( $flat[ $index + 1 ] ) ? $flat[ $index + 1 ] : null,
+		'related' => $related,
+	);
+}
+
+/**
+ * Where "Start here" points on a product page: the owner's link, else the first article.
+ *
+ * @param array   $product Product item (knowx_products()).
+ * @param array[] $flat    Articles of the product in reading order.
+ * @return string URL or an empty string.
+ */
+function knowx_start_url( $product, $flat ) {
+	if ( '' !== $product['start'] ) {
+		return $product['start'];
+	}
+
+	return $flat ? $flat[0]['url'] : '';
+}
+
+/**
+ * Everything the Docs Home template needs from the Customizer, in one call.
+ *
+ * @return array Hero and support texts, the support button, the product list, featured and recent
+ *               articles, the column class, the updated-date switch and the single-product tree.
+ */
+function knowx_home_view() {
+	$products = knowx_products();
+	$count    = 5;
+	$featured = knowx_kb_featured_posts( $count );
+	$recent   = knowx_is_truthy( knowx_mod( 'knowx_show_recent' ) ) ? knowx_kb_recent_posts( $count ) : array();
+
+	return array(
+		'hero_title'          => knowx_mod( 'hero_section_heading' ),
+		'hero_content'        => knowx_mod( 'hero_section_content' ),
+		'support_title'       => knowx_mod( 'support_section_heading' ),
+		'support_content'     => knowx_mod( 'support_section_content' ),
+		'support_button_text' => knowx_mod( 'support_section_button_text' ),
+		'support_button_link' => knowx_mod( 'support_section_button_link_url' ),
+		'hero_image'          => get_the_post_thumbnail_url( get_queried_object_id(), 'full' ),
+		'products'            => $products,
+		'home_count'          => $count,
+		'featured'            => $featured,
+		'recent'              => $recent,
+		'column'              => ( empty( $featured ) || empty( $recent ) ) ? 'col-md-12' : 'col-md-6',
+		'show_date'           => knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ),
+		'single'              => 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] ) : null,
 	);
 }

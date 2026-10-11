@@ -200,20 +200,20 @@
 	color: var(--color-muted);
 }
 
-.knowx-search-results {
+.knowx-search-dialog-results {
 	margin: 0.25rem 0 0;
 	padding: 0;
 	list-style: none;
 }
 
-.knowx-search-results a {
+.knowx-search-dialog-results a {
 	display: block;
 	padding: 0.65rem 0.5rem;
 	border-radius: var(--global-border-radius);
 	color: var(--color-heading);
 }
 
-.knowx-search-results a:hover,
-.knowx-search-results a:focus-visible {
+.knowx-search-dialog-results a:hover,
+.knowx-search-dialog-results a:focus-visible {
 	background: var(--color-surface-alt);
 }

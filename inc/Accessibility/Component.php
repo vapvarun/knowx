@@ -8,15 +8,12 @@
 namespace KnowX\KnowX\Accessibility;
 
 use KnowX\KnowX\Component_Interface;
-use WP_Post;
 
 use function KnowX\KnowX\knowx;
 use function add_action;
-use function add_filter;
 use function wp_enqueue_script;
 use function get_theme_file_uri;
 use function get_theme_file_path;
-use function wp_script_add_data;
 use function wp_localize_script;
 
 /**

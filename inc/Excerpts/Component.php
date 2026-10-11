@@ -8,7 +8,6 @@
 namespace KnowX\KnowX\Excerpts;
 
 use KnowX\KnowX\Component_Interface;
-use function KnowX\KnowX\knowx;
 use function add_filter;
 
 /**

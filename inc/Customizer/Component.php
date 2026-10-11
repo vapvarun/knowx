@@ -13,10 +13,7 @@ use WP_Customize_Manager;
 use function KnowX\KnowX\knowx;
 use function add_action;
 use function bloginfo;
-use function wp_add_inline_style;
-use function wp_enqueue_style;
 use function wp_enqueue_script;
-use function wp_script_is;
 use function get_theme_file_uri;
 use function get_theme_file_path;
 

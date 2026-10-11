@@ -11,9 +11,7 @@ use KnowX\KnowX\Component_Interface;
 
 use function add_action;
 use function add_filter;
-use function get_template_directory;
 use function is_customize_preview;
-use function wp_json_file_decode;
 
 /**
  * Prints the few colour variables the Customizer can change.

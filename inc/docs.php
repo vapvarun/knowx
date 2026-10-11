@@ -696,7 +696,7 @@ function knowx_meta_description() {
  * The newest last-modified date among the articles of a product or section, children included.
  *
  * @param int $term_id Category id.
- * @return array|null Items `date` (display) and `iso`, or null when the category has no articles.
+ * @return array Items `date` (display) and `iso`, or an empty array when the category has no articles.
  */
 function knowx_term_updated( $term_id ) {
 	$term_id = (int) $term_id;

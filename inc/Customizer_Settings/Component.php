@@ -13,7 +13,7 @@ use function get_template_directory_uri;
 use KnowX\KnowX\Component_Interface;
 
 /**
- * Class for adding custom background support.
+ * Class for registering the Customizer sections and fields.
  */
 class Component implements Component_Interface {
 
@@ -103,7 +103,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Loader.
 		// Site Scroll Top.
 		// Typography.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
@@ -125,7 +124,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Sub Header.
 		// Site Skin.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_skin_section',
@@ -136,7 +134,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Blog Layout.
 		// Site Sidebar Layout.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_sidebar_layout',
@@ -197,7 +194,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Copyright.
 	}
 
 	/**

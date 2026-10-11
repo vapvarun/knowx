@@ -16,14 +16,12 @@ use function add_action;
 use function add_filter;
 use function register_nav_menus;
 use function esc_html__;
-use function has_nav_menu;
 use function wp_nav_menu;
 
 /**
  * Class for managing navigation menus.
  *
  * Exposes template tags:
- * * `knowx()->is_primary_nav_menu_active()`
  * * `knowx()->display_primary_nav_menu( array $args = [] )`
  */
 class Component implements Component_Interface, Templating_Component_Interface {
@@ -51,12 +49,11 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *               a callable or an array with key 'callback'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags(): array {
 		return array(
-			'is_primary_nav_menu_active' => array( $this, 'is_primary_nav_menu_active' ),
 			'display_primary_nav_menu'   => array( $this, 'display_primary_nav_menu' ),
 		);
 	}
@@ -81,12 +78,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * Javascript converts the symbol to a toggle button.
 	 *
-	 * @TODO:
-	 * - This doesn't work for the page menu because it
-	 *   doesn't have a similar filter. So the dropdown symbol
-	 *   is only being added for page menus if JS is enabled.
-	 *   Create a ticket to add to core?
-	 *
 	 * @param string  $item_output The menu item's starting HTML output.
 	 * @param WP_Post $item        Menu item data object.
 	 * @param int     $depth       Depth of menu item. Used for padding.
@@ -106,15 +97,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 		}
 
 		return $item_output;
-	}
-
-	/**
-	 * Checks whether the primary navigation menu is active.
-	 *
-	 * @return bool True if the primary navigation menu is active, false otherwise.
-	 */
-	public function is_primary_nav_menu_active(): bool {
-		return (bool) has_nav_menu( static::PRIMARY_NAV_MENU_SLUG );
 	}
 
 	/**

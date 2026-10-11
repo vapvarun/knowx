@@ -158,17 +158,17 @@ function knowx_the_breadcrumb() {
  *
  * @deprecated 2.0.0 Use knowx_the_breadcrumb() to print the trail.
  *
- * @param bool $print Print the trail (default) or return its markup.
- * @return string|void The markup when `$print` is false.
+ * @param bool $display Print the trail (default) or return its markup.
+ * @return string|void The markup when `$display` is false.
  */
-function knowx_get_breadcrumb( $print = true ) {
+function knowx_get_breadcrumb( $display = true ) {
 	_deprecated_function( __FUNCTION__, '2.0.0', 'knowx_the_breadcrumb' );
 
 	ob_start();
 	knowx_the_breadcrumb();
 	$html = (string) ob_get_clean();
 
-	if ( ! $print ) {
+	if ( ! $display ) {
 		return $html;
 	}
 

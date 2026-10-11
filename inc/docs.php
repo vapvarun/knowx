@@ -434,34 +434,36 @@ function knowx_add_heading_anchors( $content ) {
 
 	$content = (string) preg_replace_callback(
 		'#<h([23])([^>]*)>(.*?)</h\1>#is',
-		static function ( $match ) use ( &$items, &$used ) {
-			$text = trim( wp_strip_all_tags( $match[3] ) );
+		static function ( $heading ) use ( &$items, &$used ) {
+			$text = trim( wp_strip_all_tags( $heading[3] ) );
 			if ( '' === $text ) {
-				return $match[0];
+				return $heading[0];
 			}
 
-			if ( preg_match( '/\sid=(["\'])(.*?)\1/', $match[2], $existing ) ) {
+			if ( preg_match( '/\sid=(["\'])(.*?)\1/', $heading[2], $existing ) ) {
 				$id    = $existing[2];
-				$attrs = $match[2];
+				$attrs = $heading[2];
 			} else {
 				$base = sanitize_title( $text );
 				$id   = '' !== $base ? $base : 'section';
-				for ( $n = 2; in_array( $id, $used, true ); $n++ ) {
+				$n    = 2;
+				while ( in_array( $id, $used, true ) ) {
 					$id = $base . '-' . $n;
+					++$n;
 				}
-				$attrs = $match[2] . ' id="' . esc_attr( $id ) . '"';
+				$attrs = $heading[2] . ' id="' . esc_attr( $id ) . '"';
 			}
 			$used[]  = $id;
 			$items[] = array(
 				'id'    => $id,
 				'text'  => $text,
-				'level' => (int) $match[1],
+				'level' => (int) $heading[1],
 			);
 
 			/* translators: %s: section heading. */
 			$label = sprintf( __( 'Link to section: %s', 'knowx' ), $text );
 
-			return sprintf( '<h%1$s%2$s>%3$s <a class="knowx-anchor" href="#%4$s" aria-label="%5$s"></a></h%1$s>', $match[1], $attrs, $match[3], esc_attr( $id ), esc_attr( $label ) );
+			return sprintf( '<h%1$s%2$s>%3$s <a class="knowx-anchor" href="#%4$s" aria-label="%5$s"></a></h%1$s>', $heading[1], $attrs, $heading[3], esc_attr( $id ), esc_attr( $label ) );
 		},
 		$content
 	);
@@ -589,6 +591,25 @@ function knowx_schema_graph() {
 			if ( $product ) {
 				$article['articleSection'] = $product['name'];
 			}
+
+			// Search engines recommend a publisher and an image for an article.
+			$logo = knowx_schema_logo_url();
+			$img  = get_the_post_thumbnail_url( $post_id, 'full' );
+			$img  = $img ? $img : $logo;
+			if ( $img ) {
+				$article['image'] = $img;
+			}
+			$article['publisher'] = array(
+				'@type' => 'Organization',
+				'name'  => get_bloginfo( 'name' ),
+				'url'   => home_url( '/' ),
+			);
+			if ( $logo ) {
+				$article['publisher']['logo'] = array(
+					'@type' => 'ImageObject',
+					'url'   => $logo,
+				);
+			}
 			$graph[] = $article;
 		}
 
@@ -609,7 +630,8 @@ function knowx_schema_graph() {
 			);
 		}
 
-		$faq = knowx_faq_from_blocks( parse_blocks( (string) get_post_field( 'post_content', $post_id ) ) );
+		$faq_allowed = knowx_is_truthy( knowx_mod( 'knowx_faq_schema' ) ) && 'off' !== get_post_meta( $post_id, 'knowx_faq_schema', true );
+		$faq         = $faq_allowed ? knowx_faq_from_blocks( parse_blocks( (string) get_post_field( 'post_content', $post_id ) ) ) : array();
 		if ( count( $faq ) >= 2 ) {
 			$entities = array();
 			foreach ( $faq as $pair ) {
@@ -629,12 +651,46 @@ function knowx_schema_graph() {
 		}
 	}
 
+	// An SEO plugin prints the site, breadcrumb and article schema; only the FAQ, which it cannot build from Details blocks, stays.
+	if ( knowx_seo_plugin_active() ) {
+		$graph = array_values(
+			array_filter(
+				$graph,
+				static function ( $node ) {
+					return 'FAQPage' === $node['@type'];
+				}
+			)
+		);
+	}
+
 	/**
 	 * Filters the schema.org graph printed in the page head. Return an empty array to print nothing.
 	 *
 	 * @param array[] $graph Graph nodes.
 	 */
 	return (array) apply_filters( 'knowx_schema_graph', $graph );
+}
+
+/**
+ * The site logo, or the site icon, as an absolute URL for structured data.
+ *
+ * @return string URL or an empty string.
+ */
+function knowx_schema_logo_url() {
+	$logo_id = (int) get_theme_mod( 'custom_logo' );
+	$logo    = $logo_id ? wp_get_attachment_image_url( $logo_id, 'full' ) : '';
+
+	return $logo ? $logo : (string) get_site_icon_url( 512 );
+}
+
+/**
+ * Whether an SEO plugin (Yoast, Rank Math, All in One SEO, SEOPress, The SEO Framework) prints the
+ * meta description and the site, breadcrumb and article schema itself.
+ *
+ * @return bool True when one is active.
+ */
+function knowx_seo_plugin_active() {
+	return defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' );
 }
 
 /**
@@ -646,7 +702,7 @@ function knowx_schema_graph() {
  * @return string Plain text of at most 160 characters.
  */
 function knowx_meta_description() {
-	if ( defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' ) || defined( 'THE_SEO_FRAMEWORK_VERSION' ) ) {
+	if ( knowx_seo_plugin_active() ) {
 		return '';
 	}
 
@@ -674,7 +730,7 @@ function knowx_meta_description() {
  * The newest last-modified date among the articles of a product or section, children included.
  *
  * @param int $term_id Category id.
- * @return array|null Items `date` (display) and `iso`, or null when the category has no articles.
+ * @return array Items `date` (display) and `iso`, or an empty array when the category has no articles.
  */
 function knowx_term_updated( $term_id ) {
 	$term_id = (int) $term_id;
@@ -701,5 +757,125 @@ function knowx_term_updated( $term_id ) {
 				'iso'  => get_the_modified_date( 'c', $latest[0] ),
 			) : null;
 		}
+	);
+}
+
+/**
+ * Product and section names above an article card, for lists that mix products (search, tag, date, author).
+ *
+ * @return string[] Category names from the product down to the section; empty on other pages.
+ */
+function knowx_entry_trail() {
+	if ( ! ( is_search() || is_tag() || is_date() || is_author() ) ) {
+		return array();
+	}
+
+	$cats = get_the_category();
+	if ( ! $cats ) {
+		return array();
+	}
+
+	$trail = array();
+	$ids   = array_reverse( get_ancestors( $cats[0]->term_id, 'category', 'taxonomy' ) );
+	foreach ( array_merge( $ids, array( $cats[0]->term_id ) ) as $id ) {
+		$trail[] = get_cat_name( $id );
+	}
+
+	return $trail;
+}
+
+/**
+ * Previous, next and related articles for the current article.
+ *
+ * @param array[] $flat Articles of the product in reading order (knowx_tree_flat()).
+ * @param array   $tree Product tree (knowx_product_tree()).
+ * @return array Keys `prev` and `next` (item or null) and `related` (up to five items of the same section).
+ */
+function knowx_article_neighbours( $flat, $tree ) {
+	$current = get_queried_object_id();
+	$index   = array_search( $current, wp_list_pluck( $flat, 'id' ), true );
+	$related = array();
+
+	foreach ( array_merge( array( $tree['root'] ), $tree['nodes'] ) as $node ) {
+		if ( in_array( $current, wp_list_pluck( $node['posts'], 'id' ), true ) ) {
+			$related = array_slice(
+				array_filter(
+					$node['posts'],
+					static function ( $item ) use ( $current ) {
+						return $current !== $item['id'];
+					}
+				),
+				0,
+				5
+			);
+			break;
+		}
+	}
+
+	return array(
+		'prev'    => false !== $index && $index > 0 ? $flat[ $index - 1 ] : null,
+		'next'    => false !== $index && isset( $flat[ $index + 1 ] ) ? $flat[ $index + 1 ] : null,
+		'related' => $related,
+	);
+}
+
+/**
+ * Where "Start here" points on a product page: the owner's link, else the first article.
+ *
+ * @param array   $product Product item (knowx_products()).
+ * @param array[] $flat    Articles of the product in reading order.
+ * @return string URL or an empty string.
+ */
+function knowx_start_url( $product, $flat ) {
+	if ( '' !== $product['start'] ) {
+		return $product['start'];
+	}
+
+	return $flat ? $flat[0]['url'] : '';
+}
+
+/**
+ * Everything the Docs Home template needs from the Customizer, in one call.
+ *
+ * @return array Hero and support texts, the support button, the product list, featured and recent
+ *               articles, the column class, the updated-date switch and the single-product tree.
+ */
+function knowx_home_view() {
+	$products = knowx_products();
+	$count    = 5;
+	$featured = knowx_kb_featured_posts( $count );
+	$recent   = knowx_is_truthy( knowx_mod( 'knowx_show_recent' ) ) ? knowx_kb_recent_posts( $count ) : array();
+
+	// Two lists sit side by side only when both are worth a column, and then they are the same length.
+	// Otherwise they stack, so there is never a half-empty column.
+	$side_by_side = count( $featured ) >= 3 && count( $recent ) >= 3;
+	if ( $side_by_side ) {
+		$length   = min( count( $featured ), count( $recent ) );
+		$featured = array_slice( $featured, 0, $length );
+		$recent   = array_slice( $recent, 0, $length );
+	}
+
+	// The support block needs somewhere to send the reader, or text the owner wrote.
+	$support_link = (string) knowx_mod( 'support_section_button_link_url' );
+	$support_text = (string) knowx_mod( 'support_section_button_text' );
+	$show_support = knowx_is_truthy( knowx_mod( 'knowx_show_support' ) )
+		&& ( ( '' !== $support_link && '' !== $support_text ) || '' !== trim( (string) knowx_mod( 'support_section_content' ) ) );
+
+	return array(
+		'hero_title'          => knowx_mod( 'hero_section_heading' ),
+		'hero_content'        => knowx_mod( 'hero_section_content' ),
+		'support_title'       => knowx_mod( 'support_section_heading' ),
+		'support_content'     => knowx_mod( 'support_section_content' ),
+		'support_button_text' => knowx_mod( 'support_section_button_text' ),
+		'support_button_link' => knowx_mod( 'support_section_button_link_url' ),
+		'hero_image'          => get_the_post_thumbnail_url( get_queried_object_id(), 'full' ),
+		'products'            => $products,
+		'home_count'          => $count,
+		'featured'            => $featured,
+		'recent'              => $recent,
+		'column'              => $side_by_side ? 'col-md-6' : 'col-md-12',
+		'show_support'        => $show_support,
+		'show_date'           => knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ),
+		'single'              => 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] ) : null,
 	);
 }

@@ -7,7 +7,7 @@ import fg from 'fast-glob';
 import sharp from 'sharp';
 import { optimize as svgoOptimize } from 'svgo';
 
-// Reuse theme paths from existing constants (no gulp needed)
+// Reuse theme paths from existing constants
 import { paths, assetsDir } from '../lib/constants.js';
 
 function getSrcRoot() {

@@ -37,7 +37,7 @@ if (fs.existsSync(DEFAULT_CONFIG_PATH)) {
 wpConfig = loadConfig(wpConfig, CUSTOM_CONFIG_PATH);
 wpConfig = loadConfig(wpConfig, LOCAL_CONFIG_PATH);
 
-const proxyURL = wpConfig.dev?.browserSync?.proxyURL || 'buddyx.local';
+const proxyURL = wpConfig.dev?.browserSync?.proxyURL || 'knowx.local';
 const protocol = wpConfig.dev?.browserSync?.https ? 'https' : 'http';
 const baseURL = `${protocol}://${proxyURL}`;
 

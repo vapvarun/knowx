@@ -8,6 +8,7 @@
 namespace KnowX\KnowX\Activation;
 
 use KnowX\KnowX\Component_Interface;
+use KnowX\KnowX\Nav_Menus\Component as Nav_Menus_Component;
 
 /**
  * Class for handling theme activation setup.
@@ -64,7 +65,7 @@ class Component implements Component_Interface {
 	 */
 	private function create_primary_menu( int $page_id ) {
 		$locations = get_theme_mod( 'nav_menu_locations', array() );
-		if ( ! empty( $locations['primary'] ) ) {
+		if ( ! empty( $locations[ Nav_Menus_Component::PRIMARY_NAV_MENU_SLUG ] ) ) {
 			return;
 		}
 
@@ -85,7 +86,7 @@ class Component implements Component_Interface {
 			)
 		);
 
-		$locations['primary'] = $menu_id;
+		$locations[ Nav_Menus_Component::PRIMARY_NAV_MENU_SLUG ] = $menu_id;
 		set_theme_mod( 'nav_menu_locations', $locations );
 	}
 

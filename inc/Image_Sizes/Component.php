@@ -45,17 +45,14 @@ class Component implements Component_Interface {
 	 * @return string A source size value for use in a content image 'sizes' attribute.
 	 */
 	public function filter_content_image_sizes_attr( string $sizes, array $size ): string {
-		$width = $size[0];
-
-		if ( 740 <= $width ) {
-			$sizes = '100vw';
+		// Small and medium images keep core's value, which caps the size at the image width.
+		if ( 740 > $size[0] ) {
+			return $sizes;
 		}
 
-		if ( knowx()->is_right_sidebar_active() ) {
-			$sizes = '(min-width: 960px) 75vw, 100vw';
-		}
+		$content = $this->content_width();
 
-		return $sizes;
+		return '100vw' === $content ? '100vw' : '(min-width: 960px) ' . $content . ', 100vw';
 	}
 
 	/**
@@ -83,12 +80,34 @@ class Component implements Component_Interface {
 	 * @return array The filtered attributes for the image markup.
 	 */
 	public function filter_post_thumbnail_sizes_attr( array $attr, WP_Post $attachment, $size ): array {
-		$attr['sizes'] = '100vw';
-
-		if ( knowx()->is_right_sidebar_active() ) {
-			$attr['sizes'] = '(min-width: 960px) 75vw, 100vw';
+		// Only the large post thumbnails; logos, widget thumbnails and small sizes keep core's value.
+		if ( 'post-thumbnail' !== $size && 'knowx-featured' !== $size ) {
+			return $attr;
 		}
 
+		$content       = $this->content_width();
+		$attr['sizes'] = '100vw' === $content ? '100vw' : '(min-width: 960px) ' . $content . ', 100vw';
+
 		return $attr;
+	}
+
+	/**
+	 * Width of the content column on wide screens, from the layout the site prints.
+	 *
+	 * @return string `100vw` without a sidebar, `75vw` with one and `50vw` with two.
+	 */
+	protected function content_width(): string {
+		$layout = knowx_mod( 'sidebar_option' );
+		$right  = knowx()->is_right_sidebar_active();
+		$left   = knowx()->is_left_sidebar_active();
+
+		if ( 'both' === $layout && $left && $right ) {
+			return '50vw';
+		}
+		if ( ( 'right' === $layout && $right ) || ( 'left' === $layout && $left ) ) {
+			return '75vw';
+		}
+
+		return '100vw';
 	}
 }

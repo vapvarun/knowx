@@ -31,22 +31,12 @@ export default [
 
 	// Configuration files: explicitly allow devDependencies
 	{
-		files: [
-			'eslint.config.js',
-			'webpack.config.js',
-			'*.config.js',
-			'gulpfile.js',
-		],
+		files: [ 'eslint.config.js', '*.config.js' ],
 		rules: {
 			'import/no-extraneous-dependencies': [
 				'error',
 				{
-					devDependencies: [
-						'eslint.config.js',
-						'webpack.config.js',
-						'*.config.js',
-						'gulpfile.js',
-					],
+					devDependencies: [ 'eslint.config.js', '*.config.js' ],
 				},
 			],
 		},
@@ -67,8 +57,6 @@ export default [
 			globals: {
 				wp: 'readonly',
 				knowxScreenReaderText: 'readonly',
-				jQuery: 'readonly',
-				$: 'readonly',
 				window: 'readonly',
 				document: 'readonly',
 				console: 'readonly',
@@ -93,9 +81,9 @@ export default [
 		},
 	},
 
-	// Overides rules for gulp folder. Replaces the former gulp/.eslintrc.json.
+	// Tooling: build and release scripts run in Node.
 	{
-		files: [ 'gulp/**/*.js', 'gulpfile.js' ],
+		files: [ 'scripts/**/*.js', 'build-js.js', 'build-css.js' ],
 		languageOptions: {
 			ecmaVersion: 'latest',
 			sourceType: 'module',

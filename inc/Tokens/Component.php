@@ -11,9 +11,7 @@ use KnowX\KnowX\Component_Interface;
 
 use function add_action;
 use function add_filter;
-use function get_template_directory;
 use function is_customize_preview;
-use function wp_json_file_decode;
 
 /**
  * Prints the few colour variables the Customizer can change.
@@ -75,10 +73,6 @@ class Component implements Component_Interface {
 	 * @param \WP_Customize_Manager $wp_customize Customizer manager.
 	 */
 	public function action_customize_register( $wp_customize ) {
-		if ( ! isset( $wp_customize->selective_refresh ) ) {
-			return;
-		}
-
 		$ids = array_merge( array_keys( self::VARIABLES ), array( 'site_primary_color', 'site_link_color', 'site_surface_color', 'background_color', 'knowx_corners' ) );
 		foreach ( $ids as $id ) {
 			$setting = $wp_customize->get_setting( $id );

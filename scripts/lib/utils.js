@@ -20,9 +20,6 @@ import {
 
 import config from '../../config/themeConfig.js';
 
-export const getDefaultConfig = () =>
-	import( `${ rootPath }/config/config.default.json` );
-
 /**
  * Get theme configuration.
  *
@@ -121,60 +118,6 @@ function createReplaceStream( searchValue, replaceValue ) {
 }
 
 /**
- * Creates a stream transformation for replacing strings based on the theme config.
- * @param {boolean} isProdFlag - Flag indicating whether it's in production mode.
- * @return {import('stream').Transform} - A stream transformation for string replacements.
- */
-export function getStringReplacementTasks( isProdFlag ) {
-	const themeConfig = getThemeConfig( isProdFlag ); // keep call signature intact
-
-	const replacements = Object.keys( nameFieldDefaults ).map(
-		( nameField ) => ( {
-			searchValue: new RegExp(
-				nameFieldDefaults[ nameField ].replace( /\\/g, '\\\\' ),
-				'g'
-			),
-			replaceValue: themeConfig.theme[ nameField ],
-		} )
-	);
-
-	return new Transform({
-		objectMode: true,
-		transform(file, encoding, callback) {
-			if ( file.isBuffer() ) {
-				file.contents = processBuffer( file.contents, replacements );
-				callback( null, file );
-			} else if ( file.isStream() ) {
-				let stream = file.contents;
-				replacements.forEach(
-					( { searchValue, replaceValue } ) =>
-						( stream = stream.pipe(
-							createReplaceStream( searchValue, replaceValue )
-						) )
-				);
-				file.contents = stream;
-				stream.on( 'finish', () => callback( null, file ) );
-				stream.on( 'error', callback );
-			} else {
-				callback( null, file );
-			}
-		}
-	});
-}
-
-/**
- * Logs an error with a specified title and message.
- *
- * @param {string} errorTitle - Title to describe where the error occurred.
- * @param {Object} error      - The error object to log.
- */
-export function logError( errorTitle = 'Task', error = {} ) {
-	console.error(
-		`[${ errorTitle }] Error: ${ error.message || 'An error occurred' }`
-	);
-}
-
-/**
  * Creates the production theme directory at the specified path, removing any existing directory at that location before creation.
  *
  * Logs the creation process and ensures that the directory is freshly created even if it previously existed.
@@ -191,34 +134,6 @@ export function createProdDir() {
 		rimraf.sync( prodThemePath );
 	}
 	mkdirp( prodThemePath );
-}
-
-/**
- * Computes the relative destination path for a given file based on its base path.
- *
- * @param {Object} file      - The file object that contains file path information.
- * @param {string} file.base - The base path of the file.
- * @param {string} file.cwd  - The current working directory from which the relative path is calculated.
- * @return {string} The relative production file path based on the file's base and current working directory.
- */
-export function gulpRelativeDest( file ) {
-	return file.base.replace( file.cwd, prodThemePath );
-}
-
-/**
- * Converts backslashes in the given path or array of paths to forward slashes.
- *
- * @param {string|string[]} path - The path or array of paths to be converted.
- * @return {string|string[]} The converted path or array of paths with backslashes replaced by forward slashes.
- */
-export function backslashToForwardSlash( path ) {
-	const replaceFn = ( p ) => p.replace( /\\/g, '/' );
-	if ( Array.isArray( path ) ) {
-		const paths = [];
-		path.forEach( ( p ) => paths.push( replaceFn( p ) ) );
-		return paths;
-	}
-	return replaceFn( path );
 }
 
 /**
@@ -252,26 +167,6 @@ export function configValueDefined( configValueLocation ) {
 	}
 
 	return true;
-}
-
-/**
- * Append a base file path to a list of files
- * @param {string|Array} filePaths the file or files to append the base path to
- * @param {string}       basePath  the base path to append
- * @return {string|Array} file paths with base path appended
- */
-export function appendBaseToFilePathArray( filePaths, basePath ) {
-	if ( ! Array.isArray( filePaths ) ) {
-		return `${ basePath }/${ filePaths }`;
-	}
-
-	const output = [];
-
-	for ( const filePath of filePaths ) {
-		output.push( `${ basePath }/${ filePath }` );
-	}
-
-	return output;
 }
 
 /**

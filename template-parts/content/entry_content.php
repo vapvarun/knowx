@@ -27,9 +27,7 @@ namespace KnowX\KnowX;
 			)
 		);
 	} else {
-		echo '<p>';
 		the_excerpt();
-		echo '</p>';
 	}
 	wp_link_pages(
 		array(

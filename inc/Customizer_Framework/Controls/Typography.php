@@ -18,8 +18,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Typography
  *
- * Reads available font families from theme.json fontFamilies (registered in
- * 5.0.3) so users see the same palette of fonts the Site Editor exposes.
+ * Reads available font families from theme.json fontFamilies so users see the same palette of fonts the Site Editor exposes.
  * Falls back to a sane minimum if theme.json hasn't registered any.
  */
 class Typography extends \WP_Customize_Control {
@@ -58,7 +57,7 @@ class Typography extends \WP_Customize_Control {
 	 * @return array
 	 */
 	protected static function available_font_families(): array {
-		$settings = function_exists( 'wp_get_global_settings' ) ? wp_get_global_settings( array( 'typography', 'fontFamilies' ) ) : array();
+		$settings = wp_get_global_settings( array( 'typography', 'fontFamilies' ) );
 
 		// Theme fonts (theme.json) and fonts the owner installed through the core Font Library.
 		$groups = array();

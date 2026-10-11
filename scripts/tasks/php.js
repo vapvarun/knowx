@@ -11,28 +11,9 @@ import {
 	isProd,
 	rootPath,
 } from '../lib/constants.js';
-import removeWpCliBlock from './removeWpCliBlock.js';
-import removeDevOnlyBlocks from './removeDevOnlyBlocks.js';
 
 /**
- * Build replacement table equivalent to getStringReplacementTasks() but without streams.
- */
-function buildReplacements() {
-	// KnowX is already named in the source. The starter-theme rename table rewrote the brand case
-	// (KnowX to Knowx) and number sequences such as 3.0.1 inside SVG paths, so nothing is replaced.
-	return [];
-}
-
-function applyReplacements( content, replacements ) {
-	let out = content;
-	replacements.forEach( ( { searchValue, replaceValue } ) => {
-		out = out.replace( searchValue, replaceValue );
-	} );
-	return out;
-}
-
-/**
- * Gulp-free PHP task.
+ * PHP task: runs PHPCS on request and copies the PHP files to the production folder.
  * @param {boolean}  runPhpcs
  * @param {Function} done
  */
@@ -83,29 +64,18 @@ export default function php( runPhpcs, done ) {
 function copyPhp( done ) {
 	( async () => {
 		if ( ! isProd ) {
-			// In development, just no-op (parity with previous gulp task behavior)
+			// In development, just no-op
 			done();
 			return;
 		}
 
-		const replacements = buildReplacements();
 		const patterns = paths.php.src; // includes negative patterns
 		const files = await globFiles( patterns );
 
 		await Promise.all(
 			files.map( async ( srcFile ) => {
 				try {
-					let content = await fse.readFile( srcFile, 'utf8' );
-					content = applyReplacements( content, replacements );
-
-					// Remove WP-CLI block only for root functions.php
-					const relToRoot = path.relative( rootPath, srcFile );
-					if ( relToRoot === 'functions.php' ) {
-						content = removeWpCliBlock( content );
-					}
-
-					// Remove any dev-only blocks from all PHP files
-					content = removeDevOnlyBlocks( content );
+					const content = await fse.readFile( srcFile, 'utf8' );
 
 					const outPath = destPathFor(
 						srcFile,

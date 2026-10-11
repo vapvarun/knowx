@@ -1,0 +1,143 @@
+<?php
+/**
+ * Tests for the Customizer sanitisers and the active callback compiler.
+ *
+ * @package knowx
+ */
+
+namespace KnowX\KnowX\Tests\Unit;
+
+use Brain\Monkey\Functions;
+use KnowX\KnowX\Customizer_Framework\Active_Callback;
+use KnowX\KnowX\Customizer_Framework\Field;
+use KnowX\KnowX\Tests\Framework\Unit_Test_Case;
+
+require_once TESTS_THEME_DIR . '/inc/Customizer_Framework/Component.php';
+require_once TESTS_THEME_DIR . '/inc/Customizer_Framework/Field.php';
+require_once TESTS_THEME_DIR . '/inc/Customizer_Framework/Active_Callback.php';
+require_once TESTS_THEME_DIR . '/inc/helpers.php';
+
+/**
+ * Sanitiser and condition tests: these turn user input into saved settings and CSS.
+ */
+class Customizer_Framework_Tests extends Unit_Test_Case {
+
+	/**
+	 * Every shape of a switch value becomes 0 or 1.
+	 */
+	public function test_switch_values_become_zero_or_one() {
+		foreach ( array( true, 1, '1', 'on', 'yes', 'true', 'ON' ) as $on ) {
+			$this->assertSame( 1, Field::sanitize_bool_int( $on ), var_export( $on, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
+		}
+		foreach ( array( false, 0, '0', '', null, 'off', 'no', 'junk' ) as $off ) {
+			$this->assertSame( 0, Field::sanitize_bool_int( $off ), var_export( $off, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
+		}
+	}
+
+	/**
+	 * Colours keep valid hex, rgb and hsl values and drop anything that could break out of a CSS rule.
+	 */
+	public function test_colours_accept_only_colour_syntax() {
+		$this->assertSame( '#aa2255', Field::sanitize_color_alpha( ' #aa2255 ' ) );
+		$this->assertSame( 'rgba(10, 20, 30, 0.5)', Field::sanitize_color_alpha( 'rgba(10, 20, 30, 0.5)' ) );
+		$this->assertSame( 'hsl(120, 50%, 40%)', Field::sanitize_color_alpha( 'hsl(120, 50%, 40%)' ) );
+		$this->assertSame( '', Field::sanitize_color_alpha( 'red;}body{display:none' ) );
+		$this->assertSame( '', Field::sanitize_color_alpha( '#12' ) );
+		$this->assertSame( '', Field::sanitize_color_alpha( 'url(javascript:alert(1))' ) );
+	}
+
+	/**
+	 * Dimensions are a number with an optional known unit.
+	 */
+	public function test_dimensions_accept_a_number_and_a_unit() {
+		$this->assertSame( '1170px', Field::sanitize_dimension( '1170px' ) );
+		$this->assertSame( '1.5rem', Field::sanitize_dimension( '1.5rem' ) );
+		$this->assertSame( '', Field::sanitize_dimension( '12px;color:red' ) );
+		$this->assertSame( '', Field::sanitize_dimension( 'calc(1px)' ) );
+	}
+
+	/**
+	 * Typography keeps only the whitelisted keys.
+	 */
+	public function test_typography_keeps_only_known_keys() {
+		Functions\when( 'sanitize_text_field' )->returnArg();
+
+		$clean = Field::sanitize_typography(
+			array(
+				'font-family' => 'Open Sans',
+				'font-size'   => '16px',
+				'evil'        => 'x',
+			)
+		);
+
+		$this->assertSame(
+			array(
+				'font-family' => 'Open Sans',
+				'font-size'   => '16px',
+			),
+			$clean
+		);
+		$this->assertSame( array(), Field::sanitize_typography( 'not an array' ) );
+	}
+
+	/**
+	 * A saved "on" matches a condition written as true, and the other way round.
+	 */
+	public function test_conditions_compare_switches_by_meaning() {
+		Functions\when( 'get_theme_mod' )->alias(
+			static function ( $id ) {
+				return array(
+					'legacy_on' => 'on',
+					'zero'      => 0,
+					'layout'    => 'wide',
+				)[ $id ] ?? null;
+			}
+		);
+
+		$this->assertTrue(
+			Active_Callback::compile(
+				array(
+					array(
+						'setting'  => 'legacy_on',
+						'operator' => '==',
+						'value'    => true,
+					),
+				)
+			)()
+		); // phpcs:ignore Universal.Arrays.MixedKeyedUnkeyedArray
+		$this->assertTrue(
+			Active_Callback::compile(
+				array(
+					array(
+						'setting'  => 'zero',
+						'operator' => '==',
+						'value'    => false,
+					),
+				)
+			)()
+		);
+		$this->assertFalse(
+			Active_Callback::compile(
+				array(
+					array(
+						'setting'  => 'zero',
+						'operator' => '==',
+						'value'    => true,
+					),
+				)
+			)()
+		);
+		$this->assertTrue(
+			Active_Callback::compile(
+				array(
+					array(
+						'setting'  => 'layout',
+						'operator' => '!=',
+						'value'    => 'boxed',
+					),
+				)
+			)()
+		);
+		$this->assertTrue( Active_Callback::compile( array() )() );
+	}
+}

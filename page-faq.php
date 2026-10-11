@@ -14,27 +14,20 @@ get_header();
 knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 
 ?>
-<?php do_action( 'knowx_sub_header' ); ?>
-<?php do_action( 'knowx_before_content' ); ?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_sub_header' );
+?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_before_content' );
+?>
 
-<main id="primary" class="knowx-narrow knowx-narrow-faq">
-	<?php
-	while ( have_posts() ) {
-		the_post();
-		?>
-		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-			<header class="entry-header">
-				<h1 class="entry-title"><?php the_title(); ?></h1>
-			</header>
-			<div class="entry-content">
-				<?php the_content(); ?>
-			</div>
-		</article>
-		<?php
-	}
-	?>
-</main>
+<?php get_template_part( 'template-parts/docs/simple-page', null, array( 'class' => 'knowx-narrow-faq' ) ); ?>
 
-<?php do_action( 'knowx_after_content' ); ?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_after_content' );
+?>
 <?php
 get_footer();

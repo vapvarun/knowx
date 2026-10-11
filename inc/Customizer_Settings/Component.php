@@ -7,13 +7,15 @@
 
 namespace KnowX\KnowX\Customizer_Settings;
 
+use KnowX\KnowX\Component_Interface;
+
+use function KnowX\KnowX\knowx;
 use function add_action;
 use function add_filter;
 use function get_template_directory_uri;
-use KnowX\KnowX\Component_Interface;
 
 /**
- * Class for adding custom background support.
+ * Class for registering the Customizer sections and fields.
  */
 class Component implements Component_Interface {
 
@@ -40,15 +42,18 @@ class Component implements Component_Interface {
 		add_action( 'init', array( $this, 'add_panels_and_sections' ) );
 		add_action( 'init', array( $this, 'add_fields' ) );
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_palettes' ) );
-		add_filter( 'body_class', array( $this, 'site_width_body_classes' ) );
-		add_filter( 'body_class', array( $this, 'site_sticky_sidebar_body_classes' ) );
-		add_filter( 'body_class', array( $this, 'site_sticky_header_classes' ) );
+		add_filter( 'body_class', array( $this, 'filter_layout_body_class' ) );
+		add_filter( 'body_class', array( $this, 'filter_sticky_sidebar_body_class' ) );
+		add_filter( 'body_class', array( $this, 'filter_sticky_header_body_class' ) );
 	}
 
 	/**
 	 * Site width body class.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array Body classes.
 	 */
-	public function site_width_body_classes( array $classes ): array {
+	public function filter_layout_body_class( array $classes ): array {
 		$classes[] = 'layout-' . knowx_mod( 'site_layout' );
 
 		return $classes;
@@ -56,8 +61,11 @@ class Component implements Component_Interface {
 
 	/**
 	 * Site sticky sidebar body class.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array Body classes.
 	 */
-	public function site_sticky_sidebar_body_classes( array $classes ): array {
+	public function filter_sticky_sidebar_body_class( array $classes ): array {
 
 		$sticky_sidebar = knowx_mod( 'sticky_sidebar_option' );
 		if ( $sticky_sidebar ) {
@@ -69,8 +77,11 @@ class Component implements Component_Interface {
 
 	/**
 	 * Site sticky header body class.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array Body classes.
 	 */
-	public function site_sticky_header_classes( array $classes ): array {
+	public function filter_sticky_header_body_class( array $classes ): array {
 		$sticky_header = knowx_mod( 'site_sticky_header' );
 		if ( $sticky_header ) {
 			$classes[] = 'sticky-header';
@@ -103,7 +114,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Loader.
 		// Site Scroll Top.
 		// Typography.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
@@ -125,7 +135,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Sub Header.
 		// Site Skin.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_skin_section',
@@ -136,7 +145,6 @@ class Component implements Component_Interface {
 			)
 		);
 
-		// Site Blog Layout.
 		// Site Sidebar Layout.
 		\KnowX\KnowX\Customizer_Framework\Section::add(
 			'site_sidebar_layout',
@@ -196,8 +204,6 @@ class Component implements Component_Interface {
 				'description' => '',
 			)
 		);
-
-		// Site Copyright.
 	}
 
 	/**
@@ -222,7 +228,7 @@ class Component implements Component_Interface {
 	 */
 	public function enqueue_palettes() {
 		$base = get_template_directory_uri() . '/inc/Customizer_Framework/assets/';
-		$ver  = wp_get_theme()->get( 'Version' );
+		$ver  = knowx()->get_version();
 
 		wp_enqueue_style( 'knowx-customizer', $base . 'knowx-customizer.css', array(), $ver );
 		wp_enqueue_script( 'knowx-customizer', $base . 'knowx-customizer.js', array( 'customize-controls' ), $ver, true );

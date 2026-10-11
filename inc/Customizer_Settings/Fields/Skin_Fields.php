@@ -14,16 +14,16 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'color',
 		array(
-			'settings' => 'site_primary_color',
+			'settings'    => 'site_primary_color',
 			'label'       => esc_html__( 'Theme Color', 'knowx' ),
 			'description' => esc_html__( 'Buttons, links and highlights across the whole site. Each product keeps its own icon colour (Posts > Categories).', 'knowx' ),
-			'section'  => 'site_skin_section',
-			'default'  => '#03A9F4',
-			'choices'  => array(
+			'section'     => 'site_skin_section',
+			'default'     => '#03A9F4',
+			'choices'     => array(
 				// Quick picks under the picker. Any other colour can still be chosen.
 				'palette' => array( '#03a9f4', '#2563eb', '#7c3aed', '#047857', '#b45309', '#be123c', '#0f766e', '#c2410c' ),
 			),
-			'priority' => 10,
+			'priority'    => 10,
 		)
 	);
 

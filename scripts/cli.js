@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 /*
- Minimal Node-based CLI to replace gulp build and bundle commands in KnowX.
- This reuses existing task modules under ./gulp and mirrors the task order
- used in gulpfile.js, but without using gulp itself.
+ KnowX build CLI: build, bundle, dev server and image tasks. Task modules live in ./tasks.
 */
 
 import { exec as execCb, execFile as execFileCb, spawn } from 'node:child_process';
@@ -73,15 +71,11 @@ function runTask( fn, name = fn?.name || 'task' ) {
 }
 
 async function lintCSS() {
-	await exec( 'node lint-css.js', { stdio: 'inherit' } );
+	await exec( 'npm run lint:css', { stdio: 'inherit' } );
 }
 
 async function lintJS() {
-	// Use flat config if configured in package.json like existing script
-	await exec(
-		'cross-env ESLINT_USE_FLAT_CONFIG=true eslint "assets/js/src/**/*.{js,jsx,ts,tsx}"',
-		{ stdio: 'inherit' }
-	);
+	await exec( 'npm run lint:js', { stdio: 'inherit' } );
 }
 
 async function buildJS( { dev = false } = {} ) {
@@ -386,7 +380,7 @@ async function runBundle( { phpcs = false, lint = false, destination = null } = 
 
 program
 	.name( 'knowx' )
-	.description( 'KnowX Node-based build CLI (no gulp)' )
+	.description( 'KnowX build CLI' )
 	.version( '0.1.0' );
 
 program
@@ -426,10 +420,10 @@ program
 		}
 	} );
 
-// Development command: start server and watch source files without gulp
+// Development command: start server and watch source files
 program
 	.command( 'dev' )
-	.description( 'Start development server with live reload (no gulp)' )
+	.description( 'Start development server with live reload' )
 	.option( '--lint', 'Run JS and CSS linters before starting' )
 	.action( async ( opts ) => {
 		try {
@@ -526,7 +520,7 @@ program
 
 program
 	.command( 'images' )
-	.description( 'Optimize images and generate WebP (no gulp)' )
+	.description( 'Optimize images' )
 	.action( async () => {
 		try {
 			await runTask( images, 'images' );

@@ -8,7 +8,6 @@
 namespace KnowX\KnowX\Excerpts;
 
 use KnowX\KnowX\Component_Interface;
-use function KnowX\KnowX\knowx;
 use function add_filter;
 
 /**
@@ -30,13 +29,13 @@ class Component implements Component_Interface {
 	 */
 	public function initialize() {
 
-		add_filter( 'excerpt_more', array( $this, 'new_excerpt_more' ) );
+		add_filter( 'excerpt_more', array( $this, 'filter_excerpt_more' ) );
 	}
 
 	/**
 	 * Custom Excerpt ending.
 	 */
-	public function new_excerpt_more() {
+	public function filter_excerpt_more() {
 		$link = sprintf(
 			'<a href="%1$s" class="more-link">%2$s</a>',
 			esc_url( get_permalink( get_the_ID() ) ),

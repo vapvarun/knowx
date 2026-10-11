@@ -27,5 +27,5 @@ $knowx_categories = $knowx_product ? array_merge( array( $knowx_product['id'] ),
 		</label>
 	<?php endif; ?>
 	<p class="knowx-search-status" role="status"></p>
-	<ul class="knowx-search-results"></ul>
+	<ul class="knowx-search-dialog-results"></ul>
 </dialog>

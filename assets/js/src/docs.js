@@ -23,6 +23,8 @@
 			announce(done);
 			return true;
 		} catch (e) {
+			// No Clipboard API (a page that is not served over HTTPS) or permission denied.
+			announce(strings.copyFailed);
 			return false;
 		}
 	};
@@ -45,9 +47,22 @@
 				setTimeout(() => {
 					button.textContent = strings.copy;
 				}, 1800);
+			} else {
+				button.textContent = strings.copyFailed;
+				setTimeout(() => {
+					button.textContent = strings.copy;
+				}, 1800);
 			}
 		});
 		pre.append(button);
+	});
+
+	// A breadcrumb trail that scrolls on phones starts at its end, so the current page is in view.
+	document.querySelectorAll('.knowx-trail-items').forEach((trail) => {
+		if (trail.scrollWidth > trail.clientWidth) {
+			const rtl = document.documentElement.dir === 'rtl';
+			trail.scrollLeft = rtl ? -trail.scrollWidth : trail.scrollWidth;
+		}
 	});
 
 	// Heading links copy their address and keep the browser's normal jump.
@@ -60,7 +75,7 @@
 	// Tree beside the article on wide screens.
 	const tree = document.querySelector('.knowx-tree-panel');
 	if (tree && !window.CSS.supports('selector(::details-content)')) {
-		const wide = window.matchMedia('(min-width: 1100px)');
+		const wide = window.matchMedia('(min-width: 900px)');
 		const sync = () => {
 			tree.open = wide.matches;
 		};
@@ -72,7 +87,7 @@
 	const dialog = document.querySelector('.knowx-search-dialog');
 	if (dialog && typeof dialog.showModal === 'function') {
 		const input = dialog.querySelector('input[type="search"]');
-		const list = dialog.querySelector('.knowx-search-results');
+		const list = dialog.querySelector('.knowx-search-dialog-results');
 		const status = dialog.querySelector('.knowx-search-status');
 		const scope = dialog.querySelector('.knowx-search-scope input');
 		const decode = (html) =>

@@ -11,17 +11,14 @@ use KnowX\KnowX\Component_Interface;
 use KnowX\KnowX\Templating_Component_Interface;
 use function KnowX\KnowX\knowx;
 use function add_action;
-use function add_filter;
 use function wp_enqueue_style;
 use function wp_register_style;
-use function wp_style_add_data;
 use function get_theme_file_uri;
 use function get_theme_file_path;
 use function wp_styles;
 use function esc_attr;
 use function esc_url;
 use function add_editor_style;
-use function wp_style_is;
 use function _doing_it_wrong;
 use function esc_html;
 use function wp_print_styles;
@@ -30,7 +27,6 @@ use function is_singular;
 use function comments_open;
 use function get_comments_number;
 use function apply_filters;
-use function add_query_arg;
 
 /**
  * Class for managing stylesheets.
@@ -50,7 +46,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 *
 	 * @var array
 	 */
-	protected $css_files;
+	protected ?array $css_files = null;
 
 	/**
 	 * Gets the unique identifier for the theme component.
@@ -75,7 +71,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *               a callable or an array with key 'callback'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags(): array {
@@ -124,8 +120,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			} else {
 				wp_register_style( $handle, $src, $data['deps'], $version, $data['media'] );
 			}
-
-			wp_style_add_data( $handle, 'precache', true );
 		}
 	}
 
@@ -223,9 +217,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Determines whether to preload stylesheets and inject their link tags directly within the page content.
 	 *
 	 * Using this technique generally improves performance, however may not be preferred under certain circumstances.
-	 * For example, since AMP will include all style rules directly in the head, it must not be used in that context.
-	 * By default, this method returns true unless the page is being served in AMP. The
-	 * {@see 'knowx_preloading_styles_enabled'} filter can be used to tweak the return value.
+	 * By default, this method returns true. The {@see 'knowx_preloading_styles_enabled'} filter can be used to
+	 * tweak the return value.
 	 *
 	 * @return bool True if preloading stylesheets and injecting them is enabled, false otherwise.
 	 */
@@ -247,7 +240,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * @return array Associative array of $handle => $data pairs.
 	 */
 	protected function get_css_files(): array {
-		if ( is_array( $this->css_files ) ) {
+		if ( null !== $this->css_files ) {
 			return $this->css_files;
 		}
 
@@ -275,14 +268,6 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			),
 			'knowx-widgets' => array(
 				'file' => 'widgets.min.css',
-			),
-			'knowx-front-page' => array(
-				'file'             => 'front-page.min.css',
-				'preload_callback' => function () {
-					global $template;
-
-					return 'front-page.php' === basename( $template );
-				},
 			),
 		);
 

@@ -1,6 +1,6 @@
 # KnowX Customizer Framework
 
-A theme-native, Customizer module. Built for KnowX 5.1.0+ and shipped as a portable namespace so KnowX Pro can consume the same API verbatim.
+A theme-native Customizer module, shipped as a portable namespace.
 
 - 20 field types (12 custom controls + 8 core-dispatched)
 - Takes array arguments (settings/section/output/transport/active_callback/...)
@@ -87,13 +87,13 @@ Supported operators: `==`, `!=`, `===`, `!==`, `>`, `<`, `>=`, `<=`, `in`, `cont
 ## Filters
 
 ### `knowx_customizer_field_type_map`
-Add/override control types. Useful for Pro-only types.
+Add/override control types. Useful for extra control types.
 
 ```php
 add_filter( 'knowx_customizer_field_type_map', function ( $map ) {
     $map['my_custom_type'] = array(
         '\\WP_Customize_Setting',                 // setting class
-        '\\KnowXPro\\KnowX_Pro\\Customizer_Framework\\Controls\\My_Custom', // control class
+        '\\KnowX\\KnowX\\Customizer_Framework\\Controls\\My_Custom', // control class
         true,                                     // is_custom_control
     );
     return $map;
@@ -114,7 +114,7 @@ add_filter( 'knowx_customizer_field_args', function ( $args, $wp_customize ) {
 
 ---
 
-## Reusing in KnowX Pro (or any other theme)
+## Reusing in another theme
 
 The framework is intentionally namespace-isolated. To reuse:
 

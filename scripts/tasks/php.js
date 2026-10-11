@@ -64,7 +64,7 @@ export default function php( runPhpcs, done ) {
 function copyPhp( done ) {
 	( async () => {
 		if ( ! isProd ) {
-			// In development, just no-op (parity with previous gulp task behavior)
+			// In development, just no-op
 			done();
 			return;
 		}

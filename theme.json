@@ -97,7 +97,7 @@
 				{
 					"name": "Open Sans",
 					"slug": "open-sans",
-					"fontFamily": "\"Open Sans\", system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif",
+					"fontFamily": "\"Open Sans\", system-ui, -apple-system, \"Segoe UI\", roboto, \"Helvetica Neue\", arial, sans-serif",
 					"fontFace": [
 						{
 							"fontFamily": "Open Sans",
@@ -124,7 +124,7 @@
 				{
 					"name": "System",
 					"slug": "system",
-					"fontFamily": "system-ui, -apple-system, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, sans-serif"
+					"fontFamily": "system-ui, -apple-system, \"Segoe UI\", roboto, \"Helvetica Neue\", arial, sans-serif"
 				}
 			]
 		},

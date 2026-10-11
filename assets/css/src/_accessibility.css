@@ -32,7 +32,7 @@
 	text-decoration: none;
 	top: 5px;
 	width: auto;
-	z-index: 100000; /* Above WP toolbar. */
+	z-index: var(--z-toolbar); /* Above WP toolbar. */
 }
 
 /* Keyboard focus is always visible; mouse clicks do not draw the ring. */

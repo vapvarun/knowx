@@ -35,13 +35,13 @@ a.read-more.button {
     transition: all linear .2s;
 }
 
-.customize-partial-edit-shortcut button,
-.widget .customize-partial-edit-shortcut button {
-    color: #fff !important;
-    font-size: 18px !important;
-    border-radius: 50% !important;
-    border: 2px solid var(--color-surface) !important;
-    padding: 3px !important;
+body .customize-partial-edit-shortcut button,
+body .widget .customize-partial-edit-shortcut button {
+    color: var(--color-white);
+    font-size: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--color-surface);
+    padding: 3px;
 }
 /* stylelint-enable */
 
@@ -63,7 +63,7 @@ input[type="reset"]:active,
 input[type="reset"]:focus,
 input[type="submit"]:active,
 input[type="submit"]:focus {
-    border-color: #aaa #bbb #bbb;
+    border-color: var(--color-muted);
 }
 
 button:focus,
@@ -158,7 +158,7 @@ select {
     -webkit-appearance: none;
     background-image: var(--select-arrow);
     background-repeat: no-repeat;
-    background-position: right 1rem center;
+    background-position: var(--icon-side) 1rem center;
     padding-inline-end: 40px;
 }
 

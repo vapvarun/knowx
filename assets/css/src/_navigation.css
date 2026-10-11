@@ -11,10 +11,10 @@
     margin: 0;
     margin-top: 3px;
     margin-inline-start: 10px;
-    padding: 10px !important;
+    padding: 10px;
     font-family: var(--highlight-font-family);
     font-size: 80%;
-    line-height: 0 !important;
+    line-height: 0;
     color: var(--color-heading);
     text-transform: uppercase;
     border: 0;
@@ -34,11 +34,7 @@
     display: none;
 }
 
-@media (max-width: 782px) {
-    .main-navigation .user-profile-menu .sub-menu {
-        border-top: 1px solid var(--global-border-color);
-    }
-}
+
 
 @media (max-width: 600px) {
     body.admin-bar.sticky-header .main-navigation .primary-menu-container {
@@ -46,15 +42,9 @@
     }
 }
 
-.main-navigation .user-profile-menu li a,
-.main-navigation .bp-header-submenu li a {
-    padding: 6px 15px;
-}
 
-.main-navigation .user-profile-menu li+li,
-.main-navigation .bp-header-submenu li+li {
-    border-top: 1px solid var(--global-border-color);
-}
+
+
 
 .main-navigation .mobile-menu-container {
     display: none;
@@ -62,7 +52,7 @@
 
 @media (max-width: 767px) {
     .main-navigation .desktop-menu-container {
-        display: none !important;
+        display: none;
     }
 
     .main-navigation .mobile-menu-container {
@@ -81,13 +71,10 @@
         inset-inline-start: 0;
         width: 100%;
         height: 100%;
-        z-index: 99;
+        z-index: var(--z-menu);
         opacity: 0;
         visibility: hidden;
         background-color: rgba(0, 0, 0, 0.7);
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
         transition: all 0.3s ease;
     }
 
@@ -104,8 +91,8 @@
         width: 340px;
         overflow: auto;
         background-color: var(--color-surface);
-        z-index: 9999;
-        transform: translate3d(340px, 0, 0);
+        z-index: var(--z-drawer);
+        transform: translate3d(var(--menu-offset), 0, 0);
         transition: all .2s ease;
         opacity: 0;
         visibility: hidden;
@@ -126,7 +113,7 @@
     .mobile-menu-heading {
         margin-bottom: 20px;
         padding: 28px 20px;
-        background-color: #000;
+        background-color: var(--color-black);
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -142,12 +129,12 @@
         text-transform: uppercase;
         vertical-align: middle;
         display: inline-block;
-        color: #fff;
+        color: var(--color-white);
     }
 
     .mobile-menu-heading .menu-close {
         width: auto;
-        color: #fff;
+        color: var(--color-white);
         text-transform: uppercase;
         text-decoration: none;
         font-size: 12px;
@@ -171,9 +158,6 @@
         height: 2px;
         display: inline-block;
         background-color: var(--color-surface);
-        -webkit-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
-        -moz-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
-        -o-transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
         transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, width 0.2s ease-in-out;
     }
 
@@ -282,7 +266,7 @@
         flex-direction: column;
         background: var(--color-surface);
         margin-inline-start: 0;
-        z-index: 1;
+        z-index: var(--z-base);
         text-shadow: none;
         text-align: start;
         box-shadow: 0 2px 7px 1px rgba(0, 0, 0, .05), 0 6px 32px 0 rgba(18, 43, 70, .1);
@@ -291,15 +275,10 @@
         transition: none;
     }
 
-    .nav--toggle-sub ul .hideshow ul {
-        margin-inline-start: -10px;
-    }
+    
 
-    .hideshow.menu-item--has-toggle>ul.sub-menu::before {
-        inset-inline-end: 24px;
-    }
+    
 
-    .nav--toggle-sub ul.user-profile-menu .sub-menu::before,
     .menu-item--has-toggle>ul.sub-menu::before {
         content: ' ';
         position: absolute;
@@ -309,17 +288,12 @@
         inset-inline-end: 28px;
         border: 7px solid var(--color-heading);
         border-color: var(--color-surface) var(--color-surface) transparent transparent;
-        -webkit-transform-origin: 0 0;
-        -ms-transform-origin: 0 0;
         transform-origin: 0 0;
-        -webkit-transform: rotate(-45deg);
-        -ms-transform: rotate(-45deg);
         transform: rotate(-45deg);
         box-shadow: 2px -3px 3px 0 rgba(0, 0, 0, .02);
-        z-index: 100;
+        z-index: var(--z-header);
     }
 
-    .nav--toggle-sub ul.user-profile-menu .sub-menu::before,
     .sub-menu li.menu-item--has-toggle>ul.sub-menu::before {
         top: 11px;
         inset-inline-start: auto;
@@ -327,11 +301,7 @@
         transform: rotate(45deg);
     }
 
-    .nav--toggle-sub ul.user-profile-menu .sub-menu {
-        top: 0;
-        inset-inline-start: -100%;
-        inset-inline-end: auto;
-    }
+    
 
     .main-navigation ul.sub-menu li a {
         padding: 9px 15px;
@@ -575,7 +545,7 @@
     position: absolute;
     inset-inline-end: -10px;
     top: calc(100% + 20px);
-    z-index: 9;
+    z-index: var(--z-raised);
 }
 
 .menu-icons-wrapper .searchform {
@@ -587,7 +557,7 @@
     padding-inline-end: 40px;
     border-radius: var(--radius-md);
     border: 1px solid var(--global-border-color);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .1);
+    box-shadow: var(--shadow-sm);
 }
 
 .menu-icons-wrapper .searchform input[type="search"] {
@@ -621,7 +591,7 @@
     position: absolute;
     inset-inline-end: 0;
     top: 0;
-    z-index: 1;
+    z-index: var(--z-base);
     cursor: pointer;
     background: none;
     border: 0;
@@ -641,7 +611,7 @@
     font-size: 9px;
     font-weight: 700;
     background: var(--color-theme-primary);
-    color: #fff;
+    color: var(--color-white);
     border-radius: 50%;
     position: relative;
     top: -8px;
@@ -669,7 +639,7 @@
     .menu-icons-wrapper .top-menu-search-container {
         position: relative;
         inset-inline-start: 0;
-        display: block !important;
+        display: block;
     }
 
     .menu-icons-wrapper .search .search-icon {

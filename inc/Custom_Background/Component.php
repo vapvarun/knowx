@@ -58,6 +58,11 @@ class Component implements Component_Interface {
 	public function action_add_custom_background_support() {
 		add_theme_support(
 			'custom-background',
+			/**
+			 * Filters the arguments passed to add_theme_support( 'custom-background' ).
+			 *
+			 * @param array $args Theme support arguments.
+			 */
 			apply_filters(
 				'knowx_custom_background_args',
 				array(

@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * Extensibility:
  *   apply_filters( 'knowx_customizer_field_type_map', $type_map )
- *     lets KnowX Pro / extensions register additional control types
+ *     lets extensions register additional control types
  *     or override existing ones via a single add_filter() call.
  */
 class Field {
@@ -83,7 +83,11 @@ class Field {
 	 * @param array                 $args Field args (must include '_type').
 	 */
 	public static function register_with_manager( \WP_Customize_Manager $wp_customize, array $args ): void {
-		// Allow Pro / extensions to add or override control types.
+		/**
+		 * Filters the Customizer control types: field type => array( setting class, control class, is custom control ).
+		 *
+		 * @param array[] $type_map Registered types; add or replace one to support a new control.
+		 */
 		$type_map = apply_filters( 'knowx_customizer_field_type_map', self::$type_map );
 
 		$type = $args['_type'] ?? '';
@@ -96,7 +100,12 @@ class Field {
 			return;
 		}
 
-		// Allow callers to mutate args (e.g. force postMessage on settings rendered via dynamic CSS).
+		/**
+		 * Filters the arguments of one Customizer field before it is registered.
+		 *
+		 * @param array                $args         Field arguments (`settings`, `section`, `default`, `transport` ...).
+		 * @param \WP_Customize_Manager $wp_customize Customizer manager.
+		 */
 		$args = apply_filters( 'knowx_customizer_field_args', $args, $wp_customize );
 
 		$setting_id  = $args['settings'];
@@ -138,7 +147,7 @@ class Field {
 	 * Resolve the 'auto' transport to postMessage if output is provided,
 	 * else refresh. Pass-through for refresh/postMessage.
 	 *
-	 * Default is 'auto' (was 'refresh' pre-5.1.0): when a field declares
+	 * Default is 'auto': when a field declares
 	 * `'output' => array(...)`, the customizer-preview.js handler can update
 	 * inline CSS without a full preview reload. Defaulting to 'auto' makes
 	 * every output-producing field live-updatable by default — only fields
@@ -215,8 +224,8 @@ class Field {
 	 *   - Functional: rgb(R,G,B) / rgba(R,G,B,A) / hsl(H,S%,L%) / hsla(H,S%,L%,A)
 	 *
 	 * Returns the trimmed input on match, or '' on invalid/empty input. Matches
-	 * the color-alpha sanitizer's tolerance so customer-saved rgba
-	 * values from 5.0.x survive 5.1.0 customizer saves intact (no data loss).
+	 * the color-alpha sanitizer's tolerance so saved rgba values survive a save
+	 * intact (no data loss).
 	 *
 	 * @param mixed $value Customer-submitted color value.
 	 * @return string Validated color string, or '' if input doesn't match a
@@ -250,23 +259,19 @@ class Field {
 	 *   - 'on', 'yes', 'true', 'enable' → 1 (choices key, default values)
 	 *   - '0', 0, false, '', null, 'off', 'no', 'disable' → 0
 	 *
-	 * This catches a customer-data-loss bug where switches with default 'on'
-	 * (e.g. site_custom_colors, site_breadcrumbs, buddypress_avatar_style)
-	 * would silently flip OFF on save because the strict comparison missed
-	 * the 'on' string.
+	 * This catches a data-loss bug where switches with default 'on'
+	 * (e.g. site_breadcrumbs) would silently flip OFF on save because the strict
+	 * comparison missed the 'on' string.
 	 *
 	 * @param mixed $value Customer-submitted value.
 	 * @return int 1 for truthy, 0 for falsy.
 	 */
 	public static function sanitize_bool_int( $value ): int {
-		if ( is_bool( $value ) ) {
+		if ( is_bool( $value ) || is_int( $value ) ) {
 			return $value ? 1 : 0;
 		}
-		if ( is_int( $value ) ) {
-			return $value ? 1 : 0;
-		}
-		$truthy = array( '1', 'on', 'yes', 'true', 'enable' );
-		return in_array( strtolower( (string) $value ), $truthy, true ) ? 1 : 0;
+		// Unknown strings are off: a switch only turns on for a value that clearly means yes.
+		return in_array( strtolower( (string) $value ), array( '1', 'on', 'yes', 'true', 'enable' ), true ) ? 1 : 0;
 	}
 
 	/**
@@ -382,7 +387,6 @@ class Field {
 
 		// Compile array-form active_callback (array shape) to a closure.
 		if ( isset( $out['active_callback'] ) && is_array( $out['active_callback'] ) ) {
-			require_once __DIR__ . '/Active_Callback.php';
 			$out['active_callback'] = Active_Callback::compile( $out['active_callback'] );
 		}
 		return $out;

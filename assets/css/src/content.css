@@ -25,12 +25,6 @@
 # Post and page content
 --------------------------------------------------------------*/
 
-/* Custom rule  for sticky posts:
-.sticky {
-
-}
-*/
-
 .entry {
     margin-bottom: 1rem;
 }
@@ -77,7 +71,6 @@ h2.entry-title a:hover {
     margin: 1rem 0;
 }
 
-.post-layout:not(.grid-layout):not(.masory-layout) .entry-layout .entry-content,
 .default-layout .entry-layout .entry-content {
     border-bottom: 1px solid var(--global-border-color);
 }
@@ -98,7 +91,7 @@ h2.entry-title a:hover {
     margin-bottom: 10px;
 }
 
-.post-categories a {
+.entry-header .post-categories a {
     display: inline-block;
     margin-inline-end: 3px;
     margin-bottom: 3px;
@@ -106,7 +99,7 @@ h2.entry-title a:hover {
     font-size: 11px;
     line-height: 1.5;
     background: var(--color-theme-primary);
-    color: var(--color-on-primary) !important;
+    color: var(--color-on-primary);
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 2px;
@@ -260,16 +253,7 @@ article .entry-header {
     max-width: max-content;
 }
 
-.type-grade .entry-header,
-.type-grade .entry-footer,
-.type-level .entry-header,
-.type-level .entry-footer,
-.type-quests .entry-header,
-.type-quests .entry-footer,
-.type-badges .entry-header,
-.type-badges .entry-footer {
-    display: none;
-}
+
 
 @media (--content-query) {
     /* .page-content>*,
@@ -374,16 +358,9 @@ article .entry-header {
 }
 
 
-.post-layout.masonry-layout .entry-layout {
-    float: none;
-    width: auto;
-    margin: 0 0 30px;
-    break-inside: avoid;
-}
 
-.post-layout.masonry-layout .grid-sizer {
-    display: none;
-}
+
+
 
 /*--------------------------------------------------------------
 # Content navigation
@@ -496,19 +473,11 @@ article .entry-header {
 --------------------------------------------------------------*/
 
 /* Globally hidden elements when Infinite Scroll is supported and in use. */
-.infinite-scroll .posts-navigation,
-.infinite-scroll .pagination,
-.infinite-scroll.neverending .site-footer {
 
-	/* Theme Footer (when set to scrolling) */
-	display: none;
-}
 
 /* When Infinite Scroll has reached its end we need to re-display elements that
 were hidden (via .neverending) before. */
-.infinity-end.neverending .site-footer {
-	display: block;
-}
+
 
 /*--------------------------------------------------------------
 # Layouts
@@ -519,8 +488,7 @@ were hidden (via .neverending) before. */
     overflow: clip;
 }
 
-.blog .site-wrapper,
-.home-page .site-wrapper {
+.blog .site-wrapper {
     margin-top: 15px;
 }
 
@@ -545,39 +513,39 @@ were hidden (via .neverending) before. */
 
 @media (--sidebar-query) {
 
-    .has-sidebar-right:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper {
+    .has-sidebar-right .site-wrapper {
         display: grid;
         grid-template-columns: 3fr 1fr;
         grid-gap: 2rem;
         justify-content: center;
     }
 
-    .has-sidebar-left:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper {
+    .has-sidebar-left .site-wrapper {
         display: grid;
         grid-template-columns: 1fr 3fr;
         grid-gap: 2rem;
         justify-content: center;
     }
 
-    .has-sidebar-both:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper {
+    .has-sidebar-both .site-wrapper {
         display: grid;
         grid-template-columns: 1fr 2fr 1fr;
         grid-gap: 1.5rem;
         justify-content: center;
     }
 
-    .has-sidebar-both:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .primary-sidebar {
+    .has-sidebar-both .primary-sidebar {
         padding: 0;
         grid-column: 3;
         min-width: 0;
     }
 
-    .has-sidebar-both:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-main {
+    .has-sidebar-both .site-main {
         grid-column: 2;
         min-width: 0;
     }
 
-    .has-sidebar-both:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .primary-sidebar {
+    .has-sidebar-both .primary-sidebar {
         grid-column: 3;
         min-width: 0;
     }
@@ -591,7 +559,7 @@ were hidden (via .neverending) before. */
         min-width: 0;
     }
 
-    .has-sidebar-left:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-main {
+    .has-sidebar-left .site-main {
         grid-column: 2;
         min-width: 0;
     }
@@ -614,8 +582,7 @@ were hidden (via .neverending) before. */
         flex-flow: row wrap;
     }
 
-    .left-sidebar,
-    .woo-left-sidebar {
+    .left-sidebar {
         order: 2;
         width: 100%;
     }
@@ -625,8 +592,7 @@ were hidden (via .neverending) before. */
         width: 100%;
     }
 
-    .primary-sidebar,
-    .woo-primary-sidebar {
+    .primary-sidebar {
         order: 3;
         width: 100%;
     }

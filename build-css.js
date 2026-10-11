@@ -35,7 +35,6 @@ ensureDirectoryExistence( paths.styles.editorDest );
  * Get theme slug from merged config (fallback to 'knowx').
  * @type {string}
  */
-const themeSlug = themeConfig?.theme?.slug || 'knowx';
 
 /**
  * Resolve preload entries from config:
@@ -86,39 +85,6 @@ const preloadListAbs = preloadListRel.map( ( p ) =>
 
 const PRELOAD_SNIPPET = loadPreloadSnippet();
 const VIRTUAL_ID = 'virtual:preload.css';
-
-/**
- * Process CSS content to replace theme URLs with actual paths.
- *
- * Handles both url('~theme/path') and var(--theme-assets-path)/path and converts
- * them to proper absolute URLs with the theme path.
- *
- * @param {string} css - CSS content to process
- * @return {string} - Processed CSS content
- */
-function processThemeUrls( css ) {
-	const themeName = themeSlug;
-
-	// Replace ~theme/... (with or without quotes)
-	let processedCSS = css.replace(
-		/url\((['"]?)~theme\/([^'")]+)(['"]?)\)/g,
-		( match, openQuote, assetPath, closeQuote ) => {
-			const quote = openQuote || "'";
-			const endQuote = closeQuote || "'";
-			return `url(${ quote }/wp-content/themes/${ themeName }/${ assetPath }${ endQuote })`;
-		}
-	);
-
-	// Replace var(--theme-assets-path)/...
-	processedCSS = processedCSS.replace(
-		/var\(--theme-assets-path\)\/([^\s;)]+)/g,
-		( match, assetPath ) => {
-			return `url('/wp-content/themes/${ themeName }/assets/${ assetPath }')`;
-		}
-	);
-
-	return processedCSS;
-}
 
 /**
  * Insert a snippet right after the top-level @import block (and optional @charset).
@@ -263,7 +229,6 @@ const processCSSFile = async ( filePath, outputPath, injectPreload = true ) => {
 
 				// Apply text-level transforms that should be visible as "original" in maps
 				css = replaceInlineCSS( css );
-				css = processThemeUrls( css );
 
 				// Inject the virtual preload import AFTER the top-level import block (theme CSS only)
 				if ( injectPreload && PRELOAD_SNIPPET ) {

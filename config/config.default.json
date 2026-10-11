@@ -16,14 +16,10 @@
       "bypassPort": "8181",
       "https": false,
       "keyPath": "",
-      "certPath": "",
-      "devPort": 3000
+      "certPath": ""
     },
     "styles": {
       "stage": 3,
-      "autoprefixer": {
-        "grid": false
-      },
       "preload": [
         "_custom-media.css"
       ],
@@ -33,20 +29,10 @@
         "nesting-rules": true,
         "mobile-nav-type": "modern"
       }
-    },
-    "debug": {
-      "styles": false,
-      "scripts": false,
-      "phpcs": true
     }
-  },
-  "child": {
-    "enabled": false,
-    "parentSlug": ""
   },
   "export": {
     "compress": true,
-    "generatePotFile": true,
     "filesToCopy": [
       "LICENSE",
       "readme.txt",

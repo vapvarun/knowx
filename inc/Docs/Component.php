@@ -71,6 +71,8 @@ class Component implements Component_Interface {
 		add_action( 'add_meta_boxes_post', array( $this, 'add_version_box' ) );
 		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_order_panel' ) );
 		add_action( 'save_post_post', array( $this, 'save_version' ) );
+		add_action( 'add_meta_boxes', array( $this, 'add_schema_box' ) );
+		add_action( 'save_post', array( $this, 'save_schema_box' ) );
 		add_action( 'pre_get_posts', array( $this, 'order_category_archives' ) );
 	}
 
@@ -164,6 +166,25 @@ class Component implements Component_Interface {
 				},
 			)
 		);
+
+		// Lets an owner keep one page out of the FAQ structured data (see knowx_schema_graph()).
+		foreach ( array( 'post', 'page' ) as $post_type ) {
+			register_post_meta(
+				$post_type,
+				'knowx_faq_schema',
+				array(
+					'type'              => 'string',
+					'single'            => true,
+					'show_in_rest'      => true,
+					'sanitize_callback' => static function ( $value ) {
+						return 'off' === $value ? 'off' : '';
+					},
+					'auth_callback'     => static function ( $allowed, $meta_key, $post_id ) {
+						return current_user_can( 'edit_post', $post_id );
+					},
+				)
+			);
+		}
 
 		register_term_meta(
 			'category',
@@ -465,7 +486,7 @@ class Component implements Component_Interface {
 	 * @param \WP_Post $post    Post.
 	 */
 	public function invalidate_on_delete_post( $post_id, $post ) {
-		if ( $post instanceof \WP_Post && 'post' === $post->post_type ) {
+		if ( 'post' === $post->post_type ) {
 			$this->invalidate();
 		}
 	}
@@ -508,6 +529,49 @@ class Component implements Component_Interface {
 		$file = get_theme_file_path( '/assets/js/editor-order.min.js' );
 		wp_enqueue_script( 'knowx-editor-order', get_theme_file_uri( '/assets/js/editor-order.min.js' ), array( 'wp-plugins', 'wp-editor', 'wp-components', 'wp-data', 'wp-element', 'wp-i18n' ), knowx()->get_asset_version( $file ), true );
 		wp_set_script_translations( 'knowx-editor-order', 'knowx' );
+	}
+
+	/**
+	 * Adds the structured data box to articles and pages.
+	 *
+	 * @param string $post_type Post type being edited.
+	 */
+	public function add_schema_box( $post_type ) {
+		if ( in_array( $post_type, array( 'post', 'page' ), true ) ) {
+			add_meta_box( 'knowx-schema', __( 'Structured data', 'knowx' ), array( $this, 'render_schema_box' ), $post_type, 'side' );
+		}
+	}
+
+	/**
+	 * Prints the FAQ structured data switch.
+	 *
+	 * @param \WP_Post $post Post being edited.
+	 */
+	public function render_schema_box( $post ) {
+		wp_nonce_field( 'knowx_schema', 'knowx_schema_nonce' );
+		printf(
+			'<p><label><input type="checkbox" name="knowx_faq_schema_off" value="1"%1$s> %2$s</label></p><p class="description">%3$s</p>',
+			checked( 'off', get_post_meta( $post->ID, 'knowx_faq_schema', true ), false ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core builds the attribute.
+			esc_html__( 'Do not print FAQ structured data on this page', 'knowx' ),
+			esc_html__( 'Pages with two or more Details blocks are marked up as a FAQ for search engines. Tick this when the blocks are only collapsible sections.', 'knowx' )
+		);
+	}
+
+	/**
+	 * Saves the FAQ structured data switch.
+	 *
+	 * @param int $post_id Post id.
+	 */
+	public function save_schema_box( $post_id ) {
+		if ( ! isset( $_POST['knowx_schema_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['knowx_schema_nonce'] ) ), 'knowx_schema' ) || ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
+		if ( ! empty( $_POST['knowx_faq_schema_off'] ) ) {
+			update_post_meta( $post_id, 'knowx_faq_schema', 'off' );
+		} else {
+			delete_post_meta( $post_id, 'knowx_faq_schema' );
+		}
 	}
 
 	/**

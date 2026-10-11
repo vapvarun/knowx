@@ -8,9 +8,25 @@
 /**
  * Builds the breadcrumb trail for the current request.
  *
+ * The same items feed the visible trail and the BreadcrumbList schema.
+ *
  * @return array[] Items as array( 'label' => string, 'url' => string ); the last item has no url.
  */
 function knowx_get_breadcrumb_items() {
+	/**
+	 * Filters the breadcrumb items for the current request.
+	 *
+	 * @param array[] $items Items as array( 'label' => string, 'url' => string ); the last item has no url.
+	 */
+	return (array) apply_filters( 'knowx_breadcrumb_items', knowx_build_breadcrumb_items() );
+}
+
+/**
+ * Builds the breadcrumb items before the `knowx_breadcrumb_items` filter runs.
+ *
+ * @return array[] Items as array( 'label' => string, 'url' => string ).
+ */
+function knowx_build_breadcrumb_items() {
 	if ( is_front_page() ) {
 		return array();
 	}
@@ -116,7 +132,7 @@ function knowx_get_breadcrumb_items() {
 /**
  * Prints the breadcrumb trail.
  */
-function knowx_get_breadcrumb() {
+function knowx_the_breadcrumb() {
 	$items = knowx_get_breadcrumb_items();
 	if ( empty( $items ) ) {
 		return;

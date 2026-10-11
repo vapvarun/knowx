@@ -15,14 +15,9 @@ use function is_singular;
 use function pings_open;
 use function esc_url;
 use function get_bloginfo;
-use function wp_scripts;
 
 /**
  * Class for adding basic theme support, most of which is mandatory to be implemented by all themes.
- *
- * Exposes template tags:
- * * `knowx()->get_version()`
- * * `knowx()->get_asset_version( string $filepath )`
  */
 class Component implements Component_Interface {
 
@@ -44,7 +39,7 @@ class Component implements Component_Interface {
 		add_action( 'wp_head', array( $this, 'action_add_pingback_header' ) );
 		add_filter( 'body_class', array( $this, 'filter_body_classes_add_hfeed' ) );
 		add_filter( 'embed_defaults', array( $this, 'filter_embed_dimensions' ) );
-		add_action( 'init', array( $this, 'knowx_theme_block_styles' ) );
+		add_action( 'init', array( $this, 'action_register_block_styles' ) );
 	}
 
 	/**
@@ -117,32 +112,29 @@ class Component implements Component_Interface {
 	/**
 	 * Register block styles.
 	 */
-	public function knowx_theme_block_styles() {
-		if ( function_exists( 'register_block_style' ) ) {
-			$callouts = array(
-				'knowx-note'    => __( 'Note', 'knowx' ),
-				'knowx-tip'     => __( 'Tip', 'knowx' ),
-				'knowx-warning' => __( 'Warning', 'knowx' ),
-				'knowx-danger'  => __( 'Danger', 'knowx' ),
-			);
-			foreach ( $callouts as $name => $label ) {
-				register_block_style(
-					'core/group',
-					array(
-						'name'  => $name,
-						'label' => $label,
-					)
-				);
-			}
-
+	public function action_register_block_styles() {
+		$callouts = array(
+			'knowx-note'    => __( 'Note', 'knowx' ),
+			'knowx-tip'     => __( 'Tip', 'knowx' ),
+			'knowx-warning' => __( 'Warning', 'knowx' ),
+			'knowx-danger'  => __( 'Danger', 'knowx' ),
+		);
+		foreach ( $callouts as $name => $label ) {
 			register_block_style(
-				'core/image',
+				'core/group',
 				array(
-					'name'  => 'knowx-border',
-					'label' => esc_html__( 'Borders', 'knowx' ),
-					'style' => 'knowx-border-style',
+					'name'  => $name,
+					'label' => $label,
 				)
 			);
 		}
+
+		register_block_style(
+			'core/image',
+			array(
+				'name'  => 'knowx-border',
+				'label' => esc_html__( 'Borders', 'knowx' ),
+			)
+		);
 	}
 }

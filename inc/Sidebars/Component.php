@@ -21,7 +21,6 @@ use function dynamic_sidebar;
  *
  * Exposes template tags:
  * * `knowx()->is_right_sidebar_active()`
- * * `knowx()->display_primary_sidebar()`
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/
  */
@@ -51,13 +50,13 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *               a callable or an array with key 'callback'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags(): array {
 		return array(
-			'is_left_sidebar_active'  => array( $this, 'is_left_sidebar_active' ),
 			'display_left_sidebar'    => array( $this, 'display_left_sidebar' ),
+			'is_left_sidebar_active'  => array( $this, 'is_left_sidebar_active' ),
 			'is_right_sidebar_active' => array( $this, 'is_right_sidebar_active' ),
 			'display_right_sidebar'   => array( $this, 'display_right_sidebar' ),
 
@@ -92,53 +91,20 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			)
 		);
 
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Footer 1', 'knowx' ),
-				'id'            => 'footer-1',
-				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
-				'before_widget' => '<section id="%1$s" class="widget %2$s">',
-				'after_widget'  => '</section>',
-				'before_title'  => '<h3 class="widget-title">',
-				'after_title'   => '</h3>',
-			)
-		);
-
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Footer 2', 'knowx' ),
-				'id'            => 'footer-2',
-				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
-				'before_widget' => '<section id="%1$s" class="widget %2$s">',
-				'after_widget'  => '</section>',
-				'before_title'  => '<h3 class="widget-title">',
-				'after_title'   => '</h3>',
-			)
-		);
-
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Footer 3', 'knowx' ),
-				'id'            => 'footer-3',
-				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
-				'before_widget' => '<section id="%1$s" class="widget %2$s">',
-				'after_widget'  => '</section>',
-				'before_title'  => '<h3 class="widget-title">',
-				'after_title'   => '</h3>',
-			)
-		);
-
-		register_sidebar(
-			array(
-				'name'          => esc_html__( 'Footer 4', 'knowx' ),
-				'id'            => 'footer-4',
-				'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
-				'before_widget' => '<section id="%1$s" class="widget %2$s">',
-				'after_widget'  => '</section>',
-				'before_title'  => '<h3 class="widget-title">',
-				'after_title'   => '</h3>',
-			)
-		);
+		for ( $i = 1; $i <= 4; $i++ ) {
+			register_sidebar(
+				array(
+					/* translators: %d: footer column number. */
+					'name'          => sprintf( esc_html__( 'Footer %d', 'knowx' ), $i ),
+					'id'            => 'footer-' . $i,
+					'description'   => esc_html__( 'Add widgets here.', 'knowx' ),
+					'before_widget' => '<section id="%1$s" class="widget %2$s">',
+					'after_widget'  => '</section>',
+					'before_title'  => '<h3 class="widget-title">',
+					'after_title'   => '</h3>',
+				)
+			);
+		}
 	}
 
 	/**
@@ -150,7 +116,12 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	public function filter_body_classes( array $classes ): array {
 		global $template;
 
-		if ( in_array( basename( (string) $template ), array( 'front-page.php', '404.php' ), true ) ) {
+		if ( in_array( basename( (string) $template ), array( '404.php' ), true ) ) {
+			return $classes;
+		}
+
+		// Docs pages (product, section, search, archives and product articles) have no sidebar.
+		if ( is_search() || is_archive() || is_404() || ( is_singular( 'post' ) && knowx_current_product() ) || is_page_template( array( 'page-faq.php', 'page-changelog.php', 'full-width.php', 'full-width-container.php', 'page-knowledgebase-one.php', 'page-knowledgebase-two.php' ) ) ) {
 			return $classes;
 		}
 

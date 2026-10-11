@@ -22,41 +22,31 @@ while ( have_posts() ) {
 $knowx_article = ob_get_clean();
 $knowx_toc     = knowx_is_truthy( knowx_mod( 'knowx_show_toc' ) ) ? knowx_toc_items() : array();
 
-$knowx_index   = array_search( get_queried_object_id(), wp_list_pluck( $knowx_flat, 'id' ), true );
-$knowx_prev    = false !== $knowx_index && $knowx_index > 0 ? $knowx_flat[ $knowx_index - 1 ] : null;
-$knowx_next    = false !== $knowx_index && isset( $knowx_flat[ $knowx_index + 1 ] ) ? $knowx_flat[ $knowx_index + 1 ] : null;
-$knowx_related = array();
-$knowx_scan = array_merge( array( $knowx_tree['root'] ), $knowx_tree['nodes'] );
-foreach ( $knowx_scan as $knowx_node ) {
-	if ( in_array( get_queried_object_id(), wp_list_pluck( $knowx_node['posts'], 'id' ), true ) ) {
-		$knowx_related = array_slice(
-			array_filter(
-				$knowx_node['posts'],
-				static function ( $item ) {
-					return get_queried_object_id() !== $item['id'];
-				}
-			),
-			0,
-			5
-		);
-		break;
-	}
-}
+$knowx_near    = knowx_article_neighbours( $knowx_flat, $knowx_tree );
+$knowx_prev    = $knowx_near['prev'];
+$knowx_next    = $knowx_near['next'];
+$knowx_related = $knowx_near['related'];
 ?>
-<?php do_action( 'knowx_sub_header' ); ?>
-<?php do_action( 'knowx_before_content' ); ?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_sub_header' );
+?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_before_content' );
+?>
 
 <div class="knowx-docs">
 	<?php get_template_part( 'template-parts/docs/sidebar' ); ?>
 
-	<main id="primary" class="knowx-docs-main">
-		<?php if ( $knowx_toc ) : ?>
-			<details class="knowx-toc-panel">
-				<summary><?php esc_html_e( 'On this page', 'knowx' ); ?></summary>
-				<?php knowx_render_toc( $knowx_toc ); ?>
-			</details>
-		<?php endif; ?>
+	<?php if ( $knowx_toc ) : ?>
+		<details class="knowx-toc-panel">
+			<summary><?php esc_html_e( 'On this page', 'knowx' ); ?></summary>
+			<?php knowx_render_toc( $knowx_toc ); ?>
+		</details>
+	<?php endif; ?>
 
+	<main id="primary" class="knowx-docs-main">
 		<?php echo $knowx_article; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup built by the article template part. ?>
 
 		<?php if ( $knowx_prev || $knowx_next ) : ?>
@@ -81,8 +71,10 @@ foreach ( $knowx_scan as $knowx_node ) {
 			</section>
 		<?php endif; ?>
 
+		<?php get_template_part( 'template-parts/docs/help' ); ?>
+
 		<?php
-		if ( comments_open() || get_comments_number() ) {
+		if ( knowx_is_truthy( knowx_mod( 'knowx_article_comments' ) ) && ( comments_open() || get_comments_number() ) ) {
 			knowx()->print_styles( 'knowx-comments' );
 			comments_template();
 		}
@@ -97,4 +89,7 @@ foreach ( $knowx_scan as $knowx_node ) {
 	<?php endif; ?>
 </div>
 
-<?php do_action( 'knowx_after_content' ); ?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_after_content' );
+?>

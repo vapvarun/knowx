@@ -7,13 +7,17 @@
 
 namespace KnowX\KnowX;
 
+$knowx_post = get_post();
+
 $taxonomies = wp_list_filter(
-	get_object_taxonomies( $post, 'objects' ),
+	get_object_taxonomies( $knowx_post, 'objects' ),
 	array(
 		'public' => true,
 	)
 );
 
+// Print the wrapper only when at least one term list exists.
+ob_start();
 ?>
 <div class="entry-taxonomies">
 	<?php
@@ -23,22 +27,21 @@ $taxonomies = wp_list_filter(
 		/* translators: separator between taxonomy terms */
 		$separator = _x( ', ', 'list item separator', 'knowx' );
 
+		// Categories are printed once, in the entry meta line.
+		if ( 'category' === $taxo->name ) {
+			continue;
+		}
+
 		switch ( $taxo->name ) {
-			case 'category':
-				$class = 'category-links term-links';
-				$list  = get_the_category_list( esc_html( $separator ), '', $post->ID );
-				/* translators: %s: list of taxonomy terms */
-				$placeholder_text = __( 'Posted in %s', 'knowx' );
-				break;
 			case 'post_tag':
 				$class = 'tag-links term-links';
-				$list  = get_the_tag_list( '', esc_html( $separator ), '', $post->ID );
+				$list  = get_the_tag_list( '', esc_html( $separator ), '', $knowx_post->ID );
 				/* translators: %s: list of taxonomy terms */
 				$placeholder_text = __( 'Tagged %s', 'knowx' );
 				break;
 			default:
 				$class            = str_replace( '_', '-', $taxo->name ) . '-links term-links';
-				$list             = get_the_term_list( $post->ID, $taxo->name, '', esc_html( $separator ), '' );
+				$list             = get_the_term_list( $knowx_post->ID, $taxo->name, '', esc_html( $separator ), '' );
 				$placeholder_text = sprintf(
 					/* translators: %s: taxonomy name */
 					__( '%s:', 'knowx' ),
@@ -62,3 +65,8 @@ $taxonomies = wp_list_filter(
 	}
 	?>
 </div><!-- .entry-taxonomies -->
+<?php
+$knowx_taxonomies = ob_get_clean();
+if ( false !== strpos( $knowx_taxonomies, 'term-links' ) ) {
+	echo $knowx_taxonomies; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built above from escaped term lists.
+}

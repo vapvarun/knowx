@@ -21,8 +21,14 @@ $knowx_is_root = $knowx_product && $knowx_product['id'] === (int) $knowx_term->t
 $knowx_per     = 5;
 $knowx_updated = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ? knowx_term_updated( $knowx_term->term_id ) : null;
 ?>
-<?php do_action( 'knowx_sub_header' ); ?>
-<?php do_action( 'knowx_before_content' ); ?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_sub_header' );
+?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_before_content' );
+?>
 
 <div class="knowx-docs">
 	<?php get_template_part( 'template-parts/docs/sidebar' ); ?>
@@ -45,7 +51,7 @@ $knowx_updated = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ? knowx_te
 					<span aria-hidden="true">&middot;</span>
 					<?php echo esc_html( knowx_article_count_label( $knowx_product['count'] ) ); ?>
 				</p>
-				<?php $knowx_start = '' !== $knowx_product['start'] ? $knowx_product['start'] : ( $knowx_first ? $knowx_first[0]['url'] : '' ); ?>
+				<?php $knowx_start = knowx_start_url( $knowx_product, $knowx_first ); ?>
 				<?php if ( '' !== $knowx_start ) : ?>
 					<a class="knowx-start" href="<?php echo esc_url( $knowx_start ); ?>"><?php esc_html_e( 'Start here', 'knowx' ); ?></a>
 				<?php endif; ?>
@@ -90,6 +96,9 @@ $knowx_updated = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ? knowx_te
 	</main>
 </div>
 
-<?php do_action( 'knowx_after_content' ); ?>
+<?php
+/** This action is documented in inc/extra.php. */
+do_action( 'knowx_after_content' );
+?>
 <?php
 get_footer();

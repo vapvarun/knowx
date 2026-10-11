@@ -1,5 +1,6 @@
 name: CI
 
+# Every job blocks the merge. The same commands run on a developer machine (see CONTRIBUTING.md).
 on:
   push:
     branches: [main, master]
@@ -13,112 +14,68 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.1', '8.2', '8.3', '8.4']
+        php: ['8.1', '8.2', '8.3', '8.4', '8.5']
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP ${{ matrix.php }}
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
           tools: none
-
       - name: Check PHP syntax
-        run: find . -name "*.php" -not -path "./vendor/*" -not -path "./node_modules/*" | xargs php -l
+        shell: bash
+        run: |
+          status=0
+          while IFS= read -r -d '' file; do
+            if ! out=$(php -l "$file" 2>&1); then echo "$out"; status=1; fi
+          done < <(find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -not -path './dist/*' -print0)
+          exit $status
 
-  phpstan:
-    name: PHPStan
+  php-quality:
+    name: PHPCS, PHPStan and unit tests
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
           tools: composer
+      - name: Install PHP dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+      - name: WordPress coding standards (repo config, 0 errors and 0 warnings)
+        run: vendor/bin/phpcs --standard=phpcs.xml.dist
+      - name: PHPStan level 5
+        run: vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+      - name: Unit tests
+        run: vendor/bin/phpunit
 
-      - name: Install PHPStan and WordPress stubs
-        run: composer require --dev szepeviktor/phpstan-wordpress phpstan/phpstan --no-interaction 2>/dev/null || true
-
-      - name: Create phpstan.neon if not exists
-        run: |
-          if [ ! -f phpstan.neon ] && [ ! -f phpstan.neon.dist ]; then
-            cat > phpstan.neon << 'NEON'
-          includes:
-            - vendor/szepeviktor/phpstan-wordpress/extension.neon
-          parameters:
-            level: 5
-            paths:
-              - .
-            excludePaths:
-              - vendor
-              - node_modules
-              - tests
-          NEON
-          fi
-
-      - name: Run PHPStan
-        run: vendor/bin/phpstan analyse --no-progress --memory-limit=512M 2>/dev/null || echo "PHPStan completed with warnings"
-
-  wpcs:
-    name: WordPress Coding Standards
+  assets:
+    name: Lint and build (Node 22)
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Lint (ESLint, tsc, stylelint, theme.json)
+        run: npm run lint
+      - name: Build and check that the committed built files are current
+        run: |
+          npm run build
+          git diff --exit-code -- assets
+          test -z "$(git status --porcelain -- assets)"
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+  integration:
+    name: Integration tests (WordPress)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
-          tools: composer, cs2pr
-
-      - name: Install WPCS
-        run: composer require --dev wp-coding-standards/wpcs:"^3.0" --no-interaction 2>/dev/null || true
-
-      - name: Run PHPCS with WordPress-Extra standard
-        run: vendor/bin/phpcs --standard=WordPress-Extra --extensions=php --ignore=vendor,node_modules,build,assets/js/min -n . 2>/dev/null || echo "WPCS completed with warnings"
-
-  theme-json:
-    name: Validate theme.json
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Validate theme.json
-        run: |
-          if [ -f theme.json ]; then
-            echo "Validating theme.json..."
-            python3 -c "import json; json.load(open('theme.json'))" && echo "theme.json is valid JSON" || { echo "::error::theme.json is invalid JSON"; exit 1; }
-          else
-            echo "No theme.json found, skipping validation."
-          fi
-
-  stylelint:
-    name: Stylelint CSS
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Run Stylelint
-        run: |
-          if [ -f .stylelintrc ] || [ -f .stylelintrc.json ] || [ -f .stylelintrc.yml ] || [ -f stylelint.config.js ] || [ -f stylelint.config.cjs ]; then
-            echo "Stylelint config found, running linter..."
-            npm install --save-dev stylelint stylelint-config-standard 2>/dev/null || true
-            npx stylelint "**/*.css" --ignore-pattern="vendor/**" --ignore-pattern="node_modules/**" --ignore-pattern="build/**" 2>/dev/null || echo "Stylelint completed with warnings"
-          else
-            echo "No stylelint config found, skipping."
-          fi
+          tools: composer
+      - run: composer install --no-interaction --no-progress --prefer-dist
+      - name: Run the integration suite against the latest WordPress
+        run: bash tests/docker/run-integration.sh

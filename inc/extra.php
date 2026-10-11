@@ -6,6 +6,15 @@
  */
 
 // Content wrapper.
+/**
+ * Hooks around the main content, fired by every template.
+ *
+ * - `knowx_sub_header`: after the header; prints the breadcrumb bar.
+ * - `knowx_before_content`: opens the `.site-wrapper` that holds the content and the sidebars.
+ * - `knowx_after_content`: closes it.
+ *
+ * Add your own callbacks with add_action( 'knowx_before_content', ... ).
+ */
 if ( ! function_exists( 'knowx_content_top' ) ) {
 	/**
 	 * Opens the site wrapper that holds the content and the sidebars.
@@ -55,13 +64,6 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 }
 
 /**
- * Prints the breadcrumb trail.
- */
-function knowx_the_breadcrumb() {
-	knowx_get_breadcrumb();
-}
-
-/**
  * Function Footer Custom Text
  */
 if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
@@ -77,6 +79,11 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 			return '';
 		}
 
+		/**
+		 * Filters the theme name and link used for the [theme_author] placeholder in the copyright line.
+		 *
+		 * @param array $theme_author Keys `theme_name` and `theme_author_url`.
+		 */
 		$theme_author = apply_filters(
 			'knowx_theme_author',
 			array(
@@ -88,6 +95,11 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 		$copyright    = str_replace( '[site_title]', '<span class="knowx-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $copyright );
 		$copyright    = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $copyright );
 
+		/**
+		 * Filters the footer copyright line after the placeholders are replaced.
+		 *
+		 * @param string $copyright Markup of the copyright line.
+		 */
 		return apply_filters( 'knowx_footer_copyright_text', $copyright );
 	}
 }
@@ -116,13 +128,12 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 	 */
 	function knowx_posted_on() {
 
-		global $post;
-
 		if ( is_sticky() && is_home() && ! is_paged() ) {
 			echo '<span class="entry-featured">' . esc_html__( 'Sticky', 'knowx' ) . '</span>';
 		}
 
-		if ( in_array( 'category', get_object_taxonomies( get_post_type() ) ) && knowx_categorized_blog() ) {
+		// With a featured image the categories sit on the image (entry_header.php); without one they are listed here.
+		if ( ! ( has_post_thumbnail() && ! is_search() ) && in_array( 'category', get_object_taxonomies( get_post_type() ), true ) && knowx_categorized_blog() ) {
 			echo '<span class="entry-cat-links">' . get_the_category_list( ', ' ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		}
 

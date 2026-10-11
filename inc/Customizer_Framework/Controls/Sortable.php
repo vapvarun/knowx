@@ -31,7 +31,7 @@ class Sortable extends \WP_Customize_Control {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['choices'] = $this->choices ?? array();
+		$this->json['choices'] = $this->choices;
 	}
 
 	/**

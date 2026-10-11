@@ -19,22 +19,20 @@ get_header();
 knowx()->print_styles( 'knowx-content' );
 knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
-$default_sidebar = knowx_mod( 'sidebar_option' );
-
 
 ?>
 
-	<?php do_action( 'knowx_sub_header' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_sub_header' );
+	?>
 	
-	<?php do_action( 'knowx_before_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_before_content' );
+	?>
 
-	<?php if ( 'left' == $default_sidebar || 'both' == $default_sidebar ) : ?>
-		<aside id="secondary-left" class="left-sidebar widget-area" aria-label="<?php esc_attr_e( 'Left sidebar', 'knowx' ); ?>">
-			<div class="sticky-sidebar">
-				<?php knowx()->display_left_sidebar(); ?>
-			</div>
-		</aside>
-	<?php endif; ?>
+	<?php get_template_part( 'template-parts/layout/sidebar', 'left' ); ?>
 	
 	<main id="primary" class="site-main">
 		
@@ -45,8 +43,7 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 				get_template_part( 'template-parts/content/page_header' );
 			}
 
-			$classes = get_body_class();
-			if ( in_array( 'blog', $classes ) || in_array( 'archive', $classes ) || in_array( 'search', $classes ) ) {
+			if ( is_home() ) {
 				?>
 			<div class="post-layout row default-layout">
 				<?php
@@ -75,14 +72,11 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 		?>
 
 	</main><!-- #primary -->
-	<?php if ( 'right' == $default_sidebar || 'both' == $default_sidebar ) : ?>
-		<aside id="secondary" class="primary-sidebar widget-area" aria-label="<?php esc_attr_e( 'Sidebar', 'knowx' ); ?>">
-			<div class="sticky-sidebar">
-				<?php knowx()->display_right_sidebar(); ?>
-			</div>
-		</aside>
-	<?php endif; ?>
+	<?php get_template_part( 'template-parts/layout/sidebar', 'right' ); ?>
 
-	<?php do_action( 'knowx_after_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_after_content' );
+	?>
 <?php
 get_footer();

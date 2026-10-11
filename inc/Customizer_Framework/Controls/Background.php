@@ -32,9 +32,7 @@ class Background extends \WP_Customize_Control {
 	 */
 	public function to_json() {
 		parent::to_json();
-		$this->json['default'] = $this->setting && is_array( $this->setting->default )
-			? $this->setting->default
-			: array();
+		$this->json['default'] = $this->setting ? wp_parse_args( $this->setting->default, array() ) : array();
 	}
 
 	/**

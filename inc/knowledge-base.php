@@ -158,34 +158,6 @@ function knowx_kb_max_categories() {
 }
 
 /**
- * Top-level categories that contain posts (Layout One tiles).
- *
- * @return array[] Category items.
- */
-function knowx_kb_top_categories() {
-	$exclude = knowx_kb_excluded_ids();
-
-	return knowx_kb_cached(
-		'top-' . implode( ',', $exclude ),
-		static function () use ( $exclude ) {
-			return knowx_kb_map_terms(
-				get_terms(
-					array(
-						'taxonomy'   => 'category',
-						'parent'     => 0,
-						'hide_empty' => true,
-						'exclude'    => $exclude,
-						'orderby'    => 'name',
-						'order'      => 'ASC',
-						'number'     => knowx_kb_max_categories(),
-					)
-				)
-			);
-		}
-	);
-}
-
-/**
  * Recently updated posts outside the excluded categories.
  *
  * @param int $limit Number of posts.
@@ -286,8 +258,8 @@ function knowx_kb_post_query( $exclude, $args = array() ) {
  * @return array[] Category items, each with a `posts` list.
  */
 function knowx_kb_sections() {
-	$exclude  = knowx_kb_excluded_ids();
-	$per_cat  = (int) knowx_mod( 'knowx_posts' );
+	$exclude = knowx_kb_excluded_ids();
+	$per_cat = (int) knowx_mod( 'knowx_posts' );
 	if ( $per_cat < 1 ) {
 		$per_cat = 10; // An empty field means the default.
 	}

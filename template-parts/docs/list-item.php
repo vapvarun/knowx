@@ -10,16 +10,7 @@ namespace KnowX\KnowX;
 $knowx_version = knowx_article_version( get_the_ID() );
 ?>
 <?php
-$knowx_trail = array();
-if ( is_search() || is_tag() || is_date() || is_author() ) {
-	$knowx_cats = get_the_category();
-	if ( $knowx_cats ) {
-		$knowx_ids = array_reverse( get_ancestors( $knowx_cats[0]->term_id, 'category', 'taxonomy' ) );
-		foreach ( array_merge( $knowx_ids, array( $knowx_cats[0]->term_id ) ) as $knowx_id ) {
-			$knowx_trail[] = get_cat_name( $knowx_id );
-		}
-	}
-}
+$knowx_trail = knowx_entry_trail();
 ?>
 <li <?php post_class( 'knowx-article-card' ); ?>>
 	<?php if ( $knowx_trail ) : ?>

@@ -11,9 +11,6 @@ use KnowX\KnowX\Component_Interface;
 use function add_action;
 use function add_theme_support;
 use function apply_filters;
-use function get_theme_support;
-use function display_header_text;
-use function esc_attr;
 
 /**
  * Class for adding custom header support.
@@ -39,11 +36,16 @@ class Component implements Component_Interface {
 	}
 
 	/**
-	 * Adds support for the Custom Logo feature.
+	 * Adds support for the Custom Header feature.
 	 */
 	public function action_add_custom_header_support() {
 		add_theme_support(
 			'custom-header',
+			/**
+			 * Filters the arguments passed to add_theme_support( 'custom-header' ).
+			 *
+			 * @param array $args Theme support arguments.
+			 */
 			apply_filters(
 				'knowx_custom_header_args',
 				array(

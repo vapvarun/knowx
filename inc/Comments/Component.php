@@ -17,18 +17,12 @@ use function get_option;
 use function wp_enqueue_script;
 use function wp_list_comments;
 use function the_comments_navigation;
-use function the_ID;
-use function esc_attr;
-use function add_filter;
-use function esc_html_e;
 
 /**
  * Class for managing comments UI.
  *
  * Exposes template tags:
  * * `knowx()->the_comments( array $args = array() )`
- *
- * @link https://wordpress.org/plugins/amp/
  */
 class Component implements Component_Interface, Templating_Component_Interface {
 
@@ -52,7 +46,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 * Gets template tags to expose as methods on the Template_Tags class instance, accessible through `knowx()`.
 	 *
 	 * @return array Associative array of $method_name => $callback_info pairs. Each $callback_info must either be
-	 *               a callable or an array with key 'callable'. This approach is used to reserve the possibility of
+	 *               a callable or an array with key 'callback'. This approach is used to reserve the possibility of
 	 *               adding support for further arguments in the future.
 	 */
 	public function template_tags(): array {

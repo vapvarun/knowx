@@ -141,7 +141,7 @@ defined( 'ABSPATH' ) || exit;
 			'priority' => 10,
 			'output'   => array(
 				array(
-					'element' => 'body:not(.block-editor-page):not(.wp-core-ui), body:not(.block-editor-page):not(.wp-core-ui) pre',
+					'element' => 'body:not(.block-editor-page):not(.wp-core-ui)',
 				),
 			),
 		)

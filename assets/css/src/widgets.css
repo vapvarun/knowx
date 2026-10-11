@@ -99,48 +99,23 @@ ul.knowx-categories-lists ul.children li a {
 }
 
 /* Collapsing Widget */
-.widget_collapscat ul.collapsing {
-    overflow: hidden;
-}
 
-.widget_collapscat ul li.collapsing.categories {
-    float: none;
-    border-top: 1px solid var(--global-border-color);
-}
 
-.widget_collapscat ul li.collapsing.categories:first-child {
-    border-top: 0;
-}
 
-.widget_collapscat ul li a {
-    display: inline-block !important;
-    width: auto !important;
-    padding: 10px 15px !important;
-}
 
-.widget_collapscat li.collapsing.categories {
-    text-indent: 0 !important;
-    margin: 0 !important;
-    position: relative;
-}
 
-.widget_collapscat li.collapsing.categories::before {
-    position: absolute;
-    top: 8px;
-}
 
-.widget_collapscat li.collapsing.categories .sym img {
-    display: inline-block;
-}
 
-.widget_collapscat li.collapsing.categories.expandable {
-    margin-inline-start: 0;
-    text-indent: 0;
-}
 
-.widget_collapscat span.sym {
-    padding-inline-end: 10px;
-}
+
+
+
+
+
+
+
+
+
 
 /* Search widget. */
 .widget_search .search-submit {

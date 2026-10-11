@@ -86,13 +86,13 @@ address {
 /* stylelint-disable */
 pre {
     background: var(--color-surface-alt);
-    font-family: "Courier 10 Pitch", Courier, monospace !important;
+    font-family: "Courier 10 Pitch", Courier, monospace;
     font-size: 0.9375rem;
     line-height: 1.6;
     margin-bottom: 1.5em;
     max-width: 100%;
     overflow: auto;
-    padding: 1.5em !important;
+    padding: 1.5em;
 }
 /* stylelint-enable */
 
@@ -112,8 +112,8 @@ acronym {
 
 mark,
 ins {
-    background: #fff9c0;
-    color: #111;
+    background: var(--color-mark-bg);
+    color: var(--color-mark-text);
     text-decoration: none;
 }
 

@@ -15,14 +15,14 @@
     border-top: 0;
     background: var(--color-surface);
     min-height: 51px;
-    z-index: 999;
+    z-index: var(--z-sticky);
     box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 5px 10px 0 rgba(189, 189, 189, 0.15);
 }
 
 .sticky-header .site-header-wrapper {
     position: sticky;
     top: var(--wp-admin--admin-bar--height, 0);
-    z-index: 999;
+    z-index: var(--z-sticky);
 }
 
 @media (max-width: 600px) {
@@ -33,7 +33,7 @@
 
 @media (max-width: 767px) {
     .site-header-wrapper {
-        z-index: 9999;
+        z-index: var(--z-drawer);
     }
 }
 

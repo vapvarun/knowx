@@ -7,45 +7,22 @@
 
 namespace KnowX\KnowX;
 
+$knowx_products = knowx_products();
 ?>
-<section class="error">
-	<?php get_template_part( 'template-parts/content/page_header' ); ?>
+<section class="error knowx-404">
+	<header class="page-header">
+		<h1 class="page-title"><?php esc_html_e( 'Page not found', 'knowx' ); ?></h1>
+		<p><?php esc_html_e( 'The page may have moved or been removed. Search the documentation or pick a product below.', 'knowx' ); ?></p>
+	</header>
 
-	<div class="page-content">
-		<p>
-			<?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'knowx' ); ?>
-		</p>
+	<?php get_search_form(); ?>
 
-		<?php
-		get_search_form();
-
-		knowx()->print_styles( 'knowx-widgets' );
-		the_widget( 'WP_Widget_Recent_Posts' );
-		?>
-
-		<div class="widget widget_categories">
-			<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'knowx' ); ?></h2>
-			<ul>
-			<?php
-			wp_list_categories(
-				array(
-					'orderby'    => 'count',
-					'order'      => 'DESC',
-					'show_count' => 1,
-					'title_li'   => '',
-					'number'     => 10,
-				)
-			);
-			?>
-			</ul>
-		</div><!-- .widget -->
-
-		<?php
-		/* translators: %1$s: smiley */
-		$archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'knowx' ), convert_smilies( ':)' ) ) . '</p>';
-		the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$archive_content" );
-
-		the_widget( 'WP_Widget_Tag_Cloud' );
-		?>
-	</div><!-- .page-content -->
+	<?php if ( $knowx_products ) : ?>
+		<h2><?php esc_html_e( 'Browse the documentation', 'knowx' ); ?></h2>
+		<ul class="knowx-article-list">
+			<?php foreach ( $knowx_products as $knowx_product ) : ?>
+				<li><a href="<?php echo esc_url( $knowx_product['url'] ); ?>"><?php echo esc_html( $knowx_product['name'] ); ?></a></li>
+			<?php endforeach; ?>
+		</ul>
+	<?php endif; ?>
 </section><!-- .error -->

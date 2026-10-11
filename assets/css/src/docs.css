@@ -1,0 +1,733 @@
+/*--------------------------------------------------------------
+# Docs layout: product cards, section tree, article, contents
+--------------------------------------------------------------*/
+
+/* Product cards on the docs home page. */
+.knowx-products {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+	gap: 1.25rem;
+	margin: 0;
+	padding: 2.5rem 0;
+	list-style: none;
+}
+
+.knowx-product-card {
+	--card-accent: var(--color-theme-primary);
+
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+	padding: 1.5rem;
+	background: var(--color-surface);
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--radius-lg);
+	color: var(--global-font-color);
+	transition: box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.knowx-product-card:hover,
+.knowx-product-card:focus-within {
+	border-color: var(--card-accent);
+	box-shadow: 0 8px 28px rgb(0 0 0 / 10%);
+}
+
+.knowx-product-card .knowx-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3rem;
+	height: 3rem;
+	border-radius: var(--radius-lg);
+	background: color-mix(in srgb, var(--card-accent) 12%, var(--color-surface));
+	color: var(--card-accent);
+}
+
+.knowx-product-card h2 {
+	margin: 0.25rem 0 0;
+	font-size: 1.25rem;
+}
+
+/* The whole card is clickable: the title link stretches over it. */
+.knowx-product-link {
+	color: var(--color-heading);
+}
+
+.knowx-product-link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: var(--radius-lg);
+}
+
+.knowx-product-link:focus-visible {
+	outline: none;
+}
+
+.knowx-product-card:has(.knowx-product-link:focus-visible) {
+	outline: 2px solid var(--card-accent);
+	outline-offset: 2px;
+}
+
+.knowx-product-desc {
+	margin: 0;
+	color: var(--color-muted);
+}
+
+.knowx-product-sections {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin: 0.25rem 0 0;
+	padding: 0;
+	list-style: none;
+}
+
+.knowx-product-sections a {
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	padding: 0.2rem 0.65rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: 999px;
+	color: var(--global-font-color);
+	font-size: 0.85rem;
+}
+
+.knowx-product-sections a:hover {
+	border-color: var(--card-accent);
+	color: var(--color-heading);
+}
+
+.knowx-product-count {
+	margin-block-start: auto;
+	padding-block-start: 0.5rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	color: color-mix(in srgb, var(--card-accent) 65%, var(--color-heading));
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.knowx-product-card {
+		transition: none;
+	}
+}
+
+/*--------------------------------------------------------------
+# Three-column layout. Below 1100px the tree and contents stack above the article.
+--------------------------------------------------------------*/
+
+.knowx-docs {
+	display: grid;
+	grid-column: 1 / -1;
+	width: 100%;
+	grid-template-columns: minmax(0, 1fr);
+	gap: 1.5rem 2.5rem;
+	padding-block: 2rem 4rem;
+}
+
+.knowx-docs-main {
+	min-width: 0;
+}
+
+@media (width >= 1100px) {
+	.knowx-docs {
+		grid-template-columns: 15rem minmax(0, 1fr) 13rem;
+		align-items: start;
+	}
+
+	/* A page without the contents column gives it to the article. */
+	.knowx-docs:not(:has(.knowx-toc)) {
+		grid-template-columns: 15rem minmax(0, 1fr);
+	}
+
+	.knowx-tree,
+	.knowx-toc {
+		position: sticky;
+		inset-block-start: 6rem;
+		max-height: calc(100vh - 7rem);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+	}
+
+	.knowx-toc-panel {
+		display: none;
+	}
+
+	/* Always expanded beside the article; docs.js opens it where ::details-content is not supported. */
+	.knowx-tree-panel::details-content {
+		content-visibility: visible;
+	}
+
+	.knowx-tree-panel > summary {
+		cursor: default;
+	}
+
+	.knowx-tree-panel > summary::after {
+		display: none;
+	}
+}
+
+@media (width < 1100px) {
+	.knowx-toc {
+		display: none;
+	}
+}
+
+/* Section tree. */
+.knowx-tree-panel > summary {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-height: 44px;
+	font-weight: 700;
+	cursor: pointer;
+	list-style: none;
+}
+
+.knowx-tree-panel > summary::-webkit-details-marker {
+	display: none;
+}
+
+.knowx-tree-panel > summary::after {
+	content: "";
+	margin-inline-start: auto;
+	width: 0.7em;
+	height: 0.7em;
+	background: currentcolor;
+	mask: url(../images/icon-chevron-down.svg) center / contain no-repeat;
+}
+
+.knowx-tree-panel[open] > summary::after {
+	transform: rotate(180deg);
+}
+
+
+@media (width < 1100px) {
+	.knowx-tree-panel {
+		padding: 0 1rem;
+		background: var(--color-surface);
+		border: 1px solid var(--global-border-color);
+		border-radius: var(--global-border-radius);
+	}
+}
+
+.knowx-tree-list,
+.knowx-tree-list ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.knowx-tree-list ul {
+	padding-inline-start: 0.9rem;
+	border-inline-start: 1px solid var(--global-border-color);
+}
+
+.knowx-tree-list details > summary {
+	display: flex;
+	align-items: center;
+	min-height: 36px;
+	font-weight: 600;
+	cursor: pointer;
+	list-style: none;
+}
+
+.knowx-tree-list details > summary::-webkit-details-marker {
+	display: none;
+}
+
+.knowx-tree-list details > summary::before {
+	content: "";
+	flex: none;
+	width: 0.6em;
+	height: 0.6em;
+	margin-inline-end: 0.5rem;
+	background: currentcolor;
+	mask: url(../images/icon-chevron-down.svg) center / contain no-repeat;
+	transform: rotate(-90deg);
+}
+
+.knowx-tree-list details[open] > summary::before {
+	transform: none;
+}
+
+[dir="rtl"] .knowx-tree-list details:not([open]) > summary::before {
+	transform: rotate(90deg);
+}
+
+.knowx-tree-list a {
+	display: block;
+	padding-block: 0.5rem;
+	color: var(--global-font-color);
+}
+
+.knowx-tree-list a:hover {
+	color: var(--color-link);
+}
+
+.knowx-tree-list a[aria-current="page"] {
+	color: var(--color-link);
+	font-weight: 600;
+}
+
+/* On this page. */
+.knowx-toc-title {
+	margin: 0 0 0.5rem;
+	font-size: 0.8125rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	color: var(--color-muted);
+}
+
+.knowx-toc-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-size: 0.9rem;
+}
+
+.knowx-toc-list a {
+	display: block;
+	padding-block: 0.45rem;
+	color: var(--global-font-color);
+}
+
+.knowx-toc-list a:hover {
+	color: var(--color-link);
+}
+
+.knowx-toc-l3 {
+	padding-inline-start: 0.9rem;
+}
+
+.knowx-toc-panel {
+	margin-block-end: 1.5rem;
+	padding: 0 1rem;
+	background: var(--color-surface);
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--global-border-radius);
+}
+
+.knowx-toc-panel summary {
+	min-height: 44px;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.knowx-toc-panel .knowx-toc-list {
+	padding-block-end: 0.75rem;
+}
+
+/* Article. */
+.knowx-article .entry-title {
+	margin-block: 0.25rem 0.5rem;
+}
+
+.knowx-article-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	margin: 0 0 1.5rem;
+	font-size: 0.875rem;
+	color: var(--color-muted);
+}
+
+.knowx-version {
+	padding: 0.1rem 0.6rem;
+	background: var(--color-surface-alt);
+	border: 1px solid var(--global-border-color);
+	border-radius: 999px;
+	font-weight: 600;
+	color: var(--color-heading);
+}
+
+.knowx-article h2,
+.knowx-article h3 {
+	scroll-margin-block-start: 6rem;
+}
+
+.knowx-anchor {
+	display: inline-block;
+	width: 0.75em;
+	height: 0.75em;
+	margin-inline-start: 0.35em;
+	background: currentcolor;
+	mask: url(../images/icon-link.svg) center / contain no-repeat;
+	opacity: 0;
+	vertical-align: baseline;
+}
+
+.knowx-article :is(h2, h3):hover .knowx-anchor,
+.knowx-anchor:focus-visible {
+	opacity: 0.6;
+}
+
+@media (hover: none) {
+	.knowx-anchor {
+		opacity: 0.4;
+	}
+}
+
+.knowx-anchor:focus-visible {
+	outline: 2px solid var(--color-theme-primary);
+	outline-offset: 2px;
+}
+
+/* Previous and next. */
+.knowx-pager {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+	gap: 1rem;
+	margin-block: 3rem 2rem;
+}
+
+.knowx-pager a {
+	display: flex;
+	flex-direction: column;
+	gap: 0.15rem;
+	padding: 1rem 1.25rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--global-border-radius);
+	background: var(--color-surface);
+	color: var(--color-heading);
+	font-weight: 600;
+}
+
+.knowx-pager a:hover {
+	border-color: var(--color-theme-primary);
+}
+
+.knowx-pager span {
+	font-size: 0.8125rem;
+	font-weight: 400;
+	color: var(--color-muted);
+}
+
+.knowx-pager-next {
+	text-align: end;
+	grid-column: 2;
+}
+
+@media (width < 480px) {
+	.knowx-pager-next {
+		grid-column: auto;
+	}
+}
+
+.knowx-related h2 {
+	font-size: 1.125rem;
+}
+
+.knowx-related ul {
+	margin: 0;
+	padding-inline-start: 1.2rem;
+}
+
+/* Product home and section pages. */
+.knowx-term-header {
+	margin-block-end: 2rem;
+	padding: 1.75rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--radius-lg);
+	background: linear-gradient(135deg, color-mix(in srgb, var(--card-accent, var(--color-theme-primary)) 10%, var(--color-surface)), var(--color-surface));
+}
+
+.knowx-term-header .knowx-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: var(--radius-lg);
+	background: color-mix(in srgb, var(--card-accent, var(--color-theme-primary)) 14%, var(--color-surface));
+	color: var(--card-accent, var(--color-theme-primary));
+}
+
+.knowx-tree-panel > summary .knowx-icon {
+	color: var(--card-accent, var(--color-theme-primary));
+}
+
+.knowx-term-header .page-title {
+	margin-block: 0.75rem 0.25rem;
+	font-size: 2rem;
+}
+
+.knowx-term-header .archive-description {
+	max-width: 42rem;
+	color: var(--color-muted);
+	font-size: 1.0625rem;
+}
+
+.knowx-term-meta {
+	margin: 0.75rem 0 0;
+	font-size: 0.9rem;
+	color: var(--color-muted);
+}
+
+.knowx-start {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	margin-block-start: 1rem;
+	padding: 0 1.25rem;
+	border-radius: var(--button-border-radius);
+	background: var(--color-theme-primary);
+	color: var(--color-on-primary);
+	font-weight: 600;
+}
+
+.knowx-start:hover {
+	background: var(--button-background-hover-color);
+	color: var(--color-on-primary);
+}
+
+.knowx-section-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+	gap: 1.25rem;
+}
+
+.knowx-section {
+	padding: 1.25rem 1.5rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: var(--radius-lg);
+	background: var(--color-surface);
+}
+
+.knowx-section :is(h2, h3) {
+	margin: 0 0 0.35rem;
+	font-size: 1.125rem;
+}
+
+.knowx-section :is(h2, h3) a {
+	color: var(--color-heading);
+}
+
+.knowx-section-desc {
+	margin: 0 0 0.5rem;
+	color: var(--color-muted);
+	font-size: 0.9rem;
+}
+
+.knowx-article-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.knowx-article-list a {
+	display: block;
+	padding-block: 0.45rem;
+	border-block-start: 1px solid var(--global-border-color);
+	color: var(--global-font-color);
+}
+
+.knowx-article-list li:first-child a {
+	border-block-start: 0;
+}
+
+.knowx-article-list a:hover {
+	color: var(--color-link);
+}
+
+.knowx-view-all {
+	display: inline-block;
+	margin-block-start: 0.5rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+.knowx-article-cards {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.knowx-article-card {
+	padding-block: 1.1rem;
+	border-block-end: 1px solid var(--global-border-color);
+}
+
+.knowx-article-card h2 {
+	margin: 0 0 0.25rem;
+	font-size: 1.125rem;
+}
+
+.knowx-article-card h2 a {
+	padding: 0;
+}
+
+.knowx-article-card .knowx-version {
+	display: inline-block;
+	margin-block-start: 0.25rem;
+}
+
+.knowx-article-card p {
+	margin: 0.25rem 0 0;
+	color: var(--color-muted);
+}
+
+.knowx-docs-main .comments-area {
+	margin-block-start: 3rem;
+}
+
+.knowx-tree-home {
+	margin: 0;
+}
+
+.knowx-tree-home a {
+	display: block;
+	padding-block: 0.5rem;
+	color: var(--global-font-color);
+}
+
+.knowx-tree-home a[aria-current="page"] {
+	color: var(--color-link);
+	font-weight: 600;
+}
+
+.knowx-related a {
+	display: inline-block;
+	padding-block: 0.4rem;
+}
+
+/* FAQ and changelog pages: one readable column. */
+.knowx-narrow {
+	grid-column: 1 / -1;
+	width: min(100%, 50rem);
+	margin-inline: auto;
+	padding-block: 2rem 4rem;
+}
+
+.knowx-narrow-changelog .entry-content h2 {
+	margin-block: 2.5rem 0.5rem;
+	padding-block-start: 1.5rem;
+	border-block-start: 1px solid var(--global-border-color);
+}
+
+.knowx-narrow .wp-block-details {
+	margin-block-end: 0.75rem;
+}
+
+/* Docs home with no product yet. */
+.knowx-empty {
+	margin-block: 2.5rem;
+	padding: 2rem;
+	border: 1px dashed var(--global-border-color);
+	border-radius: var(--radius-lg);
+	background: var(--color-surface);
+	text-align: center;
+}
+
+.knowx-empty h2 {
+	margin-block-start: 0;
+}
+
+.knowx-empty p {
+	max-width: 36rem;
+	margin-inline: auto;
+	color: var(--color-muted);
+}
+
+/* Search results: product / section above each result. */
+.knowx-crumb {
+	margin: 0 0 0.25rem;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--color-muted);
+}
+
+.knowx-search-results .page-header {
+	margin-block-end: 1.5rem;
+}
+
+.knowx-narrow .searchform {
+	display: flex;
+	gap: 0.5rem;
+	margin-block-start: 1rem;
+}
+
+.knowx-narrow .searchform .text_input {
+	flex: 1;
+	min-width: 0;
+}
+
+/* 404 */
+.knowx-404 h2 {
+	margin-block: 2rem 0.5rem;
+	font-size: 1.125rem;
+}
+
+/* Last updated date under a list item. */
+.knowx-item-date {
+	display: block;
+	margin-block-start: 0.25rem;
+	font-size: 0.8125rem;
+	color: var(--color-muted);
+}
+
+p.knowx-item-date {
+	margin-block: 0.25rem 0;
+}
+
+/* Docs home of a single product: its sections stand in for the product card. */
+.knowx-home-sections {
+	margin-block: 2.5rem;
+}
+
+/* Search: product filter. */
+.knowx-filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-block-start: 1rem;
+}
+
+.knowx-filters a {
+	padding: 0.25rem 0.875rem;
+	border: 1px solid var(--global-border-color);
+	border-radius: 999px;
+	background: var(--color-surface);
+	color: var(--global-font-color);
+	font-size: 0.875rem;
+	text-decoration: none;
+}
+
+.knowx-filters a[aria-current="true"] {
+	border-color: var(--color-link);
+	color: var(--color-link);
+	font-weight: 600;
+}
+
+/* Docs home listing each product with its sections. */
+.knowx-home-product {
+	margin-block: 2.5rem;
+}
+
+.knowx-home-product-title {
+	display: flex;
+	align-items: center;
+	gap: 0.625rem;
+	margin: 0 0 1rem;
+	font-size: 1.375rem;
+}
+
+.knowx-home-product-title .knowx-icon {
+	color: var(--card-accent, var(--color-link));
+}
+
+.knowx-home-product-title a {
+	color: var(--color-heading);
+	text-decoration: none;
+}
+
+.knowx-term-updated {
+	margin: 0.25rem 0 0;
+	font-size: 0.875rem;
+	color: var(--color-muted);
+}

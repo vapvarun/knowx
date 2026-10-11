@@ -1,0 +1,95 @@
+.knowx-palettes {
+	padding: 12px 0 8px;
+}
+
+.knowx-palettes-title {
+	margin: 0 0 4px;
+	font-weight: 600;
+}
+
+.knowx-palette-row {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 8px;
+	margin-top: 10px;
+}
+
+.knowx-palette {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 8px;
+	border: 1px solid #c3c4c7;
+	border-radius: 6px;
+	background: #fff;
+	cursor: pointer;
+	text-align: start;
+}
+
+.knowx-palette:hover {
+	border-color: #2271b1;
+}
+
+.knowx-palette[aria-pressed="true"] {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+}
+
+.knowx-palette:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+}
+
+.knowx-palette-swatches {
+	display: flex;
+	height: 22px;
+	overflow: hidden;
+	border-radius: 4px;
+	border: 1px solid rgb(0 0 0 / 10%);
+}
+
+.knowx-palette-swatches span {
+	flex: 1;
+}
+
+.knowx-palette-name {
+	font-size: 12px;
+}
+
+.customize-control-knowx-typography .customize-control-title[role="button"] {
+	position: relative;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 8px 24px 8px 0;
+	cursor: pointer;
+}
+
+.customize-control-knowx-typography .customize-control-title[role="button"]::after {
+	content: "";
+	position: absolute;
+	inset-inline-end: 6px;
+	inset-block-start: 50%;
+	width: 8px;
+	height: 8px;
+	margin-block-start: -2px;
+	border-inline-end: 2px solid #50575e;
+	border-block-end: 2px solid #50575e;
+	transform: rotate(225deg);
+	transition: transform 0.15s;
+}
+
+.customize-control-knowx-typography.knowx-folded .customize-control-title[role="button"]::after {
+	margin-block-start: -6px;
+	transform: rotate(45deg);
+}
+
+/* The title is a legend inside a fieldset: hide what follows it, never the fieldset itself. */
+.customize-control-knowx-typography.knowx-folded > fieldset > :not(.customize-control-title) {
+	display: none;
+}
+
+.customize-control-knowx-typography .customize-control-title[role="button"]:focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+}

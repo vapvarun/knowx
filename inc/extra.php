@@ -1,7 +1,15 @@
 <?php
+/**
+ * Template helpers: content wrapper, sub header, loader, footer text and post meta.
+ *
+ * @package knowx
+ */
 
-// Content wrapper
+// Content wrapper.
 if ( ! function_exists( 'knowx_content_top' ) ) {
+	/**
+	 * Opens the site wrapper that holds the content and the sidebars.
+	 */
 	function knowx_content_top() {
 		?>
 		<div class="site-wrapper">
@@ -12,6 +20,9 @@ if ( ! function_exists( 'knowx_content_top' ) ) {
 add_action( 'knowx_before_content', 'knowx_content_top' );
 
 if ( ! function_exists( 'knowx_content_bottom' ) ) {
+	/**
+	 * Closes the site wrapper.
+	 */
 	function knowx_content_bottom() {
 
 		?>
@@ -22,91 +33,32 @@ if ( ! function_exists( 'knowx_content_bottom' ) ) {
 
 add_action( 'knowx_after_content', 'knowx_content_bottom' );
 
-// Site Sub Header
+// Breadcrumb bar.
 if ( ! function_exists( 'knowx_sub_header' ) ) {
 	add_action( 'knowx_sub_header', 'knowx_sub_header' );
 
+	/**
+	 * Prints the bar with the breadcrumbs under the header.
+	 */
 	function knowx_sub_header() {
-		global $post;
-		if ( is_front_page() ) {
+		if ( is_front_page() || ! knowx_is_truthy( knowx_mod( 'site_breadcrumbs' ) ) ) {
 			return;
 		}
-		$site_subheader = get_theme_mod( 'site_sub_header', knowx_defaults( 'site-sub-header' ) );
-		if ( ! empty( $site_subheader ) ) {
-			?>
+		?>
 		<div class="site-sub-header">
 			<div class="container">
-				<?php
-				$breadcrumbs = get_theme_mod( 'site_breadcrumbs', knowx_defaults( 'site-breadcrumbs' ) );
-				if ( ! empty( $breadcrumbs ) ) {
-					knowx_the_breadcrumb();
-				}
-				?>
-				<?php
-				$site_search = get_theme_mod( 'site_search', knowx_defaults( 'site-search' ) );
-				if ( ! empty( $site_search ) ) {
-					get_search_form();
-				}
-				?>
+				<?php knowx_the_breadcrumb(); ?>
 			</div>
 		</div>
-			<?php
-		}
+		<?php
 	}
 }
 
-/*
- * BREADCRUMBS
+/**
+ * Prints the breadcrumb trail.
  */
-// to include in functions.php
-if ( ! function_exists( 'knowx_the_breadcrumb' ) ) {
-	function knowx_the_breadcrumb() {
-		$wpseo_titles = get_option( 'wpseo_titles' );
-		if ( function_exists( 'yoast_breadcrumb' ) && isset( $wpseo_titles['breadcrumbs-enable'] ) && $wpseo_titles['breadcrumbs-enable'] == 1 ) {
-			yoast_breadcrumb( '<p id="breadcrumbs">', '</p>' );
-		} else {
-			echo '<div class="knowx-breadcrumbs">';
-				knowx_get_breadcrumb();
-			echo '</div>';
-		}
-	}
-}
-
-// Site Loader
-if ( ! function_exists( 'knowx_site_loader' ) ) {
-	function knowx_site_loader() {
-		$loader = get_theme_mod( 'site_loader', knowx_defaults( 'site-loader' ) );
-		if ( $loader == '1' ) {
-			echo '<div class="site-loader"><div class="loader-inner"><span class="dot"></span><span class="dot dot1"></span><span class="dot dot2"></span><span class="dot dot3"></span><span class="dot dot4"></span></div></div>';
-		}
-	}
-}
-
-// Site Search and Woo icon
-if ( ! function_exists( 'knowx_site_menu_icon' ) ) {
-	function knowx_site_menu_icon() {
-		// menu icons
-		$searchicon = (int) get_theme_mod( 'site_search', knowx_defaults( 'site-search' ) );
-		$carticon   = (int) get_theme_mod( 'site_cart', knowx_defaults( 'site-cart' ) );
-		if ( ! empty( $searchicon ) || ! empty( $carticon ) ) :
-			?>
-			<div class="menu-icons-wrapper">
-			<?php
-			if ( ! empty( $searchicon ) ) :
-				?>
-					<div class="search" <?php echo apply_filters( 'knowx_search_slide_toggle_data_attrs', '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-						<a href="#" id="overlay-search" class="search-icon"> <span class="fa fa-search"> </span> </a>
-						<div class="top-menu-search-container" <?php echo apply_filters( 'knowx_search_field_toggle_data_attrs', '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-							<?php get_search_form(); ?>
-						</div>
-					</div>
-					<?php
-				endif;
-			?>
-			</div>
-			<?php
-		endif;
-	}
+function knowx_the_breadcrumb() {
+	knowx_get_breadcrumb();
 }
 
 /**
@@ -117,61 +69,41 @@ if ( ! function_exists( 'knowx_footer_custom_text' ) ) {
 	 * Function Footer Custom Text
 	 *
 	 * @since 1.0.14
-	 * @param string $option Custom text option name.
-	 * @return mixed         Markup of custom text option.
 	 */
 	function knowx_footer_custom_text() {
 
-		$copyright = get_theme_mod( 'site_copyright_text' );
-		if ( ! empty( $copyright ) ) {
-			$copyright    = str_replace( '[current_year]', date_i18n( 'Y' ), $copyright );
-			$copyright    = str_replace( '[site_title]', '<span class="knowx-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $copyright );
-			$theme_author = apply_filters(
-				'knowx_theme_author',
-				array(
-					'theme_name'       => esc_html( 'KnowX WordPress Theme', 'knowx' ),
-					'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/knowx-theme/' ),
-				)
-			);
-			$copyright    = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $copyright );
-			return apply_filters( 'knowx_footer_copyright_text', $copyright );
-		} else {
-			$output       = 'Copyright © [current_year] [site_title] | Powered by [theme_author]';
-			$output       = str_replace( '[current_year]', date_i18n( 'Y' ), $output );
-			$output       = str_replace( '[site_title]', '<span class="knowx-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $output );
-			$theme_author = apply_filters(
-				'knowx_theme_author',
-				array(
-					'theme_name'       => esc_html( 'KnowX WordPress Theme', 'knowx' ),
-					'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/knowx-theme/' ),
-				)
-			);
-			$output       = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $output );
-			return apply_filters( 'knowx_footer_copyright_text', $output );
+		$copyright = (string) knowx_mod( 'site_copyright_text' );
+		if ( '' === trim( $copyright ) ) {
+			return '';
 		}
+
+		$theme_author = apply_filters(
+			'knowx_theme_author',
+			array(
+				'theme_name'       => esc_html__( 'KnowX WordPress Theme', 'knowx' ),
+				'theme_author_url' => esc_url( 'https://wbcomdesigns.com/downloads/knowx-theme/' ),
+			)
+		);
+		$copyright    = str_replace( '[current_year]', date_i18n( 'Y' ), $copyright );
+		$copyright    = str_replace( '[site_title]', '<span class="knowx-footer-site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . esc_html( get_bloginfo( 'name' ) ) . '</a></span>', $copyright );
+		$copyright    = str_replace( '[theme_author]', '<a href="' . esc_url( $theme_author['theme_author_url'] ) . '">' . esc_html( $theme_author['theme_name'] ) . '</a>', $copyright );
+
+		return apply_filters( 'knowx_footer_copyright_text', $copyright );
 	}
 }
 
 /**
- * Categorized Blog
- * Find out if blog has more than one category.
+ * Whether the site has more than one category in use.
+ *
+ * @return bool True when posts are spread over several categories.
  */
-if ( ! function_exists( 'knowx_categorized_blog' ) ) {
-	function knowx_categorized_blog() {
-		if ( false === ( $all_the_cool_cats = get_transient( 'knowx_category_count' ) ) ) {
-
-			$all_the_cool_cats = get_categories( array( 'hide_empty' => 1 ) );
-			$all_the_cool_cats = count( $all_the_cool_cats );
-			set_transient( 'knowx_category_count', $all_the_cool_cats );
-
-		}
-
-		if ( 1 !== (int) $all_the_cool_cats ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+function knowx_categorized_blog() {
+	return (int) wp_count_terms(
+		array(
+			'taxonomy'   => 'category',
+			'hide_empty' => true,
+		)
+	) > 1;
 }
 
 /**
@@ -179,6 +111,9 @@ if ( ! function_exists( 'knowx_categorized_blog' ) ) {
  */
 if ( ! function_exists( 'knowx_posted_on' ) ) {
 
+	/**
+	 * Prints the author, date and category line of a post.
+	 */
 	function knowx_posted_on() {
 
 		global $post;
@@ -207,70 +142,14 @@ if ( ! function_exists( 'knowx_posted_on' ) ) {
 
 
 /**
- * Add Elementor Locations Support
+ * Whether header.php should wrap the page content in a `.container`.
+ *
+ * Full width pages and the Knowledge Base Layout One page build their own
+ * full-bleed sections, so the container opened in header.php and closed in
+ * footer.php is skipped for them.
+ *
+ * @return bool True when the content is wrapped in a container.
  */
-if ( ! function_exists( 'knowx_register_elementor_locations' ) ) {
-	function knowx_register_elementor_locations( $elementor_theme_manager ) {
-
-		$elementor_theme_manager->register_all_core_location();
-	}
-	add_action( 'elementor/theme/register_locations', 'knowx_register_elementor_locations' );
+function knowx_template_uses_container() {
+	return ! is_page_template( array( 'full-width.php', 'page-knowledgebase-one.php' ) );
 }
-
-/**
- * Meta box for knowledge base page template
- */
-function knowx_metabox_callback( $post ) {
-	wp_nonce_field( 'knowx_meta_box', 'knowx_nonce' );
-	$cats_value = get_post_meta( $post->ID, 'knowx-exclude-cats', true );
-	?>
-	<p><?php esc_html_e( 'Setting for the Knowledge Base page template. This field will override the one in Customizer.', 'knowx' ); ?></p>
-	<p><strong><label for="knowx-cats"><?php esc_html_e( 'Exclude category by ID', 'knowx' ); ?></label></strong></p>
-	<input class="widefat" id="knowx-cats" type="text" name="knowx-cats" value="<?php echo esc_attr( $cats_value ); ?>" />
-	<p><?php esc_html_e( 'Use a comma to separate multiple categories.', 'knowx' ); ?></p>
-	<?php
-}
-
-function knowx_save_meta( $post_id ) {
-	if ( ! isset( $_POST['knowx_nonce'] ) ) {
-		return;
-	}
-	if ( ! wp_verify_nonce( $_POST['knowx_nonce'], 'knowx_meta_box' ) ) {
-		return;
-	}
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-		return;
-	}
-	if ( ( get_post_type() != 'page' ) || ! current_user_can( 'edit_post', $post_id ) ) {
-		return;
-	}
-	if ( isset( $_POST['knowx-cats'] ) ) {
-		update_post_meta( $post_id, 'knowx-exclude-cats', sanitize_text_field( $_POST['knowx-cats'] ) );
-	}
-}
-add_action( 'save_post', 'knowx_save_meta' );
-
-
-/*
- * Set post views count using post meta
- */
-function setPostViews( $postID ) {
-	$countKey = 'post_views_count';
-	$count    = get_post_meta( $postID, $countKey, true );
-	if ( $count == '' ) {
-		$count = 0;
-		delete_post_meta( $postID, $countKey );
-		add_post_meta( $postID, $countKey, '0' );
-	} else {
-		++$count;
-		update_post_meta( $postID, $countKey, $count );
-	}
-}
-
-/*
- * Hide bbp breadcrumb
- */
-function custom_bbp_no_breadcrumb( $param ) {
-	return true;
-}
-add_filter( 'bbp_no_breadcrumb', 'custom_bbp_no_breadcrumb' );

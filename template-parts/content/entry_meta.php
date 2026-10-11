@@ -7,47 +7,62 @@
 
 namespace KnowX\KnowX;
 
+// Get post object and type once.
+$current_post  = get_post();
 $post_type_obj = get_post_type_object( get_post_type() );
 
-$time_string = '';
+// Initialize output variables.
+$time_string   = '';
+$author_string = '';
+$parent_string = '';
 
 // Show date only when the post type is 'post' or has an archive.
 if ( 'post' === $post_type_obj->name || $post_type_obj->has_archive ) {
-	$time_string = '<time class="entry-date published updated" datetime="%1$s">%2$s</time>';
-	if ( get_the_time( 'U' ) !== get_the_modified_time( 'U' ) ) {
-		$time_string = '<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>';
+	// Build time string only once.
+	$is_modified = get_the_time( 'U' ) !== get_the_modified_time( 'U' );
+
+	if ( $is_modified ) {
+		$time_string = sprintf(
+			'<time class="entry-date published" datetime="%1$s">%2$s</time><time class="updated" datetime="%3$s">%4$s</time>',
+			esc_attr( get_the_date( 'c' ) ),
+			esc_html( get_the_date() ),
+			esc_attr( get_the_modified_date( 'c' ) ),
+			esc_html( get_the_modified_date() )
+		);
+	} else {
+		$time_string = sprintf(
+			'<time class="entry-date published updated" datetime="%1$s">%2$s</time>',
+			esc_attr( get_the_date( 'c' ) ),
+			esc_html( get_the_date() )
+		);
 	}
 
-	$time_string = sprintf(
-		$time_string,
-		esc_attr( get_the_date( 'c' ) ),
-		esc_html( get_the_date() ),
-		esc_attr( get_the_modified_date( 'c' ) ),
-		esc_html( get_the_modified_date() )
-	);
-
+	// Add permalink only once.
 	$time_string = '<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>';
 }
 
-$author_string = '';
-
 // Show author only if the post type supports it.
-if ( post_type_supports( $post_type_obj->name, 'author' ) ) {
+if ( post_type_supports( $post_type_obj->name, 'author' ) && '' !== get_the_author() ) {
+	// Get author ID once.
+	$author_id = $current_post->post_author;
+
+	// Get author link once.
+	$author_url  = get_author_posts_url( $author_id );
+	$author_name = get_the_author();
+
 	$author_string = sprintf(
 		'<span class="author vcard"><a class="url fn n" href="%1$s">%2$s</a></span>',
-		esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ),
-		esc_html( get_the_author() )
+		esc_url( $author_url ),
+		esc_html( $author_name )
 	);
 }
 
-$parent_string = '';
-
 // Show parent post only if available and if the post type is 'attachment'.
-if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
+if ( ! empty( $current_post->post_parent ) && 'attachment' === get_post_type() ) {
 	$parent_string = sprintf(
 		'<a href="%1$s">%2$s</a>',
-		esc_url( get_permalink( $post->post_parent ) ),
-		esc_html( get_the_title( $post->post_parent ) )
+		esc_url( get_permalink( $current_post->post_parent ) ),
+		esc_html( get_the_title( $current_post->post_parent ) )
 	);
 }
 
@@ -59,8 +74,8 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 		?>
 		<span class="posted-by">
 			<?php
+			echo get_avatar( get_the_author_meta( 'user_email' ), '26' );
 			/* translators: %s: post author */
-			echo get_avatar( get_the_author_meta( 'user_email' ), $size = '26' );
 			$author_byline = _x( 'By %s', 'post author', 'knowx' );
 			if ( ! empty( $time_string ) ) {
 				/* translators: %s: post author */
@@ -98,11 +113,7 @@ if ( ! empty( $post->post_parent ) && 'attachment' === get_post_type() ) {
 		?>
 		<span class="posted-on">
 			<?php
-			printf(
-				/* translators: %s: post date */
-				esc_html_x( ': %s', 'post date', 'knowx' ),
-				$time_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			);
+			echo ' ' . wp_kses_post( $time_string );
 			?>
 		</span>
 		<?php

@@ -26,9 +26,9 @@ class Theme {
 	/**
 	 * The template tags instance, providing access to all available template tags.
 	 *
-	 * @var Template_Tags
+	 * @var \KnowX\KnowX\Template_Tags
 	 */
-	protected $template_tags;
+	protected \KnowX\KnowX\Template_Tags $template_tags;
 
 	/**
 	 * Constructor.
@@ -42,7 +42,7 @@ class Theme {
 	 * @throws InvalidArgumentException Thrown if one of the $components does not implement Component_Interface.
 	 */
 	public function __construct( array $components = array() ) {
-		if ( empty( $components ) ) {
+		if ( array() === $components ) {
 			$components = $this->get_default_components();
 		}
 
@@ -54,8 +54,8 @@ class Theme {
 				throw new InvalidArgumentException(
 					sprintf(
 						/* translators: 1: classname/type of the variable, 2: interface name */
-						__( 'The theme component %1$s does not implement the %2$s interface.', 'knowx' ),
-						gettype( $component ),
+						esc_html__( 'The theme component %1$s does not implement the %2$s interface.', 'knowx' ),
+						esc_html( gettype( $component ) ),
 						Component_Interface::class
 					)
 				);
@@ -117,8 +117,8 @@ class Theme {
 			throw new InvalidArgumentException(
 				sprintf(
 					/* translators: %s: slug */
-					__( 'No theme component with the slug %s exists.', 'knowx' ),
-					$slug
+					esc_html__( 'No theme component with the slug %s exists.', 'knowx' ),
+					esc_html( $slug )
 				)
 			);
 		}
@@ -129,20 +129,19 @@ class Theme {
 	/**
 	 * Gets the default theme components.
 	 *
-	 * This method is called if no components are passed to the constructor, which is the common scenario.
+	 * This method is called if no components are passed to the constructor, which is the common scenario.Theme Editor
+	 *
+	 * Theme Editor: 'editor-styles'
+	 * Block Styles: 'wp-block-styles'
 	 *
 	 * @return array List of theme components to use by default.
 	 */
 	protected function get_default_components(): array {
 		$components = array(
-			new Localization\Component(),
 			new Base_Support\Component(),
 			new Editor\Component(),
 			new Accessibility\Component(),
 			new Image_Sizes\Component(),
-			new Lazyload\Component(),
-			new AMP\Component(),
-			new PWA\Component(),
 			new Comments\Component(),
 			new Nav_Menus\Component(),
 			new Sidebars\Component(),
@@ -152,15 +151,14 @@ class Theme {
 			new Post_Thumbnails\Component(),
 			new Customizer\Component(),
 			new Styles\Component(),
-			new Kirki\Component(),
-			new Kirki_Option\Component(),
-			new Custom_Js\Component(),
+			new Scripts\Component(),
+			new Excerpts\Component(),
+			new Customizer_Settings\Component(),
+			new Tokens\Component(),
+			new Color_Mode\Component(),
+			new Docs\Component(),
+			new Activation\Component(),
 		);
-
-		if ( defined( 'JETPACK__VERSION' ) ) {
-			$components[] = new Jetpack\Component();
-		}
-
 		return $components;
 	}
 }

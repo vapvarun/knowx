@@ -1,0 +1,42 @@
+{
+	"product": "KnowX Theme",
+	"productType": "theme",
+	"shortId": "knowx",
+	"sections": [
+		{
+			"name": "Getting Started",
+			"folder": "getting-started",
+			"description": "Install KnowX, add your first product and see a finished example site."
+		},
+		{
+			"name": "Customizing",
+			"folder": "customizing",
+			"description": "Colours, fonts, layout, header, footer and the docs home settings."
+		},
+		{
+			"name": "Templates and Patterns",
+			"folder": "templates-and-patterns",
+			"description": "Page templates and the block patterns that come with the theme."
+		},
+		{
+			"name": "Features",
+			"folder": "features",
+			"description": "Products, instant search, FAQ, structured data, breadcrumbs and performance."
+		},
+		{
+			"name": "Developer Guide",
+			"folder": "developer-guide",
+			"description": "Architecture, content model, hooks, child themes and the build."
+		},
+		{
+			"name": "FAQ",
+			"folder": "faq",
+			"description": "Short answers to common questions."
+		},
+		{
+			"name": "Troubleshooting",
+			"folder": "troubleshooting",
+			"description": "Fixes for the problems people meet most often."
+		}
+	]
+}

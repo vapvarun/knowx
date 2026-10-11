@@ -14,21 +14,25 @@ get_header();
 knowx()->print_styles( 'knowx-content' );
 knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
-$default_sidebar = get_theme_mod( 'sidebar_option', knowx_defaults( 'sidebar-option' ) );
+// Articles that belong to a product use the docs layout.
+if ( knowx_current_product() ) {
+	get_template_part( 'template-parts/docs/single' );
+	get_footer();
+	return;
+}
 
-$post_layout  = get_theme_mod( 'blog_layout_option', knowx_defaults( 'blog-layout-option' ) );
-$post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post-per-row' ) );
+$default_sidebar = knowx_mod( 'sidebar_option' );
+
 
 ?>
 
-<?php if ( ! function_exists( 'elementor_theme_do_location' ) || ! elementor_theme_do_location( 'single' ) ) { ?>
 
 	<?php do_action( 'knowx_sub_header' ); ?>
 	
 	<?php do_action( 'knowx_before_content' ); ?>
 
-	<?php if ( $default_sidebar == 'left' || $default_sidebar == 'both' ) : ?>
-		<aside id="secondary" class="left-sidebar widget-area">
+	<?php if ( 'left' === $default_sidebar || 'both' === $default_sidebar ) : ?>
+		<aside id="secondary-left" class="left-sidebar widget-area" aria-label="<?php esc_attr_e( 'Left sidebar', 'knowx' ); ?>">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_left_sidebar(); ?>
 			</div>
@@ -39,15 +43,12 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 		
 		<?php
 		if ( have_posts() ) {
-			setPostViews( get_the_ID() );
-
 			get_template_part( 'template-parts/content/page_header' );
 
 			$classes = get_body_class();
-			if ( in_array( 'blog', $classes ) || in_array( 'archive', $classes ) || in_array( 'search', $classes ) ) {
+			if ( in_array( 'blog', $classes, true ) || in_array( 'archive', $classes, true ) || in_array( 'search', $classes, true ) ) {
 				?>
-			<div class="post-layout row <?php echo esc_attr( $post_layout ); ?>">
-			<div class="grid-sizer <?php echo esc_attr( $post_per_row ); ?>"></div>
+			<div class="post-layout row default-layout">
 				<?php
 				while ( have_posts() ) {
 
@@ -75,8 +76,8 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 		?>
 
 	</main><!-- #primary -->
-	<?php if ( $default_sidebar == 'right' || $default_sidebar == 'both' ) : ?>
-		<aside id="secondary" class="primary-sidebar widget-area">
+	<?php if ( 'right' === $default_sidebar || 'both' === $default_sidebar ) : ?>
+		<aside id="secondary" class="primary-sidebar widget-area" aria-label="<?php esc_attr_e( 'Sidebar', 'knowx' ); ?>">
 			<div class="sticky-sidebar">
 				<?php knowx()->display_right_sidebar(); ?>
 			</div>
@@ -85,7 +86,6 @@ $post_per_row = 'col-md-' . get_theme_mod( 'post_per_row', knowx_defaults( 'post
 
 	<?php do_action( 'knowx_after_content' ); ?>
 
-	<?php } ?>
 
 <?php
 get_footer();

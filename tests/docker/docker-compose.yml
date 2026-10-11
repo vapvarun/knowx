@@ -1,0 +1,51 @@
+# Fresh WordPress for QA: a new database, a new core, the built theme zip installed like a customer would.
+# Usage (from this folder):  docker compose up -d && ./qa.sh
+services:
+  db:
+    image: mariadb:lts
+    environment:
+      MARIADB_DATABASE: wp
+      MARIADB_USER: wp
+      MARIADB_PASSWORD: wp
+      MARIADB_ROOT_PASSWORD: root
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 3s
+      retries: 30
+  wp:
+    image: wordpress:php8.3-apache
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8089:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wp
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_DEBUG_LOG', '/var/www/html/wp-content/debug.log');
+        define('WP_DEBUG_DISPLAY', false);
+    volumes:
+      - wpdata:/var/www/html
+      - ../../dist:/dist:ro
+  cli:
+    image: wordpress:cli-php8.3
+    depends_on:
+      - wp
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wp
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+    volumes:
+      - wpdata:/var/www/html
+      - ../../dist:/dist:ro
+      - ../../playground:/playground:ro
+    entrypoint: ["wp"]
+    profiles: ["tools"]
+volumes:
+  wpdata:

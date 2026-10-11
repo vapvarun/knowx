@@ -1,0 +1,430 @@
+===== _accessibility.css 37 lines
+COLORS 3 distinct, 3 uses
+   #f1f1f1 [20] 
+   rgba(0, 0, 0, 0.6) [22] 
+   #21759b [24] 
+IMPORTANT 3
+VARS {}
+DEFS []
+PHYS 1 [(29, 'left: 5px;')]
+MQ {}
+FOCUS 1 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z [(35, '100000')]
+===== _blocks-style.css 51 lines
+COLORS 0 distinct, 0 uses
+IMPORTANT 1
+VARS {'--color-theme-primary': 1, '--button-text-color': 1, '--button-background-color': 1, '--button-border-color': 1, '--button-background-hover-color': 1, '--button-text-hover-color': 1, '--button-border-hover-color': 1}
+DEFS []
+PHYS 0 []
+MQ {}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [(24, 'font-family: inherit;')] PXFS 0
+Z []
+===== _blocks.css 1669 lines
+COLORS 1 distinct, 1 uses
+   rgba(0, 0, 0, 0.1) [973] 
+IMPORTANT 6
+VARS {'--global-border-color': 20, '--color-theme-primary': 16, '--color-theme-grey': 13, '--global-border-radius': 12, '--color-link-hover': 10, '--color-link': 10, '--color-block-bg-subtle': 8, '--button-border-radius': 8, '--button-text-hover-color': 8, '--button-text-color': 4, '--button-background-color': 4, '--button-border-color': 4, '--button-background-hover-color': 4, '--button-border-hover-color': 4, '--color-h2': 3, '--color-h1': 2, '--global-font-line-height': 1, '--color-h3': 1, '--color-h4': 1, '--color-h5': 1, '--color-h6': 1, '--color-quote-border': 1, '--color-quote-citation': 1, '--content-width': 1, '--color-code-bg': 1}
+DEFS []
+PHYS 18 [(52, 'float: left;'), (90, 'margin-left: 1.5rem;'), (97, 'margin-left: auto;'), (102, 'border-left-color: var(--color-quote-border);'), (108, 'border-left-color: var(--color-quote-citation);'), (171, 'margin-left: auto;'), (172, 'margin-right: auto;'), (206, 'padding-right: 1.5em;'), (207, 'padding-left: 1.5em;'), (213, 'padding-right: 0;'), (214, 'padding-left: 0;'), (321, 'text-align: left;'), (407, 'border-left: 4px solid var(--color-theme-primary);'), (517, 'padding-left: 2em;'), (685, 'padding-left: 1.25em;'), (834, 'margin-left: 0.5em;'), (1444, 'margin-left: 2em;'), (1628, 'text-align: left;')]
+MQ {'@media screen and (min-width: 48em) ': 2, '@media screen and (min-width: 40em) ': 1, '@media (max-width: 781px) ': 1, '@media (max-width: 600px) ': 2}
+FOCUS 1 FV 0 RM False DARK False
+FONTFAMILY [(358, 'font-family: "Courier New", Courier, monospace;'), (376, 'font-family: "Courier New", Courier, monospace !important;'), (390, 'font-family: inherit;'), (402, 'font-family: Georgia, "Times New Roman", serif;'), (592, 'font-family: inherit;'), (829, 'font-family: inherit;'), (841, 'font-family: inherit;'), (1344, 'font-family: inherit;'), (1355, 'font-family: inherit;'), (1627, 'font-family: inherit;')] PXFS 0
+Z []
+===== _custom-media.css 12 lines
+COLORS 0 distinct, 0 uses
+IMPORTANT 0
+VARS {}
+DEFS []
+PHYS 0 []
+MQ {}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== _custom-properties.css 87 lines
+COLORS 26 distinct, 49 uses
+   #505050 [9, 45, 49] 
+   #03a9f4 [17, 28, 29, 32, 33, 34, 39, 41, 47, 52] 
+   #41848f [18] 
+   #c0392b [19] 
+   #27ae60 [20] 
+   #2980b9 [21] 
+   #f1c40f [22] 
+   #1c2833 [23] 
+   #95a5a6 [24] 
+   #ecf0f1 [25] 
+   #97c0b7 [26] 
+   #eee9d1 [27] 
+   #f7f7f9 [30, 66] 
+   #fff [31, 37, 38] 
+   #222222 [35, 40, 42, 46, 51] 
+   #e5e5e5 [36] 
+   #333333 [44, 58, 59, 60, 77] 
+   #ffffff [48] 
+   #e8e8e8 [50] 
+   #111111 [54] 
+   #6c7781 [55] 
+   #444444 [61] 
+   #555555 [62] 
+   #666666 [63, 78] 
+   #2d2d2d [67] 
+   #f8f8f2 [68] 
+IMPORTANT 0
+VARS {'--global-font-size': 4}
+DEFS ['--button-background-color', '--button-background-hover-color', '--button-border-color', '--button-border-hover-color', '--button-border-radius', '--button-text-color', '--button-text-hover-color', '--color-block-bg-subtle', '--color-code-bg', '--color-code-text', '--color-copyright-bg', '--color-copyright-content', '--color-copyright-link', '--color-copyright-link-hover', '--color-custom-daylight', '--color-custom-sun', '--color-footer-content', '--color-footer-link', '--color-footer-link-hover', '--color-footer-title', '--color-h1', '--color-h2', '--color-h3', '--color-h4', '--color-h5', '--color-h6', '--color-header-bg', '--color-link', '--color-link-hover', '--color-menu-active', '--color-menu-hover', '--color-quote-border', '--color-quote-citation', '--color-site-tagline', '--color-site-title', '--color-site-title-hover', '--color-theme-black', '--color-theme-blue', '--color-theme-body', '--color-theme-green', '--color-theme-grey', '--color-theme-loader', '--color-theme-primary', '--color-theme-red', '--color-theme-secondary', '--color-theme-white', '--color-theme-yellow', '--container-width', '--content-width', '--copyright-border-color', '--dropdown-symbol-width', '--font-size-large', '--font-size-larger', '--font-size-regular', '--font-size-small', '--form-border-radius', '--global-border-color', '--global-border-radius', '--global-font-color', '--global-font-family', '--global-font-line-height', '--global-font-size', '--highlight-font-family', '--textarea-border-radius']
+PHYS 0 []
+MQ {}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [(10, '--global-font-family: "Open Sans", serif;'), (13, '--highlight-font-family: "Open Sans", "Helvetica Neue", "Arial Narrow", sans-ser')] PXFS 0
+Z []
+===== _elements.css 82 lines
+COLORS 1 distinct, 1 uses
+   #e8e8e8 [32] 
+IMPORTANT 0
+VARS {'--color-theme-body': 1}
+DEFS []
+PHYS 1 [(55, 'margin-left: 1.5em;')]
+MQ {}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== _footer.css 121 lines
+COLORS 2 distinct, 3 uses
+   #fff [6, 105] 
+   rgba(0, 0, 0, .1) [104] 
+IMPORTANT 0
+VARS {'--copyright-border-color': 2, '--color-footer-content': 1, '--global-border-color': 1, '--color-footer-title': 1, '--color-footer-link': 1, '--color-footer-link-hover': 1, '--color-copyright-bg': 1, '--color-copyright-content': 1, '--color-copyright-link': 1, '--color-copyright-link-hover': 1, '--color-theme-primary': 1}
+DEFS []
+PHYS 3 [(46, 'margin-left: 0;'), (50, 'margin-right: 0;'), (98, 'right: 20px;')]
+MQ {'@media (max-width: 991px) ': 1, '@media (--narrow-menu-query) ': 1}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 1
+Z []
+===== _forms.css 184 lines
+COLORS 5 distinct, 8 uses
+   #fff [41, 44, 146] 
+   #aaa [67] 
+   #bbb [67, 67] 
+   #666 [93] 
+   #111 [116] 
+IMPORTANT 5
+VARS {'--global-border-color': 4, '--button-text-color': 1, '--button-background-color': 1, '--button-border-color': 1, '--button-background-hover-color': 1, '--button-text-hover-color': 1, '--button-border-hover-color': 1}
+DEFS []
+PHYS 3 [(151, 'padding-right: 40px;'), (159, 'background-position: right 1rem center;'), (160, 'padding-right: 40px;')]
+MQ {'@media (hover: none) and (pointer: coarse) ': 1}
+FOCUS 24 FV 0 RM False DARK False
+FONTFAMILY [(16, 'font-family: inherit;'), (140, 'font-family: inherit;')] PXFS 3
+Z []
+===== _grid.css 1150 lines
+COLORS 0 distinct, 0 uses
+IMPORTANT 49
+VARS {}
+DEFS []
+PHYS 172 [(2, 'margin-right: auto;'), (3, 'margin-left: auto;'), (4, 'padding-left: 15px;'), (5, 'padding-right: 15px;'), (32, 'margin-right: auto;'), (33, 'margin-left: auto;'), (34, 'padding-left: 15px;'), (35, 'padding-right: 15px;'), (46, 'margin-left: -15px;'), (47, 'margin-right: -15px;'), (60, 'padding-left: 15px;'), (61, 'padding-right: 15px;'), (65, 'float: left;'), (117, 'right: auto;'), (121, 'right: 8.3333333333%;'), (125, 'right: 16.6666666667%;'), (129, 'right: 25%;'), (133, 'right: 33.3333333333%;'), (137, 'right: 41.6666666667%;'), (141, 'right: 50%;'), (145, 'right: 58.3333333333%;'), (149, 'right: 66.6666666667%;'), (153, 'right: 75%;'), (157, 'right: 83.3333333333%;'), (161, 'right: 91.6666666667%;'), (165, 'right: 100%;'), (169, 'left: auto;'), (173, 'left: 8.3333333333%;'), (177, 'left: 16.6666666667%;'), (181, 'left: 25%;'), (185, 'left: 33.3333333333%;'), (189, 'left: 41.6666666667%;'), (193, 'left: 50%;'), (197, 'left: 58.3333333333%;'), (201, 'left: 66.6666666667%;'), (205, 'left: 75%;'), (209, 'left: 83.3333333333%;'), (213, 'left: 91.6666666667%;'), (217, 'left: 100%;'), (221, 'margin-left: 0%;')]
+MQ {'@media (min-width: 768px) ': 2, '@media (min-width: 992px) ': 2, '@media (min-width: 1200px) ': 7, '@media (max-width: 767px) ': 5, '@media (min-width: 768px) and (max-width: 991px) ': 5, '@media (min-width: 992px) and (max-width: 1199px) ': 5, '@media print ': 5}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== _header.css 99 lines
+COLORS 7 distinct, 7 uses
+   #fff [16] 
+   rgba(255, 255, 255, 0.05) [19] 
+   rgba(189, 189, 189, 0.15) [19] 
+   rgba(206, 206, 206, 0.05) [38] 
+   rgba(132, 132, 132, 0.15) [38] 
+   #333332 [80] 
+   #757575 [98] 
+IMPORTANT 0
+VARS {'--color-site-title-hover': 1}
+DEFS []
+PHYS 3 [(25, 'left: 0;'), (26, 'right: 0;'), (67, 'margin-right: 15px;')]
+MQ {'@media (max-width: 767px) ': 1}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 2
+Z [(18, '999'), (28, '999'), (33, '9999')]
+===== _links.css 27 lines
+COLORS 0 distinct, 0 uses
+IMPORTANT 0
+VARS {'--color-link': 1, '--color-link-hover': 1}
+DEFS []
+PHYS 0 []
+MQ {}
+FOCUS 2 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== _media.css 121 lines
+COLORS 0 distinct, 0 uses
+IMPORTANT 0
+VARS {'--content-width': 2}
+DEFS []
+PHYS 4 [(32, 'margin-left: auto;'), (33, 'margin-right: auto;'), (48, 'margin-right: calc((100% - var(--content-width)) / 2);'), (53, 'margin-left: calc((100% - var(--content-width)) / 2);')]
+MQ {'@media (--content-query) ': 1, '@media screen and (min-width: 40em) ': 1}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== _navigation.css 704 lines
+COLORS 13 distinct, 20 uses
+   #111 [18] 
+   rgba(0, 0, 0, 0.7) [99] 
+   #fff [157, 162, 290, 318, 318, 591, 664] 
+   rgba(34, 36, 38, .1) [233] 
+   #000 [279, 317] 
+   rgba(0, 0, 0, .05) [295] 
+   rgba(18, 43, 70, .1) [295] 
+   rgba(0, 0, 0, .02) [325] 
+   #222222 [453] 
+   rgba(0, 0, 0, .1) [597] 
+   #aaaaaa [613] 
+   #aaa [636] 
+   #c2c2c2 [652] 
+IMPORTANT 4
+VARS {'--global-border-color': 4, '--dropdown-symbol-width': 3, '--highlight-font-family': 2, '--color-menu-hover': 2, '--content-width': 1, '--color-link': 1, '--color-menu-active': 1, '--color-theme-primary': 1}
+DEFS []
+PHYS 46 [(13, 'margin-left: 10px;'), (23, 'float: right;'), (93, 'left: 0;'), (115, 'right: 0;'), (170, 'padding-right: 21px;'), (177, 'right: 0px;'), (207, 'right: 0;'), (221, 'padding-left: 0;'), (242, 'padding-left: 10px;'), (258, 'float: left;'), (275, 'right: 20%;'), (288, 'right: 0;'), (291, 'margin-left: 0;'), (294, 'text-align: left;'), (302, 'margin-left: -10px;'), (306, 'right: 24px;'), (316, 'right: 28px;'), (332, 'left: auto;'), (333, 'right: -13px;'), (339, 'left: -100%;'), (340, 'right: auto;'), (351, 'right: 0;'), (369, 'right: 12px;'), (386, 'padding-right: var(--dropdown-symbol-width);'), (398, 'right: 0;'), (408, 'right: 10px;'), (468, 'padding-left: 1em;'), (504, 'margin-left: 0;'), (513, 'padding-left: 0;'), (514, 'margin-left: 0;'), (525, 'right: 100%;'), (530, 'right: -170px;'), (535, 'left: 0;'), (536, 'right: auto;'), (545, 'float: left;'), (555, 'float: right;'), (572, 'float: left;'), (577, 'margin-right: 0px;'), (583, 'right: -10px;'), (594, 'padding-right: 40px;')]
+MQ {'@media (max-width: 782px) ': 1, '@media (max-width: 600px) ': 1, '@media (max-width: 767px) ': 2, '@media (max-width: 480px) ': 2, '@media (min-width: 768px) ': 2}
+FOCUS 4 FV 0 RM False DARK False
+FONTFAMILY [(216, 'font-family: "FontAwesome";'), (392, 'font-family: FontAwesome;'), (642, 'font-family: FontAwesome;')] PXFS 7
+Z [(96, '99'), (119, '9999'), (292, '1'), (326, '100'), (585, '9'), (628, '1')]
+===== _reset.css 359 lines
+COLORS 0 distinct, 0 uses
+IMPORTANT 0
+VARS {}
+DEFS []
+PHYS 0 []
+MQ {}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [(74, 'font-family: monospace; /* 1 */'), (116, 'font-family: monospace; /* 1 */'), (173, 'font-family: inherit; /* 1 */')] PXFS 0
+Z []
+===== _typography.css 122 lines
+COLORS 4 distinct, 4 uses
+   #333333 [30] 
+   #eee [89] 
+   #666 [110] 
+   #fff9c0 [116] 
+IMPORTANT 2
+VARS {'--global-font-color': 1, '--global-font-family': 1, '--font-size-regular': 1, '--global-font-line-height': 1, '--highlight-font-family': 1, '--color-quote-border': 1, '--color-quote-citation': 1}
+DEFS []
+PHYS 4 [(60, 'border-left: 4px solid var(--color-quote-border);'), (65, 'padding-left: 1em;'), (66, 'margin-left: 1.5rem;'), (71, 'margin-left: auto;')]
+MQ {'@media (--content-query) ': 1}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [(90, 'font-family: "Courier 10 Pitch", Courier, monospace !important;'), (104, 'font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;')] PXFS 1
+Z []
+===== _utility.css 220 lines
+COLORS 0 distinct, 0 uses
+IMPORTANT 0
+VARS {}
+DEFS []
+PHYS 0 []
+MQ {'@media (--narrow-menu-query) ': 2}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== admin/theme-settings.css 297 lines
+COLORS 12 distinct, 19 uses
+   #3c8000 [23] 
+   #fff [59, 80, 164, 210, 216] 
+   #bbb [68] 
+   #e8e8e8 [70] 
+   #888 [71] 
+   #ef5455 [81, 82, 118, 209] 
+   rgba(0, 0, 0, 0.6) [87] 
+   #e3e3e3 [104] 
+   #242424 [113] 
+   #000 [163] 
+   #f83939 [215] 
+   #dadadab3 [242] 
+IMPORTANT 1
+VARS {}
+DEFS ['--bs-color']
+PHYS 9 [(19, 'left: 0;'), (32, 'left: -100%; /* Start fully out of sight */'), (35, 'left: 0; /* End at the intended position */'), (65, 'float: left;'), (91, 'margin-right: auto;'), (92, 'margin-left: auto;'), (93, 'padding-right: 15px;'), (94, 'padding-left: 15px;'), (296, 'padding-right: 8px !important;')]
+MQ {'@media (min-width: 768px) ': 1, '@media all and (min-width: 768px) and (max-width: 1024px) ': 1, '@media (max-width: 768px) ': 1, '@media (max-width: 380px) ': 1}
+FOCUS 2 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 10
+Z []
+===== bbpress.css 182 lines
+COLORS 3 distinct, 4 uses
+   #f9fbff [69, 81] 
+   #fff [108] 
+   #e3e3e3 [156] 
+IMPORTANT 3
+VARS {}
+DEFS []
+PHYS 2 [(55, 'float: right;'), (97, 'margin-right: 15px;')]
+MQ {}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 4
+Z []
+===== comments.css 229 lines
+COLORS 8 distinct, 9 uses
+   #e8e8e8 [35] 
+   rgba(0, 0, 0, .1) [36, 37] 
+   #fff [39] 
+   #ccc [87] 
+   #000 [155] 
+   #c3c3c3 [159] 
+   hsl(0, 0%, 95%) [179] 
+   #d54e21 [212] 
+IMPORTANT 0
+VARS {}
+DEFS []
+PHYS 16 [(43, 'margin-left: 1em;'), (44, 'padding-left: 0;'), (49, 'margin-left: 2em;'), (55, 'margin-left: 75px;'), (60, 'margin-left: 70px;'), (79, 'left: -70px;'), (89, 'margin-left: -5px;'), (114, 'padding-right: 3em;'), (115, 'padding-left: 3em;'), (124, 'margin-right: 0;'), (125, 'margin-left: 0;'), (131, 'padding-right: 1.5em;'), (132, 'padding-left: 1.5em;'), (148, 'text-align: right;'), (208, 'margin-left: 0.6em;'), (216, 'text-align: right;')]
+MQ {'@media (--content-query) ': 2}
+FOCUS 3 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== content.css 758 lines
+COLORS 2 distinct, 4 uses
+   #e8e8e8 [83, 317] 
+   #fff [110, 195] 
+IMPORTANT 2
+VARS {'--color-theme-primary': 4, '--content-width': 4, '--color-theme-secondary': 2, '--color-theme-red': 2, '--color-theme-green': 2, '--color-theme-blue': 2, '--color-theme-yellow': 2, '--color-theme-black': 2, '--color-theme-grey': 2, '--color-theme-white': 2, '--color-custom-daylight': 2, '--color-custom-sun': 2, '--border-color-dark': 2, '--color-link': 2, '--font-size-small': 1, '--font-size-regular': 1, '--font-size-large': 1, '--font-size-larger': 1, '--highlight-font-family': 1, '--global-font-color': 1, '--color-link-active': 1}
+DEFS []
+PHYS 29 [(98, 'left: 10px;'), (104, 'margin-right: 3px;'), (140, 'margin-left: 5px;'), (144, 'margin-right: 5px;'), (154, 'margin-right: 10px;'), (162, 'margin-right: 4px;'), (229, 'margin-right: auto;'), (230, 'margin-left: auto;'), (240, 'margin-left: 1.05em;'), (278, 'padding-left: 0;'), (279, 'padding-right: 0;'), (285, 'padding-right: 2.5em;'), (286, 'padding-left: 2.5em;'), (291, 'margin-right: 0;'), (292, 'margin-left: 0;'), (293, 'padding-right: 1.5em;'), (294, 'padding-left: 1.5em;'), (310, 'margin-right: 1em;'), (322, 'padding-right: 0;'), (323, 'padding-left: 0;'), (333, 'float: left;'), (334, 'margin-right: 1.5rem;'), (338, 'float: right;'), (339, 'margin-left: 1.5rem;'), (345, 'margin-left: auto;'), (346, 'margin-right: auto;'), (527, 'padding-left: 0;'), (528, 'padding-right: 0;'), (568, 'margin-right: 1em;')]
+MQ {'@media (--content-query) ': 3, '@media (min-width: 768px) ': 1, '@media (--sidebar-query) ': 1, '@media screen and (max-width: 60em) ': 1}
+FOCUS 3 FV 0 RM False DARK False
+FONTFAMILY [(163, "font-family: 'FontAwesome';")] PXFS 3
+Z []
+===== editor/editor-styles.css 159 lines
+COLORS 3 distinct, 4 uses
+   #ffffff [102] 
+   #505050 [103, 110] 
+   #333333 [120] 
+IMPORTANT 0
+VARS {'--content-width': 2, '--highlight-font-family': 1, '--color-theme-primary': 1, '--button-text-color': 1, '--button-background-color': 1, '--button-border-color': 1, '--button-background-hover-color': 1, '--button-text-hover-color': 1, '--button-border-hover-color': 1}
+DEFS []
+PHYS 4 [(87, 'margin-left: auto;'), (88, 'margin-right: auto;'), (92, 'padding-left: 2.5em;'), (93, 'padding-right: 2.5em;')]
+MQ {}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [(37, 'font-family: inherit;'), (104, 'font-family: "Open Sans", -apple-system, blinkmacsystemfont, "segoe ui", roboto,'), (111, 'font-family: "Open Sans", -apple-system, blinkmacsystemfont, "segoe ui", roboto,'), (132, 'font-family: inherit;')] PXFS 0
+Z []
+===== fontawesome.css 2338 lines
+COLORS 2 distinct, 2 uses
+   #eeeeee [64] 
+   #ffffff [179] 
+IMPORTANT 0
+VARS {}
+DEFS []
+PHYS 13 [(45, 'padding-left: 0;'), (46, 'margin-left: 2.14285714em;'), (54, 'left: -2.14285714em;'), (60, 'left: -1.85714286em;'), (68, 'float: left;'), (71, 'float: right;'), (74, 'margin-right: .3em;'), (77, 'margin-left: .3em;'), (81, 'float: right;'), (84, 'float: left;'), (87, 'margin-right: .3em;'), (90, 'margin-left: .3em;'), (168, 'left: 0;')]
+MQ {}
+FOCUS 1 FV 0 RM False DARK False
+FONTFAMILY [(8, "font-family: 'FontAwesome';")] PXFS 0
+Z []
+===== front-page.css 57 lines
+COLORS 1 distinct, 1 uses
+   hsla(0, 0%, 50%, 0.8) [25] 
+IMPORTANT 0
+VARS {'--global-font-color': 1}
+DEFS []
+PHYS 2 [(36, 'margin-left: 0;'), (41, 'margin-right: 0;')]
+MQ {'@media (--sidebar-query) ': 1}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== global.css 641 lines
+COLORS 14 distinct, 22 uses
+   rgba(0, 0, 0, 0.025) [63] 
+   #505050 [114] 
+   rgba(255, 255, 255, 0.5) [117] 
+   #111 [181, 208, 398] 
+   #f5f5f5 [273] 
+   #e2e2e2 [274, 279, 283] 
+   #555 [275] 
+   #595959 [311] 
+   #72777c [321] 
+   #21b4db [335] 
+   #fff [344, 351, 440, 637] 
+   #222 [495, 609] 
+   rgba(236, 236, 236, .94) [524] 
+   #333 [540] 
+IMPORTANT 14
+VARS {'--color-header-bg': 4, '--color-theme-primary': 4, '--global-border-color': 3, '--button-background-color': 1, '--button-text-color': 1, '--button-border-color': 1, '--button-background-hover-color': 1, '--button-text-hover-color': 1, '--button-border-hover-color': 1, '--color-link': 1, '--color-link-hover': 1}
+DEFS []
+PHYS 14 [(98, 'border-right-color: var(--color-header-bg);'), (119, 'margin-left: -50vw;'), (120, 'left: 50%;'), (169, 'right: 0;'), (177, 'background-position: right 8px center;'), (209, 'margin-right: auto;'), (229, 'margin-right: auto;'), (357, 'margin-left: auto;'), (358, 'margin-right: auto;'), (385, 'right: 0;'), (394, 'background-position: right 16px center;'), (504, 'float: right;'), (611, 'padding-left: 20px;'), (623, 'left: 0;')]
+MQ {'@media (max-width: 480px) ': 3, '@media (max-width: 991px) ': 1, '@media (--narrow-menu-query) ': 1, '@media (min-width: 960px) ': 1, '@media (max-width: 767px) ': 2, '@media (max-width: 1024px) ': 1}
+FOCUS 6 FV 0 RM False DARK False
+FONTFAMILY [(621, "font-family: 'FontAwesome';")] PXFS 2
+Z [(33, '99'), (202, '1')]
+===== knowx-amp.css 442 lines
+COLORS 8 distinct, 12 uses
+   #fff [35, 35, 425] 
+   rgba(0, 0, 0, .02) [40] 
+   #7d7d7d [179] 
+   #808080 [283, 291] 
+   #333 [351, 409] 
+   #c3c3c3 [369] 
+   #ccc [426] 
+   #eaeaea [430] 
+IMPORTANT 5
+VARS {'--color-link': 2, '--global-border-color': 1, '--global-font-family': 1}
+DEFS []
+PHYS 17 [(24, 'margin-right: 10px;'), (34, 'right: 28px;'), (45, 'left: auto;'), (46, 'right: -13px;'), (51, 'left: 0;'), (52, 'right: auto;'), (75, 'margin-left: 10px;'), (213, 'margin-left: 10px;'), (254, 'margin-left: 0;'), (259, 'padding-right: 10px;'), (301, 'margin-left: 1em;'), (332, 'padding-left: 0;'), (344, 'padding-right: 0.5em;'), (374, 'padding-left: 10px;'), (376, 'padding-right: 65px;'), (387, 'right: 3px;'), (404, 'text-align: left;')]
+MQ {'@media (min-width: 768px) ': 1, '@media (max-width: 767px) ': 1}
+FOCUS 3 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 1
+Z [(41, '100')]
+===== knowx-customizer.css 49 lines
+COLORS 6 distinct, 6 uses
+   #2271b1 [2] 
+   #135e96 [3] 
+   #ddd [4] 
+   #dde0e2 [30] 
+   #868894 [35] 
+   rgba(0, 0, 0, .08) [48] 
+IMPORTANT 4
+VARS {'--accentColor': 2}
+DEFS ['--accentColor', '--accentColorHover', '--optionBorderColor']
+PHYS 1 [(28, 'padding-left: 10px;')]
+MQ {}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== loaders.css 218 lines
+COLORS 1 distinct, 2 uses
+   #fff [33, 76] 
+IMPORTANT 0
+VARS {'--color-theme-loader': 1}
+DEFS []
+PHYS 22 [(7, 'left: 0;'), (20, 'left: 0;'), (28, 'right: 0;'), (61, 'left: 0;'), (69, 'right: 0;'), (79, 'left: 50%;'), (102, 'margin-left: -40px;'), (110, 'margin-left: -20px;'), (118, 'margin-left: 20px;'), (126, 'margin-left: 40px;'), (135, 'left: 0%;'), (139, 'left: 50%;'), (150, 'left: 50%;'), (154, 'left: 100%;'), (161, 'left: 0%;'), (165, 'left: 50%;'), (176, 'left: 50%;'), (180, 'left: 100%;'), (187, 'left: 0%;'), (191, 'left: 50%;'), (202, 'left: 50%;'), (206, 'left: 100%;')]
+MQ {'@media (max-width: 1200px) ': 1, '@media(max-width: 991px) ': 1, '@media(max-width: 767px) ': 1, '@media(max-width: 480px) ': 1}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z [(11, '999991')]
+===== rtl.css 137 lines
+COLORS 1 distinct, 1 uses
+   #000 [29] 
+IMPORTANT 4
+VARS {}
+DEFS []
+PHYS 38 [(24, 'text-align: right !important;'), (28, 'border-left: 0;'), (29, 'border-right: 4px solid #000;'), (30, 'padding-left: 0;'), (31, 'padding-right: 1em;'), (35, 'padding-left: 0;'), (36, 'padding-right: 1em;'), (37, 'margin-left: 0;'), (38, 'margin-right: 1.5rem;'), (43, 'margin-left: 0;'), (44, 'margin-right: 1.5rem;'), (50, 'margin-left: 0;'), (51, 'margin-right: auto;'), (56, 'float: left;'), (62, 'float: right;'), (66, 'margin-left: 0;'), (67, 'margin-right: 10px;'), (71, 'left: 15px;'), (72, 'right: auto;'), (76, 'left: 0;'), (77, 'right: auto;'), (90, 'text-align: right;'), (96, 'background-position: left 1rem center !important;'), (97, 'padding-left: 40px !important;'), (98, 'padding-right: 12px !important;'), (102, 'float: right;'), (106, 'margin-left: 5px;'), (107, 'margin-right: 0;'), (111, 'margin-right: 5px;'), (112, 'margin-left: 0;'), (116, 'right: 10px;'), (117, 'left: auto;'), (123, 'padding-left: .7em;'), (124, 'padding-right: 0;'), (127, 'left: 0;'), (128, 'right: auto;'), (134, 'right: auto;'), (135, 'left: 0;')]
+MQ {'@media screen and (min-width: 48em) ': 1, '@media (min-width: 768px) ': 1, '@media (max-width: 767px) ': 1}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== sidebar.css 36 lines
+COLORS 0 distinct, 0 uses
+IMPORTANT 2
+VARS {'--content-width': 1}
+DEFS []
+PHYS 4 [(8, 'margin-left: auto;'), (9, 'margin-right: auto;'), (14, 'padding-left: 0;'), (15, 'padding-right: 0;')]
+MQ {'@media (--content-query) ': 1, '@media (--sidebar-query) ': 1, '@media screen and (max-width: 60em) ': 1}
+FOCUS 0 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 0
+Z []
+===== widgets.css 305 lines
+COLORS 7 distinct, 10 uses
+   #fff [17, 292] 
+   #7d7d7d [66] 
+   #808080 [162, 170] 
+   #333 [222, 276] 
+   #c3c3c3 [238] 
+   #ccc [293] 
+   #eaeaea [297] 
+IMPORTANT 5
+VARS {'--color-link': 2, '--global-border-color': 1, '--global-font-family': 1}
+DEFS []
+PHYS 10 [(98, 'margin-left: 10px;'), (137, 'margin-left: 0;'), (142, 'padding-right: 10px;'), (180, 'margin-left: 1em;'), (205, 'padding-left: 0;'), (215, 'padding-right: 0.5em;'), (243, 'padding-left: 10px;'), (245, 'padding-right: 65px;'), (256, 'right: 3px;'), (271, 'text-align: left;')]
+MQ {}
+FOCUS 3 FV 0 RM False DARK False
+FONTFAMILY [] PXFS 1
+Z []

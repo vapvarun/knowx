@@ -1,0 +1,44 @@
+/*--------------------------------------------------------------
+# Layout grid: container, row and the col-md-* widths the templates use.
+--------------------------------------------------------------*/
+
+.container {
+    display: flow-root;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--container-width);
+    margin-inline: auto;
+    padding-inline: 15px;
+}
+
+.row {
+    display: flow-root;
+    margin-inline: -15px;
+}
+
+[class*="col-md-"] {
+    box-sizing: border-box;
+    width: 100%;
+    padding-inline: 15px;
+}
+
+/* Columns sit side by side from 992px; below that they stack in normal flow. */
+@media (min-width: 992px) {
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col-md-1 { width: 8.33333%; }
+    .col-md-2 { width: 16.66667%; }
+    .col-md-3 { width: 25%; }
+    .col-md-4 { width: 33.33333%; }
+    .col-md-5 { width: 41.66667%; }
+    .col-md-6 { width: 50%; }
+    .col-md-7 { width: 58.33333%; }
+    .col-md-8 { width: 66.66667%; }
+    .col-md-9 { width: 75%; }
+    .col-md-10 { width: 83.33333%; }
+    .col-md-11 { width: 91.66667%; }
+    .col-md-12 { width: 100%; }
+}

@@ -117,6 +117,8 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Improve  - The Kirki plugin and the plugin recommendations are gone; the Customizer is built into the theme and organised in ten short sections with plain labels.
 * Improve  - Open Sans is served from your site, and the page loads no jQuery and no icon font.
 * Improve  - Right-to-left sites mirror correctly, including text alignment, code copy buttons and list arrows.
+* Improve  - Menus with child items open with the keyboard on wide screens and close with Escape; the copy button says when copying is not available.
+* Improve  - Blog posts print one category list, one edit link and one comment link, images get correct size hints, and an SEO plugin's schema is no longer printed twice.
 * Improve  - The docs lists are cached with automatic invalidation and are bounded, so large sites stay fast.
 * Fix      - Saved Customizer colors were overridden by a duplicate set of defaults in the content stylesheet.
 * Fix      - Excluding a product now also hides its sections and articles on the Docs Index.

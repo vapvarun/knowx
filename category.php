@@ -38,8 +38,9 @@ $knowx_updated = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ? knowx_te
 				<?php $knowx_first = knowx_tree_flat( $knowx_tree ); ?>
 				<p class="knowx-term-meta">
 					<?php
+					$knowx_sections = count( $knowx_tree['root']['children'] );
 					/* translators: %s: number of sections. */
-					echo esc_html( sprintf( _n( '%s section', '%s sections', count( $knowx_tree['root']['children'] ), 'knowx' ), number_format_i18n( count( $knowx_tree['root']['children'] ) ) ) );
+					echo esc_html( sprintf( _n( '%s section', '%s sections', $knowx_sections, 'knowx' ), number_format_i18n( $knowx_sections ) ) );
 					?>
 					<span aria-hidden="true">&middot;</span>
 					<?php echo esc_html( knowx_article_count_label( $knowx_product['count'] ) ); ?>

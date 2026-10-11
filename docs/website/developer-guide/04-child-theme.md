@@ -31,3 +31,7 @@ Activate it under **Appearance > Themes**.
 - Add patterns in the child theme's `patterns` folder.
 - Change colours with CSS variables, for example `:root { --color-theme-primary: #0a7; }`. See `assets/css/src/_custom-properties.css`.
 - Use the [hooks](03-hooks.md).
+
+## Functions that changed in 2.0
+
+The 1.x template tag `knowx_get_breadcrumb( $echo = true )` still works but is deprecated: use `knowx_the_breadcrumb()` to print the trail. Many other 1.7 functions were internal callbacks of features that were removed in 2.0 (the login page, the plugin recommendations, the web font loader and the Kirki integration); child themes that called them directly need to drop those calls.

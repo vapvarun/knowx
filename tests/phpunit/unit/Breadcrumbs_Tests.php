@@ -93,4 +93,19 @@ class Breadcrumbs_Tests extends Unit_Test_Case {
 		$this->assertStringNotContainsString( '<script>', $html );
 		$this->assertStringContainsString( 'aria-current="page"', $html );
 	}
+
+	/**
+	 * The 1.x function still works: it prints by default and returns the markup when asked, and it reports itself as deprecated.
+	 */
+	public function test_the_1x_breadcrumb_function_still_works() {
+		Functions\expect( '_deprecated_function' )->twice();
+		Functions\when( 'is_front_page' )->justReturn( true );
+
+		ob_start();
+		knowx_get_breadcrumb();
+		$printed = ob_get_clean();
+
+		$this->assertSame( '', $printed );
+		$this->assertSame( '', knowx_get_breadcrumb( false ) );
+	}
 }

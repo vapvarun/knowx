@@ -152,3 +152,25 @@ function knowx_the_breadcrumb() {
 	}
 	echo '</ol></nav>';
 }
+
+/**
+ * The 1.x breadcrumb template tag, kept so child themes that call it keep working.
+ *
+ * @deprecated 2.0.0 Use knowx_the_breadcrumb() to print the trail.
+ *
+ * @param bool $display Print the trail (default) or return its markup.
+ * @return string|void The markup when `$display` is false.
+ */
+function knowx_get_breadcrumb( $display = true ) {
+	_deprecated_function( __FUNCTION__, '2.0.0', 'knowx_the_breadcrumb' );
+
+	ob_start();
+	knowx_the_breadcrumb();
+	$html = (string) ob_get_clean();
+
+	if ( ! $display ) {
+		return $html;
+	}
+
+	echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the markup is escaped where it is built.
+}

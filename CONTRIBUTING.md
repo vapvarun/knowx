@@ -25,7 +25,7 @@ npm run build && git diff --exit-code assets/   # built files are committed
 npm run lint
 npm test
 vendor/bin/phpcs --standard=phpcs.xml.dist
-vendor/bin/phpstan analyze --memory-limit=1G
+vendor/bin/phpstan analyze --memory-limit=2G
 bash tests/docker/run-integration.sh
 ```
 

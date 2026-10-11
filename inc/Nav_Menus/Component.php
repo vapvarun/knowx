@@ -17,6 +17,8 @@ use function add_filter;
 use function register_nav_menus;
 use function esc_html__;
 use function wp_nav_menu;
+use function wp_list_pages;
+use function esc_attr;
 
 /**
  * Class for managing navigation menus.
@@ -114,9 +116,26 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			array_merge(
 				array(
 					'theme_location' => static::PRIMARY_NAV_MENU_SLUG,
+					'fallback_cb'    => array( $this, 'primary_nav_fallback' ),
 				),
 				$args
 			)
 		);
+	}
+
+	/**
+	 * Prints the page list when no menu is assigned, in the same markup as a real menu.
+	 *
+	 * The core fallback wraps the list in `div.menu`, which the menu styles (`ul.menu`) do not match.
+	 *
+	 * @param array $args The wp_nav_menu() arguments.
+	 */
+	public function primary_nav_fallback( array $args ) {
+		$menu_id = ! empty( $args['menu_id'] ) ? $args['menu_id'] : static::PRIMARY_NAV_MENU_SLUG . '-menu';
+		?>
+		<ul id="<?php echo esc_attr( $menu_id ); ?>" class="menu">
+			<?php wp_list_pages( array( 'title_li' => '' ) ); ?>
+		</ul>
+		<?php
 	}
 }

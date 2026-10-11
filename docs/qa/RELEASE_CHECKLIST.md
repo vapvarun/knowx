@@ -126,8 +126,9 @@ Playground and sample content
 - [x] Docs rewritten on `1.7.5` instead of merging master's old pages; when `1.7.5` goes into `master` the new docs replace the old ones, and `.github/workflows/ci.yml` from master is kept
 - [x] `1.7.5`, first-view-and-defaults and customizer-usability are merged into `master`
 - [x] Owner approved the release (2026-10-11)
-- [x] Released to `vapvarun/knowx` as v2.0.0 on 2026-10-11 and re-tagged the same day to the final build (public master 01f0122, zip 417 KB, public CI green with the blocking jobs, branch protection on; the Slack post went out after the retag)
-- [ ] Switch the blueprint to the wordpress.org slug (`node tools/build-blueprint.mjs --release`), archive `knowx-core`, retire `knowx-demo-importer`
+- [x] Released to `vapvarun/knowx` as v2.0.0 on 2026-10-11 and re-tagged the same day to the final build (public master 86416ff, includes the breadcrumb QA fixes, zip 417 KB, public CI green with the blocking jobs, branch protection on; the Slack post went out after the retag)
+- [x] `knowx-core` and `knowx-demo-importer` archived on 2026-10-11
+- [ ] Switch the blueprint to the wordpress.org slug (`node tools/build-blueprint.mjs --release`)
 - [ ] Rich Results test and HTTPS Lighthouse on the published copy
 
 ## J. Releasing with the release skill

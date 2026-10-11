@@ -71,15 +71,11 @@ function runTask( fn, name = fn?.name || 'task' ) {
 }
 
 async function lintCSS() {
-	await exec( 'stylelint "assets/css/src/**/*.css"', { stdio: 'inherit' } );
+	await exec( 'npm run lint:css', { stdio: 'inherit' } );
 }
 
 async function lintJS() {
-	// Use flat config if configured in package.json like existing script
-	await exec(
-		'cross-env ESLINT_USE_FLAT_CONFIG=true eslint "assets/js/src/**/*.{js,jsx,ts,tsx}"',
-		{ stdio: 'inherit' }
-	);
+	await exec( 'npm run lint:js', { stdio: 'inherit' } );
 }
 
 async function buildJS( { dev = false } = {} ) {

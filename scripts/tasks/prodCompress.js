@@ -10,7 +10,7 @@ import { prodThemePath } from '../lib/constants.js';
 import { getThemeConfig } from '../lib/utils.js';
 
 /**
- * Gulp-free production compression task: create a zip from prodThemePath
+ * Production compression task: create a zip from prodThemePath
  * @param {Function} done callback when finished
  */
 export default function prodCompress( done ) {

@@ -71,7 +71,7 @@ function runTask( fn, name = fn?.name || 'task' ) {
 }
 
 async function lintCSS() {
-	await exec( 'node lint-css.js', { stdio: 'inherit' } );
+	await exec( 'stylelint "assets/css/src/**/*.css"', { stdio: 'inherit' } );
 }
 
 async function lintJS() {

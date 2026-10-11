@@ -274,4 +274,6 @@ set_theme_mod( 'nav_menu_locations', $locations );
 
 global $wp_rewrite;
 $wp_rewrite->set_permalink_structure( '/%postname%/' );
+// Taxonomies registered their rewrite rules while permalinks were plain (WP-CLI), so register them again before flushing.
+create_initial_taxonomies();
 $wp_rewrite->flush_rules( true );

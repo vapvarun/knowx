@@ -78,7 +78,6 @@
     "images": "node scripts/cli.js images",
     "bundle": "cross-env NODE_ENV=production node scripts/cli.js bundle",
     "bundle:phpcs": "cross-env NODE_ENV=production node scripts/cli.js bundle --phpcs",
-    "bundle:check-all": "cross-env NODE_ENV=production node scripts/cli.js bundle --phpcs",
     "setup": "npm install && composer install && node scripts/cli.js init",
     "prepare": "simple-git-hooks",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:theme-json",

@@ -62,6 +62,32 @@ function updateConfigVersion(version) {
 }
 
 /**
+ * Update version in package.json, package-lock.json and the readme.txt stable tag
+ */
+function updatePackageAndReadme(version) {
+	for (const file of ['package.json', 'package-lock.json']) {
+		const filePath = path.join(rootDir, file);
+		if (!fs.existsSync(filePath)) {
+			continue;
+		}
+		const json = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+		json.version = version;
+		if (json.packages && json.packages['']) {
+			json.packages[''].version = version;
+		}
+		fs.writeFileSync(filePath, JSON.stringify(json, null, 2) + '\n');
+		console.log(`Updated ${file} version to ${version}`);
+	}
+
+	const readmePath = path.join(rootDir, 'readme.txt');
+	if (fs.existsSync(readmePath)) {
+		const readme = fs.readFileSync(readmePath, 'utf8').replace(/(Stable tag:\s*)\d+\.\d+\.\d+/i, `$1${version}`);
+		fs.writeFileSync(readmePath, readme);
+		console.log(`Updated readme.txt stable tag to ${version}`);
+	}
+}
+
+/**
  * Prompt user for version number
  */
 async function promptForVersion(currentVersion) {
@@ -168,6 +194,13 @@ function renameZipWithVersion(version) {
 	const sourceZip = path.join(distDir, `${themeSlug}.zip`);
 	const versionedZip = path.join(distDir, `${themeSlug}-${version}.zip`);
 
+	if (!fs.existsSync(sourceZip) && fs.existsSync(versionedZip)) {
+		// The bundle already wrote the versioned name.
+		const sizeMB = (fs.statSync(versionedZip).size / (1024 * 1024)).toFixed(2);
+		console.log(`\nCreated: dist/${themeSlug}-${version}.zip (${sizeMB} MB)`);
+		return versionedZip;
+	}
+
 	if (fs.existsSync(sourceZip)) {
 		// Remove existing versioned zip if present
 		if (fs.existsSync(versionedZip)) {
@@ -186,8 +219,8 @@ function renameZipWithVersion(version) {
 
 		return versionedZip;
 	} else {
-		console.error(`Warning: ${themeSlug}.zip not found at ${sourceZip}`);
-		return null;
+		console.error(`Error: no zip found at ${versionedZip} or ${sourceZip}`);
+		process.exit(1);
 	}
 }
 
@@ -248,16 +281,18 @@ async function main() {
 		version = await promptForVersion(currentVersion);
 	}
 
-	// Update version in files if changed
+	// Browser smoke gate - refuses to package unless a fresh green smoke report
+	// exists at docs/qa/.last-smoke-pass.json matching this version. Emergency
+	// bypass: SKIP_BROWSER_SMOKE=1 npm run dist. It runs before any file is changed,
+	// so a failed gate leaves the tree untouched.
+	runSmokeGate({ rootDir, version });
+
+	// Update every version source if the version changed.
 	if (version !== currentVersion) {
 		updateStyleVersion(version);
 		updateConfigVersion(version);
+		updatePackageAndReadme(version);
 	}
-
-	// Browser smoke gate — refuses to package unless a fresh green smoke report
-	// exists at docs/qa/.last-smoke-pass.json matching this version. Emergency
-	// bypass: SKIP_BROWSER_SMOKE=1 npm run dist
-	runSmokeGate({ rootDir, version });
 
 	// Run the bundle
 	try {

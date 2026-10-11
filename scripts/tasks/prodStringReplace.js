@@ -9,20 +9,13 @@ import {
 	rootPath,
 	prodThemePath,
 	paths,
-	nameFieldDefaults,
 } from '../lib/constants.js';
-import { getThemeConfig } from '../lib/utils.js';
 import { globFiles, writeFileEnsured } from '../lib/filepipe.js';
 
 function buildReplacements() {
-	const themeConfig = getThemeConfig( true );
-	return Object.keys( nameFieldDefaults ).map( ( nameField ) => ( {
-		searchValue: new RegExp(
-			String( nameFieldDefaults[ nameField ] ).replace( /\\/g, '\\\\' ),
-			'g'
-		),
-		replaceValue: themeConfig.theme[ nameField ],
-	} ) );
+	// KnowX is already named in the source. The starter-theme rename table rewrote the brand case
+	// (KnowX to Knowx) and number sequences such as 3.0.1 inside SVG paths, so nothing is replaced.
+	return [];
 }
 
 function applyReplacements( content, replacements ) {

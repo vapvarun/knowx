@@ -10,9 +10,7 @@ import {
 	paths,
 	isProd,
 	rootPath,
-	nameFieldDefaults,
 } from '../lib/constants.js';
-import { getThemeConfig } from '../lib/utils.js';
 import removeWpCliBlock from './removeWpCliBlock.js';
 import removeDevOnlyBlocks from './removeDevOnlyBlocks.js';
 
@@ -20,14 +18,9 @@ import removeDevOnlyBlocks from './removeDevOnlyBlocks.js';
  * Build replacement table equivalent to getStringReplacementTasks() but without streams.
  */
 function buildReplacements() {
-	const themeConfig = getThemeConfig();
-	return Object.keys( nameFieldDefaults ).map( ( nameField ) => ( {
-		searchValue: new RegExp(
-			String( nameFieldDefaults[ nameField ] ).replace( /\\/g, '\\\\' ),
-			'g'
-		),
-		replaceValue: themeConfig.theme[ nameField ],
-	} ) );
+	// KnowX is already named in the source. The starter-theme rename table rewrote the brand case
+	// (KnowX to Knowx) and number sequences such as 3.0.1 inside SVG paths, so nothing is replaced.
+	return [];
 }
 
 function applyReplacements( content, replacements ) {
@@ -45,9 +38,10 @@ function applyReplacements( content, replacements ) {
  */
 export default function php( runPhpcs, done ) {
 	if ( runPhpcs ) {
+		// PHPCS gates the build: a failure stops it, a pass continues with the normal PHP copy below.
 		console.log( 'Running PHPCS via Composer script...' );
 		const phpcsProcess = exec(
-			'vendor/bin/phpcs --standard=phpcs.xml.dist -p -s'
+			'vendor/bin/phpcs --standard=phpcs.xml.dist --runtime-set ignore_warnings_on_exit 1 -p -s'
 		);
 		let stdoutData = '';
 		let stderrData = '';
@@ -67,8 +61,10 @@ export default function php( runPhpcs, done ) {
 			console.log( `PHPCS process exited with code ${ code }` );
 			if ( code !== 0 ) {
 				console.error( `PHPCS found issues. Exit code: ${ code }` );
+				done( new Error( `PHPCS failed with exit code ${ code }` ) );
+				return;
 			}
-			done();
+			copyPhp( done );
 		} );
 		phpcsProcess.on( 'error', ( err ) => {
 			console.error( 'Failed to start PHPCS:', err );
@@ -77,6 +73,14 @@ export default function php( runPhpcs, done ) {
 		return;
 	}
 
+	copyPhp( done );
+}
+
+/**
+ * Copies the PHP files to the production folder (production builds only).
+ * @param {Function} done
+ */
+function copyPhp( done ) {
 	( async () => {
 		if ( ! isProd ) {
 			// In development, just no-op (parity with previous gulp task behavior)

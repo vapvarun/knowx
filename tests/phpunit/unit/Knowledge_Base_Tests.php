@@ -56,11 +56,16 @@ class Knowledge_Base_Tests extends Unit_Test_Case {
 	}
 
 	/**
-	 * Cached data is returned without calling the builder again.
+	 * Cached data of the current version is returned without calling the builder again.
 	 */
 	public function test_cached_data_skips_the_builder() {
 		Functions\when( 'get_option' )->justReturn( '1' );
-		Functions\when( 'get_transient' )->justReturn( array( 'cached' ) );
+		Functions\when( 'get_transient' )->justReturn(
+			array(
+				'v' => '1',
+				'd' => array( 'cached' ),
+			)
+		);
 
 		$result = knowx_kb_cached(
 			'k',
@@ -73,33 +78,34 @@ class Knowledge_Base_Tests extends Unit_Test_Case {
 	}
 
 	/**
-	 * A new version stamp changes the transient name, so every cached result is rebuilt.
+	 * A new version stamp rebuilds the data and overwrites the same row, so old rows do not pile up.
 	 */
-	public function test_new_version_misses_the_cache() {
-		$names = array();
-		Functions\when( 'get_option' )->justReturn( '1' );
-		Functions\when( 'get_transient' )->alias(
-			static function ( $name ) use ( &$names ) {
-				$names[] = $name;
-				return false;
-			}
-		);
-		Functions\when( 'set_transient' )->justReturn( true );
-
-		knowx_kb_cached(
-			'k',
-			static function () {
-				return array( 1 );
-			}
-		);
+	public function test_new_version_rebuilds_into_the_same_row() {
+		$written = array();
 		Functions\when( 'get_option' )->justReturn( '2' );
-		knowx_kb_cached(
-			'k',
-			static function () {
-				return array( 1 );
+		Functions\when( 'get_transient' )->justReturn(
+			array(
+				'v' => '1',
+				'd' => array( 'old' ),
+			)
+		);
+		Functions\when( 'set_transient' )->alias(
+			static function ( $name, $value ) use ( &$written ) {
+				$written[ $name ] = $value;
+				return true;
 			}
 		);
 
-		$this->assertCount( 2, array_unique( $names ) );
+		$result = knowx_kb_cached(
+			'k',
+			static function () {
+				return array( 'fresh' );
+			}
+		);
+
+		$this->assertSame( array( 'fresh' ), $result );
+		$this->assertCount( 1, $written );
+		$this->assertSame( '2', reset( $written )['v'] );
+		$this->assertSame( 'knowx_kb_' . md5( 'k' ), key( $written ) );
 	}
 }

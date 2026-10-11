@@ -1,7 +1,7 @@
 {
   "mode": "single",
   "release_version": "2.0.0",
-  "ran_at": "2026-10-11T04:18:02Z",
+  "ran_at": "2026-10-11T04:40:56Z",
   "sections": {
     "C_core_flows": {
       "pass": 20,
@@ -9,12 +9,12 @@
       "skipped": 0
     },
     "D_regression_guards": {
-      "pass": 10,
+      "pass": 13,
       "fail": 0,
       "skipped": 0
     },
     "A_fresh_install": {
-      "pass": 2,
+      "pass": 3,
       "fail": 0,
       "skipped": 0
     },

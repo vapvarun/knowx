@@ -390,9 +390,15 @@
 	 * This selector needs to stay separated, otherwise submenus
 	 * will not be displayed with IE/Edge.
 	 */
-    .nav--toggle-sub li:not(.menu-item--has-toggle):focus-within>ul {
+    .nav--toggle-sub li:focus-within>ul {
         display: block;
         transition: none;
+    }
+
+    /* Escape closes an open submenu while focus stays inside it. */
+    .nav--toggle-sub li.knowx-dismissed:focus-within>ul,
+    .nav--toggle-sub li.knowx-dismissed:hover>ul {
+        display: none;
     }
 }
 

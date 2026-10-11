@@ -513,39 +513,39 @@ were hidden (via .neverending) before. */
 
 @media (--sidebar-query) {
 
-    .has-sidebar-right:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper {
+    .has-sidebar-right .site-wrapper {
         display: grid;
         grid-template-columns: 3fr 1fr;
         grid-gap: 2rem;
         justify-content: center;
     }
 
-    .has-sidebar-left:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper {
+    .has-sidebar-left .site-wrapper {
         display: grid;
         grid-template-columns: 1fr 3fr;
         grid-gap: 2rem;
         justify-content: center;
     }
 
-    .has-sidebar-both:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-wrapper {
+    .has-sidebar-both .site-wrapper {
         display: grid;
         grid-template-columns: 1fr 2fr 1fr;
         grid-gap: 1.5rem;
         justify-content: center;
     }
 
-    .has-sidebar-both:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .primary-sidebar {
+    .has-sidebar-both .primary-sidebar {
         padding: 0;
         grid-column: 3;
         min-width: 0;
     }
 
-    .has-sidebar-both:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-main {
+    .has-sidebar-both .site-main {
         grid-column: 2;
         min-width: 0;
     }
 
-    .has-sidebar-both:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .primary-sidebar {
+    .has-sidebar-both .primary-sidebar {
         grid-column: 3;
         min-width: 0;
     }
@@ -559,7 +559,7 @@ were hidden (via .neverending) before. */
         min-width: 0;
     }
 
-    .has-sidebar-left:not(.page-template-full-width-container):not(.page-template-page-knowledgebase-one):not(.page-template-page-knowledgebase-two) .site-main {
+    .has-sidebar-left .site-main {
         grid-column: 2;
         min-width: 0;
     }

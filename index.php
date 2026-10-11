@@ -37,8 +37,7 @@ knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 				get_template_part( 'template-parts/content/page_header' );
 			}
 
-			$classes = get_body_class();
-			if ( in_array( 'blog', $classes ) || in_array( 'archive', $classes ) || in_array( 'search', $classes ) ) {
+			if ( is_home() ) {
 				?>
 			<div class="post-layout row default-layout">
 				<?php

@@ -45,6 +45,8 @@ Run `npm run build` before you commit a change to a source file: CI fails when t
 
 ## Guides
 
+- Developers start with [Architecture](docs/website/developer-guide/01-architecture.md), then [Folder structure](docs/website/developer-guide/07-folder-structure.md), [Templates and template parts](docs/website/developer-guide/08-templates-and-template-parts.md) and [Styling, tokens and assets](docs/website/developer-guide/11-styling-tokens-and-assets.md)
+- Reference: [Functions](docs/website/developer-guide/09-functions-reference.md), [Settings](docs/website/developer-guide/10-settings-reference.md), [Hooks](docs/website/developer-guide/03-hooks.md) and [child themes](docs/website/developer-guide/04-child-theme.md)
 - [Building and testing](docs/website/developer-guide/05-building-and-testing.md)
 - [Adding a setting, a pattern or a hook](docs/website/developer-guide/06-adding-settings-patterns-and-hooks.md)
 - [Hooks reference](docs/website/developer-guide/03-hooks.md) and [content model](docs/website/developer-guide/02-content-model.md)

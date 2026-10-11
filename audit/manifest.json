@@ -125,6 +125,9 @@
   },
   "meta": {
     "post_meta": {
+      "knowx_faq_schema": [
+        "inc/Docs/Component.php"
+      ],
       "knowx_version": [
         "inc/Docs/Component.php"
       ]
@@ -148,6 +151,7 @@
     "custom_routes": [],
     "registered_meta_in_rest": [
       "knowx_accent",
+      "knowx_faq_schema",
       "knowx_icon",
       "knowx_order",
       "knowx_start",
@@ -308,11 +312,14 @@
     "knowx_article_neighbours",
     "knowx_article_version",
     "knowx_block_text",
+    "knowx_build_breadcrumb_items",
     "knowx_current_product",
     "knowx_current_product_id",
     "knowx_default_product_looks",
     "knowx_entry_trail",
     "knowx_faq_from_blocks",
+    "knowx_get_breadcrumb",
+    "knowx_get_breadcrumb_items",
     "knowx_home_view",
     "knowx_icon_svg",
     "knowx_kb_bump_version",
@@ -328,6 +335,7 @@
     "knowx_kb_sections",
     "knowx_kb_version",
     "knowx_meta_description",
+    "knowx_mod",
     "knowx_product_icons",
     "knowx_product_tree",
     "knowx_products",
@@ -335,9 +343,11 @@
     "knowx_render_tree",
     "knowx_schema_graph",
     "knowx_schema_logo_url",
+    "knowx_search_form_label",
     "knowx_seo_plugin_active",
     "knowx_start_url",
     "knowx_term_updated",
+    "knowx_the_breadcrumb",
     "knowx_toc_items",
     "knowx_tree_flat",
     "knowx_tree_max_posts",
@@ -352,13 +362,13 @@
       "docs home, product, section, article, FAQ, changelog, search overlay"
     ],
     "backend": [
-      "category screen: icon and accent",
+      "category screen: icon, accent, product order and start link",
       "post editor: Order and Applies to version",
       "Customizer"
     ],
     "api": [
-      "/wp/v2/categories (knowx_icon, knowx_accent)",
-      "/wp/v2/posts (knowx_version, menu_order)"
+      "/wp/v2/categories (knowx_icon, knowx_accent, knowx_order, knowx_start)",
+      "/wp/v2/posts (knowx_version, knowx_faq_schema, menu_order)"
     ]
   }
 }

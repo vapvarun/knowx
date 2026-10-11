@@ -48,6 +48,7 @@ Run `npm run build` before you commit a change to a source file: CI fails when t
 - [Building and testing](docs/website/developer-guide/05-building-and-testing.md)
 - [Adding a setting, a pattern or a hook](docs/website/developer-guide/06-adding-settings-patterns-and-hooks.md)
 - [Hooks reference](docs/website/developer-guide/03-hooks.md) and [content model](docs/website/developer-guide/02-content-model.md)
+- [Set up docs for one product](docs/website/getting-started/06-single-product-kb.md), [several products](docs/website/getting-started/07-multi-product-kb.md) and the [Customizer step by step](docs/website/customizing/08-customizer-step-by-step.md)
 - [Contributing](CONTRIBUTING.md)
 
 ## Release

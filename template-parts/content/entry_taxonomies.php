@@ -23,13 +23,12 @@ $taxonomies = wp_list_filter(
 		/* translators: separator between taxonomy terms */
 		$separator = _x( ', ', 'list item separator', 'knowx' );
 
+		// Categories are printed once, in the entry meta line.
+		if ( 'category' === $taxo->name ) {
+			continue;
+		}
+
 		switch ( $taxo->name ) {
-			case 'category':
-				$class = 'category-links term-links';
-				$list  = get_the_category_list( esc_html( $separator ), '', $post->ID );
-				/* translators: %s: list of taxonomy terms */
-				$placeholder_text = __( 'Posted in %s', 'knowx' );
-				break;
 			case 'post_tag':
 				$class = 'tag-links term-links';
 				$list  = get_the_tag_list( '', esc_html( $separator ), '', $post->ID );

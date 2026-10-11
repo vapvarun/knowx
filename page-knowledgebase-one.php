@@ -15,23 +15,22 @@ get_header();
 
 knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 
-$hero_title   = knowx_mod( 'hero_section_heading' );
-$hero_content = knowx_mod( 'hero_section_content' );
-
-$support_title   = knowx_mod( 'support_section_heading' );
-$support_content = knowx_mod( 'support_section_content' );
-
-$support_button_text = knowx_mod( 'support_section_button_text' );
-$support_button_link = knowx_mod( 'support_section_button_link_url' );
-
-$hero_image = get_the_post_thumbnail_url( get_queried_object_id(), 'full' );
-$products   = knowx_products();
-$home_count = 5;
-$featured   = knowx_kb_featured_posts( $home_count );
-$recent     = knowx_is_truthy( knowx_mod( 'knowx_show_recent' ) ) ? knowx_kb_recent_posts( $home_count ) : array();
-$column     = ( empty( $featured ) || empty( $recent ) ) ? 'col-md-12' : 'col-md-6';
-$show_date  = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) );
-$single     = 1 === count( $products ) ? knowx_product_tree( $products[0]['id'] ) : null;
+[
+	'hero_title'          => $hero_title,
+	'hero_content'        => $hero_content,
+	'support_title'       => $support_title,
+	'support_content'     => $support_content,
+	'support_button_text' => $support_button_text,
+	'support_button_link' => $support_button_link,
+	'hero_image'          => $hero_image,
+	'products'            => $products,
+	'home_count'          => $home_count,
+	'featured'            => $featured,
+	'recent'              => $recent,
+	'column'              => $column,
+	'show_date'           => $show_date,
+	'single'              => $single,
+] = knowx_home_view();
 
 ?>
 	<main id="primary" class="site-main">

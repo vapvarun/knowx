@@ -19,7 +19,16 @@
 <p class="has-text-align-center"><?php esc_html_e( 'Guides, references and answers for every product.', 'knowx' ); ?></p>
 <!-- /wp:paragraph -->
 
-<!-- wp:search {"label":"Search","showLabel":false,"placeholder":"Search the documentation","buttonText":"Search"} /--></div>
+<!-- wp:search <?php
+echo wp_json_encode(
+	array(
+		'label'       => __( 'Search', 'knowx' ),
+		'showLabel'   => false,
+		'placeholder' => __( 'Search the documentation', 'knowx' ),
+		'buttonText'  => __( 'Search', 'knowx' ),
+	)
+);
+?> /--></div>
 <!-- /wp:group -->
 
 <!-- wp:columns -->

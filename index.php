@@ -19,8 +19,6 @@ get_header();
 knowx()->print_styles( 'knowx-content' );
 knowx()->print_styles( 'knowx-sidebar', 'knowx-widgets' );
 
-$default_sidebar = knowx_mod( 'sidebar_option' );
-
 
 ?>
 
@@ -28,13 +26,7 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 	
 	<?php do_action( 'knowx_before_content' ); ?>
 
-	<?php if ( 'left' == $default_sidebar || 'both' == $default_sidebar ) : ?>
-		<aside id="secondary-left" class="left-sidebar widget-area" aria-label="<?php esc_attr_e( 'Left sidebar', 'knowx' ); ?>">
-			<div class="sticky-sidebar">
-				<?php knowx()->display_left_sidebar(); ?>
-			</div>
-		</aside>
-	<?php endif; ?>
+	<?php get_template_part( 'template-parts/layout/sidebar', 'left' ); ?>
 	
 	<main id="primary" class="site-main">
 		
@@ -75,13 +67,7 @@ $default_sidebar = knowx_mod( 'sidebar_option' );
 		?>
 
 	</main><!-- #primary -->
-	<?php if ( 'right' == $default_sidebar || 'both' == $default_sidebar ) : ?>
-		<aside id="secondary" class="primary-sidebar widget-area" aria-label="<?php esc_attr_e( 'Sidebar', 'knowx' ); ?>">
-			<div class="sticky-sidebar">
-				<?php knowx()->display_right_sidebar(); ?>
-			</div>
-		</aside>
-	<?php endif; ?>
+	<?php get_template_part( 'template-parts/layout/sidebar', 'right' ); ?>
 
 	<?php do_action( 'knowx_after_content' ); ?>
 <?php

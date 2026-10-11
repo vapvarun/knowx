@@ -72,7 +72,7 @@
 	const dialog = document.querySelector('.knowx-search-dialog');
 	if (dialog && typeof dialog.showModal === 'function') {
 		const input = dialog.querySelector('input[type="search"]');
-		const list = dialog.querySelector('.knowx-search-results');
+		const list = dialog.querySelector('.knowx-search-dialog-results');
 		const status = dialog.querySelector('.knowx-search-status');
 		const scope = dialog.querySelector('.knowx-search-scope input');
 		const decode = (html) =>

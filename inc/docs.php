@@ -98,7 +98,7 @@ function knowx_products() {
 
 			// WordPress' stock "Uncategorized" category is a placeholder, never a product. A renamed default category is.
 			$default = (int) get_option( 'default_category' );
-			$stock   = sanitize_title( _x( 'Uncategorized', 'Default category slug' ) ); // phpcs:ignore WordPress.WP.I18n.MissingArgDomain -- core string.
+			$stock   = sanitize_title( _x( 'Uncategorized', 'Default category slug', 'default' ) ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch -- core string, same as the default category created at install.
 			$terms   = array_values(
 				array_filter(
 					$terms,

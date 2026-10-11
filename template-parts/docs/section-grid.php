@@ -36,8 +36,9 @@ if ( ! $knowx_tree || empty( $knowx_tree['root']['children'] ) ) {
 			<?php if ( $knowx_node['count'] > $knowx_per ) : ?>
 				<a class="knowx-view-all" href="<?php echo esc_url( $knowx_node['url'] ); ?>">
 					<?php
+					$knowx_count = (int) $knowx_node['count'];
 					/* translators: %s: number of articles. */
-					echo esc_html( sprintf( _n( 'View all %s article', 'View all %s articles', (int) $knowx_node['count'], 'knowx' ), number_format_i18n( $knowx_node['count'] ) ) );
+					echo esc_html( sprintf( _n( 'View all %s article', 'View all %s articles', $knowx_count, 'knowx' ), number_format_i18n( $knowx_count ) ) );
 					?>
 				</a>
 			<?php endif; ?>

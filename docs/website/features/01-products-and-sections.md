@@ -9,6 +9,8 @@ KnowX organises documentation with the categories and posts WordPress already ha
 | Article | Post |
 | Featured article | Sticky post |
 
+Setting up a site? Follow [Set up docs for one product](../getting-started/06-single-product-kb.md) or [Set up docs for several products](../getting-started/07-multi-product-kb.md).
+
 ## Add a product
 
 1. Go to **Posts > Categories** and add a category with no parent. Write a short description; it is shown on the product card.

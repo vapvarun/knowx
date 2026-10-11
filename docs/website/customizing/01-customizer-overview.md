@@ -17,6 +17,8 @@ Go to **Appearance > Customize**. KnowX has its own Customizer built in, so no p
 
 WordPress' own panels still apply: **Site Identity** (logo, title, tagline, icon), **Homepage Settings**, **Menus**, **Widgets** and **Additional CSS**. The theme does not repeat them.
 
+For a guided walk through every panel, with screenshots and recipes, see [Customizer step by step](08-customizer-step-by-step.md).
+
 ## Defaults
 
 Every setting has a default, so a new site looks right without opening the Customizer. If you clear a field, the default returns.

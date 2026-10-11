@@ -32,4 +32,9 @@ Go to **Appearance > Menus**, create a menu with your pages (for example Docs, F
 
 ## 6. Make it yours
 
-Open **Appearance > Customize**. Start with **Colors** for the theme colour and page background, and **Site Identity** for the logo. See the [Customizer overview](../customizing/01-customizer-overview.md).
+Open **Appearance > Customize**. Start with **Colors** for the theme colour and page background, and **Site Identity** for the logo. See the [Customizer overview](../customizing/01-customizer-overview.md) and the [Customizer step by step](../customizing/08-customizer-step-by-step.md).
+
+## Use-case guides
+
+- One product, such as one app or plugin: [Set up docs for one product](06-single-product-kb.md).
+- Several products on one site: [Set up docs for several products](07-multi-product-kb.md).

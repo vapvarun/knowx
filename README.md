@@ -20,7 +20,7 @@ npm run build     # builds the .min.css and .min.js files (they are committed)
 npm run lint      # ESLint, tsc, stylelint and theme.json
 npm test          # PHPUnit unit tests
 vendor/bin/phpcs --standard=phpcs.xml.dist
-vendor/bin/phpstan analyze --memory-limit=1G
+vendor/bin/phpstan analyze --memory-limit=2G
 bash tests/docker/run-integration.sh   # integration tests (needs Docker)
 ```
 

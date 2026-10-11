@@ -22,7 +22,7 @@ Node 22 and PHP 8.1 or later. CI uses the same versions.
 | `npm test` | Runs the PHPUnit unit tests |
 | `bash tests/docker/run-integration.sh` | Runs the integration tests in Docker against a real WordPress |
 | `vendor/bin/phpcs --standard=phpcs.xml.dist` | WordPress coding standards |
-| `vendor/bin/phpstan analyze --memory-limit=1G` | Static analysis |
+| `vendor/bin/phpstan analyze --memory-limit=2G` | Static analysis |
 | `npm run bundle` | Builds the installable zip in `dist/` (no release gate) |
 | `node scripts/distribute.js --current --no-tag` | Builds the release zip; refuses to package without a fresh `docs/qa/.last-smoke-pass.json` for this version |
 | `python3 tools/build-manifest.py` | Regenerates `audit/manifest.json` |

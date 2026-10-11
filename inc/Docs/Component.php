@@ -394,6 +394,10 @@ class Component implements Component_Interface {
 	 * @param int $term_id Category id.
 	 */
 	public function save_term_fields( $term_id ) {
+		if ( ! current_user_can( 'edit_term', $term_id ) ) {
+			return;
+		}
+
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- the category form is verified by WordPress before these hooks run.
 		if ( isset( $_POST['knowx_icon'] ) ) {
 			update_term_meta( $term_id, 'knowx_icon', $this->sanitize_icon( sanitize_text_field( wp_unslash( $_POST['knowx_icon'] ) ) ) );

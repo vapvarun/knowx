@@ -96,24 +96,30 @@ GNU General Public License for more details.
 == Upgrade Notice ==
 
 = 2.0.0 =
-Major release. The Kirki plugin is no longer used, there are fewer color options and the docs layout is new. Review Appearance > Customize after updating.
+Major release. The Kirki plugin is no longer used, the Customizer is new and earlier choices are not carried over, and the docs layout is new. Review Appearance > Customize after updating.
 
 == Changelog ==
 
 = 2.0.0 - October 2026 =
 
-* New      - Products: top-level categories become product cards with an icon, description and accent colour, plus a header product switcher.
-* New      - Article layout with a section tree, "On this page" list, copy-link on headings, code copy buttons, previous and next links and related articles.
+Major release. Earlier Customizer choices are not carried over, so review Appearance > Customize after updating.
+
+* New      - Products: top-level categories become product cards with an icon, description and accent colour, plus a header product switcher; a site with one product lists its sections directly.
+* New      - Article layout with a section tree, "On this page" list, copy-link on headings, code copy buttons, previous and next links, related articles and a last updated date.
 * New      - Instant search overlay (Ctrl or Cmd + K) that can be limited to the current product.
-* New      - FAQ and Changelog page templates, a docs pattern category and an "applies to version" badge.
+* New      - Search results, archives, the 404 page and the comment form follow the docs style.
+* New      - FAQ and Changelog page templates, 17 block patterns (callouts, prerequisites, troubleshooting, API endpoint, compatibility table, next steps and more) and an "applies to version" badge.
+* New      - Article Order field in the block editor and in the REST API.
 * New      - schema.org data for the site, articles, breadcrumbs and FAQ, and a meta description.
-* New      - Light and dark mode with a visitor toggle and a theme colour setting.
+* New      - Light and dark mode with a visitor toggle, five colour palettes and your own colours for links, text, headings, backgrounds, header and footer, with a live preview in the Customizer.
+* New      - Footer menu location, a corner style setting and a docs home that switches between cards and sections.
 * New      - Sample content and a WordPress Playground blueprint.
-* Improve  - The Kirki plugin and the plugin recommendations are gone; the Customizer is built into the theme.
+* Improve  - The Kirki plugin and the plugin recommendations are gone; the Customizer is built into the theme and organised in ten short sections with plain labels.
 * Improve  - Open Sans is served from your site, and the page loads no jQuery and no icon font.
-* Improve  - Colors come from five settings and the rest are derived, so the editor and the front end always match.
+* Improve  - Right-to-left sites mirror correctly, including text alignment, code copy buttons and list arrows.
 * Improve  - The docs lists are cached with automatic invalidation and are bounded, so large sites stay fast.
 * Fix      - Saved Customizer colors were overridden by a duplicate set of defaults in the content stylesheet.
+* Fix      - Excluding a product now also hides its sections and articles on the Docs Index.
 * Dev      - PHP 8.1 and WordPress 6.9 minimum, PHPStan, PHPUnit, an accessibility check on every page type and a documented content model.
 
 = 1.7.4 =

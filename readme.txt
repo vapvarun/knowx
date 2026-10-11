@@ -113,9 +113,12 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * New      - schema.org data for the site, articles, breadcrumbs and FAQ, and a meta description.
 * New      - Light and dark mode with a visitor toggle, five colour palettes and your own colours for links, text, headings, backgrounds, header and footer, with a live preview in the Customizer.
 * New      - Footer menu location, a corner style setting and a docs home that switches between cards and sections.
+* New      - Switches for comments on articles (off by default; articles end with a "Still need help?" block) and for FAQ structured data, which can also be turned off on a single page.
 * New      - Sample content and a WordPress Playground blueprint.
 * Improve  - The Kirki plugin and the plugin recommendations are gone; the Customizer is built into the theme and organised in ten short sections with plain labels.
 * Improve  - Open Sans is served from your site, and the page loads no jQuery and no icon font.
+* Improve  - Tablets and phones: the section tree sits beside the article from 900 px, text lines stay about 72 characters, and the phone header is one row with the article title in the first third of the screen.
+* Improve  - The docs home has balanced lists, no half-empty column and no support block without a link; article structured data now names the publisher and an image.
 * Improve  - Right-to-left sites mirror correctly, including text alignment, code copy buttons and list arrows.
 * Improve  - Menus with child items open with the keyboard on wide screens and close with Escape; the copy button says when copying is not available.
 * Improve  - Blog posts print one category list, one edit link and one comment link, images get correct size hints, and an SEO plugin's schema is no longer printed twice.

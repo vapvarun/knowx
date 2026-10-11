@@ -46,15 +46,6 @@ const getAllFiles = (dir) => {
 // Gather all JavaScript/TypeScript entries for theme scripts
 const files = getAllFiles(srcDir);
 
-// Blocks are now built separately using @wordpress/scripts
-// via the npm run build:blocks or npm run start:blocks commands
-const blocksDir = path.join(
-	paths.assetsDir || path.join(process.cwd(), 'assets'),
-	'blocks'
-);
-
-// No block entries processing here - blocks are now built with wp-scripts
-
 // Plugin to transform code using replaceInlineJS before esbuild processes it
 const replaceInlineJSPlugin = {
 	name: 'replaceInlineJS',
@@ -120,17 +111,6 @@ files.forEach((file) => {
 				'react-dom',
 				'react-dom/client',
 				'jquery',
-				'desandro-matches-selector',
-				'ev-emitter',
-				'get-size',
-				'fizzy-ui-utils',
-				'outlayer',
-				'masonry-layout',
-				'isotope-layout/js/item',
-				'isotope-layout/js/layout-mode',
-				'isotope-layout/js/layout-modes/masonry',
-				'isotope-layout/js/layout-modes/fit-rows',
-				'isotope-layout/js/layout-modes/vertical',
 			],
 		})
 		.catch(() => process.exit(1));
@@ -139,5 +119,4 @@ files.forEach((file) => {
 // Log watch mode status
 if (isWatchMode) {
 	console.log('🔄 Watch mode enabled for theme JS files');
-	console.log('📝 Note: Blocks are built separately using `npm run start:blocks`');
 }

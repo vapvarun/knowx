@@ -1,5 +1,5 @@
 /**
- * Theme behaviour that CSS cannot do: the page loader, table cell labels and the back-to-top button.
+ * Theme behaviour that CSS cannot do: table cell labels and the back-to-top button.
  * No jQuery; menus live in navigation.ts.
  */
 (function () {

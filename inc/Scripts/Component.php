@@ -199,6 +199,7 @@ class Component implements Component_Interface, Templating_Component_Interface {
 						'copy'       => esc_html__( 'Copy', 'knowx' ),
 						'copied'     => esc_html__( 'Copied', 'knowx' ),
 						'linkCopied' => esc_html__( 'Link copied', 'knowx' ),
+						'copyFailed' => esc_html__( 'Copy is not available on this page', 'knowx' ),
 						'searching'  => esc_html__( 'Searching...', 'knowx' ),
 						'none'       => esc_html__( 'No articles found. Press Enter to search the whole site.', 'knowx' ),
 						'error'      => esc_html__( 'Search is not available right now. Press Enter to use the search page.', 'knowx' ),

@@ -192,7 +192,7 @@ export default function prodPrep( done ) {
 				relativePath.split( '/' )[ 0 ] ||
 				relativePath.split( '\\' )[ 0 ] ||
 				'';
-			const excludedDirs = new Set( [ 'childify_backup', 'scripts' ] );
+			const excludedDirs = new Set( [ 'scripts' ] );
 			const excludedFiles = new Set( [ 'rector.php', 'phpcs.xml.dist', 'phpstan.neon', 'grumphp.yml' ] );
 			const fileName = path.basename( relativePath );
 

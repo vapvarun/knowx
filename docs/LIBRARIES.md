@@ -54,13 +54,13 @@ Plugin, not bundled. Removed entirely (W07); the in-house Customizer framework r
 | simple-git-hooks + lint-staged | Pre-commit gate | Keep |
 | browser-sync, create-cert | Live reload dev server | Keep, dev convenience |
 | sharp, svgo | Image and SVG optimisation in the build | Keep |
-| archiver, fs-extra, del, mkdirp, rimraf, fast-glob, commander, inquirer, ansi-colors, fancy-log, deepmerge | Build scripts | Keep; audit for removal in W17 |
+| archiver, fs-extra, del, mkdirp, rimraf, fast-glob, commander, inquirer, ansi-colors, fancy-log, deepmerge | Build scripts | Keep |
+| typescript | `npm run lint:ts` type-checks the two TypeScript files (`tsconfig.json`) | Keep |
 | ~~jest, jest-expect-message~~ (removed in W18) | There are no JS unit tests; the browser journeys cover the scripts | **Done**: removed with `jest.config.cjs` and the unused `playwright.config.ts` |
-| wp-pot-cli | Regenerates `languages/knowx.pot` | Keep (W17) |
-| autoprefixer 9, postcss-custom-media, chokidar-cli, replace-in-file, minimist, `eslint-config-standard` / `eslint-plugin-import` / `eslint-plugin-node`, `@eslint/js`, `globals` | Legacy, not imported by the scripts | Review and remove in W01 and W17 |
+| chokidar-cli, `eslint-plugin-import`, `globals` | Watch scripts and the ESLint config | Keep |
 | PHP: phpcs + WPCS + PHPCompatibility, phpstan + WordPress stubs, phpunit + Brain Monkey, rector, php-cs-fixer | Coding standard, static analysis, unit tests | Keep |
 
-Removed in W02 because nothing used them: `@wordpress/block-editor`, `blocks`, `components`, `create-block`, `data`, `scripts`, `server-side-render`, `react`, `react-dom`, `@parcel/css`, `cssnano`, `esbuild-loader`, `esm`, `import-fresh`, `npm-run-all`, `tiny-lr`, `vinyl`, `wp-cli` (1,145 packages).
+Removed because nothing used them: `postcss-custom-media`, `axe-core`, `minimist`, `replace-in-file`, `wp-pot-cli` (the template is made with `wp i18n make-pot`), `eslint-config-standard`, `eslint-plugin-node`, `@eslint/js` and `glob`. Removed in W02: `@wordpress/block-editor`, `blocks`, `components`, `create-block`, `data`, `scripts`, `server-side-render`, `react`, `react-dom`, `@parcel/css`, `cssnano`, `esbuild-loader`, `esm`, `import-fresh`, `npm-run-all`, `tiny-lr`, `vinyl`, `wp-cli` (1,145 packages).
 
 ## 5. How a library earns its place
 

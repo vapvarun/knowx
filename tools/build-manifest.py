@@ -49,7 +49,7 @@ for kind, f in (('styles', 'inc/Styles/Component.php'), ('scripts', 'inc/Scripts
     handles[kind] = re.findall(r"'(knowx-[a-z-]+)'\s*=>\s*array", (root / f).read_text())
 
 meta = {
-    'post_meta': find(r"register_post_meta\(\s*'post',\s*'([^']+)'"),
+    'post_meta': find(r"register_post_meta\(\s*(?:'post'|\$post_type),\s*'([^']+)'"),
     'term_meta': find(r"register_term_meta\(\s*'category',\s*'([^']+)'"),
 }
 
@@ -68,12 +68,12 @@ manifest = {
     'style_variations': variations,
     'asset_handles': handles,
     'customizer_settings': settings,
-    'data_helpers': sorted(set(re.findall(r'^function (knowx_[a-z_]+)', (root / 'inc/docs.php').read_text() + (root / 'inc/knowledge-base.php').read_text(), re.M))),
+    'data_helpers': sorted(set(re.findall(r'^function (knowx_[a-z_]+)', ''.join((root / f'inc/{n}.php').read_text() for n in ('docs', 'knowledge-base', 'helpers', 'breadcrumbs')), re.M))),
     'options': sorted(set(re.findall(r"(?:get|update)_option\(\s*'(knowx_[a-z_]+)'", ''.join(p.read_text(errors='ignore') for p in php)))),
     'entry_points': {
         'frontend': ['docs home, product, section, article, FAQ, changelog, search overlay'],
-        'backend': ['category screen: icon and accent', 'post editor: Order and Applies to version', 'Customizer'],
-        'api': ['/wp/v2/categories (knowx_icon, knowx_accent)', '/wp/v2/posts (knowx_version, menu_order)'],
+        'backend': ['category screen: icon, accent, product order and start link', 'post editor: Order and Applies to version', 'Customizer'],
+        'api': ['/wp/v2/categories (knowx_icon, knowx_accent, knowx_order, knowx_start)', '/wp/v2/posts (knowx_version, knowx_faq_schema, menu_order)'],
     },
 }
 

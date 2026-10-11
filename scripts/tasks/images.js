@@ -148,42 +148,7 @@ export async function images() {
 	}
 }
 
-export async function convertToWebP() {
-	const srcRoot = getSrcRoot();
-	const patterns = [ paths.images.src ];
-	// Normalize patterns for cross-platform globbing (Windows)
-	const normalizedPatterns = patterns.map( ( p ) => p.replace( /\\/g, '/' ) );
-	const files = await fg( normalizedPatterns, {
-		caseSensitiveMatch: false,
-		dot: false,
-		onlyFiles: true,
-	} );
-
-	for ( const file of files ) {
-		const osFile = path.normalize( file );
-		const ext = path.extname( osFile ).toLowerCase();
-		if ( ! [ '.jpg', '.jpeg', '.png' ].includes( ext ) ) {
-			continue; // Skip non-webp convertible types here
-		}
-		const rel = path.relative( srcRoot, osFile );
-		const destFile = path
-			.join( getDestRoot(), rel )
-			.replace( /\.[^.]+$/i, '.webp' );
-		if ( ! ( await isNewer( osFile, destFile ) ) ) {
-			continue;
-		}
-		try {
-			await fse.ensureDir( path.dirname( destFile ) );
-			await sharp( osFile, { sequentialRead: true } )
-				.webp( { quality: 75 } )
-				.toFile( destFile );
-		} catch ( err ) {
-			console.warn(
-				`Failed to convert to WebP: ${ path.basename( osFile ) }. Skipping this file.`,
-				err.message
-			);
-			// Continue with next file - don't let this error stop the process
-			continue;
-		}
-	}
-}
+/**
+ * KnowX references no WebP file (the Customizer choices use the PNG previews), so none are generated or shipped.
+ */
+export async function convertToWebP() {}

@@ -23,13 +23,6 @@ defined( 'ABSPATH' ) || exit;
 					'element' => '.site-sub-header',
 				),
 			),
-			'active_callback' => array(
-				array(
-					'setting'  => 'site_sub_header_bg',
-					'operator' => '==',
-					'value'    => '1',
-				),
-			),
 			'priority' => 30,
 		)
 	);
@@ -45,13 +38,6 @@ defined( 'ABSPATH' ) || exit;
 			'choices'         => array(
 				'on'  => esc_html__( 'Yes', 'knowx' ),
 				'off' => esc_html__( 'No', 'knowx' ),
-			),
-			'active_callback' => array(
-				array(
-					'setting'  => 'site_sub_header',
-					'operator' => '==',
-					'value'    => true,
-				),
 			),
 			'priority' => 20,
 		)

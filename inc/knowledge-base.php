@@ -36,7 +36,35 @@ function knowx_kb_version() {
  * Invalidates every cached docs result. Hooked to the post and term actions in the Docs component.
  */
 function knowx_kb_bump_version() {
-	update_option( 'knowx_kb_version', (string) microtime( true ) );
+	// Not autoloaded: it is rewritten on every content change and only the docs pages read it.
+	update_option( 'knowx_kb_version', (string) microtime( true ), false );
+}
+
+/**
+ * Refreshes the docs cache after a content change, without writing the option once per hook.
+ *
+ * The first call in a request bumps the version at once; later calls only queue one more bump for
+ * shutdown, so a save that fires many hooks costs two writes at most.
+ *
+ * @param bool $reset Forget the per-request state (tests and long running CLI scripts).
+ */
+function knowx_kb_invalidate( $reset = false ) {
+	static $bumped = false;
+	static $queued = false;
+
+	if ( $reset ) {
+		$bumped = false;
+		$queued = false;
+		return;
+	}
+
+	if ( ! $bumped ) {
+		$bumped = true;
+		knowx_kb_bump_version();
+	} elseif ( ! $queued ) {
+		$queued = true;
+		add_action( 'shutdown', 'knowx_kb_bump_version' );
+	}
 }
 
 /**
@@ -47,13 +75,25 @@ function knowx_kb_bump_version() {
  * @return array Cached data.
  */
 function knowx_kb_cached( $key, $callback ) {
-	$transient = 'knowx_kb_' . md5( $key . knowx_kb_version() );
-	$data      = get_transient( $transient );
+	// One row per key. The version lives inside the value, so a content change overwrites the row
+	// instead of abandoning it and the number of rows stays flat.
+	$transient = 'knowx_kb_' . md5( $key );
+	$version   = knowx_kb_version();
+	$stored    = get_transient( $transient );
 
-	if ( ! is_array( $data ) ) {
-		$data = (array) $callback();
-		set_transient( $transient, $data, DAY_IN_SECONDS );
+	if ( is_array( $stored ) && isset( $stored['v'], $stored['d'] ) && $stored['v'] === $version && is_array( $stored['d'] ) ) {
+		return $stored['d'];
 	}
+
+	$data = (array) $callback();
+	set_transient(
+		$transient,
+		array(
+			'v' => $version,
+			'd' => $data,
+		),
+		DAY_IN_SECONDS
+	);
 
 	return $data;
 }
@@ -247,7 +287,10 @@ function knowx_kb_post_query( $exclude, $args = array() ) {
  */
 function knowx_kb_sections() {
 	$exclude  = knowx_kb_excluded_ids();
-	$per_cat  = max( 1, (int) knowx_mod( 'knowx_posts' ) );
+	$per_cat  = (int) knowx_mod( 'knowx_posts' );
+	if ( $per_cat < 1 ) {
+		$per_cat = 10; // An empty field means the default.
+	}
 	$by_name  = 'name' === knowx_mod( 'knowx_order' );
 	$cache_id = 'sections-' . $per_cat . '-' . (int) $by_name . '-' . implode( ',', $exclude );
 

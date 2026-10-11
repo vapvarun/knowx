@@ -397,6 +397,7 @@ class Field {
 			'text'           => 'text',
 			'textarea'       => 'textarea',
 			'url'            => 'url',
+			'number'         => 'number',
 			'select'         => 'select',
 			'radio'          => 'radio',
 			'dropdown-pages' => 'dropdown-pages',

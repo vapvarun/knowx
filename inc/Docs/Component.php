@@ -15,6 +15,7 @@ use function add_action;
 use function add_filter;
 use function add_meta_box;
 use function add_post_type_support;
+use function get_post_status;
 use function get_post_type;
 use function get_theme_file_path;
 use function get_theme_file_uri;
@@ -43,9 +44,16 @@ class Component implements Component_Interface {
 	public function initialize() {
 		add_action( 'init', array( $this, 'action_register_meta' ) );
 		add_action( 'init', array( $this, 'action_register_pattern_category' ) );
-		// Any change that can alter a product list, tree or count refreshes the cached docs data.
-		foreach ( array( 'save_post', 'deleted_post', 'transition_post_status', 'set_object_terms', 'created_category', 'edited_category', 'delete_category', 'added_term_meta', 'updated_term_meta', 'deleted_term_meta', 'update_option_sticky_posts' ) as $hook ) {
-			add_action( $hook, 'knowx_kb_bump_version' );
+		// Only changes that can alter a product list, tree or count refresh the cached docs data.
+		add_action( 'save_post_post', array( $this, 'invalidate_on_save_post' ), 10, 2 );
+		add_action( 'transition_post_status', array( $this, 'invalidate_on_status_change' ), 10, 3 );
+		add_action( 'deleted_post', array( $this, 'invalidate_on_delete_post' ), 10, 2 );
+		add_action( 'set_object_terms', array( $this, 'invalidate_on_terms' ), 10, 4 );
+		foreach ( array( 'created_category', 'edited_category', 'delete_category', 'update_option_sticky_posts' ) as $hook ) {
+			add_action( $hook, array( $this, 'invalidate' ) );
+		}
+		foreach ( array( 'added_term_meta', 'updated_term_meta', 'deleted_term_meta' ) as $hook ) {
+			add_action( $hook, array( $this, 'invalidate_on_term_meta' ), 10, 3 );
 		}
 
 		add_action( 'wp_footer', array( $this, 'render_search_dialog' ) );
@@ -416,6 +424,77 @@ class Component implements Component_Interface {
 			update_term_meta( $term_id, 'knowx_start', esc_url_raw( wp_unslash( $_POST['knowx_start'] ) ) );
 		}
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
+	}
+
+	/**
+	 * Refreshes the cached docs data, at most twice per request (see knowx_kb_invalidate()).
+	 */
+	public function invalidate() {
+		knowx_kb_invalidate();
+	}
+
+	/**
+	 * A published article was saved. Drafts, autosaves and revisions do not change what readers see.
+	 *
+	 * @param int      $post_id Post id.
+	 * @param \WP_Post $post    Post.
+	 */
+	public function invalidate_on_save_post( $post_id, $post ) {
+		if ( 'publish' === $post->post_status ) {
+			$this->invalidate();
+		}
+	}
+
+	/**
+	 * An article was published, unpublished or trashed.
+	 *
+	 * @param string   $new_status New status.
+	 * @param string   $old_status Old status.
+	 * @param \WP_Post $post       Post.
+	 */
+	public function invalidate_on_status_change( $new_status, $old_status, $post ) {
+		if ( 'post' === $post->post_type && ( 'publish' === $new_status || 'publish' === $old_status ) && $new_status !== $old_status ) {
+			$this->invalidate();
+		}
+	}
+
+	/**
+	 * An article was deleted.
+	 *
+	 * @param int      $post_id Post id.
+	 * @param \WP_Post $post    Post.
+	 */
+	public function invalidate_on_delete_post( $post_id, $post ) {
+		if ( $post instanceof \WP_Post && 'post' === $post->post_type ) {
+			$this->invalidate();
+		}
+	}
+
+	/**
+	 * The categories of a published article changed.
+	 *
+	 * @param int    $object_id Object id.
+	 * @param array  $terms     Terms.
+	 * @param array  $tt_ids    Term taxonomy ids.
+	 * @param string $taxonomy  Taxonomy.
+	 */
+	public function invalidate_on_terms( $object_id, $terms, $tt_ids, $taxonomy ) {
+		if ( 'category' === $taxonomy && 'post' === get_post_type( $object_id ) && 'publish' === get_post_status( $object_id ) ) {
+			$this->invalidate();
+		}
+	}
+
+	/**
+	 * A product field (icon, accent, order, start link) changed.
+	 *
+	 * @param int    $meta_id  Meta id.
+	 * @param int    $term_id  Term id.
+	 * @param string $meta_key Meta key.
+	 */
+	public function invalidate_on_term_meta( $meta_id, $term_id, $meta_key ) {
+		if ( 0 === strpos( (string) $meta_key, 'knowx_' ) ) {
+			$this->invalidate();
+		}
 	}
 
 	/**

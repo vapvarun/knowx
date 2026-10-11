@@ -19,9 +19,15 @@ $sections         = knowx_kb_sections();
 
 ?>
 
-	<?php do_action( 'knowx_sub_header' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_sub_header' );
+	?>
 
-	<?php do_action( 'knowx_before_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_before_content' );
+	?>
 
 	<main id="primary" class="site-main">
 
@@ -59,6 +65,9 @@ $sections         = knowx_kb_sections();
 
 	</main><!-- #primary -->
 
-	<?php do_action( 'knowx_after_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_after_content' );
+	?>
 <?php
 get_footer();

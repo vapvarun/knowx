@@ -154,7 +154,7 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Fix: Updated customizer options images
 * Fix: Managed plugin bulk selection installation and activation
 * Fix: Format theme files
-* Fix: Added kirki 5.0.0 support
+* Fix: Added support for Kirki 5.0.0 (the plugin is no longer used since 2.0.0)
 
 = 1.6.0 =
 * Fix : Added custom WP login form setting
@@ -175,7 +175,7 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 
 
 = 1.3.0 =
-* Fix : Removed include-kirki.php (notice removed from customizer)
+* Fix: Removed the Kirki include notice from the Customizer
 * Fix : Updated theme screenshot.png
 * Fix : Updated gmpg.org link with https
 

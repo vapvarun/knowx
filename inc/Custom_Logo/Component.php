@@ -41,6 +41,11 @@ class Component implements Component_Interface {
 	public function action_add_custom_logo_support() {
 		add_theme_support(
 			'custom-logo',
+			/**
+			 * Filters the arguments passed to add_theme_support( 'custom-logo' ).
+			 *
+			 * @param array $args Theme support arguments.
+			 */
 			apply_filters(
 				'knowx_custom_logo_args',
 				array(

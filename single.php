@@ -25,9 +25,15 @@ if ( knowx_current_product() ) {
 ?>
 
 
-	<?php do_action( 'knowx_sub_header' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_sub_header' );
+	?>
 	
-	<?php do_action( 'knowx_before_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_before_content' );
+	?>
 
 	<?php get_template_part( 'template-parts/layout/sidebar', 'left' ); ?>
 	
@@ -50,7 +56,10 @@ if ( knowx_current_product() ) {
 	</main><!-- #primary -->
 	<?php get_template_part( 'template-parts/layout/sidebar', 'right' ); ?>
 
-	<?php do_action( 'knowx_after_content' ); ?>
+	<?php
+	/** This action is documented in inc/extra.php. */
+	do_action( 'knowx_after_content' );
+	?>
 
 
 <?php

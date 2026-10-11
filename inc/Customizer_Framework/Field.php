@@ -83,7 +83,11 @@ class Field {
 	 * @param array                 $args Field args (must include '_type').
 	 */
 	public static function register_with_manager( \WP_Customize_Manager $wp_customize, array $args ): void {
-		// Allow Pro / extensions to add or override control types.
+		/**
+		 * Filters the Customizer control types: field type => array( setting class, control class, is custom control ).
+		 *
+		 * @param array[] $type_map Registered types; add or replace one to support a new control.
+		 */
 		$type_map = apply_filters( 'knowx_customizer_field_type_map', self::$type_map );
 
 		$type = $args['_type'] ?? '';
@@ -96,7 +100,12 @@ class Field {
 			return;
 		}
 
-		// Allow callers to mutate args (e.g. force postMessage on settings rendered via dynamic CSS).
+		/**
+		 * Filters the arguments of one Customizer field before it is registered.
+		 *
+		 * @param array                $args         Field arguments (`settings`, `section`, `default`, `transport` ...).
+		 * @param \WP_Customize_Manager $wp_customize Customizer manager.
+		 */
 		$args = apply_filters( 'knowx_customizer_field_args', $args, $wp_customize );
 
 		$setting_id  = $args['settings'];

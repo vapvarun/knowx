@@ -23,8 +23,8 @@ KnowX is a classic theme with block features. It is based on WP Rig and uses nam
 
 ## Colours
 
-Five colour settings drive the whole palette. Every other colour is derived in CSS with `color-mix()` from the variables in `assets/css/src/_custom-properties.css`. `theme.json` points its palette at the same variables, so the editor and the front end match.
+The Customizer colour settings (theme, link, text, heading, page and content background, header and footer colours) and the five palettes write a few CSS variables in one `<style id="knowx-tokens">` tag. Every other colour is derived in CSS with `color-mix()` from the variables in `assets/css/src/_custom-properties.css`. `theme.json` points its palette at the same variables, so the editor and the front end match.
 
 ## Caching
 
-`knowx_kb_cached( $key, $callback )` stores a result in a transient keyed by a version option. The version changes whenever a post, category or category meta changes (`knowx_kb_bump_version()`), so no manual clearing is needed.
+`knowx_kb_cached( $key, $callback )` stores a result in one transient per key; the value carries the docs version it was built for. The version changes (`knowx_kb_invalidate()`) when a published article, a category or a `knowx_` category field changes, at most twice per request, so no manual clearing is needed and no old rows pile up.

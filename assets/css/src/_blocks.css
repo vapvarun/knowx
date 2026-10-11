@@ -1744,25 +1744,30 @@ pre.wp-block-code {
 	direction: ltr;
 }
 
-.knowx-copy {
+.knowx-code .knowx-copy {
 	position: absolute;
 	inset-block-start: 0.5rem;
 	inset-inline-end: 0.5rem;
 	min-height: 32px;
 	padding: 0 0.6rem;
-	border: 1px solid rgb(255 255 255 / 30%);
+	border: 1px solid rgb(255 255 255 / 35%);
 	border-radius: var(--global-border-radius);
-	background: rgb(255 255 255 / 10%);
+	background: transparent;
 	color: var(--color-white);
+	font-family: var(--highlight-font-family);
 	font-size: 0.8125rem;
 	cursor: pointer;
 }
 
-.knowx-copy:hover {
-	background: rgb(255 255 255 / 20%);
+/* Quiet until the reader reaches for it. */
+.knowx-code .knowx-copy:hover,
+.knowx-code .knowx-copy:focus-visible {
+	border-color: var(--color-theme-primary);
+	background: var(--color-theme-primary);
+	color: var(--color-on-primary);
 }
 
-.knowx-copy:focus-visible {
+.knowx-code .knowx-copy:focus-visible {
 	outline: 2px solid var(--color-white);
 	outline-offset: 2px;
 }

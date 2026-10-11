@@ -103,7 +103,64 @@
 
 @media (width <= 767px) {
     .site-header .main-navigation {
-        margin-inline-start: auto;
+        margin-inline-start: 0;
         margin-inline-end: 0;
+    }
+
+    /* One header row on phones: name, then search, products, mode toggle and the menu button. */
+    .site-header {
+        flex-wrap: nowrap;
+        gap: 0.25rem;
+    }
+
+    .site-header .site-branding {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .site-header .site-branding-inner {
+        min-width: 0;
+    }
+
+    .site-header .site-title {
+        margin: 0;
+        font-size: 1.25rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .site-header .site-description {
+        display: none;
+    }
+
+    .site-header .knowx-search-trigger {
+        order: 1;
+        margin-inline-start: 0;
+    }
+
+    .site-header .knowx-switcher {
+        order: 2;
+    }
+
+    .site-header .knowx-switcher summary {
+        padding-inline: 0.625rem;
+        font-size: 0.875rem;
+    }
+
+    .site-header .color-mode-toggle {
+        order: 3;
+    }
+
+    .site-header .main-navigation {
+        order: 4;
+        flex: none;
+    }
+}
+
+/* The docs home has its own search above the fold, so the header one steps aside on wide screens (Ctrl or Cmd + K still works). */
+@media (width >= 900px) {
+    .page-template-page-knowledgebase-one .site-header .knowx-search-trigger {
+        display: none;
     }
 }

@@ -57,6 +57,14 @@
 		pre.append(button);
 	});
 
+	// A breadcrumb trail that scrolls on phones starts at its end, so the current page is in view.
+	document.querySelectorAll('.knowx-trail-items').forEach((trail) => {
+		if (trail.scrollWidth > trail.clientWidth) {
+			const rtl = document.documentElement.dir === 'rtl';
+			trail.scrollLeft = rtl ? -trail.scrollWidth : trail.scrollWidth;
+		}
+	});
+
 	// Heading links copy their address and keep the browser's normal jump.
 	document.querySelectorAll('.knowx-anchor').forEach((anchor) => {
 		anchor.addEventListener('click', () => {
@@ -67,7 +75,7 @@
 	// Tree beside the article on wide screens.
 	const tree = document.querySelector('.knowx-tree-panel');
 	if (tree && !window.CSS.supports('selector(::details-content)')) {
-		const wide = window.matchMedia('(min-width: 1100px)');
+		const wide = window.matchMedia('(min-width: 900px)');
 		const sync = () => {
 			tree.open = wide.matches;
 		};

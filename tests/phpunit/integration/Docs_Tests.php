@@ -214,4 +214,30 @@ class Docs_Tests extends Integration_Test_Case {
 
 		unset( $_POST['knowx_order'] );
 	}
+
+	/**
+	 * An article names its publisher and has an image; FAQ data can be switched off for a page.
+	 */
+	public function test_article_schema_is_complete_and_faq_can_be_switched_off() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+		$content = '<!-- wp:details --><details class="wp-block-details"><summary>One?</summary><!-- wp:paragraph --><p>Yes.</p><!-- /wp:paragraph --></details><!-- /wp:details -->'
+			. '<!-- wp:details --><details class="wp-block-details"><summary>Two?</summary><!-- wp:paragraph --><p>Also yes.</p><!-- /wp:paragraph --></details><!-- /wp:details -->';
+		$post_id = self::factory()->post->create( array( 'post_content' => $content ) );
+		$this->go_to( get_permalink( $post_id ) );
+
+		$by_type = array();
+		foreach ( knowx_schema_graph() as $node ) {
+			$by_type[ $node['@type'] ] = $node;
+		}
+		$this->assertSame( 'Organization', $by_type['TechArticle']['publisher']['@type'] );
+		$this->assertArrayHasKey( 'FAQPage', $by_type );
+
+		update_post_meta( $post_id, 'knowx_faq_schema', 'off' );
+		$this->assertNotContains( 'FAQPage', wp_list_pluck( knowx_schema_graph(), '@type' ) );
+
+		delete_post_meta( $post_id, 'knowx_faq_schema' );
+		set_theme_mod( 'knowx_faq_schema', 0 );
+		$this->assertNotContains( 'FAQPage', wp_list_pluck( knowx_schema_graph(), '@type' ) );
+		remove_theme_mod( 'knowx_faq_schema' );
+	}
 }

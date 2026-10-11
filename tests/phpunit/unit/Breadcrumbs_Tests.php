@@ -87,7 +87,7 @@ class Breadcrumbs_Tests extends Unit_Test_Case {
 		);
 
 		ob_start();
-		knowx_get_breadcrumb();
+		knowx_the_breadcrumb();
 		$html = ob_get_clean();
 
 		$this->assertStringNotContainsString( '<script>', $html );

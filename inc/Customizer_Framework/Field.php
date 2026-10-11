@@ -267,14 +267,11 @@ class Field {
 	 * @return int 1 for truthy, 0 for falsy.
 	 */
 	public static function sanitize_bool_int( $value ): int {
-		if ( is_bool( $value ) ) {
+		if ( is_bool( $value ) || is_int( $value ) ) {
 			return $value ? 1 : 0;
 		}
-		if ( is_int( $value ) ) {
-			return $value ? 1 : 0;
-		}
-		$truthy = array( '1', 'on', 'yes', 'true', 'enable' );
-		return in_array( strtolower( (string) $value ), $truthy, true ) ? 1 : 0;
+		// Unknown strings are off: a switch only turns on for a value that clearly means yes.
+		return in_array( strtolower( (string) $value ), array( '1', 'on', 'yes', 'true', 'enable' ), true ) ? 1 : 0;
 	}
 
 	/**
@@ -390,7 +387,6 @@ class Field {
 
 		// Compile array-form active_callback (array shape) to a closure.
 		if ( isset( $out['active_callback'] ) && is_array( $out['active_callback'] ) ) {
-			require_once __DIR__ . '/Active_Callback.php';
 			$out['active_callback'] = Active_Callback::compile( $out['active_callback'] );
 		}
 		return $out;

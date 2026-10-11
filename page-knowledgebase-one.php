@@ -30,6 +30,7 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 	'column'              => $column,
 	'show_date'           => $show_date,
 	'single'              => $single,
+	'show_support'        => $show_support,
 ] = knowx_home_view();
 
 ?>
@@ -177,7 +178,7 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 
 	</div><!-- .container -->
 
-	<?php if ( knowx_is_truthy( knowx_mod( 'knowx_show_support' ) ) ) : ?>
+	<?php if ( $show_support ) : ?>
 	<div class="knowx-support-section">
 		<div class="container">
 			<div class="knowx-support-heading">

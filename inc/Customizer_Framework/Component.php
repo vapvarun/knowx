@@ -10,6 +10,8 @@
 
 namespace KnowX\KnowX\Customizer_Framework;
 
+use function KnowX\KnowX\knowx;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -33,7 +35,6 @@ class Component {
 	/**
 	 * Asset version for the framework scripts and styles.
 	 */
-	const VERSION = '2.0.0';
 
 	/**
 	 * Framework configuration.
@@ -139,7 +140,6 @@ class Component {
 		foreach ( self::$sections as $id => $args ) {
 			$wp_customize->add_section( $id, $args );
 		}
-		require_once __DIR__ . '/Field.php';
 		foreach ( self::$fields as $field_args ) {
 			Field::register_with_manager( $wp_customize, $field_args );
 		}
@@ -162,14 +162,14 @@ class Component {
 			$handle,
 			$base . 'inc/Customizer_Framework/assets/customizer-controls.js',
 			array( 'customize-controls', 'wp-color-picker', 'jquery-ui-sortable' ),
-			self::VERSION,
+			knowx()->get_version(),
 			true
 		);
 		wp_enqueue_style(
 			$handle,
 			$base . 'inc/Customizer_Framework/assets/customizer-controls.css',
 			array( 'wp-color-picker' ),
-			self::VERSION
+			knowx()->get_version()
 		);
 
 		// Export array-form active_callback conditions so customizer-controls.js
@@ -200,7 +200,7 @@ class Component {
 			self::get_config( 'config_id' ) . '-preview',
 			$base . 'inc/Customizer_Framework/assets/customizer-preview.js',
 			array( 'customize-preview', 'jquery' ),
-			self::VERSION,
+			knowx()->get_version(),
 			true
 		);
 
@@ -241,7 +241,6 @@ class Component {
 	 * Emit accumulated inline CSS into <head> based on each field's output rules.
 	 */
 	public static function output_inline_css(): void {
-		require_once __DIR__ . '/Output_Builder.php';
 		$css = Output_Builder::collect( self::$fields );
 		if ( '' === $css ) {
 			return;

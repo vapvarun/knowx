@@ -10,11 +10,13 @@ namespace KnowX\KnowX\Tests\Unit;
 use Brain\Monkey\Functions;
 use KnowX\KnowX\Customizer_Framework\Active_Callback;
 use KnowX\KnowX\Customizer_Framework\Field;
+use KnowX\KnowX\Customizer_Framework\Output_Builder;
 use KnowX\KnowX\Tests\Framework\Unit_Test_Case;
 
 require_once TESTS_THEME_DIR . '/inc/Customizer_Framework/Component.php';
 require_once TESTS_THEME_DIR . '/inc/Customizer_Framework/Field.php';
 require_once TESTS_THEME_DIR . '/inc/Customizer_Framework/Active_Callback.php';
+require_once TESTS_THEME_DIR . '/inc/Customizer_Framework/Output_Builder.php';
 require_once TESTS_THEME_DIR . '/inc/helpers.php';
 
 /**
@@ -78,6 +80,59 @@ class Customizer_Framework_Tests extends Unit_Test_Case {
 			$clean
 		);
 		$this->assertSame( array(), Field::sanitize_typography( 'not an array' ) );
+	}
+
+	/**
+	 * Content Width stays between 1000 and 1920 pixels, and an empty value is the default.
+	 */
+	public function test_content_width_stays_in_range() {
+		$this->assertSame( '1170px', knowx_sanitize_container_width( '1170px' ) );
+		$this->assertSame( '1000px', knowx_sanitize_container_width( '700px' ) );
+		$this->assertSame( '1920px', knowx_sanitize_container_width( '5000' ) );
+		$this->assertSame( '1170px', knowx_sanitize_container_width( '' ) );
+		$this->assertSame( '1170px', knowx_sanitize_container_width( 'wide' ) );
+	}
+
+	/**
+	 * Typography CSS: sizes follow the browser font size, a font the theme cannot load and a 1.x colour are left out.
+	 */
+	public function test_typography_css_skips_what_the_theme_cannot_deliver() {
+		Functions\when( 'wp_get_global_settings' )->justReturn(
+			array( 'theme' => array( array( 'name' => 'Open Sans' ) ) )
+		);
+		$field = static function ( array $value ) {
+			Functions\when( 'get_theme_mod' )->justReturn( $value );
+
+			return Output_Builder::collect(
+				array(
+					array(
+						'_type'    => 'typography',
+						'settings' => 'typography_option',
+						'output'   => array( array( 'element' => 'body' ) ),
+					),
+				)
+			);
+		};
+
+		$this->assertSame(
+			'body{font-family:"Open Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:1.125rem;}',
+			$field(
+				array(
+					'font-family' => 'Open Sans',
+					'font-size'   => '18px',
+				)
+			)
+		);
+		$this->assertSame(
+			'body{line-height:2.1;}',
+			$field(
+				array(
+					'font-family' => 'Playfair Display',
+					'line-height' => '2.1',
+					'color'       => '#ff0000',
+				)
+			)
+		);
 	}
 
 	/**

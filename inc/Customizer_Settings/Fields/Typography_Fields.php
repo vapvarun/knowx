@@ -68,7 +68,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'headings_typography_option',
 			'label'       => esc_html__( 'Headings (H1 to H6)', 'knowx' ),
-			'description' => esc_html__( 'One font for every heading, with its colour.', 'knowx' ),
+			'description' => esc_html__( 'One font for every heading. Each level keeps its own size.', 'knowx' ),
 			'section'     => 'site_title_typography_section',
 			'default'     => array(
 				'font-family'    => 'Open Sans',
@@ -82,6 +82,8 @@ defined( 'ABSPATH' ) || exit;
 			'output'      => array(
 				array(
 					'element' => 'h1, h2, h3, h4, h5, h6',
+					// One size would flatten the heading scale in _typography.css.
+					'exclude' => array( 'font-size' ),
 				),
 			),
 		)
@@ -95,7 +97,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'menu_typography_option',
 			'label'       => esc_html__( 'Menu', 'knowx' ),
-			'description' => esc_html__( 'Font and colour of the main menu.', 'knowx' ),
+			'description' => esc_html__( 'Font of the main menu.', 'knowx' ),
 			'section'     => 'site_title_typography_section',
 			'default'     => array(
 				'font-family'    => 'Open Sans',
@@ -109,11 +111,7 @@ defined( 'ABSPATH' ) || exit;
 			'priority'    => 30,
 			'output'      => array(
 				array(
-					'element' => '.main-navigation a, .main-navigation ul li a, .nav--toggle-sub li.menu-item-has-children, .nav--toggle-small .menu-toggle',
-				),
-				array(
-					'element'  => '.nav--toggle-small .menu-toggle',
-					'property' => 'border-color',
+					'element' => '.main-navigation a, .main-navigation ul li a, .nav--toggle-sub li.menu-item-has-children',
 				),
 			),
 		)
@@ -127,7 +125,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'typography_option',
 			'label'       => esc_html__( 'Body Text', 'knowx' ),
-			'description' => esc_html__( 'Font, size and colour of the text in articles and pages.', 'knowx' ),
+			'description' => esc_html__( 'Font and size of the text in articles and pages.', 'knowx' ),
 			'section'     => 'site_title_typography_section',
 			'default'     => array(
 				'font-family'    => 'Open Sans',

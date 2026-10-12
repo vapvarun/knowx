@@ -43,6 +43,8 @@ class Component implements Component_Interface {
 		add_action( 'init', array( $this, 'add_fields' ) );
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'enqueue_palettes' ) );
 		add_filter( 'body_class', array( $this, 'filter_layout_body_class' ) );
+		// A Content Width saved by an earlier version is kept inside the supported range when it is read.
+		add_filter( 'theme_mod_site_container_width', 'knowx_sanitize_container_width' );
 		add_filter( 'body_class', array( $this, 'filter_sticky_sidebar_body_class' ) );
 		add_filter( 'body_class', array( $this, 'filter_sticky_header_body_class' ) );
 	}

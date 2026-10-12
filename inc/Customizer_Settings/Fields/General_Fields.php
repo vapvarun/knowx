@@ -31,14 +31,15 @@ defined( 'ABSPATH' ) || exit;
 	\KnowX\KnowX\Customizer_Framework\Field::add(
 		'dimension',
 		array(
-			'settings'    => 'site_container_width',
-			'label'       => esc_html__( 'Content Width', 'knowx' ),
-			'description' => esc_html__( 'Widest the page content gets, in pixels.', 'knowx' ),
-			'section'     => 'site_layout',
-			'default'     => '1170px',
-			'priority'    => 20,
-			'transport'   => 'auto',
-			'output'      => array(
+			'settings'          => 'site_container_width',
+			'label'             => esc_html__( 'Content Width', 'knowx' ),
+			'description'       => esc_html__( 'Widest the page content gets, in pixels. Between 1000 and 1920, so the article beside the section tree stays readable.', 'knowx' ),
+			'section'           => 'site_layout',
+			'default'           => '1170px',
+			'sanitize_callback' => 'knowx_sanitize_container_width',
+			'priority'          => 20,
+			'transport'         => 'auto',
+			'output'            => array(
 				array(
 					'element'  => '.container',
 					'function' => 'css',

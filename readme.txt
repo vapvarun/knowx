@@ -96,7 +96,7 @@ GNU General Public License for more details.
 == Upgrade Notice ==
 
 = 2.0.0 =
-Major release. The Kirki plugin is no longer used, the Customizer is new and earlier choices are not carried over, and the docs layout is new. Review Appearance > Customize after updating.
+Major release. The Customizer is new and earlier choices are not carried over. Google Fonts, login page branding, the page loader and button colour settings from 1.x are removed. Review Appearance > Customize after updating.
 
 == Changelog ==
 
@@ -125,7 +125,17 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Improve  - The docs lists are cached with automatic invalidation and are bounded, so large sites stay fast.
 * Fix      - Saved Customizer colors were overridden by a duplicate set of defaults in the content stylesheet.
 * Fix      - Excluding a product now also hides its sections and articles on the Docs Index.
+* Fix      - Buttons in articles and pages are no longer underlined.
+* Fix      - Body Text line height now applies to paragraphs, and the Headings setting keeps the size of each heading level.
+* Fix      - A font from 1.x that the theme no longer loads falls back to the default font, and the Typography control shows it.
+* Fix      - Docs Index follows the Order in section value, leaves out products with no articles of their own and names the product above each section.
+* Fix      - Docs Home hero colour and image from the Customizer now show, with readable text on a dark colour.
+* Fix      - Phones: the menu drawer shows one menu with its Close button, the Products list and the search box stay on screen, tables scroll sideways and nested comments keep their width.
+* Fix      - Keyboard focus in the phone header follows the order on screen.
+* Fix      - A header image sits above the header bar, and Content Width stays between 1000 and 1920 pixels.
+* Fix      - Text set in the Customizer follows the reader's browser font size.
 * Dev      - PHP 8.1 and WordPress 6.9 minimum, PHPStan, PHPUnit, an accessibility check on every page type and a documented content model.
+* Dev      - Removed from 1.x: Google Fonts loading, login page branding, the page loader, button colour settings, a separate font for each heading level, the sub-header and header search switches and the blog grid options.
 
 = 1.7.4 =
 * Improvement: Updated global styling for better design consistency.

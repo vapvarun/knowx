@@ -77,10 +77,20 @@
 	color: var(--color-link);
 }
 
+.knowx-switcher-list a {
+	padding-block: 0.4rem;
+	overflow-wrap: anywhere;
+}
+
+/* Phones: the panel spans the header bar, so it cannot run off either edge. */
 @media (width <= 767px) {
+	.knowx-switcher {
+		position: static;
+	}
+
 	.knowx-switcher-list {
-		inset-inline-end: auto;
-		inset-inline-start: 0;
+		inset-inline: 15px;
+		inset-block-start: 100%;
 	}
 }
 

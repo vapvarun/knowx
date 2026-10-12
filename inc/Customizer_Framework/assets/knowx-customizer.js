@@ -131,6 +131,14 @@
 
 			const refresh = () => cards.forEach( ( c ) => c.button.setAttribute( 'aria-pressed', matches( c.colors ) ? 'true' : 'false' ) );
 			ids.forEach( ( id ) => api( id, ( setting ) => setting.bind( refresh ) ) );
+
+			// The colour picker keeps its last swatch when a setting is emptied from outside it (a palette sets
+			// Link Color to "use the theme shade"), so clear the swatch to match the empty field.
+			ids.forEach( ( id ) => api( id, ( setting ) => setting.bind( ( value ) => {
+				if ( ! value ) {
+					api.control( id, ( control ) => control.container.find( '.wp-color-result' ).css( 'background-color', '' ) );
+				}
+			} ) ) );
 			refresh();
 		} );
 	} );

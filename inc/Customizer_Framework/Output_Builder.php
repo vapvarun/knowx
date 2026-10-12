@@ -118,6 +118,7 @@ class Output_Builder {
 
 	/**
 	 * Build typography CSS declarations from a structured value array.
+	 * Colour is not printed here: text and heading colours belong to the Colors section.
 	 * Accepts both modern keys ('font-weight', 'font-size', etc.) and the older
 	 * legacy 'variant' (mapped to font-weight, with 'regular' → 400, 'bold' → 700).
 	 */
@@ -154,12 +155,19 @@ class Output_Builder {
 			'font-style'      => 'font-style',
 			'text-align'      => 'text-align',
 			'text-decoration' => 'text-decoration',
-			'color'           => 'color',
 		);
 		foreach ( $key_map as $k => $css_prop ) {
-			if ( ! empty( $value[ $k ] ) ) {
-				$rendered = 'font-family' === $k ? self::font_stack( (string) $value[ $k ] ) : $value[ $k ];
-				$decls   .= sprintf( '%s:%s;', $css_prop, $rendered );
+			if ( empty( $value[ $k ] ) ) {
+				continue;
+			}
+			$rendered = (string) $value[ $k ];
+			if ( 'font-family' === $k ) {
+				$rendered = self::font_stack( $rendered );
+			} elseif ( 'font-size' === $k ) {
+				$rendered = self::font_size( $rendered );
+			}
+			if ( '' !== $rendered ) {
+				$decls .= sprintf( '%s:%s;', $css_prop, $rendered );
 			}
 		}
 		return $decls;
@@ -181,7 +189,48 @@ class Output_Builder {
 			return $family;
 		}
 
+		// A font the theme cannot load (a Google font saved by 1.x) is left out, so the default family applies.
+		if ( ! self::is_available_font( $family ) ) {
+			return '';
+		}
+
 		return '"' . trim( $family, '"\'' ) . '", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif';
+	}
+
+	/**
+	 * Whether the theme can load a font family: one from theme.json or one installed through the Font Library.
+	 *
+	 * @param string $family Family name as saved by the Typography control.
+	 * @return bool
+	 */
+	protected static function is_available_font( string $family ): bool {
+		static $names = null;
+		if ( null === $names ) {
+			$names = array();
+			foreach ( (array) wp_get_global_settings( array( 'typography', 'fontFamilies' ) ) as $fonts ) {
+				foreach ( (array) $fonts as $font ) {
+					if ( ! empty( $font['name'] ) ) {
+						$names[] = strtolower( $font['name'] );
+					}
+				}
+			}
+		}
+
+		return in_array( strtolower( trim( $family, " \t\"'" ) ), $names, true );
+	}
+
+	/**
+	 * Turns a pixel font size into rem so text follows the reader's browser font size.
+	 *
+	 * @param string $size Saved size, for example 16px.
+	 * @return string CSS font-size value.
+	 */
+	protected static function font_size( string $size ): string {
+		if ( preg_match( '/^(\d+(?:\.\d+)?)px$/i', trim( $size ), $match ) ) {
+			return round( (float) $match[1] / 16, 4 ) . 'rem';
+		}
+
+		return $size;
 	}
 
 	/**

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-11T06:37:20+00:00\n"
+"POT-Creation-Date: 2026-10-12T09:13:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: knowx\n"
@@ -79,8 +79,8 @@ msgid "Comments are disabled."
 msgstr ""
 
 #: footer.php:28
-#: inc/Customizer_Settings/Component.php:202
-#: inc/Nav_Menus/Component.php:68
+#: inc/Customizer_Settings/Component.php:204
+#: inc/Nav_Menus/Component.php:70
 msgid "Footer"
 msgstr ""
 
@@ -94,6 +94,10 @@ msgstr ""
 
 #: header.php:28
 msgid "Skip to content"
+msgstr ""
+
+#: header.php:45
+msgid "Open menu"
 msgstr ""
 
 #: inc/Accessibility/Component.php:60
@@ -110,7 +114,7 @@ msgid "Main menu"
 msgstr ""
 
 #: inc/Activation/Component.php:81
-#: inc/Customizer_Settings/Component.php:162
+#: inc/Customizer_Settings/Component.php:164
 #: inc/Docs/Component.php:581
 msgid "Docs"
 msgstr ""
@@ -326,54 +330,54 @@ msgstr ""
 msgid "Overline"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:101
+#: inc/Customizer_Settings/Component.php:103
 msgid "Layout"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:111
+#: inc/Customizer_Settings/Component.php:113
 msgid "Dark Mode"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:122
+#: inc/Customizer_Settings/Component.php:124
 msgid "Typography"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:132
+#: inc/Customizer_Settings/Component.php:134
 msgid "Header and Breadcrumbs"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:142
+#: inc/Customizer_Settings/Component.php:144
 msgid "Colors"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:152
+#: inc/Customizer_Settings/Component.php:154
 #: template-parts/layout/sidebar-right.php:14
 msgid "Sidebar"
 msgstr ""
 
 #. Template Name of the theme
-#: inc/Customizer_Settings/Component.php:171
+#: inc/Customizer_Settings/Component.php:173
 msgid "Docs Home"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:181
+#: inc/Customizer_Settings/Component.php:183
 msgid "Articles"
 msgstr ""
 
 #. Template Name of the theme
-#: inc/Customizer_Settings/Component.php:191
+#: inc/Customizer_Settings/Component.php:193
 msgid "Docs Index"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:256
+#: inc/Customizer_Settings/Component.php:258
 msgid "Palettes"
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:257
+#: inc/Customizer_Settings/Component.php:259
 msgid "Pick a starting point, then change any colour below."
 msgstr ""
 
-#: inc/Customizer_Settings/Component.php:258
+#: inc/Customizer_Settings/Component.php:260
 msgid "Default"
 msgstr ""
 
@@ -460,60 +464,60 @@ msgid "Content Width"
 msgstr ""
 
 #: inc/Customizer_Settings/Fields/General_Fields.php:36
-msgid "Widest the page content gets, in pixels."
-msgstr ""
-
-#: inc/Customizer_Settings/Fields/General_Fields.php:60
-msgid "Back to top button"
+msgid "Widest the page content gets, in pixels. Between 1000 and 1920, so the article beside the section tree stays readable."
 msgstr ""
 
 #: inc/Customizer_Settings/Fields/General_Fields.php:61
+msgid "Back to top button"
+msgstr ""
+
+#: inc/Customizer_Settings/Fields/General_Fields.php:62
 msgid "Shows a button after scrolling down a long page."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/General_Fields.php:66
-#: inc/Customizer_Settings/Fields/Header_Fields.php:22
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:184
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:199
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:214
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:228
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:248
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:263
-#: inc/Customizer_Settings/Fields/Sidebar_Fields.php:38
-#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:39
-msgid "Yes"
-msgstr ""
-
 #: inc/Customizer_Settings/Fields/General_Fields.php:67
-#: inc/Customizer_Settings/Fields/Header_Fields.php:23
+#: inc/Customizer_Settings/Fields/Header_Fields.php:22
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:185
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:200
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:215
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:229
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:249
 #: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:264
+#: inc/Customizer_Settings/Fields/Sidebar_Fields.php:38
+#: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:39
+msgid "Yes"
+msgstr ""
+
+#: inc/Customizer_Settings/Fields/General_Fields.php:68
+#: inc/Customizer_Settings/Fields/Header_Fields.php:23
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:186
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:201
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:216
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:230
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:250
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:265
 #: inc/Customizer_Settings/Fields/Sidebar_Fields.php:39
 #: inc/Customizer_Settings/Fields/Sub_Header_Fields.php:40
 msgid "No"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/General_Fields.php:79
+#: inc/Customizer_Settings/Fields/General_Fields.php:80
 msgid "Corners"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/General_Fields.php:80
+#: inc/Customizer_Settings/Fields/General_Fields.php:81
 msgid "Roundness of cards, buttons and inputs."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/General_Fields.php:84
+#: inc/Customizer_Settings/Fields/General_Fields.php:85
 msgid "Square"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/General_Fields.php:85
+#: inc/Customizer_Settings/Fields/General_Fields.php:86
 msgid "Soft"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/General_Fields.php:86
+#: inc/Customizer_Settings/Fields/General_Fields.php:87
 msgid "Round"
 msgstr ""
 
@@ -541,123 +545,123 @@ msgstr ""
 msgid "Colour or image behind the top of the docs home. A featured image on the page is used instead of the image here."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:45
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:46
 msgid "Hero Heading"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:49
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:50
 msgid "Empty: the page title is used"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:59
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:60
 msgid "Hero Text"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:82
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:83
 msgid "Hide Categories"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:83
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:84
 msgid "Category IDs to keep off the docs home, separated by commas. The ID is in the address bar when you edit a category. Their sub-categories are hidden too."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:97
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:98
 msgid "Support Heading"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:101
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:102
 msgid "Empty: Can't find what you're looking for?"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:111
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:112
 msgid "Support Text"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:122
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:123
 msgid "Support Button Text"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:133
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:134
 msgid "Support Button Link"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:150
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:151
 msgid "Articles per category"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:151
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:152
 msgid "Only numeric characters allowed. Leave empty for 10."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:161
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:162
 msgid "Order articles"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:165
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:166
 msgid "By date"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:166
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:167
 msgid "By name"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:180
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:181
 msgid "Show last updated date"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:194
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:195
 msgid "Show comments on articles"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:195
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:196
 msgid "Off by default: readers get a \"Still need help\" block that links to your support page instead. Turn it on for community-answered docs."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:209
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:210
 msgid "FAQ structured data"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:210
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:211
 msgid "Mark pages with two or more Details blocks as a FAQ for search engines. You can also switch it off for a single page in the page editor."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:224
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:225
 msgid "Show the contents list (On this page)"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:244
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:245
 msgid "Show the recent articles list"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:259
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:260
 msgid "Show the support block"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:276
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:277
 msgid "Products on the docs home"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:280
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:281
 msgid "Product cards"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:281
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:282
 msgid "Each product with its sections"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:291
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:292
 msgid "Order articles in a section"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:295
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:296
 msgid "Newest first (after the page order)"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:296
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:297
 msgid "By title (after the page order)"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:297
+#: inc/Customizer_Settings/Fields/Knowledge_Base_Fields.php:298
 msgid "Last updated first (after the page order)"
 msgstr ""
 
@@ -746,24 +750,24 @@ msgid "Headings (H1 to H6)"
 msgstr ""
 
 #: inc/Customizer_Settings/Fields/Typography_Fields.php:71
-msgid "One font for every heading, with its colour."
+msgid "One font for every heading. Each level keeps its own size."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Typography_Fields.php:97
-#: template-parts/header/navigation.php:20
+#: inc/Customizer_Settings/Fields/Typography_Fields.php:99
+#: template-parts/header/navigation.php:16
 msgid "Menu"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Typography_Fields.php:98
-msgid "Font and colour of the main menu."
+#: inc/Customizer_Settings/Fields/Typography_Fields.php:100
+msgid "Font of the main menu."
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Typography_Fields.php:129
+#: inc/Customizer_Settings/Fields/Typography_Fields.php:127
 msgid "Body Text"
 msgstr ""
 
-#: inc/Customizer_Settings/Fields/Typography_Fields.php:130
-msgid "Font, size and colour of the text in articles and pages."
+#: inc/Customizer_Settings/Fields/Typography_Fields.php:128
+msgid "Font and size of the text in articles and pages."
 msgstr ""
 
 #: inc/Custom_Background/Component.php:48
@@ -970,7 +974,7 @@ msgstr ""
 msgid "Search %d"
 msgstr ""
 
-#: inc/Nav_Menus/Component.php:67
+#: inc/Nav_Menus/Component.php:69
 msgid "Primary"
 msgstr ""
 
@@ -1096,47 +1100,47 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: page-knowledgebase-one.php:62
+#: page-knowledgebase-one.php:67
 msgid "Popular:"
 msgstr ""
 
-#: page-knowledgebase-one.php:80
+#: page-knowledgebase-one.php:85
 msgid "Your documentation starts here"
 msgstr ""
 
-#: page-knowledgebase-one.php:83
+#: page-knowledgebase-one.php:88
 msgid "Add your first product: create a category with no parent, give it an icon and a description, then publish articles in its sections."
 msgstr ""
 
-#: page-knowledgebase-one.php:85
+#: page-knowledgebase-one.php:90
 msgid "Add a product"
 msgstr ""
 
-#: page-knowledgebase-one.php:87
+#: page-knowledgebase-one.php:92
 msgid "The documentation is being written. Please check back soon."
 msgstr ""
 
-#: page-knowledgebase-one.php:149
+#: page-knowledgebase-one.php:154
 msgid "Featured Articles"
 msgstr ""
 
-#: page-knowledgebase-one.php:161
+#: page-knowledgebase-one.php:166
 msgid "Recently Updated"
 msgstr ""
 
-#: page-knowledgebase-one.php:186
+#: page-knowledgebase-one.php:191
 msgid "Can't find what you're looking for?"
 msgstr ""
 
-#: page-knowledgebase-one.php:190
+#: page-knowledgebase-one.php:195
 msgid "Search the articles above, or get in touch and we will help you."
 msgstr ""
 
-#: page-knowledgebase-one.php:190
+#: page-knowledgebase-one.php:195
 msgid "Search the articles above to find what you need."
 msgstr ""
 
-#: page-knowledgebase-two.php:60
+#: page-knowledgebase-two.php:67
 msgid "View All &raquo;"
 msgstr ""
 
@@ -1808,7 +1812,7 @@ msgid "If this page did not answer your question, tell us what was missing."
 msgstr ""
 
 #: template-parts/docs/search-dialog.php:18
-#: template-parts/header/navigation.php:21
+#: template-parts/header/navigation.php:17
 msgid "Close"
 msgstr ""
 
@@ -1858,10 +1862,6 @@ msgstr ""
 
 #: template-parts/footer/info.php:20
 msgid "Footer menu"
-msgstr ""
-
-#: template-parts/header/navigation.php:14
-msgid "Open menu"
 msgstr ""
 
 #: template-parts/header/product-switcher.php:26

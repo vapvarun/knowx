@@ -264,32 +264,38 @@ function knowx_kb_sections() {
 		$per_cat = 10; // An empty field means the default.
 	}
 	$by_name  = 'name' === knowx_mod( 'knowx_order' );
-	$cache_id = 'sections-' . $per_cat . '-' . (int) $by_name . '-' . implode( ',', $exclude );
+	$cache_id = 'sections2-' . $per_cat . '-' . (int) $by_name . '-' . implode( ',', $exclude );
 
 	return knowx_kb_cached(
 		$cache_id,
 		static function () use ( $exclude, $per_cat, $by_name ) {
-			$sections = knowx_kb_map_terms(
-				get_terms(
-					array(
-						'taxonomy'     => 'category',
-						'hide_empty'   => true,
-						'exclude_tree' => $exclude,
-						'orderby'      => 'name',
-						'order'        => 'ASC',
-						'number'       => knowx_kb_max_categories(),
-					)
+			$terms    = get_terms(
+				array(
+					'taxonomy'     => 'category',
+					'hide_empty'   => true,
+					'exclude_tree' => $exclude,
+					'orderby'      => 'name',
+					'order'        => 'ASC',
+					'number'       => knowx_kb_max_categories(),
 				)
 			);
+			$sections = knowx_kb_map_terms( $terms );
+			$names    = $sections ? wp_list_pluck( $terms, 'name', 'term_id' ) : array();
+			$parents  = $sections ? wp_list_pluck( $terms, 'parent', 'term_id' ) : array();
 
 			foreach ( $sections as $index => $section ) {
-				$sections[ $index ]['posts'] = knowx_kb_map_posts(
+				// The product a section belongs to, so two products can each have a "Getting started".
+				$sections[ $index ]['product'] = (string) ( $names[ $parents[ $section['id'] ] ] ?? '' );
+				$sections[ $index ]['posts']   = knowx_kb_map_posts(
 					get_posts(
 						array(
 							'post_type'              => 'post',
 							'numberposts'            => $per_cat,
-							'orderby'                => $by_name ? 'title' : 'date',
-							'order'                  => $by_name ? 'ASC' : 'DESC',
+							// "Order in section" first, then the Order articles setting.
+							'orderby'                => array(
+								'menu_order' => 'ASC',
+								( $by_name ? 'title' : 'date' ) => $by_name ? 'ASC' : 'DESC',
+							),
 							'ignore_sticky_posts'    => true,
 							'no_found_rows'          => true,
 							'update_post_meta_cache' => false,
@@ -306,6 +312,20 @@ function knowx_kb_sections() {
 					)
 				);
 			}
+
+			// A product whose articles all sit in its sections has nothing of its own to list.
+			$sections = array_filter(
+				$sections,
+				static function ( $section ) {
+					return ! empty( $section['posts'] );
+				}
+			);
+			usort(
+				$sections,
+				static function ( $a, $b ) {
+					return strnatcasecmp( $a['product'] . ' ' . $a['name'], $b['product'] . ' ' . $b['name'] );
+				}
+			);
 
 			return $sections;
 		}

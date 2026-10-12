@@ -27,11 +27,11 @@ namespace KnowX\KnowX;
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="<?php echo esc_url( '#primary' ); ?>"><?php esc_html_e( 'Skip to content', 'knowx' ); ?></a>
 
+	<?php get_template_part( 'template-parts/header/custom_header' ); ?>
+
 	<div class="site-header-wrapper">
 			<div class="container">
 				<header id="masthead" class="site-header">
-					<?php get_template_part( 'template-parts/header/custom_header' ); ?>
-
 					<?php get_template_part( 'template-parts/header/branding' ); ?>
 
 					<?php get_template_part( 'template-parts/header/navigation' ); ?>
@@ -41,6 +41,10 @@ namespace KnowX\KnowX;
 					<?php get_template_part( 'template-parts/header/product-switcher' ); ?>
 
 					<?php knowx()->color_mode_toggle(); ?>
+
+					<button id="menu-toggle" class="menu-toggle" aria-label="<?php esc_attr_e( 'Open menu', 'knowx' ); ?>" aria-controls="primary-menu-mobile" aria-expanded="false">
+						<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+					</button>
 				</header><!-- #masthead -->
 			</div>
 	</div>

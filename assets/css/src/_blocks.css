@@ -40,10 +40,6 @@
 # Paragraph Block
 --------------------------------------------------------------*/
 
-.entry-content .wp-block-paragraph {
-	line-height: var(--global-font-line-height);
-}
-
 .entry-content .has-drop-cap:not(:focus)::first-letter {
 	font-size: 3.375em;
 	font-weight: 700;
@@ -340,6 +336,27 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 /*--------------------------------------------------------------
 # Table Block
 --------------------------------------------------------------*/
+
+/* Phones: columns follow their content and the table scrolls sideways, so a heading is never split inside a word. */
+@media (width <= 600px) {
+	.wp-block-table table,
+	.wp-block-table table.has-fixed-layout {
+		table-layout: auto;
+		width: max-content;
+		min-width: 100%;
+	}
+
+	.wp-block-table th,
+	.wp-block-table td {
+		max-width: 16rem;
+		word-break: normal;
+		overflow-wrap: break-word;
+	}
+
+	.wp-block-table th {
+		white-space: nowrap;
+	}
+}
 
 .wp-block-table {
 	margin: 1.5em 0;

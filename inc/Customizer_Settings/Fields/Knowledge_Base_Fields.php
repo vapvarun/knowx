@@ -21,7 +21,8 @@ defined( 'ABSPATH' ) || exit;
 			'transport'   => 'auto',
 			'output'      => array(
 				array(
-					'element' => '.knowx-section-hero',
+					// docs.css loads after the Customizer CSS, so this needs the higher specificity.
+					'element' => 'body .knowx-section-hero',
 				),
 			),
 			'priority'    => 10,

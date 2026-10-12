@@ -16,6 +16,8 @@ get_header();
 knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 
 $sections = knowx_kb_sections();
+// Sections are labelled with their product only when the site has more than one.
+$show_product = count( array_unique( array_filter( array_column( $sections, 'product' ) ) ) ) > 1;
 
 ?>
 
@@ -50,7 +52,12 @@ $sections = knowx_kb_sections();
 	<div id="knowx-categories-columns-four" class="knowx-knowledgebase-two">
 		<?php foreach ( $sections as $section ) : ?>
 			<ul class="cat-list">
-				<li class="cat-name"><h2><a href="<?php echo esc_url( $section['url'] ); ?>"><?php echo esc_html( $section['name'] ); ?></a></h2></li>
+				<li class="cat-name">
+					<?php if ( $show_product && '' !== $section['product'] ) : ?>
+						<span class="cat-product"><?php echo esc_html( $section['product'] ); ?></span>
+					<?php endif; ?>
+					<h2><a href="<?php echo esc_url( $section['url'] ); ?>"><?php echo esc_html( $section['name'] ); ?></a></h2>
+				</li>
 				<?php if ( '' !== trim( $section['description'] ) ) : ?>
 					<li class="cat-description"><?php echo wp_kses_post( wpautop( $section['description'] ) ); ?></li>
 				<?php endif; ?>

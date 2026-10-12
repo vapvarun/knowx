@@ -833,7 +833,8 @@ p.knowx-item-date {
 /* Docs home hero: a light tint of the theme colour, compact, with the search box and popular links. */
 .knowx-section-hero {
     padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 4vw, 3rem);
-    background: linear-gradient(180deg, color-mix(in srgb, var(--color-theme-primary) 14%, var(--color-surface)), var(--color-surface));
+    background-color: var(--color-surface);
+    background-image: linear-gradient(180deg, color-mix(in srgb, var(--color-theme-primary) 14%, transparent), transparent);
     border-block-end: 1px solid var(--global-border-color);
     text-align: center;
 }
@@ -865,6 +866,13 @@ p.knowx-item-date {
 .knowx-section-hero--image h1.entry-title,
 .knowx-section-hero--image .entry-summary {
     color: var(--color-on-primary);
+}
+
+/* A hero colour from the Customizer gets the text colour that is readable on it. */
+.knowx-section-hero--colored h1.entry-title,
+.knowx-section-hero--colored .entry-summary,
+.knowx-section-hero--colored .knowx-hero-popular {
+    color: var(--knowx-hero-text);
 }
 
 .knowx-hero-section-search {
@@ -1089,6 +1097,16 @@ p.knowx-item-date {
     #knowx-categories-columns-four ul {
         width: calc(100% - 30px);
     }
+}
+
+.knowx-knowledgebase-two .cat-product {
+    display: block;
+    margin-block-end: 0.25rem;
+    color: var(--color-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
 .knowx-knowledgebase-two ul.cat-list li {

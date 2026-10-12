@@ -63,8 +63,11 @@
 
 @media (--narrow-menu-query) {
     .footer-inner {
-        margin: 50px 0;
         display: block;
+    }
+
+    .footer-widget + .footer-widget {
+        margin-block-start: 25px;
     }
 
     .footer-widget {
@@ -99,7 +102,7 @@
     display: none;
     bottom: 20px;
     inset-inline-end: 20px;
-    font-size: 24px;
+    font-size: 1.5rem;
     width: 40px;
     height: 40px;
     line-height: 40px;

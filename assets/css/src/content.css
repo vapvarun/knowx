@@ -46,7 +46,7 @@
 }
 
 h2.entry-title {
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 h2.entry-title a {
@@ -96,7 +96,7 @@ h2.entry-title a:hover {
     margin-inline-end: 3px;
     margin-bottom: 3px;
     padding: 2px 6px;
-    font-size: 11px;
+    font-size: 0.6875rem;
     line-height: 1.5;
     background: var(--color-theme-primary);
     color: var(--color-on-primary);
@@ -115,7 +115,7 @@ h2.entry-title a:hover {
     display: flex;
     align-items: center;
     flex-flow: wrap;
-    font-size: 12px;
+    font-size: 0.75rem;
     gap: 5px;
 }
 
@@ -216,9 +216,9 @@ h2.entry-title a:hover {
     margin: 1em 0 0;
 }
 
-.page-content a,
-.entry-content a,
-.entry-summary a {
+.page-content a:not(.wp-element-button),
+.entry-content a:not(.wp-element-button),
+.entry-summary a:not(.wp-element-button) {
     text-decoration: underline;
 }
 

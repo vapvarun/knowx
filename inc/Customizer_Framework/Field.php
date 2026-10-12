@@ -307,7 +307,6 @@ class Field {
 			'font-style',
 			'text-align',
 			'text-decoration',
-			'color',
 		);
 		foreach ( $keys as $k ) {
 			if ( isset( $value[ $k ] ) ) {

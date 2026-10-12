@@ -177,7 +177,7 @@ body.layout-boxed {
 
     .site .site-sub-header .entry-title,
     .site .site-sub-header .page-title {
-        font-size: 24px;
+        font-size: 1.5rem;
     }
 }
 
@@ -188,7 +188,7 @@ body.layout-boxed {
 
 .knowx-breadcrumbs,
 #breadcrumbs {
-    font-size: 14px;
+    font-size: 0.875rem;
     margin: 10px 0;
     margin-inline-end: auto;
     /* A long trail scrolls inside the nav instead of widening the page. */

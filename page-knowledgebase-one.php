@@ -23,6 +23,7 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 	'support_button_text' => $support_button_text,
 	'support_button_link' => $support_button_link,
 	'hero_image'          => $hero_image,
+	'hero_text'           => $hero_text,
 	'products'            => $products,
 	'home_count'          => $home_count,
 	'featured'            => $featured,
@@ -36,7 +37,11 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 ?>
 	<main id="primary" class="site-main">
 
-	<div class="knowx-section-hero<?php echo $hero_image ? ' knowx-section-hero--image' : ''; ?>"<?php echo $hero_image ? ' style="background-image: url(\'' . esc_url( $hero_image ) . '\');"' : ''; ?>>
+	<?php
+	$hero_class = $hero_image ? ' knowx-section-hero--image' : ( $hero_text ? ' knowx-section-hero--colored' : '' );
+	$hero_style = $hero_image ? 'background-image: url(\'' . esc_url( $hero_image ) . '\');' : ( $hero_text ? '--knowx-hero-text: ' . $hero_text . ';' : '' );
+	?>
+	<div class="knowx-section-hero<?php echo esc_attr( $hero_class ); ?>"<?php echo $hero_style ? ' style="' . esc_attr( $hero_style ) . '"' : ''; ?>>
 		<div class="container">
 			<?php if ( ! empty( $hero_title ) ) { ?>
 				<h1 class="entry-title"><?php echo esc_html( $hero_title ); ?></h1>

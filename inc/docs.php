@@ -861,6 +861,13 @@ function knowx_home_view() {
 	$show_support = knowx_is_truthy( knowx_mod( 'knowx_show_support' ) )
 		&& ( ( '' !== $support_link && '' !== $support_text ) || '' !== trim( (string) knowx_mod( 'support_section_content' ) ) );
 
+	$hero_background = (array) knowx_mod( 'hero_section_background_setting' );
+	// A featured image on the page wins over the image chosen in the Customizer.
+	$hero_image = get_the_post_thumbnail_url( get_queried_object_id(), 'full' );
+	if ( ! $hero_image ) {
+		$hero_image = $hero_background['background-image'] ?? '';
+	}
+
 	return array(
 		'hero_title'          => knowx_mod( 'hero_section_heading' ),
 		'hero_content'        => knowx_mod( 'hero_section_content' ),
@@ -868,7 +875,9 @@ function knowx_home_view() {
 		'support_content'     => knowx_mod( 'support_section_content' ),
 		'support_button_text' => knowx_mod( 'support_section_button_text' ),
 		'support_button_link' => knowx_mod( 'support_section_button_link_url' ),
-		'hero_image'          => get_the_post_thumbnail_url( get_queried_object_id(), 'full' ),
+		'hero_image'          => $hero_image,
+		// White or near-black text, whichever is readable on the hero colour chosen in the Customizer.
+		'hero_text'           => empty( $hero_background['background-color'] ) ? '' : \KnowX\KnowX\Tokens\Component::on_color( (string) $hero_background['background-color'] ),
 		'products'            => $products,
 		'home_count'          => $count,
 		'featured'            => $featured,

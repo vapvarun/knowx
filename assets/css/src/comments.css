@@ -280,9 +280,38 @@
     text-align: start;
 }
 
+.comment-content {
+    overflow-wrap: anywhere;
+}
+
 @media (max-width: 640px) {
     .comment-respond {
         padding: 1rem;
+    }
+
+    /* Replies keep the full width: a line beside the reply shows the nesting instead of a narrower card each level. */
+    .comment-list .children {
+        margin-inline-start: 0;
+    }
+
+    .comment-list .children li {
+        margin-block-end: 0;
+        padding: 0.75em 0 0;
+        padding-inline-start: 0.75em;
+        border: 0;
+        border-inline-start: 2px solid var(--global-border-color);
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .comment-list .children .children li {
+        padding-inline-start: 0.5em;
+    }
+
+    /* Text sits under the avatar and name, not beside them. */
+    .comment-content {
+        margin-inline-start: 0;
+        clear: both;
     }
 
     .comment-form .form-submit input[type="submit"] {

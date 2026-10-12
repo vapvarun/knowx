@@ -2,7 +2,7 @@
 /**
  * Builds blueprint.json for WordPress Playground from playground/seed.php.
  *
- * Usage: node tools/build-blueprint.mjs [--ref <git ref>] [--release] [--single]   (default ref: the current branch)
+ * Usage: node tools/build-blueprint.mjs [--ref <git ref>] [--release] [--single]   (default ref: the current branch; the theme is read from the public repository)
  * --single writes blueprint-single.json: the same site with only the Orbit API product.
  * At release the theme step is switched to the wordpress.org slug so Playground installs the published zip.
  */
@@ -30,7 +30,7 @@ const blueprint = {
 			step: 'installTheme',
 			themeData: release
 				? { resource: 'wordpress.org/themes', slug: 'knowx' }
-				: { resource: 'git:directory', url: 'https://github.com/wbcomdesigns/knowx.git', ref, path: '/' },
+				: { resource: 'git:directory', url: 'https://github.com/vapvarun/knowx.git', ref, path: '/' },
 			options: { activate: true },
 		},
 		{ step: 'runPHP', code: seed },

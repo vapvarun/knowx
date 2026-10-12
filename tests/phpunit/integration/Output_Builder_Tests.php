@@ -43,7 +43,7 @@ class Output_Builder_Tests extends Integration_Test_Case {
 
 		$this->assertStringContainsString( 'body{', $css );
 		$this->assertStringContainsString( 'font-family:"Open Sans"', $css );
-		$this->assertStringContainsString( 'font-size:17px;', $css );
+		$this->assertStringContainsString( 'font-size:1.0625rem;', $css );
 	}
 
 	/**

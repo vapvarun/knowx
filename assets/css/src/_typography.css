@@ -73,7 +73,7 @@ blockquote {
 
 blockquote cite {
     color: var(--color-quote-citation);
-    font-size: 13px;
+    font-size: 0.8125rem;
     margin-top: 1em;
     position: relative;
     font-style: normal;

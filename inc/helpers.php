@@ -73,3 +73,18 @@ function knowx_search_form_label() {
 	/* translators: %d: position of the search form on the page. */
 	return 1 === $count ? __( 'Site search', 'knowx' ) : sprintf( __( 'Search %d', 'knowx' ), $count );
 }
+
+/**
+ * Keeps the Content Width setting between 1000 and 1920 pixels.
+ *
+ * Below 1000 the article beside the section tree and the contents column is too narrow to read.
+ * Used when the setting is saved and when it is read, so a width saved by an earlier version is corrected too.
+ *
+ * @param mixed $value Saved or submitted width, for example 1170px.
+ * @return string Width in pixels.
+ */
+function knowx_sanitize_container_width( $value ) {
+	$width = (int) $value;
+
+	return ( $width > 0 ? min( 1920, max( 1000, $width ) ) : 1170 ) . 'px';
+}

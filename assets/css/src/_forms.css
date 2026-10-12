@@ -38,7 +38,7 @@ a.read-more.button {
 body .customize-partial-edit-shortcut button,
 body .widget .customize-partial-edit-shortcut button {
     color: var(--color-white);
-    font-size: 18px;
+    font-size: 1.125rem;
     border-radius: 50%;
     border: 2px solid var(--color-surface);
     padding: 3px;
@@ -142,7 +142,7 @@ select {
     display: inline-block;
     font-family: inherit;
     font-style: inherit;
-    font-size: 15px;
+    font-size: 0.9375rem;
     height: 35px;
     vertical-align: middle;
     background-color: var(--color-surface);

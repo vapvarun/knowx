@@ -175,21 +175,18 @@
 			const weightMap = { regular: '400', bold: '700', '': '400' };
 			const initialWeight = weightMap[rawVariant] || rawVariant;
 
-			// Reflect the saved value.
-			familyEl.value = (initial && initial['font-family']) ? initial['font-family'] : '';
-			// If the saved value isn't in the catalog (e.g. an older
-			// pick), inject it so the control reflects reality.
+			// Reflect the saved value. A family that is not in the list (a Google
+			// font saved by 1.x) is no longer loaded, so the control shows the
+			// default, which is what the site displays.
 			const savedFam = (initial && initial['font-family']) ? initial['font-family'] : '';
-			if (savedFam && !familyEl.querySelector('option[value="' + window.CSS.escape(savedFam) + '"]')) {
-				const customGroup = document.createElement('optgroup');
-				customGroup.label = fontData.saved_label || 'Saved';
-				const savedOpt = document.createElement('option');
-				savedOpt.value = savedFam;
-				savedOpt.textContent = savedFam;
-				customGroup.appendChild(savedOpt);
-				familyEl.insertBefore(customGroup, familyEl.children[1] || null);
-				familyEl.value = savedFam;
+			familyEl.value = savedFam;
+			if (familyEl.value !== savedFam) {
+				familyEl.value = '';
 			}
+			// A field whose default has no size (Headings) keeps the size of
+			// each element, so it has no Size input.
+			const hasSize = Object.prototype.hasOwnProperty.call(defaultVal, 'font-size');
+			sizeEl.closest('.knowx-typo-row').hidden = !hasSize;
 			// Searchable filter above the family select (insert once).
 			if (!familyEl.parentNode.querySelector('.knowx-typo-family-search')) {
 				const familySearch = document.createElement('input');
@@ -231,13 +228,17 @@
 					'font-family':     familyEl.value,
 					'font-weight':     weightEl.value,
 					'font-style':      styleEl ? styleEl.value : (base['font-style'] || 'normal'),
-					'font-size':       sizeEl.value + 'px',
 					'line-height':     String(lhEl.value),
 					'letter-spacing':  lsEl.value + 'em',
 					'text-transform':  ttEl.value,
 					'text-align':      alignEl ? alignEl.value : (base['text-align'] || ''),
 					'text-decoration': decorEl ? decorEl.value : (base['text-decoration'] || ''),
 				});
+				if (hasSize) {
+					v['font-size'] = sizeEl.value + 'px';
+				} else {
+					delete v['font-size'];
+				}
 				hidden.value = JSON.stringify(v);
 				ctl.setting.set(v);
 			};

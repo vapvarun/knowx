@@ -341,6 +341,7 @@
     "knowx_products",
     "knowx_render_toc",
     "knowx_render_tree",
+    "knowx_sanitize_container_width",
     "knowx_schema_graph",
     "knowx_schema_logo_url",
     "knowx_search_form_label",

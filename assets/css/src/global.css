@@ -229,12 +229,13 @@ body.layout-boxed {
         flex: none;
     }
 
+    /* A mask reads only alpha, so the opaque stop needs no theme colour. */
     .knowx-trail-items.is-scrolled {
-        mask-image: linear-gradient(to right, transparent, black 2rem);
+        mask-image: linear-gradient(to right, transparent, rgb(0 0 0) 2rem);
     }
 
     [dir="rtl"] .knowx-trail-items.is-scrolled {
-        mask-image: linear-gradient(to left, transparent, black 2rem);
+        mask-image: linear-gradient(to left, transparent, rgb(0 0 0) 2rem);
     }
 }
 

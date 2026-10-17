@@ -136,7 +136,7 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Fix      - A font from 1.x that the theme no longer loads falls back to the default font, and the Typography control shows it.
 * Fix      - Docs Index follows the Order in section value, leaves out products with no articles of their own and names the product above each section.
 * Fix      - Docs Home hero colour and image from the Customizer now show, with readable text on a dark colour.
-* Fix      - Phones: the menu drawer shows one menu with its Close button, the Products list and the search box stay on screen, tables scroll sideways and nested comments keep their width.
+* Fix      - Phones: the menu drawer shows one menu with its Close button, the Products list and the search box stay on screen, tables scroll sideways (also with the keyboard) and nested comments keep their width.
 * Fix      - Keyboard focus in the phone header follows the order on screen.
 * Fix      - A header image sits above the header bar, and Content Width stays between 1000 and 1920 pixels.
 * Fix      - Text set in the Customizer follows the reader's browser font size.

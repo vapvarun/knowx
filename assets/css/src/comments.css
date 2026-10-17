@@ -284,7 +284,7 @@
     overflow-wrap: anywhere;
 }
 
-@media (max-width: 640px) {
+@media (width <= 640px) {
     .comment-respond {
         padding: 1rem;
     }

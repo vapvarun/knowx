@@ -3,9 +3,13 @@
  * Works like Custom Properties, except for media queries.
  *
  * @link: https://drafts.csswg.org/mediaqueries-5/#custom-mq
+ *
+ * Each "below" query is the exact complement of its partner, so no width matches both.
+ * navigation.ts mirrors --below-content-query for the mobile drawer.
  **/
 
-@custom-media --narrow-menu-query screen and (max-width: 37.5em);
-@custom-media --wide-menu-query screen and (min-width: 37.5em);
-@custom-media --content-query screen and (min-width: 48em);
-@custom-media --sidebar-query screen and (min-width: 60em);
+@custom-media --narrow-menu-query screen and (width <= 37.5em);
+@custom-media --content-query screen and (width >= 48em);
+@custom-media --below-content-query screen and (width < 48em);
+@custom-media --sidebar-query screen and (width >= 60em);
+@custom-media --below-sidebar-query screen and (width < 60em);

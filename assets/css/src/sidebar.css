@@ -27,7 +27,7 @@
 }
 
 /* Sticky sidebar without a script: it follows the page below the sticky header. */
-@media screen and (min-width: 60.0625em) {
+@media (--sidebar-query) {
     .sticky-sidebar-enable .widget-area {
         align-self: stretch;
     }

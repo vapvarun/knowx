@@ -20,7 +20,9 @@
 			? root.dataset.colorMode
 			: 'light';
 	const render = () => {
-		button.setAttribute('aria-label', labels[current()] || '');
+		const label = labels[current()] || '';
+		button.setAttribute('aria-label', label);
+		button.setAttribute('title', label);
 	};
 
 	button.addEventListener('click', () => {

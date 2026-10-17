@@ -53,6 +53,8 @@ class Component implements Component_Interface {
 	 * Adds theme support for essential features.
 	 */
 	public function action_essential_theme_support() {
+		load_theme_textdomain( 'knowx', get_template_directory() . '/languages' );
+
 		// Add default RSS feed links to head.
 		add_theme_support( 'automatic-feed-links' );
 

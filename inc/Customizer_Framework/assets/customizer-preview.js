@@ -100,6 +100,11 @@
 		];
 		let decls = '';
 		keys.forEach((k) => {
+			// A cleared image must override the image the server printed on page load.
+			if (k === 'background-image' && !val[k]) {
+				decls += 'background-image:none;';
+				return;
+			}
 			if (!val[k]) {
 				return;
 			}

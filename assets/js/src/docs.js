@@ -59,10 +59,19 @@
 
 	// A breadcrumb trail that scrolls on phones starts at its end, so the current page is in view.
 	document.querySelectorAll('.knowx-trail-items').forEach((trail) => {
-		if (trail.scrollWidth > trail.clientWidth) {
+		// A few pixels of overflow would only clip the first letters of "Home", so leave it at the start.
+		if (trail.scrollWidth - trail.clientWidth > 24) {
 			const rtl = document.documentElement.dir === 'rtl';
 			trail.scrollLeft = rtl ? -trail.scrollWidth : trail.scrollWidth;
 		}
+		// Fades the start edge while part of the trail is scrolled out of view, so no word looks cut.
+		const fade = () =>
+			trail.classList.toggle(
+				'is-scrolled',
+				Math.abs(trail.scrollLeft) > 1
+			);
+		fade();
+		trail.addEventListener('scroll', fade, { passive: true });
 	});
 
 	// Heading links copy their address and keep the browser's normal jump.

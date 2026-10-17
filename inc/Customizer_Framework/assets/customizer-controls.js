@@ -329,6 +329,7 @@
 			const colorEl = root.querySelector('.knowx-bg-color');
 			const imageEl = root.querySelector('.knowx-bg-image');
 			const pickBtn = root.querySelector('.knowx-bg-image-pick');
+			const removeBtn = root.querySelector('.knowx-bg-image-remove');
 			const repeatEl = root.querySelector('.knowx-bg-repeat');
 			const positionEl = root.querySelector('.knowx-bg-position');
 			const sizeEl = root.querySelector('.knowx-bg-size');
@@ -362,10 +363,29 @@
 				});
 				hidden.value = JSON.stringify(v);
 				ctl.setting.set(v);
+				toggleRemove();
 			};
+			// The Remove button shows only while there is an image to remove.
+			const toggleRemove = () => {
+				if (removeBtn) {
+					removeBtn.hidden = '' === imageEl.value.trim();
+				}
+			};
+			toggleRemove();
 			[imageEl, repeatEl, positionEl, sizeEl, attachmentEl].forEach((el) =>
 				el.addEventListener('change', sync)
 			);
+			// Clearing the field takes effect at once; a typed URL applies on change, so the preview
+			// does not request every partial address.
+			imageEl.addEventListener('input', () => ('' === imageEl.value.trim() ? sync() : toggleRemove()));
+			if (removeBtn) {
+				removeBtn.addEventListener('click', (e) => {
+					e.preventDefault();
+					imageEl.value = '';
+					sync();
+					imageEl.focus();
+				});
+			}
 
 			// Premium UX: wire wp-color-picker (iris) onto the color sub-input
 			// so it renders a swatch + popover picker, not a plain text input.
@@ -472,7 +492,7 @@
 				const max = parseFloat(rangeEl.max) || 100;
 				const val = parseFloat(rangeEl.value) || min;
 				const pct = ((val - min) / (max - min)) * 100;
-				rangeEl.style.setProperty('--bx-fill', pct + '%');
+				rangeEl.style.setProperty('--knowx-slider-fill', pct + '%');
 			};
 			updateFill();
 

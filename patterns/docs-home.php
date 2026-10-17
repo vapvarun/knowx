@@ -15,7 +15,8 @@ $knowx_search_attrs = wp_json_encode(
 		'showLabel'   => false,
 		'placeholder' => __( 'Search the documentation', 'knowx' ),
 		'buttonText'  => __( 'Search', 'knowx' ),
-	)
+	),
+	JSON_HEX_TAG | JSON_HEX_AMP
 );
 
 ?>

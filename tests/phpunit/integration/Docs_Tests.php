@@ -212,7 +212,13 @@ class Docs_Tests extends Integration_Test_Case {
 		$docs->save_term_fields( $term_id );
 		$this->assertSame( '5', (string) get_term_meta( $term_id, 'knowx_order', true ) );
 
-		unset( $_POST['knowx_order'] );
+		// Choosing Automatic again removes the saved accent instead of storing an empty string.
+		update_term_meta( $term_id, 'knowx_accent', '#ff0000' );
+		$_POST['knowx_accent_choice'] = '';
+		$docs->save_term_fields( $term_id );
+		$this->assertFalse( metadata_exists( 'term', $term_id, 'knowx_accent' ) );
+
+		unset( $_POST['knowx_order'], $_POST['knowx_accent_choice'] );
 	}
 
 	/**

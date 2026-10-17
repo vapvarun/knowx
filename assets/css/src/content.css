@@ -123,7 +123,8 @@ h2.entry-title a:hover {
     display: flex;
     align-items: center;
     flex: 0 0 100%;
-    margin: 5px 3px 5px 0;
+    margin-block: 5px;
+    margin-inline: 0 3px;
 }
 
 .entry-meta .author.vcard,
@@ -220,6 +221,13 @@ h2.entry-title a:hover {
 .entry-content a:not(.wp-element-button),
 .entry-summary a:not(.wp-element-button) {
     text-decoration: underline;
+}
+
+/* Long function names and URLs wrap instead of running past the edge (the page clips overflow). pre is left out, so code blocks keep scrolling. */
+.entry-title,
+.page-title,
+:is(.page-content, .entry-content, .entry-summary) :is(h1, h2, h3, h4, h5, h6, p, li, dd, dt, blockquote, figcaption, a) {
+    overflow-wrap: anywhere;
 }
 
 .page-content>*,
@@ -440,23 +448,13 @@ article .entry-header {
 .pagination a:hover,
 .pagination a:focus,
 .pagination a:active {
-	border-color: var(--color-link-active);
+	border-color: var(--color-link-hover);
 }
 
+/* Previous and Next keep their words and share the boxed look of the page numbers. */
 .pagination .prev,
 .pagination .next {
-	min-width: auto;
-	border-color: transparent;
-	text-decoration: underline;
-}
-
-.pagination .prev:hover,
-.pagination .prev:focus,
-.pagination .prev:active,
-.pagination .next:hover,
-.pagination .next:focus,
-.pagination .next:active {
-	border-color: transparent;
+	padding-inline: 0.5em;
 }
 
 .pagination .dots {
@@ -498,7 +496,7 @@ were hidden (via .neverending) before. */
     margin: 0;
 }
 
-@media (min-width: 768px) {
+@media (--content-query) {
 
     #primary,
     .site-wrapper {
@@ -574,7 +572,7 @@ were hidden (via .neverending) before. */
     }
 }
 
-@media screen and (max-width: 60em) {
+@media (--below-sidebar-query) {
 
     /* Sidebar and Content ordering in mobile */
     .site-wrapper {

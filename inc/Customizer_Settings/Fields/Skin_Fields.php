@@ -57,7 +57,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'site_text_color',
 			'label'       => esc_html__( 'Text Color', 'knowx' ),
-			'description' => esc_html__( 'Body text. Keep it dark on a light page.', 'knowx' ),
+			'description' => esc_html__( 'Body text. Keep it dark on a light page.', 'knowx' ) . ' ' . esc_html__( 'Applies to light mode. Dark mode uses its own palette.', 'knowx' ),
 			'section'     => 'site_skin_section',
 			'default'     => '',
 			'priority'    => 12,
@@ -69,7 +69,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'site_heading_color',
 			'label'       => esc_html__( 'Heading Color', 'knowx' ),
-			'description' => esc_html__( 'Headings and titles.', 'knowx' ),
+			'description' => esc_html__( 'Headings and titles.', 'knowx' ) . ' ' . esc_html__( 'Applies to light mode. Dark mode uses its own palette.', 'knowx' ),
 			'section'     => 'site_skin_section',
 			'default'     => '',
 			'priority'    => 13,

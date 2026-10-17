@@ -32,7 +32,7 @@ if ( '' === trim( wp_strip_all_tags( $knowx_copyright ) ) && '' === $knowx_priva
 	<?php endif; ?>
 	<?php if ( '' !== trim( wp_strip_all_tags( $knowx_copyright ) ) ) : ?>
 		<div class="container">
-			<?php echo $knowx_copyright; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+			<?php echo wp_kses_post( $knowx_copyright ); ?>
 		</div>
 	<?php endif; ?>
 

@@ -112,7 +112,7 @@ body.layout-boxed {
     margin: 10px 0;
 }
 
-@media (max-width: 480px) {
+@media (width <= 480px) {
 
     .site-sub-header>.container form.searchform {
         width: 100%;
@@ -122,7 +122,8 @@ body.layout-boxed {
 
 .site-sub-header input.text_input {
     width: 100%;
-    padding: 0 40px 0 15px;
+    padding-block: 0;
+    padding-inline: 15px 40px;
     border-radius: 100px;
 }
 
@@ -145,7 +146,7 @@ body.layout-boxed {
     outline: thin dotted var(--color-heading);
 }
 
-@media (max-width: 991px) {
+@media (width < 992px) {
     .site-sub-header>.container {
         padding: 0 20px;
     }
@@ -215,7 +216,7 @@ body.layout-boxed {
 }
 
 /* On phones the trail stays on one line and scrolls; docs.js shows the end of it. */
-@media (width <= 600px) {
+@media (--narrow-menu-query) {
     .knowx-trail-items {
         max-width: 100%;
         flex-wrap: nowrap;
@@ -226,6 +227,14 @@ body.layout-boxed {
 
     .knowx-trail-item {
         flex: none;
+    }
+
+    .knowx-trail-items.is-scrolled {
+        mask-image: linear-gradient(to right, transparent, black 2rem);
+    }
+
+    [dir="rtl"] .knowx-trail-items.is-scrolled {
+        mask-image: linear-gradient(to left, transparent, black 2rem);
     }
 }
 

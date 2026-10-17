@@ -276,12 +276,13 @@ class Component implements Component_Interface {
 		}
 		wp_add_inline_style(
 			'common',
-			'.knowx-picker{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:520px}'
+			'.knowx-field-label{display:block;padding:2px 0}'
+			. '.knowx-picker{display:flex;flex-wrap:wrap;align-items:center;gap:6px;max-width:520px}'
 			. '.knowx-pick{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:38px;margin:0;border:1px solid #c3c4c7;border-radius:6px;background:#fff;cursor:pointer}'
 			. '.knowx-pick-text{padding:0 10px;font-size:13px}'
 			. '.knowx-pick input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}'
-			. '.knowx-pick:has(input:checked){border-color:#2271b1;box-shadow:0 0 0 1px #2271b1;background:#f0f6fc}'
-			. '.knowx-pick:has(input:focus-visible){outline:2px solid #2271b1;outline-offset:2px}'
+			. '.knowx-pick:has(input:checked){border-color:var(--wp-admin-theme-color,#2271b1);box-shadow:0 0 0 1px var(--wp-admin-theme-color,#2271b1);background:#f0f6fc}'
+			. '.knowx-pick:has(input:focus-visible){outline:2px solid var(--wp-admin-theme-color,#2271b1);outline-offset:2px}'
 			. '.knowx-swatch{display:block;width:22px;height:22px;border-radius:50%}'
 		);
 	}
@@ -292,12 +293,12 @@ class Component implements Component_Interface {
 	public function render_add_fields() {
 		?>
 		<div class="form-field">
-			<label for="knowx_icon"><?php esc_html_e( 'Product icon', 'knowx' ); ?></label>
+			<span class="knowx-field-label" id="knowx_icon_label"><?php esc_html_e( 'Product icon', 'knowx' ); ?></span>
 			<?php $this->icon_select( '' ); ?>
 			<p><?php esc_html_e( 'Shown on the product card when this is a top-level category.', 'knowx' ); ?></p>
 		</div>
 		<div class="form-field">
-			<label for="knowx_accent"><?php esc_html_e( 'Product accent colour', 'knowx' ); ?></label>
+			<span class="knowx-field-label" id="knowx_accent_label"><?php esc_html_e( 'Product accent colour', 'knowx' ); ?></span>
 			<?php $this->accent_input( '' ); ?>
 			<p><?php esc_html_e( 'Buttons and links on this product use this colour. Automatic picks one from the theme palette when the site has several products.', 'knowx' ); ?></p>
 		</div>
@@ -331,14 +332,14 @@ class Component implements Component_Interface {
 	public function render_edit_fields( $term ) {
 		?>
 		<tr class="form-field">
-			<th scope="row"><label for="knowx_icon"><?php esc_html_e( 'Product icon', 'knowx' ); ?></label></th>
+			<th scope="row"><span class="knowx-field-label" id="knowx_icon_label"><?php esc_html_e( 'Product icon', 'knowx' ); ?></span></th>
 			<td>
 				<?php $this->icon_select( (string) get_term_meta( $term->term_id, 'knowx_icon', true ) ); ?>
 				<p class="description"><?php esc_html_e( 'Shown on the product card when this is a top-level category.', 'knowx' ); ?></p>
 			</td>
 		</tr>
 		<tr class="form-field">
-			<th scope="row"><label for="knowx_accent"><?php esc_html_e( 'Product accent colour', 'knowx' ); ?></label></th>
+			<th scope="row"><span class="knowx-field-label" id="knowx_accent_label"><?php esc_html_e( 'Product accent colour', 'knowx' ); ?></span></th>
 			<td>
 				<?php $this->accent_input( (string) get_term_meta( $term->term_id, 'knowx_accent', true ) ); ?>
 				<p class="description"><?php esc_html_e( 'Buttons and links on this product use this colour. Automatic picks one from the theme palette when the site has several products.', 'knowx' ); ?></p>
@@ -367,7 +368,7 @@ class Component implements Component_Interface {
 	 * @param string $current Saved icon slug.
 	 */
 	protected function icon_select( string $current ) {
-		echo '<div class="knowx-picker" role="radiogroup" aria-label="' . esc_attr__( 'Product icon', 'knowx' ) . '" id="knowx_icon">';
+		echo '<div class="knowx-picker" role="radiogroup" aria-labelledby="knowx_icon_label">';
 		printf(
 			'<label class="knowx-pick knowx-pick-text"><input type="radio" name="knowx_icon" value=""%1$s><span>%2$s</span></label>',
 			checked( '', $current, false ),
@@ -394,7 +395,7 @@ class Component implements Component_Interface {
 		$palette = knowx_default_product_looks()['accents'];
 		$custom  = '' !== $current && ! in_array( strtolower( $current ), $palette, true );
 
-		echo '<div class="knowx-picker" role="radiogroup" aria-label="' . esc_attr__( 'Product accent colour', 'knowx' ) . '" id="knowx_accent">';
+		echo '<div class="knowx-picker" role="radiogroup" aria-labelledby="knowx_accent_label">';
 		printf(
 			'<label class="knowx-pick knowx-pick-text"><input type="radio" name="knowx_accent_choice" value=""%1$s><span>%2$s</span></label>',
 			checked( '', $current, false ),
@@ -429,22 +430,37 @@ class Component implements Component_Interface {
 
 		// phpcs:disable WordPress.Security.NonceVerification.Missing -- the category form is verified by WordPress before these hooks run.
 		if ( isset( $_POST['knowx_icon'] ) ) {
-			update_term_meta( $term_id, 'knowx_icon', $this->sanitize_icon( sanitize_text_field( wp_unslash( $_POST['knowx_icon'] ) ) ) );
+			$this->save_term_meta( $term_id, 'knowx_icon', $this->sanitize_icon( sanitize_text_field( wp_unslash( $_POST['knowx_icon'] ) ) ) );
 		}
 		if ( isset( $_POST['knowx_accent_choice'] ) ) {
 			$choice = sanitize_text_field( wp_unslash( $_POST['knowx_accent_choice'] ) );
 			if ( 'custom' === $choice ) {
 				$choice = isset( $_POST['knowx_accent_custom'] ) ? sanitize_text_field( wp_unslash( $_POST['knowx_accent_custom'] ) ) : '';
 			}
-			update_term_meta( $term_id, 'knowx_accent', (string) sanitize_hex_color( $choice ) );
+			$this->save_term_meta( $term_id, 'knowx_accent', (string) sanitize_hex_color( $choice ) );
 		}
 		if ( isset( $_POST['knowx_order'] ) ) {
 			update_term_meta( $term_id, 'knowx_order', absint( wp_unslash( $_POST['knowx_order'] ) ) );
 		}
 		if ( isset( $_POST['knowx_start'] ) ) {
-			update_term_meta( $term_id, 'knowx_start', esc_url_raw( wp_unslash( $_POST['knowx_start'] ) ) );
+			$this->save_term_meta( $term_id, 'knowx_start', esc_url_raw( wp_unslash( $_POST['knowx_start'] ) ) );
 		}
 		// phpcs:enable WordPress.Security.NonceVerification.Missing
+	}
+
+	/**
+	 * Saves a term meta value, or deletes the row when the value is empty so "Automatic" leaves no meta behind.
+	 *
+	 * @param int    $term_id Category id.
+	 * @param string $key     Meta key.
+	 * @param string $value   Sanitized value.
+	 */
+	private function save_term_meta( int $term_id, string $key, string $value ) {
+		if ( '' === $value ) {
+			delete_term_meta( $term_id, $key );
+			return;
+		}
+		update_term_meta( $term_id, $key, $value );
 	}
 
 	/**

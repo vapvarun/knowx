@@ -60,6 +60,7 @@ class Background extends \WP_Customize_Control {
 					<span><?php esc_html_e( 'Image URL', 'knowx' ); ?></span>
 					<input class="knowx-bg-image" type="url" placeholder="https://…" />
 					<button type="button" class="button knowx-bg-image-pick"><?php esc_html_e( 'Select Image', 'knowx' ); ?></button>
+					<button type="button" class="button knowx-bg-image-remove" hidden><?php esc_html_e( 'Remove image', 'knowx' ); ?></button>
 				</label>
 				<label class="knowx-bg-row">
 					<span><?php esc_html_e( 'Repeat', 'knowx' ); ?></span>

@@ -820,7 +820,7 @@ function knowx_article_neighbours( $flat, $tree ) {
 }
 
 /**
- * Where "Start here" points on a product page: the owner's link, else the first article.
+ * Where "Start here" points on a product page: the owner's link, else the first article with a title.
  *
  * @param array   $product Product item (knowx_products()).
  * @param array[] $flat    Articles of the product in reading order.
@@ -831,7 +831,13 @@ function knowx_start_url( $product, $flat ) {
 		return $product['start'];
 	}
 
-	return $flat ? $flat[0]['url'] : '';
+	foreach ( $flat as $item ) {
+		if ( '' !== trim( $item['title'] ) ) {
+			return $item['url'];
+		}
+	}
+
+	return '';
 }
 
 /**

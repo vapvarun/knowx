@@ -108,11 +108,7 @@ class Output_Builder {
 		$units  = $rule['units'] ?? '';
 
 		$rendered = $prefix . $value . $suffix . $units;
-		// Stored theme_mod values are concatenated into an inline <style> block.
-		// A CSS property value never legitimately contains angle brackets, so
-		// strip them defensively to ensure a value can't break out of the
-		// element (e.g. a saved "</style>..." payload).
-		$rendered = str_replace( array( '<', '>' ), '', (string) $rendered );
+		$rendered = self::clean_value( (string) $rendered );
 		return sprintf( '%s{%s:%s;}', $element, $property, $rendered );
 	}
 
@@ -160,7 +156,7 @@ class Output_Builder {
 			if ( empty( $value[ $k ] ) ) {
 				continue;
 			}
-			$rendered = (string) $value[ $k ];
+			$rendered = self::clean_value( (string) $value[ $k ] );
 			if ( 'font-family' === $k ) {
 				$rendered = self::font_stack( $rendered );
 			} elseif ( 'font-size' === $k ) {
@@ -234,6 +230,19 @@ class Output_Builder {
 	}
 
 	/**
+	 * Strips characters a CSS property value never needs.
+	 *
+	 * Stored theme_mod values are concatenated into an inline <style> block, so a value
+	 * must not close the declaration or the rule (; { }) or the element (< >).
+	 *
+	 * @param string $value Raw value.
+	 * @return string Value safe to print as one declaration.
+	 */
+	protected static function clean_value( string $value ): string {
+		return str_replace( array( '<', '>', ';', '{', '}' ), '', $value );
+	}
+
+	/**
 	 * Build background CSS declarations from a structured value array.
 	 * background-image is wrapped in url(...); other keys passed through.
 	 */
@@ -251,7 +260,7 @@ class Output_Builder {
 			if ( empty( $value[ $k ] ) ) {
 				continue;
 			}
-			$v = (string) $value[ $k ];
+			$v = self::clean_value( (string) $value[ $k ] );
 			if ( 'background-image' === $k ) {
 				$v = sprintf( "url('%s')", esc_url( $v ) );
 			}

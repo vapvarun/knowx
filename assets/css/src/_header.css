@@ -25,13 +25,13 @@
     z-index: var(--z-sticky);
 }
 
-@media (max-width: 600px) {
+@media (--narrow-menu-query) {
     .sticky-header .site-header-wrapper {
         top: 0;
     }
 }
 
-@media (max-width: 767px) {
+@media (--below-content-query) {
     .site-header-wrapper {
         z-index: var(--z-drawer);
     }
@@ -76,14 +76,16 @@
 
 .site-title {
     margin: 0;
-    margin-bottom: 6px;
     font-size: 2.375rem;
     font-weight: 700;
     line-height: 1.2;
     color: var(--color-heading);
 }
 
+/* The link is a block, so its own size and line height (also from the Customizer) set the line box,
+   not the larger title around it; the name then sits on the header's centre line. */
 .site-title a {
+    display: block;
     text-decoration: none;
     color: inherit;
 }
@@ -93,7 +95,7 @@
 }
 
 .site-description {
-    margin: -5px 0 0;
+    margin: 0;
     font-size: 0.875rem;
     font-weight: inherit;
     line-height: 1.4;
@@ -105,7 +107,7 @@
     margin-inline: 1.5rem auto;
 }
 
-@media (width <= 767px) {
+@media (--below-content-query) {
     .site-header .main-navigation {
         margin-inline-start: 0;
         margin-inline-end: 0;
@@ -129,12 +131,12 @@
     .site-header .site-title {
         margin: 0;
         white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     /* On the link, so it also applies over the Site Title size from the Customizer. */
     .site-header .site-title a {
+        overflow: hidden;
+        text-overflow: ellipsis;
         font-size: 1.25rem;
     }
 

@@ -162,5 +162,7 @@ To release, tell Claude: "use the release skill to release the theme". Everythin
 - [x] Dev `master` fast-forwarded to `b41f5dd`; public PR #12 green on all 8 checks, merged as `b1744e6`, master CI green
 - [x] `v2.0.0` moved to `b1744e6`, zip replaced (sha256 matches the local build), body from the readme 2.0.0 bullets plus the release-notes link
 - [x] Posted to #ready-for-release
+- [x] Second retag, 2026-10-18: activation no longer sets the front page or creates content (wordpress.org consent rule); one-time setup notice with Add sample docs / Create an empty docs home / No thanks (inc/Starter_Content, BuddyX 5.1.8 model); six starter patterns. Verified on fresh Docker sites over HTTP: all three buttons, existing front page and menu kept, rerun creates nothing twice, editor and missing nonce refused (403), seed and single seed, Theme Check one accepted warning, debug.log empty. PR #13 green, merged as `6d4482a`, master CI green, tag moved, zip replaced (checksum matches)
+- [ ] Screenshot check of the setup notice and the new-page layout picker at 1440 and 390 (Playwright MCP was disconnected during the change)
 - [ ] Owner: upload 2.0.0 to wordpress.org (still lists 1.7.4)
 - [ ] After it is live: `node tools/build-blueprint.mjs --release`

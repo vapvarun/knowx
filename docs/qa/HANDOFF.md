@@ -26,8 +26,8 @@ The first 2.0.0 build was bounced by QA and never reached wordpress.org (the dir
 
 ## The cards
 
-- **Ready for Testing: 45 cards.** Each has a proof comment with the commit, what changed and how to test. Verify each as its card says, then move it to Done or bounce it with page, viewport, light or dark, expected, seen and a screenshot.
-- **Left in Bugs, owner decision pending (not part of this gate):** 10415338524 (product with sections hides its direct articles), 10403690882 (docs breakpoints), 10403683143 (not reproduced), 10403480547 (switcher row height, pushed back), 10403216987 (spacing tokens), 10398980276 (Google Fonts, feature request). Reasons are on each card.
+- **Ready for Testing: 46 cards.** Each has a proof comment with the commit, what changed and how to test. Verify each as its card says, then move it to Done or bounce it with page, viewport, light or dark, expected, seen and a screenshot.
+- **Bugs column is empty.** Owner decisions (2026-10-17): 10403683143 and 10403480547 closed; 10398980276, 10403216987 and 10403690882 moved to Not now (after release). Reasons are on each card.
 
 ## Check A: WordPress coding standards
 

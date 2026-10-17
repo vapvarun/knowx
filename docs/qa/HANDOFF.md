@@ -1,51 +1,105 @@
-# QA handoff: KnowX 2.0.0
+# QA handoff: KnowX 2.0.0 (re-release from branch 2.0.1)
 
 Start here. This is the one page QA needs. Everything else in `docs/qa/` is linked from it.
 
+## What this round is
+
+The first 2.0.0 build was bounced by QA and never reached wordpress.org (the directory still lists 1.7.4). Branch `2.0.1` holds every fix since then and ships as **2.0.0**: the version in `style.css` and `readme.txt` stays 2.0.0, the `v2.0.0` tag is moved and the zip replaced, then 2.0.0 is uploaded to wordpress.org.
+
+**Release gate:** every card in Ready for Testing is moved to Done by QA, and the three checks below (A, B, C) pass. Then the owner merges and retags. Nothing is merged or tagged before that.
+
 ## What to test, and where
 
-- **Code:** branch `master` of `wbcomdesigns/knowx` (it already contains everything from `1.7.5`). Version `2.0.0`. Nothing is tagged or released yet.
-- **Environment:** WordPress 6.9 to 7.1, PHP 8.1 or newer, no plugins needed. Theme folder `knowx`.
-- **Sample content:** run `wp eval-file wp-content/themes/knowx/playground/seed.php` on an empty site. It creates two products (Orbit Helpdesk, Orbit API), sections, articles, FAQ, changelog, docs home and the menu. For the single-product check run `playground/seed-single.php` on a second empty site.
-- **Large-site check:** a seed of 1,000+ articles and 500+ categories (results in `plans/WORK_GROUPS.md`, W16).
-- **Do not test:** Playground from the git URL (the repo is private; it is switched to the wordpress.org slug at release), the `accessibility-ready` tag (not claimed).
+- **Code:** branch `2.0.1` of `wbcomdesigns/knowx`, at origin HEAD. Version `2.0.0`.
+- **Build the zip QA tests:** `npm ci && npm run bundle` gives `dist/knowx-2.0.0.zip`. Test the installed zip, not the git folder.
+- **Environment:** WordPress 6.9 to 7.1, PHP 8.1 or newer, no plugins. Theme folder `knowx`.
+- **Sample content:** `wp eval-file wp-content/themes/knowx/playground/seed.php` on an empty site (two products, sections, articles, FAQ, changelog, docs home, menu). Single-product check: `playground/seed-single.php` on a second empty site.
+- **Clean Docker site (recommended):** from `tests/docker`:
+  ```
+  docker compose down -v && docker compose up -d
+  docker compose run --rm -T cli core install --url=http://localhost:8089 --title=KnowX --admin_user=admin --admin_password=admin --admin_email=qa@example.com --skip-email
+  docker compose run --rm -T cli theme install /dist/knowx-2.0.0.zip --activate
+  docker compose run --rm -T cli eval-file /playground/seed.php
+  ```
+  Site: http://localhost:8089, login `admin` / `admin`.
+- **Do not test:** Playground from the git URL (private repo; switched to the wordpress.org slug after release), the `accessibility-ready` tag (not claimed, see C).
 
-## What changed since the last QA build
+## The cards
 
-| Area | What to look for | Where it is checked |
+- **Ready for Testing: 45 cards.** Each has a proof comment with the commit, what changed and how to test. Verify each as its card says, then move it to Done or bounce it with page, viewport, light or dark, expected, seen and a screenshot.
+- **Left in Bugs, owner decision pending (not part of this gate):** 10415338524 (product with sections hides its direct articles), 10403690882 (docs breakpoints), 10403683143 (not reproduced), 10403480547 (switcher row height, pushed back), 10403216987 (spacing tokens), 10398980276 (Google Fonts, feature request). Reasons are on each card.
+
+## Check A: WordPress coding standards
+
+Run from the theme folder; each must pass with zero errors.
+
+| Check | Command | Pass |
 |---|---|---|
-| First view | Docs home looks like a real docs site on a fresh install, with no setup | J1, J19 |
-| Single and multi product | One product shows its sections directly; several show product cards | J2, J20 |
-| Docs home layouts | Customizer, Docs, Docs Home: cards or sections | J19 |
-| Updated date | "Last updated" on articles, products and sections; hide it with one switch | J4, J21 |
-| Search, archive, 404 | Docs-style results with filter chips; docs-style list; friendly 404 | J8, J9, J18, J22 |
-| Comments | Form and list are styled as cards | J23 |
-| Patterns | 17 patterns: callouts, prerequisites, troubleshooting, API endpoint, compatibility table, next steps, feedback, docs home, recently updated, popular tags, FAQ, steps, changelog, support | J24 |
-| Colours | One place: Customizer, Colors. Palette cards at the top, then your own choices | J14, J25 |
-| Customizer | Flat sections, plain labels and hints, collapsible Typography groups; colours and corners update live in the preview | J26, J28 |
-| Footer menu | New `footer` menu location | J27 |
+| WPCS | `vendor/bin/phpcs --standard=phpcs.xml.dist` | no output |
+| PHPStan | `vendor/bin/phpstan analyze --memory-limit=1G` | `[OK] No errors` |
+| Unit tests | `vendor/bin/phpunit` | 41 tests OK |
+| Integration tests | `tests/docker/run-integration.sh` | all pass |
+| JS, TS, CSS, theme.json lint | `npm run lint` | exit 0, no `✖` |
+| Build is committed | `npm run build && git status --short` | no changed `*.min.*` files |
+| PHP versions | `find . -name '*.php' -not -path './vendor/*' -not -path './node_modules/*' -exec php -l {} \;` on PHP 8.1 and 8.4 | no syntax errors |
+| Debug log | browse every journey with `WP_DEBUG_LOG` on | `wp-content/debug.log` gains no lines |
 
-Removed on purpose, do not report as missing: page loader, search options, blog layout options, style variations, Kirki, the old colour-scheme picker, the extra colour settings that are now derived (link hover, button colours and similar).
+## Check B: Theme Check and the wordpress.org review rules
 
-## How to run the checks
+1. **Theme Check plugin** on the installed zip (Docker site above):
+   ```
+   docker compose run --rm -T cli plugin install theme-check --activate
+   docker compose run --rm -T cli theme-check run knowx
+   ```
+   Pass: no `REQUIRED` and no `ERROR`. One known `WARNING` is accepted: two text domains (`knowx`, `default`), from `inc/docs.php` using core's own translation of "Uncategorized" to hide the empty default category. Anything else is a bug. Also open Appearance, Theme Check in the admin once and confirm the same result.
+2. **Manual review against the required guidelines** (https://make.wordpress.org/themes/handbook/review/required/). Tick each:
+   - [ ] `style.css` header: name, version 2.0.0, requires 6.9, tested up to 7.1, requires PHP 8.1, GPL licence, text domain `knowx`, only allowed tags
+   - [ ] `readme.txt`: same version and requirements, description, FAQ, changelog, Resources section lists every bundled font and image with its licence
+   - [ ] `screenshot.png` is 1200 x 900 (4:3), shows the theme's docs home with the KnowX logo, does not look like an advert
+   - [ ] No plugin territory: no custom post types, shortcodes for content, analytics or SEO features
+   - [ ] No external requests: with DevTools Network open, every request on every page goes to the site's own host (fonts are bundled)
+   - [ ] No admin notices, upsells or nag screens after activation; nothing outside Appearance
+   - [ ] All options live in the Customizer and save, reset and preview live (`SETTINGS_QA.md`, `customizer-ui-check.js`)
+   - [ ] Every string is translatable with domain `knowx`; `languages/knowx.pot` exists
+   - [ ] The zip holds no `docs/`, `plans/`, `audit/`, `tests/`, `tools/`, `playground/`, `node_modules`, `vendor`, source maps or Markdown (`unzip -l dist/knowx-2.0.0.zip`)
+   - [ ] Core features work: custom logo (a square logo keeps the header at its normal height), menus, widgets, comments with threading, sticky posts, post formats, editor styles match the front end
+   - [ ] Theme Unit Test data: import https://github.com/WPTT/theme-test-data on a clean site and walk home, a long post, image alignment, comments, pagination and the menu. This is the content wordpress.org's preview uses.
 
-1. **Browser journeys:** `docs/qa/JOURNEYS.md`, J1 to J28, at 390, 768, 1024 and 1440 px, light and dark. Each ends with axe clean, console empty, no sideways scroll.
-2. **Every Customizer setting:** `docs/qa/SETTINGS_QA.md` is the last report (43 settings, 0 failures). To rerun on a clean Docker stack: `cd tests/docker && docker compose up -d`, then `python3 settings_qa.py` (site on port 8089).
-3. **Customizer screens render:** open the Customizer, expand every section, paste `tests/docker/customizer-ui-check.js` into the browser console. It must print every section with all controls visible and nothing flagged.
-4. **Integration tests:** `tests/docker/run-integration.sh` (12 tests).
-5. **Automatic gates:** `vendor/bin/phpstan analyze`, `vendor/bin/phpcs --standard=phpcs.xml.dist`, `vendor/bin/phpunit` (33 tests), `npm run lint`, `npm run build` (no diff in `*.min.*`).
+## Check C: Accessibility
+
+The `accessibility-ready` tag is not claimed, but the theme is checked to that bar (https://make.wordpress.org/themes/handbook/review/accessibility/required/).
+
+1. **axe** (browser extension or `@axe-core/cli`): docs home, product, section, article, search results, 404, FAQ, changelog and blog, in light and dark, at 390 and 1440. Pass: no violations.
+2. **Keyboard only** (no mouse), on the same pages:
+   - [ ] First Tab shows "Skip to content" and it moves focus to the main content
+   - [ ] Every link, button and field shows a visible focus outline
+   - [ ] Main menu and submenus open and close with the keyboard
+   - [ ] Mobile menu (390 px): Enter opens it, focus moves to Close, Tab stays inside the drawer, Escape closes it and focus returns to the menu button
+   - [ ] Products switcher, search overlay, colour-mode toggle and docs tree all work with Enter, Space and Escape
+   - [ ] No keyboard trap anywhere
+3. **Content and markup:**
+   - [ ] One `h1` per page, headings in order
+   - [ ] Landmarks: header, nav (labelled), main, footer
+   - [ ] Every form field has a label (search, comments)
+   - [ ] Links inside article text are underlined
+   - [ ] Repeated links ("Read more", "View all") have screen-reader text naming the target
+   - [ ] Images have alt text; decorative icons are hidden from screen readers
+   - [ ] Text contrast at least 4.5:1 (3:1 for large text and UI borders) in light and dark, including the hero, chips, cards and footer
+   - [ ] Page works at 200% browser zoom with no lost content or sideways scroll
+   - [ ] Nothing animates when the system setting "reduce motion" is on
+4. **Screen reader spot check** (VoiceOver or NVDA): docs home, an article and the mobile menu read in a sensible order with the right names and states (expanded or collapsed).
 
 ## Known limits (not bugs)
 
 - "Hide Categories" takes category IDs, not a picker.
-- A custom text, background or surface colour applies in light mode only. Dark mode keeps its own colours.
-- The product accent colour is decoration on cards only. The theme colour in Customizer, Colors drives buttons and links.
-- Rich Results test and HTTPS Lighthouse need a public URL and are run after release.
-
-## Release status
-
-Not released. Open items (owner): create the Ready for Testing cards, approve the release, publish to `vapvarun/knowx`, switch the blueprint with `node tools/build-blueprint.mjs --release`, archive `knowx-core`, retire `knowx-demo-importer`. Full list: `RELEASE_CHECKLIST.md`.
+- A custom text, background or surface colour applies in light mode only. Dark mode keeps its own palette (the Customizer says so under each colour).
+- The product accent colour decorates cards only. The theme colour drives buttons and links.
+- Rich Results test and HTTPS Lighthouse need a public URL and run after release.
 
 ## Reporting a problem
 
-Put in the card: page and viewport, light or dark, the Customizer values changed, what you expected, what you saw, a screenshot. A layout or taste call is an input to the owner, not a verdict; a broken function is fixed straight away.
+Put in the card: page and viewport, light or dark, Customizer values changed, expected, seen, a screenshot. A layout or taste call is an input to the owner, not a verdict; a broken function is fixed straight away.
+
+## After QA clears the gate (owner)
+
+Merge `2.0.1` into `master`, rebuild with `node scripts/distribute.js --current --no-tag`, release branch and PR to `vapvarun/knowx`, green CI, move the `v2.0.0` tag and replace the zip, upload 2.0.0 to wordpress.org, then `node tools/build-blueprint.mjs --release`. Full list: `RELEASE_CHECKLIST.md`.

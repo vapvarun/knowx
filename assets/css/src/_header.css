@@ -70,8 +70,12 @@
     margin-inline-end: 15px;
 }
 
+/* Capped on both sides so a square or tall logo keeps the header bar at its normal height. */
 .site-branding img {
+    width: auto;
+    height: auto;
     max-width: 150px;
+    max-height: 3rem;
 }
 
 .site-title {

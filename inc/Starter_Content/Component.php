@@ -212,16 +212,19 @@ class Component implements Component_Interface {
 					continue;
 				}
 				foreach ( $articles as $position => $article ) {
+					// wp_insert_post() unslashes its input; slash it so code samples keep their backslashes.
 					$id = wp_insert_post(
-						array(
-							'post_type'     => 'post',
-							'post_status'   => 'publish',
-							'post_author'   => get_current_user_id(),
-							'post_title'    => $article[0],
-							'post_excerpt'  => $article[1],
-							'post_content'  => $this->article_content( $article ),
-							'post_category' => array( (int) $term['term_id'] ),
-							'menu_order'    => $position + 1,
+						wp_slash(
+							array(
+								'post_type'      => 'post',
+								'post_status'    => 'publish',
+								'post_author'    => get_current_user_id(),
+								'post_title'     => $article[0],
+								'post_excerpt'   => $article[1],
+								'post_content'   => $this->article_content( $article ),
+								'post_category'  => array( (int) $term['term_id'] ),
+								'menu_order'     => $position + 1,
+							)
 						)
 					);
 					if ( ! $id ) {
@@ -288,14 +291,16 @@ class Component implements Component_Interface {
 			return (int) $existing->ID;
 		}
 		$id = wp_insert_post(
-			array(
-				'post_type'    => 'page',
-				'post_status'  => 'publish',
-				'post_author'  => get_current_user_id(),
-				'post_title'   => $title,
-				'post_excerpt' => $excerpt,
-				'post_content' => $content,
-				'meta_input'   => array( '_wp_page_template' => $template ),
+			wp_slash(
+				array(
+					'post_type'    => 'page',
+					'post_status'  => 'publish',
+					'post_author'  => get_current_user_id(),
+					'post_title'   => $title,
+					'post_excerpt' => $excerpt,
+					'post_content' => $content,
+					'meta_input'   => array( '_wp_page_template' => $template ),
+				)
 			)
 		);
 		return (int) $id;

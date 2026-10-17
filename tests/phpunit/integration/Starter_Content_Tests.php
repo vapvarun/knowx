@@ -114,6 +114,22 @@ class Starter_Content_Tests extends Integration_Test_Case {
 	}
 
 	/**
+	 * Code samples keep their backslash line continuations, so they can be copied and run.
+	 */
+	public function test_sample_code_keeps_backslashes() {
+		$this->setup->create_sample_content();
+
+		$article = get_posts(
+			array(
+				'title'          => 'Get an API key',
+				'posts_per_page' => 1,
+			)
+		);
+
+		$this->assertStringContainsString( "v2/me \\\n", $article[0]->post_content );
+	}
+
+	/**
 	 * With no menu assigned, the sample menu links the docs home, FAQ and changelog.
 	 */
 	public function test_sample_content_menu_has_every_page() {

@@ -10,7 +10,7 @@ The hero block at the top, the product cards, the featured and recent articles a
 
 | Setting | What it does |
 |---|---|
-| Hero Background | Colour or image behind the hero. A featured image on the page is used if you set one. |
+| Hero Background | Colour or image behind the hero; **Remove image** clears it. A featured image on the page is used if you set one. |
 | Hero Heading and Hero Text | The title and text in the hero. If empty, the page title and excerpt are used. |
 | Products on the docs home | Product cards (default), or each product with its sections. |
 | Hide Categories | Category IDs, separated by commas, kept off the docs home cards and lists and off the Docs Index. Find the ID in the address bar when you edit a category. Sub-categories are hidden too. |

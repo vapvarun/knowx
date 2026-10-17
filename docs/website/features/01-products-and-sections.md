@@ -26,7 +26,7 @@ Use the **Order** field in the editor sidebar. Articles with the same order are 
 ## What readers see
 
 - **Docs home:** product cards with an icon, the description and the article count, then featured (sticky) and recent articles.
-- **Product page:** an **Overview** card with the articles filed on the product itself (only when there are some), then every section with its first five articles and a link to see all of them. The Overview card comes first, in the same order as the sidebar and the **Start here** button. On the docs home, with the Sections layout, it shows the first five and links to the product page.
+- **Product page:** an **Overview** card with the articles filed on the product itself (only when there are some), then every section with its first five articles and a link to see all of them. The Overview card comes first, in the same order as the sidebar and the **Start here** button. On the docs home, with the Sections layout, it shows the first five and links to the product page. A product with no sections lists its articles like a section page, with page numbers.
 - **Section page:** the articles of the section with a short excerpt and a page number list.
 - **Article page:** the section tree on the left, the article in the middle and "On this page" on the right. On tablets and phones the tree and the contents are collapsible panels above the article.
 

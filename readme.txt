@@ -115,6 +115,8 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * New      - Footer menu location, a corner style setting and a docs home that switches between cards and sections.
 * New      - Switches for comments on articles (off by default; articles end with a "Still need help?" block) and for FAQ structured data, which can also be turned off on a single page.
 * New      - Sample content and a WordPress Playground blueprint.
+* New      - Articles filed on a product itself, not in a section, appear in an Overview card first on the product page and the docs home.
+* New      - The Background control in the Customizer has a Remove image button.
 * Improve  - The Kirki plugin and the plugin recommendations are gone; the Customizer is built into the theme and organised in ten short sections with plain labels.
 * Improve  - Open Sans is served from your site, and the page loads no jQuery and no icon font.
 * Improve  - Tablets and phones: the section tree sits beside the article from 900 px, text lines stay about 72 characters, and the phone header is one row with the article title in the first third of the screen.
@@ -123,6 +125,10 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Improve  - Menus with child items open with the keyboard on wide screens and close with Escape; the copy button says when copying is not available.
 * Improve  - Blog posts print one category list, one edit link and one comment link, images get correct size hints, and an SEO plugin's schema is no longer printed twice.
 * Improve  - The docs lists are cached with automatic invalidation and are bounded, so large sites stay fast.
+* Improve  - The phone menu is a proper dialog: focus moves into it, stays inside, and Escape closes it and returns focus to the menu button.
+* Improve  - Buttons, inputs and tap targets follow the Corners setting, show a clear focus outline and a disabled state, and are at least 40 px on phones.
+* Improve  - A long breadcrumb trail on phones scrolls sideways and fades at the start instead of cutting words.
+* Improve  - The colour settings say they apply to light mode, since dark mode keeps its own palette.
 * Fix      - Saved Customizer colors were overridden by a duplicate set of defaults in the content stylesheet.
 * Fix      - Excluding a product now also hides its sections and articles on the Docs Index.
 * Fix      - Buttons in articles and pages are no longer underlined.
@@ -134,7 +140,16 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Fix      - Keyboard focus in the phone header follows the order on screen.
 * Fix      - A header image sits above the header bar, and Content Width stays between 1000 and 1920 pixels.
 * Fix      - Text set in the Customizer follows the reader's browser font size.
+* Fix      - A product with articles but no sections lists them with page numbers, and its header no longer says 0 sections.
+* Fix      - A square logo no longer makes the header 150 px tall; logos are shown up to 48 px tall.
+* Fix      - The Products menu scrolls when there are many products, and long words in articles wrap instead of being clipped.
+* Fix      - Previous and Next page links look like the page numbers, and the site title lines up with the header on every screen size.
+* Fix      - Right-to-left sites mirror the desktop menu and the remaining spacing correctly.
+* Fix      - The comment reply script loads on articles only when article comments are on.
+* Fix      - The copyright line keeps links you add, and theme translations load.
+* Security - Customizer values printed into the stylesheet drop characters that could end a rule, and the docs home pattern escapes its data.
 * Dev      - PHP 8.1 and WordPress 6.9 minimum, PHPStan, PHPUnit, an accessibility check on every page type and a documented content model.
+* Dev      - New filters knowx_overview_articles and knowx_overview_title for the product Overview card.
 * Dev      - Removed from 1.x: Google Fonts loading, login page branding, the page loader, button colour settings, a separate font for each heading level, the sub-header and header search switches and the blog grid options.
 
 = 1.7.4 =

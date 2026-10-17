@@ -61,6 +61,12 @@
     "knowx_meta_description": [
       "inc/docs.php"
     ],
+    "knowx_overview_articles": [
+      "template-parts/docs/section-grid.php"
+    ],
+    "knowx_overview_title": [
+      "template-parts/docs/section-grid.php"
+    ],
     "knowx_preloading_styles_enabled": [
       "inc/Styles/Component.php"
     ],

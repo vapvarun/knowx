@@ -42,7 +42,7 @@ An article never belongs to two products. If two products share a step, write it
 
 ### 4. Check the product pages
 
-Open a product from the home page. A product page lists every section with its first six articles and a link to all of them.
+Open a product from the home page. A product page lists every section with its first five articles and a link to all of them.
 
 ![A product page with its sections and their first articles](../images/product-page.webp)
 

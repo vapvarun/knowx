@@ -48,6 +48,10 @@
 	inset-inline-end: 0;
 	z-index: var(--z-overlay);
 	min-width: 14rem;
+	/* A long product list scrolls inside the panel: viewport minus the header (about 4.5rem), the toolbar and a gap. */
+	max-height: calc(100dvh - var(--wp-admin--admin-bar--height, 0px) - 6rem);
+	overflow-y: auto;
+	overscroll-behavior: contain;
 	margin: 0;
 	padding: 0.35rem;
 	list-style: none;
@@ -83,7 +87,7 @@
 }
 
 /* Phones: the panel spans the header bar, so it cannot run off either edge. */
-@media (width <= 767px) {
+@media (--below-content-query) {
 	.knowx-switcher {
 		position: static;
 	}

@@ -5,7 +5,7 @@ Run each at 390, 768, 1024 and 1440 px, in light and dark mode, with the sample 
 | # | Journey | Expected |
 |---|---|---|
 | J1 | Open the home page | Hero search, one card per product with its icon, accent and article count, featured and recent lists |
-| J2 | Click a product card | Product page lists its sections with six articles each and "View all"; tree on the left (wide screens) |
+| J2 | Click a product card | Product page lists its sections with five articles each and "View all"; tree on the left (wide screens) |
 | J3 | Open a section, go to page 2 | Articles with excerpts; pagination works; tree keeps the section open |
 | J4 | Open an article | Title, version badge, last updated, steps, code block with a Copy button, note, previous and next, related list |
 | J5 | Click a heading link | URL gets the fragment, "Link copied" is announced, the page jumps to the heading |
@@ -22,7 +22,7 @@ Run each at 390, 768, 1024 and 1440 px, in light and dark mode, with the sample 
 | J16 | Editor: Order and Applies to version | Order changes the position in the tree; the badge shows on the article |
 | J17 | Open a page with no JavaScript | Content, tree, contents and search page link all work |
 | J18 | 404 and empty category | Friendly message with a search form |
-| J19 | Fresh install, open the home page with no Customizer changes | Hero, product cards, recent articles and the support block look finished; Customizer, Docs, Docs Home switches between cards and sections |
+| J19 | Fresh install, open the home page with no Customizer changes | Hero, product cards, recent articles look finished, and the support block appears once support text or a link is set; Customizer, Docs, Docs Home switches between cards and sections |
 | J20 | Site with one product (`seed-single.php`) | Home lists that product's sections directly, no product switcher or card |
 | J21 | Customizer, Docs, Articles: turn "updated date" off | Date disappears from article, section and product pages; on again brings it back |
 | J22 | Search with results; archive (date, tag, author) | Docs-style list with filter chips and excerpts; pagination works |

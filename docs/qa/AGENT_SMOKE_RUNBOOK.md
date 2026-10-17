@@ -38,14 +38,14 @@ Enable `WP_DEBUG`, `WP_DEBUG_LOG`, `WP_DEBUG_DISPLAY=false`. Baseline `wp-conten
 **Why:** only the built zip proves the packaging (fonts, patterns, min files, languages) is complete.
 
 ### A2 - Plug-and-play first view
-**Verify:** with the sample content and no Customizer change, the home page is a finished docs home (hero search, product cards with icon, accent and count, recent articles, support block) with no placeholder text. Journeys J1, J19.
+**Verify:** with the sample content and no Customizer change, the home page is a finished docs home (hero search, product cards with icon, accent and count, recent articles; the support block appears only once support text or a link is set) with no placeholder text. Journeys J1, J19.
 
 ---
 
 ## C - Core customer flows
 
 ### C.visitor.home-and-products
-**Verify:** home, a product page (sections with six articles, tree on the left on wide screens), a section page (paging, tree keeps the section open). J1 to J3, J12 (Products menu opens, marks the current product, closes with Escape and on an outside click).
+**Verify:** home, a product page (sections with five articles, tree on the left on wide screens), a section page (paging, tree keeps the section open). J1 to J3, J12 (Products menu opens, marks the current product, closes with Escape and on an outside click).
 
 ### C.visitor.article-and-navigation
 **Verify:** article shows title, version badge, last updated, code with a Copy button, previous and next, related list; heading links copy and jump; On this page works; Ctrl or Cmd + K search (scoped, all-products switch, no-result message, "1 result" and "N results" wording). J4 to J9.

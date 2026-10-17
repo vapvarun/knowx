@@ -90,7 +90,7 @@
 	display: inline-block;
 	padding: 0.2rem 0.65rem;
 	border: 1px solid var(--global-border-color);
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	color: var(--global-font-color);
 	font-size: 0.85rem;
 }
@@ -320,7 +320,9 @@
 .knowx-tree-list details > summary {
 	display: flex;
 	align-items: center;
-	min-height: 36px;
+	/* 40px hit area; the negative margin keeps the 36px rhythm of the tree. */
+	min-height: 40px;
+	margin-block: -2px;
 	font-weight: 600;
 	cursor: pointer;
 	list-style: none;
@@ -433,7 +435,7 @@
 	padding: 0.1rem 0.6rem;
 	background: var(--color-surface-alt);
 	border: 1px solid var(--global-border-color);
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	font-weight: 600;
 	color: var(--color-heading);
 }
@@ -443,15 +445,25 @@
 	scroll-margin-block-start: 6rem;
 }
 
+/* A 1.5em hit area around a 0.75em icon; the negative block margin keeps the heading's line height. */
 .knowx-anchor {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.5em;
+	height: 1.5em;
+	margin-block: -0.375em;
+	margin-inline-start: 0.1em;
+	opacity: 0;
+	vertical-align: middle;
+}
+
+.knowx-anchor::before {
+	content: "";
 	width: 0.75em;
 	height: 0.75em;
-	margin-inline-start: 0.35em;
 	background: currentcolor;
 	mask: url(../images/icon-link.svg) center / contain no-repeat;
-	opacity: 0;
-	vertical-align: baseline;
 }
 
 .knowx-article :is(h2, h3):hover .knowx-anchor,
@@ -779,7 +791,7 @@ p.knowx-item-date {
 .knowx-filters a {
 	padding: 0.25rem 0.875rem;
 	border: 1px solid var(--global-border-color);
-	border-radius: 999px;
+	border-radius: var(--radius-pill);
 	background: var(--color-surface);
 	color: var(--global-font-color);
 	font-size: 0.875rem;
@@ -840,8 +852,9 @@ p.knowx-item-date {
 }
 
 .knowx-section-hero--image {
+    /* A scrim of the theme colour between the photo and the text, so --color-on-primary stays readable on any photo. */
     background-color: var(--color-theme-primary);
-    background-blend-mode: color-burn;
+    box-shadow: inset 0 0 0 100vmax color-mix(in srgb, var(--color-theme-primary) 80%, transparent);
     background-position: 50% 0;
     background-size: cover;
     background-repeat: no-repeat;
@@ -890,9 +903,10 @@ p.knowx-item-date {
 .knowx-hero-section-search input.text_input {
     width: 100%;
     height: 56px;
-    padding: 0 3.5rem 0 1.25rem;
+    padding-block: 0;
+    padding-inline: 1.25rem 3.5rem;
     border: 1px solid var(--global-border-color);
-    border-radius: 100px;
+    border-radius: var(--radius-pill);
     background: var(--color-surface);
     box-shadow: 0 6px 24px rgb(0 0 0 / 8%);
 }
@@ -915,7 +929,7 @@ p.knowx-item-date {
 .knowx-hero-popular a {
     padding: 0.35rem 0.8rem;
     border: 1px solid var(--global-border-color);
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--color-surface);
     color: var(--color-heading);
 }
@@ -1054,7 +1068,7 @@ p.knowx-item-date {
     color: var(--button-text-color);
     border: 1px solid var(--button-border-color);
     display: inline-block;
-    border-radius: 100px;
+    border-radius: var(--radius-pill);
 }
 
 .knowx-support-button a:hover {
@@ -1069,33 +1083,34 @@ p.knowx-item-date {
 --------------------------------------------------------------*/
 
 #knowx-categories-columns-four {
-    display: flex;
-    flex-flow: row wrap;
-    margin: 0 -15px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 30px;
+    margin-block: 15px;
 }
 
 #knowx-categories-columns-four ul {
-    margin: 15px;
+    margin: 0;
     padding: 0;
     list-style: none;
-    width: calc(25% - 30px);
 }
 
-@media (max-width: 1024px) {
-    #knowx-categories-columns-four ul {
-        width: calc(33.333333% - 30px);
+@media (width > 480px) {
+    #knowx-categories-columns-four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 767px) {
-    #knowx-categories-columns-four ul {
-        width: calc(50% - 30px);
+@media (--content-query) {
+    #knowx-categories-columns-four {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 }
 
-@media (max-width: 480px) {
-    #knowx-categories-columns-four ul {
-        width: calc(100% - 30px);
+/* 1024px stays three columns, as before. */
+@media (width > 1024px) {
+    #knowx-categories-columns-four {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 }
 

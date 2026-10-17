@@ -3,6 +3,12 @@ declare const knowxScreenReaderText: { [key: string]: string };
 // Module-level variable to store navigation elements
 let navElements: NodeListOf<HTMLElement>;
 
+// The off-canvas drawer, and the page elements made inert while it is open.
+let drawer: HTMLElement | null = null;
+let inertElements: HTMLElement[] = [];
+const FOCUSABLE =
+	'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 // Initiate the menus when the DOM loads.
 if (document.readyState === 'loading') {
 	document.addEventListener('DOMContentLoaded', initNavigation);
@@ -194,7 +200,7 @@ function watchForWindowSizeChanges(): void {
  * Helper to determine if we are at or below the mobile breakpoint (767px, same as the CSS).
  */
 function isMobileWidth(): boolean {
-	return window.matchMedia('(max-width: 767px)').matches;
+	return window.matchMedia('not all and (min-width: 48em)').matches;
 }
 
 /**
@@ -357,23 +363,96 @@ function initEachNavToggleSmall(): void {
 		menuToggle.addEventListener('click', toggleMenuToggleState);
 	});
 
+	// The drawer is a modal dialog on phones (it is hidden on wide screens).
+	drawer = document.querySelector<HTMLElement>('.mobile-menu-container');
+	if (drawer) {
+		drawer.setAttribute('role', 'dialog');
+		drawer.setAttribute('aria-modal', 'true');
+		drawer.setAttribute(
+			'aria-label',
+			drawer.querySelector('.menu-title')?.textContent?.trim() ||
+				menuToggles[0]?.getAttribute('aria-label') ||
+				''
+		);
+	}
+
 	// Close the mobile drawer from its Close button, the dimmed overlay and the Escape key.
 	document.addEventListener('click', (e) => {
 		const target = e.target as HTMLElement;
 		if (target.closest('.menu-close, .mobile-menu-close')) {
 			setMobileMenuOpen(false);
-			(menuToggles[0] as HTMLElement).focus();
 		}
 	});
 	document.addEventListener('keydown', (e) => {
 		if (
-			e.key === 'Escape' &&
-			document.body.classList.contains('mobile-menu-opened')
+			!drawer ||
+			!document.body.classList.contains('mobile-menu-opened')
 		) {
+			return;
+		}
+		if (e.key === 'Escape') {
 			setMobileMenuOpen(false);
-			(menuToggles[0] as HTMLElement).focus();
+			return;
+		}
+		// Tab and Shift+Tab wrap inside the drawer. Closed submenus are display:none, so they are skipped.
+		if (e.key === 'Tab') {
+			const items = Array.from(
+				drawer.querySelectorAll<HTMLElement>(FOCUSABLE)
+			).filter((item) => item.getClientRects().length > 0);
+			if (!items.length) {
+				return;
+			}
+			const first = items[0];
+			const last = items[items.length - 1];
+			const active = drawer.ownerDocument.activeElement;
+			if (e.shiftKey && (active === first || !drawer.contains(active))) {
+				e.preventDefault();
+				last.focus();
+			} else if (
+				!e.shiftKey &&
+				(active === last || !drawer.contains(active))
+			) {
+				e.preventDefault();
+				first.focus();
+			}
 		}
 	});
+}
+
+/**
+ * Makes everything outside the drawer inert while it is open, so the page behind cannot be reached.
+ * Each ancestor's siblings are made inert; the dimmed overlay stays clickable so it can close the drawer.
+ *
+ * @param {boolean} on - Whether the page behind the drawer should be inert.
+ * @return {void}
+ */
+function setPageInert(on: boolean): void {
+	inertElements.forEach((element) => {
+		element.inert = false;
+	});
+	inertElements = [];
+
+	if (!on || !drawer) {
+		return;
+	}
+
+	for (
+		let node: HTMLElement = drawer;
+		node.parentElement && node !== document.body;
+		node = node.parentElement
+	) {
+		Array.from(node.parentElement.children).forEach((sibling) => {
+			if (
+				sibling !== node &&
+				sibling instanceof HTMLElement &&
+				!sibling.inert &&
+				!sibling.matches('.mobile-menu-close, script, style')
+			) {
+				sibling.inert = true;
+				inertElements.push(sibling);
+			}
+		});
+	}
 }
 
 /**
@@ -383,6 +462,11 @@ function initEachNavToggleSmall(): void {
  * @return {void}
  */
 function setMobileMenuOpen(open: boolean): void {
+	const wasOpen = document.body.classList.contains('mobile-menu-opened');
+	const focusInDrawer = !!drawer?.contains(
+		drawer.ownerDocument.activeElement
+	);
+
 	document.body.classList.toggle('mobile-menu-opened', open);
 
 	document
@@ -395,6 +479,20 @@ function setMobileMenuOpen(open: boolean): void {
 	navElements?.forEach((navElement) => {
 		navElement.classList.toggle('nav--toggled-on', open);
 	});
+
+	if (open === wasOpen) {
+		return;
+	}
+
+	setPageInert(open);
+
+	if (open) {
+		// Focus moves into the drawer, starting on its Close button.
+		drawer?.querySelector<HTMLElement>(FOCUSABLE)?.focus();
+	} else if (focusInDrawer) {
+		// Back to the button that opened it (not inert any more).
+		document.querySelector<HTMLElement>('.menu-toggle')?.focus();
+	}
 }
 
 function toggleMenuToggleState(e: Event) {

@@ -33,7 +33,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'site_footer_content_color',
 			'label'       => esc_html__( 'Footer Text', 'knowx' ),
-			'description' => esc_html__( 'Text in the footer.', 'knowx' ),
+			'description' => esc_html__( 'Text in the footer.', 'knowx' ) . ' ' . esc_html__( 'Applies to light mode. Dark mode uses its own palette.', 'knowx' ),
 			'section'     => 'site_skin_section',
 			'default'     => '#505050',
 			'priority'    => 30,
@@ -60,7 +60,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'site_copyright_background_color',
 			'label'       => esc_html__( 'Copyright Background', 'knowx' ),
-			'description' => esc_html__( 'The line at the very bottom of the page.', 'knowx' ),
+			'description' => esc_html__( 'The line at the very bottom of the page.', 'knowx' ) . ' ' . esc_html__( 'Applies to light mode. Dark mode uses its own palette.', 'knowx' ),
 			'section'     => 'site_skin_section',
 			'default'     => '#ffffff',
 			'priority'    => 31,
@@ -72,7 +72,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'site_copyright_content_color',
 			'label'       => esc_html__( 'Copyright Text', 'knowx' ),
-			'description' => esc_html__( 'Text in that line.', 'knowx' ),
+			'description' => esc_html__( 'Text in that line.', 'knowx' ) . ' ' . esc_html__( 'Applies to light mode. Dark mode uses its own palette.', 'knowx' ),
 			'section'     => 'site_skin_section',
 			'default'     => '#505050',
 			'priority'    => 32,

@@ -17,7 +17,7 @@ a.read-more.button {
     font-size: inherit;
     color: var(--button-text-color);
     background-color: var(--button-background-color);
-    border-radius: 3px;
+    border-radius: var(--button-border-radius);
     padding: 10px 20px;
     font-weight: 500;
     font-style: normal;
@@ -31,8 +31,9 @@ a.read-more.button {
     -webkit-appearance: none;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-transition: all linear .2s;
-    transition: all linear .2s;
+    /* Not `all`: an inherited visibility change would animate too, and a button inside a drawer
+       that just opened could not take focus until the transition ended. */
+    transition: background-color .2s linear, border-color .2s linear, color .2s linear;
 }
 
 body .customize-partial-edit-shortcut button,
@@ -45,7 +46,8 @@ body .widget .customize-partial-edit-shortcut button {
 }
 /* stylelint-enable */
 
-button:not(.menu-toggle,.wp-block-accordion-heading__toggle):hover,
+/* The drawer's Close and submenu buttons are plain text and icon buttons, so they keep their own colours on hover. */
+button:not(.menu-toggle,.wp-block-accordion-heading__toggle,.menu-close,.dropdown-toggle):hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
 input[type="submit"]:hover,
@@ -73,6 +75,29 @@ input[type="submit"]:focus {
     outline: thin dotted;
 }
 
+button:focus-visible,
+input[type="button"]:focus-visible,
+input[type="reset"]:focus-visible,
+input[type="submit"]:focus-visible,
+select:focus-visible {
+    outline: 2px solid var(--color-theme-primary);
+    outline-offset: 2px;
+}
+
+/* Disabled controls look inactive in both colour modes. */
+button:disabled,
+button:disabled:hover,
+input:disabled,
+input:disabled:hover,
+select:disabled,
+textarea:disabled {
+    color: var(--color-muted);
+    background-color: var(--color-surface-alt);
+    border-color: var(--global-border-color);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
 input[type="text"],
 
 input[type="search"],
@@ -93,7 +118,7 @@ input[type="color"],
 textarea {
     color: var(--color-muted);
     border: 1px solid var(--global-border-color);
-    border-radius: 4px;
+    border-radius: var(--form-border-radius);
     padding: 10px;
     min-height: 38px;
 }
@@ -147,7 +172,7 @@ select {
     vertical-align: middle;
     background-color: var(--color-surface);
     border: 1px solid var(--global-border-color);
-    border-radius: 3px;
+    border-radius: var(--form-border-radius);
     box-shadow: none;
     padding: 0 12px;
     padding-inline-end: 40px;

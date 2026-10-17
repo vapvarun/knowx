@@ -3,7 +3,7 @@
  * Product home and section pages.
  *
  * A top-level category is a product and lists its sections with their first articles; a child
- * category is a section and lists its articles. Both sit next to the product's section tree.
+ * category, or a product without sections, lists its articles. Both sit next to the product's section tree.
  *
  * @package knowx
  */
@@ -18,8 +18,10 @@ $knowx_term    = get_queried_object();
 $knowx_product = knowx_current_product();
 $knowx_tree    = $knowx_product ? knowx_product_tree( $knowx_product['id'] ) : null;
 $knowx_is_root = $knowx_product && $knowx_product['id'] === (int) $knowx_term->term_id;
-$knowx_per     = 5;
-$knowx_updated = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ? knowx_term_updated( $knowx_term->term_id ) : null;
+// A product with no sections lists its own articles from the main query, paginated like a section.
+$knowx_has_sections = $knowx_is_root && $knowx_tree && ! empty( $knowx_tree['root']['children'] );
+$knowx_per          = 5;
+$knowx_updated      = knowx_is_truthy( knowx_mod( 'knowx_show_updated' ) ) ? knowx_term_updated( $knowx_term->term_id ) : null;
 ?>
 <?php
 /** This action is documented in inc/extra.php. */
@@ -43,12 +45,14 @@ do_action( 'knowx_before_content' );
 			<?php if ( $knowx_is_root && $knowx_tree ) : ?>
 				<?php $knowx_first = knowx_tree_flat( $knowx_tree ); ?>
 				<p class="knowx-term-meta">
-					<?php
-					$knowx_sections = count( $knowx_tree['root']['children'] );
-					/* translators: %s: number of sections. */
-					echo esc_html( sprintf( _n( '%s section', '%s sections', $knowx_sections, 'knowx' ), number_format_i18n( $knowx_sections ) ) );
-					?>
-					<span aria-hidden="true">&middot;</span>
+					<?php if ( $knowx_has_sections ) : ?>
+						<?php
+						$knowx_sections = count( $knowx_tree['root']['children'] );
+						/* translators: %s: number of sections. */
+						echo esc_html( sprintf( _n( '%s section', '%s sections', $knowx_sections, 'knowx' ), number_format_i18n( $knowx_sections ) ) );
+						?>
+						<span aria-hidden="true">&middot;</span>
+					<?php endif; ?>
 					<?php echo esc_html( knowx_article_count_label( $knowx_product['count'] ) ); ?>
 				</p>
 				<?php $knowx_start = knowx_start_url( $knowx_product, $knowx_first ); ?>
@@ -68,15 +72,16 @@ do_action( 'knowx_before_content' );
 			<?php endif; ?>
 		</header>
 
-		<?php if ( $knowx_is_root && $knowx_tree ) : ?>
+		<?php if ( $knowx_has_sections ) : ?>
 			<?php
 			get_template_part(
 				'template-parts/docs/section-grid',
 				null,
 				array(
-					'tree'   => $knowx_tree,
-					'per'    => $knowx_per,
-					'prefix' => 'knowx-section',
+					'tree'    => $knowx_tree,
+					'per'     => $knowx_per,
+					'prefix'  => 'knowx-section',
+					'product' => $knowx_product['id'],
 				)
 			);
 			?>

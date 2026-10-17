@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
 		array(
 			'settings'    => 'site_header_bg_color',
 			'label'       => esc_html__( 'Header Background', 'knowx' ),
-			'description' => esc_html__( 'The header bar.', 'knowx' ),
+			'description' => esc_html__( 'The header bar.', 'knowx' ) . ' ' . esc_html__( 'Applies to light mode. Dark mode uses its own palette.', 'knowx' ),
 			'section'     => 'site_skin_section',
 			'default'     => '#ffffff',
 			'priority'    => 20,

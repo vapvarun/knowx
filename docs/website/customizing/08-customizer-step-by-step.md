@@ -14,7 +14,7 @@ To open a panel directly, use the list on the left of the Customizer. A panel wi
 
 ## Step 1. Site Identity (WordPress panel)
 
-Upload your **Logo** and **Site Icon**, and set the **Site Title** and **Tagline**. The tagline is shown under the title in the header. If you upload no logo, the title is used.
+Upload your **Logo** and **Site Icon**, and set the **Site Title** and **Tagline**. The logo sits beside the title, and the tagline under the title. The logo is shown up to 48 px tall and 150 px wide, so a square icon or a wide wordmark both keep the header at its normal height.
 
 ## Step 2. Colors
 

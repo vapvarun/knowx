@@ -66,6 +66,8 @@ class Component_Tests extends Unit_Test_Case {
 	public function test_action_essential_theme_support() {
 		$features = array();
 
+		Functions\expect( 'load_theme_textdomain' )->once()->with( 'knowx', 'THEME_DIR/languages' );
+		Functions\when( 'get_template_directory' )->justReturn( 'THEME_DIR' );
 		Functions\when( 'add_theme_support' )->alias(
 			function ( $feature, ...$args ) use ( &$features ) {
 				$features[ $feature ] = $args;

@@ -15,7 +15,7 @@ Setting up a site? Follow [Set up docs for one product](../getting-started/06-si
 
 1. Go to **Posts > Categories** and add a category with no parent. Write a short description; it is shown on the product card.
 2. Choose an **icon** from the list and, if you want one, tick **Use an accent colour** and pick a colour. Buttons and links on that product's pages use it. If you choose nothing, a site with two or more products gives each product its own icon and colour from the theme's palette automatically, so the cards look different out of the box. With one product the theme colour is used.
-3. Add child categories for the sections and publish articles in them.
+3. Add child categories for the sections and publish articles in them. An article can also be filed on the product itself, for an introduction, pricing or an FAQ; it then appears in the product's **Overview** card.
 
 WordPress' stock "Uncategorized" category is never shown as a product. The product appears on the docs home page and in the **Products** menu in the header. The menu is hidden when the site has a single product.
 
@@ -26,7 +26,7 @@ Use the **Order** field in the editor sidebar. Articles with the same order are 
 ## What readers see
 
 - **Docs home:** product cards with an icon, the description and the article count, then featured (sticky) and recent articles.
-- **Product page:** every section with its first six articles and a link to see all of them.
+- **Product page:** an **Overview** card with the articles filed on the product itself (only when there are some), then every section with its first five articles and a link to see all of them. The Overview card comes first, in the same order as the sidebar and the **Start here** button. On the docs home, with the Sections layout, it shows the first five and links to the product page. A product with no sections lists its articles like a section page, with page numbers.
 - **Section page:** the articles of the section with a short excerpt and a page number list.
 - **Article page:** the section tree on the left, the article in the middle and "On this page" on the right. On tablets and phones the tree and the contents are collapsible panels above the article.
 

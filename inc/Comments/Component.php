@@ -60,10 +60,17 @@ class Component implements Component_Interface, Templating_Component_Interface {
 	 */
 	public function action_enqueue_comment_reply_script() {
 
-		// Enqueue comment script on singular post/page views only.
-		if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-			wp_enqueue_script( 'comment-reply' );
+		// Enqueue comment script on singular post/page views only, and on articles only when the
+		// Article comments switch shows the form (template-parts/docs/single.php).
+		if ( ! is_singular() || ! comments_open() || ! get_option( 'thread_comments' ) ) {
+			return;
 		}
+
+		if ( is_singular( 'post' ) && ! knowx_is_truthy( knowx_mod( 'knowx_article_comments' ) ) ) {
+			return;
+		}
+
+		wp_enqueue_script( 'comment-reply' );
 	}
 
 	/**

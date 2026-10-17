@@ -14,10 +14,10 @@ Assign a menu to the **Footer** location under **Appearance > Menus** to print a
 
 Go to **Appearance > Customize > Footer**.
 
-- **Footer Background**: colour or image behind the footer widgets.
+- **Footer Background**: colour or image behind the footer widgets. **Remove image** clears the image and the preview updates at once.
 - The footer text colour is **Footer Text** under **Colors**.
 
-- **Copyright Line**: the text at the very bottom. You can use these placeholders:
+- **Copyright Line**: the text at the very bottom. Basic HTML such as a link (`<a href="https://example.com">Status</a>`) is kept; scripts are removed. You can use these placeholders:
 
 | Placeholder | Replaced with |
 |---|---|

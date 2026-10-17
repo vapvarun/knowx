@@ -81,9 +81,14 @@ function knowx_search_form_label() {
  * Used when the setting is saved and when it is read, so a width saved by an earlier version is corrected too.
  *
  * @param mixed $value Saved or submitted width, for example 1170px.
- * @return string Width in pixels.
+ * @return mixed Width in pixels, or a non-scalar value untouched.
  */
 function knowx_sanitize_container_width( $value ) {
+	// Core passes a stdClass sentinel when it checks whether the setting has a saved value.
+	if ( ! is_scalar( $value ) ) {
+		return $value;
+	}
+
 	$width = (int) $value;
 
 	return ( $width > 0 ? min( 1920, max( 1000, $width ) ) : 1170 ) . 'px';

@@ -47,8 +47,8 @@
 .knowx-typo-row select,
 .knowx-typo-row input {
 	width: 100%;
-	height: 32px;
-	min-height: 32px;
+	height: 40px;
+	min-height: 40px;
 	box-sizing: border-box;
 	padding: 4px 8px;
 	border: 1px solid #c3c4c7;
@@ -60,8 +60,8 @@
 }
 .knowx-typo-row select:focus,
 .knowx-typo-row input:focus {
-	border-color: #2271b1;
-	box-shadow: 0 0 0 1px #2271b1;
+	border-color: var(--wp-admin-theme-color, #2271b1);
+	box-shadow: 0 0 0 1px var(--wp-admin-theme-color, #2271b1);
 	outline: none;
 }
 .knowx-typo-family-search {
@@ -89,7 +89,8 @@
 .knowx-bg-row input {
 	padding: 4px 6px;
 }
-.knowx-bg-row .knowx-bg-image-pick {
+.knowx-bg-row .knowx-bg-image-pick,
+.knowx-bg-row .knowx-bg-image-remove {
 	align-self: flex-start;
 	margin-top: 4px;
 }
@@ -125,10 +126,10 @@
 	transition: border-color 0.15s ease;
 }
 .knowx-radio-image-option input:checked + img {
-	border-color: #2271b1;
+	border-color: var(--wp-admin-theme-color, #2271b1);
 }
 .knowx-radio-image-option input:focus-visible + img {
-	outline: 2px solid #2271b1;
+	outline: 2px solid var(--wp-admin-theme-color, #2271b1);
 	outline-offset: 2px;
 }
 
@@ -163,11 +164,11 @@
 	height: auto;
 }
 .knowx-radio-image-option:has(input:checked) {
-	border-color: #2271b1;
-	box-shadow: 0 0 0 1px #2271b1;
+	border-color: var(--wp-admin-theme-color, #2271b1);
+	box-shadow: 0 0 0 1px var(--wp-admin-theme-color, #2271b1);
 }
 .knowx-radio-image-option:has(input:focus-visible) {
-	outline: 2px solid #2271b1;
+	outline: 2px solid var(--wp-admin-theme-color, #2271b1);
 	outline-offset: 2px;
 }
 .knowx-radio-image-label {
@@ -187,7 +188,7 @@
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	background: #2271b1 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='3 6.5 5 8.5 9 4'/></svg>") center / 12px no-repeat;
+	background: var(--wp-admin-theme-color, #2271b1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='3 6.5 5 8.5 9 4'/></svg>") center / 12px no-repeat;
 	opacity: 0;
 	transition: opacity 0.15s ease;
 }
@@ -251,7 +252,7 @@
 .knowx-switch-slider::before {
 	content: "";
 	position: absolute;
-	left: 2px;
+	inset-inline-start: 2px;
 	top: 2px;
 	width: 16px;
 	height: 16px;
@@ -260,13 +261,16 @@
 	transition: transform 0.2s ease;
 }
 .knowx-switch-input:checked + .knowx-switch-slider {
-	background: #2271b1;
+	background: var(--wp-admin-theme-color, #2271b1);
 }
 .knowx-switch-input:checked + .knowx-switch-slider::before {
 	transform: translateX(16px);
 }
+[dir="rtl"] .knowx-switch-input:checked + .knowx-switch-slider::before {
+	transform: translateX(-16px);
+}
 .knowx-switch-input:focus-visible + .knowx-switch-slider {
-	outline: 2px solid #2271b1;
+	outline: 2px solid var(--wp-admin-theme-color, #2271b1);
 	outline-offset: 2px;
 }
 
@@ -300,10 +304,16 @@
 	height: 4px;
 	-webkit-appearance: none;
 	appearance: none;
-	background: linear-gradient(to right, #2271b1 var(--bx-fill, 50%), #dcdcde var(--bx-fill, 50%));
+	background: linear-gradient(to right, var(--wp-admin-theme-color, #2271b1) var(--knowx-slider-fill, 50%), #dcdcde var(--knowx-slider-fill, 50%));
 	border-radius: 2px;
-	outline: none;
 	cursor: pointer;
+}
+[dir="rtl"] .customize-control .knowx-slider-controls input.knowx-slider-range {
+	background: linear-gradient(to left, var(--wp-admin-theme-color, #2271b1) var(--knowx-slider-fill, 50%), #dcdcde var(--knowx-slider-fill, 50%));
+}
+.customize-control .knowx-slider-controls input.knowx-slider-range:focus-visible {
+	outline: 2px solid var(--wp-admin-theme-color, #2271b1);
+	outline-offset: 4px;
 }
 .knowx-slider-range::-webkit-slider-thumb {
 	-webkit-appearance: none;
@@ -311,9 +321,9 @@
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	background: #2271b1;
+	background: var(--wp-admin-theme-color, #2271b1);
 	border: 2px solid #ffffff;
-	box-shadow: 0 0 0 1px #2271b1, 0 1px 2px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 0 0 1px var(--wp-admin-theme-color, #2271b1), 0 1px 2px rgba(0, 0, 0, 0.15);
 	cursor: pointer;
 	transition: transform 0.1s ease;
 }
@@ -323,15 +333,15 @@
 	width: 16px;
 	height: 16px;
 	border-radius: 50%;
-	background: #2271b1;
+	background: var(--wp-admin-theme-color, #2271b1);
 	border: 2px solid #ffffff;
-	box-shadow: 0 0 0 1px #2271b1, 0 1px 2px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 0 0 1px var(--wp-admin-theme-color, #2271b1), 0 1px 2px rgba(0, 0, 0, 0.15);
 	cursor: pointer;
 }
 .customize-control .knowx-slider-controls input.knowx-slider-number {
 	flex: 0 0 64px;
 	width: 64px;
-	height: 28px;
+	height: 40px;
 	padding: 4px 6px;
 	border: 1px solid #c3c4c7;
 	border-radius: 4px;
@@ -372,8 +382,23 @@
 	font-size: 12px;
 }
 .knowx-buttonset-option input:checked + .knowx-buttonset-label {
-	background: #2271b1;
+	background: var(--wp-admin-theme-color, #2271b1);
 	color: #fff;
+}
+/* The set clips overflow, so the ring sits inside the option. */
+.knowx-buttonset-option input:focus-visible + .knowx-buttonset-label {
+	outline: 2px solid var(--wp-admin-theme-color, #2271b1);
+	outline-offset: -4px;
+}
+.knowx-buttonset-option input:checked:focus-visible + .knowx-buttonset-label {
+	outline-color: #fff;
+}
+
+/* Disabled state for the framework's buttons and inputs. */
+.customize-control :is(button, input, select)[class*="knowx-"]:disabled,
+.knowx-buttonset-option input:disabled + .knowx-buttonset-label {
+	opacity: 0.5;
+	cursor: not-allowed;
 }
 
 /* Repeater control */
@@ -386,8 +411,9 @@
 .knowx-repeater-row {
 	display: grid;
 	gap: 6px;
-	padding: 8px 32px 8px 8px;
-	background: #f6f6f6;
+	padding-block: 8px;
+	padding-inline: 8px 32px;
+	background: #f6f7f7;
 	border-radius: 4px;
 	position: relative;
 }
@@ -403,8 +429,8 @@
 	border: 0;
 	padding: 0;
 	position: absolute;
-	right: 8px;
-	top: 8px;
+	inset-inline-end: 8px;
+	inset-block-start: 8px;
 	user-select: none;
 }
 .knowx-repeater-trash {
@@ -432,7 +458,7 @@
 	align-items: center;
 	gap: 8px;
 	padding: 6px 8px;
-	background: #f6f6f6;
+	background: #f6f7f7;
 	border-radius: 4px;
 }
 .knowx-sortable-handle {
@@ -443,88 +469,8 @@
 /* Checkbox control — inline title alongside checkbox */
 .customize-control-title-inline {
 	display: inline-block;
-	margin-left: 6px;
+	margin-inline-start: 6px;
 	vertical-align: middle;
-}
-
-/* Site Skin — cluster head (Phase 3 UX overhaul).
-   Replaces the old <hr> dividers between groups of color fields.
-   Used as the rendered default value of `custom-*-divider` Custom_HTML controls. */
-.customize-control-knowx-custom-html .bx-cluster-head {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 12px 14px;
-	margin: 18px -12px 8px;
-	background: linear-gradient(180deg, #f0f0f1 0%, #f6f7f7 100%);
-	border-top: 1px solid #c3c4c7;
-	border-bottom: 1px solid #dcdcde;
-}
-.customize-control-knowx-custom-html .bx-cluster-head__icon {
-	display: inline-flex;
-	flex-shrink: 0;
-	align-items: center;
-	justify-content: center;
-	width: 22px;
-	height: 22px;
-	border-radius: 4px;
-	background: rgba(34, 113, 177, 0.08);
-	color: #2271b1;
-}
-.customize-control-knowx-custom-html .bx-cluster-head__icon svg {
-	width: 14px;
-	height: 14px;
-	display: block;
-}
-.customize-control-knowx-custom-html .bx-cluster-head__text {
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
-}
-.customize-control-knowx-custom-html .bx-cluster-head__title {
-	font-size: 13px;
-	font-weight: 600;
-	color: #1d2327;
-	line-height: 1.3;
-}
-.customize-control-knowx-custom-html .bx-cluster-head__caption {
-	font-size: 11px;
-	color: #50575e;
-	line-height: 1.4;
-	margin-top: 1px;
-}
-
-/* Smaller sub-cluster head (visually subordinate to main cluster heads).
-   Used inside the Header cluster to group: Header surface / Site title / Menu. */
-.customize-control-knowx-custom-html .bx-subcluster-head {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	padding: 6px 0 4px;
-	margin: 10px 0 2px;
-	border-bottom: 1px dashed #dcdcde;
-}
-.customize-control-knowx-custom-html .bx-subcluster-head__title {
-	font-size: 11px;
-	font-weight: 600;
-	color: #50575e;
-	text-transform: uppercase;
-	letter-spacing: 0.06em;
-}
-
-/* Cluster heads should not get the default control wrapper margins. */
-.customize-control-knowx-custom-html.has-cluster-head {
-	margin-bottom: 0;
-}
-
-@media (max-width: 640px) {
-	.customize-control-knowx-custom-html .bx-cluster-head {
-		padding: 10px 12px;
-		margin: 14px -8px 6px;
-	}
-	.customize-control-knowx-custom-html .bx-cluster-head__caption {
-		display: none;
-	}
 }
 
 /* Color control — alpha (rgba) opacity slider. Only rendered when the
@@ -535,7 +481,7 @@
 	gap: 10px;
 	margin-top: 8px;
 	padding-top: 8px;
-	border-top: 1px solid var(--bx-color-border, #e8e8e8);
+	border-top: 1px solid #dcdcde;
 }
 .knowx-color-alpha-label {
 	font-size: 12px;
@@ -545,7 +491,7 @@
 .knowx-color-alpha-value {
 	font-weight: 600;
 	color: #1d2327;
-	margin-left: 4px;
+	margin-inline-start: 4px;
 }
 .knowx-color-alpha-slider {
 	flex: 1 1 auto;
@@ -575,15 +521,15 @@
 }
 .customize-control-title .knowx-tooltip-trigger:hover,
 .customize-control-title .knowx-tooltip-trigger:focus-visible {
-	background: #2271b1;
+	background: var(--wp-admin-theme-color, #2271b1);
 	color: #fff;
-	border-color: #2271b1;
+	border-color: var(--wp-admin-theme-color, #2271b1);
 	outline: 0;
 }
 .customize-control-title .knowx-tooltip-trigger[aria-expanded="true"] {
-	background: #2271b1;
+	background: var(--wp-admin-theme-color, #2271b1);
 	color: #fff;
-	border-color: #2271b1;
+	border-color: var(--wp-admin-theme-color, #2271b1);
 }
 .knowx-tooltip-popover {
 	display: block;
@@ -598,6 +544,7 @@
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.knowx-typo-row[hidden] {
+.knowx-typo-row[hidden],
+.knowx-bg-row .knowx-bg-image-remove[hidden] {
 	display: none;
 }

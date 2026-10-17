@@ -23,7 +23,7 @@
 }
 
 /* Columns sit side by side from 992px; below that they stack in normal flow. */
-@media (min-width: 992px) {
+@media (width >= 992px) {
     .row {
         display: flex;
         flex-wrap: wrap;

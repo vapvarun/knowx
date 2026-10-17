@@ -1,5 +1,5 @@
 /**
- * Theme behaviour that CSS cannot do: table cell labels and the back-to-top button.
+ * Theme behaviour that CSS cannot do: table cell labels, scrolling tables and the back-to-top button.
  * No jQuery; menus live in navigation.ts.
  */
 (function () {
@@ -24,6 +24,22 @@
 				});
 			});
 		});
+
+		// A table that scrolls sideways (phones) takes keyboard focus so it can be scrolled with the arrow keys.
+		if ('ResizeObserver' in window) {
+			const observer = new window.ResizeObserver((entries) => {
+				entries.forEach(({ target }) => {
+					if (target.scrollWidth > target.clientWidth) {
+						target.setAttribute('tabindex', '0');
+					} else {
+						target.removeAttribute('tabindex');
+					}
+				});
+			});
+			document
+				.querySelectorAll('.wp-block-table')
+				.forEach((figure) => observer.observe(figure));
+		}
 	}
 
 	/**

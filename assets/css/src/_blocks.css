@@ -91,7 +91,7 @@
 	margin-inline-start: 1.5rem;
 }
 
-@media screen and (min-width: 48em) {
+@media (--content-query) {
 
 	.entry-content > .wp-block-quote,
 	.entry-content > .wp-block-quote.is-style-large {
@@ -208,7 +208,7 @@
 	padding-inline-start: 1.5em;
 }
 
-@media screen and (min-width: 48em) {
+@media (--content-query) {
 
 	.entry-content .wp-block-gallery {
 		padding-inline-end: 0;
@@ -240,7 +240,7 @@
 	grid-column: span 1;
 }
 
-@media screen and (min-width: 40em) {
+@media (width >= 40em) {
 
 	.wp-block-gallery.columns-2 {
 		grid-template-columns: repeat(2, 1fr);
@@ -338,7 +338,7 @@ ul.wp-block-latest-posts.is-grid.alignfull {
 --------------------------------------------------------------*/
 
 /* Phones: columns follow their content and the table scrolls sideways, so a heading is never split inside a word. */
-@media (width <= 600px) {
+@media (--narrow-menu-query) {
 	.wp-block-table table,
 	.wp-block-table table.has-fixed-layout {
 		table-layout: auto;
@@ -480,7 +480,7 @@ pre.wp-block-code {
 	margin-bottom: 0;
 }
 
-@media (max-width: 781px) {
+@media (width < 782px) {
 
 	.entry-content .wp-block-columns:not(.is-not-stacked-on-mobile) {
 		flex-wrap: wrap;
@@ -525,7 +525,7 @@ pre.wp-block-code {
 	margin-bottom: 0;
 }
 
-@media (max-width: 600px) {
+@media (--narrow-menu-query) {
 
 	.wp-block-media-text.is-stacked-on-mobile {
 		/* Overrides the inline grid-template-columns the block editor writes. */
@@ -853,7 +853,8 @@ pre.wp-block-code {
 
 .entry-content .wp-block-tag-cloud a {
 	display: inline-block;
-	margin: 0 0.25em 0.5em 0;
+	margin: 0 0 0.5em;
+	margin-inline-end: 0.25em;
 	padding: 0.25em 0.75em;
 	border: 1px solid var(--global-border-color);
 	border-radius: var(--button-border-radius);
@@ -1764,7 +1765,7 @@ pre.wp-block-code {
 	flex: 1;
 }
 
-@media (max-width: 600px) {
+@media (--narrow-menu-query) {
 	.wp-block-text-columns {
 		flex-direction: column;
 	}
@@ -1780,7 +1781,8 @@ pre.wp-block-code {
 	position: absolute;
 	inset-block-start: 0.5rem;
 	inset-inline-end: 0.5rem;
-	min-height: 32px;
+	min-width: 40px;
+	min-height: 40px;
 	padding: 0 0.6rem;
 	border: 1px solid rgb(255 255 255 / 35%);
 	border-radius: var(--global-border-radius);

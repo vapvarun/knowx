@@ -78,9 +78,10 @@ do_action( 'knowx_before_content' );
 				'template-parts/docs/section-grid',
 				null,
 				array(
-					'tree'   => $knowx_tree,
-					'per'    => $knowx_per,
-					'prefix' => 'knowx-section',
+					'tree'    => $knowx_tree,
+					'per'     => $knowx_per,
+					'prefix'  => 'knowx-section',
+					'product' => $knowx_product['id'],
 				)
 			);
 			?>

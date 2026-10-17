@@ -11,6 +11,8 @@
 | `knowx_show_product_switcher` | `( bool $show )` Show or hide the header Products menu (default: more than one product). |
 | `knowx_kb_max_categories` | Maximum products and categories listed (default 100). |
 | `knowx_tree_max_posts` | Maximum articles in one product's section tree (default 500). |
+| `knowx_overview_articles` | `( array $items, int $product_id )` Articles in a product's Overview card: the ones filed on the product, not in a section. Items have `id`, `title`, `url`. Return an empty array to hide the card. |
+| `knowx_overview_title` | `( string $title, int $product_id )` Heading of a product's Overview card (default "Overview"). |
 | `knowx_footer_copyright_text` | `( string $copyright )` The copyright line, placeholders already replaced. |
 | `knowx_theme_author` | `( array $theme_author )` Keys `theme_name` and `theme_author_url`, used for the `[theme_author]` placeholder. |
 | `knowx_css_files` | The registered stylesheets. |
@@ -40,6 +42,10 @@ add_filter( 'knowx_schema_graph', '__return_empty_array' );
 
 // Allow more articles in the section tree.
 add_filter( 'knowx_tree_max_posts', fn() => 1000 );
+
+// Rename the Overview card on one product, and hide it on another.
+add_filter( 'knowx_overview_title', fn( $title, $product_id ) => 12 === $product_id ? 'Start here' : $title, 10, 2 );
+add_filter( 'knowx_overview_articles', fn( $items, $product_id ) => 15 === $product_id ? array() : $items, 10, 2 );
 
 // Always show the Products menu, even with one product.
 add_filter( 'knowx_show_product_switcher', '__return_true' );

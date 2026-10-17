@@ -99,9 +99,11 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 				'template-parts/docs/section-grid',
 				null,
 				array(
-					'tree'   => $single,
-					'per'    => 5,
-					'prefix' => 'knowx-home-section',
+					'tree'     => $single,
+					'per'      => 5,
+					'prefix'   => 'knowx-home-section',
+					'more_url' => $products[0]['url'],
+					'product'  => $products[0]['id'],
 				)
 			);
 			?>
@@ -115,9 +117,11 @@ knowx()->print_styles( 'knowx-content', 'knowx-docs' );
 						'template-parts/docs/section-grid',
 						null,
 						array(
-							'tree'   => knowx_product_tree( $product['id'] ),
-							'per'    => 5,
-							'prefix' => 'knowx-home-' . $product['id'],
+							'tree'     => knowx_product_tree( $product['id'] ),
+							'per'      => 5,
+							'prefix'   => 'knowx-home-' . $product['id'],
+							'more_url' => $product['url'],
+							'product'  => $product['id'],
 						)
 					);
 					?>

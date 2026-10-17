@@ -246,4 +246,59 @@ class Docs_Tests extends Integration_Test_Case {
 		$this->assertNotContains( 'FAQPage', wp_list_pluck( knowx_schema_graph(), '@type' ) );
 		remove_theme_mod( 'knowx_faq_schema' );
 	}
+
+	/**
+	 * Articles filed on a product open the section grid as an Overview card; the docs home caps it
+	 * and links to the product, and the filters can rename or hide it.
+	 */
+	public function test_overview_card_lists_product_articles() {
+		$product = self::factory()->category->create( array( 'name' => 'Overview product' ) );
+		$section = self::factory()->category->create(
+			array(
+				'name'   => 'Overview section',
+				'parent' => $product,
+			)
+		);
+		self::factory()->post->create( array( 'post_category' => array( $section ) ) );
+		foreach ( range( 1, 6 ) as $i ) {
+			self::factory()->post->create(
+				array(
+					'post_title'    => 'Intro ' . $i,
+					'post_category' => array( $product ),
+				)
+			);
+		}
+		knowx_kb_bump_version();
+
+		$render = static function ( $args ) use ( $product ) {
+			ob_start();
+			get_template_part(
+				'template-parts/docs/section-grid',
+				null,
+				$args + array(
+					'tree'    => knowx_product_tree( $product ),
+					'product' => $product,
+				)
+			);
+			return ob_get_clean();
+		};
+
+		$page = $render( array() );
+		$this->assertStringContainsString( '<h2>Overview</h2>', $page );
+		$this->assertSame( 6, substr_count( $page, '>Intro ' ) );
+		$this->assertLessThan( strpos( $page, 'Overview section' ), strpos( $page, 'Overview</h2>' ) );
+
+		$home = $render( array( 'more_url' => 'https://example.org/p/' ) );
+		$this->assertSame( 5, substr_count( $home, '>Intro ' ) );
+		$this->assertStringContainsString( 'href="https://example.org/p/"', $home );
+
+		add_filter( 'knowx_overview_title', fn() => 'Start with these' );
+		$this->assertStringContainsString( '<h2>Start with these</h2>', $render( array() ) );
+		add_filter( 'knowx_overview_articles', '__return_empty_array' );
+		$hidden = $render( array() );
+		remove_all_filters( 'knowx_overview_title' );
+		remove_all_filters( 'knowx_overview_articles' );
+		$this->assertStringNotContainsString( 'knowx-section--overview', $hidden );
+		$this->assertStringContainsString( 'Overview section', $hidden );
+	}
 }

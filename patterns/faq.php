@@ -4,6 +4,8 @@
  * Slug: knowx/faq
  * Description: A list of questions that open to show the answer. The theme adds FAQ structured data for search engines.
  * Categories: knowx-docs
+ * Block Types: core/post-content
+ * Post Types: page
  * Keywords: faq, questions, accordion
  *
  * @package knowx

@@ -4,6 +4,8 @@
  * Slug: knowx/getting-started-steps
  * Description: A short lead-in followed by numbered steps.
  * Categories: knowx-docs
+ * Block Types: core/post-content
+ * Post Types: post
  * Keywords: steps, how to, tutorial
  *
  * @package knowx

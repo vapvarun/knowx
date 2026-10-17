@@ -22,6 +22,8 @@
 | `knowx_customizer_field_args` | `( array $args, WP_Customize_Manager $wp_customize )` Arguments of one Customizer field before it is registered. |
 | `knowx_customizer_field_type_map` | `( array $type_map )` The control types: field type to setting class, control class and custom flag. |
 | `knowx_color_palettes` | `( array $palettes )` The five palette cards in Customizer, Colors: slug to `label` and `colors` (setting id to hex). |
+| `knowx_show_setup_notice` | `( bool $pending )` Show the setup notice on the Dashboard and Themes screens (default: until the owner picks a button). Return false to hide it, for example on sites you build for clients. |
+| `knowx_sample_content` | `( array $content )` The sample docs the **Add sample docs** button creates: `home_excerpt`, `products` (name, slug, icon, accent, desc, version, sections of articles), `faq` and `changelog`. Return your own products to ship a demo for your product. |
 | `knowx_breadcrumb_items` | `( array $items )` The breadcrumb items (`label`, `url`); the last item has no url. They feed the visible trail and the BreadcrumbList schema. |
 
 ## Actions
@@ -31,6 +33,7 @@
 | `knowx_sub_header` | After the header on every template; prints the breadcrumb bar |
 | `knowx_before_content` | Opens the `.site-wrapper` that holds the content and the sidebars |
 | `knowx_after_content` | Closes the `.site-wrapper` |
+| `knowx_sample_content_created` | `( int $home, int[] $products )` After the sample docs are created: the docs home page ID and the product category IDs made in that run |
 
 ## Examples
 

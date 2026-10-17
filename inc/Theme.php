@@ -154,7 +154,7 @@ class Theme {
 			new Tokens\Component(),
 			new Color_Mode\Component(),
 			new Docs\Component(),
-			new Activation\Component(),
+			new Starter_Content\Component(),
 		);
 		return $components;
 	}

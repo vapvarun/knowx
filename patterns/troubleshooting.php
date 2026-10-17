@@ -4,6 +4,8 @@
  * Slug: knowx/troubleshooting
  * Description: A problem, its cause and the fix.
  * Categories: knowx-docs
+ * Block Types: core/post-content
+ * Post Types: post
  * Keywords: troubleshooting, problem, error, fix
  *
  * @package knowx

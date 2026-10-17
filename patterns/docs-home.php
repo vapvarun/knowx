@@ -4,6 +4,8 @@
  * Slug: knowx/docs-home
  * Description: A hero with search, product columns and the newest articles, built from blocks.
  * Categories: knowx-docs
+ * Block Types: core/post-content
+ * Post Types: page
  * Keywords: home, landing, hero, products
  *
  * @package knowx

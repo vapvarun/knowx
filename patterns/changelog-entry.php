@@ -4,6 +4,8 @@
  * Slug: knowx/changelog-entry
  * Description: A release heading with New, Improve and Fix items.
  * Categories: knowx-docs
+ * Block Types: core/post-content
+ * Post Types: page
  * Keywords: changelog, release notes, version
  *
  * @package knowx

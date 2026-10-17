@@ -58,7 +58,7 @@ Run from the theme folder; each must pass with zero errors.
    - [ ] `screenshot.png` is 1200 x 900 (4:3), shows the theme's docs home with the KnowX logo, does not look like an advert
    - [ ] No plugin territory: no custom post types, shortcodes for content, analytics or SEO features
    - [ ] No external requests: with DevTools Network open, every request on every page goes to the site's own host (fonts are bundled)
-   - [ ] No admin notices, upsells or nag screens after activation; nothing outside Appearance
+   - [ ] Activation creates nothing and changes no setting; the only notice is the one-time **Set up your docs site** (Dashboard and Themes screens, gone after any button); no upsells or nag screens; nothing outside Appearance
    - [ ] All options live in the Customizer and save, reset and preview live (`SETTINGS_QA.md`, `customizer-ui-check.js`)
    - [ ] Every string is translatable with domain `knowx`; `languages/knowx.pot` exists
    - [ ] The zip holds no `docs/`, `plans/`, `audit/`, `tests/`, `tools/`, `playground/`, `node_modules`, `vendor`, source maps or Markdown (`unzip -l dist/knowx-2.0.0.zip`)

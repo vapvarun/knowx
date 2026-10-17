@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-17T13:06:52+00:00\n"
+"POT-Creation-Date: 2026-10-17T19:33:25+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: knowx\n"
@@ -108,25 +108,6 @@ msgstr ""
 msgid "Collapse child menu"
 msgstr ""
 
-#: inc/Activation/Component.php:72
-#: template-parts/header/navigation.php:12
-msgid "Main menu"
-msgstr ""
-
-#: inc/Activation/Component.php:81
-#: inc/Customizer_Settings/Component.php:164
-#: inc/Docs/Component.php:597
-msgid "Docs"
-msgstr ""
-
-#: inc/Activation/Component.php:100
-msgid "Knowledge Base"
-msgstr ""
-
-#: inc/Activation/Component.php:101
-msgid "Welcome to our Knowledge Base. Here you can find articles, guides, and resources to help you."
-msgstr ""
-
 #: inc/Base_Support/Component.php:119
 msgid "Note"
 msgstr ""
@@ -156,17 +137,17 @@ msgid "Blog"
 msgstr ""
 
 #. translators: %s: search term.
-#: inc/breadcrumbs.php:114
+#: inc/breadcrumbs.php:115
 #, php-format
 msgid "Search results for \"%s\""
 msgstr ""
 
-#: inc/breadcrumbs.php:124
+#: inc/breadcrumbs.php:125
 #: template-parts/content/error-404.php:14
 msgid "Page not found"
 msgstr ""
 
-#: inc/breadcrumbs.php:143
+#: inc/breadcrumbs.php:144
 msgid "Breadcrumb"
 msgstr ""
 
@@ -357,6 +338,13 @@ msgstr ""
 #: inc/Customizer_Settings/Component.php:154
 #: template-parts/layout/sidebar-right.php:14
 msgid "Sidebar"
+msgstr ""
+
+#: inc/Customizer_Settings/Component.php:164
+#: inc/Docs/Component.php:597
+#: inc/Starter_Content/Component.php:123
+#: inc/Starter_Content/Component.php:252
+msgid "Docs"
 msgstr ""
 
 #. Template Name of the theme
@@ -1041,6 +1029,645 @@ msgstr ""
 msgid "Footer %d"
 msgstr ""
 
+#: inc/Starter_Content/Component.php:77
+msgid "Your docs home is ready."
+msgstr ""
+
+#: inc/Starter_Content/Component.php:79
+msgid "View it"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:81
+msgid "Customize"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:95
+msgid "Set up your docs site"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:96
+msgid "Sample docs add two products with sections and articles, an FAQ page, a changelog page and a menu, so you can see KnowX working and replace the content with your own. An empty docs home adds only the docs home page and a menu item."
+msgstr ""
+
+#: inc/Starter_Content/Component.php:97
+msgid "The docs home becomes the front page only if your site shows its latest posts there, and a menu is added only if none is assigned."
+msgstr ""
+
+#: inc/Starter_Content/Component.php:99
+msgid "Add sample docs"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:100
+msgid "Create an empty docs home"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:101
+msgid "No thanks"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:112
+msgid "You do not have permission to do this."
+msgstr ""
+
+#: inc/Starter_Content/Component.php:126
+msgid "Unknown setup option."
+msgstr ""
+
+#: inc/Starter_Content/Component.php:152
+msgid "Documentation"
+msgstr ""
+
+#. Template Name of the theme
+#: inc/Starter_Content/Component.php:254
+msgid "FAQ"
+msgstr ""
+
+#. Template Name of the theme
+#: inc/Starter_Content/Component.php:257
+msgid "Changelog"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:314
+#: template-parts/header/navigation.php:12
+msgid "Main menu"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:343
+#: patterns/getting-started-steps.php:20
+msgid "Steps"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:345
+#: patterns/api-endpoint.php:36
+msgid "Example"
+msgstr ""
+
+#: inc/Starter_Content/Component.php:347
+#: patterns/callout-note.php:15
+msgid "Note."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:12
+msgid "Guides, references and answers for Orbit Helpdesk and the Orbit API."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:15
+msgid "Orbit Helpdesk"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:19
+msgid "Shared inbox, ticket routing and reports for support teams."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:22
+#: inc/Starter_Content/sample-content.php:47
+msgid "Getting started"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:23
+msgid "Create your account"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:23
+msgid "Sign up and set up your workspace in a few minutes."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:23
+msgid "Open the sign-up page and enter your work email."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:23
+msgid "Choose a workspace name; it becomes your address, such as <code>acme.orbit.example</code>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:23
+msgid "Confirm your email and pick a plan. Every plan starts with a 14-day trial."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:23
+msgid "You can rename the workspace later under <strong>Settings &gt; General</strong>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:24
+msgid "Invite your team"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:24
+msgid "Add agents and decide what each person can do."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:24
+msgid "Open <strong>Settings &gt; Team</strong> and choose <strong>Invite agent</strong>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:24
+msgid "Enter one or more email addresses and pick a role: Agent, Manager or Admin."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:24
+msgid "Send the invitation. Invites expire after seven days."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:24
+msgid "Admins can change a role at any time without resending an invite."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:25
+msgid "Connect your email"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:25
+msgid "Forward your support address so every message becomes a ticket."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:25
+msgid "Open <strong>Settings &gt; Channels</strong> and choose <strong>Email</strong>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:25
+msgid "Copy the forwarding address shown on the page."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:25
+msgid "In your mail provider, forward <code>support@yourcompany.com</code> to that address."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:25
+msgid "Send a test message. It appears in the inbox within a minute."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:25
+msgid "Replies are sent from your own address once you verify the domain."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:27
+msgid "Managing tickets"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:28
+msgid "Assign and route tickets"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:28
+msgid "Send each ticket to the right person automatically."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:28
+msgid "Open <strong>Settings &gt; Routing</strong> and add a rule."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:28
+msgid "Pick a condition, for example <em>Subject contains &ldquo;invoice&rdquo;</em>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:28
+msgid "Choose an agent or a team and save. Rules run from top to bottom."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:28
+msgid "Drag rules to change their order. The first matching rule wins."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:29
+msgid "Use canned replies"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:29
+msgid "Save answers you send often and insert them in two clicks."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:29
+msgid "Open any ticket and choose <strong>Canned replies</strong> in the reply box."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:29
+msgid "Select <strong>New reply</strong>, name it and write the text. Use <code>{{customer.name}}</code> to personalise it."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:29
+msgid "Insert it from the same menu next time."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:29
+msgid "Shared replies are visible to the whole team; private ones only to you."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:30
+msgid "Merge duplicate tickets"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:30
+msgid "Combine tickets from the same customer into one conversation."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:30
+msgid "Open the newer ticket and choose <strong>More &gt; Merge</strong>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:30
+msgid "Search for the ticket to keep and confirm."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:30
+msgid "All messages move to the kept ticket in date order."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:30
+msgid "Merging cannot be undone, so check the customer and subject first."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:32
+msgid "Reports and billing"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:33
+msgid "Read the dashboard"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:33
+msgid "Understand the numbers on the home screen."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:33
+msgid "<strong>First response time</strong> is the median time to the first agent reply."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:33
+msgid "<strong>Resolution time</strong> is the median time from opening to closing."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:33
+msgid "<strong>Satisfaction</strong> is the share of positive ratings from customers."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:33
+msgid "Use the date picker to compare with the previous period."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:34
+msgid "Export a report"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:34
+msgid "Download your data as a spreadsheet."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:34
+msgid "Open <strong>Reports</strong> and choose a report."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:34
+msgid "Set the date range and filters."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:34
+msgid "Select <strong>Export</strong> and pick CSV or XLSX."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:34
+msgid "Exports larger than 50,000 rows are emailed to you as a download link."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:35
+msgid "Change your plan"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:35
+msgid "Upgrade, downgrade or cancel at any time."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:35
+msgid "Open <strong>Settings &gt; Billing</strong>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:35
+msgid "Choose <strong>Change plan</strong> and pick a new plan."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:35
+msgid "Confirm. Upgrades apply immediately; downgrades start at the next renewal."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:35
+msgid "Unused time on an upgrade is credited to your next invoice."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:40
+msgid "Orbit API"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:44
+msgid "REST endpoints, authentication and webhooks for developers."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:48
+msgid "Get an API key"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:48
+msgid "Create a key and keep it safe."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:48
+msgid "Open <strong>Settings &gt; API</strong> and choose <strong>New key</strong>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:48
+msgid "Name the key after the app that will use it."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:48
+msgid "Copy the key now. It is shown once."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:48
+msgid "Never put a key in front-end code. Call the API from your server."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:49
+msgid "Make your first request"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:49
+msgid "List the latest tickets with one call."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:49
+msgid "Send a <code>GET</code> request to <code>/v2/tickets</code>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:49
+msgid "Add the <code>Authorization</code> header with your key."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:49
+msgid "Read the <code>data</code> array in the JSON response."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:49
+msgid "Responses are always JSON and times are in UTC."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:50
+msgid "Handle errors"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:50
+msgid "Read the status code and the error body."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:50
+msgid "<code>400</code> means a parameter is missing or invalid."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:50
+msgid "<code>401</code> means the key is missing or wrong."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:50
+msgid "<code>429</code> means you sent too many requests; wait and retry."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:50
+msgid "<code>5xx</code> means a problem on our side; retry with a delay."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:50
+msgid "Every error body has a <code>code</code> and a human-readable <code>message</code>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:52
+msgid "Resources"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:53
+msgid "Tickets endpoint"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:53
+msgid "Create, read and update tickets."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:53
+msgid "<code>GET /v2/tickets</code> lists tickets, newest first."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:53
+msgid "<code>POST /v2/tickets</code> creates a ticket."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:53
+msgid "<code>PATCH /v2/tickets/{id}</code> changes the status, assignee or tags."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:53
+msgid "Closed tickets stay available for 24 months."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:54
+msgid "Customers endpoint"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:54
+msgid "Look up and update customer records."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:54
+msgid "<code>GET /v2/customers?email=</code> finds a customer by email."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:54
+msgid "<code>PUT /v2/customers/{id}</code> updates the name, phone or custom fields."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:54
+msgid "<code>DELETE /v2/customers/{id}</code> removes a customer and anonymises their tickets."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:54
+msgid "Deleting a customer cannot be undone."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:55
+msgid "Webhooks"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:55
+msgid "Get a call when something changes."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:55
+msgid "Open <strong>Settings &gt; API &gt; Webhooks</strong> and add an endpoint URL."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:55
+msgid "Choose the events, such as <code>ticket.created</code> or <code>ticket.closed</code>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:55
+msgid "Return a <code>2xx</code> response within ten seconds."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:55
+msgid "Failed deliveries are retried five times over one hour."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:57
+msgid "Guides"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:58
+msgid "Paginate large results"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:58
+msgid "Walk through any list without missing items."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:58
+msgid "Pass <code>limit</code> to set the page size, up to 100."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:58
+msgid "Read <code>next_cursor</code> from the response."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:58
+msgid "Pass it as <code>cursor</code> in the next request until it is empty."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:58
+msgid "Cursors expire after one hour."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:59
+msgid "Rate limits"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:59
+msgid "Stay inside the request budget."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:59
+msgid "Each key may send 100 requests per minute."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:59
+msgid "Check <code>X-RateLimit-Remaining</code> on every response."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:59
+msgid "On <code>429</code>, wait for the number of seconds in <code>Retry-After</code>."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:59
+msgid "Contact support if you need a higher limit for a launch."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:60
+msgid "Verify webhook signatures"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:60
+msgid "Make sure a webhook really came from Orbit."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:60
+msgid "Read the <code>Orbit-Signature</code> header."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:60
+msgid "Compute an HMAC-SHA256 of the raw body with your signing secret."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:60
+msgid "Compare the two values in constant time and reject the request if they differ."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:60
+msgid "Use the raw request body, not a re-encoded copy."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:66
+msgid "Is there a free trial?"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:66
+msgid "Yes. Every plan starts with a 14-day trial and no card is needed."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:67
+msgid "Can I change my plan later?"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:67
+msgid "Yes. Upgrades apply immediately and downgrades start at your next renewal."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:68
+msgid "Where is my data stored?"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:68
+msgid "In data centres in the EU and the US. You choose the region when you create the workspace."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:69
+msgid "Do you offer an API?"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:69
+msgid "Yes. See the Orbit API documentation for endpoints, rate limits and webhooks."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:70
+msgid "How do I contact support?"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:70
+msgid "Reply to any email from us or write to support@orbit.example. We answer within one working day."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:73
+msgid "3.2.0 - October 2026"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:73
+msgid "New: merge duplicate tickets from the ticket menu."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:73
+msgid "Improve: the dashboard loads twice as fast on large accounts."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:73
+msgid "Fix: canned replies kept the wrong signature on forwarded tickets."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:74
+msgid "3.1.0 - September 2026"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:74
+msgid "New: routing rules can match on the sender domain."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:74
+msgid "Fix: CSV exports now include custom fields."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:75
+msgid "3.0.0 - August 2026"
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:75
+msgid "New: shared inbox with real-time presence."
+msgstr ""
+
+#: inc/Starter_Content/sample-content.php:75
+msgid "Improve: a new reply editor with keyboard shortcuts."
+msgstr ""
+
 #. translators: %s: stylesheet handle
 #: inc/Styles/Component.php:203
 #, php-format
@@ -1103,14 +1730,6 @@ msgstr ""
 msgid "Slate"
 msgstr ""
 
-#. Template Name of the theme
-msgid "Changelog"
-msgstr ""
-
-#. Template Name of the theme
-msgid "FAQ"
-msgstr ""
-
 #: page-knowledgebase-one.php:67
 msgid "Popular:"
 msgstr ""
@@ -1165,56 +1784,52 @@ msgctxt "Pattern description"
 msgid "Method, URL, parameters and an example request."
 msgstr ""
 
-#: patterns/api-endpoint.php:14
+#: patterns/api-endpoint.php:16
 msgid "List tickets"
 msgstr ""
 
-#: patterns/api-endpoint.php:18
+#: patterns/api-endpoint.php:20
 msgid "Returns the tickets the key can see, newest first."
 msgstr ""
 
-#: patterns/api-endpoint.php:26
+#: patterns/api-endpoint.php:28
 msgid "Parameters"
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "Name"
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "Type"
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "Description"
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "status"
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "string"
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "Filter by status, for example open."
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "page"
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "integer"
 msgstr ""
 
-#: patterns/api-endpoint.php:30
+#: patterns/api-endpoint.php:32
 msgid "Page number. Default 1."
-msgstr ""
-
-#: patterns/api-endpoint.php:34
-msgid "Example"
 msgstr ""
 
 #: patterns/article-feedback.php
@@ -1273,10 +1888,6 @@ msgid "A highlighted note block."
 msgstr ""
 
 #: patterns/callout-note.php:15
-msgid "Note."
-msgstr ""
-
-#: patterns/callout-note.php:15
 msgid "Add the detail readers often miss."
 msgstr ""
 
@@ -1326,19 +1937,19 @@ msgctxt "Pattern description"
 msgid "A release heading with New, Improve and Fix items."
 msgstr ""
 
-#: patterns/changelog-entry.php:14
+#: patterns/changelog-entry.php:16
 msgid "1.0.0 - January 2027"
 msgstr ""
 
-#: patterns/changelog-entry.php:19
+#: patterns/changelog-entry.php:21
 msgid "New: describe the feature."
 msgstr ""
 
-#: patterns/changelog-entry.php:23
+#: patterns/changelog-entry.php:25
 msgid "Improve: describe the change."
 msgstr ""
 
-#: patterns/changelog-entry.php:27
+#: patterns/changelog-entry.php:29
 msgid "Fix: describe the problem that was solved."
 msgstr ""
 
@@ -1414,39 +2025,39 @@ msgctxt "Pattern description"
 msgid "A hero with search, product columns and the newest articles, built from blocks."
 msgstr ""
 
-#: patterns/docs-home.php:14
-#: patterns/docs-home.php:17
+#: patterns/docs-home.php:16
+#: patterns/docs-home.php:19
 msgid "Search"
 msgstr ""
 
-#: patterns/docs-home.php:16
+#: patterns/docs-home.php:18
 #: searchform.php:15
 #: template-parts/docs/search-dialog.php:13
 msgid "Search the documentation"
 msgstr ""
 
-#: patterns/docs-home.php:25
+#: patterns/docs-home.php:27
 msgid "How can we help?"
 msgstr ""
 
-#: patterns/docs-home.php:29
+#: patterns/docs-home.php:31
 msgid "Guides, references and answers for every product."
 msgstr ""
 
-#: patterns/docs-home.php:39
+#: patterns/docs-home.php:41
 msgid "Product one"
 msgstr ""
 
-#: patterns/docs-home.php:43
-#: patterns/docs-home.php:55
+#: patterns/docs-home.php:45
+#: patterns/docs-home.php:57
 msgid "One sentence about what this product does."
 msgstr ""
 
-#: patterns/docs-home.php:51
+#: patterns/docs-home.php:53
 msgid "Product two"
 msgstr ""
 
-#: patterns/docs-home.php:62
+#: patterns/docs-home.php:64
 msgid "Latest articles"
 msgstr ""
 
@@ -1460,37 +2071,37 @@ msgctxt "Pattern description"
 msgid "A list of questions that open to show the answer. The theme adds FAQ structured data for search engines."
 msgstr ""
 
-#: patterns/faq.php:14
+#: patterns/faq.php:16
 msgid "Frequently asked questions"
 msgstr ""
 
-#: patterns/faq.php:18
+#: patterns/faq.php:20
 msgid "How do I get started?"
 msgstr ""
 
-#: patterns/faq.php:18
-#: patterns/faq.php:24
-#: patterns/faq.php:30
+#: patterns/faq.php:20
+#: patterns/faq.php:26
+#: patterns/faq.php:32
 msgid "Write the answer"
 msgstr ""
 
-#: patterns/faq.php:19
+#: patterns/faq.php:21
 msgid "Start with the getting started guide, then follow the setup steps for your product."
 msgstr ""
 
-#: patterns/faq.php:24
+#: patterns/faq.php:26
 msgid "Where can I get help?"
 msgstr ""
 
-#: patterns/faq.php:25
+#: patterns/faq.php:27
 msgid "Search the documentation, or contact support from the link at the bottom of any page."
 msgstr ""
 
-#: patterns/faq.php:30
+#: patterns/faq.php:32
 msgid "Which versions are supported?"
 msgstr ""
 
-#: patterns/faq.php:31
+#: patterns/faq.php:33
 msgid "The latest release and the one before it. Each article shows the version it applies to."
 msgstr ""
 
@@ -1504,23 +2115,19 @@ msgctxt "Pattern description"
 msgid "A short lead-in followed by numbered steps."
 msgstr ""
 
-#: patterns/getting-started-steps.php:14
+#: patterns/getting-started-steps.php:16
 msgid "Say in one sentence what the reader will be able to do after this article."
 msgstr ""
 
-#: patterns/getting-started-steps.php:18
-msgid "Steps"
-msgstr ""
-
-#: patterns/getting-started-steps.php:23
+#: patterns/getting-started-steps.php:25
 msgid "Open the settings screen."
 msgstr ""
 
-#: patterns/getting-started-steps.php:27
+#: patterns/getting-started-steps.php:29
 msgid "Choose the option you want to change."
 msgstr ""
 
-#: patterns/getting-started-steps.php:31
+#: patterns/getting-started-steps.php:33
 msgid "Save your changes and check the result."
 msgstr ""
 
@@ -1633,35 +2240,35 @@ msgctxt "Pattern description"
 msgid "A problem, its cause and the fix."
 msgstr ""
 
-#: patterns/troubleshooting.php:14
+#: patterns/troubleshooting.php:16
 msgid "Troubleshooting"
 msgstr ""
 
-#: patterns/troubleshooting.php:18
+#: patterns/troubleshooting.php:20
 msgid "The page shows an error"
 msgstr ""
 
-#: patterns/troubleshooting.php:22
+#: patterns/troubleshooting.php:24
 msgid "Cause."
 msgstr ""
 
-#: patterns/troubleshooting.php:22
+#: patterns/troubleshooting.php:24
 msgid "Say why it happens."
 msgstr ""
 
-#: patterns/troubleshooting.php:26
+#: patterns/troubleshooting.php:28
 msgid "Fix."
 msgstr ""
 
-#: patterns/troubleshooting.php:26
+#: patterns/troubleshooting.php:28
 msgid "Say what to do, in one or two steps."
 msgstr ""
 
-#: patterns/troubleshooting.php:30
+#: patterns/troubleshooting.php:32
 msgid "Another problem"
 msgstr ""
 
-#: patterns/troubleshooting.php:34
+#: patterns/troubleshooting.php:36
 msgid "Repeat the cause and the fix for each problem readers report."
 msgstr ""
 

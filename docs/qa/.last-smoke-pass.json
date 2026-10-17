@@ -1,25 +1,25 @@
 {
   "mode": "single",
   "release_version": "2.0.0",
-  "ran_at": "2026-10-11T06:50:58Z",
+  "ran_at": "2026-10-17T18:34:00Z",
   "sections": {
-    "C_core_flows": {
-      "pass": 21,
-      "fail": 0,
-      "skipped": 0
-    },
-    "D_regression_guards": {
-      "pass": 16,
-      "fail": 0,
-      "skipped": 0
-    },
     "A_fresh_install": {
-      "pass": 3,
-      "fail": 0,
+      "pass": 2,
+      "fail": 1,
       "skipped": 0
     },
     "B_upgrade": {
       "pass": 0,
+      "fail": 0,
+      "skipped": 1
+    },
+    "C_core_flows": {
+      "pass": 7,
+      "fail": 3,
+      "skipped": 0
+    },
+    "D_regression_guards": {
+      "pass": 17,
       "fail": 0,
       "skipped": 0
     },
@@ -31,7 +31,7 @@
     "F_cross_browser": {
       "pass": 0,
       "fail": 0,
-      "skipped": 0
+      "skipped": 1
     }
   },
   "failures": [],
@@ -40,53 +40,106 @@
   "hard_fails": [],
   "untested": [
     {
-      "id": "J13",
-      "reason": "not run in this walk",
-      "needs": "dark mode toggle persistence after reload; covered by the earlier QA pass"
-    },
-    {
-      "id": "J15",
-      "reason": "not run in this walk",
-      "needs": "category screen icon and accent save; covered by the earlier QA pass"
-    },
-    {
-      "id": "J17",
-      "reason": "not run in this walk",
-      "needs": "page with JavaScript disabled; covered by the earlier QA pass"
-    },
-    {
-      "id": "J20",
-      "reason": "simulated, not run with seed-single.php",
-      "needs": "single-product layout checked by excluding one product on the two-product seed"
-    },
-    {
-      "id": "J23.post-comment",
-      "reason": "form render checked with comments switched on, submission not run",
-      "needs": "post and reply a comment"
-    },
-    {
-      "id": "J27",
-      "reason": "not run in this walk",
-      "needs": "footer menu location"
-    },
-    {
-      "id": "F.cross-browser",
-      "reason": "env: Chrome (headless) only",
-      "needs": "Firefox and Safari pass"
+      "id": "C.owner.palettes-and-colours.publish-persist (J14, J25, J28 save-persists)",
+      "reason": "Publishing from the Customizer was denied by the permission classifier, so palette, colour and corner values were verified in the live preview and through theme mods set with WP-CLI (front end honoured them), not through a Customizer Publish.",
+      "needs": "A run where Customizer Publish is allowed: Publish, reload the front end, confirm, then remove the mods."
     },
     {
       "id": "B.upgrade",
-      "reason": "na: 2.0.0 does not migrate 1.x settings (documented)",
-      "needs": ""
+      "reason": "2.0.0 documents that 1.x settings are not migrated.",
+      "needs": "Not applicable."
+    },
+    {
+      "id": "F.cross_browser",
+      "reason": "Only Chrome (Playwright Chromium) is available. Deferred.",
+      "needs": "Firefox, Safari and Edge pass on the home, article, search dialog and Customizer."
+    },
+    {
+      "id": "C.visitor.rtl.real-locale",
+      "reason": "RTL checked by setting dir=rtl on html and body on the article and product page (mirrors, p/h text-align start, Copy button on the physical right, next/previous swapped, no sideways scroll). No RTL locale installed, so is_rtl() code paths were not exercised.",
+      "needs": "An RTL language pack (for example ar) active on a test site."
+    },
+    {
+      "id": "J-large-site",
+      "reason": "Journeys call for the 1,000+ article / 500+ category seed; only the sample seed and temporary 6, 12 and 15 article fixtures were used.",
+      "needs": "Large-site seed."
+    },
+    {
+      "id": "axe-768-1024",
+      "reason": "Axe ran at 390 and 1440 on the 12 page types in light and dark. 768 and 1024 were checked for sideways scroll, one h1 and 200 status only.",
+      "needs": "Axe pass at 768 and 1024."
+    },
+    {
+      "id": "HANDOFF.A-B-C.non-browser",
+      "reason": "WPCS, PHPStan, PHPUnit, Theme Check, PHP 8.1/8.4 lint, VoiceOver, 200% zoom, reduced-motion and the Theme Unit Test import are not part of the runbook walk.",
+      "needs": "Run per HANDOFF.md checks A, B and C."
+    },
+    {
+      "id": "C.visitor.article.copy-on-http",
+      "reason": "On http://knowx.local (non-secure) Copy and heading links show 'Copy is not available on this page', the designed fallback. Real clipboard copy and the 'Link copied' announcement were verified on http://localhost:8089.",
+      "needs": "An https test host for the local site (optional)."
+    },
+    {
+      "id": "E_pro_smoke",
+      "reason": "No paired plugin.",
+      "needs": "Not applicable."
     }
   ],
   "coverage": {
-    "viewports": "run: axe at 390 and 1280, overflow at 390/768/1024/1440",
-    "light_dark": "run",
-    "rtl": "run: text alignment, copy button, arrows",
-    "upgrade": "na: documented reset",
-    "cross_browser": "deferred: Chrome only",
-    "php": "run: lint 8.1 and 8.4, runtime 8.3"
+    "viewports": "390, 768, 1024 and 1440 for no-sideways-scroll, one h1 and status on 12 page types (home, product, section, article, search, empty search, 404, FAQ, changelog, tag, date, author); axe at 390 and 1440; keyboard drawer test at 390",
+    "light_dark": "Light and dark on all 12 page types and four widths via data-color-mode (OS colour-scheme emulation does not drive the theme); axe clean in both except the J24 pattern table finding; toggle persisted across reload; colour scheme restored to light",
+    "rtl": "dir=rtl attribute test only (no RTL locale installed)",
+    "upgrade": "Not applicable (2.0.0 documents that 1.x settings are not migrated)",
+    "cross_browser": "Chrome only; Firefox, Safari and Edge deferred",
+    "php": "Local site PHP as configured; Docker stack PHP 8.3 (wordpress:php8.3-apache). No 8.1/8.4 lint run."
   },
-  "layer1_delta": []
+  "layer1_delta": [
+    "All four Sonnet failures re-verified by Opus; 2 code fixes (breadcrumb null guard, focusable scrolling tables) and 2 stale QA/doc wordings corrected. See resolved[]."
+  ],
+  "resolved": [
+    {
+      "id": "C.visitor.search-archive-404.author-unknown",
+      "origin": "from",
+      "triage_note": "inc/breadcrumbs.php:91 reads ->display_name on get_queried_object() without a null guard. /author/<unknown>/ returns HTTP 200 (not 404) and logs a PHP Warning on every request. 6 warnings logged during the walk.",
+      "expected": "An author archive for a user that does not exist returns 404 (or the breadcrumb guards null) and nothing is logged to debug.log.",
+      "actual": "HTTP 200, empty archive, debug.log: PHP Warning: Attempt to read property \"display_name\" on null in themes/knowx/inc/breadcrumbs.php on line 91.",
+      "url": "http://knowx.local/author/admin/",
+      "screenshot": "none (server-side warning; see debug.log)",
+      "resolution": "inc/breadcrumbs.php: author branch now requires a WP_User. Re-verified: two loads of /author/nosuchuser/ added 0 breadcrumbs lines to debug.log. The 200 status comes from 21 seeded posts with post_author 0 on this site; core 404s otherwise.",
+      "reverified_by": "opus main session 2026-10-18"
+    },
+    {
+      "id": "C.owner.editor-order-and-patterns.J24-table-axe-390",
+      "origin": "from",
+      "triage_note": "Two figure.wp-block-table elements (from the compatibility-table and/or api-endpoint patterns) scroll horizontally at 390 but are not keyboard focusable. Axe 4.10.2 rule scrollable-region-focusable, 2 nodes. Clean at 1440. J24 requires patterns to pass axe. Reproduced logged out on a temporary page holding all 16 non-home patterns.",
+      "expected": "Every pattern passes axe at 390 and 1440.",
+      "actual": "scrollable-region-focusable (serious) on figure.wp-block-table at 390.",
+      "url": "http://knowx.local/?page_id=<temp page with patterns> (page deleted after test)",
+      "screenshot": "/Users/varundubey/Local Sites/knowx/app/qa-artifacts/smoke-2.0.0/pattern-others-390.png",
+      "resolution": "assets/js/src/theme.js: .wp-block-table gets tabindex=0 only while it overflows (ResizeObserver). Re-verified at 390: axe wcag2a/aa clean (scrollable-region-focusable gone), focus outline 2px, ArrowRight scrolls; at 1440 no tabindex. Screenshot qa-artifacts/smoke-2.0.0/table-focus-390.png.",
+      "reverified_by": "opus main session 2026-10-18"
+    },
+    {
+      "id": "C.visitor.home-and-products.J2-six-articles",
+      "origin": "from",
+      "triage_note": "category.php sets $knowx_per = 5 and passes it to section-grid.php, so each section card on a product page lists 5 articles plus 'View all N articles'. JOURNEYS.md J2, the runbook C step and docs/website/getting-started/07-multi-product-kb.md all say six. Either the code or the three docs are wrong; 'View all N articles' (uses _n) works.",
+      "expected": "Product page lists each section with its first six articles and a View all link.",
+      "actual": "Section card shows 5 articles then 'View all 15 articles' (Orbit API, Guides, with 15 articles).",
+      "url": "http://knowx.local/category/orbit-api/",
+      "screenshot": "/Users/varundubey/Local Sites/knowx/app/qa-artifacts/smoke-2.0.0/product-viewall-1440.png",
+      "resolution": "Code is right: 5 per section since the first 2.0.0 tag and matches the 5-on-home decision. JOURNEYS J2, runbook C and docs/website/getting-started/07-multi-product-kb.md now say five.",
+      "reverified_by": "opus main session 2026-10-18"
+    },
+    {
+      "id": "A2.support-block-on-fresh-install",
+      "origin": "from",
+      "triage_note": "Runbook A2 and J19 expect a support block on the fresh docs home. inc/docs.php:865-868 prints it only when a support link+text or support text is configured, which D9 also requires. The seeded home therefore has no support block (Docker fresh install and local). Behaviour is deliberate; the runbook/JOURNEYS wording is stale.",
+      "expected": "Home shows hero, product cards, recent articles and the support block (per A2/J19).",
+      "actual": "Hero, product cards, Featured Articles and Recently Updated render; no support block until the owner sets support text or a link.",
+      "url": "http://localhost:8089/",
+      "screenshot": "/Users/varundubey/Local Sites/knowx/app/qa-artifacts/smoke-2.0.0/docker-home-1440.png",
+      "resolution": "Deliberate (D9). JOURNEYS J19 and runbook A now say the support block appears once support text or a link is set.",
+      "reverified_by": "opus main session 2026-10-18"
+    }
+  ]
 }

@@ -86,7 +86,8 @@ function knowx_build_breadcrumb_items() {
 			'label' => $term->name,
 			'url'   => '',
 		);
-	} elseif ( is_author() ) {
+	} elseif ( is_author() && get_queried_object() instanceof WP_User ) {
+		// No user behind the archive (posts owned by a deleted or imported author): the trail stays at Home.
 		$items[] = array(
 			'label' => get_queried_object()->display_name,
 			'url'   => '',

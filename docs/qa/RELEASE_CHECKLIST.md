@@ -152,3 +152,15 @@ To release, tell Claude: "use the release skill to release the theme". Everythin
 | Branch protection (step 2.9) | `vapvarun/knowx` `master` has none yet. The skill applies it on the first release (needs the owner's go-ahead because it changes the public repo). |
 | GitHub release (step 10) | Tag `v2.0.0` on the public repo, zip attached, title `KnowX 2.0.0 - one-line summary`, body copied from the `readme.txt` bullets plus `Full changelog:` from `node ~/Code/wbcom-services/scripts/changelog-url.mjs vapvarun/knowx` (resolves to `https://wbcomdesigns.com/release-notes/knowx-theme/`). |
 | After the release | `node tools/build-blueprint.mjs --release`, Rich Results test and HTTPS Lighthouse on a public copy, archive `knowx-core`, retire `knowx-demo-importer`. |
+
+## Re-release, 2026-10-18 (branch 2.0.1 shipped as 2.0.0)
+
+- [x] QA cleared every Ready for Testing card; owner gave the go
+- [x] Smoke (single mode): 4 findings re-verified and resolved (author breadcrumb null guard, keyboard-scrollable tables, five articles per section in docs, support block wording); report `resolved[]`
+- [x] `distribute.js --current --no-tag`: smoke gate OK, 243 entries, sources beside every minified file
+- [x] Fresh Docker install of the zip: Theme Check one accepted warning (`default` text domain), every page type 200 or 404 as expected, no debug.log, Customizer check 10 sections with every control visible and 0 console errors
+- [x] Dev `master` fast-forwarded to `b41f5dd`; public PR #12 green on all 8 checks, merged as `b1744e6`, master CI green
+- [x] `v2.0.0` moved to `b1744e6`, zip replaced (sha256 matches the local build), body from the readme 2.0.0 bullets plus the release-notes link
+- [x] Posted to #ready-for-release
+- [ ] Owner: upload 2.0.0 to wordpress.org (still lists 1.7.4)
+- [ ] After it is live: `node tools/build-blueprint.mjs --release`

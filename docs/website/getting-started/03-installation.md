@@ -15,7 +15,7 @@
 
 ## After activation
 
-The theme creates nothing on its own. Follow [First setup](04-first-setup.md) to add your first product, or load the [sample content](05-sample-content.md) on a test site.
+The theme creates nothing on its own. The Dashboard shows a **Set up your docs site** notice: add the [sample docs](05-sample-content.md) to see a finished site, create an empty docs home, or dismiss it and follow [First setup](04-first-setup.md) to add your first product.
 
 ## Updating from KnowX 1.x
 

@@ -1,6 +1,6 @@
 # Sample content and Playground
 
-`seed.php` creates a complete docs site: two products (Orbit Helpdesk and Orbit API, three sections and nine articles each), a docs home page, an FAQ page, a changelog page, the main menu and the reading settings. Running it twice does nothing the second time. It is not shipped in the theme zip.
+`seed.php` creates a complete docs site through the theme's own **Add sample docs** code (`inc/Starter_Content`): two products (Orbit Helpdesk and Orbit API, three sections and nine articles each), a docs home page, an FAQ page, a changelog page and the main menu. On top of that it sets what only a demo needs: the site title, tags, two comments, pretty permalinks, and no WordPress sample post or page. Running it twice does nothing the second time. It is not shipped in the theme zip.
 
 ## Try it
 

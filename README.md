@@ -64,7 +64,7 @@ The same documentation is in [`docs/website`](docs/website).
 4. Create a page with the **Docs Home** template and set it as your homepage under **Settings > Reading**.
 5. Adjust colours, typography and layout under **Appearance > Customize**.
 
-To see a finished site first, open the sample content in WordPress Playground using `https://playground.wordpress.net/?blueprint-url=<raw URL of blueprint.json>`. On an empty test site you can instead run `wp eval-file wp-content/themes/knowx/playground/seed.php`, which creates two products, an FAQ, a changelog and a menu.
+To see a finished site first, choose **Add sample docs** in the setup notice on the Dashboard after activating the theme. It creates two products, an FAQ, a changelog and a menu, and changes your homepage only if it shows latest posts. You can also open the sample site in WordPress Playground using `https://playground.wordpress.net/?blueprint-url=<raw URL of blueprint.json>`.
 
 ## For developers
 

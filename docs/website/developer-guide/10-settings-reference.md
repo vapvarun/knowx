@@ -122,7 +122,8 @@ Colour settings that are empty by default (link, text, heading and content backg
 | Name | Kind | Purpose |
 |---|---|---|
 | `knowx_kb_version` | option | The docs data version used by `knowx_kb_cached()`. Not autoloaded. Changes when a published article, a category or a `knowx_` category field changes. |
-| `knowx_theme_activated` | option | Set once on activation by the Activation component, so the Knowledge Base page is created only on the first activation. |
+| `knowx_setup` | option | The button the owner picked in the setup notice: `sample`, `home` or `dismiss`. While it is empty the notice shows on the Dashboard and Themes screens. |
+| `knowx_theme_activated` | option | Set by KnowX 1.x, which created the docs home on activation. 2.0 only reads it: a site that has it does not see the setup notice. |
 | `knowx_` transients | transient | One transient per cached docs result; the stored value carries the version it was built for. |
 
 Removing the theme does not delete these. To reset every setting for a site, run `wp theme mod remove --all`.

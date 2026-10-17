@@ -4,6 +4,8 @@
  * Slug: knowx/api-endpoint
  * Description: Method, URL, parameters and an example request.
  * Categories: knowx-docs
+ * Block Types: core/post-content
+ * Post Types: post
  * Keywords: api, endpoint, reference, rest
  *
  * @package knowx

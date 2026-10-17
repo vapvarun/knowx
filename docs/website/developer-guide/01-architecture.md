@@ -51,7 +51,7 @@ Every folder in `inc/` that holds a `Component.php` is one component. They are i
 | `Tokens` | The colour variables the Customizer can change, written as one `<style>` tag |
 | `Color_Mode` | Light, dark and automatic mode, applied before first paint, plus the visitor toggle |
 | `Docs` | Product and article meta, the category screen fields, cache invalidation, structured data, the editor Order field |
-| `Activation` | The Knowledge Base page created on first activation |
+| `Starter_Content` | The one-time setup notice, the sample docs (`sample-content.php`) and the empty docs home; nothing runs on activation |
 
 `Customizer_Framework` is the in-house Customizer API (`Panel::add()`, `Section::add()`, `Field::add()`), which `Customizer_Settings` uses. The theme has no Kirki dependency.
 

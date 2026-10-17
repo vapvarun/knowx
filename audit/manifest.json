@@ -4,7 +4,6 @@
   "generated_by": "tools/build-manifest.py",
   "components": [
     "Accessibility",
-    "Activation",
     "Base_Support",
     "Color_Mode",
     "Comments",
@@ -21,6 +20,7 @@
     "Post_Thumbnails",
     "Scripts",
     "Sidebars",
+    "Starter_Content",
     "Styles",
     "Tokens"
   ],
@@ -70,11 +70,17 @@
     "knowx_preloading_styles_enabled": [
       "inc/Styles/Component.php"
     ],
+    "knowx_sample_content": [
+      "inc/Starter_Content/Component.php"
+    ],
     "knowx_schema_graph": [
       "inc/docs.php"
     ],
     "knowx_show_product_switcher": [
       "template-parts/header/product-switcher.php"
+    ],
+    "knowx_show_setup_notice": [
+      "inc/Starter_Content/Component.php"
     ],
     "knowx_theme_author": [
       "inc/extra.php"
@@ -113,6 +119,9 @@
       "search.php",
       "single.php",
       "template-parts/docs/single.php"
+    ],
+    "knowx_sample_content_created": [
+      "inc/Starter_Content/Component.php"
     ],
     "knowx_sub_header": [
       "404.php",

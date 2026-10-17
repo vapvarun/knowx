@@ -31,7 +31,7 @@ KnowX turns WordPress into a documentation site without a custom post type or a 
 3. Publish articles in those categories. Use the Order field in the editor to sort articles inside a section.
 4. Create a page with the template "Docs Home" and set it as your homepage under Settings > Reading.
 
-To see a finished site first, open the sample content in WordPress Playground (blueprint.json in the theme repository, github.com/vapvarun/knowx) or run playground/seed.php from the repository with `wp eval-file` on an empty test site.
+To see a finished site first, choose Add sample docs in the Set up your docs site notice on the Dashboard after activating the theme. Nothing is created until you choose it.
 
 == Frequently Asked Questions ==
 
@@ -114,7 +114,9 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * New      - Light and dark mode with a visitor toggle, five colour palettes and your own colours for links, text, headings, backgrounds, header and footer, with a live preview in the Customizer.
 * New      - Footer menu location, a corner style setting and a docs home that switches between cards and sections.
 * New      - Switches for comments on articles (off by default; articles end with a "Still need help?" block) and for FAQ structured data, which can also be turned off on a single page.
-* New      - Sample content and a WordPress Playground blueprint.
+* New      - Set up your docs site: a one-time notice adds sample docs (two products, FAQ, changelog and a menu) or an empty docs home in one click; activating the theme changes nothing.
+* New      - Six starter layouts when you add a new article or page: getting started steps, troubleshooting, API endpoint, docs home, FAQ and changelog entry.
+* New      - A WordPress Playground blueprint with the same sample docs.
 * New      - Articles filed on a product itself, not in a section, appear in an Overview card first on the product page and the docs home.
 * New      - The Background control in the Customizer has a Remove image button.
 * Improve  - The Kirki plugin and the plugin recommendations are gone; the Customizer is built into the theme and organised in ten short sections with plain labels.
@@ -150,6 +152,7 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Security - Customizer values printed into the stylesheet drop characters that could end a rule, and the docs home pattern escapes its data.
 * Dev      - PHP 8.1 and WordPress 6.9 minimum, PHPStan, PHPUnit, an accessibility check on every page type and a documented content model.
 * Dev      - New filters knowx_overview_articles and knowx_overview_title for the product Overview card.
+* Dev      - New filters knowx_sample_content and knowx_show_setup_notice and the action knowx_sample_content_created, so a child theme can ship its own demo or hide the setup notice.
 * Dev      - Removed from 1.x: Google Fonts loading, login page branding, the page loader, button colour settings, a separate font for each heading level, the sub-header and header search switches and the blog grid options.
 
 = 1.7.4 =

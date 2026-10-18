@@ -34,6 +34,7 @@
 .site-footer a:hover,
 .site-footer a:active {
     color: var(--color-footer-link-hover);
+    text-decoration: underline;
 }
 
 .footer-widget ul {

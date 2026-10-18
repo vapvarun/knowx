@@ -92,6 +92,11 @@ body.layout-boxed {
     border-bottom: 1px solid var(--global-border-color);
 }
 
+/* Without the breadcrumb bar, pages keep the space under the header that it gave. */
+.no-sub-header.page:not(.page-template-page-knowledgebase-one, .page-template-full-width) .site-main {
+    padding-block-start: 2.5rem;
+}
+
 .site-sub-header>.container {
     display: flex;
     justify-content: space-between;

@@ -70,7 +70,7 @@ class Component implements Component_Interface {
 			. '.knowx-welcome .card p{margin:0 0 12px}'
 			. '.knowx-welcome-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}'
 			. '.knowx-welcome-setup{margin-block:16px 8px}'
-			. '.knowx-welcome-setup h3{margin-block:24px 8px}'
+			. '.knowx-welcome .knowx-welcome-setup h3{margin-block:24px 8px}'
 		);
 	}
 

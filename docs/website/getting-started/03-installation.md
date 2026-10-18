@@ -21,4 +21,12 @@ The theme creates nothing on its own. The Dashboard shows a **Set up your docs s
 
 ## Updating from KnowX 1.x
 
-Version 2.0 no longer uses the Kirki plugin and has fewer colour options, because the other colours are derived from the theme colour. After updating, review **Appearance > Customize**; earlier Customizer choices are not carried over. You can deactivate and delete Kirki.
+Version 2.0 no longer uses the Kirki plugin and has fewer colour options, because the other colours are derived from the theme colour. Your pages and their templates, menus, widgets and most Customizer choices carry over: the hero and support texts, the theme colour, layout, sidebar position, footer and copyright colours, font sizes, breadcrumbs and the docs home settings.
+
+These 1.x options are gone, so check the pages that used them:
+
+- Google Fonts: text uses the theme font, Open Sans, served from your site. Font sizes are kept.
+- Login page branding, the page loader, button and link hover colours, and the separate font for each heading level.
+- The bbPress template and the two bbPress sidebars. Their widgets move to Inactive widgets in **Appearance > Widgets**, where you can drag them to another sidebar.
+
+After updating, review **Appearance > Customize**. You can then deactivate and delete Kirki.

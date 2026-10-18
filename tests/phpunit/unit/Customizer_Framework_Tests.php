@@ -29,10 +29,10 @@ class Customizer_Framework_Tests extends Unit_Test_Case {
 	 */
 	public function test_switch_values_become_zero_or_one() {
 		foreach ( array( true, 1, '1', 'on', 'yes', 'true', 'ON' ) as $on ) {
-			$this->assertSame( 1, Field::sanitize_bool_int( $on ), var_export( $on, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
+			$this->assertSame( 1, Field::sanitize_bool_int( $on ), var_export( $on, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- test code, not shipped.
 		}
 		foreach ( array( false, 0, '0', '', null, 'off', 'no', 'junk' ) as $off ) {
-			$this->assertSame( 0, Field::sanitize_bool_int( $off ), var_export( $off, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
+			$this->assertSame( 0, Field::sanitize_bool_int( $off ), var_export( $off, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export -- test code, not shipped.
 		}
 	}
 
@@ -159,7 +159,7 @@ class Customizer_Framework_Tests extends Unit_Test_Case {
 					),
 				)
 			)()
-		); // phpcs:ignore Universal.Arrays.MixedKeyedUnkeyedArray
+		); // phpcs:ignore Universal.Arrays.MixedKeyedUnkeyedArray -- test code, not shipped.
 		$this->assertTrue(
 			Active_Callback::compile(
 				array(

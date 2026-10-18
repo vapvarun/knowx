@@ -162,7 +162,7 @@ class Component implements Component_Interface {
 				'numberposts' => 1,
 				'fields'      => 'ids',
 				'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Admin only: the setup click and the Getting started screen.
-				'meta_value'  => $template, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'meta_value'  => $template, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- Admin only, one row: see meta_key above.
 			)
 		);
 		return $existing ? (int) $existing[0] : 0;

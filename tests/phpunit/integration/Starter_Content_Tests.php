@@ -159,8 +159,8 @@ class Starter_Content_Tests extends Integration_Test_Case {
 					'post_type'   => 'page',
 					'numberposts' => -1,
 					'fields'      => 'ids',
-					'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
-					'meta_value'  => 'page-faq.php', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+					'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- test code, not shipped.
+					'meta_value'  => 'page-faq.php', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value -- test code, not shipped.
 				)
 			)
 		);

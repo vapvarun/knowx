@@ -147,7 +147,7 @@ class Docs_Tests extends Integration_Test_Case {
 	public function test_cache_rows_stay_flat() {
 		global $wpdb;
 		$count_rows = static function () use ( $wpdb ) {
-			return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->options} WHERE option_name LIKE '\_transient\_knowx\_kb\_%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->options} WHERE option_name LIKE '\_transient\_knowx\_kb\_%'" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery -- test code, not shipped.
 		};
 
 		knowx_kb_cached(

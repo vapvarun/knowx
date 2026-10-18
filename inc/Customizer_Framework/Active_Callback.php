@@ -128,6 +128,6 @@ class Active_Callback {
 		if ( ( $a_truthy || $a_falsy ) && ( $b_truthy || $b_falsy ) ) {
 			return $a_truthy === $b_truthy;
 		}
-		return $a == $b; // phpcs:ignore Universal.Operators.StrictComparisons
+		return $a == $b; // phpcs:ignore Universal.Operators.StrictComparisons -- Loose on purpose: Customizer values arrive as strings ('1') and conditions are written as ints or bools.
 	}
 }

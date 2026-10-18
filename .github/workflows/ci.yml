@@ -43,6 +43,16 @@ jobs:
         run: composer install --no-interaction --no-progress --prefer-dist
       - name: WordPress coding standards (repo config, 0 errors and 0 warnings)
         run: vendor/bin/phpcs --standard=phpcs.xml.dist
+      - name: Translation and PHP compatibility rules cannot be silenced with phpcs comments
+        run: |
+          vendor/bin/phpcs --standard=phpcs.xml.dist --ignore-annotations --sniffs=WordPress.WP.I18n
+          vendor/bin/phpcs --standard=PHPCompatibility --runtime-set testVersion 8.1- --ignore-annotations --extensions=php '--ignore=*/vendor/*,*/node_modules/*,*/dist/*' .
+      - name: Every phpcs ignore names its sniff and gives a reason
+        run: |
+          if grep -rnE 'phpcs:(ignore|disable)' --include='*.php' --exclude-dir=vendor --exclude-dir=node_modules --exclude-dir=dist . | grep -vE 'phpcs:(ignore|disable) [A-Za-z.]+.* -- '; then
+            echo "Each phpcs:ignore needs the sniff name and ' -- reason'. Prefer escaping or core functions over an ignore."
+            exit 1
+          fi
       - name: PHPStan level 5
         run: vendor/bin/phpstan analyse --no-progress --memory-limit=2G
       - name: Unit tests
@@ -79,3 +89,19 @@ jobs:
       - run: composer install --no-interaction --no-progress --prefer-dist
       - name: Run the integration suite against the latest WordPress
         run: bash tests/docker/run-integration.sh
+
+  wporg:
+    name: wordpress.org Theme Check on the zip
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Build the zip that would be uploaded
+        run: SKIP_BROWSER_SMOKE=1 node scripts/distribute.js --current --no-tag
+      - name: Install it on a fresh WordPress and run the latest Theme Check (no REQUIRED or WARNING allowed)
+        run: bash tools/wporg-check.sh

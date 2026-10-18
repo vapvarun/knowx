@@ -36,15 +36,14 @@ knowx()->print_styles( 'knowx-comments' );
 				printf(
 					/* translators: 1: title. */
 					esc_html__( 'One thought on &ldquo;%1$s&rdquo;', 'knowx' ),
-					'<span>' . esc_html( get_the_title() ) . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					'<span>' . esc_html( get_the_title() ) . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the title is escaped inside the span.
 				);
 			} else {
 				printf(
 					/* translators: 1: comment count number, 2: title. */
 					esc_html( _nx( '%1$s thought on &ldquo;%2$s&rdquo;', '%1$s thoughts on &ldquo;%2$s&rdquo;', $comment_count, 'comments title', 'knowx' ) ),
-					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					number_format_i18n( $comment_count ),
-					'<span>' . esc_html( get_the_title() ) . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					esc_html( number_format_i18n( $comment_count ) ),
+					'<span>' . esc_html( get_the_title() ) . '</span>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- the title is escaped inside the span.
 				);
 			}
 			?>

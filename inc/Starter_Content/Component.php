@@ -74,9 +74,9 @@ class Component implements Component_Interface {
 		if ( $page_id && 'page' === get_post_type( $page_id ) ) {
 			printf(
 				'<div class="notice notice-success is-dismissible"><p>%1$s <a href="%2$s">%3$s</a> | <a href="%4$s">%5$s</a></p></div>',
-				esc_html__( 'Your docs home is ready.', 'knowx' ),
+				'sample' === get_option( self::STATE_OPTION ) ? esc_html__( 'Sample docs are added.', 'knowx' ) : esc_html__( 'Your docs home is ready.', 'knowx' ),
 				esc_url( get_permalink( $page_id ) ),
-				esc_html__( 'View it', 'knowx' ),
+				esc_html__( 'View docs home', 'knowx' ),
 				esc_url( admin_url( 'customize.php' ) ),
 				esc_html__( 'Customize', 'knowx' )
 			);
@@ -145,6 +145,16 @@ class Component implements Component_Interface {
 	 * @return int Page ID, 0 when the site has none.
 	 */
 	public static function docs_home_id(): int {
+		return self::page_with_template( 'page-knowledgebase-one.php' );
+	}
+
+	/**
+	 * Finds a published page that uses one of the theme's page templates.
+	 *
+	 * @param string $template Template file, such as page-faq.php.
+	 * @return int Page ID, 0 when the site has none.
+	 */
+	public static function page_with_template( string $template ): int {
 		$existing = get_posts(
 			array(
 				'post_type'   => 'page',
@@ -152,7 +162,7 @@ class Component implements Component_Interface {
 				'numberposts' => 1,
 				'fields'      => 'ids',
 				'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Admin only: the setup click and the Getting started screen.
-				'meta_value'  => 'page-knowledgebase-one.php', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				'meta_value'  => $template, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
 			)
 		);
 		return $existing ? (int) $existing[0] : 0;
@@ -190,18 +200,44 @@ class Component implements Component_Interface {
 	}
 
 	/**
+	 * The sample docs bundled with the theme, after the knowx_sample_content filter.
+	 *
+	 * @return array
+	 */
+	private function sample_data(): array {
+		/**
+		 * Filters the sample docs, so a child theme or plugin can ship its own products.
+		 *
+		 * @param array $content Keys: home_excerpt, products, faq, changelog (see inc/Starter_Content/sample-content.php).
+		 */
+		return (array) apply_filters( 'knowx_sample_content', require __DIR__ . '/sample-content.php' );
+	}
+
+	/**
+	 * Whether the sample docs were added, by the button or by the Playground seed, so they are not offered again.
+	 *
+	 * @return bool
+	 */
+	public function has_sample_content(): bool {
+		if ( 'sample' === get_option( self::STATE_OPTION ) ) {
+			return true;
+		}
+		foreach ( (array) ( $this->sample_data()['products'] ?? array() ) as $product ) {
+			if ( ! empty( $product['slug'] ) && get_term_by( 'slug', $product['slug'], 'category' ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Creates the sample products, sections, articles, FAQ and changelog pages, docs home and menu.
 	 * Running it again creates nothing twice.
 	 *
 	 * @return int Docs home page ID, 0 on failure.
 	 */
 	public function create_sample_content(): int {
-		/**
-		 * Filters the sample docs, so a child theme or plugin can ship its own products.
-		 *
-		 * @param array $content Keys: home_excerpt, products, faq, changelog (see inc/Starter_Content/sample-content.php).
-		 */
-		$content  = (array) apply_filters( 'knowx_sample_content', require __DIR__ . '/sample-content.php' );
+		$content  = $this->sample_data();
 		$featured = array();
 		$products = array();
 
@@ -313,6 +349,10 @@ class Component implements Component_Interface {
 	 * @return int Page ID, 0 on failure.
 	 */
 	private function insert_page( string $title, string $content, string $template, string $excerpt = '' ): int {
+		$by_template = self::page_with_template( $template );
+		if ( $by_template ) {
+			return $by_template;
+		}
 		$existing = get_page_by_path( sanitize_title( $title ) );
 		if ( $existing && 'publish' === $existing->post_status ) {
 			return (int) $existing->ID;

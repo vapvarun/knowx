@@ -42,8 +42,33 @@ class Welcome_Tests extends Integration_Test_Case {
 
 		$home = ( new Starter_Content() )->create_docs_home();
 		$html = $this->render();
-		$this->assertStringNotContainsString( 'mode=sample', $html );
+		$this->assertStringNotContainsString( 'mode=home', $html );
 		$this->assertStringContainsString( get_permalink( $home ), $html );
+	}
+
+	/**
+	 * A site with its own docs home (set up by 1.x or the empty home button) can still add sample docs, once.
+	 */
+	public function test_sample_docs_offered_until_added() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+		update_option( 'knowx_theme_activated', true );
+		( new Starter_Content() )->create_docs_home();
+
+		$this->assertStringContainsString( 'mode=sample', $this->render() );
+
+		update_option( Starter_Content::STATE_OPTION, 'sample' );
+		$this->assertStringNotContainsString( 'mode=sample', $this->render() );
+	}
+
+	/**
+	 * Sample products already on the site (Playground seed, an earlier run) mean no second offer.
+	 */
+	public function test_sample_docs_not_offered_when_products_exist() {
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+		( new Starter_Content() )->create_docs_home();
+		wp_insert_term( 'Orbit API', 'category', array( 'slug' => 'orbit-api' ) );
+
+		$this->assertStringNotContainsString( 'mode=sample', $this->render() );
 	}
 
 	/**

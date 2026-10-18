@@ -70,6 +70,7 @@ class Component implements Component_Interface {
 			. '.knowx-welcome .card p{margin:0 0 12px}'
 			. '.knowx-welcome-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}'
 			. '.knowx-welcome-setup{margin-block:16px 8px}'
+			. '.knowx-welcome-setup h3{margin-block:24px 8px}'
 		);
 	}
 
@@ -189,6 +190,7 @@ class Component implements Component_Interface {
 	 */
 	public function render_page() {
 		$home     = Starter_Content::docs_home_id();
+		$samples  = ( new Starter_Content() )->has_sample_content();
 		$sections = $this->sections();
 		?>
 		<div class="wrap knowx-welcome">
@@ -202,13 +204,20 @@ class Component implements Component_Interface {
 						<a class="button button-primary" href="<?php echo esc_url( get_permalink( $home ) ); ?>"><?php esc_html_e( 'View docs home', 'knowx' ); ?></a>
 						<a class="button" href="<?php echo esc_url( admin_url( 'customize.php' ) ); ?>"><?php esc_html_e( 'Customize', 'knowx' ); ?></a>
 					</p>
+					<?php if ( current_user_can( 'manage_options' ) && ! $samples ) : ?>
+						<h3><?php esc_html_e( 'Want examples to learn from?', 'knowx' ); ?></h3>
+						<p><?php esc_html_e( 'Sample docs add two example products with sections and articles, an FAQ page and a changelog page next to your own content. Your docs home, front page and menu stay as they are, and you can delete the samples any time.', 'knowx' ); ?></p>
+						<p><a class="button" href="<?php echo esc_url( Starter_Content::setup_url( 'sample' ) ); ?>"><?php esc_html_e( 'Add sample docs', 'knowx' ); ?></a></p>
+					<?php endif; ?>
 				<?php else : ?>
 					<h2><?php esc_html_e( 'Set up your docs site', 'knowx' ); ?></h2>
 					<p><?php esc_html_e( 'Sample docs add two products with sections and articles, an FAQ page, a changelog page and a menu, so you can see KnowX working and replace the content with your own. An empty docs home adds only the docs home page and a menu item.', 'knowx' ); ?></p>
 					<?php if ( current_user_can( 'manage_options' ) ) : ?>
 						<p class="knowx-welcome-actions">
-							<a class="button button-primary" href="<?php echo esc_url( Starter_Content::setup_url( 'sample' ) ); ?>"><?php esc_html_e( 'Add sample docs', 'knowx' ); ?></a>
-							<a class="button" href="<?php echo esc_url( Starter_Content::setup_url( 'home' ) ); ?>"><?php esc_html_e( 'Create an empty docs home', 'knowx' ); ?></a>
+							<?php if ( ! $samples ) : ?>
+								<a class="button button-primary" href="<?php echo esc_url( Starter_Content::setup_url( 'sample' ) ); ?>"><?php esc_html_e( 'Add sample docs', 'knowx' ); ?></a>
+							<?php endif; ?>
+							<a class="button<?php echo $samples ? ' button-primary' : ''; ?>" href="<?php echo esc_url( Starter_Content::setup_url( 'home' ) ); ?>"><?php esc_html_e( 'Create an empty docs home', 'knowx' ); ?></a>
 						</p>
 					<?php else : ?>
 						<p><?php esc_html_e( 'Ask a site administrator to set up the docs home.', 'knowx' ); ?></p>

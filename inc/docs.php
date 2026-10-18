@@ -96,14 +96,22 @@ function knowx_products() {
 				)
 			);
 
-			// WordPress' stock "Uncategorized" category is a placeholder, never a product. A renamed default category is.
+			// The default category ("Uncategorized" on a new site, in any language) is a placeholder until the
+			// owner makes it a product: a description, an icon or a section.
 			$default = (int) get_option( 'default_category' );
-			$stock   = sanitize_title( _x( 'Uncategorized', 'Default category slug', 'default' ) ); // phpcs:ignore WordPress.WP.I18n.TextDomainMismatch -- core string, same as the default category created at install.
 			$terms   = array_values(
 				array_filter(
 					$terms,
-					static function ( $term ) use ( $default, $stock ) {
-						return ! ( (int) $term->term_id === $default && $term->slug === $stock );
+					static function ( $term ) use ( $default, $all ) {
+						if ( (int) $term->term_id !== $default || '' !== trim( $term->description ) || get_term_meta( $default, 'knowx_icon', true ) ) {
+							return true;
+						}
+						foreach ( $all as $child ) {
+							if ( (int) $child->parent === $default ) {
+								return true;
+							}
+						}
+						return false;
 					}
 				)
 			);

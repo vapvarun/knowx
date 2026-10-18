@@ -301,4 +301,26 @@ class Docs_Tests extends Integration_Test_Case {
 		$this->assertStringNotContainsString( 'knowx-section--overview', $hidden );
 		$this->assertStringContainsString( 'Overview section', $hidden );
 	}
+
+	/**
+	 * The default category stays out of the products until the owner gives it a description, an icon or a section.
+	 */
+	public function test_default_category_is_a_product_only_once_set_up() {
+		$default = (int) get_option( 'default_category' );
+		self::factory()->post->create( array( 'post_category' => array( $default ) ) );
+		$ids = static function () {
+			knowx_kb_bump_version();
+			return wp_list_pluck( knowx_products(), 'id' );
+		};
+
+		$this->assertNotContains( $default, $ids() );
+
+		wp_update_term( $default, 'category', array( 'description' => 'Start here.' ) );
+		$this->assertContains( $default, $ids() );
+
+		wp_update_term( $default, 'category', array( 'description' => '' ) );
+		$section = self::factory()->category->create( array( 'parent' => $default ) );
+		self::factory()->post->create( array( 'post_category' => array( $section ) ) );
+		$this->assertContains( $default, $ids() );
+	}
 }

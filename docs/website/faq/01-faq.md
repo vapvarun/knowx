@@ -16,7 +16,7 @@ Yes. With one product the header Products menu is hidden and the docs home shows
 
 ## Why does my product not appear on the home page?
 
-A product appears when its category has no parent and has at least one published article, directly or in a section. Check that the category is not listed in **Exclude category by ID**, and that it is not the default "Uncategorized" category on a site with other products.
+A product appears when its category has no parent and has at least one published article, directly or in a section. Check that the category is not listed in **Exclude category by ID**, If it is the default category ("Uncategorized" on a new site), give it a description, an icon or a section.
 
 ## How do I order articles?
 

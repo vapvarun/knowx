@@ -17,7 +17,7 @@ Setting up a site? Follow [Set up docs for one product](../getting-started/06-si
 2. Choose an **icon** from the list and, if you want one, tick **Use an accent colour** and pick a colour. Buttons and links on that product's pages use it. If you choose nothing, a site with two or more products gives each product its own icon and colour from the theme's palette automatically, so the cards look different out of the box. With one product the theme colour is used.
 3. Add child categories for the sections and publish articles in them. An article can also be filed on the product itself, for an introduction, pricing or an FAQ; it then appears in the product's **Overview** card.
 
-WordPress' stock "Uncategorized" category is never shown as a product. The product appears on the docs home page and in the **Products** menu in the header. The menu is hidden when the site has a single product.
+The default category ("Uncategorized" on a new site) is not shown as a product until you give it a description, an icon or a section. The product appears on the docs home page and in the **Products** menu in the header. The menu is hidden when the site has a single product.
 
 ## Order of articles
 

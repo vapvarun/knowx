@@ -90,10 +90,8 @@ class Component implements Component_Interface, Templating_Component_Interface {
 			? "var m=localStorage.getItem('knowx-color-mode');if(m==='light'||m==='dark'||m==='auto'){mode=m;}"
 			: '';
 
-		printf(
-			"<script>(function(){var mode=%s;try{%s}catch(e){}document.documentElement.setAttribute('data-color-mode',mode);})();</script>\n", // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON encoded constant and fixed script.
-			wp_json_encode( $default ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			$stored // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		wp_print_inline_script_tag(
+			'(function(){var mode=' . wp_json_encode( $default ) . ';try{' . $stored . "}catch(e){}document.documentElement.setAttribute('data-color-mode',mode);})();"
 		);
 	}
 

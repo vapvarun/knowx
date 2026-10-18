@@ -46,7 +46,12 @@ if ( is_singular( get_post_type() ) ) {
 		}
 
 		if ( ! empty( $attachment_navigation ) ) {
-			echo _navigation_markup( $attachment_navigation, $class = 'post-navigation', __( 'Post navigation', 'knowx' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			?>
+			<nav class="navigation post-navigation" aria-label="<?php esc_attr_e( 'Post navigation', 'knowx' ); ?>">
+				<h2 class="screen-reader-text"><?php esc_html_e( 'Post navigation', 'knowx' ); ?></h2>
+				<div class="nav-links"><?php echo $attachment_navigation; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core image links plus escaped labels, built above. ?></div>
+			</nav>
+			<?php
 		}
 	}
 

@@ -31,7 +31,7 @@ namespace KnowX\KnowX;
 		if ( $knowx_description || is_customize_preview() ) {
 			?>
 			<p class="site-description">
-				<?php echo esc_html( $knowx_description ); /* phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped */ ?>
+				<?php echo esc_html( $knowx_description ); ?>
 			</p>
 			<?php
 		}

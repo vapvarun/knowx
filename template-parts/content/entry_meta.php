@@ -83,7 +83,7 @@ if ( ! empty( $current_post->post_parent ) && 'attachment' === get_post_type() )
 			}
 			printf(
 				esc_html( $author_byline ),
-				$author_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				wp_kses_post( $author_string )
 			);
 			?>
 		</span>
@@ -102,7 +102,7 @@ if ( ! empty( $current_post->post_parent ) && 'attachment' === get_post_type() )
 			}
 			printf(
 				esc_html( $parent_note ),
-				$parent_string // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				wp_kses_post( $parent_string )
 			);
 			?>
 		</span>

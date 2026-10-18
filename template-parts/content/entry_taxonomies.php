@@ -22,7 +22,7 @@ ob_start();
 <div class="entry-taxonomies">
 	<?php
 	// Show terms for all taxonomies associated with the post.
-	foreach ( $taxonomies as $taxo ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+	foreach ( $taxonomies as $taxo ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited -- template part variables, local to the include.
 
 		/* translators: separator between taxonomy terms */
 		$separator = _x( ', ', 'list item separator', 'knowx' );
@@ -45,7 +45,7 @@ ob_start();
 				$placeholder_text = sprintf(
 					/* translators: %s: taxonomy name */
 					__( '%s:', 'knowx' ),
-					$taxo->labels->name // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					$taxo->labels->name
 				);
 		}
 
@@ -57,7 +57,7 @@ ob_start();
 			<?php
 			printf(
 				esc_html( $placeholder_text ),
-				$list // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				wp_kses_post( $list )
 			);
 			?>
 		</span>

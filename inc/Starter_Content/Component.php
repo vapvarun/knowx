@@ -65,7 +65,7 @@ class Component implements Component_Interface {
 	 */
 	public function render_notice() {
 		$screen = get_current_screen();
-		if ( ! $screen || ! in_array( $screen->id, array( 'dashboard', 'themes' ), true ) || ! current_user_can( 'manage_options' ) ) {
+		if ( ! $screen || ! in_array( $screen->id, array( 'dashboard', 'themes', 'appearance_page_knowx' ), true ) || ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
@@ -74,31 +74,37 @@ class Component implements Component_Interface {
 		if ( $page_id && 'page' === get_post_type( $page_id ) ) {
 			printf(
 				'<div class="notice notice-success is-dismissible"><p>%1$s <a href="%2$s">%3$s</a> | <a href="%4$s">%5$s</a></p></div>',
-				esc_html__( 'Your docs home is ready.', 'knowx' ),
+				'sample' === get_option( self::STATE_OPTION ) ? esc_html__( 'Sample docs are added.', 'knowx' ) : esc_html__( 'Your docs home is ready.', 'knowx' ),
 				esc_url( get_permalink( $page_id ) ),
-				esc_html__( 'View it', 'knowx' ),
+				esc_html__( 'View docs home', 'knowx' ),
 				esc_url( admin_url( 'customize.php' ) ),
 				esc_html__( 'Customize', 'knowx' )
 			);
 			return;
 		}
 
-		if ( ! $this->is_pending() ) {
+		if ( ! $this->is_pending() || 'appearance_page_knowx' === $screen->id ) {
 			return;
 		}
 
-		$url = static function ( $mode ) {
-			return wp_nonce_url( admin_url( 'admin-post.php?action=knowx_setup&mode=' . $mode ), 'knowx_setup' );
-		};
 		?>
 		<div class="notice notice-info">
 			<h2><?php esc_html_e( 'Set up your docs site', 'knowx' ); ?></h2>
 			<p><?php esc_html_e( 'Sample docs add two products with sections and articles, an FAQ page, a changelog page and a menu, so you can see KnowX working and replace the content with your own. An empty docs home adds only the docs home page and a menu item.', 'knowx' ); ?></p>
 			<p><?php esc_html_e( 'The docs home becomes the front page only if your site shows its latest posts there, and a menu is added only if none is assigned.', 'knowx' ); ?></p>
 			<p>
-				<a class="button button-primary" href="<?php echo esc_url( $url( 'sample' ) ); ?>"><?php esc_html_e( 'Add sample docs', 'knowx' ); ?></a>
-				<a class="button" href="<?php echo esc_url( $url( 'home' ) ); ?>"><?php esc_html_e( 'Create an empty docs home', 'knowx' ); ?></a>
-				<a class="button button-link" href="<?php echo esc_url( $url( 'dismiss' ) ); ?>"><?php esc_html_e( 'No thanks', 'knowx' ); ?></a>
+				<?php
+				printf(
+					/* translators: %s: link to the Getting started screen. */
+					esc_html__( 'You can do this later from %s.', 'knowx' ),
+					'<a href="' . esc_url( admin_url( 'themes.php?page=knowx' ) ) . '">' . esc_html__( 'Appearance > KnowX', 'knowx' ) . '</a>'
+				);
+				?>
+			</p>
+			<p>
+				<a class="button button-primary" href="<?php echo esc_url( self::setup_url( 'sample' ) ); ?>"><?php esc_html_e( 'Add sample docs', 'knowx' ); ?></a>
+				<a class="button" href="<?php echo esc_url( self::setup_url( 'home' ) ); ?>"><?php esc_html_e( 'Create an empty docs home', 'knowx' ); ?></a>
+				<a class="button button-link" href="<?php echo esc_url( self::setup_url( 'dismiss' ) ); ?>"><?php esc_html_e( 'No thanks', 'knowx' ); ?></a>
 			</p>
 		</div>
 		<?php
@@ -128,8 +134,48 @@ class Component implements Component_Interface {
 		update_option( self::STATE_OPTION, $mode, false );
 
 		$referer = wp_get_referer();
-		wp_safe_redirect( $page_id ? add_query_arg( 'knowx-setup', $page_id, admin_url() ) : ( $referer ? $referer : admin_url() ) );
+		$back    = $referer ? $referer : admin_url();
+		wp_safe_redirect( $page_id ? add_query_arg( 'knowx-setup', $page_id, $back ) : $back );
 		exit;
+	}
+
+	/**
+	 * Finds the site's published docs home page.
+	 *
+	 * @return int Page ID, 0 when the site has none.
+	 */
+	public static function docs_home_id(): int {
+		return self::page_with_template( 'page-knowledgebase-one.php' );
+	}
+
+	/**
+	 * Finds a published page that uses one of the theme's page templates.
+	 *
+	 * @param string $template Template file, such as page-faq.php.
+	 * @return int Page ID, 0 when the site has none.
+	 */
+	public static function page_with_template( string $template ): int {
+		$existing = get_posts(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+				'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Admin only: the setup click and the Getting started screen.
+				'meta_value'  => $template, // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+			)
+		);
+		return $existing ? (int) $existing[0] : 0;
+	}
+
+	/**
+	 * Link that runs one setup option: sample, home or dismiss.
+	 *
+	 * @param string $mode Setup option.
+	 * @return string Nonced admin-post URL.
+	 */
+	public static function setup_url( string $mode ): string {
+		return wp_nonce_url( admin_url( 'admin-post.php?action=knowx_setup&mode=' . $mode ), 'knowx_setup' );
 	}
 
 	/**
@@ -139,17 +185,8 @@ class Component implements Component_Interface {
 	 * @return int Page ID, 0 on failure.
 	 */
 	public function create_docs_home( string $excerpt = '' ): int {
-		$existing = get_posts(
-			array(
-				'post_type'   => 'page',
-				'post_status' => 'publish',
-				'numberposts' => 1,
-				'fields'      => 'ids',
-				'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Runs once, on the owner's click.
-				'meta_value'  => 'page-knowledgebase-one.php', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
-			)
-		);
-		$page_id  = $existing ? (int) $existing[0] : $this->insert_page( __( 'Documentation', 'knowx' ), '', 'page-knowledgebase-one.php', $excerpt );
+		$page_id = self::docs_home_id();
+		$page_id = $page_id ? $page_id : $this->insert_page( __( 'Documentation', 'knowx' ), '', 'page-knowledgebase-one.php', $excerpt );
 		if ( ! $page_id ) {
 			return 0;
 		}
@@ -163,18 +200,44 @@ class Component implements Component_Interface {
 	}
 
 	/**
+	 * The sample docs bundled with the theme, after the knowx_sample_content filter.
+	 *
+	 * @return array
+	 */
+	private function sample_data(): array {
+		/**
+		 * Filters the sample docs, so a child theme or plugin can ship its own products.
+		 *
+		 * @param array $content Keys: home_excerpt, products, faq, changelog (see inc/Starter_Content/sample-content.php).
+		 */
+		return (array) apply_filters( 'knowx_sample_content', require __DIR__ . '/sample-content.php' );
+	}
+
+	/**
+	 * Whether the sample docs were added, by the button or by the Playground seed, so they are not offered again.
+	 *
+	 * @return bool
+	 */
+	public function has_sample_content(): bool {
+		if ( 'sample' === get_option( self::STATE_OPTION ) ) {
+			return true;
+		}
+		foreach ( (array) ( $this->sample_data()['products'] ?? array() ) as $product ) {
+			if ( ! empty( $product['slug'] ) && get_term_by( 'slug', $product['slug'], 'category' ) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * Creates the sample products, sections, articles, FAQ and changelog pages, docs home and menu.
 	 * Running it again creates nothing twice.
 	 *
 	 * @return int Docs home page ID, 0 on failure.
 	 */
 	public function create_sample_content(): int {
-		/**
-		 * Filters the sample docs, so a child theme or plugin can ship its own products.
-		 *
-		 * @param array $content Keys: home_excerpt, products, faq, changelog (see inc/Starter_Content/sample-content.php).
-		 */
-		$content  = (array) apply_filters( 'knowx_sample_content', require __DIR__ . '/sample-content.php' );
+		$content  = $this->sample_data();
 		$featured = array();
 		$products = array();
 
@@ -286,6 +349,10 @@ class Component implements Component_Interface {
 	 * @return int Page ID, 0 on failure.
 	 */
 	private function insert_page( string $title, string $content, string $template, string $excerpt = '' ): int {
+		$by_template = self::page_with_template( $template );
+		if ( $by_template ) {
+			return $by_template;
+		}
 		$existing = get_page_by_path( sanitize_title( $title ) );
 		if ( $existing && 'publish' === $existing->post_status ) {
 			return (int) $existing->ID;

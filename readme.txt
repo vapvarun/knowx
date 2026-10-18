@@ -96,13 +96,13 @@ GNU General Public License for more details.
 == Upgrade Notice ==
 
 = 2.0.0 =
-Major release. The Customizer is new and earlier choices are not carried over. Google Fonts, login page branding, the page loader and button colour settings from 1.x are removed. Review Appearance > Customize after updating.
+Major release. Your pages, menus, widgets, texts, theme colour, layout and font sizes carry over. Google Fonts, login page branding, the page loader, button colours and the bbPress sidebars are removed. Review Appearance > Customize after updating.
 
 == Changelog ==
 
 = 2.0.0 - October 2026 =
 
-Major release. Earlier Customizer choices are not carried over, so review Appearance > Customize after updating.
+Major release. Most Customizer choices from 1.x carry over; review Appearance > Customize after updating.
 
 * New      - Products: top-level categories become product cards with an icon, description and accent colour, plus a header product switcher; a site with one product lists its sections directly.
 * New      - Article layout with a section tree, "On this page" list, copy-link on headings, code copy buttons, previous and next links, related articles and a last updated date.
@@ -115,6 +115,7 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * New      - Footer menu location, a corner style setting and a docs home that switches between cards and sections.
 * New      - Switches for comments on articles (off by default; articles end with a "Still need help?" block) and for FAQ structured data, which can also be turned off on a single page.
 * New      - Set up your docs site: a one-time notice adds sample docs (two products, FAQ, changelog and a menu) or an empty docs home in one click; activating the theme changes nothing.
+* New      - Getting started screen under Appearance > KnowX: the setup buttons, what you can do next with a link to each screen and its guide, and help links.
 * New      - Six starter layouts when you add a new article or page: getting started steps, troubleshooting, API endpoint, docs home, FAQ and changelog entry.
 * New      - A WordPress Playground blueprint with the same sample docs.
 * New      - Articles filed on a product itself, not in a section, appear in an Overview card first on the product page and the docs home.
@@ -131,6 +132,8 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Improve  - Buttons, inputs and tap targets follow the Corners setting, show a clear focus outline and a disabled state, and are at least 40 px on phones.
 * Improve  - A long breadcrumb trail on phones scrolls sideways and fades at the start instead of cutting words.
 * Improve  - The colour settings say they apply to light mode, since dark mode keeps its own palette.
+* Fix      - Sites updated from 1.x: switches saved as off stay off, footer titles and links stay readable on a dark footer, and pages keep their top spacing with breadcrumbs off.
+* Fix      - The docs home support block spans the full width on phones.
 * Fix      - Saved Customizer colors were overridden by a duplicate set of defaults in the content stylesheet.
 * Fix      - Excluding a product now also hides its sections and articles on the Docs Index.
 * Fix      - Buttons in articles and pages are no longer underlined.
@@ -152,8 +155,8 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Security - Customizer values printed into the stylesheet drop characters that could end a rule, and the docs home pattern escapes its data.
 * Dev      - PHP 8.1 and WordPress 6.9 minimum, PHPStan, PHPUnit, an accessibility check on every page type and a documented content model.
 * Dev      - New filters knowx_overview_articles and knowx_overview_title for the product Overview card.
-* Dev      - New filters knowx_sample_content and knowx_show_setup_notice and the action knowx_sample_content_created, so a child theme can ship its own demo or hide the setup notice.
-* Dev      - Removed from 1.x: Google Fonts loading, login page branding, the page loader, button colour settings, a separate font for each heading level, the sub-header and header search switches and the blog grid options.
+* Dev      - New filters knowx_sample_content, knowx_show_setup_notice, knowx_getting_started and knowx_docs_url and the action knowx_sample_content_created, so a child theme can ship its own demo, hide the setup notice or change the getting started screen.
+* Dev      - Removed from 1.x: Google Fonts loading, login page branding, the page loader, button colour settings, a separate font for each heading level, the sub-header and header search switches, the blog grid options and the bbPress template and sidebars.
 
 = 1.7.4 =
 * Improvement: Updated global styling for better design consistency.

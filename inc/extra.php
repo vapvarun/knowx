@@ -42,6 +42,15 @@ if ( ! function_exists( 'knowx_content_bottom' ) ) {
 
 add_action( 'knowx_after_content', 'knowx_content_bottom' );
 
+/**
+ * Whether the breadcrumb bar shows under the header on this request.
+ *
+ * @return bool
+ */
+function knowx_has_sub_header(): bool {
+	return ! is_front_page() && knowx_is_truthy( knowx_mod( 'site_breadcrumbs' ) );
+}
+
 // Breadcrumb bar.
 if ( ! function_exists( 'knowx_sub_header' ) ) {
 	add_action( 'knowx_sub_header', 'knowx_sub_header' );
@@ -50,7 +59,7 @@ if ( ! function_exists( 'knowx_sub_header' ) ) {
 	 * Prints the bar with the breadcrumbs under the header.
 	 */
 	function knowx_sub_header() {
-		if ( is_front_page() || ! knowx_is_truthy( knowx_mod( 'site_breadcrumbs' ) ) ) {
+		if ( ! knowx_has_sub_header() ) {
 			return;
 		}
 		?>

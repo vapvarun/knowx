@@ -47,6 +47,7 @@ class Component implements Component_Interface {
 		add_filter( 'theme_mod_site_container_width', 'knowx_sanitize_container_width' );
 		add_filter( 'body_class', array( $this, 'filter_sticky_sidebar_body_class' ) );
 		add_filter( 'body_class', array( $this, 'filter_sticky_header_body_class' ) );
+		add_filter( 'body_class', array( $this, 'filter_sub_header_body_class' ) );
 	}
 
 	/**
@@ -69,9 +70,23 @@ class Component implements Component_Interface {
 	 */
 	public function filter_sticky_sidebar_body_class( array $classes ): array {
 
-		$sticky_sidebar = knowx_mod( 'sticky_sidebar_option' );
-		if ( $sticky_sidebar ) {
+		// knowx_is_truthy(): sites updated from 1.x saved this switch as 'on' or 'off'.
+		if ( knowx_is_truthy( knowx_mod( 'sticky_sidebar_option' ) ) ) {
 			$classes[] = 'sticky-sidebar-enable';
+		}
+
+		return $classes;
+	}
+
+	/**
+	 * Marks pages without the breadcrumb bar, so pages keep the space under the header that it gave.
+	 *
+	 * @param array $classes Body classes.
+	 * @return array Body classes.
+	 */
+	public function filter_sub_header_body_class( array $classes ): array {
+		if ( ! knowx_has_sub_header() ) {
+			$classes[] = 'no-sub-header';
 		}
 
 		return $classes;
@@ -84,8 +99,7 @@ class Component implements Component_Interface {
 	 * @return array Body classes.
 	 */
 	public function filter_sticky_header_body_class( array $classes ): array {
-		$sticky_header = knowx_mod( 'site_sticky_header' );
-		if ( $sticky_header ) {
+		if ( knowx_is_truthy( knowx_mod( 'site_sticky_header' ) ) ) {
 			$classes[] = 'sticky-header';
 		}
 

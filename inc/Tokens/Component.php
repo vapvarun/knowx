@@ -200,6 +200,19 @@ class Component implements Component_Interface {
 			}
 		}
 
+		// Footer titles and links follow the owner's footer text colour, or, with only a footer background
+		// colour chosen, a readable colour for that background. Otherwise they stay dark on a dark footer.
+		$footer_text = self::sanitize_color( get_theme_mod( 'site_footer_content_color', '' ) );
+		$footer_bg   = (array) get_theme_mod( 'background_setting', array() );
+		$footer_bg   = self::sanitize_color( $footer_bg['background-color'] ?? '' );
+		if ( '' === $footer_text && '' !== $footer_bg ) {
+			$footer_text   = self::on_color( $footer_bg );
+			$declarations .= '--color-footer-content:' . $footer_text . ';';
+		}
+		if ( '' !== $footer_text ) {
+			$declarations .= '--color-footer-title:' . $footer_text . ';--color-footer-link:' . $footer_text . ';--color-footer-link-hover:' . $footer_text . ';';
+		}
+
 		return '' === $declarations ? '' : ':root{' . $declarations . '}';
 	}
 

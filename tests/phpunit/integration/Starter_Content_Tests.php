@@ -130,6 +130,43 @@ class Starter_Content_Tests extends Integration_Test_Case {
 	}
 
 	/**
+	 * An FAQ or changelog page the owner already has, at any address, is reused instead of copied.
+	 */
+	public function test_sample_content_reuses_owner_faq_page() {
+		$faq = self::factory()->post->create(
+			array(
+				'post_type'  => 'page',
+				'post_title' => 'Questions',
+				'meta_input' => array( '_wp_page_template' => 'page-faq.php' ),
+			)
+		);
+
+		$this->setup->create_sample_content();
+
+		$this->assertSame( array( $faq ), self::faq_pages() );
+	}
+
+	/**
+	 * Published pages using the FAQ template.
+	 *
+	 * @return int[]
+	 */
+	public static function faq_pages(): array {
+		return array_map(
+			'intval',
+			get_posts(
+				array(
+					'post_type'   => 'page',
+					'numberposts' => -1,
+					'fields'      => 'ids',
+					'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key
+					'meta_value'  => 'page-faq.php', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+				)
+			)
+		);
+	}
+
+	/**
 	 * With no menu assigned, the sample menu links the docs home, FAQ and changelog.
 	 */
 	public function test_sample_content_menu_has_every_page() {

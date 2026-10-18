@@ -1031,6 +1031,8 @@ p.knowx-item-date {
 
 
 .knowx-support-section {
+    /* Full width even when .site-wrapper is a wrapping flex row on phones and the text is short. */
+    inline-size: 100%;
     margin: 0;
     padding: 70px 0;
     text-align: center;

@@ -20,6 +20,8 @@ Either setup button also:
 
 The notice appears once. After you pick a button it does not come back. Sites updated from KnowX 1.x already have a docs home and do not see it.
 
+Changed your mind later? **Appearance > KnowX** keeps **Create an empty docs home** until the site has a docs home, and **Add sample docs** until the sample products are on the site. That includes sites set up with KnowX 1.x. Adding the samples next to your own docs keeps your docs home, front page and menu, and reuses an FAQ or Changelog page you already have, so nothing is created twice.
+
 ## Try it in WordPress Playground
 
 Open the theme's `blueprint.json` in [WordPress Playground](https://playground.wordpress.net). It installs and activates KnowX and adds the same sample docs. Nothing is saved on your own site.

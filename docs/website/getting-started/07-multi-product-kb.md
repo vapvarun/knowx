@@ -26,7 +26,7 @@ Each product also has its own look. With no choice made, KnowX gives every produ
 
 ![The product fields on the category screen: icon, accent colour, product order and start link](../images/admin-category-edit.webp)
 
-WordPress' own "Uncategorized" category is never shown as a product.
+The default category ("Uncategorized" on a new site) is not shown as a product until you give it a description, an icon or a section.
 
 ### 2. Add sections under each product
 

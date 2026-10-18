@@ -20,6 +20,8 @@ Either setup button also:
 
 The notice appears once. After you pick a button it does not come back. Sites updated from KnowX 1.x already have a docs home and do not see it.
 
+Changed your mind after **No thanks**? The same two setup buttons stay on **Appearance > KnowX** until the site has a docs home.
+
 ## Try it in WordPress Playground
 
 Open the theme's `blueprint.json` in [WordPress Playground](https://playground.wordpress.net). It installs and activates KnowX and adds the same sample docs. Nothing is saved on your own site.

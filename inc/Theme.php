@@ -155,6 +155,7 @@ class Theme {
 			new Color_Mode\Component(),
 			new Docs\Component(),
 			new Starter_Content\Component(),
+			new Welcome\Component(),
 		);
 		return $components;
 	}

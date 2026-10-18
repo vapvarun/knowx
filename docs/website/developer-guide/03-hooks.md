@@ -24,6 +24,8 @@
 | `knowx_color_palettes` | `( array $palettes )` The five palette cards in Customizer, Colors: slug to `label` and `colors` (setting id to hex). |
 | `knowx_show_setup_notice` | `( bool $pending )` Show the setup notice on the Dashboard and Themes screens (default: until the owner picks a button). Return false to hide it, for example on sites you build for clients. |
 | `knowx_sample_content` | `( array $content )` The sample docs the **Add sample docs** button creates: `home_excerpt`, `products` (name, slug, icon, accent, desc, version, sections of articles), `faq` and `changelog`. Return your own products to ship a demo for your product. |
+| `knowx_getting_started` | `( array $sections )` The cards and links on **Appearance > KnowX**: `tasks` (each `title`, `text`, `label`, `url`, `guide`) and `help` (each `label`, `url`). Add a card for your own plugin or remove one. |
+| `knowx_docs_url` | `( string $url )` Base URL of the guides linked from **Appearance > KnowX**, with a trailing slash. Point it at your own docs for a client build. |
 | `knowx_breadcrumb_items` | `( array $items )` The breadcrumb items (`label`, `url`); the last item has no url. They feed the visible trail and the BreadcrumbList schema. |
 
 ## Actions

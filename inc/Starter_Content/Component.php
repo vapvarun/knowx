@@ -65,7 +65,7 @@ class Component implements Component_Interface {
 	 */
 	public function render_notice() {
 		$screen = get_current_screen();
-		if ( ! $screen || ! in_array( $screen->id, array( 'dashboard', 'themes' ), true ) || ! current_user_can( 'manage_options' ) ) {
+		if ( ! $screen || ! in_array( $screen->id, array( 'dashboard', 'themes', 'appearance_page_knowx' ), true ) || ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
@@ -83,22 +83,28 @@ class Component implements Component_Interface {
 			return;
 		}
 
-		if ( ! $this->is_pending() ) {
+		if ( ! $this->is_pending() || 'appearance_page_knowx' === $screen->id ) {
 			return;
 		}
 
-		$url = static function ( $mode ) {
-			return wp_nonce_url( admin_url( 'admin-post.php?action=knowx_setup&mode=' . $mode ), 'knowx_setup' );
-		};
 		?>
 		<div class="notice notice-info">
 			<h2><?php esc_html_e( 'Set up your docs site', 'knowx' ); ?></h2>
 			<p><?php esc_html_e( 'Sample docs add two products with sections and articles, an FAQ page, a changelog page and a menu, so you can see KnowX working and replace the content with your own. An empty docs home adds only the docs home page and a menu item.', 'knowx' ); ?></p>
 			<p><?php esc_html_e( 'The docs home becomes the front page only if your site shows its latest posts there, and a menu is added only if none is assigned.', 'knowx' ); ?></p>
 			<p>
-				<a class="button button-primary" href="<?php echo esc_url( $url( 'sample' ) ); ?>"><?php esc_html_e( 'Add sample docs', 'knowx' ); ?></a>
-				<a class="button" href="<?php echo esc_url( $url( 'home' ) ); ?>"><?php esc_html_e( 'Create an empty docs home', 'knowx' ); ?></a>
-				<a class="button button-link" href="<?php echo esc_url( $url( 'dismiss' ) ); ?>"><?php esc_html_e( 'No thanks', 'knowx' ); ?></a>
+				<?php
+				printf(
+					/* translators: %s: link to the Getting started screen. */
+					esc_html__( 'You can do this later from %s.', 'knowx' ),
+					'<a href="' . esc_url( admin_url( 'themes.php?page=knowx' ) ) . '">' . esc_html__( 'Appearance > KnowX', 'knowx' ) . '</a>'
+				);
+				?>
+			</p>
+			<p>
+				<a class="button button-primary" href="<?php echo esc_url( self::setup_url( 'sample' ) ); ?>"><?php esc_html_e( 'Add sample docs', 'knowx' ); ?></a>
+				<a class="button" href="<?php echo esc_url( self::setup_url( 'home' ) ); ?>"><?php esc_html_e( 'Create an empty docs home', 'knowx' ); ?></a>
+				<a class="button button-link" href="<?php echo esc_url( self::setup_url( 'dismiss' ) ); ?>"><?php esc_html_e( 'No thanks', 'knowx' ); ?></a>
 			</p>
 		</div>
 		<?php
@@ -128,8 +134,38 @@ class Component implements Component_Interface {
 		update_option( self::STATE_OPTION, $mode, false );
 
 		$referer = wp_get_referer();
-		wp_safe_redirect( $page_id ? add_query_arg( 'knowx-setup', $page_id, admin_url() ) : ( $referer ? $referer : admin_url() ) );
+		$back    = $referer ? $referer : admin_url();
+		wp_safe_redirect( $page_id ? add_query_arg( 'knowx-setup', $page_id, $back ) : $back );
 		exit;
+	}
+
+	/**
+	 * Finds the site's published docs home page.
+	 *
+	 * @return int Page ID, 0 when the site has none.
+	 */
+	public static function docs_home_id(): int {
+		$existing = get_posts(
+			array(
+				'post_type'   => 'page',
+				'post_status' => 'publish',
+				'numberposts' => 1,
+				'fields'      => 'ids',
+				'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Admin only: the setup click and the Getting started screen.
+				'meta_value'  => 'page-knowledgebase-one.php', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
+			)
+		);
+		return $existing ? (int) $existing[0] : 0;
+	}
+
+	/**
+	 * Link that runs one setup option: sample, home or dismiss.
+	 *
+	 * @param string $mode Setup option.
+	 * @return string Nonced admin-post URL.
+	 */
+	public static function setup_url( string $mode ): string {
+		return wp_nonce_url( admin_url( 'admin-post.php?action=knowx_setup&mode=' . $mode ), 'knowx_setup' );
 	}
 
 	/**
@@ -139,17 +175,8 @@ class Component implements Component_Interface {
 	 * @return int Page ID, 0 on failure.
 	 */
 	public function create_docs_home( string $excerpt = '' ): int {
-		$existing = get_posts(
-			array(
-				'post_type'   => 'page',
-				'post_status' => 'publish',
-				'numberposts' => 1,
-				'fields'      => 'ids',
-				'meta_key'    => '_wp_page_template', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- Runs once, on the owner's click.
-				'meta_value'  => 'page-knowledgebase-one.php', // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_value
-			)
-		);
-		$page_id  = $existing ? (int) $existing[0] : $this->insert_page( __( 'Documentation', 'knowx' ), '', 'page-knowledgebase-one.php', $excerpt );
+		$page_id = self::docs_home_id();
+		$page_id = $page_id ? $page_id : $this->insert_page( __( 'Documentation', 'knowx' ), '', 'page-knowledgebase-one.php', $excerpt );
 		if ( ! $page_id ) {
 			return 0;
 		}

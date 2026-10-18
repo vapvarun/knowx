@@ -115,6 +115,7 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * New      - Footer menu location, a corner style setting and a docs home that switches between cards and sections.
 * New      - Switches for comments on articles (off by default; articles end with a "Still need help?" block) and for FAQ structured data, which can also be turned off on a single page.
 * New      - Set up your docs site: a one-time notice adds sample docs (two products, FAQ, changelog and a menu) or an empty docs home in one click; activating the theme changes nothing.
+* New      - Getting started screen under Appearance > KnowX: the setup buttons, what you can do next with a link to each screen and its guide, and help links.
 * New      - Six starter layouts when you add a new article or page: getting started steps, troubleshooting, API endpoint, docs home, FAQ and changelog entry.
 * New      - A WordPress Playground blueprint with the same sample docs.
 * New      - Articles filed on a product itself, not in a section, appear in an Overview card first on the product page and the docs home.
@@ -152,7 +153,7 @@ Major release. Earlier Customizer choices are not carried over, so review Appear
 * Security - Customizer values printed into the stylesheet drop characters that could end a rule, and the docs home pattern escapes its data.
 * Dev      - PHP 8.1 and WordPress 6.9 minimum, PHPStan, PHPUnit, an accessibility check on every page type and a documented content model.
 * Dev      - New filters knowx_overview_articles and knowx_overview_title for the product Overview card.
-* Dev      - New filters knowx_sample_content and knowx_show_setup_notice and the action knowx_sample_content_created, so a child theme can ship its own demo or hide the setup notice.
+* Dev      - New filters knowx_sample_content, knowx_show_setup_notice, knowx_getting_started and knowx_docs_url and the action knowx_sample_content_created, so a child theme can ship its own demo, hide the setup notice or change the getting started screen.
 * Dev      - Removed from 1.x: Google Fonts loading, login page branding, the page loader, button colour settings, a separate font for each heading level, the sub-header and header search switches and the blog grid options.
 
 = 1.7.4 =

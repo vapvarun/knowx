@@ -22,7 +22,8 @@
     "Sidebars",
     "Starter_Content",
     "Styles",
-    "Tokens"
+    "Tokens",
+    "Welcome"
   ],
   "filters": {
     "knowx_breadcrumb_items": [
@@ -49,8 +50,14 @@
     "knowx_customizer_field_type_map": [
       "inc/Customizer_Framework/Field.php"
     ],
+    "knowx_docs_url": [
+      "inc/Welcome/Component.php"
+    ],
     "knowx_footer_copyright_text": [
       "inc/extra.php"
+    ],
+    "knowx_getting_started": [
+      "inc/Welcome/Component.php"
     ],
     "knowx_js_files": [
       "inc/Scripts/Component.php"

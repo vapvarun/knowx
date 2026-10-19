@@ -12,10 +12,8 @@
 		{
 			"step": "installTheme",
 			"themeData": {
-				"resource": "git:directory",
-				"url": "https://github.com/vapvarun/knowx.git",
-				"ref": "master",
-				"path": "/"
+				"resource": "wordpress.org/themes",
+				"slug": "knowx"
 			},
 			"options": {
 				"activate": true
